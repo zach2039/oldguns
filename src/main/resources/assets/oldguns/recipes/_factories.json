@@ -1,0 +1,12 @@
+{
+	"ingredients":
+	{
+		"generic_firearm": "zach2039.oldguns.common.item.crafting.ingredient.IngredientGenericItemFirearm$Factory"
+	},
+    "recipes":
+    {
+        "reload_firearm_single": "zach2039.oldguns.common.item.crafting.RecipesFirearmReload$Factory",
+        "repair_firearm_with_kit": "zach2039.oldguns.common.item.crafting.RecipesFirearmRepairWithKit$Factory",
+        "firearm_build": "zach2039.oldguns.common.item.crafting.RecipesFirearmBuild$Factory"
+    }
+}﻿

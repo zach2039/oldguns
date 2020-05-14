@@ -1,0 +1,35 @@
+{
+	"bullet.ricochet": 
+	{
+		"category": "neutral",
+		"sounds":
+		[
+			"oldguns:ricochet0",
+			"oldguns:ricochet1",
+			"oldguns:ricochet2",
+			"oldguns:ricochet3"
+		],
+		"subtitle": "subtitle.bullet.ricochet"
+	},
+	"bullet.hit.block": 
+	{
+		"category": "neutral",
+		"sounds":
+		[
+			"oldguns:bullethit0",
+			"oldguns:bullethit1",
+			"oldguns:bullethit2"
+		],
+		"subtitle": "subtitle.bullet.hit.block"
+	},
+	"bullet.hit.mob": 
+	{
+		"category": "neutral",
+		"sounds":
+		[
+			"oldguns:bullethitmob0",
+			"oldguns:bullethitmob1"
+		],
+		"subtitle": "subtitle.bullet.hit.mob"
+	}
+}

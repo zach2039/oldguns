@@ -1,0 +1,20 @@
+# Items
+item.flintlock_pistol.name=Flintlock Pistol
+item.flintlock_mechanism.name=Flintlock Mechanism
+item.small_iron_musket_ball.name=Small Iron Musket Ball
+item.small_iron_barrel.name=Small Iron Barrel
+item.medium_iron_barrel.name=Medium Iron Barrel
+item.large_iron_barrel.name=Large Iron Barrel
+item.small_wooden_handle.name=Small Wooden Handle
+item.medium_wooden_handle.name=Medium Wooden Handle
+item.large_wooden_handle.name=Large Wooden Handle
+item.small_musket_ball_cast.name=Small Musket Ball Cast
+item.repair_kit.name=Firearm Repair Kit
+
+# Blocks
+tile.gunsmiths_bench.name=Gunsmith's Bench
+tile.melter.name=Melter
+
+# Gui
+container.gunsmiths_bench=Gunsmithing
+container.melter=Casting

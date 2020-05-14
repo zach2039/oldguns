@@ -1,0 +1,13 @@
+{
+	"type": "oldguns:repair_firearm_with_kit",
+	"ingredients": 
+	[
+	    {
+			"type": "oldguns:generic_firearm"
+	    },
+	    {
+            "item": "oldguns:repair_kit",
+			"data": 32767
+        }
+  	]
+}
