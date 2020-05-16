@@ -14,7 +14,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.inventory.IGunsmithsBench;
+import zach2039.oldguns.common.inventory.impl.IGunsmithsBench;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 
 public class RecipesFirearmBuild extends ShapedOreRecipe

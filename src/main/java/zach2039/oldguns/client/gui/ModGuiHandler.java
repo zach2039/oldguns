@@ -12,6 +12,7 @@ import zach2039.oldguns.client.gui.inventory.GuiMelter;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.inventory.ContainerGunsmithsBench;
 import zach2039.oldguns.common.inventory.ContainerMelter;
+import zach2039.oldguns.common.tile.TileEntityMelter;
 
 public class ModGuiHandler implements IGuiHandler
 {
@@ -29,7 +30,7 @@ public class ModGuiHandler implements IGuiHandler
 			}
 			case ModGuiIDs.MELTER:
 			{
-				return new ContainerMelter(player.inventory, world, new BlockPos(x, y, z));
+				return new ContainerMelter(player.inventory, (TileEntityMelter) tileEntity);
 			}
 			default:
 			{
@@ -52,7 +53,7 @@ public class ModGuiHandler implements IGuiHandler
 			}
 			case ModGuiIDs.MELTER:
 			{
-				return new GuiMelter(player.inventory, world);
+				return new GuiMelter(player.inventory, (TileEntityMelter) tileEntity);
 			}
 			default:
 			{

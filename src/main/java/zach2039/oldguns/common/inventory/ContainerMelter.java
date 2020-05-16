@@ -2,140 +2,159 @@ package zach2039.oldguns.common.inventory;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IContainerListener;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCraftResult;
 import net.minecraft.inventory.Slot;
-import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import zach2039.oldguns.common.init.ModBlocks;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import zach2039.oldguns.api.capability.casting.CapabilityCast;
+import zach2039.oldguns.api.capability.casting.ICast;
+import zach2039.oldguns.common.inventory.util.InventoryContainerHelper;
+import zach2039.oldguns.common.tile.TileEntityMelter;
+import zach2039.oldguns.common.tile.TileEntityMelter.EnumMelterSlot;
 
 public class ContainerMelter extends Container
 {
-	/** Crafting matrix inventory of 3x3. */
-	public InventoryCraftingGunsmithsBench craftMatrix = new InventoryCraftingGunsmithsBench(this, 3, 3);
+	/** Tile entity storage. */
+	private TileEntityMelter tileEntityMelter;
 	
 	/** Crafting result inventory. */
 	public InventoryCraftResult craftResult = new InventoryCraftResult();
 	
-	/** World of gunsmith's bench. */
-	private final World world;
+	/** Number of ticks melter will burn for. */
+	private int melterBurnTime;
 	
-	/** Position of gunsmith's bench. */
-	private final BlockPos pos;
+	/** Number of ticks next meltable item will contribute to burn time. */
+	private int currentItemBurnTime;
 	
-	/** EntityPlayer using the gunsmith's bench. */
-	private final EntityPlayer player;
+	/** Current time spent cooking an item. */
+	private int cookTime;
 	
-	public ContainerMelter(InventoryPlayer playerInventory, World worldIn, BlockPos posIn)
+	/** Time required to cook item. */
+	private int totalCookTime; 
+	
+	public ContainerMelter(InventoryPlayer playerInventory, TileEntityMelter tileEntityMelter)
 	{
-		this.world = worldIn;
-		this.pos = posIn;
-		this.player = playerInventory.player;
+		this.tileEntityMelter = tileEntityMelter;
 		
-		// Add slots to this container gui for result.
-		this.addSlotToContainer(new SlotCrafting(playerInventory.player, this.craftMatrix, this.craftResult, 0, 124, 35));
+		// Add output slot to this container.
+		this.addSlotToContainer(new SlotMelterOutput(this.tileEntityMelter, TileEntityMelter.EnumMelterSlot.OUTPUT_SLOT.ordinal(), 116, 35));
 		
-		// Add input slots to this container.
-		for (int i = 0; i < 3; ++i)
-        {
-            for (int j = 0; j < 3; ++j)
-            {
-                this.addSlotToContainer(new Slot(this.craftMatrix, j + i * 3, 30 + j * 18, 17 + i * 18));
-            }
-        }
+		// Add cast slot to this container.
+		this.addSlotToContainer(new SlotMelterCast(this.tileEntityMelter, TileEntityMelter.EnumMelterSlot.CAST_SLOT.ordinal(), 35, 35));
+		
+		// Add input slot to this container.
+		this.addSlotToContainer(new SlotMelterInput(this.tileEntityMelter, TileEntityMelter.EnumMelterSlot.INPUT_SLOT.ordinal(), 56, 17));
 
-		// Add player inventory slots to this container.
-        for (int k = 0; k < 3; ++k)
-        {
-            for (int i1 = 0; i1 < 9; ++i1)
-            {
-                this.addSlotToContainer(new Slot(playerInventory, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
-            }
-        }
-
-        // Add hotbar slots to this container.
-        for (int l = 0; l < 9; ++l)
-        {
-            this.addSlotToContainer(new Slot(playerInventory, l, 8 + l * 18, 142));
-        }
+		// Add fuel slot to this container.
+		this.addSlotToContainer(new SlotMelterFuel(this.tileEntityMelter, TileEntityMelter.EnumMelterSlot.FUEL_SLOT.ordinal(), 56, 53));
+		
+		// Add player inventory to this container.
+		InventoryContainerHelper.addPlayerInventoryToContainer(this, playerInventory);
 	}
 
 	@Override
-	public void onCraftMatrixChanged(IInventory inventoryIn)
-    {
-		// Send packet using mincraft built-in methods.
-        this.slotChangedCraftingGrid(this.world, this.player, this.craftMatrix, this.craftResult);
-    }
-	
-	@Override
-	public void onContainerClosed(EntityPlayer playerIn)
-    {
-        super.onContainerClosed(playerIn);
-
-        if (!this.world.isRemote)
-        {
-            this.clearContainer(playerIn, this.world, this.craftMatrix);
-        }
-    }
-	
-	@Override
-	public boolean canInteractWith(EntityPlayer playerIn)
+	public boolean canInteractWith(EntityPlayer player)
 	{
-		if (this.world.getBlockState(this.pos).getBlock() != ModBlocks.MELTER)
-        {
-            return false;
-        }
-        else
-        {
-            return playerIn.getDistanceSq((double)this.pos.getX() + 0.5D, (double)this.pos.getY() + 0.5D, (double)this.pos.getZ() + 0.5D) <= 64.0D;
-        }
+		return this.tileEntityMelter.isUsableByPlayer(player);
 	}
 	
 	@Override
+	public void detectAndSendChanges() 
+	{
+		super.detectAndSendChanges();
+		
+		for(int i = 0; i < this.listeners.size(); ++i) 
+		{
+			IContainerListener listener = (IContainerListener)this.listeners.get(i);
+			
+			if(this.cookTime != this.tileEntityMelter.getField(2)) listener.sendWindowProperty(this, 2, this.tileEntityMelter.getField(2));
+			if(this.melterBurnTime != this.tileEntityMelter.getField(0)) listener.sendWindowProperty(this, 0, this.tileEntityMelter.getField(0));
+			if(this.currentItemBurnTime != this.tileEntityMelter.getField(1)) listener.sendWindowProperty(this, 1, this.tileEntityMelter.getField(1));
+			if(this.totalCookTime != this.tileEntityMelter.getField(3)) listener.sendWindowProperty(this, 3, this.tileEntityMelter.getField(3));
+		}
+		
+		this.cookTime = this.tileEntityMelter.getField(2);
+		this.melterBurnTime = this.tileEntityMelter.getField(0);
+		this.currentItemBurnTime = this.tileEntityMelter.getField(1);
+		this.totalCookTime = this.tileEntityMelter.getField(3);
+	}
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void updateProgressBar(int id, int data) 
+	{
+		this.tileEntityMelter.setField(id, data);
+	}
+
+	@Override
+	public void addListener(IContainerListener listener)
+	{
+		super.addListener(listener);
+		listener.sendAllWindowProperties(this, this.tileEntityMelter);
+	}
+		
 	public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
     {
-        ItemStack itemstack = ItemStack.EMPTY;
+        ItemStack stackToMove = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
 
         if (slot != null && slot.getHasStack())
         {
-            ItemStack itemstack1 = slot.getStack();
-            itemstack = itemstack1.copy();
+            ItemStack stackToMoveFromSlot = slot.getStack();
+            stackToMove = stackToMoveFromSlot.copy();
 
-            if (index == 0)
+            if (index == EnumMelterSlot.OUTPUT_SLOT.ordinal())
             {
-                itemstack1.getItem().onCreated(itemstack1, this.world, playerIn);
-
-                if (!this.mergeItemStack(itemstack1, 10, 46, true))
+                if (!this.mergeItemStack(stackToMove, EnumMelterSlot.OUTPUT_SLOT.ordinal(), 39, true))
                 {
                     return ItemStack.EMPTY;
                 }
 
-                slot.onSlotChange(itemstack1, itemstack);
+                slot.onSlotChange(stackToMoveFromSlot, stackToMove);
             }
-            else if (index >= 10 && index < 37)
+            else if (index != EnumMelterSlot.FUEL_SLOT.ordinal() && index != EnumMelterSlot.INPUT_SLOT.ordinal())
             {
-                if (!this.mergeItemStack(itemstack1, 37, 46, false))
+                if (!FurnaceRecipes.instance().getSmeltingResult(stackToMoveFromSlot).isEmpty())
+                {
+                    if (!this.mergeItemStack(stackToMoveFromSlot, 0, 1, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (TileEntityFurnace.isItemFuel(stackToMoveFromSlot))
+                {
+                    if (!this.mergeItemStack(stackToMoveFromSlot, 1, 2, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (index >= 3 && index < 30)
+                {
+                    if (!this.mergeItemStack(stackToMoveFromSlot, 30, 39, false))
+                    {
+                        return ItemStack.EMPTY;
+                    }
+                }
+                else if (index >= 30 && index < 39 && !this.mergeItemStack(stackToMoveFromSlot, 3, 30, false))
                 {
                     return ItemStack.EMPTY;
                 }
             }
-            else if (index >= 37 && index < 46)
-            {
-                if (!this.mergeItemStack(itemstack1, 10, 37, false))
-                {
-                    return ItemStack.EMPTY;
-                }
-            }
-            else if (!this.mergeItemStack(itemstack1, 10, 46, false))
+            else if (!this.mergeItemStack(stackToMoveFromSlot, 3, 39, false))
             {
                 return ItemStack.EMPTY;
             }
 
-            if (itemstack1.isEmpty())
+            if (stackToMoveFromSlot.isEmpty())
             {
                 slot.putStack(ItemStack.EMPTY);
             }
@@ -144,20 +163,15 @@ public class ContainerMelter extends Container
                 slot.onSlotChanged();
             }
 
-            if (itemstack1.getCount() == itemstack.getCount())
+            if (stackToMoveFromSlot.getCount() == stackToMove.getCount())
             {
                 return ItemStack.EMPTY;
             }
 
-            ItemStack itemstack2 = slot.onTake(playerIn, itemstack1);
-
-            if (index == 0)
-            {
-                playerIn.dropItem(itemstack2, false);
-            }
+            slot.onTake(playerIn, stackToMoveFromSlot);
         }
 
-        return itemstack;
+        return stackToMove;
     }
 	
 	@Override
@@ -165,4 +179,71 @@ public class ContainerMelter extends Container
     {
         return slotIn.inventory != this.craftResult && super.canMergeSlot(stack, slotIn);
     }
+	
+	
+	/** Nested slot classes for melter below. */
+	
+	public class SlotMelterCast extends Slot
+	{
+		public SlotMelterCast(IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
+	    {
+	        super(inventoryIn, slotIndex, xPosition, yPosition);
+	    }
+
+		@Override
+	    public boolean isItemValid(ItemStack stack)
+	    {
+			// Return true if stack in CAST_SLOT has the ICast capability.
+			ICast cap = stack.getCapability(CapabilityCast.CAST_CAPABILITY, null);
+			return (cap instanceof ICast) ? true : false;
+	    }
+	}
+
+	public class SlotMelterFuel extends Slot
+	{
+		public SlotMelterFuel(IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
+	    {
+	        super(inventoryIn, slotIndex, xPosition, yPosition);
+	    }
+
+		@Override
+	    public boolean isItemValid(ItemStack stack)
+	    {
+			return TileEntityMelter.isItemFuel(stack) || isBucket(stack);
+	    }
+		
+		private boolean isBucket(ItemStack stack)
+	    {
+	        return stack.getItem() == Items.BUCKET;
+	    }
+	}
+
+	public class SlotMelterInput extends Slot
+	{
+		public SlotMelterInput(IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
+	    {
+	        super(inventoryIn, slotIndex, xPosition, yPosition);
+	    }
+
+		@Override
+	    public boolean isItemValid(ItemStack stack)
+	    {
+			return true;
+	    }
+	}
+	
+	public class SlotMelterOutput extends Slot
+	{
+		public SlotMelterOutput(IInventory inventoryIn, int slotIndex, int xPosition, int yPosition)
+	    {
+	        super(inventoryIn, slotIndex, xPosition, yPosition);
+	    }
+
+		@Override
+	    public boolean isItemValid(ItemStack stack)
+	    {
+			// Don't allow items to be placed in output slot.
+			return false;
+	    }
+	}
 }

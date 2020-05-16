@@ -11,6 +11,7 @@ import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
+import zach2039.oldguns.api.capability.casting.CapabilityCast;
 import zach2039.oldguns.client.gui.ModGuiHandler;
 import zach2039.oldguns.common.init.ModMessages;
 import zach2039.oldguns.common.init.ModRecipes;
@@ -42,6 +43,9 @@ public class OldGuns
         /* PreInit sounds. */
         ModSoundEvents.RegistrationHandler.initializeSoundEvents();
    
+        /* PreInit capabilities. */
+        CapabilityCast.preInit();
+        
         /* Call sided proxy. */
         proxy.preInit();
     }

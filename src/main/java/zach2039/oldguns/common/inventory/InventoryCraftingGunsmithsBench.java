@@ -2,6 +2,7 @@ package zach2039.oldguns.common.inventory;
 
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.InventoryCrafting;
+import zach2039.oldguns.common.inventory.impl.IGunsmithsBench;
 
 public class InventoryCraftingGunsmithsBench extends InventoryCrafting implements IGunsmithsBench
 {

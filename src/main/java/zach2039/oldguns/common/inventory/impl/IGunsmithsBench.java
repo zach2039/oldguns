@@ -1,4 +1,4 @@
-package zach2039.oldguns.common.inventory;
+package zach2039.oldguns.common.inventory.impl;
 
 public interface IGunsmithsBench
 {

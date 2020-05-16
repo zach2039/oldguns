@@ -15,7 +15,10 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ContainerWorkbench;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
@@ -30,8 +33,9 @@ import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModBlocks;
 import zach2039.oldguns.common.inventory.ContainerGunsmithsBench;
 import zach2039.oldguns.common.inventory.ContainerMelter;
+import zach2039.oldguns.common.tile.TileEntityMelter;
 
-public class BlockMelter extends Block
+public class BlockMelter extends BlockContainer
 {
 	public static final IProperty<EnumFacing> FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
@@ -109,46 +113,72 @@ public class BlockMelter extends Block
 		return true;
 	}
 	
-	// Nested class for Melter GUI.
-	public static class InterfaceMelter implements IInteractionObject
+	@Override
+	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) 
 	{
-		private final World world;
-		private final BlockPos position;
-		
-		public InterfaceMelter(World worldIn, BlockPos pos)
+		TileEntity tileEntity = worldIn.getTileEntity(pos);
+		if (tileEntity instanceof IInventory) 
 		{
-			this.world = worldIn;
-			this.position = pos;
+			InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileEntity);
 		}
-		
-		@Override
-		public String getName()
-		{
-			return "melter";
-		}
-
-		@Override
-		public boolean hasCustomName()
-		{
-			return false;
-		}
-
-		@Override
-		public ITextComponent getDisplayName()
-		{
-			return new TextComponentTranslation(ModBlocks.MELTER.getUnlocalizedName() + ".name", new Object[0]);
-		}
-
-		@Override
-		public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
-		{
-			return new ContainerMelter(playerInventory, this.world, this.position);
-		}
-
-		@Override
-		public String getGuiID()
-		{
-			return "oldguns:melter";
-		}
+	
+		super.breakBlock(worldIn, pos, state);
 	}
+	
+	@Override
+	public EnumBlockRenderType getRenderType(IBlockState state)
+    {
+        return EnumBlockRenderType.MODEL;
+    }
+	
+	@Override
+	public TileEntity createNewTileEntity(World worldIn, int meta)
+	{
+		return new TileEntityMelter();
+	}
+	
+//	// Nested class for Melter GUI.
+//	public static class InterfaceMelter implements IInteractionObject
+//	{
+//		private final World world;
+//		private final BlockPos position;
+//		
+//		public InterfaceMelter(World worldIn, BlockPos pos)
+//		{
+//			this.world = worldIn;
+//			this.position = pos;
+//		}
+//		
+//		@Override
+//		public String getName()
+//		{
+//			return "melter";
+//		}
+//
+//		@Override
+//		public boolean hasCustomName()
+//		{
+//			return false;
+//		}
+//
+//		@Override
+//		public ITextComponent getDisplayName()
+//		{
+//			return new TextComponentTranslation(ModBlocks.MELTER.getUnlocalizedName() + ".name", new Object[0]);
+//		}
+//
+//		@Override
+//		public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
+//		{
+//			return new ContainerMelter(playerInventory, );
+//		}
+//
+//		@Override
+//		public String getGuiID()
+//		{
+//			return "oldguns:melter";
+//		}
+//	}
+
+
 }
