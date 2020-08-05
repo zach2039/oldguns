@@ -7,6 +7,7 @@
     {
         "reload_firearm_single": "zach2039.oldguns.common.item.crafting.RecipesFirearmReload$Factory",
         "repair_firearm_with_kit": "zach2039.oldguns.common.item.crafting.RecipesFirearmRepairWithKit$Factory",
-        "firearm_build": "zach2039.oldguns.common.item.crafting.RecipesFirearmBuild$Factory"
+        "shaped_gunsmiths_bench": "zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe$Factory",
+        "shapeless_gunsmiths_bench": "zach2039.oldguns.common.item.crafting.ShapelessGunsmithsBenchRecipe$Factory"
     }
 }﻿

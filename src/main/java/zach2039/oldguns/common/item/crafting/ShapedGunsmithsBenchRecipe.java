@@ -17,12 +17,12 @@ import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.inventory.impl.IGunsmithsBench;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 
-public class RecipesFirearmBuild extends ShapedOreRecipe
+public class ShapedGunsmithsBenchRecipe extends ShapedOreRecipe
 {
 	/**
 	 * Default constructor.
 	 */
-	public RecipesFirearmBuild(@Nullable final ResourceLocation group, final ItemStack result, final CraftingHelper.ShapedPrimer primer) 
+	public ShapedGunsmithsBenchRecipe(@Nullable final ResourceLocation group, final ItemStack result, final CraftingHelper.ShapedPrimer primer) 
 	{
 		super(group, result, primer);
 	}
@@ -32,13 +32,12 @@ public class RecipesFirearmBuild extends ShapedOreRecipe
 	{
 		/* Get default output. */
 		ItemStack output = super.getCraftingResult(inv); 
-
-		
-		OldGuns.logger.info("Trying to get crafting result for firearm build.");
 		
 		/* Return if crafting block isn't a gunsmith's workbench. */
 		if (!(inv instanceof IGunsmithsBench))
+		{
 			return ItemStack.EMPTY;
+		}
 		
 		return output;
 	}
@@ -48,7 +47,7 @@ public class RecipesFirearmBuild extends ShapedOreRecipe
 	{
 		return group == null ? "" : group.toString();
 	}
-	
+
 	public static class Factory implements IRecipeFactory
 	{
 		@Override
@@ -58,8 +57,8 @@ public class RecipesFirearmBuild extends ShapedOreRecipe
 			final String group = JsonUtils.getString(json, "group", "");
 			final CraftingHelper.ShapedPrimer primer = RecipeUtil.parseShaped(context, json);
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-
-			return new RecipesFirearmBuild(group.isEmpty() ? null : new ResourceLocation(group), result, primer);
+			
+			return new ShapedGunsmithsBenchRecipe(group.isEmpty() ? null : new ResourceLocation(group), result, primer);
 		}
 	}
 }

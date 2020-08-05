@@ -14,15 +14,15 @@ import zach2039.oldguns.common.item.util.FirearmType.FirearmSize;
 import zach2039.oldguns.common.item.util.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
-public class ItemFlintlockPistol extends ItemFirearm implements IFirearm
+public class ItemMatchlockPistol extends ItemFirearm implements IFirearm
 {
-	public ItemFlintlockPistol()
+	public ItemMatchlockPistol()
 	{
-		super("flintlock_pistol");
-		setMaxDamage(32);
+		super("matchlock_pistol");
+		setMaxDamage(16);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(8.0f);
+		setEffectiveRange(6.0f);
 		setProjectileSpeed(3.5f);
 	}
 
@@ -61,6 +61,6 @@ public class ItemFlintlockPistol extends ItemFirearm implements IFirearm
 	@Override
 	public FirearmWaterResiliency getFirearmWaterResiliency()
 	{
-		return FirearmWaterResiliency.FAIR;
+		return FirearmWaterResiliency.POOR;
 	}
 }

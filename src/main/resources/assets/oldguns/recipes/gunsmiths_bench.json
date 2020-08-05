@@ -1,0 +1,28 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"pattern": [
+		"LLC",
+		"PGP"
+	],
+	"key": {
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
+		},
+		"P": {
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		},
+		"L": {
+			"type": "forge:ore_dict",
+			"ore": "logWood"
+		},
+		"G": {
+			"item": "minecraft:gunpowder"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:gunsmiths_bench"
+	}
+}

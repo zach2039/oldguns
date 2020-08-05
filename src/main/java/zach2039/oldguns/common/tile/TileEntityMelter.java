@@ -1,5 +1,10 @@
 package zach2039.oldguns.common.tile;
 
+import java.util.Arrays;
+
+import javax.annotation.Nullable;
+
+import net.minecraft.block.BlockOre;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
@@ -10,15 +15,23 @@ import net.minecraft.inventory.SlotFurnaceFuel;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
+import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.tileentity.TileEntityLockable;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.ITickable;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.oredict.OreDictionary;
 import zach2039.oldguns.api.capability.casting.CapabilityCast;
 import zach2039.oldguns.api.capability.casting.ICast;
+import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.block.BlockMelter;
 import zach2039.oldguns.common.inventory.ContainerMelter;
+import zach2039.oldguns.common.item.crafting.MelterRecipes;
 
-public class TileEntityMelter extends TileEntityLockable implements ISidedInventory
+public class TileEntityMelter extends TileEntityLockable implements ITickable, ISidedInventory
 {
 	/** Slots enum for melter. */
 	public static enum EnumMelterSlot
@@ -42,13 +55,13 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
 	};
 	
 	/** ItemStack array for items in melter. */
-	private NonNullList<ItemStack> melterItemStacks = NonNullList.<ItemStack>withSize(4, ItemStack.EMPTY);
+	private NonNullList<ItemStack> melterItemStacks = NonNullList.<ItemStack>withSize(EnumMelterSlot.values().length, ItemStack.EMPTY);
 	
 	/** Number of ticks melter will burn for. */
 	private int melterBurnTime;
 	
 	/** Number of ticks next meltable item will contribute to burn time. */
-	private int currentItemBurnTime;
+	private int currentMelterBurnTime;
 	
 	/** Current time spent cooking an item. */
 	private int cookTime;
@@ -63,7 +76,7 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
 	@Override
 	public int getSizeInventory()
 	{
-		return this.melterItemStacks.size();
+		return EnumMelterSlot.values().length;
 	}
 
 	/** Returns if the melter is completely empty. */
@@ -95,7 +108,7 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
 		return ItemStackHelper.getAndSplit(this.melterItemStacks, index, count);
 	}
 
-	/** Removes a stac from an inventory slot, and returns it. */
+	/** Removes a stack from an inventory slot, and returns it. */
 	@Override
 	public ItemStack removeStackFromSlot(int index)
 	{
@@ -105,7 +118,17 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
 	/** Get cook time of input stack */
 	private int getCookTime(ItemStack stack)
 	{
-		return 0;
+		
+		if (!stack.isEmpty())
+		{
+			for (int id : OreDictionary.getOreIDs(stack))
+			{
+				if (OreDictionary.getOreName(id) == "oreIron")
+					return 100;
+			}
+		}
+	
+		return 100;
 	}
 	
 	/** Sets given item stack to slot in inventory. */
@@ -171,6 +194,187 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
         return getItemBurnTime(stack) > 0;
     }
 	
+	/**
+	 * Returns true if the melter can smelt an item, i.e. has a source item, destination stack isn't full, etc.
+	 */
+	private boolean canMelt()
+	{
+		ItemStack inputStack = this.melterItemStacks.get(EnumMelterSlot.INPUT_SLOT.ordinal());
+		ItemStack castStack = this.melterItemStacks.get(EnumMelterSlot.CAST_SLOT.ordinal());
+		
+		if (inputStack.isEmpty())
+        {
+            return false;
+        }
+        else
+        {
+            ItemStack resultFromInputStack = MelterRecipes.instance().getMeltingResult(inputStack, castStack);
+
+            if (resultFromInputStack.isEmpty())
+            {
+            	// No recipe found for input and cast.
+                return false;
+            }
+            else
+            {
+                ItemStack currentResultStack = this.melterItemStacks.get(EnumMelterSlot.OUTPUT_SLOT.ordinal());
+
+                if (currentResultStack.isEmpty())
+                {
+                	// Output is empty, so we can smelt an item.
+                    return true;
+                }
+                else if (!currentResultStack.isItemEqual(resultFromInputStack))
+                {
+                	// Output item and result of melter recipe aren't equal, so we cannot smelt an item.
+                    return false;
+                }
+                else if (currentResultStack.getCount() + resultFromInputStack.getCount() <= this.getInventoryStackLimit() && currentResultStack.getCount() + resultFromInputStack.getCount() <= currentResultStack.getMaxStackSize())  // Forge fix: make furnace respect stack sizes in furnace recipes
+                {
+                	// Output items match, and result of recipe can fit into stack size of other without overflowing.
+                    return true;
+                }
+                else
+                {
+                	// Output items match, and result of recipe can fit into stack size of other without overflowing.
+                    return currentResultStack.getCount() + resultFromInputStack.getCount() <= resultFromInputStack.getMaxStackSize(); // Forge fix: make furnace respect stack sizes in furnace recipes
+                }
+            }
+        }
+	}
+	
+	private void damageCast(final ItemStack castStack)
+	{
+		if (castStack.attemptDamageItem(1, this.world.rand, null))
+		{
+			OldGuns.logger.info("Consume cast item.", castStack);
+			castStack.shrink(1);
+		}
+	}
+	
+	/**
+     * Turn one item from the melter source stack into the appropriate melted item in the melter result stack
+     */
+    public void meltItem()
+    {
+        if (this.canMelt())
+        {
+        	ItemStack inputStack = this.melterItemStacks.get(EnumMelterSlot.INPUT_SLOT.ordinal());
+    		ItemStack castStack = this.melterItemStacks.get(EnumMelterSlot.CAST_SLOT.ordinal());
+            ItemStack currentResultStack = this.melterItemStacks.get(EnumMelterSlot.OUTPUT_SLOT.ordinal());
+            ItemStack resultFromInputStack = MelterRecipes.instance().getMeltingResult(inputStack, castStack);
+            
+            if (currentResultStack.isEmpty())
+            {
+                this.melterItemStacks.set(EnumMelterSlot.OUTPUT_SLOT.ordinal(), resultFromInputStack.copy());
+            }
+            else if (currentResultStack.getItem() == resultFromInputStack.getItem())
+            {
+            	currentResultStack.grow(resultFromInputStack.getCount());
+            }
+
+            // Shrink input stack on completion of melt.
+            inputStack.shrink(1);
+            
+            // Damage cast stack by 1, consuming if necessary.
+            damageCast(castStack);
+        }
+    }
+	
+	@Override
+	public void update()
+	{
+		boolean wasBurning = this.isBurning();
+		boolean isDirty = false;
+		
+		// Decrease burn time counter, if the melter was burning.
+		if (wasBurning)
+		{
+			--this.melterBurnTime;
+		}
+		
+		// On server side, process tick counters.
+		if (!this.world.isRemote)
+		{
+			ItemStack inputStack = this.melterItemStacks.get(EnumMelterSlot.INPUT_SLOT.ordinal());
+			ItemStack fuelStack = this.melterItemStacks.get(EnumMelterSlot.FUEL_SLOT.ordinal());
+			
+			if (this.isBurning() || (!inputStack.isEmpty() && !fuelStack.isEmpty()))
+			{
+				// Melter is burning, or has items in fuel and input slots.
+				if (!this.isBurning() && this.canMelt())
+				{
+					// Melter is not burning, and can melt an item.
+					
+					// Restart burn item from fuel item.
+					this.melterBurnTime = getItemBurnTime(fuelStack);
+					this.currentMelterBurnTime = this.melterBurnTime;
+					
+					// Check again if burning, since we restarted burn timer using fuel.
+					if (this.isBurning())
+					{
+						// Set as updatable once finished, as things have changed and must be synced between client and server.
+						isDirty = true;
+						
+						if (!fuelStack.isEmpty())
+						{
+							// Have fuel to consume, so shrink fuel stack.
+							Item fuelItem = fuelStack.getItem();
+							fuelStack.shrink(1);
+							
+							if (fuelStack.isEmpty())
+							{
+								// If fuel is consumed completely, make sure we replace with a container item if applicable (like buckets of lava).
+								ItemStack fuelContainerStack = fuelItem.getContainerItem(fuelStack);
+								this.melterItemStacks.set(EnumMelterSlot.FUEL_SLOT.ordinal(), fuelContainerStack);
+							}
+						}
+					}
+				}
+				
+				if (this.isBurning() && this.canMelt())
+				{
+					// Melter is burning, and can melt an item.
+					++this.cookTime;
+					
+					if (this.cookTime == this.totalCookTime)
+					{
+						// Currently melting item is complete.
+						this.cookTime = 0;
+                        this.totalCookTime = this.getCookTime(this.melterItemStacks.get(EnumMelterSlot.INPUT_SLOT.ordinal()));
+                        this.meltItem();
+                        isDirty = true;
+					}
+				}
+				else
+				{
+					// Stop cooking process, as melter is not burning or cannot melt an item.
+					this.cookTime = 0;
+				}
+			}
+			else if (!this.isBurning() && this.cookTime > 0)
+			{
+				// Melter is not burning, but cooktime is not zero. Reduce cooktime by 2 per tick.
+				this.cookTime = MathHelper.clamp(this.cookTime - 2, 0, this.totalCookTime);
+			}
+			
+			if (wasBurning != this.isBurning())
+			{
+				// Burn state changed during process. Mark as needing update/sync.
+				isDirty = true;
+				BlockMelter.setState(this.isBurning(), this.world, this.pos);
+			}
+		}
+		
+		if (isDirty)
+		{
+			// Update/sync needed.
+			this.markDirty();
+		}
+	}
+	
+	
+
 	@Override
 	public boolean isItemValidForSlot(int index, ItemStack stack)
 	{
@@ -253,7 +457,7 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
             case 0:
                 return this.melterBurnTime;
             case 1:
-                return this.currentItemBurnTime;
+                return this.currentMelterBurnTime;
             case 2:
                 return this.cookTime;
             case 3:
@@ -272,7 +476,7 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
                 this.melterBurnTime = value;
                 break;
             case 1:
-                this.currentItemBurnTime = value;
+                this.currentMelterBurnTime = value;
                 break;
             case 2:
                 this.cookTime = value;
@@ -311,17 +515,18 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
     public void readFromNBT(NBTTagCompound compound)
     {
         super.readFromNBT(compound);
-        this.melterItemStacks = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
-        ItemStackHelper.loadAllItems(compound, this.melterItemStacks);
-        this.melterBurnTime = compound.getInteger("BurnTime");
-        this.cookTime = compound.getInteger("CookTime");
-        this.totalCookTime = compound.getInteger("CookTimeTotal");
-        this.currentItemBurnTime = getItemBurnTime(this.melterItemStacks.get(1));
-
         if (compound.hasKey("CustomName", 8))
         {
             this.melterCustomName = compound.getString("CustomName");
         }
+        this.melterItemStacks = NonNullList.<ItemStack>withSize(this.getSizeInventory(), ItemStack.EMPTY);
+        
+        ItemStackHelper.loadAllItems(compound, this.melterItemStacks);
+        
+        this.melterBurnTime = compound.getInteger("BurnTime");
+        this.cookTime = compound.getInteger("CookTime");
+        this.totalCookTime = compound.getInteger("CookTimeTotal");
+        this.currentMelterBurnTime = getItemBurnTime(this.melterItemStacks.get(EnumMelterSlot.FUEL_SLOT.ordinal()));
     }
 
 	@Override
@@ -331,6 +536,7 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
         compound.setInteger("BurnTime", (short)this.melterBurnTime);
         compound.setInteger("CookTime", (short)this.cookTime);
         compound.setInteger("CookTimeTotal", (short)this.totalCookTime);
+        
         ItemStackHelper.saveAllItems(compound, this.melterItemStacks);
 
         if (this.hasCustomName())
@@ -344,6 +550,37 @@ public class TileEntityMelter extends TileEntityLockable implements ISidedInvent
 	public boolean isBurning()
 	{
 		return this.melterBurnTime > 0;
+	}
+	
+	@Override
+	@Nullable
+	public SPacketUpdateTileEntity getUpdatePacket()
+	{
+		NBTTagCompound updateTagDescribingTileEntityState = new NBTTagCompound();
+		writeToNBT(updateTagDescribingTileEntityState);
+		final int METADATA = this.getBlockMetadata();
+		return new SPacketUpdateTileEntity(this.pos, METADATA, updateTagDescribingTileEntityState);
+	}
+
+	@Override
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) 
+	{
+		NBTTagCompound updateTagDescribingTileEntityState = pkt.getNbtCompound();
+		handleUpdateTag(updateTagDescribingTileEntityState);
+	}
+	
+	@Override
+	public NBTTagCompound getUpdateTag()
+	{
+		 NBTTagCompound nbtTagCompound = new NBTTagCompound();
+		 writeToNBT(nbtTagCompound);
+		 return nbtTagCompound;
+	}
+	
+	@Override
+	public void handleUpdateTag(NBTTagCompound tag)
+	{
+		this.readFromNBT(tag);
 	}
 	
 	net.minecraftforge.items.IItemHandler handlerTop = new net.minecraftforge.items.wrapper.SidedInvWrapper(this, net.minecraft.util.EnumFacing.UP);

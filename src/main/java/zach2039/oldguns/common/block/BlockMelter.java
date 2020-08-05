@@ -1,6 +1,5 @@
 package zach2039.oldguns.common.block;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
@@ -11,10 +10,6 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
-import net.minecraft.inventory.ContainerWorkbench;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryHelper;
 import net.minecraft.tileentity.TileEntity;
@@ -24,28 +19,30 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
-import net.minecraft.world.IInteractionObject;
 import net.minecraft.world.World;
 import zach2039.oldguns.client.gui.ModGuiIDs;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.init.ModBlocks;
-import zach2039.oldguns.common.inventory.ContainerGunsmithsBench;
-import zach2039.oldguns.common.inventory.ContainerMelter;
 import zach2039.oldguns.common.tile.TileEntityMelter;
 
 public class BlockMelter extends BlockContainer
 {
 	public static final IProperty<EnumFacing> FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	private final boolean isBurning;
+	private static boolean keepInventory;
 	
-	public BlockMelter()
+	public BlockMelter(boolean isBurning)
 	{
 		super(Material.ROCK);
 		setRegistryName(OldGuns.MODID, "melter");
 		setUnlocalizedName("melter");
 		setCreativeTab(CreativeTabs.DECORATIONS);
 		setSoundType(SoundType.STONE);	
+		this.isBurning = isBurning;
+	}
+	
+	public BlockMelter()
+	{
+		this(false);
 	}
 	
 	@Override
@@ -116,12 +113,15 @@ public class BlockMelter extends BlockContainer
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) 
 	{
-		TileEntity tileEntity = worldIn.getTileEntity(pos);
-		if (tileEntity instanceof IInventory) 
+		if (!keepInventory)
 		{
-			InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileEntity);
+			TileEntity tileEntity = worldIn.getTileEntity(pos);
+			if (tileEntity instanceof IInventory) 
+			{
+				InventoryHelper.dropInventoryItems(worldIn, pos, (IInventory)tileEntity);
+				//worldIn.updateComparatorOutputLevel(pos, this);
+			}
 		}
-	
 		super.breakBlock(worldIn, pos, state);
 	}
 	
@@ -136,6 +136,34 @@ public class BlockMelter extends BlockContainer
 	{
 		return new TileEntityMelter();
 	}
+
+	public static void setState(boolean active, World worldIn, BlockPos pos)
+	{
+		IBlockState iblockstate = worldIn.getBlockState(pos);
+        TileEntity tileentity = worldIn.getTileEntity(pos);
+        keepInventory = true;
+
+//        if (active)
+//        {
+//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+//        }
+//        else
+//        {
+//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
+//        }
+
+        keepInventory = false;
+
+        if (tileentity != null)
+        {
+            tileentity.validate();
+            worldIn.setTileEntity(pos, tileentity);
+        }
+	}
+	
+	
 	
 //	// Nested class for Melter GUI.
 //	public static class InterfaceMelter implements IInteractionObject

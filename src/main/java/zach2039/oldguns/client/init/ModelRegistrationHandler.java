@@ -17,12 +17,23 @@ public class ModelRegistrationHandler
 	@SubscribeEvent
 	public static void registerModels(ModelRegistryEvent event)
 	{
+		registerModel(ModItems.MATCHLOCK_PISTOL, 0);
 		registerModel(ModItems.FLINTLOCK_PISTOL, 0);
 		registerModel(ModItems.FLINTLOCK_MECHANISM, 0);
 		registerModel(ModItems.SMALL_IRON_MUSKET_BALL, 0);
+		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL, 0);
+		registerModel(ModItems.LARGE_IRON_MUSKET_BALL, 0);
+		registerModel(ModItems.SMALL_STONE_MUSKET_BALL, 0);
+		registerModel(ModItems.MEDIUM_STONE_MUSKET_BALL, 0);
+		registerModel(ModItems.LARGE_STONE_MUSKET_BALL, 0);
 		registerModel(ModItems.SMALL_IRON_BARREL, 0);
 		registerModel(ModItems.SMALL_WOODEN_HANDLE, 0);	
-		registerModel(ModItems.SMALL_MUSKET_BALL_CAST, 0);
+		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD, 0);
+		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD, 0);
+		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD, 0);
+		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD_TOOL, 0);
+		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD_TOOL, 0);
+		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD_TOOL, 0);
 		registerModel(ModItems.REPAIR_KIT, 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.GUNSMITHS_BENCH), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.MELTER), 0);

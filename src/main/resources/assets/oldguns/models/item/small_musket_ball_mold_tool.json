@@ -1,0 +1,6 @@
+{
+	"parent": "item/generated",
+	"textures": {
+		"layer0": "oldguns:items/small_musket_ball_mold_tool"
+	}
+}

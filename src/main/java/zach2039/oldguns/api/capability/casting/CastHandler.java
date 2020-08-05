@@ -32,7 +32,8 @@ public class CastHandler implements ICapabilitySerializable<NBTTagCompound>, ICa
 	@Override
 	public NBTTagCompound serializeNBT()
 	{
-		return null;
+		// ZTH 200802: Not having this makes the game forget the cast when saving/loading NBT of tile ent.
+		return new NBTTagCompound();
 	}
 
 	@Override

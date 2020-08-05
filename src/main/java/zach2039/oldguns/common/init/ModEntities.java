@@ -26,7 +26,7 @@ public class ModEntities
 					createBuilder("entity_projectile")
 							.entity(EntityProjectile.class)
 							.tracker(500, 1, true)
-							.build()
+							.build(),
 			};
 			
 			event.getRegistry().registerAll(entries);

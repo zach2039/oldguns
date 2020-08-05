@@ -25,6 +25,7 @@ import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.tools.ItemRepairKit;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
+import zach2039.oldguns.common.item.util.FirearmType.FirearmCondition;
 
 public class RecipesFirearmRepairWithKit extends ShapelessOreRecipe
 {
@@ -79,6 +80,12 @@ public class RecipesFirearmRepairWithKit extends ShapelessOreRecipe
 			int damage = firearmStack.getItemDamage();
 			int repairAmount = Math.round((float)firearmStack.getMaxDamage() / (float)4);
 			firearmStack.setItemDamage(Math.max(0, damage - repairAmount));
+			/* Restore condition and update for durability, if repaired. */
+			if (FirearmNBTHelper.getNBTTagCondition(firearmStack) == FirearmCondition.BROKEN)
+			{
+				FirearmNBTHelper.setNBTTagCondition(firearmStack, FirearmCondition.VERY_POOR);
+				FirearmNBTHelper.refreshFirearmCondition(firearmStack);
+			}
 		}
 		
 		return firearmStack;

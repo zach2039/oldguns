@@ -2,6 +2,11 @@
 item.flintlock_pistol.name=Flintlock Pistol
 item.flintlock_mechanism.name=Flintlock Mechanism
 item.small_iron_musket_ball.name=Small Iron Musket Ball
+item.medium_iron_musket_ball.name=Medium Iron Musket Ball
+item.large_iron_musket_ball.name=Large Iron Musket Ball
+item.small_stone_musket_ball.name=Small Stone Musket Ball
+item.medium_stone_musket_ball.name=Medium Stone Musket Ball
+item.large_stone_musket_ball.name=Large Stone Musket Ball
 item.small_iron_barrel.name=Small Iron Barrel
 item.medium_iron_barrel.name=Medium Iron Barrel
 item.large_iron_barrel.name=Large Iron Barrel
@@ -10,6 +15,12 @@ item.medium_wooden_handle.name=Medium Wooden Handle
 item.large_wooden_handle.name=Large Wooden Handle
 item.small_musket_ball_cast.name=Small Musket Ball Cast
 item.repair_kit.name=Firearm Repair Kit
+item.small_musket_ball_mold.name=Small Musket Ball Mold
+item.medium_musket_ball_mold.name=Medium Musket Ball Mold
+item.large_musket_ball_mold.name=Large Musket Ball Mold
+item.small_musket_ball_mold_tool.name=Small Musket Ball Mold Tool
+item.medium_musket_ball_mold_tool.name=Medium Musket Ball Mold Tool
+item.large_musket_ball_mold_tool.name=Large Musket Ball Mold Tool
 
 # Blocks
 tile.gunsmiths_bench.name=Gunsmith's Bench

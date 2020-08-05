@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
 import zach2039.oldguns.common.item.util.FirearmType.FirearmCondition;
 
 public class FirearmNBTHelper
@@ -171,5 +172,49 @@ public class FirearmNBTHelper
 			setNBTTagCondition(stackIn, FirearmCondition.VERY_GOOD);
 
 		return FirearmCondition.values()[stackIn.getTagCompound().getInteger("condition")];
+	}
+	
+	/**
+	 * Refreshes the condition of a firearm itemstack instance.
+	 * @param stackIn
+	 */
+	public static void refreshFirearmCondition(ItemStack stackIn)
+	{
+		float damageLevel = (float)((float)stackIn.getItemDamage() / (float)stackIn.getMaxDamage());
+		
+		/* If firearm is broken, don't bother setting state. */
+		if (FirearmNBTHelper.getNBTTagCondition(stackIn) == FirearmCondition.BROKEN)
+			return;
+		
+		/* Set condition of firearm based on damage percentage. */
+		if (damageLevel < 0.10f)
+		{
+			/* Very good condition. */
+			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.VERY_GOOD);
+		}
+		else if (damageLevel < 0.25f)
+		{
+			/* Good condition. */
+			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.GOOD);
+		}
+		else if (damageLevel < 0.75f)
+		{
+			/* Fair condition. */
+			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.FAIR);
+		}
+		else if (damageLevel < 0.90f)
+		{
+			/* Poor condition. */
+			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.POOR);
+		}
+		else if (stackIn.getItemDamage() != stackIn.getMaxDamage())
+		{
+			/* Very poor condition. */
+			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.VERY_POOR);
+		}
+		else
+		{
+			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.BROKEN);
+		}
 	}
 }

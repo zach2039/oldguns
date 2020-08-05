@@ -112,66 +112,96 @@ public class ContainerMelter extends Container
             ItemStack stackToMoveFromSlot = slot.getStack();
             stackToMove = stackToMoveFromSlot.copy();
 
-            if (index == EnumMelterSlot.OUTPUT_SLOT.ordinal())
+            if (index < EnumMelterSlot.values().length)
             {
-                if (!this.mergeItemStack(stackToMove, EnumMelterSlot.OUTPUT_SLOT.ordinal(), 39, true))
-                {
-                    return ItemStack.EMPTY;
-                }
-
-                slot.onSlotChange(stackToMoveFromSlot, stackToMove);
-            }
-            else if (index != EnumMelterSlot.FUEL_SLOT.ordinal() && index != EnumMelterSlot.INPUT_SLOT.ordinal())
-            {
-                if (!FurnaceRecipes.instance().getSmeltingResult(stackToMoveFromSlot).isEmpty())
-                {
-                    if (!this.mergeItemStack(stackToMoveFromSlot, 0, 1, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (TileEntityFurnace.isItemFuel(stackToMoveFromSlot))
-                {
-                    if (!this.mergeItemStack(stackToMoveFromSlot, 1, 2, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (index >= 3 && index < 30)
-                {
-                    if (!this.mergeItemStack(stackToMoveFromSlot, 30, 39, false))
-                    {
-                        return ItemStack.EMPTY;
-                    }
-                }
-                else if (index >= 30 && index < 39 && !this.mergeItemStack(stackToMoveFromSlot, 3, 30, false))
-                {
-                    return ItemStack.EMPTY;
-                }
-            }
-            else if (!this.mergeItemStack(stackToMoveFromSlot, 3, 39, false))
-            {
-                return ItemStack.EMPTY;
-            }
-
-            if (stackToMoveFromSlot.isEmpty())
-            {
-                slot.putStack(ItemStack.EMPTY);
+                if (!this.mergeItemStack(stackToMoveFromSlot, EnumMelterSlot.values().length, 39, true))
+                	return ItemStack.EMPTY;
             }
             else
             {
-                slot.onSlotChanged();
+            	if (!this.mergeItemStack(stackToMoveFromSlot, 0, EnumMelterSlot.values().length, false))
+                	return ItemStack.EMPTY;	
             }
-
+            
+            if (stackToMoveFromSlot.getCount() == 0)
+            {
+            	slot.putStack(ItemStack.EMPTY);
+            }
+            else
+            {
+            	slot.onSlotChanged();
+            }
+            
             if (stackToMoveFromSlot.getCount() == stackToMove.getCount())
             {
-                return ItemStack.EMPTY;
+            	return ItemStack.EMPTY;
             }
-
+            
             slot.onTake(playerIn, stackToMoveFromSlot);
         }
-
+            
         return stackToMove;
+            
+//            if (index == EnumMelterSlot.OUTPUT_SLOT.ordinal())
+//            {
+//                if (!this.mergeItemStack(stackToMove, EnumMelterSlot.OUTPUT_SLOT.ordinal(), 39, true))
+//                {
+//                    return ItemStack.EMPTY;
+//                }
+//
+//                slot.onSlotChange(stackToMoveFromSlot, stackToMove);
+//            }
+//            else if (index != EnumMelterSlot.FUEL_SLOT.ordinal() && index != EnumMelterSlot.INPUT_SLOT.ordinal())
+//            {
+//                if (!FurnaceRecipes.instance().getSmeltingResult(stackToMoveFromSlot).isEmpty())
+//                {
+//                    if (!this.mergeItemStack(stackToMoveFromSlot, 0, 1, false))
+//                    {
+//                        return ItemStack.EMPTY;
+//                    }
+//                }
+//                else if (TileEntityFurnace.isItemFuel(stackToMoveFromSlot))
+//                {
+//                    if (!this.mergeItemStack(stackToMoveFromSlot, 1, 2, false))
+//                    {
+//                        return ItemStack.EMPTY;
+//                    }
+//                }
+//                else if (index >= 3 && index < 30)
+//                {
+//                    if (!this.mergeItemStack(stackToMoveFromSlot, 30, 39, false))
+//                    {
+//                        return ItemStack.EMPTY;
+//                    }
+//                }
+//                else if (index >= 30 && index < 39 && !this.mergeItemStack(stackToMoveFromSlot, 3, 30, false))
+//                {
+//                    return ItemStack.EMPTY;
+//                }
+//            }
+//            else if (!this.mergeItemStack(stackToMoveFromSlot, 3, 39, false))
+//            {
+//                return ItemStack.EMPTY;
+//            }
+//
+//            if (stackToMoveFromSlot.isEmpty())
+//            {
+//                slot.putStack(ItemStack.EMPTY);
+//            }
+//            else
+//            {
+//                slot.onSlotChanged();
+//            }
+//
+//            if (stackToMoveFromSlot.getCount() == stackToMove.getCount())
+//            {
+//                return ItemStack.EMPTY;
+//            }
+//
+//            slot.onTake(playerIn, stackToMoveFromSlot);
+//        }
+//
+//        return stackToMove;
     }
 	
 	@Override

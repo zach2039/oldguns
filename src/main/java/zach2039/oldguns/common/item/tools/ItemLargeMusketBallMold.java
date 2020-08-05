@@ -9,14 +9,17 @@ import net.minecraft.nbt.NBTTagCompound;
 import zach2039.oldguns.api.capability.casting.CastHandler;
 import zach2039.oldguns.common.OldGuns;
 
-public class ItemSmallMusketBallCast extends Item
+public class ItemLargeMusketBallMold extends Item
 {
-	public ItemSmallMusketBallCast()
+	public ItemLargeMusketBallMold()
 	{
-		setRegistryName(OldGuns.MODID, "small_musket_ball_cast");
-		setUnlocalizedName("small_musket_ball_cast");
+		setRegistryName(OldGuns.MODID, "large_musket_ball_mold");
+		setUnlocalizedName("large_musket_ball_mold");
 		setMaxStackSize(1);
 		setCreativeTab(CreativeTabs.COMBAT);
+		
+		// Set max uses of cast in recipes via damage value.
+		setMaxDamage(63);
 	}
 	
 	@Override

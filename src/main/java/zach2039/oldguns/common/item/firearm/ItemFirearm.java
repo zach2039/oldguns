@@ -2,6 +2,8 @@ package zach2039.oldguns.common.item.firearm;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import com.google.common.collect.Multimap;
 
 import net.minecraft.client.util.ITooltipFlag;
@@ -13,9 +15,11 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Enchantments;
+import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
+import net.minecraft.item.IItemPropertyGetter;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
@@ -24,9 +28,12 @@ import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
 import zach2039.oldguns.common.init.ModItems;
@@ -68,6 +75,16 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		setUnlocalizedName(name);
 		setCreativeTab(CreativeTabs.COMBAT);
 		setNoRepair();
+        addPropertyOverride(new ResourceLocation(OldGuns.MODID, "empty"), new IItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+            	if (entityIn == null) return 0.0F;
+            	if (stack.isEmpty() || !(stack.getItem() instanceof ItemFirearm)) return 0.0F;
+                return (FirearmNBTHelper.peekNBTTagAmmoCount(stack) > 0) ? 0.0F : 1.0F;
+            }
+        });
 	}
 	
 	@Override
@@ -90,7 +107,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 			initNBTTags(stack);
     	
     	/* Recalculate firearm condition. */
-		refreshFirearmCondition(worldIn, stack);
+    	FirearmNBTHelper.refreshFirearmCondition(stack);
     }
 	
 	@Override
@@ -176,7 +193,11 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
         	            
                     /* If firearm broke or misfired, do nothing. */
                     if (failure)
+                    {
+                    	/* Refresh condition. */
+                        FirearmNBTHelper.refreshFirearmCondition(stack);
                     	return;
+                    }
                     
                     ItemFirearmAmmo itemFirearmAmmo = (ItemFirearmAmmo)(itemstack.getItem() instanceof ItemFirearmAmmo ? itemstack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
                     List<EntityProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, itemstack, entityplayer);
@@ -226,7 +247,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                 }
 
                 /* Refresh condition. */
-                refreshFirearmCondition(worldIn, stack);
+                FirearmNBTHelper.refreshFirearmCondition(stack);
                 
                 entityplayer.addStat(StatList.getObjectUseStats(this));
             }
@@ -310,46 +331,6 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	{
 		// TODO Auto-generated method stub
 		return super.getItemEnchantability();
-	}
-
-	public void refreshFirearmCondition(World worldIn, ItemStack stackIn)
-	{
-		float damageLevel = (float)((float)stackIn.getItemDamage() / (float)stackIn.getMaxDamage());
-		
-		/* If firearm is broken, don't bother setting state. */
-		if (FirearmNBTHelper.getNBTTagCondition(stackIn) == FirearmCondition.BROKEN)
-			return;
-		
-		/* Set condition of firearm based on damage percentage. */
-		if (damageLevel < 0.10f)
-		{
-			/* Very good condition. */
-			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.VERY_GOOD);
-		}
-		else if (damageLevel < 0.25f)
-		{
-			/* Good condition. */
-			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.GOOD);
-		}
-		else if (damageLevel < 0.75f)
-		{
-			/* Fair condition. */
-			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.FAIR);
-		}
-		else if (damageLevel < 0.90f)
-		{
-			/* Poor condition. */
-			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.POOR);
-		}
-		else if (stackIn.getItemDamage() != stackIn.getMaxDamage())
-		{
-			/* Very poor condition. */
-			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.VERY_POOR);
-		}
-		else
-		{
-			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.BROKEN);
-		}
 	}
 	
 	/**
