@@ -9,6 +9,7 @@ import net.minecraftforge.fml.common.registry.EntityEntry;
 import net.minecraftforge.fml.common.registry.EntityEntryBuilder;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.entity.EntityArtilleryCannon;
 import zach2039.oldguns.common.entity.EntityProjectile;
 
 @ObjectHolder(OldGuns.MODID)
@@ -16,6 +17,9 @@ public class ModEntities
 {
 	@ObjectHolder("entity_projectile")
 	public static final EntityEntry ENTITY_PROJECTILE = null;
+	
+	@ObjectHolder("entity_artillery_cannon")
+	public static final EntityEntry ENTITY_ARTILLERY_CANNON = null;
 	
 	@Mod.EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler 
@@ -26,6 +30,10 @@ public class ModEntities
 					createBuilder("entity_projectile")
 							.entity(EntityProjectile.class)
 							.tracker(500, 1, true)
+							.build(),
+					createBuilder("entity_artillery_cannon")
+							.entity(EntityArtilleryCannon.class)
+							.tracker(500, 10, true)
 							.build(),
 			};
 			

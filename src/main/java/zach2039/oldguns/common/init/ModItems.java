@@ -12,6 +12,7 @@ import zach2039.oldguns.common.item.ammo.ItemMediumIronMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemMediumStoneMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemSmallIronMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemSmallStoneMusketBall;
+import zach2039.oldguns.common.item.artillery.ItemArtilleryCannon;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockPistol;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockPistol;
 import zach2039.oldguns.common.item.part.ItemFlintlockMechanism;
@@ -28,6 +29,9 @@ import zach2039.oldguns.common.item.tools.ItemSmallMusketBallMoldTool;
 @ObjectHolder(OldGuns.MODID)
 public class ModItems
 {
+	@ObjectHolder("artillery_cannon")
+	public static final Item ARTILLERY_CANNON = null;
+	
 	@ObjectHolder("matchlock_pistol")
 	public static final Item MATCHLOCK_PISTOL = null;
 	
@@ -82,6 +86,7 @@ public class ModItems
 		{
 			final Item[] items =
 				{					
+					new ItemArtilleryCannon(),
 					new ItemMatchlockPistol(),
 					new ItemFlintlockPistol(),
 					new ItemSmallIronMusketBall(),
