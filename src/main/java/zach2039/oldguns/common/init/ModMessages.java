@@ -2,6 +2,7 @@ package zach2039.oldguns.common.init;
 
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
+import zach2039.oldguns.common.network.MessageArtilleryEffect;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
 public class ModMessages
@@ -12,5 +13,6 @@ public class ModMessages
 	public static void registerMessages(SimpleNetworkWrapper network)
 	{
 		network.registerMessage(MessageFirearmEffect.HandlerClient.class, MessageFirearmEffect.class, messageID++, Side.CLIENT);
+		network.registerMessage(MessageArtilleryEffect.HandlerClient.class, MessageArtilleryEffect.class, messageID++, Side.CLIENT);
 	}
 }

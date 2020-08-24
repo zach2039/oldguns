@@ -52,23 +52,24 @@ public class EntityProjectile extends EntityArrow
 	        }
 	    });
 	 
+	private static final DataParameter<Float> PROJECTILE_SIZE = EntityDataManager.<Float>createKey(EntityProjectile.class, DataSerializers.FLOAT);
 	private static final DataParameter<BlockPos> START_POS = EntityDataManager.<BlockPos>createKey(EntityProjectile.class, DataSerializers.BLOCK_POS);
 	private static final DataParameter<Float> EFFECTIVE_RANGE = EntityDataManager.<Float>createKey(EntityProjectile.class, DataSerializers.FLOAT);
 	private static final DataParameter<String> SHOOTING_ENTITY = EntityDataManager.<String>createKey(EntityProjectile.class, DataSerializers.STRING);
 	private static final DataParameter<Float> DAMAGE = EntityDataManager.<Float>createKey(EntityProjectile.class, DataSerializers.FLOAT);
 	
-	private int xTile = -1;
-	private int yTile = -1;
-	private int zTile = -1;
-	private Block inTile;
-	private int inData;
-	private boolean inGround;
-	private int ticksInAir;
-	private int ticksInGround;
-	private int timeInGround;
-	private int knockbackStrength;
-	private EntityLivingBase shootingEntity;
-	private double damage;
+	protected int xTile = -1;
+	protected int yTile = -1;
+	protected int zTile = -1;
+	protected Block inTile;
+	protected int inData;
+	protected boolean inGround;
+	protected int ticksInAir;
+	protected int ticksInGround;
+	protected int timeInGround;
+	protected int knockbackStrength;
+	protected EntityLivingBase shootingEntity;
+	protected double damage;
 	
 	public EntityProjectile(World worldIn)
 	{
@@ -112,6 +113,9 @@ public class EntityProjectile extends EntityArrow
 		
 		/* Register storage for damage. */
 		dataManager.register(DAMAGE, 0.0f);
+		
+		/* Register projectile size for rendering. */
+		dataManager.register(PROJECTILE_SIZE, 1f);
 	}
 	
 	/**
@@ -152,6 +156,25 @@ public class EntityProjectile extends EntityArrow
 		dataManager.set(SHOOTING_ENTITY, shootingEntity.getName());
 	}
 	
+	
+	/**
+	 * Set the size of this projectile.
+	 * @param range
+	 */
+	public void setProjectileSize(float size)
+	{
+		dataManager.set(PROJECTILE_SIZE, size);
+	}
+	
+	/**
+	 * Get the shooting entity for this entity.
+	 * @param range
+	 */
+	public float getProjectileSize()
+    {
+        return dataManager.get(PROJECTILE_SIZE).floatValue();
+    }
+	
 	/**
 	 * Returns true if projectile's current location is within the specified range.
 	 * @param x
@@ -159,7 +182,7 @@ public class EntityProjectile extends EntityArrow
 	 * @param z
 	 * @return
 	 */
-	private boolean isInsideEffectiveRange()
+	protected boolean isInsideEffectiveRange()
 	{
 		/* Get effective range. */
 		float effectiveRange = dataManager.get(EFFECTIVE_RANGE);
@@ -181,7 +204,7 @@ public class EntityProjectile extends EntityArrow
 	 * Gets the magnitude of the current velocity.
 	 * @return
 	 */
-	private double getVelocityMagnitude()
+	public double getVelocityMagnitude()
 	{
 		return Math.sqrt(Math.pow(this.motionX, 2) + Math.pow(this.motionY, 2) + Math.pow(this.motionZ, 2));
 	}
@@ -205,7 +228,7 @@ public class EntityProjectile extends EntityArrow
 	 * Gets the motion to impart on the entity if affected by gravity.
 	 * @return
 	 */
-	private double getGravity()
+	protected double getGravity()
 	{
 		/* Set no gravity when bullet is within effective range and hasn't been in the ground yet. */
 		if (this.isInsideEffectiveRange() && this.timeInGround == 0 && !this.isInWater())
@@ -223,7 +246,7 @@ public class EntityProjectile extends EntityArrow
     {
         return dataManager.get(DAMAGE);
     }
-
+    
     /**
      * Sets the amount of knockback the arrow applies when it hits a mob.
      */
@@ -492,6 +515,11 @@ public class EntityProjectile extends EntityArrow
 
 	}
 	
+	protected void projectileBlockHit(BlockPos blockPos)
+	{
+
+	}
+	
 	protected void onProjectileHit(RayTraceResult raytraceResultIn)
     {		
         Entity entity = raytraceResultIn.entityHit;
@@ -579,6 +607,9 @@ public class EntityProjectile extends EntityArrow
             this.inTile = iblockstate.getBlock();
             this.inData = this.inTile.getMetaFromState(iblockstate);
         	
+            /* Call onBlockHit. */
+        	projectileBlockHit(blockpos);
+            
         	/* Do ricochet if angle of attack to surface is low. */
         	boolean ricochet = blockFace.getAxis().isVertical() && (Math.abs(this.rotationPitch) < 10f)
         			&& (this.getVelocityMagnitude() > 1.0f);

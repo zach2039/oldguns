@@ -53,6 +53,7 @@ public abstract class ItemArtillery extends Item
             	entityartillery.setCustomNameTag(itemstack.getDisplayName());
             }
 
+            entityartillery.rotationYaw = (player.getRotationYawHead());
             worldIn.spawnEntity(entityartillery);
         }
 

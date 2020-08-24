@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.ammo.ItemLargeIronMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemLargeStoneMusketBall;
+import zach2039.oldguns.common.item.ammo.ItemMediumIronCannonball;
 import zach2039.oldguns.common.item.ammo.ItemMediumIronMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemMediumStoneMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemSmallIronMusketBall;
@@ -18,6 +19,7 @@ import zach2039.oldguns.common.item.firearm.ItemMatchlockPistol;
 import zach2039.oldguns.common.item.part.ItemFlintlockMechanism;
 import zach2039.oldguns.common.item.part.ItemSmallIronBarrel;
 import zach2039.oldguns.common.item.part.ItemSmallWoodenHandle;
+import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
 import zach2039.oldguns.common.item.tools.ItemLargeMusketBallMold;
 import zach2039.oldguns.common.item.tools.ItemLargeMusketBallMoldTool;
 import zach2039.oldguns.common.item.tools.ItemMediumMusketBallMold;
@@ -31,6 +33,9 @@ public class ModItems
 {
 	@ObjectHolder("artillery_cannon")
 	public static final Item ARTILLERY_CANNON = null;
+	
+	@ObjectHolder("medium_iron_cannonball")
+	public static final Item MEDIUM_IRON_CANNONBALL = null;
 	
 	@ObjectHolder("matchlock_pistol")
 	public static final Item MATCHLOCK_PISTOL = null;
@@ -78,6 +83,9 @@ public class ModItems
 	@ObjectHolder("repair_kit")
 	public static final Item REPAIR_KIT = null;
 	
+	@ObjectHolder("gunners_quadrant")
+	public static final Item GUNNERS_QUADRANT = null;
+	
 	@EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler
 	{
@@ -87,6 +95,7 @@ public class ModItems
 			final Item[] items =
 				{					
 					new ItemArtilleryCannon(),
+					new ItemMediumIronCannonball(),
 					new ItemMatchlockPistol(),
 					new ItemFlintlockPistol(),
 					new ItemSmallIronMusketBall(),
@@ -104,7 +113,8 @@ public class ModItems
 					new ItemSmallMusketBallMoldTool(),
 					new ItemMediumMusketBallMoldTool(),
 					new ItemLargeMusketBallMoldTool(),
-					new ItemRepairKit()
+					new ItemRepairKit(),
+					new ItemGunnersQuadrant()
 				};
 
 			event.getRegistry().registerAll(items);

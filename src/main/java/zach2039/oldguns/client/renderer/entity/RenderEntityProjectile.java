@@ -25,6 +25,7 @@ public class RenderEntityProjectile extends Render<EntityProjectile>
 		GlStateManager.translate(x, y, z);
 		GlStateManager.rotate(entity.rotationPitch, 0, 1, 0);
 		GlStateManager.rotate(entity.rotationYaw, 1, 0, 1);
+		GlStateManager.scale(entity.getProjectileSize(), entity.getProjectileSize(), entity.getProjectileSize());
 		bindEntityTexture(entity);
 		model.render(entity, 0.0F, 0.0F, -0.1F, entity.rotationYaw, entity.rotationPitch, 0.025F);
 		GlStateManager.popMatrix();
