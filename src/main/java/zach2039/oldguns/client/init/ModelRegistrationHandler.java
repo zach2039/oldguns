@@ -37,6 +37,9 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD_TOOL, 0);
 		registerModel(ModItems.REPAIR_KIT, 0);
 		registerModel(ModItems.GUNNERS_QUADRANT, 0);
+		registerModel(ModItems.RAM_ROD, 0);
+		registerModel(ModItems.LONG_MATCH, 0);
+		registerModel(ModItems.POWDER_CHARGE, 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.GUNSMITHS_BENCH), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.MELTER), 0);
 	}

@@ -1,5 +1,8 @@
 package zach2039.oldguns.client.renderer.entity;
 
+import org.lwjgl.opengl.GL11;
+
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.Render;
@@ -9,6 +12,7 @@ import zach2039.oldguns.client.model.entity.ModelArtilleryCarriage;
 import zach2039.oldguns.client.model.entity.ModelCannonBarrel;
 import zach2039.oldguns.client.model.entity.ModelCarriageWheel;
 import zach2039.oldguns.common.entity.EntityArtilleryCannon;
+import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
 
 public class RenderEntityArtilleryCannon extends Render<EntityArtilleryCannon>
 {
@@ -67,6 +71,7 @@ public class RenderEntityArtilleryCannon extends Render<EntityArtilleryCannon>
 		GlStateManager.popMatrix();
 		
 		GlStateManager.popMatrix();
+		
 		super.doRender(entity, x, y, z, entityYaw, partialTicks);
 	}
 

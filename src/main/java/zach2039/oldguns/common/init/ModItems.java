@@ -22,8 +22,11 @@ import zach2039.oldguns.common.item.part.ItemSmallWoodenHandle;
 import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
 import zach2039.oldguns.common.item.tools.ItemLargeMusketBallMold;
 import zach2039.oldguns.common.item.tools.ItemLargeMusketBallMoldTool;
+import zach2039.oldguns.common.item.tools.ItemLongMatch;
 import zach2039.oldguns.common.item.tools.ItemMediumMusketBallMold;
 import zach2039.oldguns.common.item.tools.ItemMediumMusketBallMoldTool;
+import zach2039.oldguns.common.item.tools.ItemPowderCharge;
+import zach2039.oldguns.common.item.tools.ItemRamRod;
 import zach2039.oldguns.common.item.tools.ItemRepairKit;
 import zach2039.oldguns.common.item.tools.ItemSmallMusketBallMold;
 import zach2039.oldguns.common.item.tools.ItemSmallMusketBallMoldTool;
@@ -85,6 +88,12 @@ public class ModItems
 	
 	@ObjectHolder("gunners_quadrant")
 	public static final Item GUNNERS_QUADRANT = null;
+	@ObjectHolder("ram_rod")
+	public static final Item RAM_ROD = null;
+	@ObjectHolder("long_match")
+	public static final Item LONG_MATCH = null;
+	@ObjectHolder("powder_charge")
+	public static final Item POWDER_CHARGE = null;
 	
 	@EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler
@@ -114,7 +123,10 @@ public class ModItems
 					new ItemMediumMusketBallMoldTool(),
 					new ItemLargeMusketBallMoldTool(),
 					new ItemRepairKit(),
-					new ItemGunnersQuadrant()
+					new ItemGunnersQuadrant(),
+					new ItemRamRod(),
+					new ItemLongMatch(),
+					new ItemPowderCharge()
 				};
 
 			event.getRegistry().registerAll(items);

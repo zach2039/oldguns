@@ -447,10 +447,14 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 			boolean misfire = false;
 			
 			/* If poor water resiliency and wet or submerged, misfire. */
-			if (shooter.isWet())
+			if (shooter.isWet() && !shooter.isInWater())
 			{
 				misfire = ((worldIn.rand.nextFloat() < misfireWaterChance) ||
 						(this.getFirearmWaterResiliency() == FirearmWaterResiliency.POOR)) ? true : false;
+			}
+			else if (shooter.isInWater())
+			{
+				misfire = true;
 			}
 			
 			/* Misfire and flag as failure if needed. */

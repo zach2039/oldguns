@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Maps;
 
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -27,14 +28,18 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.util.EntityHelpers;
 import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemArtilleryAmmo;
-import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
+import zach2039.oldguns.common.item.tools.ItemLongMatch;
+import zach2039.oldguns.common.item.tools.ItemPowderCharge;
+import zach2039.oldguns.common.item.tools.ItemRamRod;
 
 public abstract class EntityArtillery extends Entity
 {
@@ -42,8 +47,12 @@ public abstract class EntityArtillery extends Entity
 	private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
 	private static final DataParameter<Float> DAMAGE_TAKEN = EntityDataManager.<Float>createKey(EntityArtillery.class, DataSerializers.FLOAT);
 	private static final DataParameter<Float> WHEEL_SPIN = EntityDataManager.<Float>createKey(EntityArtillery.class, DataSerializers.FLOAT);
-	private static final DataParameter<Integer> ARTILLERY_TYPE = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
+	
 	private static final DataParameter<Boolean> UNPACKED = EntityDataManager.<Boolean>createKey(EntityArtillery.class, DataSerializers.BOOLEAN);
+	private static final DataParameter<Integer> ARTILLERY_TYPE = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> FIRING_STATE = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
+	private static final DataParameter<Integer> POWDER_CHARGE = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
+	private static final DataParameter<NBTTagCompound> LOADED_PROJECTILE = EntityDataManager.<NBTTagCompound>createKey(EntityArtillery.class, DataSerializers.COMPOUND_TAG);
 	
 	private boolean isInReverse;
 	private float momentum;
@@ -101,13 +110,18 @@ public abstract class EntityArtillery extends Entity
 	@Override
 	protected void entityInit()
 	{
-        this.dataManager.register(TIME_SINCE_HIT, Integer.valueOf(0));
+		this.dataManager.register(ARTILLERY_TYPE, Integer.valueOf(EntityArtillery.Type.CANNON.ordinal()));
+		
+		this.dataManager.register(TIME_SINCE_HIT, Integer.valueOf(0));
         this.dataManager.register(FORWARD_DIRECTION, Integer.valueOf(1));
         this.dataManager.register(DAMAGE_TAKEN, Float.valueOf(0.0F));
+                
         this.dataManager.register(WHEEL_SPIN, Float.valueOf(0.0F));
-        
         this.dataManager.register(UNPACKED, Boolean.valueOf(true));
-        this.dataManager.register(ARTILLERY_TYPE, Integer.valueOf(EntityArtillery.Type.CANNON.ordinal()));
+        this.dataManager.register(FIRING_STATE, Integer.valueOf(EntityArtillery.FiringState.UNLOADED.ordinal()));
+        
+        this.dataManager.register(POWDER_CHARGE, Integer.valueOf(0));
+        this.dataManager.register(LOADED_PROJECTILE, ItemStack.EMPTY.serializeNBT());
 	}
 
     public void setWheelSpin(float wheelSpin)
@@ -168,6 +182,36 @@ public abstract class EntityArtillery extends Entity
     public EntityArtillery.Type getArtilleryType()
     {
         return EntityArtillery.Type.getById(((Integer)this.dataManager.get(ARTILLERY_TYPE)).intValue());
+    }
+    
+    public void setPowderCharge(int charge)
+    {
+    	this.dataManager.set(POWDER_CHARGE, Integer.valueOf(charge));
+    }
+    
+    public int getPowderCharge()
+    {
+    	return ((Integer)this.dataManager.get(POWDER_CHARGE)).intValue();
+    }
+    
+    public void setLoadedProjectile(ItemStack stackIn)
+    {
+    	this.dataManager.set(LOADED_PROJECTILE, stackIn.serializeNBT());
+    }
+    
+    public ItemStack getLoadedProjectile()
+    {
+    	return new ItemStack((NBTTagCompound)this.dataManager.get(LOADED_PROJECTILE));
+    }
+    
+    public void setFiringState(EntityArtillery.FiringState firingState)
+    {
+        this.dataManager.set(FIRING_STATE, Integer.valueOf(firingState.ordinal()));
+    }
+    
+    public EntityArtillery.FiringState getFiringState()
+    {
+        return EntityArtillery.FiringState.values()[((Integer)this.dataManager.get(FIRING_STATE)).intValue()];
     }
     
     @Override
@@ -382,7 +426,7 @@ public abstract class EntityArtillery extends Entity
         EntityPlayer controllingEntity = this.world.getClosestPlayerToEntity(this, 2D);
         if (controllingEntity != null)
         {
-        	if (controllingEntity.getHeldItemMainhand().getItem() instanceof ItemGunnersQuadrant)
+        	if (controllingEntity.getHeldItemMainhand().getItem() instanceof ItemGunnersQuadrant && controllingEntity.isSneaking())
         	{
         		this.rotationYaw = controllingEntity.getRotationYawHead();
         		this.rotationPitch = MathHelper.clamp(controllingEntity.getPitchYaw().x, -15, 15);
@@ -423,9 +467,12 @@ public abstract class EntityArtillery extends Entity
             double d0 = this.posX + (this.lerpX - this.posX) / (double)this.lerpSteps;
             double d1 = this.posY + (this.lerpY - this.posY) / (double)this.lerpSteps;
             double d2 = this.posZ + (this.lerpZ - this.posZ) / (double)this.lerpSteps;
-            double d3 = MathHelper.wrapDegrees(this.lerpYaw - (double)this.rotationYaw);
-            this.rotationYaw = (float)((double)this.rotationYaw + d3 / (double)this.lerpSteps);
-            this.rotationPitch = (float)((double)this.rotationPitch + (this.lerpPitch - (double)this.rotationPitch) / (double)this.lerpSteps);
+            /* FIXME: Need to find a better way of synchronizing client/server artillery rotation. */
+            //double d3 = MathHelper.wrapDegrees(this.lerpYaw - (double)this.rotationYaw);
+            //this.rotationYaw = (float)((double)this.rotationYaw + d3 / (double)this.lerpSteps);
+            this.rotationYaw = (float) this.lerpYaw;
+            //this.rotationPitch = (float)((double)this.rotationPitch + (this.lerpPitch - (double)this.rotationPitch) / (double)this.lerpSteps);
+            this.rotationPitch = (float) this.lerpPitch;
             --this.lerpSteps;
             this.setPosition(d0, d1, d2);
             this.setRotation(this.rotationYaw, this.rotationPitch);
@@ -466,57 +513,147 @@ public abstract class EntityArtillery extends Entity
     
     public abstract float getBarrelHeight();
     
-    protected abstract void doFiringEffect(World worldIn, Entity entity);
+    public abstract int getMaxPowderCharge();
+    
+    protected abstract void doFiringEffect(World worldIn, Entity entity);        
     
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
     {
-        if (player.isSneaking())
-        {
-        	if (!this.world.isRemote)
+        if (!player.isSneaking())
+        {       		
+        	/* Change behavior based on current firing state. */
+        	FiringState firingState = getFiringState();
+        	int currentPowderCharge = getPowderCharge();
+        	ItemStack currentProjectile = getLoadedProjectile();
+        	ItemStack currentPlayerItem = player.inventory.getCurrentItem();
+        	
+        	/* Debug client/server rotation differences. */
+        	if (this.world.isRemote)
         	{
-        		/* Calculate deviation multiplier for shot, based on charge time. */
-        		float deviationMulti = 1.0f; 
-            
-        		float f = getProjectileSpeed();          
-            
-            	//ItemFirearmAmmo itemFirearmAmmo = (ItemFirearmAmmo)(itemstack.getItem() instanceof ItemFirearmAmmo ? itemstack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
-            	ItemArtilleryAmmo itemArtilleryAmmo = (ItemArtilleryAmmo)(ModItems.MEDIUM_IRON_CANNONBALL);
-            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(this.world, ItemStack.EMPTY, this, player);
-            
-            	/* Fire all projectiles from ammo item. */
-            	entityProjectiles.forEach((t) ->
-            	{            		
-            		/* Set location-based data. */
-            		t.setEffectiveRange(getEffectiveRange());
-            		t.setLaunchLocation(t.getPosition());
-            	
-            		/* Launch projectile. */
-            		t.shoot(this, this.rotationPitch, this.rotationYaw, 0.0F, f, deviationMulti);
-            	
-//            	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
-//
-//                if (j > 0)
-//                {
-//                    t.setDamage(t.getDamage() + (double)j * 0.5D + 0.5D);
-//                }
-//
-//                int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
-//
-//                if (k > 0)
-//                {
-//                    t.setKnockbackStrength(k);
-//                }
-//
-//                if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
-//                {
-//                    t.setFire(100);
-//                }
-                
-                	this.world.spawnEntity(t);
-            	});
-            	
-            	/* Do firing effects. */
-                doFiringEffect(this.world, this);     
+        		OldGuns.logger.info(String.format("CLIENT:"));
+        		OldGuns.logger.info(String.format("   firingState         : %s", firingState));
+        		OldGuns.logger.info(String.format("   currentPowderCharge : %d", currentPowderCharge));
+        		OldGuns.logger.info(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
+        		
+        	}
+        	else
+        	{
+        		OldGuns.logger.info(String.format("SERVER:"));
+        		OldGuns.logger.info(String.format("   firingState         : %s", firingState));
+        		OldGuns.logger.info(String.format("   currentPowderCharge : %d", currentPowderCharge));
+        		OldGuns.logger.info(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
+        	}
+        	
+        	switch(firingState)
+        	{
+        		case UNLOADED:
+        			if (!currentPlayerItem.isEmpty())
+        			{
+        				/* Player has an item. */        				 
+        				if (currentPlayerItem.getItem() instanceof ItemPowderCharge)
+        				{
+        					if (currentPowderCharge >= getMaxPowderCharge())
+        					{
+        						player.sendMessage(new TextComponentString(I18n.format("text.too_many_powder_charges.message")));
+        					}
+        					else
+        					{
+        						setPowderCharge(currentPowderCharge + 1);
+        						currentPlayerItem.shrink(1);
+        						setFiringState(FiringState.POWDERED);
+        						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
+        					}
+        				}
+        			}
+        			break;
+        		case POWDERED:
+        			if (!currentPlayerItem.isEmpty())
+        			{
+        				/* Player has an item. */        				 
+        				if (currentPlayerItem.getItem() instanceof ItemPowderCharge)
+        				{
+        					if (currentPowderCharge >= getMaxPowderCharge())
+        					{
+        						player.sendMessage(new TextComponentString(I18n.format("text.too_many_powder_charges.message")));
+        					}
+        					else
+        					{
+        						setPowderCharge(currentPowderCharge + 1);
+        						currentPlayerItem.shrink(1);
+        						setFiringState(FiringState.POWDERED);
+        						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
+        					}
+        				}
+        				else if (currentPlayerItem.getItem() instanceof ItemRamRod)
+        				{        					
+    						setFiringState(FiringState.POWDERED_RAMMED);
+    						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
+        				}
+        			}
+        			break;
+        		case POWDERED_RAMMED:
+        			if (!currentPlayerItem.isEmpty())
+        			{
+        				/* Player has an item. */        				 
+        				if (currentPlayerItem.getItem() instanceof ItemArtilleryAmmo)
+        				{
+        					setLoadedProjectile(currentPlayerItem);
+        					setFiringState(FiringState.PROJECTILE);
+    						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
+        				}
+        			}
+        			break;
+        		case PROJECTILE:
+        			if (!currentPlayerItem.isEmpty())
+        			{
+        				/* Player has an item. */        				 
+        				if (currentPlayerItem.getItem() instanceof ItemRamRod)
+        				{        					
+    						setFiringState(FiringState.PROJECTILE_RAMMED);
+    						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
+        				}
+        			}
+        			break;
+        		case PROJECTILE_RAMMED:
+        			if (!currentPlayerItem.isEmpty())
+        			{
+        				/* Player has an item. */        				 
+        				if (currentPlayerItem.getItem() instanceof ItemLongMatch)
+        				{        			
+        		        	if (!this.world.isRemote)
+        		        	{
+        		        		/* Calculate deviation multiplier for shot, based on charge time. */
+        		        		float deviationMulti = 1.0f; 
+        		            
+        		        		float f = getProjectileBaseSpeed() * currentPowderCharge;          
+        		            
+        		            	ItemArtilleryAmmo itemArtilleryAmmo = (ItemArtilleryAmmo)(currentProjectile.getItem());
+        		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(this.world, ItemStack.EMPTY, this, player);
+        		            
+        		            	/* Fire all projectiles from ammo item. */
+        		            	entityProjectiles.forEach((t) ->
+        		            	{            		
+        		            		/* Set location-based data. */
+        		            		t.setEffectiveRange(getEffectiveRange());
+        		            		t.setLaunchLocation(t.getPosition());
+        		            	
+        		            		/* Launch projectile. */
+        		            		t.shoot(this, this.rotationPitch, this.rotationYaw, 0.0F, f, deviationMulti);
+        		            		
+        		                	this.world.spawnEntity(t);
+        		            	});
+        		            	
+        		            	/* Do firing effects. */
+        		                doFiringEffect(this.world, this);     
+        		        	}
+        		        	setPowderCharge(0);
+        		        	setLoadedProjectile(ItemStack.EMPTY);
+    						setFiringState(FiringState.UNLOADED);    						
+        				}
+        			}
+        			break;
+        		default:
+        			break;
         	}
             return true;
         }
@@ -543,7 +680,7 @@ public abstract class EntityArtillery extends Entity
         }
     }
     
-    protected abstract float getProjectileSpeed();
+    protected abstract float getProjectileBaseSpeed();
 
 	protected abstract float getEffectiveRange();
 
@@ -596,6 +733,11 @@ public abstract class EntityArtillery extends Entity
 			default:
 				return null;
 		}
+	}
+	
+	public static enum FiringState
+	{
+		UNLOADED, POWDERED, POWDERED_RAMMED, WADDED, WADDED_RAMMED, PROJECTILE, PROJECTILE_RAMMED;
 	}
 	
 	public static enum Type

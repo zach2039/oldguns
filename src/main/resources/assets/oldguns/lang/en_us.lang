@@ -29,3 +29,6 @@ tile.melter.name=Melter
 # Gui
 container.gunsmiths_bench=Gunsmithing
 container.melter=Casting
+
+# Message
+text.too_many_powder_charges.message=This artillery piece cannot accept any more powder charges.

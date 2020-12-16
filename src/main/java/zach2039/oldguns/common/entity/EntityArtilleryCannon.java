@@ -1,15 +1,12 @@
 package zach2039.oldguns.common.entity;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.util.ArtilleryType.ArtilleryEffect;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
 import zach2039.oldguns.common.network.MessageArtilleryEffect;
 
 public class EntityArtilleryCannon extends EntityArtillery
@@ -46,9 +43,9 @@ public class EntityArtilleryCannon extends EntityArtillery
 	}
 
 	@Override
-	protected float getProjectileSpeed()
+	protected float getProjectileBaseSpeed()
 	{
-		return 5f;
+		return 2.5f;
 	}
 
 	@Override
@@ -61,6 +58,12 @@ public class EntityArtilleryCannon extends EntityArtillery
 	public float getBarrelHeight()
 	{
 		return 1.0f;
+	}
+	
+	@Override
+	public int getMaxPowderCharge()
+	{
+		return 3;
 	}
 
 }
