@@ -1,0 +1,24 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"BM",
+		" H"
+	],
+	"key": {
+		"B": {
+			"type": "forge:ore_dict",
+			"ore": "barrelSmallIron"
+		},
+		"M": {
+			"item": "oldguns:flintlock_mechanism"
+		},
+		"H": {
+			"type": "forge:ore_dict",
+			"ore": "handleSmallWooden"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:flintlock_musket"
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"type": "oldguns:reload_firearm_single",
+	"ingredients": 
+	[
+	    {
+			"item": "oldguns:flintlock_caliver",
+			"data": 32767
+	    },
+	    {
+			"item": "oldguns:small_iron_musket_ball"
+		},
+		{
+			"item": "minecraft:gunpowder"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:flintlock_caliver"
+	}
+}

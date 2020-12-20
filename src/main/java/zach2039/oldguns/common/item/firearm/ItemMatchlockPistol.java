@@ -19,11 +19,11 @@ public class ItemMatchlockPistol extends ItemFirearm implements IFirearm
 	public ItemMatchlockPistol()
 	{
 		super("matchlock_pistol");
-		setMaxDamage(16);
+		setMaxDamage(12);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
 		setEffectiveRange(6.0f);
-		setProjectileSpeed(3.5f);
+		setProjectileSpeed(3.25f);
 	}
 
 	@Override

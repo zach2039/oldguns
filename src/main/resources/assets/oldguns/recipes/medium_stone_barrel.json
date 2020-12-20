@@ -1,0 +1,22 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"CCc",
+		" cC"
+	],
+	"key": {
+		"c": {
+			"type": "forge:ore_dict",
+			"ore": "slabCobblestone"
+		},
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:medium_stone_barrel",
+		"count": 1
+	}
+}

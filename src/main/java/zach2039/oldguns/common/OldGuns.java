@@ -22,6 +22,7 @@ import zach2039.oldguns.util.IProxy;
 public class OldGuns
 {
     public static final String MODID = "oldguns";
+    public static final String MODNAME = "Old Guns";
     
     public static Logger logger;
     

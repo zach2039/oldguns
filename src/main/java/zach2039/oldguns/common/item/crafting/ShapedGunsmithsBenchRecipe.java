@@ -12,12 +12,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.oredict.ShapedOreRecipe;
-import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.inventory.impl.IGunsmithsBench;
+import zach2039.oldguns.common.item.crafting.base.ShapedOldGunsRecipe;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 
-public class ShapedGunsmithsBenchRecipe extends ShapedOreRecipe
+public class ShapedGunsmithsBenchRecipe extends ShapedOldGunsRecipe
 {
 	/**
 	 * Default constructor.
@@ -57,7 +56,7 @@ public class ShapedGunsmithsBenchRecipe extends ShapedOreRecipe
 			final String group = JsonUtils.getString(json, "group", "");
 			final CraftingHelper.ShapedPrimer primer = RecipeUtil.parseShaped(context, json);
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
-			
+
 			return new ShapedGunsmithsBenchRecipe(group.isEmpty() ? null : new ResourceLocation(group), result, primer);
 		}
 	}

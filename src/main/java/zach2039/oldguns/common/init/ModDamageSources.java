@@ -7,6 +7,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentTranslation;
+import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
 
 public class ModDamageSources
@@ -23,7 +24,7 @@ public class ModDamageSources
 		
 		public String getTypeName()
 		{
-			return this.typeName;
+			return OldGuns.MODID + this.typeName;
 		}
 		
 		private String typeName;
@@ -58,13 +59,6 @@ public class ModDamageSources
 		public BulletDamageSource(String damageTypeIn)
 		{
 			super(damageTypeIn);
-		}
-
-		@Override
-		public ITextComponent getDeathMessage(EntityLivingBase entityLivingBaseIn)
-		{
-			String s = "death.attack."+this.damageType+".bullet";
-			return new TextComponentTranslation(s, entityLivingBaseIn.getDisplayName());
 		}
 	}
 	

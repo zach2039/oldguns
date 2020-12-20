@@ -14,11 +14,11 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import net.minecraftforge.oredict.ShapelessOreRecipe;
 import zach2039.oldguns.common.inventory.impl.IGunsmithsBench;
+import zach2039.oldguns.common.item.crafting.base.ShapelessOldGunsRecipe;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 
-public class ShapelessGunsmithsBenchRecipe extends ShapelessOreRecipe
+public class ShapelessGunsmithsBenchRecipe extends ShapelessOldGunsRecipe
 {
 	/**
 	 * Default constructor.

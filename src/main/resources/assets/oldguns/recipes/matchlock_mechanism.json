@@ -1,0 +1,33 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"  R",
+		"CSL",
+		" T "
+	],
+	"key": {
+		"T": {
+			"type": "forge:ore_dict",
+			"ore": "stick"
+		},
+		"R": {
+			"item": "minecraft:string"
+		},
+		"C": {
+			"type": "forge:ore_dict",
+			"ore": "cobblestone"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "stone"
+		},
+		"L": {
+			"item": "minecraft:lever"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:matchlock_mechanism",
+		"count": 1
+	}
+}

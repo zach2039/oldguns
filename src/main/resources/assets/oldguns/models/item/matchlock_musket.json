@@ -1,0 +1,14 @@
+{
+	"parent": "oldguns:item/simple_firearm",
+	"textures": {
+		"layer0": "oldguns:items/matchlock_musket"
+	},
+	"overrides": [
+	    {
+	    	"predicate": {
+	    		"oldguns:empty": 1
+	    	}, 
+	    	"model": "oldguns:item/matchlock_musket_empty"
+	    }
+	]
+}

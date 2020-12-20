@@ -1,0 +1,24 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"BM",
+		" H"
+	],
+	"key": {
+		"B": {
+			"type": "forge:ore_dict",
+			"ore": "barrelSmallStone"
+		},
+		"M": {
+			"item": "oldguns:matchlock_mechanism"
+		},
+		"H": {
+			"type": "forge:ore_dict",
+			"ore": "handleSmallWooden"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:matchlock_long_musket"
+	}
+}

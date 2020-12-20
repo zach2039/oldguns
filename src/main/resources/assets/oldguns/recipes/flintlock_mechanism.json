@@ -1,0 +1,33 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"  F",
+		"IGL",
+		" T "
+	],
+	"key": {
+		"T": {
+			"type": "forge:ore_dict",
+			"ore": "stick"
+		},
+		"F": {
+			"item": "minecraft:flint"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"G": {
+			"type": "forge:ore_dict",
+			"ore": "ingotGold"
+		},
+		"L": {
+			"item": "minecraft:lever"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:flintlock_mechanism",
+		"count": 1
+	}
+}

@@ -125,27 +125,25 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		Multimap<String, AttributeModifier> multimap = super.getAttributeModifiers(slot, stack);
 
         /* Attack vars. */
-        double baseAttackDamage;
-        double baseAttackSpeed;
+        double baseAttackDamage = 1f;
+        double baseAttackSpeed = 1f;
         
         /* Get attack speed and base from size. */
-        switch (this.getFirearmSize())
+        switch (getFirearmSize())
         {
         	case SMALL:
         		baseAttackDamage = 1f;
-        		baseAttackSpeed = -2f;
+        		baseAttackSpeed = 1f;
         		break;
         	case MEDIUM:
         		baseAttackDamage = 2f;
-        		baseAttackSpeed = -4f;
+        		baseAttackSpeed = 0.7f;
         		break;
         	case LARGE:
         		baseAttackDamage = 3f;
-        		baseAttackSpeed = -6f;
+        		baseAttackSpeed = 0.4f;
         		break;
         	default:
-        		baseAttackDamage = 1f;
-        		baseAttackSpeed = -1f;
         		break;
         }
         

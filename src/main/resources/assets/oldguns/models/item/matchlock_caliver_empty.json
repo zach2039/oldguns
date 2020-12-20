@@ -1,0 +1,6 @@
+{
+	"parent": "oldguns:item/simple_firearm",
+	"textures": {
+		"layer0": "oldguns:items/matchlock_caliver_empty"
+	}
+}

@@ -18,36 +18,83 @@ public class ModelRegistrationHandler
 	public static void registerModels(ModelRegistryEvent event)
 	{
 		registerModel(ModItems.ARTILLERY_CANNON, 0);
+		
 		registerModel(ModItems.MEDIUM_IRON_CANNONBALL, 0);
 		registerModel(ModItems.MEDIUM_IRON_HE_SHELL, 0);
-		registerModel(ModItems.MATCHLOCK_PISTOL, 0);
-		registerModel(ModItems.FLINTLOCK_PISTOL, 0);
-		registerModel(ModItems.FLINTLOCK_MECHANISM, 0);
-		registerModel(ModItems.SMALL_IRON_MUSKET_BALL, 0);
-		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL, 0);
-		registerModel(ModItems.LARGE_IRON_MUSKET_BALL, 0);
-		registerModel(ModItems.SMALL_STONE_MUSKET_BALL, 0);
-		registerModel(ModItems.MEDIUM_STONE_MUSKET_BALL, 0);
-		registerModel(ModItems.LARGE_STONE_MUSKET_BALL, 0);
-		registerModel(ModItems.SMALL_IRON_BARREL, 0);
-		registerModel(ModItems.SMALL_WOODEN_HANDLE, 0);	
-		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD, 0);
-		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD, 0);
-		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD, 0);
-		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD_TOOL, 0);
-		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD_TOOL, 0);
-		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD_TOOL, 0);
-		registerModel(ModItems.REPAIR_KIT, 0);
+		
 		registerModel(ModItems.GUNNERS_QUADRANT, 0);
 		registerModel(ModItems.RAM_ROD, 0);
 		registerModel(ModItems.LONG_MATCH, 0);
 		registerModel(ModItems.POWDER_CHARGE, 0);
+		
+		registerModel(ModItems.MATCHLOCK_DERRINGER, 0);
+		registerModel(ModItems.MATCHLOCK_PISTOL, 0);
+		registerModel(ModItems.MATCHLOCK_ARQUEBUS, 0);
+		registerModel(ModItems.MATCHLOCK_CALIVER, 0);
+		registerModel(ModItems.MATCHLOCK_MUSKET, 0);
+		registerModel(ModItems.MATCHLOCK_LONG_MUSKET, 0);
+		
+		registerModel(ModItems.MATCHLOCK_MUSKETOON, 0);
+		registerModel(ModItems.MATCHLOCK_BLUNDERBUSS, 0);
+		
+		registerModel(ModItems.FLINTLOCK_DERRINGER, 0);
+		registerModel(ModItems.FLINTLOCK_PISTOL, 0);
+		registerModel(ModItems.FLINTLOCK_ARQUEBUS, 0);
+		registerModel(ModItems.FLINTLOCK_CALIVER, 0);
+		registerModel(ModItems.FLINTLOCK_MUSKET, 0);
+		registerModel(ModItems.FLINTLOCK_LONG_MUSKET, 0);
+		                       
+		registerModel(ModItems.FLINTLOCK_MUSKETOON, 0);
+		registerModel(ModItems.FLINTLOCK_BLUNDERBUSS, 0);
+		
+		registerModel(ModItems.SMALL_STONE_MUSKET_BALL, 0);
+		registerModel(ModItems.MEDIUM_STONE_MUSKET_BALL, 0);
+		registerModel(ModItems.LARGE_STONE_MUSKET_BALL, 0);
+		
+		registerModel(ModItems.SMALL_IRON_MUSKET_BALL, 0);
+		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL, 0);
+		registerModel(ModItems.LARGE_IRON_MUSKET_BALL, 0);
+
+		registerModel(ModItems.TINY_STONE_BARREL, 0);
+		registerModel(ModItems.SMALL_STONE_BARREL, 0);
+		registerModel(ModItems.MEDIUM_STONE_BARREL, 0);
+		registerModel(ModItems.LARGE_STONE_BARREL, 0);
+		registerModel(ModItems.HUGE_STONE_BARREL, 0);
+		
+		registerModel(ModItems.TINY_IRON_BARREL, 0);
+		registerModel(ModItems.SMALL_IRON_BARREL, 0);
+		registerModel(ModItems.MEDIUM_IRON_BARREL, 0);
+		registerModel(ModItems.LARGE_IRON_BARREL, 0);
+		registerModel(ModItems.HUGE_IRON_BARREL, 0);
+		
+		registerModel(ModItems.SMALL_WOODEN_HANDLE, 0);	
+		registerModel(ModItems.MEDIUM_WOODEN_HANDLE, 0);	
+		registerModel(ModItems.LARGE_WOODEN_HANDLE, 0);	
+		
+		registerModel(ModItems.SMALL_WOODEN_STOCK, 0);	
+		registerModel(ModItems.MEDIUM_WOODEN_STOCK, 0);	
+		registerModel(ModItems.LARGE_WOODEN_STOCK, 0);
+		
+		registerModel(ModItems.MATCHLOCK_MECHANISM, 0);
+		registerModel(ModItems.FLINTLOCK_MECHANISM, 0);
+
+		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD, 0);
+		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD, 0);
+		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD, 0);
+		
+		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD_TOOL, 0);
+		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD_TOOL, 0);
+		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD_TOOL, 0);
+		
+		registerModel(ModItems.REPAIR_KIT, 0);
+		
 		registerModel(Item.getItemFromBlock(ModBlocks.GUNSMITHS_BENCH), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.MELTER), 0);
 	}
 	
 	private static void registerModel(Item item, int meta)
 	{
+		OldGuns.logger.info("Registering model for item " + item + " with metadata value of " + meta + ".");
 		ModelLoader.setCustomModelResourceLocation(item, meta, 
 				new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

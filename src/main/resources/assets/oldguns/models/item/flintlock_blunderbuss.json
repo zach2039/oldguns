@@ -1,0 +1,14 @@
+{
+	"parent": "oldguns:item/simple_firearm",
+	"textures": {
+		"layer0": "oldguns:items/flintlock_blunderbuss"
+	},
+	"overrides": [
+	    {
+	    	"predicate": {
+	    		"oldguns:empty": 1
+	    	}, 
+	    	"model": "oldguns:item/flintlock_blunderbuss_empty"
+	    }
+	]
+}

@@ -598,7 +598,7 @@ public abstract class EntityArtillery extends Entity
         				{
         					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						player.sendMessage(new TextComponentString(I18n.format("text.too_many_powder_charges.message")));
+        						player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
         					}
         					else
         					{
@@ -618,7 +618,7 @@ public abstract class EntityArtillery extends Entity
         				{
         					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						player.sendMessage(new TextComponentString(I18n.format("text.too_many_powder_charges.message")));
+        						player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
         					}
         					else
         					{

@@ -1,0 +1,22 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"IIi",
+		" iI"
+	],
+	"key": {
+		"i": {
+			"type": "forge:ore_dict",
+			"ore": "nuggetIron"
+		},
+		"I": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:medium_iron_barrel",
+		"count": 1
+	}
+}

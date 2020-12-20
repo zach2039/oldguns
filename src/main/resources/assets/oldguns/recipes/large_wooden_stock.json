@@ -1,0 +1,22 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"WWW",
+		" SS"
+	],
+	"key": {
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "slabWood"
+		},
+		"W": {
+			"type": "forge:ore_dict",
+			"ore": "logWood"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:large_wooden_stock",
+		"count": 1
+	}
+}

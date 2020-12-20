@@ -1,0 +1,21 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"Ss"
+	],
+	"key": {
+		"s": {
+			"type": "forge:ore_dict",
+			"ore": "stick"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "slabWood"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:small_wooden_handle",
+		"count": 1
+	}
+}
