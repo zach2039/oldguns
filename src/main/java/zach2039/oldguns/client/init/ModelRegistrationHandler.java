@@ -18,6 +18,8 @@ public class ModelRegistrationHandler
 	public static void registerModels(ModelRegistryEvent event)
 	{
 		registerModel(ModItems.ARTILLERY_CANNON, 0);
+		registerModel(ModItems.MEDIUM_IRON_CANNONBALL, 0);
+		registerModel(ModItems.MEDIUM_IRON_HE_SHELL, 0);
 		registerModel(ModItems.MATCHLOCK_PISTOL, 0);
 		registerModel(ModItems.FLINTLOCK_PISTOL, 0);
 		registerModel(ModItems.FLINTLOCK_MECHANISM, 0);

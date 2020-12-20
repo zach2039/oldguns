@@ -38,6 +38,7 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModDamageSources;
 import zach2039.oldguns.common.init.ModSoundEvents;
 
@@ -332,6 +333,10 @@ public class EntityProjectile extends EntityArrow
         }
     }
     
+	protected boolean allowBlockHitSlowdown() {
+		return true;
+	}
+    
 	@Override
 	public void onUpdate()
 	{
@@ -506,11 +511,11 @@ public class EntityProjectile extends EntityArrow
 
 			/* Set new position of entity and do collisions. */
 			this.setPosition(this.posX, this.posY, this.posZ);
-            this.doBlockCollisions();
+			this.doBlockCollisions();
 		}
     }
-
-	protected void projectileHit(EntityLivingBase entityLiving)
+	
+	protected void projectileHit(Entity entityLiving)
 	{
 
 	}
@@ -586,6 +591,10 @@ public class EntityProjectile extends EntityArrow
                         ((EntityPlayerMP)this.shootingEntity).connection.sendPacket(new SPacketChangeGameState(6, 0.0F));
                     }
                 }
+                else
+                {
+                	this.projectileHit(entity);
+                }
 
                 /* Play hit sound. */
                 this.playSound(ModSoundEvents.BULLET_HIT_MOB, 0.5F, 1.0F / (this.rand.nextFloat() * 0.3F + 0.9F));
@@ -612,17 +621,26 @@ public class EntityProjectile extends EntityArrow
             
         	/* Do ricochet if angle of attack to surface is low. */
         	boolean ricochet = blockFace.getAxis().isVertical() && (Math.abs(this.rotationPitch) < 10f)
-        			&& (this.getVelocityMagnitude() > 1.0f);
-        	 	
+        			&& (this.getVelocityMagnitude() > 1.0f);        
+        	
         	if (!ricochet)
-        	{      
-        		this.motionX = (double)((float)(raytraceResultIn.hitVec.x - this.posX));
-                this.motionY = (double)((float)(raytraceResultIn.hitVec.y - this.posY));
-                this.motionZ = (double)((float)(raytraceResultIn.hitVec.z - this.posZ));
-        		float f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
-	            this.posX -= this.motionX / (double)f2 * 0.05000000074505806D;
-	            this.posY -= this.motionY / (double)f2 * 0.05000000074505806D;
-	            this.posZ -= this.motionZ / (double)f2 * 0.05000000074505806D;
+        	{              			
+        		if (allowBlockHitSlowdown())
+        		{
+        			this.motionX = (double)((float)(raytraceResultIn.hitVec.x - this.posX));
+                    this.motionY = (double)((float)(raytraceResultIn.hitVec.y - this.posY));
+                    this.motionZ = (double)((float)(raytraceResultIn.hitVec.z - this.posZ));
+            		float f2 = MathHelper.sqrt(this.motionX * this.motionX + this.motionY * this.motionY + this.motionZ * this.motionZ);
+        			this.posX -= this.motionX / (double)f2 * 0.05000000074505806D;
+	            	this.posY -= this.motionY / (double)f2 * 0.05000000074505806D;
+	            	this.posZ -= this.motionZ / (double)f2 * 0.05000000074505806D;
+        		}
+        		else
+        		{
+        			this.motionX *= 0.5f;
+        			this.motionY *= 0.5f;    
+        			this.motionZ *= 0.5f;
+        		}
 	            
 	            /* Play hit sound. */
 	            if (!this.isInWater() && (this.getVelocityMagnitude() > 1.0f))
@@ -635,7 +653,7 @@ public class EntityProjectile extends EntityArrow
 	            }
                 
 	            
-	            this.inGround = true;
+	            this.inGround = (allowBlockHitSlowdown()) ? true : false;
 	            
 	            if (this.canCollideWithBlockState(iblockstate))
 	            {
@@ -668,7 +686,7 @@ public class EntityProjectile extends EntityArrow
         	}
         }
     }
-	
+
 	@Override
 	public void move(MoverType type, double x, double y, double z)
     {

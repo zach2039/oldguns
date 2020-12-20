@@ -29,6 +29,7 @@ import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -53,6 +54,7 @@ public abstract class EntityArtillery extends Entity
 	private static final DataParameter<Integer> FIRING_STATE = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> POWDER_CHARGE = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
 	private static final DataParameter<NBTTagCompound> LOADED_PROJECTILE = EntityDataManager.<NBTTagCompound>createKey(EntityArtillery.class, DataSerializers.COMPOUND_TAG);
+	private static final DataParameter<Integer> FIRING_COOLDOWN = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
 	
 	private boolean isInReverse;
 	private float momentum;
@@ -119,6 +121,7 @@ public abstract class EntityArtillery extends Entity
         this.dataManager.register(WHEEL_SPIN, Float.valueOf(0.0F));
         this.dataManager.register(UNPACKED, Boolean.valueOf(true));
         this.dataManager.register(FIRING_STATE, Integer.valueOf(EntityArtillery.FiringState.UNLOADED.ordinal()));
+        this.dataManager.register(FIRING_COOLDOWN, Integer.valueOf(0));
         
         this.dataManager.register(POWDER_CHARGE, Integer.valueOf(0));
         this.dataManager.register(LOADED_PROJECTILE, ItemStack.EMPTY.serializeNBT());
@@ -214,6 +217,16 @@ public abstract class EntityArtillery extends Entity
         return EntityArtillery.FiringState.values()[((Integer)this.dataManager.get(FIRING_STATE)).intValue()];
     }
     
+    public void setFiringCooldown(int cooldown)
+    {
+        this.dataManager.set(FIRING_COOLDOWN, Integer.valueOf(cooldown));
+    }
+
+    public int getFiringCooldown()
+    {
+        return ((Integer)this.dataManager.get(FIRING_COOLDOWN)).intValue();
+    }
+    
     @Override
 	public boolean canBeCollidedWith()
     {
@@ -266,7 +279,18 @@ public abstract class EntityArtillery extends Entity
             {
                 this.setForwardDirection(-this.getForwardDirection());
                 this.setTimeSinceHit(10);
-                this.setDamageTaken(this.getDamageTaken() + amount * 10.0F);
+                
+                /* Reduce damage taken if source was not a player with a tool. */
+                float amountModifier = 1.0f;
+                if (!(source.getTrueSource() instanceof EntityPlayer && source.getDamageType() == "player")) {                		
+                	amountModifier = 0.25f;
+                }
+                
+                OldGuns.logger.info("source : " + source.getTrueSource());
+                OldGuns.logger.info("type : " + source.getDamageType());
+                OldGuns.logger.info("amount : " + amount);
+                
+                this.setDamageTaken(this.getDamageTaken() + ((amount * 10.0F) * amountModifier));
                 this.markVelocityChanged();
                 boolean flag = source.getTrueSource() instanceof EntityPlayer && ((EntityPlayer)source.getTrueSource()).capabilities.isCreativeMode;
 
@@ -368,6 +392,10 @@ public abstract class EntityArtillery extends Entity
         return this.isInReverse ? this.getHorizontalFacing().getOpposite().rotateY() : this.getHorizontalFacing().rotateY();
     }
     
+    public abstract float getMinBarrelPitch();
+    
+    public abstract float getMaxBarrelPitch();
+    
     @Override
     public void onUpdate()
     {
@@ -379,6 +407,10 @@ public abstract class EntityArtillery extends Entity
         if (this.getDamageTaken() > 0.0F)
         {
             this.setDamageTaken(this.getDamageTaken() - 1.0F);
+        }
+        
+        if (this.getFiringCooldown() > 0) {
+        	this.setFiringCooldown(this.getFiringCooldown() - 1);
         }
 
         this.prevPosX = this.posX;
@@ -428,8 +460,9 @@ public abstract class EntityArtillery extends Entity
         {
         	if (controllingEntity.getHeldItemMainhand().getItem() instanceof ItemGunnersQuadrant && controllingEntity.isSneaking())
         	{
+        		// FIXME: This crashes on server-side
         		this.rotationYaw = controllingEntity.getRotationYawHead();
-        		this.rotationPitch = MathHelper.clamp(controllingEntity.getPitchYaw().x, -15, 15);
+        		this.rotationPitch = MathHelper.clamp(controllingEntity.rotationPitch, getMinBarrelPitch(), getMaxBarrelPitch());
         	}
         }
         
@@ -457,6 +490,17 @@ public abstract class EntityArtillery extends Entity
                     }
                 }
             }
+        }
+        
+        /* Jank for cool firing effect. */
+        if (this.getFiringCooldown() == 1) {
+        	this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().up());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().down());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().north());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().south());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().east());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().west());
         }
     }
     
@@ -530,18 +574,18 @@ public abstract class EntityArtillery extends Entity
         	/* Debug client/server rotation differences. */
         	if (this.world.isRemote)
         	{
-        		OldGuns.logger.info(String.format("CLIENT:"));
-        		OldGuns.logger.info(String.format("   firingState         : %s", firingState));
-        		OldGuns.logger.info(String.format("   currentPowderCharge : %d", currentPowderCharge));
-        		OldGuns.logger.info(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
+        		OldGuns.logger.debug(String.format("CLIENT:"));
+        		OldGuns.logger.debug(String.format("   firingState         : %s", firingState));
+        		OldGuns.logger.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
+        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
         		
         	}
         	else
         	{
-        		OldGuns.logger.info(String.format("SERVER:"));
-        		OldGuns.logger.info(String.format("   firingState         : %s", firingState));
-        		OldGuns.logger.info(String.format("   currentPowderCharge : %d", currentPowderCharge));
-        		OldGuns.logger.info(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
+        		OldGuns.logger.debug(String.format("SERVER:"));
+        		OldGuns.logger.debug(String.format("   firingState         : %s", firingState));
+        		OldGuns.logger.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
+        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
         	}
         	
         	switch(firingState)
@@ -598,6 +642,7 @@ public abstract class EntityArtillery extends Entity
         				if (currentPlayerItem.getItem() instanceof ItemArtilleryAmmo)
         				{
         					setLoadedProjectile(currentPlayerItem);
+        					currentPlayerItem.shrink(1);
         					setFiringState(FiringState.PROJECTILE);
     						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
         				}
@@ -644,11 +689,20 @@ public abstract class EntityArtillery extends Entity
         		            	});
         		            	
         		            	/* Do firing effects. */
-        		                doFiringEffect(this.world, this);     
-        		        	}
+        		                doFiringEffect(this.world, this);        		                
+        		        	}	       	
         		        	setPowderCharge(0);
         		        	setLoadedProjectile(ItemStack.EMPTY);
-    						setFiringState(FiringState.UNLOADED);    						
+    						setFiringState(FiringState.UNLOADED);   
+    						this.world.setLightFor(EnumSkyBlock.BLOCK, getPosition(), 15);
+    						this.world.markBlockRangeForRenderUpdate(getPosition(), getPosition().offset(getHorizontalFacing(), 12));
+    						this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().up());
+    						this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().down());
+    						this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().north());
+    						this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().south());
+    						this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().east());
+    						this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().west());
+    						setFiringCooldown(5);	
         				}
         			}
         			break;

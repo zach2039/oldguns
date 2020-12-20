@@ -8,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
+import net.minecraftforge.fml.relauncher.Side;
 import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
 import zach2039.oldguns.common.network.util.FirearmEffectHelper;
 
@@ -67,7 +68,7 @@ public class MessageFirearmEffect implements IMessage
 		{
 			Minecraft.getMinecraft().addScheduledTask(() -> {
 				/* Get world of client. */
-				World world = Minecraft.getMinecraft().world;
+				World world = Minecraft.getMinecraft().player.world;
 				
 				/* Only process effects if world isn't null. */
 				if (world != null) 

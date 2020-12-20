@@ -2,6 +2,7 @@ package zach2039.oldguns.common.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
+import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zach2039.oldguns.common.OldGuns;
@@ -64,6 +65,16 @@ public class EntityArtilleryCannon extends EntityArtillery
 	public int getMaxPowderCharge()
 	{
 		return 3;
+	}
+
+	@Override
+	public float getMinBarrelPitch() {
+		return -15f;
+	}
+
+	@Override
+	public float getMaxBarrelPitch() {
+		return 15;
 	}
 
 }
