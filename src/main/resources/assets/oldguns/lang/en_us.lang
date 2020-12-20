@@ -33,9 +33,13 @@ item.small_stone_musket_ball.name=Small Stone Musket Ball
 item.medium_stone_musket_ball.name=Medium Stone Musket Ball
 item.large_stone_musket_ball.name=Large Stone Musket Ball
 
+item.large_stone_birdshot.name=Large Stone Birdshot
+
 item.small_iron_musket_ball.name=Small Iron Musket Ball
 item.medium_iron_musket_ball.name=Medium Iron Musket Ball
 item.large_iron_musket_ball.name=Large Iron Musket Ball
+
+item.large_iron_birdshot.name=Large Iron Birdshot
 
 item.tiny_stone_barrel.name=Tiny Stone Barrel
 item.small_stone_barrel.name=Small Stone Barrel

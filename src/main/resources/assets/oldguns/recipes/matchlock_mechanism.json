@@ -1,33 +1,30 @@
 {
 	"type": "oldguns:shaped_gunsmiths_bench",
 	"pattern": [
-		"  R",
-		"CSL",
-		" T "
+		"  b",
+		"cde",
+		" a "
 	],
 	"key": {
-		"T": {
-			"type": "forge:ore_dict",
-			"ore": "stick"
+		"a": {
+			"item": "minecraft:stick"
 		},
-		"R": {
+		"b": {
 			"item": "minecraft:string"
 		},
-		"C": {
-			"type": "forge:ore_dict",
-			"ore": "cobblestone"
+		"c": {
+			"item": "minecraft:cobblestone"
 		},
-		"S": {
-			"type": "forge:ore_dict",
-			"ore": "stone"
+		"d": {
+			"item": "minecraft:stone",
+			"data": 0
 		},
-		"L": {
+		"e": {
 			"item": "minecraft:lever"
 		}
 	},
 	"result":
 	{
-		"item": "oldguns:matchlock_mechanism",
-		"count": 1
+		"item": "oldguns:matchlock_mechanism"
 	}
 }

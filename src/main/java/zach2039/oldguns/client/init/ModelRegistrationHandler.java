@@ -51,10 +51,14 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.MEDIUM_STONE_MUSKET_BALL, 0);
 		registerModel(ModItems.LARGE_STONE_MUSKET_BALL, 0);
 		
+		registerModel(ModItems.LARGE_STONE_BIRDSHOT, 0);
+		
 		registerModel(ModItems.SMALL_IRON_MUSKET_BALL, 0);
 		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL, 0);
 		registerModel(ModItems.LARGE_IRON_MUSKET_BALL, 0);
 
+		registerModel(ModItems.LARGE_IRON_BIRDSHOT, 0);
+		
 		registerModel(ModItems.TINY_STONE_BARREL, 0);
 		registerModel(ModItems.SMALL_STONE_BARREL, 0);
 		registerModel(ModItems.MEDIUM_STONE_BARREL, 0);

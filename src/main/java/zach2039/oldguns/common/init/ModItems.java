@@ -162,7 +162,7 @@ public class ModItems
 	public static final Item MEDIUM_STONE_BARREL = null;
 	@ObjectHolder("large_stone_barrel")
 	public static final Item LARGE_STONE_BARREL = null;
-	@ObjectHolder("small_stone_barrel")
+	@ObjectHolder("huge_stone_barrel")
 	public static final Item HUGE_STONE_BARREL = null;
 	
 	@ObjectHolder("small_wooden_handle")

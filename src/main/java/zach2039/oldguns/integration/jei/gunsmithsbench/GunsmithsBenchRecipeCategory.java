@@ -110,6 +110,7 @@ public class GunsmithsBenchRecipeCategory implements IRecipeCategory<IRecipeWrap
 		}
 		guiItemStacks.set(OUTPUT_SLOT, outputs.get(0));
 		
+		/*
 		if (recipeWrapper instanceof ICraftingRecipeWrapper) 
 		{
 			ICraftingRecipeWrapper craftingRecipeWrapper = (ICraftingRecipeWrapper) recipeWrapper;
@@ -146,5 +147,6 @@ public class GunsmithsBenchRecipeCategory implements IRecipeCategory<IRecipeWrap
 				});
 			}
 		}
+		*/
 	}
 }

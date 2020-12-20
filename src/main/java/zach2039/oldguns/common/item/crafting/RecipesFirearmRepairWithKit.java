@@ -1,11 +1,13 @@
 package zach2039.oldguns.common.item.crafting;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
@@ -34,6 +36,12 @@ public class RecipesFirearmRepairWithKit extends ShapelessOreRecipe
 	 */
 	public RecipesFirearmRepairWithKit(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
 		super(group, input, result);
+	}
+	
+	@Override
+	public boolean isDynamic()
+	{
+		return true;
 	}
 
 	@Override

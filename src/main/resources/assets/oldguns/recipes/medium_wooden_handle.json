@@ -1,21 +1,19 @@
 {
 	"type": "oldguns:shaped_gunsmiths_bench",
 	"pattern": [
-		"SSs"
+		"bba"
 	],
 	"key": {
-		"s": {
-			"type": "forge:ore_dict",
-			"ore": "stick"
+		"a": {
+			"item": "minecraft:stick"
 		},
-		"S": {
+		"b": {
 			"type": "forge:ore_dict",
 			"ore": "slabWood"
 		}
 	},
 	"result":
 	{
-		"item": "oldguns:medium_wooden_handle",
-		"count": 1
+		"item": "oldguns:medium_wooden_handle"
 	}
 }
