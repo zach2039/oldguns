@@ -2,12 +2,12 @@ package zach2039.oldguns.common.entity;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
-import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import zach2039.oldguns.api.artillery.ArtilleryEffect;
+import zach2039.oldguns.api.artillery.ArtilleryType;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModItems;
-import zach2039.oldguns.common.item.util.ArtilleryType.ArtilleryEffect;
 import zach2039.oldguns.common.network.MessageArtilleryEffect;
 
 public class EntityArtilleryCannon extends EntityArtillery
@@ -20,7 +20,7 @@ public class EntityArtilleryCannon extends EntityArtillery
 	public EntityArtilleryCannon(World worldIn, double x, double y, double z)
 	{
 		super(worldIn, x, y, z);
-		this.setArtilleryType(EntityArtillery.Type.CANNON);
+		this.setArtilleryType(ArtilleryType.CANNON);
 	}
 
 	@Override
@@ -44,13 +44,13 @@ public class EntityArtilleryCannon extends EntityArtillery
 	}
 
 	@Override
-	protected float getProjectileBaseSpeed()
+	public float getProjectileBaseSpeed()
 	{
 		return 2.5f;
 	}
 
 	@Override
-	protected float getEffectiveRange()
+	public float getEffectiveRange()
 	{
 		return 500f;
 	}

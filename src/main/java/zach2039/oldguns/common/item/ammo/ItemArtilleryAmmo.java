@@ -1,10 +1,8 @@
 package zach2039.oldguns.common.item.ammo;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
+import zach2039.oldguns.api.artillery.ArtilleryAmmoType;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.item.util.ArtilleryType.ArtilleryAmmoType;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmAmmoType;
 
 public abstract class ItemArtilleryAmmo extends Item implements IArtilleryAmmo
 {

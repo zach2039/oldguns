@@ -1,11 +1,8 @@
 package zach2039.oldguns.common.entity;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Nullable;
-
-import com.google.common.collect.Maps;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
@@ -28,21 +25,25 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zach2039.oldguns.api.artillery.ArtilleryType;
+import zach2039.oldguns.api.artillery.FiringState;
+import zach2039.oldguns.api.artillery.impl.IArtillery;
+import zach2039.oldguns.api.artillery.impl.IArtilleryPowderable;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.util.EntityHelpers;
-import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemArtilleryAmmo;
 import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
 import zach2039.oldguns.common.item.tools.ItemLongMatch;
 import zach2039.oldguns.common.item.tools.ItemPowderCharge;
 import zach2039.oldguns.common.item.tools.ItemRamRod;
 
-public abstract class EntityArtillery extends Entity
+public abstract class EntityArtillery extends Entity implements IArtillery, IArtilleryPowderable
 {
 	private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
@@ -73,7 +74,7 @@ public abstract class EntityArtillery extends Entity
 	@SideOnly(Side.CLIENT)
 	private double velocityForward;
 	
-	protected EntityArtillery.Type ArtilleryType = Type.CANNON;
+	protected ArtilleryType type = ArtilleryType.CANNON;
 	
 	/* Stole this from Forge minecart code. */
     public static float defaultMaxSpeedAirLateral = 0.4f;
@@ -112,7 +113,7 @@ public abstract class EntityArtillery extends Entity
 	@Override
 	protected void entityInit()
 	{
-		this.dataManager.register(ARTILLERY_TYPE, Integer.valueOf(EntityArtillery.Type.CANNON.ordinal()));
+		this.dataManager.register(ARTILLERY_TYPE, Integer.valueOf(ArtilleryType.CANNON.ordinal()));
 		
 		this.dataManager.register(TIME_SINCE_HIT, Integer.valueOf(0));
         this.dataManager.register(FORWARD_DIRECTION, Integer.valueOf(1));
@@ -120,7 +121,7 @@ public abstract class EntityArtillery extends Entity
                 
         this.dataManager.register(WHEEL_SPIN, Float.valueOf(0.0F));
         this.dataManager.register(UNPACKED, Boolean.valueOf(true));
-        this.dataManager.register(FIRING_STATE, Integer.valueOf(EntityArtillery.FiringState.UNLOADED.ordinal()));
+        this.dataManager.register(FIRING_STATE, Integer.valueOf(FiringState.UNLOADED.ordinal()));
         this.dataManager.register(FIRING_COOLDOWN, Integer.valueOf(0));
         
         this.dataManager.register(POWDER_CHARGE, Integer.valueOf(0));
@@ -177,14 +178,14 @@ public abstract class EntityArtillery extends Entity
         return ((Integer)this.dataManager.get(FORWARD_DIRECTION)).intValue();
     }
 
-    public void setArtilleryType(EntityArtillery.Type artilleryType)
+    public void setArtilleryType(ArtilleryType artilleryType)
     {
         this.dataManager.set(ARTILLERY_TYPE, Integer.valueOf(artilleryType.ordinal()));
     }
     
-    public EntityArtillery.Type getArtilleryType()
+    public ArtilleryType getArtilleryType()
     {
-        return EntityArtillery.Type.getById(((Integer)this.dataManager.get(ARTILLERY_TYPE)).intValue());
+        return ArtilleryType.getById(((Integer)this.dataManager.get(ARTILLERY_TYPE)).intValue());
     }
     
     public void setPowderCharge(int charge)
@@ -207,14 +208,14 @@ public abstract class EntityArtillery extends Entity
     	return new ItemStack((NBTTagCompound)this.dataManager.get(LOADED_PROJECTILE));
     }
     
-    public void setFiringState(EntityArtillery.FiringState firingState)
+    public void setFiringState(FiringState firingState)
     {
         this.dataManager.set(FIRING_STATE, Integer.valueOf(firingState.ordinal()));
     }
     
-    public EntityArtillery.FiringState getFiringState()
+    public FiringState getFiringState()
     {
-        return EntityArtillery.FiringState.values()[((Integer)this.dataManager.get(FIRING_STATE)).intValue()];
+        return FiringState.values()[((Integer)this.dataManager.get(FIRING_STATE)).intValue()];
     }
     
     public void setFiringCooldown(int cooldown)
@@ -331,19 +332,30 @@ public abstract class EntityArtillery extends Entity
 	
     public abstract Item getItemArtillery();
 	
+    @Override
+    public ItemStack getPickedResult(RayTraceResult target)
+    {
+        return new ItemStack(getItemArtillery());
+    }
+    
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound)
 	{
-		compound.setString("Type", this.getArtilleryType().getName());
+		compound.setString("artillerytype", getArtilleryType().getName());
+		compound.setBoolean("unpacked", getUnpacked());
+		compound.setInteger("firingstate", getFiringState().ordinal());
+		compound.setInteger("powdercharge", getPowderCharge());
+		compound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());		
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound)
 	{
-		if (compound.hasKey("Type", 8))
-        {
-            this.setArtilleryType(EntityArtillery.Type.getTypeFromString(compound.getString("Type")));
-        }
+		setArtilleryType(ArtilleryType.getTypeFromString(compound.getString("artillerytype")));
+		setUnpacked(compound.getBoolean("unpacked"));
+		setFiringState(FiringState.values()[compound.getInteger("firingstate")]);
+		setPowderCharge(compound.getInteger("powdercharge"));
+		setLoadedProjectile(new ItemStack(compound.getCompoundTag("loadedprojectile")));
 	}
     
 	protected double getMaximumSpeed()
@@ -740,9 +752,9 @@ public abstract class EntityArtillery extends Entity
         }
     }
     
-    protected abstract float getProjectileBaseSpeed();
+    public abstract float getProjectileBaseSpeed();
 
-	protected abstract float getEffectiveRange();
+    public abstract float getEffectiveRange();
 
 	public float getMaxSpeedAirLateral()
     {
@@ -774,7 +786,7 @@ public abstract class EntityArtillery extends Entity
         dragAir = value;
     }
     
-	public static EntityArtillery create(World worldIn, double x, double y, double z, EntityArtillery.Type typeIn)
+	public static EntityArtillery create(World worldIn, double x, double y, double z, ArtilleryType typeIn)
 	{
 		switch (typeIn)
 		{
@@ -794,70 +806,4 @@ public abstract class EntityArtillery extends Entity
 				return null;
 		}
 	}
-	
-	public static enum FiringState
-	{
-		UNLOADED, POWDERED, POWDERED_RAMMED, WADDED, WADDED_RAMMED, PROJECTILE, PROJECTILE_RAMMED;
-	}
-	
-	public static enum Type
-    {
-        BOMBARD(0, "ArtilleryBombard"),
-        MORTAR(1, "ArtilleryMortar"),
-        HWACHA(2, "ArtilleryHwacha"),
-        CANNON(3, "ArtilleryCannon"),                
-        FIELD_GUN(4, "ArtilleryFieldGun"),        
-        HOWITZER(5, "ArtilleryHowitzer");
-        
-        private static final Map<Integer, EntityArtillery.Type> BY_ID = Maps.<Integer, EntityArtillery.Type>newHashMap();
-        private final int id;
-        private final String name;
-
-        private Type(int idIn, String nameIn)
-        {
-            this.id = idIn;
-            this.name = nameIn;
-        }
-
-        public int getId()
-        {
-            return this.id;
-        }
-
-        public String getName()
-        {
-            return this.name;
-        }
-
-        @SideOnly(Side.CLIENT)
-        public static EntityArtillery.Type getById(int idIn)
-        {
-        	EntityArtillery.Type entityartillery$type = BY_ID.get(Integer.valueOf(idIn));
-            return entityartillery$type == null ? CANNON : entityartillery$type;
-        }
-
-        static
-        {
-            for (EntityArtillery.Type entityartillery$type : values())
-            {
-                BY_ID.put(Integer.valueOf(entityartillery$type.getId()), entityartillery$type);
-            }
-        }
-        
-        public static EntityArtillery.Type getTypeFromString(String nameIn)
-        {
-            for (int i = 0; i < values().length; ++i)
-            {
-                if (values()[i].getName().equals(nameIn))
-                {
-                    return values()[i];
-                }
-            }
-
-            return values()[0];
-        }
-    }
-	
-	
-
 }

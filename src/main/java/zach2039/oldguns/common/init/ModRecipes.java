@@ -1,7 +1,6 @@
 package zach2039.oldguns.common.init;
 
 import net.minecraftforge.oredict.OreDictionary;
-import zach2039.oldguns.common.OldGuns;
 
 public class ModRecipes
 {

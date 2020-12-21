@@ -5,14 +5,13 @@ import java.util.Random;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
 import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
-import zach2039.oldguns.common.item.util.ArtilleryType.ArtilleryEffect;
+import zach2039.oldguns.api.artillery.ArtilleryEffect;
 import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
 
 public class FirearmEffectHelper

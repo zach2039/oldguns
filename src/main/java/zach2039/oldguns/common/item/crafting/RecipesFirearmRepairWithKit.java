@@ -1,15 +1,12 @@
 package zach2039.oldguns.common.item.crafting;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -17,12 +14,10 @@ import net.minecraft.util.JsonUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.tools.ItemRepairKit;

@@ -3,14 +3,12 @@ package zach2039.oldguns.common.network;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
-import zach2039.oldguns.common.item.util.ArtilleryType.ArtilleryEffect;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
+import zach2039.oldguns.api.artillery.ArtilleryEffect;
 import zach2039.oldguns.common.network.util.FirearmEffectHelper;
 
 public class MessageArtilleryEffect implements IMessage

@@ -1,6 +1,5 @@
 package zach2039.oldguns.common.item.part;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.util.FirearmType.FirearmPart;

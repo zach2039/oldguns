@@ -1,12 +1,9 @@
 package zach2039.oldguns.common.init;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.EntityDamageSourceIndirect;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
 

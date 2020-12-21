@@ -38,7 +38,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModDamageSources;
 import zach2039.oldguns.common.init.ModSoundEvents;
 

@@ -9,8 +9,8 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import zach2039.oldguns.common.entity.EntityArtillery;
 import zach2039.oldguns.common.entity.EntityArtilleryProjectile;
-import zach2039.oldguns.common.entity.EntityProjectile;
 import zach2039.oldguns.common.entity.EntityArtilleryProjectile.ProjectileType;
+import zach2039.oldguns.common.entity.EntityProjectile;
 
 public class ItemMediumIronCannonball extends ItemArtilleryAmmo implements IArtilleryAmmo
 {

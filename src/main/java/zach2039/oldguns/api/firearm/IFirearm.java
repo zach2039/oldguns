@@ -1,4 +1,4 @@
-package zach2039.oldguns.common.item.firearm;
+package zach2039.oldguns.api.firearm;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;

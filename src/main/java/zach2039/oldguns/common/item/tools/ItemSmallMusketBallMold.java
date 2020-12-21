@@ -2,7 +2,6 @@ package zach2039.oldguns.common.item.tools;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;

@@ -2,20 +2,14 @@ package zach2039.oldguns.common.item;
 
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
-import java.util.logging.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import net.minecraftforge.fml.relauncher.Side;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModItems;
-import zach2039.oldguns.common.network.MessageArtilleryEffect;
-import zach2039.oldguns.common.network.MessageFirearmEffect;
 
 /**
  * Took this from a forum post on tabs.

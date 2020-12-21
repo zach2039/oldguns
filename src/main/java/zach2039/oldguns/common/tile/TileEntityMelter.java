@@ -1,10 +1,7 @@
 package zach2039.oldguns.common.tile;
 
-import java.util.Arrays;
-
 import javax.annotation.Nullable;
 
-import net.minecraft.block.BlockOre;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
