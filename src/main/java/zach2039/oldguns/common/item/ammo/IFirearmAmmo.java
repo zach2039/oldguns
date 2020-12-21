@@ -10,4 +10,12 @@ import zach2039.oldguns.common.entity.EntityProjectile;
 public interface IFirearmAmmo
 {
 	List<EntityProjectile> createProjectiles(World worldIn, ItemStack stack, EntityLivingBase shooter);
+	
+	float getProjectileSize();
+	
+	void setProjectileSize(float size);
+	
+	float getProjectileCount();
+	
+	void setProjectileCount(int count);
 }

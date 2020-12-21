@@ -602,8 +602,9 @@ public abstract class EntityArtillery extends Entity
         					}
         					else
         					{
+        						player.swingArm(hand);
         						setPowderCharge(currentPowderCharge + 1);
-        						currentPlayerItem.shrink(1);
+        						currentPlayerItem.shrink(1);        						
         						setFiringState(FiringState.POWDERED);
         						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
         					}
@@ -622,14 +623,16 @@ public abstract class EntityArtillery extends Entity
         					}
         					else
         					{
+        						player.swingArm(hand);
         						setPowderCharge(currentPowderCharge + 1);
-        						currentPlayerItem.shrink(1);
+        						currentPlayerItem.shrink(1);        						
         						setFiringState(FiringState.POWDERED);
         						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
         					}
         				}
         				else if (currentPlayerItem.getItem() instanceof ItemRamRod)
-        				{        					
+        				{        			
+        					player.swingArm(hand);
     						setFiringState(FiringState.POWDERED_RAMMED);
     						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
         				}
@@ -641,8 +644,9 @@ public abstract class EntityArtillery extends Entity
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemArtilleryAmmo)
         				{
+        					player.swingArm(hand);
         					setLoadedProjectile(currentPlayerItem);
-        					currentPlayerItem.shrink(1);
+        					currentPlayerItem.shrink(1);        					
         					setFiringState(FiringState.PROJECTILE);
     						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
         				}
@@ -654,6 +658,7 @@ public abstract class EntityArtillery extends Entity
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemRamRod)
         				{        					
+        					player.swingArm(hand);
     						setFiringState(FiringState.PROJECTILE_RAMMED);
     						this.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.5f, 0.5f);
         				}
@@ -664,7 +669,8 @@ public abstract class EntityArtillery extends Entity
         			{
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemLongMatch)
-        				{        			
+        				{        		
+        					player.swingArm(hand);
         		        	if (!this.world.isRemote)
         		        	{
         		        		/* Calculate deviation multiplier for shot, based on charge time. */

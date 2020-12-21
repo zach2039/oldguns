@@ -23,7 +23,7 @@ public abstract class ItemArtilleryAmmo extends Item implements IArtilleryAmmo
 		setRegistryName(OldGuns.MODID, name);
 		setUnlocalizedName(name);
 		setMaxStackSize(stackSize);
-		setCreativeTab(CreativeTabs.COMBAT);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}
 	
 	public ArtilleryAmmoType getAmmoType()

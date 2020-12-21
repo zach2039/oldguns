@@ -2,6 +2,7 @@ package zach2039.oldguns.common;
 
 import org.apache.logging.log4j.Logger;
 
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -16,6 +17,7 @@ import zach2039.oldguns.client.gui.ModGuiHandler;
 import zach2039.oldguns.common.init.ModMessages;
 import zach2039.oldguns.common.init.ModRecipes;
 import zach2039.oldguns.common.init.ModSoundEvents;
+import zach2039.oldguns.common.item.OldGunsCreativeTab;
 import zach2039.oldguns.util.IProxy;
 
 @Mod(modid = OldGuns.MODID, useMetadata = true)
@@ -33,6 +35,8 @@ public class OldGuns
 	public static OldGuns instance;
 
     public static SimpleNetworkWrapper network;
+    
+    public static final CreativeTabs OLDGUNS_CREATIVE_TAB = new OldGunsCreativeTab();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)

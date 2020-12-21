@@ -12,7 +12,7 @@ public class ItemRepairKit extends Item
 		setUnlocalizedName("repair_kit");
 		setMaxStackSize(1);
 		setMaxDamage(4);
-		setCreativeTab(CreativeTabs.COMBAT);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}
 	
 	@Override

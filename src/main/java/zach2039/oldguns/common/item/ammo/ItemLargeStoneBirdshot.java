@@ -15,22 +15,7 @@ public class ItemLargeStoneBirdshot extends ItemFirearmAmmo implements IFirearmA
 	{
 		super("large_stone_birdshot", 4);
 		setAmmoDamage(2.0f);
-	}
-
-	@Override
-	public List<EntityProjectile> createProjectiles(World worldIn, ItemStack stack, EntityLivingBase shooter)
-	{
-		/* Create list to hold all projectile entities that this bullet makes when fired. */
-		List<EntityProjectile> projectileEntityList = new ArrayList<EntityProjectile>();
-		
-		/* Add multi-projectile for musket ball. */
-		for (int i = 0; i < 10; i++) 
-		{
-			EntityProjectile entityBullet = new EntityProjectile(worldIn, shooter);
-			entityBullet.setDamage(getAmmoDamage());			
-			projectileEntityList.add(entityBullet);
-		}
-		
-		return projectileEntityList;
+		setProjectileSize(0.2f);
+		setProjectileCount(10);
 	}
 }

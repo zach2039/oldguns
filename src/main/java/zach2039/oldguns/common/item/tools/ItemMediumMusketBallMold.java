@@ -16,7 +16,7 @@ public class ItemMediumMusketBallMold extends Item
 		setRegistryName(OldGuns.MODID, "medium_musket_ball_mold");
 		setUnlocalizedName("medium_musket_ball_mold");
 		setMaxStackSize(1);
-		setCreativeTab(CreativeTabs.COMBAT);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		
 		// Set max uses of cast in recipes via damage value.
 		setMaxDamage(63);

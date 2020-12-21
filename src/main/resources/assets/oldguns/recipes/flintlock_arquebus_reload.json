@@ -11,11 +11,8 @@
 		},
 		{
 			"item": "minecraft:gunpowder"
-		},
-		{
-			"item": "minecraft:gunpowder"
 		}
-  	],
+	],
 	"result":
 	{
 		"item": "oldguns:flintlock_arquebus"

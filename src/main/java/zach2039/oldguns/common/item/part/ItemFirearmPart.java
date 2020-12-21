@@ -17,7 +17,7 @@ public abstract class ItemFirearmPart extends Item
 		setRegistryName(OldGuns.MODID, name);
 		setUnlocalizedName(name);
 		setMaxStackSize(1);
-		setCreativeTab(CreativeTabs.COMBAT);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setPartType(partType);
 	}
 	

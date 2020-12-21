@@ -753,6 +753,9 @@ public class EntityProjectile extends EntityArrow
 	    if (compound.hasKey("damage", 99)) {
 	        this.damage = compound.getDouble("damage");
 	    }
+	    
+	    /* Load projectile size from disk, since loading a world will not have saved the render size otherwise. */
+	    setProjectileSize(compound.getFloat("projectileSize"));
 	}
 
 	@Override
@@ -768,6 +771,9 @@ public class EntityProjectile extends EntityArrow
         compound.setByte("inData", (byte)this.inData);
         compound.setByte("inGround", (byte)(this.inGround ? 1 : 0));
         compound.setDouble("damage", this.damage);
+        
+        /* Store projectile size to disk, since loading a world will not have saved the render size otherwise. */
+        compound.setFloat("projectileSize", getProjectileSize());
 	}
 
 	@Override

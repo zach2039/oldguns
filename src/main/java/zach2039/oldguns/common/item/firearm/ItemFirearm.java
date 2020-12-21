@@ -73,7 +73,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	{
 		setRegistryName(OldGuns.MODID, name);
 		setUnlocalizedName(name);
-		setCreativeTab(CreativeTabs.COMBAT);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setNoRepair();
         addPropertyOverride(new ResourceLocation(OldGuns.MODID, "empty"), new IItemPropertyGetter()
         {

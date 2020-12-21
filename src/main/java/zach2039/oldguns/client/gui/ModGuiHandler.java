@@ -9,7 +9,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.IGuiHandler;
 import zach2039.oldguns.client.gui.inventory.GuiGunsmithsBench;
 import zach2039.oldguns.client.gui.inventory.GuiMelter;
-import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.inventory.ContainerGunsmithsBench;
 import zach2039.oldguns.common.inventory.ContainerMelter;
 import zach2039.oldguns.common.tile.TileEntityMelter;

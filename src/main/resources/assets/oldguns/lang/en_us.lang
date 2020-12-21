@@ -82,6 +82,9 @@ tile.melter.name=Melter
 container.gunsmiths_bench=Gunsmithing
 container.melter=Casting
 
+# Item Groups
+itemGroup.oldguns.all=Old Guns
+
 # Chat Messages
 text.oldguns.too_many_powder_charges.message=This artillery piece cannot accept any more powder charges.
 

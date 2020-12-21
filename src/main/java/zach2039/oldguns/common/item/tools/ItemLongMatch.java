@@ -11,6 +11,6 @@ public class ItemLongMatch extends Item
 		setRegistryName(OldGuns.MODID, "long_match");
 		setUnlocalizedName("long_match");
 		setMaxStackSize(1);
-		setCreativeTab(CreativeTabs.COMBAT);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}
 }
