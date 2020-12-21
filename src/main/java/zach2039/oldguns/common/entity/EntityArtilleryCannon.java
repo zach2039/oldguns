@@ -1,6 +1,6 @@
 package zach2039.oldguns.common.entity;
 
-import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
@@ -24,18 +24,17 @@ public class EntityArtilleryCannon extends EntityArtillery
 	}
 
 	@Override
-	public void doFiringEffect(World worldIn, Entity shooter)
+	public void doFiringEffect(World worldIn, EntityPlayer player, double posX, double posY, double posZ)
 	{
 		NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(
-				shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 64d);
+				player.dimension, posX, posY, posZ, 64d);
 		
 		OldGuns.network.sendToAllAround(
-				new MessageArtilleryEffect(shooter, ArtilleryEffect.CANNON_SHOT, shooter.posX, shooter.posY + this.getBarrelHeight(), shooter.posZ,
-						shooter.rotationPitch, shooter.rotationYaw, 0),
+				new MessageArtilleryEffect(player, ArtilleryEffect.CANNON_SHOT, posX, posY + getBarrelHeight(), posZ,
+						getBarrelPitch(), getBarrelYaw(), 0),
 				point
 				);
 	}
-
 	
 	@Override
 	public Item getItemArtillery()
@@ -74,7 +73,17 @@ public class EntityArtilleryCannon extends EntityArtillery
 
 	@Override
 	public float getMaxBarrelPitch() {
-		return 15;
+		return 15f;
+	}
+	
+	@Override
+	public float getMinBarrelYaw() {
+		return 0f;
+	}
+
+	@Override
+	public float getMaxBarrelYaw() {
+		return 360f;
 	}
 
 }

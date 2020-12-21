@@ -6,7 +6,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
-import zach2039.oldguns.api.firearm.IFirearm;
+import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;

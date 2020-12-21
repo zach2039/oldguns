@@ -12,7 +12,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
-import zach2039.oldguns.common.inventory.impl.IGunsmithsBench;
+import zach2039.oldguns.api.crafting.impl.IGunsmithsBench;
 import zach2039.oldguns.common.item.crafting.base.ShapedOldGunsRecipe;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 

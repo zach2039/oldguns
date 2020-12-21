@@ -1,4 +1,4 @@
-package zach2039.oldguns.common.inventory.impl;
+package zach2039.oldguns.api.crafting.impl;
 
 public interface IGunsmithsBench
 {

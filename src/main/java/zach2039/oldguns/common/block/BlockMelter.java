@@ -35,7 +35,7 @@ public class BlockMelter extends BlockContainer
 		super(Material.ROCK);
 		setRegistryName(OldGuns.MODID, "melter");
 		setUnlocalizedName("melter");
-		setCreativeTab(CreativeTabs.DECORATIONS);
+		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.STONE);	
 		this.isBurning = isBurning;
 	}
@@ -136,77 +136,4 @@ public class BlockMelter extends BlockContainer
 	{
 		return new TileEntityMelter();
 	}
-
-	public static void setState(boolean active, World worldIn, BlockPos pos)
-	{
-		IBlockState iblockstate = worldIn.getBlockState(pos);
-        TileEntity tileentity = worldIn.getTileEntity(pos);
-        keepInventory = true;
-
-//        if (active)
-//        {
-//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-//        }
-//        else
-//        {
-//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-//            worldIn.setBlockState(pos, ModBlocks.MELTER.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)), 3);
-//        }
-
-        keepInventory = false;
-
-        if (tileentity != null)
-        {
-            tileentity.validate();
-            worldIn.setTileEntity(pos, tileentity);
-        }
-	}
-	
-	
-	
-//	// Nested class for Melter GUI.
-//	public static class InterfaceMelter implements IInteractionObject
-//	{
-//		private final World world;
-//		private final BlockPos position;
-//		
-//		public InterfaceMelter(World worldIn, BlockPos pos)
-//		{
-//			this.world = worldIn;
-//			this.position = pos;
-//		}
-//		
-//		@Override
-//		public String getName()
-//		{
-//			return "melter";
-//		}
-//
-//		@Override
-//		public boolean hasCustomName()
-//		{
-//			return false;
-//		}
-//
-//		@Override
-//		public ITextComponent getDisplayName()
-//		{
-//			return new TextComponentTranslation(ModBlocks.MELTER.getUnlocalizedName() + ".name", new Object[0]);
-//		}
-//
-//		@Override
-//		public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
-//		{
-//			return new ContainerMelter(playerInventory, );
-//		}
-//
-//		@Override
-//		public String getGuiID()
-//		{
-//			return "oldguns:melter";
-//		}
-//	}
-
-
 }

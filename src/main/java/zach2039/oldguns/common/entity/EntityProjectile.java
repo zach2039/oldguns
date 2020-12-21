@@ -301,6 +301,21 @@ public class EntityProjectile extends EntityArrow
         }
     }
     
+    public void shoot(double posX, double posY, double posZ, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
+    {
+        float f = -MathHelper.sin(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        float f1 = -MathHelper.sin(pitch * 0.017453292F);
+        float f2 = MathHelper.cos(yaw * 0.017453292F) * MathHelper.cos(pitch * 0.017453292F);
+        this.shoot((double)f, (double)f1, (double)f2, velocity, inaccuracy);
+        //this.motionX += shooter.motionX;
+        //this.motionZ += shooter.motionZ;
+
+        //if (!shooter.onGround)
+        //{
+        //    this.motionY += shooter.motionY;
+        //}
+    }
+    
     @SideOnly(Side.CLIENT)
     @Override
     public void setPositionAndRotationDirect(double x, double y, double z, float yaw, float pitch, int posRotationIncrements, boolean teleport)

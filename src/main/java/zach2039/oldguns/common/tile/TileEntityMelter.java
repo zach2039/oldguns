@@ -27,6 +27,7 @@ import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.block.BlockMelter;
 import zach2039.oldguns.common.inventory.ContainerMelter;
 import zach2039.oldguns.common.item.crafting.MelterRecipes;
+import zach2039.oldguns.common.tile.util.TileEntityHelpers;
 
 public class TileEntityMelter extends TileEntityLockable implements ITickable, ISidedInventory
 {
@@ -359,7 +360,7 @@ public class TileEntityMelter extends TileEntityLockable implements ITickable, I
 			{
 				// Burn state changed during process. Mark as needing update/sync.
 				isDirty = true;
-				BlockMelter.setState(this.isBurning(), this.world, this.pos);
+				TileEntityHelpers.setState(this.world, this.pos);
 			}
 		}
 		

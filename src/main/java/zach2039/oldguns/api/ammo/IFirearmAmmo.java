@@ -1,4 +1,4 @@
-package zach2039.oldguns.common.item.ammo;
+package zach2039.oldguns.api.ammo;
 
 import java.util.List;
 

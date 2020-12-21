@@ -185,7 +185,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
     
     public ArtilleryType getArtilleryType()
     {
-        return ArtilleryType.getById(((Integer)this.dataManager.get(ARTILLERY_TYPE)).intValue());
+        return ArtilleryType.values()[((Integer)this.dataManager.get(ARTILLERY_TYPE)).intValue()];
     }
     
     public void setPowderCharge(int charge)
@@ -341,21 +341,25 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound)
 	{
-		compound.setString("artillerytype", getArtilleryType().getName());
+		compound.setInteger("artillerytype", getArtilleryType().ordinal());
 		compound.setBoolean("unpacked", getUnpacked());
 		compound.setInteger("firingstate", getFiringState().ordinal());
 		compound.setInteger("powdercharge", getPowderCharge());
-		compound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());		
+		compound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());
+		compound.setFloat("barrelpitch", getBarrelPitch());
+		compound.setFloat("barrelyaw", getBarrelYaw());
 	}
 
 	@Override
 	protected void writeEntityToNBT(NBTTagCompound compound)
 	{
-		setArtilleryType(ArtilleryType.getTypeFromString(compound.getString("artillerytype")));
+		setArtilleryType(ArtilleryType.values()[compound.getInteger("artillerytype")]);
 		setUnpacked(compound.getBoolean("unpacked"));
 		setFiringState(FiringState.values()[compound.getInteger("firingstate")]);
 		setPowderCharge(compound.getInteger("powdercharge"));
 		setLoadedProjectile(new ItemStack(compound.getCompoundTag("loadedprojectile")));
+		setBarrelPitch(compound.getFloat("barrelpitch"));
+		setBarrelYaw(compound.getFloat("barrelyaw"));
 	}
     
 	protected double getMaximumSpeed()
@@ -407,6 +411,26 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
     public abstract float getMinBarrelPitch();
     
     public abstract float getMaxBarrelPitch();
+    
+    public float getBarrelPitch()
+    {
+    	return this.rotationPitch;
+    }
+    
+    public float getBarrelYaw()
+    {
+    	return this.rotationYaw;
+    }
+    
+    public void setBarrelPitch(float pitch)
+    {
+    	this.rotationPitch = MathHelper.clamp(pitch, getMinBarrelPitch(), getMaxBarrelPitch());
+    }
+    
+    public void setBarrelYaw(float yaw)
+    {
+    	this.rotationYaw = yaw;
+    }
     
     @Override
     public void onUpdate()
@@ -473,8 +497,8 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         	if (controllingEntity.getHeldItemMainhand().getItem() instanceof ItemGunnersQuadrant && controllingEntity.isSneaking())
         	{
         		// FIXME: This crashes on server-side
-        		this.rotationYaw = controllingEntity.getRotationYawHead();
-        		this.rotationPitch = MathHelper.clamp(controllingEntity.rotationPitch, getMinBarrelPitch(), getMaxBarrelPitch());
+        		setBarrelYaw(controllingEntity.getRotationYawHead());
+        		setBarrelPitch(controllingEntity.rotationPitch);
         	}
         }
         
@@ -571,7 +595,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
     
     public abstract int getMaxPowderCharge();
     
-    protected abstract void doFiringEffect(World worldIn, Entity entity);        
+    public abstract void doFiringEffect(World worldIn, EntityPlayer player, double posX, double posY, double posZ);        
     
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
     {
@@ -691,7 +715,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		        		float f = getProjectileBaseSpeed() * currentPowderCharge;          
         		            
         		            	ItemArtilleryAmmo itemArtilleryAmmo = (ItemArtilleryAmmo)(currentProjectile.getItem());
-        		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(this.world, ItemStack.EMPTY, this, player);
+        		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(this.world, this.posX, this.posY, this.posZ, ItemStack.EMPTY, this, player);
         		            
         		            	/* Fire all projectiles from ammo item. */
         		            	entityProjectiles.forEach((t) ->
@@ -701,13 +725,13 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		            		t.setLaunchLocation(t.getPosition());
         		            	
         		            		/* Launch projectile. */
-        		            		t.shoot(this, this.rotationPitch, this.rotationYaw, 0.0F, f, deviationMulti);
+        		            		t.shoot(this, getBarrelPitch(), getBarrelYaw(), 0.0F, f, deviationMulti);
         		            		
         		                	this.world.spawnEntity(t);
         		            	});
         		            	
         		            	/* Do firing effects. */
-        		                doFiringEffect(this.world, this);        		                
+        		                doFiringEffect(this.world, player, this.posX, this.posY, this.posZ);        		                
         		        	}	       	
         		        	setPowderCharge(0);
         		        	setLoadedProjectile(ItemStack.EMPTY);
@@ -790,18 +814,8 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 	{
 		switch (typeIn)
 		{
-			case BOMBARD:
-					//return new EntityArtilleryBombard(worldIn, x, y, z);
-			case MORTAR:
-					//return new EntityArtilleryMortar(worldIn, x, y, z);
-			case HWACHA:
-					//return new EntityArtilleryHwacha(worldIn, x, y, z);
 			case CANNON:
 					return new EntityArtilleryCannon(worldIn, x, y, z);
-			case FIELD_GUN:
-					//return new EntityFieldGun(worldIn, x, y, z);
-			case HOWITZER:
-					//return new EntityHowitzer(worldIn, x, y, z);
 			default:
 				return null;
 		}

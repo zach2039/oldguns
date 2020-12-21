@@ -32,7 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import zach2039.oldguns.api.firearm.IFirearm;
+import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
 import zach2039.oldguns.common.init.ModItems;

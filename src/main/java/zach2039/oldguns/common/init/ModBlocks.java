@@ -13,7 +13,9 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.block.BlockGunsmithsBench;
 import zach2039.oldguns.common.block.BlockMelter;
+import zach2039.oldguns.common.block.BlockStationaryCannon;
 import zach2039.oldguns.common.tile.TileEntityMelter;
+import zach2039.oldguns.common.tile.TileEntityStationaryCannon;
 
 @ObjectHolder(OldGuns.MODID)
 public class ModBlocks
@@ -24,6 +26,9 @@ public class ModBlocks
 	@ObjectHolder("melter")
 	public static final Block MELTER = null;
 	
+	@ObjectHolder("stationary_cannon")
+	public static final Block STATIONARY_CANNON = null;
+	
 	@EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler
 	{
@@ -33,7 +38,8 @@ public class ModBlocks
 			final Block[] blocks =
 				{
 					new BlockGunsmithsBench(),
-					new BlockMelter()
+					new BlockMelter(),
+					new BlockStationaryCannon()
 				};
 
 			event.getRegistry().registerAll(blocks);
@@ -47,7 +53,8 @@ public class ModBlocks
 			final Item[] items =
 				{
 					new ItemBlock(ModBlocks.GUNSMITHS_BENCH).setRegistryName(ModBlocks.GUNSMITHS_BENCH.getRegistryName()),
-					new ItemBlock(ModBlocks.MELTER).setRegistryName(ModBlocks.MELTER.getRegistryName())
+					new ItemBlock(ModBlocks.MELTER).setRegistryName(ModBlocks.MELTER.getRegistryName()),
+					new ItemBlock(ModBlocks.STATIONARY_CANNON).setRegistryName(ModBlocks.STATIONARY_CANNON.getRegistryName())
 				};
 			
 			event.getRegistry().registerAll(items);
@@ -56,6 +63,7 @@ public class ModBlocks
 	
 	private static void registerTileEntities() {
 		registerTileEntity(TileEntityMelter.class, "melter");
+		registerTileEntity(TileEntityStationaryCannon.class, "stationary_cannon");
 	}
 
 	private static void registerTileEntity(final Class<? extends TileEntity> tileEntityClass, final String name) {

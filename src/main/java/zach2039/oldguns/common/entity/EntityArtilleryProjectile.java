@@ -7,11 +7,12 @@ import net.minecraft.network.datasync.DataSerializers;
 import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import zach2039.oldguns.api.artillery.ArtilleryAmmoType;
 import zach2039.oldguns.common.OldGuns;
 
 public class EntityArtilleryProjectile extends EntityProjectile
 {
-	private ProjectileType projectileType = ProjectileType.SOLID;
+	private ArtilleryAmmoType projectileType = ArtilleryAmmoType.SOLID;
 	
 	private static final DataParameter<Float> EFFECT_STRENGTH = EntityDataManager.<Float>createKey(EntityArtilleryProjectile.class, DataSerializers.FLOAT);
 
@@ -25,12 +26,12 @@ public class EntityArtilleryProjectile extends EntityProjectile
 		super(worldIn, x, y, z);
 	}
 	
-	public void setProjectileType(ProjectileType type)
+	public void setProjectileType(ArtilleryAmmoType type)
 	{
 		this.projectileType = type;
 	}
 	
-	public ProjectileType getProjectileType()
+	public ArtilleryAmmoType getProjectileType()
 	{
 		return this.projectileType;
 	}
@@ -77,7 +78,7 @@ public class EntityArtilleryProjectile extends EntityProjectile
 	
 	@Override
 	protected boolean allowBlockHitSlowdown() {
-		if (this.projectileType == ProjectileType.SOLID && getEffectStrength() > 0.1f)
+		if (this.projectileType == ArtilleryAmmoType.SOLID && getEffectStrength() > 0.1f)
 		{
 			return false;
 		}
@@ -133,9 +134,5 @@ public class EntityArtilleryProjectile extends EntityProjectile
 	protected double getGravity()
 	{		
 		return 0.05000000074505806D;
-	}
-	
-	public static enum ProjectileType {
-		SOLID, EXPLOSIVE;
 	}
 }
