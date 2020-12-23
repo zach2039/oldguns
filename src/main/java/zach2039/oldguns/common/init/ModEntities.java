@@ -41,7 +41,7 @@ public class ModEntities
 							.build(),
 					createBuilder("entity_artillery_cannon")
 							.entity(EntityArtilleryCannon.class)
-							.tracker(500, 10, true)
+							.tracker(500, 3, true)
 							.build(),
 			};
 			

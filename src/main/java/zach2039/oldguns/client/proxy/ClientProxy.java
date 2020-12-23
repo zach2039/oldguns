@@ -10,6 +10,7 @@ public class ClientProxy implements IProxy
 	{
 		/* Register client stuff. */
 		ModRenderers.registerRenderers();
+		ModRenderers.registerBlockRenderers();
 	}
 
 	@Override

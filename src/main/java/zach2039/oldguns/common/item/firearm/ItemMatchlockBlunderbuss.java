@@ -6,13 +6,13 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmReloadType;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmSize;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
 public class ItemMatchlockBlunderbuss extends ItemFirearm implements IFirearm

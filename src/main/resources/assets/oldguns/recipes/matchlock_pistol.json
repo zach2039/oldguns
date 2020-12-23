@@ -14,7 +14,7 @@
 		},
 		"H": {
 			"type": "forge:ore_dict",
-			"ore": "handleSmallWooden"
+			"ore": "handleMediumWooden"
 		}
 	},
 	"result":

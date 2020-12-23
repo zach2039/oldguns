@@ -1,6 +1,7 @@
 package zach2039.oldguns.common.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zach2039.oldguns.api.artillery.ArtilleryEffect;
@@ -10,7 +11,7 @@ import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.network.MessageArtilleryEffect;
 
 public class TileEntityStationaryCannon extends TileEntityStationaryArtillery implements IArtillery, IArtilleryPowderable {
-
+	
 	@Override
 	public int getMaxPowderCharge() {
 		return 3;
@@ -38,12 +39,12 @@ public class TileEntityStationaryCannon extends TileEntityStationaryArtillery im
 	
 	@Override
 	public float getMinBarrelYaw() {
-		return -15f;
+		return -360f;
 	}
 
 	@Override
 	public float getMaxBarrelYaw() {
-		return 15f;
+		return 360f;
 	}
 	
 	@Override
@@ -62,8 +63,6 @@ public class TileEntityStationaryCannon extends TileEntityStationaryArtillery im
 				point
 				);
 	}
-
-	
 
 	
 }

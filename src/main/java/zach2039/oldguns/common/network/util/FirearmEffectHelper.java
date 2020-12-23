@@ -12,7 +12,7 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import zach2039.oldguns.api.artillery.ArtilleryEffect;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 
 public class FirearmEffectHelper
 {

@@ -7,7 +7,7 @@
 	"key": {
 		"B": {
 			"type": "forge:ore_dict",
-			"ore": "barrelLargeIron"
+			"ore": "barrelHugeIron"
 		},
 		"M": {
 			"item": "oldguns:flintlock_mechanism"

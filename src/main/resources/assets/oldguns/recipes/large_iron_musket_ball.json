@@ -1,0 +1,19 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		" a ",
+		"aaa",
+		" a "
+	],
+	"key": {
+		"a": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:large_iron_musket_ball",
+		"count": 2
+	}
+}

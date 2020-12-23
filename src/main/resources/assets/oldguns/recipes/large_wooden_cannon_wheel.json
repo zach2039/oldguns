@@ -1,0 +1,21 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		" p ",
+		"pap",
+		" p "
+	],
+	"key": {
+		"a": {
+			"item": "minecraft:stick"
+		},
+		"p": {
+			"type": "forge:ore_dict",
+			"ore": "plankWood"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:large_wooden_cannon_wheel"
+	}
+}

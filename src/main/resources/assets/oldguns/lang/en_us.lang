@@ -9,6 +9,10 @@ item.ram_rod.name=Ram Rod
 item.long_match.name=Long Match
 item.powder_charge.name=Powder Charge
 
+item.large_iron_cannon_barrel.name=Large Iron Cannon Barrel
+item.large_wooden_cannon_wheel.name=Large Wooden Cannon Wheel
+item.large_wooden_cannon_carriage.name=Large Wooden Cannon Carriage
+
 item.matchlock_derringer.name=Matchlock Derringer
 item.matchlock_pistol.name=Matchlock Pistol
 item.matchlock_arquebus.name=Matchlock Arquebus
@@ -77,6 +81,7 @@ item.repair_kit.name=Firearm Repair Kit
 # Blocks
 tile.gunsmiths_bench.name=Gunsmith's Bench
 tile.melter.name=Melter
+tile.stationary_cannon.name=Medium Naval Cannon
 
 # Gui
 container.gunsmiths_bench=Gunsmithing

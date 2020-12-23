@@ -1,6 +1,6 @@
 package zach2039.oldguns.common.item.part;
 
-import zach2039.oldguns.common.item.util.FirearmType.FirearmPart;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmPart;
 
 public class ItemSmallWoodenStock extends ItemFirearmPart
 {

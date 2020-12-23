@@ -7,14 +7,14 @@
 	"key": {
 		"B": {
 			"type": "forge:ore_dict",
-			"ore": "barrelSmallStone"
+			"ore": "barrelMediumStone"
 		},
 		"M": {
 			"item": "oldguns:matchlock_mechanism"
 		},
 		"H": {
 			"type": "forge:ore_dict",
-			"ore": "handleSmallWooden"
+			"ore": "stockSmallWooden"
 		}
 	},
 	"result":

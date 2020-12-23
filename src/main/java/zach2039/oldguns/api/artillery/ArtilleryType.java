@@ -4,3 +4,4 @@ public enum ArtilleryType
 {
 	CANNON, STATIONARY_CANNON;
 }
+

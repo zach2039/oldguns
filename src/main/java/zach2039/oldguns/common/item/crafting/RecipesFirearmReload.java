@@ -15,11 +15,11 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmCondition;
 
 public class RecipesFirearmReload extends ShapelessOreRecipe
 {

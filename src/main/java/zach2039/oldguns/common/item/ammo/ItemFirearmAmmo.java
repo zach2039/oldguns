@@ -8,9 +8,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import zach2039.oldguns.api.ammo.IFirearmAmmo;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmAmmoType;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmAmmoType;
 
 public abstract class ItemFirearmAmmo extends Item implements IFirearmAmmo
 {

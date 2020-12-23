@@ -7,7 +7,7 @@
 	"key": {
 		"B": {
 			"type": "forge:ore_dict",
-			"ore": "barrelSmallStone"
+			"ore": "barrelTinyStone"
 		},
 		"M": {
 			"item": "oldguns:matchlock_mechanism"

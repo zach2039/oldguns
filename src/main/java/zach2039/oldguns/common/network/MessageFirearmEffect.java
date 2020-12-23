@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import zach2039.oldguns.common.network.util.FirearmEffectHelper;
 
 public class MessageFirearmEffect implements IMessage

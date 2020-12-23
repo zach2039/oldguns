@@ -32,6 +32,11 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
@@ -39,11 +44,6 @@ import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.item.util.FirearmTooltipHelper;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmCondition;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmEffect;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmReloadType;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmSize;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
 public abstract class ItemFirearm extends ItemBow implements IFirearm

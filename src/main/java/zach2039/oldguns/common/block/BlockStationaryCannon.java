@@ -9,17 +9,25 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.BlockRenderLayer;
+import net.minecraft.util.EnumBlockRenderType;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.Mirror;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.tile.TileEntityStationaryArtillery;
+import zach2039.oldguns.common.init.ModBlocks;
+import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.tile.TileEntityStationaryCannon;
 import zach2039.oldguns.common.tile.util.TileEntityHelpers;
 
@@ -33,20 +41,56 @@ public class BlockStationaryCannon extends BlockContainer {
 		setUnlocalizedName("stationary_cannon");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.METAL);
+		setHardness(2.0F);
+		setResistance(6.0F);
+		setHarvestLevel("pickaxe", 1);
+		
 	}
 
 	@Override
-    public boolean isOpaqueCube(IBlockState state)
+    public void getDrops(NonNullList<ItemStack> drops, IBlockAccess world, BlockPos pos, IBlockState state, int fortune)
+    {
+		drops.add(new ItemStack(ModItems.LARGE_IRON_CANNON_BARREL));
+		drops.add(new ItemStack(ModItems.LARGE_WOODEN_CANNON_CARRIAGE));
+		drops.add(new ItemStack(Blocks.WOODEN_BUTTON));
+		drops.add(new ItemStack(Blocks.WOODEN_BUTTON));
+    }
+	
+	@Override
+	public boolean hasTileEntity(IBlockState state)
+	{
+		return true;
+	}
+	
+	@Override
+	public ItemStack getPickBlock(IBlockState state, RayTraceResult target, World world, BlockPos pos, EntityPlayer player)
+    {
+        return new ItemStack(ModBlocks.STATIONARY_CANNON);
+    }
+	
+	@Override
+	public boolean isOpaqueCube(IBlockState state)
+    {
+        return false;
+    }
+
+	@Override
+    public boolean isFullCube(IBlockState state)
+    {
+        return false;
+    }
+
+	@Override
+    public boolean isPassable(IBlockAccess worldIn, BlockPos pos)
     {
         return false;
     }
 	
 	@Override
-	public boolean isFullCube(final IBlockState state)
-	{
-		return false;
+	public EnumBlockRenderType getRenderType(IBlockState state) {
+		return EnumBlockRenderType.ENTITYBLOCK_ANIMATED;
 	}
-	
+
 	@Override
 	protected BlockStateContainer createBlockState()
 	{
@@ -83,17 +127,52 @@ public class BlockStationaryCannon extends BlockContainer {
 	}
 	
 	@Override
-	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) 
-		{
-			TileEntity te = TileEntityHelpers.getTileEntity(world, pos);
-			if (te != null && te instanceof TileEntityStationaryArtillery)
-			{						
-				TileEntityStationaryArtillery ten = (TileEntityStationaryArtillery) te;
-				TileEntityStationaryArtillery.handleInteraction(world, ten, ten, pos, state, player, hand, side, hitX, hitY, hitZ);
-				te.markDirty();
-			}
+	public void onBlockPlacedBy(World worldIn, BlockPos pos, IBlockState state, EntityLivingBase placer, ItemStack stack) {
+		super.onBlockPlacedBy(worldIn, pos, state, placer, stack);
+		TileEntity tileentity = worldIn.getTileEntity(pos);
+		if (tileentity instanceof TileEntityStationaryCannon) { // prevent a crash if not the right type, or is null
+			TileEntityStationaryCannon teCannon = (TileEntityStationaryCannon)tileentity;
+			teCannon.setFacing(placer.getHorizontalFacing());
+			teCannon.setBarrelYaw(teCannon.getDefaultYaw());
+			teCannon.setBarrelPitch(teCannon.getDefaultPitch());
 		}
-		return false;
+    }
+	
+	@SideOnly(Side.CLIENT)
+	@Override
+	public BlockRenderLayer getBlockLayer()
+	{
+		return BlockRenderLayer.SOLID;
 	}
+	
+	@Override
+	public void breakBlock(World world, BlockPos pos, IBlockState state) {
+		super.breakBlock(world, pos, state);
+		world.removeTileEntity(pos);
+		world.setBlockToAir(pos);
+		world.markChunkDirty(pos, null);
+	}
+	
+	@Override
+	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
+		TileEntity te = TileEntityHelpers.getTileEntity(world, pos);
+		
+		if(te == null || !(te instanceof TileEntityStationaryCannon) ) {
+			return false;
+		}
+		return ((TileEntityStationaryCannon)te).processPlayerInteraction(world, pos, state, player, side, hitX, hitY, hitZ) && (player != null);
+	}
+
+	@Override
+	public boolean eventReceived(IBlockState state, World world, BlockPos pos, int id, int param) {
+		super.eventReceived(state, world, pos, id, param);
+		TileEntityStationaryCannon tileentity = (TileEntityStationaryCannon) world.getTileEntity(pos);
+		
+		if(tileentity == null) {
+			return false;
+		}
+		
+		return tileentity.receiveClientEvent(param, param);
+	}
+
 }

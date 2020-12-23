@@ -1,5 +1,6 @@
 package zach2039.oldguns.common.entity;
 
+import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;

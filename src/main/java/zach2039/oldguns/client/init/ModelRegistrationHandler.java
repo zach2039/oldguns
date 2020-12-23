@@ -27,6 +27,10 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.LONG_MATCH, 0);
 		registerModel(ModItems.POWDER_CHARGE, 0);
 		
+		registerModel(ModItems.LARGE_IRON_CANNON_BARREL, 0);
+		registerModel(ModItems.LARGE_WOODEN_CANNON_WHEEL, 0);
+		registerModel(ModItems.LARGE_WOODEN_CANNON_CARRIAGE, 0);
+		
 		registerModel(ModItems.MATCHLOCK_DERRINGER, 0);
 		registerModel(ModItems.MATCHLOCK_PISTOL, 0);
 		registerModel(ModItems.MATCHLOCK_ARQUEBUS, 0);
@@ -94,11 +98,12 @@ public class ModelRegistrationHandler
 		
 		registerModel(Item.getItemFromBlock(ModBlocks.GUNSMITHS_BENCH), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.MELTER), 0);
+		registerModel(Item.getItemFromBlock(ModBlocks.STATIONARY_CANNON), 0);
 	}
 	
 	private static void registerModel(Item item, int meta)
 	{
-		OldGuns.logger.info("Registering model for item " + item + " with metadata value of " + meta + ".");
+		OldGuns.logger.debug("Registering model for item " + item + " with metadata value of " + meta + ".");
 		ModelLoader.setCustomModelResourceLocation(item, meta, 
 				new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

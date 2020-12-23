@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,12 +24,16 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumSkyBlock;
+import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zach2039.oldguns.api.artillery.ArtilleryType;
@@ -37,13 +42,14 @@ import zach2039.oldguns.api.artillery.impl.IArtillery;
 import zach2039.oldguns.api.artillery.impl.IArtilleryPowderable;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.util.EntityHelpers;
+import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemArtilleryAmmo;
 import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
 import zach2039.oldguns.common.item.tools.ItemLongMatch;
 import zach2039.oldguns.common.item.tools.ItemPowderCharge;
 import zach2039.oldguns.common.item.tools.ItemRamRod;
 
-public abstract class EntityArtillery extends Entity implements IArtillery, IArtilleryPowderable
+public abstract class EntityArtillery extends Entity implements IArtillery, IArtilleryPowderable  
 {
 	private static final DataParameter<Integer> TIME_SINCE_HIT = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
 	private static final DataParameter<Integer> FORWARD_DIRECTION = EntityDataManager.<Integer>createKey(EntityArtillery.class, DataSerializers.VARINT);
@@ -76,6 +82,9 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 	
 	protected ArtilleryType type = ArtilleryType.CANNON;
 	
+	public Entity pullingEntity;
+	public boolean fellLastTick = false;
+	
 	/* Stole this from Forge minecart code. */
     public static float defaultMaxSpeedAirLateral = 0.4f;
     public static float defaultMaxSpeedAirVertical = -1f;
@@ -90,6 +99,8 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 		super(worldIn);
 		this.preventEntitySpawning = true;
 		this.setSize(1.2F, 1.2F);
+		this.pullingEntity = null;
+		this.stepHeight = 1.2F;
 	}
 
     public EntityArtillery(World worldIn, double x, double y, double z)
@@ -299,7 +310,10 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
                 {
                     if (!flag && this.world.getGameRules().getBoolean("doEntityDrops"))
                     {
-                        this.dropItemWithOffset(this.getItemArtillery(), 1, 0.0F);
+                        this.dropItemWithOffset(ModItems.LARGE_IRON_CANNON_BARREL, 1, 0.0F);
+                        this.dropItemWithOffset(ModItems.LARGE_WOODEN_CANNON_CARRIAGE, 1, 0.0F);
+                        this.dropItemWithOffset(ModItems.LARGE_WOODEN_CANNON_WHEEL, 1, 0.0F);
+                        this.dropItemWithOffset(ModItems.LARGE_WOODEN_CANNON_WHEEL, 1, 0.0F);
                     }
 
                     this.setDead();
@@ -341,18 +355,6 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 	@Override
 	protected void readEntityFromNBT(NBTTagCompound compound)
 	{
-		compound.setInteger("artillerytype", getArtilleryType().ordinal());
-		compound.setBoolean("unpacked", getUnpacked());
-		compound.setInteger("firingstate", getFiringState().ordinal());
-		compound.setInteger("powdercharge", getPowderCharge());
-		compound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());
-		compound.setFloat("barrelpitch", getBarrelPitch());
-		compound.setFloat("barrelyaw", getBarrelYaw());
-	}
-
-	@Override
-	protected void writeEntityToNBT(NBTTagCompound compound)
-	{
 		setArtilleryType(ArtilleryType.values()[compound.getInteger("artillerytype")]);
 		setUnpacked(compound.getBoolean("unpacked"));
 		setFiringState(FiringState.values()[compound.getInteger("firingstate")]);
@@ -360,6 +362,18 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 		setLoadedProjectile(new ItemStack(compound.getCompoundTag("loadedprojectile")));
 		setBarrelPitch(compound.getFloat("barrelpitch"));
 		setBarrelYaw(compound.getFloat("barrelyaw"));
+	}
+
+	@Override
+	protected void writeEntityToNBT(NBTTagCompound compound)
+	{
+		compound.setInteger("artillerytype", getArtilleryType().ordinal());
+		compound.setBoolean("unpacked", getUnpacked());
+		compound.setInteger("firingstate", getFiringState().ordinal());
+		compound.setInteger("powdercharge", getPowderCharge());
+		compound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());
+		compound.setFloat("barrelpitch", getBarrelPitch());
+		compound.setFloat("barrelyaw", getBarrelYaw());
 	}
     
 	protected double getMaximumSpeed()
@@ -449,26 +463,55 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         	this.setFiringCooldown(this.getFiringCooldown() - 1);
         }
 
+        if (this.pullingEntity != null)
+        {
+        	this.posY = this.pullingEntity.posY;
+        }
+        
         this.prevPosX = this.posX;
         this.prevPosY = this.posY;
         this.prevPosZ = this.posZ;
         super.onUpdate();
         this.tickLerp();
 
-        if (!this.world.isRemote)
+        if (this.pullingEntity != null) 
         {
-            this.updateMotion();
-
-            this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+        	double dRotation = (double) (this.prevRotationYaw - this.rotationYaw);
+            if (dRotation < -180.0D)
+            {
+                this.prevRotationYaw += 360.0F;
+            }
+            else if (dRotation >= 180.0D)
+            {
+                this.prevRotationYaw -= 360.0F;
+            }
+            
+        	double lookX = MathHelper.sin(-this.rotationYaw * 0.017453292F - (float) Math.PI);
+            double lookZ = MathHelper.cos(-this.rotationYaw * 0.017453292F - (float) Math.PI);
+        	this.motionX = (this.pullingEntity.posX - this.posX + lookX * 2.5D) * 5D;
+        	this.motionZ = (this.pullingEntity.posZ - this.posZ + lookZ * 2.5D) * 5D;
+        	if (!this.pullingEntity.onGround && this.pullingEntity.fallDistance == 0.0F)
+            {
+                this.motionY = this.pullingEntity.posY - this.posY;
+                this.fallDistance = 0.0F;
+                this.fellLastTick = false;
+            }
+            else if (!fellLastTick)
+            {
+                this.motionY = 0.0D;
+                this.fellLastTick = true;
+            }
         }
         else
         {
-            this.motionX = 0.0D;
-            this.motionY = 0.0D;
+        	this.motionX = 0.0D;
             this.motionZ = 0.0D;
         }
-
-        this.doBlockCollisions();
+        
+        this.updateMotion();
+        this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
+        
+        if (this.pullingEntity == null) this.doBlockCollisions();
         //this.rotationPitch = 0.0F;
         double d0 = this.prevPosX - this.posX;
         double d2 = this.prevPosZ - this.posZ;
@@ -502,31 +545,36 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         	}
         }
         
+        /* Override rotation if carriage is being pulled by an entity. */
+        if (this.pullingEntity != null) {
+        	this.rotationYaw = (float) Math.toDegrees(-Math.atan2(this.pullingEntity.posX - this.posX, this.pullingEntity.posZ - this.posZ));
+        }
+        
         this.setRotation(this.rotationYaw, this.rotationPitch);
         
         List<Entity> list = this.world.getEntitiesInAABBexcluding(this, this.getEntityBoundingBox().grow(0.20000000298023224D, -0.009999999776482582D, 0.20000000298023224D), EntitySelectors.getTeamCollisionPredicate(this));
 
-        if (!list.isEmpty() && !this.getUnpacked())
-        {
-            boolean flag = !this.world.isRemote && !(this.getControllingPassenger() instanceof EntityPlayer);
-
-            for (int j = 0; j < list.size(); ++j)
-            {
-                Entity entity = list.get(j);
-
-                if (!entity.isPassenger(this))
-                {
-                    if (flag && this.getPassengers().size() < 2 && !entity.isRiding() && entity.width < this.width && entity instanceof EntityLivingBase && !(entity instanceof EntityWaterMob) && !(entity instanceof EntityPlayer))
-                    {
-                        entity.startRiding(this);
-                    }
-                    else
-                    {
-                        this.applyEntityCollision(entity);
-                    }
-                }
-            }
-        }
+//        if (!list.isEmpty() && !this.getUnpacked())
+//        {
+//            boolean flag = !this.world.isRemote && !(this.getControllingPassenger() instanceof EntityPlayer);
+//
+//            for (int j = 0; j < list.size(); ++j)
+//            {
+//                Entity entity = list.get(j);
+//
+//                if (!entity.isPassenger(this))
+//                {
+//                    if (flag && this.getPassengers().size() < 2 && !entity.isRiding() && entity.width < this.width && entity instanceof EntityLivingBase && !(entity instanceof EntityWaterMob) && !(entity instanceof EntityPlayer))
+//                    {
+//                        entity.startRiding(this);
+//                    }
+//                    else
+//                    {
+//                        this.applyEntityCollision(entity);
+//                    }
+//                }
+//            }
+//        }
         
         /* Jank for cool firing effect. */
         if (this.getFiringCooldown() == 1) {
@@ -538,38 +586,61 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().east());
 			this.world.checkLightFor(EnumSkyBlock.BLOCK, getPosition().west());
         }
+        
+        if (this.pullingEntity != null) {
+        	if (this.pullingEntity.isDead)
+        	{
+        		this.pullingEntity = null;
+        		setUnpacked(true);
+        	}
+        }
     }
     
     private void tickLerp()
     {
-        if (this.lerpSteps > 0 && this.world.isRemote)
+        if (this.lerpSteps > 0)
         {
             double d0 = this.posX + (this.lerpX - this.posX) / (double)this.lerpSteps;
             double d1 = this.posY + (this.lerpY - this.posY) / (double)this.lerpSteps;
             double d2 = this.posZ + (this.lerpZ - this.posZ) / (double)this.lerpSteps;
             /* FIXME: Need to find a better way of synchronizing client/server artillery rotation. */
-            //double d3 = MathHelper.wrapDegrees(this.lerpYaw - (double)this.rotationYaw);
-            //this.rotationYaw = (float)((double)this.rotationYaw + d3 / (double)this.lerpSteps);
-            this.rotationYaw = (float) this.lerpYaw;
-            //this.rotationPitch = (float)((double)this.rotationPitch + (this.lerpPitch - (double)this.rotationPitch) / (double)this.lerpSteps);
-            this.rotationPitch = (float) this.lerpPitch;
+            double d3 = MathHelper.wrapDegrees(this.lerpYaw - (double)this.rotationYaw);
+            this.rotationYaw = (float)((double)this.rotationYaw + d3 / (double)this.lerpSteps);
+            //this.rotationYaw = (float) this.lerpYaw;
+            this.rotationPitch = (float)((double)this.rotationPitch + (this.lerpPitch - (double)this.rotationPitch) / (double)this.lerpSteps);
+            //this.rotationPitch = (float) this.lerpPitch;
             --this.lerpSteps;
             this.setPosition(d0, d1, d2);
             this.setRotation(this.rotationYaw, this.rotationPitch);
             
-            float spin = this.getWheelSpin();
+            double spin = this.getWheelSpin();
             
             if (EntityHelpers.getHeading(this).lengthSquared() > 0.001D)
             {
             	if (EntityHelpers.getHeading(this).dotProduct(this.getForward()) > 0)
             	{
             		// Entity is facing the same way it is moving.
-            		spin += EntityHelpers.getHeading(this).lengthSquared() * 1000f;
+            		if (this.pullingEntity != null)
+            		{
+            			spin -= Math.max(EntityHelpers.getHeading(this).lengthSquared() * 1000f, 0.000000001d);
+            		}
+            		else
+            		{
+            			spin += Math.max(EntityHelpers.getHeading(this).lengthSquared() * 1000f, 0.000000001d);            			
+            		}           		
             	}
             	else
             	{
             		// Entity is facing opposite the way it is moving.
-            		spin -= EntityHelpers.getHeading(this).lengthSquared() * 1000f;
+            		if (this.pullingEntity != null)
+            		{       
+            			spin += Math.max(EntityHelpers.getHeading(this).lengthSquared() * 1000f, 0.000000001d);            			
+            		}
+            		else
+            		{            		
+            			spin -= Math.max(EntityHelpers.getHeading(this).lengthSquared() * 1000f, 0.000000001d);            			
+            		}        
+            		
             	}
             	if (spin > 360f)
             		spin = 0;
@@ -577,14 +648,14 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
             		spin = 360f;
             }
             
-            this.setWheelSpin(spin);
+            this.setWheelSpin((float) spin);
         }
     }
     
     private void updateMotion()
     {
-        double d1 = this.hasNoGravity() ? 0.0D : -0.03999999910593033D;
-        this.momentum = 0.75F;
+        double d1 = (this.hasNoGravity() || (this.pullingEntity == null)) ? 0.0D : -0.03999999910593033D;
+        this.momentum = 0.10F;
         
         this.motionX *= (double)this.momentum;
         this.motionZ *= (double)this.momentum;
@@ -597,6 +668,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
     
     public abstract void doFiringEffect(World worldIn, EntityPlayer player, double posX, double posY, double posZ);        
     
+    @Override
     public boolean processInitialInteract(EntityPlayer player, EnumHand hand)
     {
         if (!player.isSneaking())
@@ -751,29 +823,31 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		default:
         			break;
         	}
-            return true;
-        }
-        else
-        {
+        	
         	if (player.getHeldItemMainhand().isEmpty())
         	{
-	        	// Allow player to pack and unpack artillery.
-	        	if (this.getUnpacked())
-	        	{
-	        		this.setUnpacked(false);
-	        		this.playSound(SoundEvents.BLOCK_PISTON_CONTRACT, 0.5f, 2f);
-	        	}
-	        	else
-	        	{
-	        		this.setUnpacked(true);
-	        		this.playSound(SoundEvents.BLOCK_PISTON_EXTEND, 0.5f, 2f);
-	        		for (int i = 0; i < (5 + this.rand.nextInt(5)); i++)
-	        			this.world.spawnParticle(EnumParticleTypes.CLOUD, this.posX + (this.rand.nextFloat() - 0.5f), this.posY + 0.25f, this.posZ + (this.rand.nextFloat() - 0.5f), 0f, this.rand.nextDouble() * 0.1f, 0f, 0);
-	        	}
-	        	player.swingArm(hand);
+            	// Allow player to pack and unpack artillery.
+            	if (getUnpacked() && player.getRidingEntity() != null)
+            	{
+            		setUnpacked(false);
+            		playSound(SoundEvents.BLOCK_PISTON_CONTRACT, 0.5f, 2f);
+            		pullingEntity = player.getRidingEntity();
+            	}
+            	else if (!getUnpacked())
+            	{
+            		setUnpacked(true);
+            		playSound(SoundEvents.BLOCK_PISTON_EXTEND, 0.5f, 2f);
+            		pullingEntity = null;
+            		setBarrelYaw(player.rotationYaw);
+            		for (int i = 0; i < (5 + this.rand.nextInt(5)); i++)
+            			this.world.spawnParticle(EnumParticleTypes.CLOUD, this.posX + (this.rand.nextFloat() - 0.5f), this.posY + 0.25f, this.posZ + (this.rand.nextFloat() - 0.5f), 0f, this.rand.nextDouble() * 0.1f, 0f, 0);
+            	}
+            	player.swingArm(hand);
         	}
+        	
             return true;
         }
+        return true;
     }
     
     public abstract float getProjectileBaseSpeed();

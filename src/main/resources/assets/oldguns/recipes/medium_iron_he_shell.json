@@ -1,0 +1,23 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		" a ",
+		"aba",
+		" a "
+	],
+	"key": {
+		"a": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"b": {
+			"type": "forge:ore_dict",
+			"ore": "blockIron"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:medium_iron_cannonball",
+		"count": 1
+	}
+}

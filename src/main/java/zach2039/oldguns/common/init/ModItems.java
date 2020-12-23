@@ -37,7 +37,10 @@ import zach2039.oldguns.common.item.part.ItemFlintlockMechanism;
 import zach2039.oldguns.common.item.part.ItemHugeIronBarrel;
 import zach2039.oldguns.common.item.part.ItemHugeStoneBarrel;
 import zach2039.oldguns.common.item.part.ItemLargeIronBarrel;
+import zach2039.oldguns.common.item.part.ItemLargeIronCannonBarrel;
 import zach2039.oldguns.common.item.part.ItemLargeStoneBarrel;
+import zach2039.oldguns.common.item.part.ItemLargeWoodenCannonCarriage;
+import zach2039.oldguns.common.item.part.ItemLargeWoodenCannonWheel;
 import zach2039.oldguns.common.item.part.ItemLargeWoodenHandle;
 import zach2039.oldguns.common.item.part.ItemLargeWoodenStock;
 import zach2039.oldguns.common.item.part.ItemMatchlockMechanism;
@@ -82,6 +85,13 @@ public class ModItems
 	public static final Item LONG_MATCH = null;
 	@ObjectHolder("powder_charge")
 	public static final Item POWDER_CHARGE = null;
+	
+	@ObjectHolder("large_iron_cannon_barrel")
+	public static final Item LARGE_IRON_CANNON_BARREL = null;
+	@ObjectHolder("large_wooden_cannon_wheel")
+	public static final Item LARGE_WOODEN_CANNON_WHEEL = null;
+	@ObjectHolder("large_wooden_cannon_carriage")
+	public static final Item LARGE_WOODEN_CANNON_CARRIAGE = null;
 	
 	/* Matchlock Firearms */
 	@ObjectHolder("matchlock_derringer")
@@ -218,6 +228,10 @@ public class ModItems
 					new ItemRamRod(),
 					new ItemLongMatch(),
 					new ItemPowderCharge(),
+					
+					new ItemLargeIronCannonBarrel(),
+					new ItemLargeWoodenCannonWheel(),
+					new ItemLargeWoodenCannonCarriage(),
 					
 					new ItemMatchlockDerringer(),
 					new ItemMatchlockPistol(),

@@ -1,8 +1,8 @@
 package zach2039.oldguns.common.item.part;
 
 import net.minecraft.item.Item;
+import zach2039.oldguns.api.firearm.FirearmType.FirearmPart;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.item.util.FirearmType.FirearmPart;
 
 public abstract class ItemFirearmPart extends Item
 {

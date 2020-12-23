@@ -1,0 +1,29 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"ac ",
+		"dbd"
+	],
+	"key": {
+		"a": {
+			"type": "forge:ore_dict",
+			"ore": "barrelLargeIronCannon"
+		},
+		"b": {
+			"type": "forge:ore_dict",
+			"ore": "carriageLargeWooden"
+		},
+		"c": {
+			"type": "forge:ore_dict",
+			"ore": "ingotIron"
+		},
+		"d": {
+			"type": "forge:ore_dict",
+			"ore": "wheelLargeWooden"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:artillery_cannon"
+	}
+}

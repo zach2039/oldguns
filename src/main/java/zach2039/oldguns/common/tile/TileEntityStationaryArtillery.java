@@ -10,10 +10,10 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
 import net.minecraft.util.ITickable;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
@@ -22,6 +22,7 @@ import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 import zach2039.oldguns.api.artillery.ArtilleryType;
@@ -35,7 +36,8 @@ import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
 import zach2039.oldguns.common.item.tools.ItemLongMatch;
 import zach2039.oldguns.common.item.tools.ItemPowderCharge;
 import zach2039.oldguns.common.item.tools.ItemRamRod;
-import zach2039.oldguns.common.tile.util.TileEntityHelpers;
+import zach2039.oldguns.common.network.MessageSyncTileEntityCannonRotation;
+import zach2039.oldguns.common.network.MessageSyncTileEntityCannonState;
 
 public abstract class TileEntityStationaryArtillery extends TileEntity implements ITickable, IArtillery, IArtilleryPowderable {
 
@@ -48,7 +50,33 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	protected float barrelYaw = 0f;
 	protected int powderCharge = 0;
 	protected ItemStack loadedProjectile = ItemStack.EMPTY;
-	protected ItemStackHandler inventory = new ItemStackHandler(1);
+	
+	public float getDefaultYaw()
+	{
+		switch (facing) 
+		{
+			case SOUTH:
+				return 0f;
+			case WEST:
+				return 90f;
+			case NORTH:
+				return 180f;
+			case EAST:
+				return -90f;
+			default:
+				return 0f;
+		}
+	}
+	
+	public float getDefaultPitch()
+	{
+		return -( getMaxBarrelPitch() * 0.5f);
+	}
+	
+	@Override
+	public boolean receiveClientEvent(int id, int type) {
+        return false;
+    }
 	
 	@Override
 	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
@@ -56,9 +84,10 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 		compound.setInteger("artillerytype", getArtilleryType().ordinal());
 		compound.setInteger("firingstate", getFiringState().ordinal());
 		compound.setInteger("powdercharge", getPowderCharge());
-		compound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());
+		compound.setTag("loadedProjectile", getLoadedProjectile().serializeNBT());
 		compound.setFloat("barrelpitch", getBarrelPitch());
 		compound.setFloat("barrelyaw", getBarrelYaw());
+		compound.setInteger("facing", this.facing.getHorizontalIndex());
 		return compound;
 	}
 	
@@ -68,20 +97,10 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 		setArtilleryType(ArtilleryType.values()[compound.getInteger("artillerytype")]);
 		setFiringState(FiringState.values()[compound.getInteger("firingstate")]);
 		setPowderCharge(compound.getInteger("powdercharge"));
-		setLoadedProjectile(new ItemStack(compound.getCompoundTag("loadedprojectile")));
+		setLoadedProjectile(new ItemStack(compound.getCompoundTag("loadedProjectile")));
 		setBarrelPitch(compound.getFloat("barrelpitch"));
 		setBarrelYaw(compound.getFloat("barrelyaw"));
-	}
-
-	@Override
-	public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
-	}
-	
-	@Nullable
-	@Override
-	public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-		return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY ? (T)inventory : super.getCapability(capability, facing);
+		this.facing = EnumFacing.HORIZONTALS[compound.getInteger("facing")];
 	}
 	
 	@Override
@@ -158,12 +177,48 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 
 	@Override
 	public void setBarrelYaw(float yaw) {
-		this.barrelYaw = MathHelper.clamp(yaw, getMinBarrelYaw(), getMaxBarrelYaw());
+		/* Set yaw limits from block facing. */
+		float facingYaw = 0f;
+		float clampedYaw = yaw % 360f;
+		if (clampedYaw > 180f)
+			clampedYaw -= 360f;
+		if (clampedYaw <= -180f)
+			clampedYaw += 360f;
+		float trueMinBarrelYaw = getMinBarrelYaw();
+		float trueMaxBarrelYaw = getMaxBarrelYaw();
+		float mod = 1f;
+		switch (this.facing) 
+		{
+			case SOUTH:
+				facingYaw = 0f;
+				break;
+			case WEST:
+				facingYaw = 90f;
+				break;
+			case NORTH:
+				facingYaw = 180f;
+				if (clampedYaw < 0f)
+					mod *= -1;
+				break;
+			case EAST:
+				facingYaw = -90f;
+				break;
+			default:
+				break;
+		}
+		
+		float trueYawMin = mod * facingYaw + trueMinBarrelYaw;
+		float trueYawMax = mod * facingYaw + trueMaxBarrelYaw;
+
+		OldGuns.logger.debug("minBarrelYaw: " + getMinBarrelYaw() + ", maxBarrelYaw: " + getMaxBarrelYaw());
+		OldGuns.logger.debug("facing: " + facing + ", " + "yaw: " + clampedYaw + ", " + "yawMin: " + trueYawMin + ", yawMax: " + trueYawMax);
+		
+		this.barrelYaw = MathHelper.clamp(clampedYaw, trueYawMin, trueYawMax);
 	}
 
 	@Override
 	public float getBarrelYaw() {
-		return this.barrelPitch;
+		return this.barrelYaw;
 	}
 	
 	@Override
@@ -180,63 +235,78 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	public abstract void doFiringEffect(World worldIn, EntityPlayer player, double posX, double posY, double posZ);
 	
 	@Override
-	public void onDataPacket(net.minecraft.network.NetworkManager net, net.minecraft.network.play.server.SPacketUpdateTileEntity pkt) {
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		handleUpdateTag(pkt.getNbtCompound());
+		world.markChunkDirty(getPos(), this);
 	}
 	
 	@Override
 	public void handleUpdateTag(NBTTagCompound tag) {
-		super.handleUpdateTag(tag);
+		readFromNBT(tag);
 	}
 	
 	@Override
 	public SPacketUpdateTileEntity getUpdatePacket() {
-		NBTTagCompound nbtTagCompound = getUpdateTag();
-		
-		return new SPacketUpdateTileEntity(this.pos, 0, nbtTagCompound);
+		NBTTagCompound nbtTagCompound = new NBTTagCompound();
+		writeToNBT(nbtTagCompound);
+		int metadata = getBlockMetadata();
+		return new SPacketUpdateTileEntity(this.pos, metadata, nbtTagCompound);
 	}
 	
 	@Override
 	public NBTTagCompound getUpdateTag() { 
 		NBTTagCompound nbtTagCompound = super.getUpdateTag();
-		
-		nbtTagCompound.setInteger("artillerytype", getArtilleryType().ordinal());
-		nbtTagCompound.setInteger("firingstate", getFiringState().ordinal());
-		nbtTagCompound.setInteger("powdercharge", getPowderCharge());
-		nbtTagCompound.setTag("loadedprojectile", getLoadedProjectile().serializeNBT());
-		nbtTagCompound.setFloat("barrelpitch", getBarrelPitch());
-		nbtTagCompound.setFloat("barrelyaw", getBarrelYaw());
-		
+		writeToNBT(nbtTagCompound);
 		return nbtTagCompound;
 	}
-
+	
 	@Override
-	public void update() {
+	public void update() 
+	{		
+		if (!this.hasWorld()) 
+			return;  // prevent crash
+		
+		if (getFiringCooldown() > 0) {
+			setFiringCooldown(getFiringCooldown() - 1);
+		}
+		
 		// Allow override of cannon yaw, if entity is near with gunner's quadrant.
         EntityPlayer controllingEntity = this.world.getClosestPlayer(getPos().getX(), getPos().getY(), getPos().getZ(), 2D, false);
         if (controllingEntity != null)
         {
         	if (controllingEntity.getHeldItemMainhand().getItem() instanceof ItemGunnersQuadrant && controllingEntity.isSneaking())
         	{
-        		setBarrelYaw(controllingEntity.getRotationYawHead());
+        		setBarrelYaw(controllingEntity.rotationYaw);
         		setBarrelPitch(controllingEntity.rotationPitch);
-        		OldGuns.logger.info("rot: " + getBarrelPitch() + ", yaw: " + getBarrelYaw());
+        		OldGuns.network.sendToAllAround(
+        				new MessageSyncTileEntityCannonRotation(this.pos, getBarrelPitch(), getBarrelYaw()),
+        				new TargetPoint(controllingEntity.dimension, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1000));
         	}
+        }
+        
+        /* Jank for cool firing effect. */
+        if (getFiringCooldown() == 1) {
+        	this.world.checkLightFor(EnumSkyBlock.BLOCK, this.pos);
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, this.pos.up());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, this.pos.down());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, this.pos.north());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, this.pos.east());
+			this.world.checkLightFor(EnumSkyBlock.BLOCK, this.pos.west());
         }
 	}
 	
-	public static boolean handleInteraction(World world, IArtillery artillery, IArtilleryPowderable artilleryPowder, 
-			BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ)
-	{
+	public boolean processPlayerInteraction(World world, BlockPos pos, IBlockState state, EntityPlayer player,
+			EnumFacing side, float hitX, float hitY, float hitZ) {
 		boolean successfulInteract = false;
-		boolean isDirty = false;
+		
+		boolean isCreativeMode = player.capabilities.isCreativeMode;
 		
 		if (!player.isSneaking())
         {       		
         	/* Change behavior based on current firing state. */
-        	FiringState firingState = artillery.getFiringState();
-        	int currentPowderCharge = artilleryPowder.getPowderCharge();
-        	ItemStack currentProjectile = artillery.getLoadedProjectile();
+        	FiringState firingState = getFiringState();
+        	int currentPowderCharge = getPowderCharge();
+        	ItemStack currentProjectile = getLoadedProjectile();
         	ItemStack currentPlayerItem = player.getHeldItemMainhand();
         	
         	switch(firingState)
@@ -247,16 +317,18 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemPowderCharge)
         				{
-        					if (currentPowderCharge >= artilleryPowder.getMaxPowderCharge())
+        					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
+        						if (!world.isRemote) player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
         					}
         					else
         					{
-        						player.swingArm(hand);
-        						artilleryPowder.setPowderCharge(currentPowderCharge + 1);
-        						currentPlayerItem.shrink(1);        						
-        						artillery.setFiringState(FiringState.POWDERED);
+        						if (!world.isRemote) {
+        							player.swingArm(player.getActiveHand());
+        							setPowderCharge(currentPowderCharge + 1);
+        							if (!isCreativeMode) currentPlayerItem.shrink(1);        						
+        							setFiringState(FiringState.POWDERED);
+        						}
         						world.playSound(player, pos, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.5f, 0.5f);
         						successfulInteract = true;
         					}
@@ -269,24 +341,28 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemPowderCharge)
         				{
-        					if (currentPowderCharge >= artilleryPowder.getMaxPowderCharge())
+        					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
+        						if (!world.isRemote) player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
         					}
         					else
         					{
-        						player.swingArm(hand);
-        						artilleryPowder.setPowderCharge(currentPowderCharge + 1);
-        						currentPlayerItem.shrink(1);        						
-        						artillery.setFiringState(FiringState.POWDERED);
+        						if (!world.isRemote) {
+        							player.swingArm(player.getActiveHand());
+            						setPowderCharge(currentPowderCharge + 1);
+            						if (!isCreativeMode) currentPlayerItem.shrink(1);        									
+            						setFiringState(FiringState.POWDERED);
+        						}
         						world.playSound(player, pos, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.5f, 0.5f);
         						successfulInteract = true;
         					}
         				}
         				else if (currentPlayerItem.getItem() instanceof ItemRamRod)
         				{        			
-        					player.swingArm(hand);
-        					artillery.setFiringState(FiringState.POWDERED_RAMMED);
+        					if (!world.isRemote) {
+        						player.swingArm(player.getActiveHand());
+        						setFiringState(FiringState.POWDERED_RAMMED);
+        					}
     						world.playSound(player, pos, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.5f, 0.5f);
     						successfulInteract = true;
         				}
@@ -298,10 +374,13 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemArtilleryAmmo)
         				{
-        					player.swingArm(hand);
-        					artillery.setLoadedProjectile(currentPlayerItem);
-        					currentPlayerItem.shrink(1);        					
-        					artillery.setFiringState(FiringState.PROJECTILE);
+        					if (!world.isRemote) {
+	        					player.swingArm(player.getActiveHand());
+	        					OldGuns.logger.info("currentPlayerItem : " + currentPlayerItem);
+	        					setLoadedProjectile(currentPlayerItem.copy());
+	        					if (!isCreativeMode) currentPlayerItem.shrink(1);        							
+	        					setFiringState(FiringState.PROJECTILE);
+        					}
         					world.playSound(player, pos, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.5f, 0.5f);
         					successfulInteract = true;
         				}
@@ -312,10 +391,12 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         			{
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemRamRod)
-        				{        					
-        					player.swingArm(hand);
-        					artillery.setFiringState(FiringState.PROJECTILE_RAMMED);
-    						world.playSound(player, pos, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.5f, 0.5f);
+        				{        	
+        					if (!world.isRemote) {
+        						player.swingArm(player.getActiveHand());
+        						setFiringState(FiringState.PROJECTILE_RAMMED);
+        					}
+        					world.playSound(player, pos, SoundEvents.ENTITY_CHICKEN_EGG, SoundCategory.BLOCKS, 0.5f, 0.5f);
     						successfulInteract = true;
         				}
         			}
@@ -326,46 +407,52 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				/* Player has an item. */        				 
         				if (currentPlayerItem.getItem() instanceof ItemLongMatch)
         				{        		
-        					player.swingArm(hand);
         		        	if (!world.isRemote)
         		        	{
+        		        		player.swingArm(player.getActiveHand());
+        		        		
+        		        		/* Need to offset spawn location of projectiles, since block pos will end up aligned to block edge. */
+        		        		double pX = pos.getX() + 0.5D;
+        		        		double pY = pos.getY() - 0.2D;
+        		        		double pZ = pos.getZ() + 0.5D;
+        		        		
         		        		/* Calculate deviation multiplier for shot, based on charge time. */
         		        		float deviationMulti = 1.0f; 
         		            
-        		        		float f = artillery.getProjectileBaseSpeed() * currentPowderCharge;          
+        		        		float f = getProjectileBaseSpeed() * currentPowderCharge;          
         		            
         		            	ItemArtilleryAmmo itemArtilleryAmmo = (ItemArtilleryAmmo)(currentProjectile.getItem());
-        		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(world, pos.getX(), pos.getY(), pos.getZ(), 
-        		            			currentProjectile, artillery, player);
+        		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(world, pX, pY, pZ, 
+        		            			currentProjectile, this, player);
         		            
         		            	/* Fire all projectiles from ammo item. */
         		            	entityProjectiles.forEach((t) ->
         		            	{            		
         		            		/* Set location-based data. */
-        		            		t.setEffectiveRange(artillery.getEffectiveRange());
+        		            		t.setEffectiveRange(getEffectiveRange());
         		            		t.setLaunchLocation(t.getPosition());
         		            	
         		            		/* Launch projectile. */
-        		            		t.shoot(pos.getX(), pos.getY(), pos.getZ(), artillery.getBarrelPitch(), artillery.getBarrelYaw(), 0.0F, f, deviationMulti);
+        		            		t.shoot(pX, pY, pZ, getBarrelPitch(), getBarrelYaw(), 0.0F, f, deviationMulti);
         		            		
         		                	world.spawnEntity(t);
         		            	});
         		            	
         		            	/* Do firing effects. */
-        		            	artillery.doFiringEffect(world, player, pos.getX(), pos.getY(), pos.getZ());        		                
-        		        	}	       	
-        		        	artilleryPowder.setPowderCharge(0);
-        		        	artillery.setLoadedProjectile(ItemStack.EMPTY);
-        		        	artillery.setFiringState(FiringState.UNLOADED);   
-    						world.setLightFor(EnumSkyBlock.BLOCK, pos, 15);
-    						world.markBlockRangeForRenderUpdate(pos, pos.up(12));
+        		            	doFiringEffect(world, player, pX, pY, pZ);        		                  	
+	        		        	setPowderCharge(0);
+	        		        	setLoadedProjectile(ItemStack.EMPTY);
+	        		        	setFiringState(FiringState.UNLOADED);   
+        		        	}
+        		        	world.setLightFor(EnumSkyBlock.BLOCK, pos, 15);
+    						world.markBlockRangeForRenderUpdate(pos, pos.offset(facing, 12));
     						world.checkLightFor(EnumSkyBlock.BLOCK, pos.up());
     						world.checkLightFor(EnumSkyBlock.BLOCK, pos.down());
     						world.checkLightFor(EnumSkyBlock.BLOCK, pos.north());
     						world.checkLightFor(EnumSkyBlock.BLOCK, pos.south());
     						world.checkLightFor(EnumSkyBlock.BLOCK, pos.east());
     						world.checkLightFor(EnumSkyBlock.BLOCK, pos.west());
-    						artillery.setFiringCooldown(5);	
+    						setFiringCooldown(5);	     
     						successfulInteract = true;
         				}
         			}
@@ -375,17 +462,14 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         	}
         }
 		
-		if (successfulInteract)
-		{
-			/* Debug client/server rotation differences. */
-    		OldGuns.logger.info(String.format("SERVER:"));
-    		OldGuns.logger.info(String.format("   firingState         : %s", artillery.getFiringState()));
-    		OldGuns.logger.info(String.format("   currentPowderCharge : %d", artilleryPowder.getPowderCharge()));
-    		OldGuns.logger.info(String.format("   currentProjectile   : %s", artillery.getLoadedProjectile().getUnlocalizedName()));
-		}
+		OldGuns.network.sendToAllAround(
+				new MessageSyncTileEntityCannonState(this.pos, getArtilleryType(), getFiringState(), getPowderCharge(), getLoadedProjectile(), getFiringCooldown()),
+				new TargetPoint(player.dimension, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1000));
 		
-		TileEntityHelpers.setState(world, pos);
-			
-		return (successfulInteract) ? true : false;
+		return successfulInteract;
+	}
+	
+	public void setFacing(EnumFacing facing) {
+		this.facing = facing;		
 	}
 }
