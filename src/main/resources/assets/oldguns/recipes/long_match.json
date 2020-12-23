@@ -1,0 +1,20 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"  b",
+		" a ",
+		"a  "
+	],
+	"key": {
+		"a": {
+			"item": "minecraft:stick"
+		},
+		"b": {
+			"item": "minecraft:torch"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:long_match"
+	}
+}

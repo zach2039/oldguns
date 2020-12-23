@@ -1,0 +1,20 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"aa ",
+		" ba",
+		"  a"
+	],
+	"key": {
+		"a": {
+			"item": "minecraft:stick"
+		},
+		"b": {
+			"item": "minecraft:compass"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:gunners_quadrant"
+	}
+}

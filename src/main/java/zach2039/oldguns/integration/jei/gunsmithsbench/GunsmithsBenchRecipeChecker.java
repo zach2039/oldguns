@@ -1,22 +1,17 @@
 package zach2039.oldguns.integration.jei.gunsmithsbench;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-import mezz.jei.Internal;
 import mezz.jei.api.IJeiHelpers;
-import mezz.jei.api.recipe.IRecipeWrapper;
 import mezz.jei.api.recipe.IRecipeWrapperFactory;
-import mezz.jei.startup.StackHelper;
-import mezz.jei.util.ErrorUtil;
-import mezz.jei.util.Log;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreIngredient;
-import scala.actors.threadpool.Arrays;
 import zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe;
 import zach2039.oldguns.common.item.crafting.ShapelessGunsmithsBenchRecipe;
 
@@ -28,7 +23,6 @@ public final class GunsmithsBenchRecipeChecker {
 		CraftingRecipeValidator<ShapelessGunsmithsBenchRecipe> shapelessGunsmithsBenchRecipeValidator = new CraftingRecipeValidator<>(recipe -> new ShapelessGunsmithsBenchRecipeWrapper(jeiHelpers, recipe));
 		CraftingRecipeValidator<ShapedGunsmithsBenchRecipe> shapedGunsmithsBenchRecipeValidator = new CraftingRecipeValidator<>(recipe -> new ShapedGunsmithsBenchRecipeWrapper(jeiHelpers, recipe));
 		
-		StackHelper stackHelper = Internal.getStackHelper();
 		Iterator<IRecipe> recipeIterator = CraftingManager.REGISTRY.iterator();
 		List<IRecipe> validRecipes = new ArrayList<>();
 		while (recipeIterator.hasNext()) 
@@ -36,14 +30,14 @@ public final class GunsmithsBenchRecipeChecker {
 			IRecipe recipe = recipeIterator.next();
 			if (recipe instanceof ShapelessGunsmithsBenchRecipe) 
 			{
-				if (shapelessGunsmithsBenchRecipeValidator.isRecipeValid((ShapelessGunsmithsBenchRecipe) recipe, stackHelper)) 
+				if (shapelessGunsmithsBenchRecipeValidator.isRecipeValid((ShapelessGunsmithsBenchRecipe) recipe)) 
 				{
 					validRecipes.add(recipe);
 				}
 			} 
 			else if (recipe instanceof ShapedGunsmithsBenchRecipe) 
 			{
-				if (shapedGunsmithsBenchRecipeValidator.isRecipeValid((ShapedGunsmithsBenchRecipe) recipe, stackHelper)) 
+				if (shapedGunsmithsBenchRecipeValidator.isRecipeValid((ShapedGunsmithsBenchRecipe) recipe)) 
 				{
 					validRecipes.add(recipe);
 				}
@@ -61,17 +55,12 @@ public final class GunsmithsBenchRecipeChecker {
 			this.recipeWrapperFactory = recipeWrapperFactory;
 		}
 		
-		public boolean isRecipeValid(T recipe, StackHelper stackHelper) 
+		public boolean isRecipeValid(T recipe) 
 		{
 			ItemStack recipeOutput = recipe.getRecipeOutput();
 			//noinspection ConstantConditions
 			if (recipeOutput == null || recipeOutput.isEmpty()) 
 			{
-				if (!recipe.isDynamic()) 
-				{
-					String recipeInfo = getInfo(recipe);
-					Log.get().error("Recipe has no output. {}", recipeInfo);
-				}
 				return false;
 			}
 			
@@ -79,15 +68,11 @@ public final class GunsmithsBenchRecipeChecker {
 			//noinspection ConstantConditions
 			if (ingredients == null) 
 			{
-				String recipeInfo = getInfo(recipe);
-				Log.get().error("Recipe has no input Ingredients. {}", recipeInfo);
 				return false;
 			}
-			int inputCount = getInputCount(ingredients, stackHelper);
+			int inputCount = getInputCount(ingredients);
 			if (inputCount == CANT_DISPLAY) 
 			{
-				String recipeInfo = getInfo(recipe);
-				Log.get().warn("Recipe contains ingredients that can't be understood or displayed by JEI: {}", recipeInfo);
 				return false;
 			} 
 			else if (inputCount == INVALID_COUNT) 
@@ -96,26 +81,16 @@ public final class GunsmithsBenchRecipeChecker {
 			} 
 			else if (inputCount > 9) 
 			{
-				String recipeInfo = getInfo(recipe);
-				Log.get().error("Recipe has too many inputs. {}", recipeInfo);
 				return false;
 			}
 			else if (inputCount == 0) 
 			{
-				String recipeInfo = getInfo(recipe);
-				Log.get().error("Recipe has no inputs. {}", recipeInfo);
 				return false;
 			}
 			return true;
 		}
-
-		private String getInfo(T recipe) 
-		{
-			IRecipeWrapper recipeWrapper = recipeWrapperFactory.getRecipeWrapper(recipe);
-			return ErrorUtil.getInfoFromRecipe(recipe, recipeWrapper);
-		}
 		
-		protected static int getInputCount(List<Ingredient> ingredientList, StackHelper stackHelper) 
+		protected static int getInputCount(List<Ingredient> ingredientList) 
 		{
 			int inputCount = 0;
 			for (Ingredient ingredient : ingredientList) 

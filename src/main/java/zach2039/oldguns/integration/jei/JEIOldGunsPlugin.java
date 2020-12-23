@@ -25,10 +25,13 @@ import zach2039.oldguns.integration.jei.gunsmithsbench.ShapelessGunsmithsBenchRe
 @JEIPlugin
 public class JEIOldGunsPlugin implements IModPlugin {
 
+    public static IJeiHelpers jeiHelpers = null;
+    public static IJeiRuntime jeiRuntime = null;
+	
 	@Override 
 	public void register(IModRegistry registry)
 	{
-		IJeiHelpers jeiHelpers = registry.getJeiHelpers();
+		jeiHelpers = registry.getJeiHelpers();
 		
 		List<IRecipe> gunsmithBenchRecipes = GunsmithsBenchRecipeChecker.getValidRecipes(jeiHelpers);
 
@@ -54,9 +57,9 @@ public class JEIOldGunsPlugin implements IModPlugin {
 		registry.addRecipeCategories(new GunsmithsBenchRecipeCategory(guiHelper));
 	}
 	
-	@Override
-	public void onRuntimeAvailable(IJeiRuntime run)
-	{
-		
-	}
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime iJeiRuntime) {
+        jeiRuntime = iJeiRuntime;
+    }
+
 }

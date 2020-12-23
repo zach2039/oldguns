@@ -5,12 +5,12 @@
 	],
 	"key": {
 		"c": {
-			"type": "forge:ore_dict",
-			"ore": "slabCobblestone"
+			"item": "minecraft:stone_slab",
+			"data": 3
 		},
 		"C": {
-			"type": "forge:ore_dict",
-			"ore": "cobblestone"
+			"item": "minecraft:stone",
+			"data": 0
 		}
 	},
 	"result":

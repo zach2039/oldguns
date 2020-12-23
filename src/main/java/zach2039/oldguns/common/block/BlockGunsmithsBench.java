@@ -37,6 +37,7 @@ public class BlockGunsmithsBench extends Block
 		setUnlocalizedName("gunsmiths_bench");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.WOOD);	
+		setHardness(2.5F);
 	}
 	
 	@Override
