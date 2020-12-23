@@ -20,11 +20,18 @@ import zach2039.oldguns.common.init.ModSoundEvents;
 import zach2039.oldguns.common.item.OldGunsCreativeTab;
 import zach2039.oldguns.util.IProxy;
 
-@Mod(modid = OldGuns.MODID, useMetadata = true)
+@Mod(
+		modid = OldGuns.MODID,
+		name = OldGuns.MODNAME,
+		version = OldGuns.MODVERSION,
+		acceptedMinecraftVersions = "[1.12.2]",
+		dependencies = "required-after:forge@[14.23.5.2847,);"
+	)
 public class OldGuns
 {
     public static final String MODID = "oldguns";
     public static final String MODNAME = "Old Guns";
+    public static final String MODVERSION = "@VERSION@";
     
     public static Logger logger;
     
