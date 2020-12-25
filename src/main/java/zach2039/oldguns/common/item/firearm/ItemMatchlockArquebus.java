@@ -21,11 +21,13 @@ public class ItemMatchlockArquebus extends ItemFirearm implements IFirearm
 	public ItemMatchlockArquebus()
 	{
 		super("matchlock_arquebus");
-		setMaxDamage(ConfigCategoryFirearms.configMatchlockArquebus.durability);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
+		setMaxDamage(ConfigCategoryFirearms.configMatchlockArquebus.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockArquebus.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDeviationModifier);
 	}
 
 	@Override

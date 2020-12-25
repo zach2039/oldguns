@@ -13,6 +13,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import zach2039.oldguns.api.crafting.impl.IGunsmithsBench;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.item.crafting.base.ShapedOldGunsRecipe;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 
@@ -38,7 +39,8 @@ public class ShapedGunsmithsBenchRecipe extends ShapedOldGunsRecipe
 			return ItemStack.EMPTY;
 		}
 		
-		return output;
+		return ConfigCategoryRecipes.isRecipeEnabled(output) ? output : ItemStack.EMPTY;
+		//return output;
 	}
 
 	@Override

@@ -19,6 +19,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.tools.ItemRepairKit;
@@ -91,7 +92,8 @@ public class RecipesFirearmRepairWithKit extends ShapelessOreRecipe
 			}
 		}
 		
-		return firearmStack;
+		return ConfigCategoryRecipes.isRecipeEnabled(firearmStack) ? firearmStack : ItemStack.EMPTY;
+		//return firearmStack;
 	}
 
 	private ItemStack damageRepairKit(final ItemStack stack)

@@ -23,9 +23,11 @@ public class ItemFlintlockBlunderbuss extends ItemFirearm implements IFirearm
 		super("flintlock_blunderbuss");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setMaxDamage(ConfigCategoryFirearms.configFlintlockBlunderbus.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBlunderbus.baseEffectiveRange);
-		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBlunderbus.projectileSpeed);
+		setMaxDamage(ConfigCategoryFirearms.configFlintlockBlunderbuss.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBlunderbuss.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseShotDeviationModifier);
 	}
 
 	@Override

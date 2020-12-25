@@ -26,6 +26,8 @@ public class ItemMatchlockPistol extends ItemFirearm implements IFirearm
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockPistol.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockPistol.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockPistol.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configMatchlockPistol.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configMatchlockPistol.baseShotDeviationModifier);
 	}
 
 	@Override

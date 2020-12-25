@@ -26,9 +26,17 @@ public interface IArtillery {
     
     public int getFiringCooldown();
     
-    public void setProjectileBaseSpeed(float projectileSpeed);
+    public void setProjectileSpeed(float projectileSpeed);
     
-    public float getProjectileBaseSpeed();
+    public float getProjectileSpeed();
+    
+    public void setDeviationModifier(float deviationModifier);
+    
+    public float getDeviationModifier();
+    
+    public void setDamageModifier(float damageModifier);
+    
+    public float getDamageModifier();
 
     public void setEffectiveRange(float effectiveRange);
     

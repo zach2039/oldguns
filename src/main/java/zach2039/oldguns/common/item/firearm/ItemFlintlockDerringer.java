@@ -26,6 +26,8 @@ public class ItemFlintlockDerringer extends ItemFirearm implements IFirearm
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockDerringer.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockDerringer.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockDerringer.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configFlintlockDerringer.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configFlintlockDerringer.baseShotDeviationModifier);
 	}
 
 	@Override

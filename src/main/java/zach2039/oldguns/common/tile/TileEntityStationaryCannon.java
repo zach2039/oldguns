@@ -22,8 +22,10 @@ public class TileEntityStationaryCannon extends TileEntityStationaryArtillery im
 	@Override
 	public void initArtilleryConfiguration() {
 		setArtilleryType(ArtilleryType.STATIONARY_CANNON);
-		setProjectileBaseSpeed(ConfigCategoryArtillery.configNavalCannon.projectileSpeed);
+		setProjectileSpeed(ConfigCategoryArtillery.configNavalCannon.projectileSpeed);
 		setEffectiveRange(ConfigCategoryArtillery.configNavalCannon.baseEffectiveRange);
+		setDeviationModifier(ConfigCategoryArtillery.configMediumCannon.baseShotDeviationModifier);
+		setDamageModifier(ConfigCategoryArtillery.configMediumCannon.baseShotDamageModifier);
 	}
 	
 	@Override

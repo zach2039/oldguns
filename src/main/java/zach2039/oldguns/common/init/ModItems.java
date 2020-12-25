@@ -298,7 +298,7 @@ public class ModItems
 					
 					new ItemRepairKit(),
 				};
-
+			
 			event.getRegistry().registerAll(items);
 		}
 	}

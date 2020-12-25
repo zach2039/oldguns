@@ -1,4 +1,7 @@
 {
+	"conditions": {
+        "recipe_enabled": "zach2039.oldguns.common.item.crafting.condition.ConditionIsRecipeEnabled$Factory"
+    },
 	"ingredients":
 	{
 		"generic_firearm": "zach2039.oldguns.common.item.crafting.ingredient.IngredientGenericItemFirearm$Factory"

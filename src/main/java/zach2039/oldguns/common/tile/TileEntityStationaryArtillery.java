@@ -66,6 +66,16 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	 */
 	protected float effectiveRange = 500f;
 	
+	/**
+	 * Deviation modifier of this artillery instance.
+	 */
+	protected float deviationModifier = 1f;
+	
+	/**
+	 * Damage modifier of this artillery instance.
+	 */
+	protected float damageModifier = 1f;
+	
 	public float getDefaultYaw()
 	{
 		switch (facing) 
@@ -165,13 +175,13 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	}
 
 	@Override
-	public void setProjectileBaseSpeed(float projectileSpeed)
+	public void setProjectileSpeed(float projectileSpeed)
 	{
 		this.projectileSpeed = projectileSpeed;
 	}
 	
 	@Override
-	public float getProjectileBaseSpeed()
+	public float getProjectileSpeed()
 	{
 		return this.projectileSpeed;
 	}
@@ -188,6 +198,30 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
     	return this.effectiveRange;
     }
 
+	@Override
+    public void setDeviationModifier(float deviationModifier)
+    {
+    	this.deviationModifier = deviationModifier;
+    }
+    
+	@Override
+    public float getDeviationModifier()
+    {
+    	return this.deviationModifier;
+    }
+	
+	@Override
+    public void setDamageModifier(float damageModifier)
+    {
+    	this.damageModifier = damageModifier;
+    }
+    
+	@Override
+    public float getDamageModifier()
+    {
+    	return this.damageModifier;
+    }
+	
 	@Override
 	public abstract float getBarrelHeight();
 	
@@ -453,11 +487,8 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         		        		double pX = pos.getX() + 0.5D;
         		        		double pY = pos.getY() - 0.2D;
         		        		double pZ = pos.getZ() + 0.5D;
-        		        		
-        		        		/* Calculate deviation multiplier for shot, based on charge time. */
-        		        		float deviationMulti = 1.0f; 
         		            
-        		        		float f = getProjectileBaseSpeed() * currentPowderCharge;          
+        		        		float f = getProjectileSpeed() * currentPowderCharge;          
         		            
         		            	ItemArtilleryAmmo itemArtilleryAmmo = (ItemArtilleryAmmo)(currentProjectile.getItem());
         		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(world, pX, pY, pZ, 
@@ -469,9 +500,10 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         		            		/* Set location-based data. */
         		            		t.setEffectiveRange(getEffectiveRange());
         		            		t.setLaunchLocation(t.getPosition());
-        		            	
+        		            		t.setDamage(t.getDamage() * getDamageModifier());
+        		            		
         		            		/* Launch projectile. */
-        		            		t.shoot(pX, pY, pZ, getBarrelPitch(), getBarrelYaw(), 0.0F, f, deviationMulti);
+        		            		t.shoot(pX, pY, pZ, getBarrelPitch(), getBarrelYaw(), 0.0F, f, getDeviationModifier());
         		            		
         		                	world.spawnEntity(t);
         		            	});

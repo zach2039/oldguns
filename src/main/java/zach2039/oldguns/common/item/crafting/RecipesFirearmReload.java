@@ -16,6 +16,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
@@ -74,7 +75,8 @@ public class RecipesFirearmReload extends ShapelessOreRecipe
 			FirearmNBTHelper.pushNBTTagAmmo(firearmStack, ammoStack);
 		}
 		
-		return firearmStack;
+		return ConfigCategoryRecipes.isRecipeEnabled(firearmStack) ? firearmStack : ItemStack.EMPTY;
+		//return firearmStack;
 	}
 
 	@Override

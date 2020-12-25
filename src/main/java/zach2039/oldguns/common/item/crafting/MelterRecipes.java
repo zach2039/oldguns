@@ -11,6 +11,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModItems;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 
 public class MelterRecipes
 {
@@ -56,6 +57,11 @@ public class MelterRecipes
      */
     public void addMeltingRecipe(ItemStack input, ItemStack cast, ItemStack stack, float experience)
     {
+    	/* Prevent adding of recipe if disabled. */
+    	if (!ConfigCategoryRecipes.isRecipeEnabled(stack)) {
+    		return;
+    	}
+		
         if (getMeltingResult(input, cast) != ItemStack.EMPTY) 
         {
         	OldGuns.logger.info("Ignored melting recipe with conflicting input: {} = {}", input, stack);

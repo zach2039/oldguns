@@ -26,6 +26,8 @@ public class ItemFlintlockArquebus extends ItemFirearm implements IFirearm
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockArquebus.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockArquebus.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configFlintlockArquebus.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configFlintlockArquebus.baseShotDeviationModifier);
 	}
 
 	@Override

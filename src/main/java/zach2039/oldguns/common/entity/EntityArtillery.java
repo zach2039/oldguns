@@ -90,6 +90,16 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 	 */
 	protected float effectiveRange = 500f;
 	
+	/**
+	 * Deviation modifier of this artillery instance.
+	 */
+	protected float deviationModifier = 1f;
+	
+	/**
+	 * Damage modifier of this artillery instance.
+	 */
+	protected float damageModifier = 1f;
+	
 	public Entity pullingEntity;
 	public boolean fellLastTick = false;
 	
@@ -790,11 +800,8 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         				{        		
         					player.swingArm(hand);
         		        	if (!this.world.isRemote)
-        		        	{
-        		        		/* Calculate deviation multiplier for shot, based on charge time. */
-        		        		float deviationMulti = 1.0f; 
-        		            
-        		        		float f = getProjectileBaseSpeed() * currentPowderCharge;          
+        		        	{	            
+        		        		float f = getProjectileSpeed() * currentPowderCharge;          
         		            
         		            	ItemArtilleryAmmo itemArtilleryAmmo = (ItemArtilleryAmmo)(currentProjectile.getItem());
         		            	List<EntityProjectile> entityProjectiles = itemArtilleryAmmo.createProjectiles(this.world, this.posX, this.posY, this.posZ, ItemStack.EMPTY, this, player);
@@ -805,9 +812,10 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		            		/* Set location-based data. */
         		            		t.setEffectiveRange(getEffectiveRange());
         		            		t.setLaunchLocation(t.getPosition());
+        		            		t.setDamage(t.getDamage() * getDamageModifier());
         		            	
         		            		/* Launch projectile. */
-        		            		t.shoot(this, getBarrelPitch(), getBarrelYaw(), 0.0F, f, deviationMulti);
+        		            		t.shoot(this, getBarrelPitch(), getBarrelYaw(), 0.0F, f, getDeviationModifier());
         		            		
         		                	this.world.spawnEntity(t);
         		            	});
@@ -860,12 +868,12 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         return true;
     }
     
-    public void setProjectileBaseSpeed(float projectileSpeed)
+    public void setProjectileSpeed(float projectileSpeed)
 	{
 		this.projectileSpeed = projectileSpeed;
 	}
 	
-	public float getProjectileBaseSpeed()
+	public float getProjectileSpeed()
 	{
 		return this.projectileSpeed;
 	}
@@ -879,6 +887,26 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
     {
     	return this.effectiveRange;
     }
+    
+    public void setDeviationModifier(float deviationModifier)
+	{
+		this.deviationModifier = deviationModifier;
+	}
+	
+	public float getDeviationModifier()
+	{
+		return this.deviationModifier;
+	}
+	
+	public void setDamageModifier(float damageModifier)
+	{
+		this.damageModifier = damageModifier;
+	}
+	
+	public float getDamageModifier()
+	{
+		return this.damageModifier;
+	}
 
 	public float getMaxSpeedAirLateral()
     {

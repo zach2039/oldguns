@@ -27,6 +27,8 @@ public class ItemMatchlockDerringer extends ItemFirearm implements IFirearm
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockDerringer.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockDerringer.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockDerringer.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configMatchlockDerringer.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configMatchlockDerringer.baseShotDeviationModifier);
 	}
 
 	@Override

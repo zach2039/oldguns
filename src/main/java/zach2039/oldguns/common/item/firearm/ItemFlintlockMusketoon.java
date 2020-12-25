@@ -26,6 +26,8 @@ public class ItemFlintlockMusketoon extends ItemFirearm implements IFirearm
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockMusketoon.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockMusketoon.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockMusketoon.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configFlintlockMusketoon.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configFlintlockMusketoon.baseShotDeviationModifier);
 	}
 
 	@Override

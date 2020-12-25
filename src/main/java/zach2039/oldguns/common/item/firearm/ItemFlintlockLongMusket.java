@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,13 @@ public class ItemFlintlockLongMusket extends ItemFirearm implements IFirearm
 	public ItemFlintlockLongMusket()
 	{
 		super("flintlock_long_musket");
-		setMaxDamage(48);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(20.0f);
-		setProjectileSpeed(4.5f);
+		setMaxDamage(ConfigCategoryFirearms.configFlintlockLongMusket.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configFlintlockLongMusket.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockLongMusket.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configFlintlockLongMusket.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configFlintlockLongMusket.baseShotDeviationModifier);
 	}
 
 	@Override

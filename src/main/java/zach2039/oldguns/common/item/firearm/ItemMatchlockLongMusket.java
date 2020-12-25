@@ -26,6 +26,8 @@ public class ItemMatchlockLongMusket extends ItemFirearm implements IFirearm
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockLongMusket.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockLongMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockLongMusket.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configMatchlockLongMusket.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configMatchlockLongMusket.baseShotDeviationModifier);
 	}
 
 	@Override

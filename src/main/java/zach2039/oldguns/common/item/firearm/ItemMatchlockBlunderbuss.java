@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,13 @@ public class ItemMatchlockBlunderbuss extends ItemFirearm implements IFirearm
 	public ItemMatchlockBlunderbuss()
 	{
 		super("matchlock_blunderbuss");
-		setMaxDamage(24);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(6.0f);
-		setProjectileSpeed(3.25f);
+		setMaxDamage(ConfigCategoryFirearms.configMatchlockBlunderbuss.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockBlunderbuss.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseShotDeviationModifier);
 	}
 
 	@Override

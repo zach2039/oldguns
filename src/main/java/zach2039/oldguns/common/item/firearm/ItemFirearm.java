@@ -64,6 +64,16 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	protected float EffectiveRange = 10f;
 	
 	/**
+	 * Deviation modifier of this firearm item instance.
+	 */
+	protected float deviationModifier = 1f;
+	
+	/**
+	 * Damage modifier of this firearm item instance.
+	 */
+	protected float damageModifier = 1f;
+	
+	/**
 	 * Reload type of the firearm.
 	 */
 	protected FirearmReloadType ReloadType = FirearmReloadType.MUZZLELOADER;
@@ -173,7 +183,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
             if (i < 0) return;
 
             /* Calculate deviation multiplier for shot, based on charge time. */
-            float deviationMulti = (i < 5) ? 3.0f : ((i < 10) ? 2.0f : 1.0f); 
+            float aimingDeviationMulti = (i < 5) ? 3.0f : ((i < 10) ? 2.0f : 1.0f); 
             
             if (!itemstack.isEmpty())
             {
@@ -207,13 +217,13 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     	t.setLaunchLocation(t.getPosition());
                     	
                     	/* Launch projectile. */
-                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, deviationMulti * 5.0F);
+                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getDeviationModifier() * aimingDeviationMulti);
                     	
                     	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
 
                         if (j > 0)
                         {
-                            t.setDamage(t.getDamage() + (double)j * 0.5D + 0.5D);
+                            t.setDamage((t.getDamage() * getDamageModifier()) + (double)j * 0.5D + 0.5D);
                         }
 
                         int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
@@ -503,6 +513,26 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		EffectiveRange = effectiveRange;
 	}
 
+	public float getDeviationModifier()
+	{
+		return this.deviationModifier;
+	}
+
+	public void setDeviationModifier(float deviationModifier)
+	{
+		this.deviationModifier = deviationModifier;
+	}
+	
+	public float getDamageModifier()
+	{
+		return this.damageModifier;
+	}
+
+	public void setDamageModifier(float damageModifier)
+	{
+		this.damageModifier = damageModifier;
+	}
+	
 	public FirearmReloadType getReloadType()
 	{
 		return ReloadType;

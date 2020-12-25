@@ -30,8 +30,10 @@ public class EntityArtilleryCannon extends EntityArtillery implements IArtillery
 	@Override
 	public void initArtilleryConfiguration() {
 		setArtilleryType(ArtilleryType.CANNON);
-		setProjectileBaseSpeed(ConfigCategoryArtillery.configMediumCannon.projectileSpeed);
+		setProjectileSpeed(ConfigCategoryArtillery.configMediumCannon.projectileSpeed);
 		setEffectiveRange(ConfigCategoryArtillery.configMediumCannon.baseEffectiveRange);
+		setDeviationModifier(ConfigCategoryArtillery.configMediumCannon.baseShotDeviationModifier);
+		setDamageModifier(ConfigCategoryArtillery.configMediumCannon.baseShotDamageModifier);
 	}
 
 	@Override
