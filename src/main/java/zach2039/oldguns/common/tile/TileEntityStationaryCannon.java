@@ -1,30 +1,34 @@
 package zach2039.oldguns.common.tile;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zach2039.oldguns.api.artillery.ArtilleryEffect;
+import zach2039.oldguns.api.artillery.ArtilleryType;
 import zach2039.oldguns.api.artillery.impl.IArtillery;
 import zach2039.oldguns.api.artillery.impl.IArtilleryPowderable;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryArtillery;
 import zach2039.oldguns.common.network.MessageArtilleryEffect;
 
 public class TileEntityStationaryCannon extends TileEntityStationaryArtillery implements IArtillery, IArtilleryPowderable {
 	
+	public TileEntityStationaryCannon()
+	{
+		super();
+		initArtilleryConfiguration();
+	}
+	
+	@Override
+	public void initArtilleryConfiguration() {
+		setArtilleryType(ArtilleryType.STATIONARY_CANNON);
+		setProjectileBaseSpeed(ConfigCategoryArtillery.configNavalCannon.projectileSpeed);
+		setEffectiveRange(ConfigCategoryArtillery.configNavalCannon.baseEffectiveRange);
+	}
+	
 	@Override
 	public int getMaxPowderCharge() {
 		return 3;
-	}
-
-	@Override
-	public float getProjectileBaseSpeed() {
-		return 2.5f;
-	}
-
-	@Override
-	public float getEffectiveRange() {
-		return 500f;
 	}
 
 	@Override

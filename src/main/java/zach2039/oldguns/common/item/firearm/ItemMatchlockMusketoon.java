@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -25,6 +26,9 @@ public class ItemMatchlockMusketoon extends ItemFirearm implements IFirearm
 		setReloadType(FirearmReloadType.MUZZLELOADER);
 		setEffectiveRange(14.0f);
 		setProjectileSpeed(3.75f);
+		setMaxDamage(ConfigCategoryFirearms.configMatchlockMusketoon.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configMatchlockMusketoon.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockMusketoon.projectileSpeed);
 	}
 
 	@Override

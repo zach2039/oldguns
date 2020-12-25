@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,11 @@ public class ItemFlintlockPistol extends ItemFirearm implements IFirearm
 	public ItemFlintlockPistol()
 	{
 		super("flintlock_pistol");
-		setMaxDamage(32);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(8.0f);
-		setProjectileSpeed(3.5f);
+		setMaxDamage(ConfigCategoryFirearms.configFlintlockPistol.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configFlintlockPistol.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockPistol.projectileSpeed);
 	}
 
 	@Override

@@ -3,6 +3,9 @@ package zach2039.oldguns.common;
 import org.apache.logging.log4j.Logger;
 
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraftforge.common.config.Config.Type;
+import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -10,6 +13,7 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import zach2039.oldguns.api.capability.casting.CapabilityCast;
@@ -67,6 +71,9 @@ public class OldGuns
     {
     	logger.info("init()");
         
+    	/* Sync configuration settings. */
+    	ConfigManager.sync(OldGuns.MODID, Type.INSTANCE);
+    	
         /* Get network channel for mod. */
         network = NetworkRegistry.INSTANCE.newSimpleChannel(OldGuns.MODID);
         
@@ -90,5 +97,14 @@ public class OldGuns
         
         /* Call sided proxy. */
         proxy.postInit();
+    }
+    
+    @SubscribeEvent
+    public void onConfigChangedEvent(OnConfigChangedEvent event)
+    {
+        if (event.getModID().equals(OldGuns.MODID))
+        {
+            ConfigManager.sync(OldGuns.MODID, Type.INSTANCE);
+        }
     }
 }

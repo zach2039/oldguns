@@ -8,6 +8,8 @@ import zach2039.oldguns.api.artillery.FiringState;
 
 public interface IArtillery {
 	
+	public void initArtilleryConfiguration();
+	
 	public void setArtilleryType(ArtilleryType artilleryType);
     
     public ArtilleryType getArtilleryType();
@@ -24,8 +26,12 @@ public interface IArtillery {
     
     public int getFiringCooldown();
     
+    public void setProjectileBaseSpeed(float projectileSpeed);
+    
     public float getProjectileBaseSpeed();
 
+    public void setEffectiveRange(float effectiveRange);
+    
     public float getEffectiveRange();
     
 	public float getBarrelHeight();

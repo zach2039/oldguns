@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
-import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
@@ -24,16 +21,12 @@ import net.minecraft.util.EntitySelectors;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.EnumSkyBlock;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zach2039.oldguns.api.artillery.ArtilleryType;
@@ -82,6 +75,21 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
 	
 	protected ArtilleryType type = ArtilleryType.CANNON;
 	
+	/**
+	 * Ammo capacity of this artillery instance.
+	 */
+	protected int ammoCapacity = 1;
+	
+	/**
+	 * Projectile speed of this artillery instance.
+	 */
+	protected float projectileSpeed = 2.5f;
+	
+	/**
+	 * Effective range of this artillery instance.
+	 */
+	protected float effectiveRange = 500f;
+	
 	public Entity pullingEntity;
 	public boolean fellLastTick = false;
 	
@@ -115,6 +123,8 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         this.prevPosZ = z;
     }
 
+	public abstract void initArtilleryConfiguration();
+    
     @Override
     protected boolean canTriggerWalking()
     {
@@ -850,9 +860,25 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         return true;
     }
     
-    public abstract float getProjectileBaseSpeed();
+    public void setProjectileBaseSpeed(float projectileSpeed)
+	{
+		this.projectileSpeed = projectileSpeed;
+	}
+	
+	public float getProjectileBaseSpeed()
+	{
+		return this.projectileSpeed;
+	}
 
-    public abstract float getEffectiveRange();
+    public void setEffectiveRange(float effectiveRange)
+    {
+    	this.effectiveRange = effectiveRange;
+    }
+    
+    public float getEffectiveRange()
+    {
+    	return this.effectiveRange;
+    }
 
 	public float getMaxSpeedAirLateral()
     {

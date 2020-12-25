@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,11 @@ public class ItemFlintlockCaliver extends ItemFirearm implements IFirearm
 	public ItemFlintlockCaliver()
 	{
 		super("flintlock_caliver");
-		setMaxDamage(40);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(14.0f);
-		setProjectileSpeed(4.0f);
+		setMaxDamage(ConfigCategoryFirearms.configFlintlockCaliver.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configFlintlockCaliver.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockCaliver.projectileSpeed);
 	}
 
 	@Override

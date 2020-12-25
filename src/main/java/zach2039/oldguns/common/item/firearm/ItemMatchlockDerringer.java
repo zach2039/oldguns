@@ -12,6 +12,8 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +22,11 @@ public class ItemMatchlockDerringer extends ItemFirearm implements IFirearm
 	public ItemMatchlockDerringer()
 	{
 		super("matchlock_derringer");
-		setMaxDamage(8);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(3.0f);
-		setProjectileSpeed(3.0f);
+		setMaxDamage(ConfigCategoryFirearms.configMatchlockDerringer.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configMatchlockDerringer.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockDerringer.projectileSpeed);
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,11 @@ public class ItemMatchlockArquebus extends ItemFirearm implements IFirearm
 	public ItemMatchlockArquebus()
 	{
 		super("matchlock_arquebus");
-		setMaxDamage(16);
+		setMaxDamage(ConfigCategoryFirearms.configMatchlockArquebus.durability);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(9.0f);
-		setProjectileSpeed(3.5f);
+		setEffectiveRange(ConfigCategoryFirearms.configMatchlockArquebus.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockArquebus.projectileSpeed);
 	}
 
 	@Override

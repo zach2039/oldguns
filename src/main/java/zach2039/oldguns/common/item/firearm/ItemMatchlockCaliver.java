@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,11 @@ public class ItemMatchlockCaliver extends ItemFirearm implements IFirearm
 	public ItemMatchlockCaliver()
 	{
 		super("matchlock_caliver");
-		setMaxDamage(20);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(12.0f);
-		setProjectileSpeed(3.75f);
+		setMaxDamage(ConfigCategoryFirearms.configMatchlockCaliver.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configMatchlockCaliver.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockCaliver.projectileSpeed);
 	}
 
 	@Override

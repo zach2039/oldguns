@@ -12,6 +12,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -20,11 +21,11 @@ public class ItemFlintlockMusketoon extends ItemFirearm implements IFirearm
 	public ItemFlintlockMusketoon()
 	{
 		super("flintlock_musketoon");
-		setMaxDamage(44);
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
-		setEffectiveRange(16.0f);
-		setProjectileSpeed(4.0f);
+		setMaxDamage(ConfigCategoryFirearms.configFlintlockMusketoon.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configFlintlockMusketoon.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockMusketoon.projectileSpeed);
 	}
 
 	@Override

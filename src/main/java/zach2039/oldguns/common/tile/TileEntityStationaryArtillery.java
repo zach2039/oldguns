@@ -51,6 +51,21 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	protected int powderCharge = 0;
 	protected ItemStack loadedProjectile = ItemStack.EMPTY;
 	
+	/**
+	 * Ammo capacity of this artillery instance.
+	 */
+	protected int ammoCapacity = 1;
+	
+	/**
+	 * Projectile speed of this artillery instance.
+	 */
+	protected float projectileSpeed = 2.5f;
+	
+	/**
+	 * Effective range of this artillery instance.
+	 */
+	protected float effectiveRange = 500f;
+	
 	public float getDefaultYaw()
 	{
 		switch (facing) 
@@ -104,6 +119,9 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	}
 	
 	@Override
+	public abstract void initArtilleryConfiguration();
+	
+	@Override
 	public void setLoadedProjectile(ItemStack stackIn) {
 		this.loadedProjectile = stackIn;
 	}
@@ -146,9 +164,29 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 		this.powderCharge = charge;
 	}
 
-	public abstract float getProjectileBaseSpeed();
+	@Override
+	public void setProjectileBaseSpeed(float projectileSpeed)
+	{
+		this.projectileSpeed = projectileSpeed;
+	}
+	
+	@Override
+	public float getProjectileBaseSpeed()
+	{
+		return this.projectileSpeed;
+	}
 
-	public abstract float getEffectiveRange();
+	@Override
+    public void setEffectiveRange(float effectiveRange)
+    {
+    	this.effectiveRange = effectiveRange;
+    }
+    
+	@Override
+    public float getEffectiveRange()
+    {
+    	return this.effectiveRange;
+    }
 
 	@Override
 	public abstract float getBarrelHeight();

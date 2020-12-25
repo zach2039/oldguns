@@ -1,27 +1,37 @@
 package zach2039.oldguns.common.entity;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import zach2039.oldguns.api.artillery.ArtilleryEffect;
 import zach2039.oldguns.api.artillery.ArtilleryType;
+import zach2039.oldguns.api.artillery.impl.IArtillery;
+import zach2039.oldguns.api.artillery.impl.IArtilleryPowderable;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryArtillery;
 import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.network.MessageArtilleryEffect;
 
-public class EntityArtilleryCannon extends EntityArtillery
+public class EntityArtilleryCannon extends EntityArtillery implements IArtillery, IArtilleryPowderable
 {
 	public EntityArtilleryCannon(World worldIn)
 	{
 		super(worldIn);
+		initArtilleryConfiguration();
 	}
 	
 	public EntityArtilleryCannon(World worldIn, double x, double y, double z)
 	{
 		super(worldIn, x, y, z);
-		this.setArtilleryType(ArtilleryType.CANNON);
+		initArtilleryConfiguration();
+	}
+	
+	@Override
+	public void initArtilleryConfiguration() {
+		setArtilleryType(ArtilleryType.CANNON);
+		setProjectileBaseSpeed(ConfigCategoryArtillery.configMediumCannon.projectileSpeed);
+		setEffectiveRange(ConfigCategoryArtillery.configMediumCannon.baseEffectiveRange);
 	}
 
 	@Override
@@ -41,18 +51,6 @@ public class EntityArtilleryCannon extends EntityArtillery
 	public Item getItemArtillery()
 	{
 		return ModItems.ARTILLERY_CANNON;
-	}
-
-	@Override
-	public float getProjectileBaseSpeed()
-	{
-		return 2.5f;
-	}
-
-	@Override
-	public float getEffectiveRange()
-	{
-		return 500f;
 	}
 
 	@Override
