@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -22,6 +23,7 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
+import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
@@ -77,11 +79,13 @@ public class RecipesFirearmBreechloaderReload extends IForgeRegistryEntry.Impl<I
     		return false;
     	
     	for (Ingredient ingredient : input) {
+    		OldGuns.logger.info("ingredient : " + ingredient);
     		boolean ingredientSatisfied = false;
     		for (int i = 0; i < inv.getSizeInventory(); i++)
     		{
     			ItemStack itemstack = inv.getStackInSlot(i);
     			if (ingredient.test(itemstack)) {
+    				OldGuns.logger.info("itemstack : " + itemstack);
     				ingredientSatisfied = true;
     			}
     		}
