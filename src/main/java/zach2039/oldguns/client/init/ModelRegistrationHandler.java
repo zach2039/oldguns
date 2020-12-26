@@ -50,6 +50,7 @@ public class ModelRegistrationHandler
 		                       
 		registerModel(ModItems.FLINTLOCK_MUSKETOON, 0);
 		registerModel(ModItems.FLINTLOCK_BLUNDERBUSS, 0);
+		registerModel(ModItems.FLINTLOCK_BREECHLOADING_PISTOL, 0);
 		registerModel(ModItems.FLINTLOCK_BREECHLOADING_MUSKET, 0);
 		
 		registerModel(ModItems.SMALL_STONE_MUSKET_BALL, 0);

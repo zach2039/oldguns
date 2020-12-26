@@ -1,7 +1,10 @@
 package zach2039.oldguns.common.item.crafting;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -11,6 +14,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -73,25 +77,63 @@ public class RecipesFirearmBreechloaderReload extends IForgeRegistryEntry.Impl<I
     	return ConfigCategoryRecipes.isRecipeEnabled(this.output) ? this.output : ItemStack.EMPTY;
     }
 
+    public Map<Ingredient, Integer> getIngredientsWithCounts()
+    {
+    	Map<Ingredient, Integer> countMap = new HashMap<Ingredient, Integer>();
+    
+    	for (Ingredient ingredient : input) {
+    		boolean merged = false;
+    		for (Entry<Ingredient, Integer> entry : countMap.entrySet()) {
+    			if (entry.getKey().getValidItemStacksPacked().compareTo(ingredient.getValidItemStacksPacked()) == 0)
+    			{
+    				int oldCount = countMap.get(entry.getKey());
+        			countMap.replace(entry.getKey(), oldCount, oldCount + 1);
+        			merged = true;
+        			break;
+    			}
+    		}
+    		if (!merged)
+    			countMap.put(ingredient, 1);
+    	}
+    	
+    	return countMap;
+    }
+    
     public boolean isValid (IInventory inv) 
     {   
     	if (getRecipeOutput() == ItemStack.EMPTY)
     		return false;
     	
-    	for (Ingredient ingredient : input) {
-    		OldGuns.logger.info("ingredient : " + ingredient);
-    		boolean ingredientSatisfied = false;
+    	for (Entry<Ingredient, Integer> entry : getIngredientsWithCounts().entrySet()) {
+    		Ingredient ingredient = entry.getKey();
+    		int countRequired = entry.getValue();
+    		int numItems = 0;
+    		List<ItemStack> satisfactoryStacks = new ArrayList<ItemStack>();
+    		//OldGuns.logger.info("ingredient : " + entry.getKey());
+    		//OldGuns.logger.info("count : " + entry.getValue());
+    		boolean hasValidStackForIngredient = false;
+    		boolean hasCorrectCountForIngredients = false;
+    		/* Check if player has an itemstack that satisfies the ingredient. */
     		for (int i = 0; i < inv.getSizeInventory(); i++)
     		{
     			ItemStack itemstack = inv.getStackInSlot(i);
     			if (ingredient.test(itemstack)) {
-    				OldGuns.logger.info("itemstack : " + itemstack);
-    				ingredientSatisfied = true;
+    				satisfactoryStacks.add(itemstack);
+    				hasValidStackForIngredient = true;
     			}
     		}
-    		if (!ingredientSatisfied)
+    		/* Also check if total stacksize can satisfy count required. */
+    		for (ItemStack stack : satisfactoryStacks)
+    		{
+    			numItems += stack.getCount();
+    		}
+    		if (numItems >= countRequired)
+    			hasCorrectCountForIngredients = true;
+    		
+    		if (!hasCorrectCountForIngredients || !hasValidStackForIngredient)
     			return false;
-		}
+    	}
+    		
 		return true;
     }
     

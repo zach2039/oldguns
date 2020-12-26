@@ -16,19 +16,19 @@ import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
-public class ItemFlintlockBreechloadingMusket extends ItemFirearm implements IFirearm
+public class ItemFlintlockBreechloadingPistol extends ItemFirearm implements IFirearm
 {
-	public ItemFlintlockBreechloadingMusket()
+	public ItemFlintlockBreechloadingPistol()
 	{
-		super("flintlock_breechloading_musket");
+		super("flintlock_breechloading_pistol");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.BREECHLOADER);
-		setMaxDamage(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.baseEffectiveRange);
-		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.projectileSpeed);
-		setDamageModifier(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.baseShotDeviationModifier);
-		setRequiredReloadTicks(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.requiredReloadTicks);
+		setMaxDamage(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.durability);
+		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseEffectiveRange);
+		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.projectileSpeed);
+		setDamageModifier(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseShotDamageModifier);
+		setDeviationModifier(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseShotDeviationModifier);
+		setRequiredReloadTicks(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.requiredReloadTicks);
 	}
 
 	@Override

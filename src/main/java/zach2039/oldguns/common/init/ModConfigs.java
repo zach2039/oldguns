@@ -52,8 +52,11 @@ public class ModConfigs {
 		public static ConfigCategoryFirearmSettings configFlintlockMusketoon = new ConfigCategoryFirearmSettings(44, 4f, 16f, 7f, 1f); 
 		@Name("Flintlock Blunderbuss")
 		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 10f, 1f); 
+		
+		@Name("Flintlock Breechloading Pistol")
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(24, 3.5f, 8f, 9f, 1f, 40); 
 		@Name("Flintlock Breechloading Musket")
-		public static ConfigCategoryFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 10f, 1f); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(36, 4.25f, 17f, 6f, 1f, 80); 
 		
 		public static class ConfigCategoryFirearmSettings {	
 			@Name("Firearm durability")
@@ -93,6 +96,53 @@ public class ModConfigs {
 				this.baseShotDamageModifier = defaultShotDamageModifier;
 			}
 			
+		}
+		
+		public static class ConfigCategoryBreechloadingFirearmSettings {	
+			@Name("Firearm durability")
+			@Comment("Affects the number of times a firearm can be shot/used before breaking.")
+			public int durability = 32;
+			
+			@Name("Projectile speed")
+			@Comment("Affects the speed of projectiles followed from this firearm.")
+			public float projectileSpeed = 2f; 
+			
+			@Name("Base effective range")
+			@Comment({
+				"Affects the default range past which projectiles fired from this firearm do half damage.",
+				"This is sometimes overriden by the type of projectile loaded."
+			})
+			public float baseEffectiveRange = 10f; 
+			
+			@Name("Base shot deviation")
+			@Comment({
+				"Affects the deviation of projectiles fired from this firearm.",
+				"This is multiplied with the base deviation of the ammo loaded to get the final deviation."
+			})
+			public float baseShotDeviationModifier = 1f; 
+			
+			@Name("Base shot damage modifier")
+			@Comment({
+				"Affects the damage of projectiles fired from this firearm.",
+				"This is multiplied with the base damage of the ammo loaded to get the final damage."
+			})
+			public float baseShotDamageModifier = 1f;
+			
+			@Name("Ticks required for reload")
+			@Comment({
+				"Affects the reload duration of this breechloading firearm.",
+				"For reference, 20 ticks is 1 second."
+			})
+			public int requiredReloadTicks = 80;
+			
+			public ConfigCategoryBreechloadingFirearmSettings(int defaultDurability, float defaultProjectileSpeed, float defaultEffectiveRange, float defaultShotDeviationModifier, float defaultShotDamageModifier, int defaultReloadTicks) {
+				this.durability = defaultDurability;
+				this.projectileSpeed = defaultProjectileSpeed;
+				this.baseEffectiveRange = defaultEffectiveRange;
+				this.baseShotDeviationModifier = defaultShotDeviationModifier;
+				this.baseShotDamageModifier = defaultShotDamageModifier;
+				this.requiredReloadTicks = defaultReloadTicks;
+			}
 		}
 	}
 	

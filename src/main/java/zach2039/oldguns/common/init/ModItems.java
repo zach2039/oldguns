@@ -20,6 +20,7 @@ import zach2039.oldguns.common.item.artillery.ItemArtilleryCannon;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockArquebus;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockBlunderbuss;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingMusket;
+import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingPistol;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockCaliver;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockDerringer;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockLongMusket;
@@ -133,6 +134,8 @@ public class ModItems
 	public static final Item FLINTLOCK_MUSKETOON = null;
 	@ObjectHolder("flintlock_blunderbuss")
 	public static final Item FLINTLOCK_BLUNDERBUSS = null;
+	@ObjectHolder("flintlock_breechloading_pistol")
+	public static final Item FLINTLOCK_BREECHLOADING_PISTOL = null;
 	@ObjectHolder("flintlock_breechloading_musket")
 	public static final Item FLINTLOCK_BREECHLOADING_MUSKET = null;
 	
@@ -256,6 +259,7 @@ public class ModItems
 					new ItemFlintlockMusketoon(),
 					new ItemFlintlockBlunderbuss(),
 					new ItemFlintlockBreechloadingMusket(),
+					new ItemFlintlockBreechloadingPistol(),
 					
 					new ItemSmallStoneMusketBall(),
 					new ItemMediumStoneMusketBall(),

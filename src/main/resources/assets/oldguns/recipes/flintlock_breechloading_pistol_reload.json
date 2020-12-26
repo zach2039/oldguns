@@ -1,0 +1,23 @@
+{
+	"type": "oldguns:reload_firearm_breechload",
+	"ingredients": 
+	[
+	    {
+			"item": "oldguns:flintlock_breechloading_pistol",
+			"data": 32767
+	    },
+	    {
+			"item": "oldguns:small_iron_musket_ball"
+		},
+		{
+			"item": "minecraft:gunpowder"
+		},
+		{
+			"item": "minecraft:gunpowder"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:flintlock_breechloading_pistol"
+	}
+}

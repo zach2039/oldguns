@@ -154,6 +154,8 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 			
 			if (entLiving.getActiveItemStack().isItemEqualIgnoreDurability(stack) && isLoading)
 			{
+				OldGuns.logger.info("hasAmmoLoaded : " + hasAmmoLoaded);
+				OldGuns.logger.info("isLoading : " + isLoading);
 				float progress = FirearmStackHelper.getReloadProgress(entLiving, getRequiredReloadTicks());
 				
 				if (progress > 0.09f && progress < 0.11f)
@@ -496,7 +498,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		else 
 		{
 			 playerIn.setActiveHand(handIn);
-			 return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+			 return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
 		}
 	}
 
