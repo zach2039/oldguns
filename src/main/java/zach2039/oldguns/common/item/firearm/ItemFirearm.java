@@ -13,6 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Enchantments;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
@@ -22,6 +23,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemArrow;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.play.server.SPacketEntityEquipment;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -42,7 +44,10 @@ import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
 import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
+import zach2039.oldguns.common.item.crafting.RecipesFirearmBreechloaderReload;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
+import zach2039.oldguns.common.item.util.FirearmRecipeHelper;
+import zach2039.oldguns.common.item.util.FirearmStackHelper;
 import zach2039.oldguns.common.item.util.FirearmTooltipHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
 
@@ -74,9 +79,14 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	protected float damageModifier = 1f;
 	
 	/**
+	 * Required reload ticks of this firearm item instance.
+	 */
+	protected int requiredReloadTicks = 80;
+	
+	/**
 	 * Reload type of the firearm.
 	 */
-	protected FirearmReloadType ReloadType = FirearmReloadType.MUZZLELOADER;
+	protected FirearmReloadType reloadType = FirearmReloadType.MUZZLELOADER;
 	
 	public ItemFirearm(String name)
 	{
@@ -91,7 +101,33 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
             {
             	if (entityIn == null) return 0.0F;
             	if (stack.isEmpty() || !(stack.getItem() instanceof ItemFirearm)) return 0.0F;
-                return (FirearmNBTHelper.peekNBTTagAmmoCount(stack) > 0) ? 0.0F : 1.0F;
+            	int ammoCount = FirearmNBTHelper.peekNBTTagAmmoCount(stack);
+            	//OldGuns.logger.info("ammoCount : " + ammoCount);
+            	return (ammoCount > 0) ? 0.0F : 1.0F;
+            }
+        });
+        addPropertyOverride(new ResourceLocation(OldGuns.MODID, "reload_state"), new IItemPropertyGetter()
+        {
+            @SideOnly(Side.CLIENT)
+            public float apply(ItemStack stack, @Nullable World worldIn, @Nullable EntityLivingBase entityIn)
+            {
+            	if (entityIn == null) return 1.0F;
+            	if (stack.isEmpty() || !(stack.getItem() instanceof ItemFirearm)) return 1.0F;
+            	
+            	/* Check if this firearm is a breechloader and has a valid reloading recipe. */
+				boolean isReloadableBreechloader = (getReloadType() == FirearmReloadType.BREECHLOADER && 
+						!FirearmRecipeHelper.getBreechloadingReloadRecipes(stack).isEmpty());
+				boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(stack) > 0);
+				boolean isLoadable = (!hasAmmoLoaded && isReloadableBreechloader);
+            	
+				if (!isReloadableBreechloader)
+					return 1.0f;
+				if (!isLoadable)
+					return 0.0f;
+				
+            	float progress = FirearmStackHelper.getReloadProgress(entityIn, getRequiredReloadTicks());
+            	//OldGuns.logger.info("reloadProgress : " + progress);
+                return progress;
             }
         });
 	}
@@ -104,6 +140,35 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		/* Make sure item has NBT tag. */
 		if (!stack.hasTagCompound())
 			initNBTTags(stack);
+		
+		/* Process reloading animations based on active use ticks, if this item is a breechloader. */
+		if (entityIn instanceof EntityLivingBase) 
+		{
+			EntityLivingBase entLiving = (EntityLivingBase) entityIn;
+		
+			/* Check if this firearm is a breechloader and has a valid reloading recipe. */
+			boolean isReloadableBreechloader = (getReloadType() == FirearmReloadType.BREECHLOADER && 
+					!FirearmRecipeHelper.getBreechloadingReloadRecipes(stack).isEmpty());
+			boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(stack) > 0);
+			boolean isLoading = (!hasAmmoLoaded && isReloadableBreechloader);
+			
+			if (entLiving.getActiveItemStack().isItemEqualIgnoreDurability(stack) && isLoading)
+			{
+				float progress = FirearmStackHelper.getReloadProgress(entLiving, getRequiredReloadTicks());
+				
+				if (progress > 0.09f && progress < 0.11f)
+					entLiving.playSound(SoundEvents.BLOCK_LEVER_CLICK, 0.25F, 1.0F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));
+            	
+				if (progress > 0.49f && progress < 0.51f)
+					entLiving.playSound(SoundEvents.ENTITY_CHICKEN_EGG, 0.25F, 0.7F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));
+				
+				if (progress > 0.69f && progress < 0.71f)
+					entLiving.playSound(SoundEvents.BLOCK_LEVER_CLICK, 0.25F, 1.0F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));
+				
+				if (progress > 0.95f && progress < 0.99f)
+					entLiving.playSound(SoundEvents.BLOCK_LEVER_CLICK, 0.35F, 1.7F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));
+			}
+		}
     }
 
 	@Override
@@ -170,31 +235,93 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
     }
 	
 	@Override
-	public void onPlayerStoppedUsing(ItemStack stack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
+	public void onPlayerStoppedUsing(ItemStack firearmStack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
 	{
 		if (entityLiving instanceof EntityPlayer)
         {
             EntityPlayer entityplayer = (EntityPlayer)entityLiving;
             //boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
-            ItemStack itemstack = FirearmNBTHelper.peekNBTTagAmmo(stack);
+            ItemStack ammoStack = FirearmNBTHelper.peekNBTTagAmmo(firearmStack);
 
-            int i = this.getMaxItemUseDuration(stack) - timeLeft;
-            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, worldIn, entityplayer, i, !itemstack.isEmpty());
+            int i = this.getMaxItemUseDuration(firearmStack) - timeLeft;
+            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(firearmStack, worldIn, entityplayer, i, !ammoStack.isEmpty());
             if (i < 0) return;
 
+            /* Check if this firearm is a breechloader and has a valid reloading recipe. */
+            RecipesFirearmBreechloaderReload reloadRecipe = null;
+            boolean isReloadableBreechloader = (getReloadType() == FirearmReloadType.BREECHLOADER && 
+    				!FirearmRecipeHelper.getBreechloadingReloadRecipes(firearmStack).isEmpty());
+    		boolean canReloadBreechloader = false;
+    		if (isReloadableBreechloader)
+    		{
+    			/* Allow action to continue on the first reload recipe that is valid for the player's inventory. */
+    			for (RecipesFirearmBreechloaderReload recipe : FirearmRecipeHelper.getBreechloadingReloadRecipes(firearmStack))
+    			{
+    				canReloadBreechloader = recipe.isValid(entityplayer.inventory);
+    				if (canReloadBreechloader)
+    				{
+    					reloadRecipe = recipe;
+    					break;
+    				}
+    			}
+    		}
+    		
+    		/* Only allow firing if no cooldown and ammo loaded. */
+            boolean readyToFire = (entityplayer.getCooledAttackStrength(0f) >= 0.99f);
+    		boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(firearmStack) > 0);
+    		boolean notBroken = FirearmNBTHelper.getNBTTagCondition(firearmStack) != FirearmCondition.BROKEN;
+    		
+    		boolean holdingLargeFirearmOffhand = isCarryingLargeFirearmInOtherHand(worldIn, entityplayer, EnumHand.MAIN_HAND);
+    		//boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+    		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+            
+    		OldGuns.logger.info("readyToFire : " + readyToFire);
+    		OldGuns.logger.info("hasAmmoLoaded : " + hasAmmoLoaded);
+    		OldGuns.logger.info("notBroken : " + notBroken);
+    		OldGuns.logger.info("canReload : " + canReload);
+    		OldGuns.logger.info("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
+    		OldGuns.logger.info("isReloadableBreechloader : " + isReloadableBreechloader);
+    		
+            if (isReloadableBreechloader && canReload)
+            {
+            	float progress = FirearmStackHelper.getReloadProgress(entityplayer, getRequiredReloadTicks());
+            	if (progress >= 0.99f && reloadRecipe != null)
+            	{
+            		ItemStack reloadRecipeAmmoStack = reloadRecipe.getAmmoItemStack().copy();
+            		if (reloadRecipe.consumeIngredients(entityplayer.inventory, entityplayer.capabilities.isCreativeMode))
+            		{
+	            		FirearmNBTHelper.pushNBTTagAmmo(firearmStack, reloadRecipeAmmoStack);
+	            		//OldGuns.logger.info("reloadRecipeAmmoStack : " + reloadRecipeAmmoStack);
+	            		//OldGuns.logger.info("reloadProgress : " + progress);
+	            		entityplayer.swingArm(entityplayer.getActiveHand());
+            		}
+            		
+            		if (!worldIn.isRemote)
+            		{
+            			EntityPlayerMP playerMP = (EntityPlayerMP) entityplayer;
+            			SPacketEntityEquipment pkt = new SPacketEntityEquipment(
+            					entityplayer.getEntityId(),
+            					((entityplayer.getActiveHand() == EnumHand.MAIN_HAND) ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND), 
+            					firearmStack);
+            			playerMP.connection.sendPacket(pkt);
+            		}
+            		return;
+            	}
+            }
+            
             /* Calculate deviation multiplier for shot, based on charge time. */
             float aimingDeviationMulti = (i < 5) ? 3.0f : ((i < 10) ? 2.0f : 1.0f); 
             
-            if (!itemstack.isEmpty())
+            if (!ammoStack.isEmpty())
             {
                 float f = getProjectileSpeed();
                 
-                boolean flag1 = entityplayer.capabilities.isCreativeMode || (itemstack.getItem() instanceof ItemArrow && ((ItemArrow) itemstack.getItem()).isInfinite(itemstack, stack, entityplayer));
+                boolean flag1 = entityplayer.capabilities.isCreativeMode || (ammoStack.getItem() instanceof ItemArrow && ((ItemArrow) ammoStack.getItem()).isInfinite(ammoStack, firearmStack, entityplayer));
 
                 if (!worldIn.isRemote)
                 {
                 	/* Calculate stuff based on firearm condition. */
-                    boolean failure = checkConditionForEffect(worldIn, entityplayer, stack);
+                    boolean failure = checkConditionForEffect(worldIn, entityplayer, firearmStack);
         	            
         	        //OldGuns.logger.info(String.format("Failure: %d", failure ? 1 : 0));
         	            
@@ -202,12 +329,21 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     if (failure)
                     {
                     	/* Refresh condition. */
-                        FirearmNBTHelper.refreshFirearmCondition(stack);
+                        FirearmNBTHelper.refreshFirearmCondition(firearmStack);
+                        if (!worldIn.isRemote)
+                		{
+                			EntityPlayerMP playerMP = (EntityPlayerMP) entityplayer;
+                			SPacketEntityEquipment pkt = new SPacketEntityEquipment(
+                					entityplayer.getEntityId(),
+                					((entityplayer.getActiveHand() == EnumHand.MAIN_HAND) ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND), 
+                					firearmStack);
+                			playerMP.connection.sendPacket(pkt);
+                		}
                     	return;
                     }
                     
-                    ItemFirearmAmmo itemFirearmAmmo = (ItemFirearmAmmo)(itemstack.getItem() instanceof ItemFirearmAmmo ? itemstack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
-                    List<EntityProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, itemstack, entityplayer);
+                    ItemFirearmAmmo itemFirearmAmmo = (ItemFirearmAmmo)(ammoStack.getItem() instanceof ItemFirearmAmmo ? ammoStack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
+                    List<EntityProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, ammoStack, entityplayer);
                     
                     /* Fire all projectiles from ammo item. */
                     entityProjectiles.forEach((t) ->
@@ -219,21 +355,21 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     	/* Launch projectile. */
                     	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getDeviationModifier() * aimingDeviationMulti);
                     	
-                    	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, stack);
+                    	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, firearmStack);
 
                         if (j > 0)
                         {
                             t.setDamage((t.getDamage() * getDamageModifier()) + (double)j * 0.5D + 0.5D);
                         }
 
-                        int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, stack);
+                        int k = EnchantmentHelper.getEnchantmentLevel(Enchantments.PUNCH, firearmStack);
 
                         if (k > 0)
                         {
                             t.setKnockbackStrength(k);
                         }
 
-                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, stack) > 0)
+                        if (EnchantmentHelper.getEnchantmentLevel(Enchantments.FLAME, firearmStack) > 0)
                         {
                             t.setFire(100);
                         }
@@ -241,31 +377,40 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                         worldIn.spawnEntity(t);
                     });
                     
-                    stack.damageItem(1, entityplayer);
+                    firearmStack.damageItem(1, entityplayer);
                     
                     /* Do firing effects. */
-                    doFiringEffect(worldIn, entityplayer, stack);        
+                    doFiringEffect(worldIn, entityplayer, firearmStack);        
                     
-                    if (!flag1 && !entityplayer.capabilities.isCreativeMode && (stack != null))
+                    if (!flag1 && !entityplayer.capabilities.isCreativeMode && (firearmStack != null))
                     {
                     	/* Remove ammo from firearm. */
-                        FirearmNBTHelper.popNBTTagAmmo(stack);
+                        FirearmNBTHelper.popNBTTagAmmo(firearmStack);
                     }
                 }
 
                 /* Refresh condition. */
-                FirearmNBTHelper.refreshFirearmCondition(stack);
+                FirearmNBTHelper.refreshFirearmCondition(firearmStack);
                 
                 entityplayer.addStat(StatList.getObjectUseStats(this));
             }
+            if (!worldIn.isRemote)
+    		{
+    			EntityPlayerMP playerMP = (EntityPlayerMP) entityplayer;
+    			SPacketEntityEquipment pkt = new SPacketEntityEquipment(
+    					entityplayer.getEntityId(),
+    					((entityplayer.getActiveHand() == EnumHand.MAIN_HAND) ? EntityEquipmentSlot.MAINHAND : EntityEquipmentSlot.OFFHAND), 
+    					firearmStack);
+    			playerMP.connection.sendPacket(pkt);
+    		}
         }
+		
 	}
 
 	@Override
 	public int getMaxItemUseDuration(ItemStack stack)
 	{
-		// TODO Auto-generated method stub
-		return super.getMaxItemUseDuration(stack);
+		return 72000;
 	}
 
 	@Override
@@ -298,16 +443,37 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	{
 		ItemStack itemstack = playerIn.getHeldItem(handIn);
 		
+		/* Check if this firearm is a breechloader and has a valid reloading recipe. */
+		boolean isReloadableBreechloader = (getReloadType() == FirearmReloadType.BREECHLOADER && 
+				!FirearmRecipeHelper.getBreechloadingReloadRecipes(itemstack).isEmpty());
+		boolean canReloadBreechloader = false;
+		if (isReloadableBreechloader)
+		{
+			/* Allow action to continue on the first reload recipe that is valid for the player's inventory. */
+			for (RecipesFirearmBreechloaderReload recipe : FirearmRecipeHelper.getBreechloadingReloadRecipes(itemstack))
+			{
+				canReloadBreechloader = recipe.isValid(playerIn.inventory);
+				if (canReloadBreechloader)
+					break;
+			}
+		}
+		
 		/* Only allow firing if no cooldown and ammo loaded. */
         boolean readyToFire = (playerIn.getCooledAttackStrength(0f) >= 0.99f);
-		boolean hasAmmo = (FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) > 0);
+		boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) > 0);
 		boolean notBroken = FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN;
-		boolean canAim = (hasAmmo && readyToFire && notBroken && !isCarryingLargeFirearmInOtherHand(worldIn, playerIn, handIn));
+		
+		boolean holdingLargeFirearmOffhand = isCarryingLargeFirearmInOtherHand(worldIn, playerIn, handIn);
+		boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+		
+		//OldGuns.logger.info("isReloadableBreechloader : " + isReloadableBreechloader);
+		//OldGuns.logger.info("canReloadBreechloader : " + canReloadBreechloader);
 		
 		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, canAim);
 		if (ret != null) return ret;
 		
-		if (!canAim)
+		if (!canAim && !canReload)
 		{
 			/* Play empty sound if no ammo, or broken soundif broken. */
 			if (!notBroken)
@@ -315,15 +481,22 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 				playerIn.playSound(SoundEvents.BLOCK_LEVER_CLICK, 0.25F, 0.7F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));
 				playerIn.playSound(SoundEvents.ITEM_SHIELD_BREAK, 0.10F, 0.7F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));
 			}
-			else if (!hasAmmo)
+			else if (!hasAmmoLoaded)
+			{
                 playerIn.playSound(SoundEvents.BLOCK_LEVER_CLICK, 0.25F, 0.7F / (Item.itemRand.nextFloat() * 0.2F + 0.9F));		 
+			}
 			
 		    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
 		}
-		else
+		else if (canAim)
 		{
 		    playerIn.setActiveHand(handIn);
 		    return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+		}
+		else 
+		{
+			 playerIn.setActiveHand(handIn);
+			 return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
 		}
 	}
 
@@ -533,13 +706,23 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		this.damageModifier = damageModifier;
 	}
 	
+	public int getRequiredReloadTicks()
+	{
+		return this.requiredReloadTicks;
+	}
+
+	public void setRequiredReloadTicks(int requiredReloadTicks)
+	{
+		this.requiredReloadTicks = requiredReloadTicks;
+	}
+	
 	public FirearmReloadType getReloadType()
 	{
-		return ReloadType;
+		return this.reloadType;
 	}
 
 	public void setReloadType(FirearmReloadType reloadType)
 	{
-		ReloadType = reloadType;
+		this.reloadType = reloadType;
 	}
 }

@@ -52,6 +52,8 @@ public class ModConfigs {
 		public static ConfigCategoryFirearmSettings configFlintlockMusketoon = new ConfigCategoryFirearmSettings(44, 4f, 16f, 7f, 1f); 
 		@Name("Flintlock Blunderbuss")
 		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 10f, 1f); 
+		@Name("Flintlock Breechloading Musket")
+		public static ConfigCategoryFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 10f, 1f); 
 		
 		public static class ConfigCategoryFirearmSettings {	
 			@Name("Firearm durability")
