@@ -55,6 +55,9 @@ public class FirearmNBTHelper
 			setNBTTagMagazineStack(stackIn, new ArrayList<ItemStack>());
 		
 		/* Get tag list from firearm item. */
+		if (!stackIn.getTagCompound().hasKey("ammoList"))
+			stackIn.getTagCompound().setTag("ammoList", new NBTTagList());
+			
 		NBTTagList ammoStackNBTTagList = (NBTTagList) stackIn.getTagCompound().getTag("ammoList");
 		
 		/* Populate list from deserialized itemstacks. */

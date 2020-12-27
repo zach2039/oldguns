@@ -19,6 +19,9 @@ import zach2039.oldguns.common.item.ammo.ItemSmallStoneMusketBall;
 import zach2039.oldguns.common.item.artillery.ItemArtilleryCannon;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockArquebus;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockBlunderbuss;
+import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingArquebus;
+import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingCaliver;
+import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingLongMusket;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingMusket;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockBreechloadingPistol;
 import zach2039.oldguns.common.item.firearm.ItemFlintlockCaliver;
@@ -35,6 +38,7 @@ import zach2039.oldguns.common.item.firearm.ItemMatchlockLongMusket;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockMusket;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockMusketoon;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockPistol;
+import zach2039.oldguns.common.item.part.ItemBreechBlock;
 import zach2039.oldguns.common.item.part.ItemFlintlockMechanism;
 import zach2039.oldguns.common.item.part.ItemHugeIronBarrel;
 import zach2039.oldguns.common.item.part.ItemHugeStoneBarrel;
@@ -57,6 +61,7 @@ import zach2039.oldguns.common.item.part.ItemSmallWoodenStock;
 import zach2039.oldguns.common.item.part.ItemTinyIronBarrel;
 import zach2039.oldguns.common.item.part.ItemTinyStoneBarrel;
 import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
+import zach2039.oldguns.common.item.tools.ItemHackSaw;
 import zach2039.oldguns.common.item.tools.ItemLargeMusketBallMold;
 import zach2039.oldguns.common.item.tools.ItemLargeMusketBallMoldTool;
 import zach2039.oldguns.common.item.tools.ItemLongMatch;
@@ -134,10 +139,17 @@ public class ModItems
 	public static final Item FLINTLOCK_MUSKETOON = null;
 	@ObjectHolder("flintlock_blunderbuss")
 	public static final Item FLINTLOCK_BLUNDERBUSS = null;
+	
 	@ObjectHolder("flintlock_breechloading_pistol")
 	public static final Item FLINTLOCK_BREECHLOADING_PISTOL = null;
+	@ObjectHolder("flintlock_breechloading_arquebus")
+	public static final Item FLINTLOCK_BREECHLOADING_ARQUEBUS = null;
+	@ObjectHolder("flintlock_breechloading_caliver")
+	public static final Item FLINTLOCK_BREECHLOADING_CALIVER = null;
 	@ObjectHolder("flintlock_breechloading_musket")
 	public static final Item FLINTLOCK_BREECHLOADING_MUSKET = null;
+	@ObjectHolder("flintlock_breechloading_long_musket")
+	public static final Item FLINTLOCK_BREECHLOADING_LONG_MUSKET = null;
 	
 	@ObjectHolder("small_stone_musket_ball")
 	public static final Item SMALL_STONE_MUSKET_BALL = null;
@@ -200,6 +212,9 @@ public class ModItems
 	@ObjectHolder("flintlock_mechanism")
 	public static final Item FLINTLOCK_MECHANISM = null;
 	
+	@ObjectHolder("breech_block")
+	public static final Item BREECH_BLOCK = null;
+	
 	@ObjectHolder("small_musket_ball_mold")
 	public static final Item SMALL_MUSKET_BALL_MOLD = null;
 	@ObjectHolder("medium_musket_ball_mold")
@@ -216,6 +231,8 @@ public class ModItems
 	
 	@ObjectHolder("repair_kit")
 	public static final Item REPAIR_KIT = null;
+	@ObjectHolder("hack_saw")
+	public static final Item HACK_SAW = null;
 	
 	@EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler
@@ -258,8 +275,12 @@ public class ModItems
 					
 					new ItemFlintlockMusketoon(),
 					new ItemFlintlockBlunderbuss(),
-					new ItemFlintlockBreechloadingMusket(),
+					
 					new ItemFlintlockBreechloadingPistol(),
+					new ItemFlintlockBreechloadingArquebus(),
+					new ItemFlintlockBreechloadingCaliver(),
+					new ItemFlintlockBreechloadingMusket(),
+					new ItemFlintlockBreechloadingLongMusket(),
 					
 					new ItemSmallStoneMusketBall(),
 					new ItemMediumStoneMusketBall(),
@@ -296,6 +317,8 @@ public class ModItems
 					new ItemMatchlockMechanism(),
 					new ItemFlintlockMechanism(),
 					
+					new ItemBreechBlock(),
+					
 					new ItemSmallMusketBallMold(),
 					new ItemMediumMusketBallMold(),
 					new ItemLargeMusketBallMold(),
@@ -305,6 +328,7 @@ public class ModItems
 					new ItemLargeMusketBallMoldTool(),
 					
 					new ItemRepairKit(),
+					new ItemHackSaw()
 				};
 			
 			event.getRegistry().registerAll(items);

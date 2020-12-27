@@ -44,7 +44,7 @@ import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
 import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
-import zach2039.oldguns.common.item.crafting.RecipesFirearmBreechloaderReload;
+import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.item.util.FirearmRecipeHelper;
 import zach2039.oldguns.common.item.util.FirearmStackHelper;
@@ -88,6 +88,16 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	 */
 	protected FirearmReloadType reloadType = FirearmReloadType.MUZZLELOADER;
 	
+	/**
+	 * Size of the firearm.
+	 */
+	protected FirearmSize firearmSize = FirearmSize.MEDIUM;
+	
+	/**
+	 * Water resiliency of the firearm.
+	 */
+	protected FirearmWaterResiliency firearmWaterResiliency = FirearmWaterResiliency.FAIR;
+	
 	public ItemFirearm(String name)
 	{
 		setRegistryName(OldGuns.MODID, name);
@@ -124,10 +134,13 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 					return 1.0f;
 				if (!isLoadable)
 					return 0.0f;
+				if (hasAmmoLoaded)
+					return 1.0f;
 				
             	float progress = FirearmStackHelper.getReloadProgress(entityIn, getRequiredReloadTicks());
             	//OldGuns.logger.info("reloadProgress : " + progress);
-                return progress;
+            	
+                return (entityIn.getActiveItemStack() == stack) ? progress : 0.0f;
             }
         });
 	}
@@ -152,10 +165,10 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 			boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(stack) > 0);
 			boolean isLoading = (!hasAmmoLoaded && isReloadableBreechloader);
 			
-			if (entLiving.getActiveItemStack().isItemEqualIgnoreDurability(stack) && isLoading)
+			if (entLiving.getActiveItemStack() == stack && isLoading)
 			{
-				OldGuns.logger.info("hasAmmoLoaded : " + hasAmmoLoaded);
-				OldGuns.logger.info("isLoading : " + isLoading);
+				OldGuns.logger.debug("hasAmmoLoaded : " + hasAmmoLoaded);
+				OldGuns.logger.debug("isLoading : " + isLoading);
 				float progress = FirearmStackHelper.getReloadProgress(entLiving, getRequiredReloadTicks());
 				
 				if (progress > 0.09f && progress < 0.11f)
@@ -236,6 +249,12 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
         return multimap;
     }
 	
+	public static float getSnapshotDeviationMultiplier(int ticksInUse)
+	{
+		float devMulti = (ticksInUse < 5) ? 3.0f : ((ticksInUse < 10) ? 2.0f : 1.0f); 
+		return devMulti; 
+	}
+	
 	@Override
 	public void onPlayerStoppedUsing(ItemStack firearmStack, World worldIn, EntityLivingBase entityLiving, int timeLeft)
 	{
@@ -245,19 +264,19 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
             //boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
             ItemStack ammoStack = FirearmNBTHelper.peekNBTTagAmmo(firearmStack);
 
-            int i = this.getMaxItemUseDuration(firearmStack) - timeLeft;
-            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(firearmStack, worldIn, entityplayer, i, !ammoStack.isEmpty());
-            if (i < 0) return;
+            int ticksUsed = this.getMaxItemUseDuration(firearmStack) - timeLeft;
+            ticksUsed = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(firearmStack, worldIn, entityplayer, ticksUsed, !ammoStack.isEmpty());
+            if (ticksUsed < 0) return;
 
             /* Check if this firearm is a breechloader and has a valid reloading recipe. */
-            RecipesFirearmBreechloaderReload reloadRecipe = null;
+            BreechloadingReloadRecipe reloadRecipe = null;
             boolean isReloadableBreechloader = (getReloadType() == FirearmReloadType.BREECHLOADER && 
     				!FirearmRecipeHelper.getBreechloadingReloadRecipes(firearmStack).isEmpty());
     		boolean canReloadBreechloader = false;
     		if (isReloadableBreechloader)
     		{
     			/* Allow action to continue on the first reload recipe that is valid for the player's inventory. */
-    			for (RecipesFirearmBreechloaderReload recipe : FirearmRecipeHelper.getBreechloadingReloadRecipes(firearmStack))
+    			for (BreechloadingReloadRecipe recipe : FirearmRecipeHelper.getBreechloadingReloadRecipes(firearmStack))
     			{
     				canReloadBreechloader = recipe.isValid(entityplayer.inventory);
     				if (canReloadBreechloader)
@@ -277,12 +296,12 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
     		//boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
     		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
             
-    		OldGuns.logger.info("readyToFire : " + readyToFire);
-    		OldGuns.logger.info("hasAmmoLoaded : " + hasAmmoLoaded);
-    		OldGuns.logger.info("notBroken : " + notBroken);
-    		OldGuns.logger.info("canReload : " + canReload);
-    		OldGuns.logger.info("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
-    		OldGuns.logger.info("isReloadableBreechloader : " + isReloadableBreechloader);
+    		OldGuns.logger.debug("readyToFire : " + readyToFire);
+    		OldGuns.logger.debug("hasAmmoLoaded : " + hasAmmoLoaded);
+    		OldGuns.logger.debug("notBroken : " + notBroken);
+    		OldGuns.logger.debug("canReload : " + canReload);
+    		OldGuns.logger.debug("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
+    		OldGuns.logger.debug("isReloadableBreechloader : " + isReloadableBreechloader);
     		
             if (isReloadableBreechloader && canReload)
             {
@@ -311,8 +330,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
             	}
             }
             
-            /* Calculate deviation multiplier for shot, based on charge time. */
-            float aimingDeviationMulti = (i < 5) ? 3.0f : ((i < 10) ? 2.0f : 1.0f); 
+            float snapshotDevMulti = getSnapshotDeviationMultiplier(ticksUsed);
             
             if (!ammoStack.isEmpty())
             {
@@ -355,7 +373,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     	t.setLaunchLocation(t.getPosition());
                     	
                     	/* Launch projectile. */
-                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getDeviationModifier() * aimingDeviationMulti);
+                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getDeviationModifier() * snapshotDevMulti);
                     	
                     	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, firearmStack);
 
@@ -440,6 +458,22 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		return isCarryingLargeFirearm;
 	}
 	
+	private boolean hasLoadedFirearmInOtherHand(World worldIn, EntityPlayer playerIn, EnumHand handIn)
+	{
+		boolean isLoadedFirearmInOtherHand = false;
+		
+		/* Item in other hand. */
+		ItemStack itemstackOther = playerIn.getHeldItem((handIn == EnumHand.MAIN_HAND) ? EnumHand.OFF_HAND : EnumHand.MAIN_HAND);
+		
+		/* If item in other hand is instance of ItemFirearm, return true if firearm is large size. */
+		if (itemstackOther.getItem() instanceof ItemFirearm)
+		{
+			isLoadedFirearmInOtherHand = (FirearmNBTHelper.peekNBTTagAmmoCount(itemstackOther) > 0);
+		}
+		
+		return isLoadedFirearmInOtherHand;
+	}
+	
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn)
 	{
@@ -452,7 +486,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		if (isReloadableBreechloader)
 		{
 			/* Allow action to continue on the first reload recipe that is valid for the player's inventory. */
-			for (RecipesFirearmBreechloaderReload recipe : FirearmRecipeHelper.getBreechloadingReloadRecipes(itemstack))
+			for (BreechloadingReloadRecipe recipe : FirearmRecipeHelper.getBreechloadingReloadRecipes(itemstack))
 			{
 				canReloadBreechloader = recipe.isValid(playerIn.inventory);
 				if (canReloadBreechloader)
@@ -466,11 +500,17 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		boolean notBroken = FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN;
 		
 		boolean holdingLargeFirearmOffhand = isCarryingLargeFirearmInOtherHand(worldIn, playerIn, handIn);
+		/* Need this to allow firing of an offhand firearm. */
+		boolean holdingLoadedFirearmOffhand = hasLoadedFirearmInOtherHand(worldIn, playerIn, handIn);
 		boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
-		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && !holdingLoadedFirearmOffhand && readyToFire && notBroken && !holdingLargeFirearmOffhand);
 		
-		//OldGuns.logger.info("isReloadableBreechloader : " + isReloadableBreechloader);
-		//OldGuns.logger.info("canReloadBreechloader : " + canReloadBreechloader);
+		if (!worldIn.isRemote) {
+			OldGuns.logger.debug("itemstack                : " + itemstack);
+			OldGuns.logger.debug("isReloadableBreechloader : " + isReloadableBreechloader);
+			OldGuns.logger.debug("canAim                   : " + canAim);
+			OldGuns.logger.debug("canReload                : " + canReload);
+		}
 		
 		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, canAim);
 		if (ret != null) return ret;
@@ -498,7 +538,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		else 
 		{
 			 playerIn.setActiveHand(handIn);
-			 return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, itemstack);
+			 return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
 		}
 	}
 
@@ -726,5 +766,25 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 	public void setReloadType(FirearmReloadType reloadType)
 	{
 		this.reloadType = reloadType;
+	}
+	
+	public FirearmSize getFirearmSize()
+	{
+		return this.firearmSize;
+	}
+
+	public void setFirearmSize(FirearmSize size) 
+	{
+		this.firearmSize = size;
+	}
+	
+	public FirearmWaterResiliency getFirearmWaterResiliency()
+	{
+		return this.firearmWaterResiliency;
+	}
+	
+	public void setFirearmWaterResiliency(FirearmWaterResiliency waterResiliency) 
+	{
+		this.firearmWaterResiliency = waterResiliency;
 	}
 }

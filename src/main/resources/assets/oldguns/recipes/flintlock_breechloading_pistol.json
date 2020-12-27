@@ -1,0 +1,26 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench_saw",
+	"pattern": [
+		" a ",
+		" b ",
+		" c "
+	],
+	"key": {
+		"a": {
+			"type": "forge:ore_dict",
+			"ore": "toolSaw"
+		},
+		"b": {
+			"item": "oldguns:flintlock_pistol",
+			"data": 32767
+		},
+		"c": {
+			"type": "forge:ore_dict",
+			"ore": "breechBlock"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:flintlock_breechloading_pistol"
+	}
+}

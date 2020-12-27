@@ -25,12 +25,12 @@ import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.tools.ItemRepairKit;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 
-public class RecipesFirearmRepairWithKit extends ShapelessOreRecipe
+public class FirearmRepairWithKitRecipe extends ShapelessOreRecipe
 {
 	/**
 	 * Default constructor.
 	 */
-	public RecipesFirearmRepairWithKit(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
+	public FirearmRepairWithKitRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
 		super(group, input, result);
 	}
 	
@@ -144,7 +144,7 @@ public class RecipesFirearmRepairWithKit extends ShapelessOreRecipe
 			final String group = JsonUtils.getString(json, "group", "");
 			final NonNullList<Ingredient> ingredients = RecipeUtil.parseShapeless(context, json);
 			
-			return new RecipesFirearmRepairWithKit(group.isEmpty() ? null : new ResourceLocation(group), ingredients, ItemStack.EMPTY);
+			return new FirearmRepairWithKitRecipe(group.isEmpty() ? null : new ResourceLocation(group), ingredients, ItemStack.EMPTY);
 		}
 	}
 }

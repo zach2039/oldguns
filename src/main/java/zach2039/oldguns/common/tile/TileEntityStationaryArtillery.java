@@ -2,8 +2,6 @@ package zach2039.oldguns.common.tile;
 
 import java.util.List;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,12 +17,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
-import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
-import net.minecraftforge.items.CapabilityItemHandler;
-import net.minecraftforge.items.ItemStackHandler;
 import zach2039.oldguns.api.artillery.ArtilleryType;
 import zach2039.oldguns.api.artillery.FiringState;
 import zach2039.oldguns.api.artillery.impl.IArtillery;
@@ -369,8 +365,8 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 	
 	public boolean processPlayerInteraction(World world, BlockPos pos, IBlockState state, EntityPlayer player,
 			EnumFacing side, float hitX, float hitY, float hitZ) {
-		boolean successfulInteract = false;
 		
+		boolean successfulInteract = false;
 		boolean isCreativeMode = player.capabilities.isCreativeMode;
 		
 		if (!player.isSneaking())
@@ -391,7 +387,11 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				{
         					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						if (!world.isRemote) player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
+        						if (!world.isRemote) 
+        						{
+        							//OldGuns.logger.info("A world.isRemote : " + world.isRemote);
+        							player.sendMessage(new TextComponentTranslation("text.oldguns.too_many_powder_charges.message"));
+        						}
         					}
         					else
         					{
@@ -415,7 +415,11 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				{
         					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						if (!world.isRemote) player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
+        						if (!world.isRemote) 
+        						{
+        							//OldGuns.logger.info("B world.isRemote : " + world.isRemote);
+        							player.sendMessage(new TextComponentTranslation("text.oldguns.too_many_powder_charges.message"));
+        						}
         					}
         					else
         					{
@@ -448,7 +452,6 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         				{
         					if (!world.isRemote) {
 	        					player.swingArm(player.getActiveHand());
-	        					OldGuns.logger.info("currentPlayerItem : " + currentPlayerItem);
 	        					setLoadedProjectile(currentPlayerItem.copy());
 	        					if (!isCreativeMode) currentPlayerItem.shrink(1);        							
 	        					setFiringState(FiringState.PROJECTILE);

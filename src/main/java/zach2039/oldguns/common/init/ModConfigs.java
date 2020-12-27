@@ -54,9 +54,15 @@ public class ModConfigs {
 		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 10f, 1f); 
 		
 		@Name("Flintlock Breechloading Pistol")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(24, 3.5f, 8f, 9f, 1f, 40); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(24, 3.5f, 8f, 9f, 1f, 60); 
+		@Name("Flintlock Breechloading Arquebus")
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(28, 3.75f, 11f, 8f, 1f, 70); 
+		@Name("Flintlock Breechloading Caliver")
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(32, 4.0f, 14f, 7f, 1f, 80); 
 		@Name("Flintlock Breechloading Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(36, 4.25f, 17f, 6f, 1f, 80); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(36, 4.25f, 17f, 6f, 1f, 90); 
+		@Name("Flintlock Breechloading Long Musket")
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(40, 4.5f, 20f, 5f, 1f, 100); 
 		
 		public static class ConfigCategoryFirearmSettings {	
 			@Name("Firearm durability")
@@ -227,6 +233,11 @@ public class ModConfigs {
         		"flintlock_long_musket",
         		"flintlock_musketoon",
         		"flintlock_blunderbuss",
+        		"flintlock_breechloading_pistol",
+        		"flintlock_breechloading_arquebus",
+        		"flintlock_breechloading_caliver",
+        		"flintlock_breechloading_musket",
+        		"flintlock_breechloading_long_musket",
         		"small_stone_musket_ball",
         		"medium_stone_musket_ball",
         		"large_stone_musket_ball",
@@ -259,7 +270,8 @@ public class ModConfigs {
         		"small_musket_ball_mold_tool",
         		"medium_musket_ball_mold_tool",
         		"large_musket_ball_mold_tool",
-        		"repair_kit"
+        		"repair_kit",
+        		"hack_saw"
         };
         
         static

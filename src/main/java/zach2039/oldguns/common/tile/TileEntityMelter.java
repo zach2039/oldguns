@@ -24,7 +24,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import zach2039.oldguns.api.capability.casting.CapabilityCast;
 import zach2039.oldguns.api.capability.casting.ICast;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.block.BlockMelter;
 import zach2039.oldguns.common.inventory.ContainerMelter;
 import zach2039.oldguns.common.item.crafting.MelterRecipes;
 import zach2039.oldguns.common.tile.util.TileEntityHelpers;
@@ -245,7 +244,7 @@ public class TileEntityMelter extends TileEntityLockable implements ITickable, I
 	{
 		if (castStack.attemptDamageItem(1, this.world.rand, null))
 		{
-			OldGuns.logger.info("Consume cast item.", castStack);
+			OldGuns.logger.debug("Consume cast item.", castStack);
 			castStack.shrink(1);
 		}
 	}

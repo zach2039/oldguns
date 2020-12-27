@@ -23,6 +23,8 @@ public class ItemMatchlockArquebus extends ItemFirearm implements IFirearm
 		super("matchlock_arquebus");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
+		setFirearmSize(FirearmSize.MEDIUM);
+		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockArquebus.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockArquebus.projectileSpeed);
@@ -54,17 +56,5 @@ public class ItemMatchlockArquebus extends ItemFirearm implements IFirearm
 						shooter.rotationPitch, shooter.rotationYaw, ((EntityPlayer)shooter).getActiveHand().ordinal()),
 				point
 				);
-	}
-
-	@Override
-	public FirearmSize getFirearmSize()
-	{
-		return FirearmSize.MEDIUM;
-	}
-
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
-		return FirearmWaterResiliency.POOR;
 	}
 }

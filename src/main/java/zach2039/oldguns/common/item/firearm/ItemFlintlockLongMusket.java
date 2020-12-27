@@ -23,6 +23,8 @@ public class ItemFlintlockLongMusket extends ItemFirearm implements IFirearm
 		super("flintlock_long_musket");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
+		setFirearmSize(FirearmSize.LARGE);
+		setFirearmWaterResiliency(FirearmWaterResiliency.FAIR);
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockLongMusket.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockLongMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockLongMusket.projectileSpeed);
@@ -54,17 +56,5 @@ public class ItemFlintlockLongMusket extends ItemFirearm implements IFirearm
 						shooter.rotationPitch, shooter.rotationYaw, ((EntityPlayer)shooter).getActiveHand().ordinal()),
 				point
 				);
-	}
-
-	@Override
-	public FirearmSize getFirearmSize()
-	{
-		return FirearmSize.LARGE;
-	}
-
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
-		return FirearmWaterResiliency.FAIR;
 	}
 }

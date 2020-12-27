@@ -21,7 +21,7 @@ public class ModDamageSources
 		
 		public String getTypeName()
 		{
-			return OldGuns.MODID + this.typeName;
+			return OldGuns.MODID + "." + this.typeName;
 		}
 		
 		private String typeName;

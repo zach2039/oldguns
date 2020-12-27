@@ -1,0 +1,42 @@
+{
+	"parent": "oldguns:item/simple_firearm",
+	"textures": {
+		"layer0": "oldguns:items/flintlock_breechloading_caliver"
+	},
+	"overrides": [
+	    {
+	    	"predicate": {
+	    		"oldguns:empty": 1
+	    	}, 
+	    	"model": "oldguns:item/flintlock_breechloading_caliver_empty"
+	    },
+	    {
+	    	"predicate": {
+	    		"oldguns:empty": 1,
+	    		"oldguns:reload_state": 0.10
+	    	}, 
+	    	"model": "oldguns:item/flintlock_breechloading_caliver_reload_0"
+	    },
+	    {
+	    	"predicate": {
+	    		"oldguns:empty": 1,
+	    		"oldguns:reload_state": 0.50
+	    	}, 
+	    	"model": "oldguns:item/flintlock_breechloading_caliver_reload_1"
+	    },
+	   	{
+	    	"predicate": {
+	    		"oldguns:empty": 1,
+	    		"oldguns:reload_state": 0.70
+	    	}, 
+	    	"model": "oldguns:item/flintlock_breechloading_caliver_empty"
+	    },
+	    {
+	    	"predicate": {
+	    		"oldguns:empty": 1,
+	    		"oldguns:reload_state": 1.0
+	    	}, 
+	    	"model": "oldguns:item/flintlock_breechloading_caliver"
+	    }
+	]
+}

@@ -14,7 +14,11 @@ public interface IFirearm
 	
 	void doFiringEffect(World worldIn, Entity entityShooter, ItemStack stackIn);
 	
+	void setFirearmSize(FirearmSize size);
+	
 	FirearmSize getFirearmSize();
+	
+	void setFirearmWaterResiliency(FirearmWaterResiliency waterResiliency);
 	
 	FirearmWaterResiliency getFirearmWaterResiliency();
 }

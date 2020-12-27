@@ -50,8 +50,12 @@ public class ModelRegistrationHandler
 		                       
 		registerModel(ModItems.FLINTLOCK_MUSKETOON, 0);
 		registerModel(ModItems.FLINTLOCK_BLUNDERBUSS, 0);
+		
 		registerModel(ModItems.FLINTLOCK_BREECHLOADING_PISTOL, 0);
+		registerModel(ModItems.FLINTLOCK_BREECHLOADING_ARQUEBUS, 0);
+		registerModel(ModItems.FLINTLOCK_BREECHLOADING_CALIVER, 0);
 		registerModel(ModItems.FLINTLOCK_BREECHLOADING_MUSKET, 0);
+		registerModel(ModItems.FLINTLOCK_BREECHLOADING_LONG_MUSKET, 0);
 		
 		registerModel(ModItems.SMALL_STONE_MUSKET_BALL, 0);
 		registerModel(ModItems.MEDIUM_STONE_MUSKET_BALL, 0);
@@ -87,6 +91,8 @@ public class ModelRegistrationHandler
 		
 		registerModel(ModItems.MATCHLOCK_MECHANISM, 0);
 		registerModel(ModItems.FLINTLOCK_MECHANISM, 0);
+		
+		registerModel(ModItems.BREECH_BLOCK, 0);
 
 		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD, 0);
 		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD, 0);
@@ -97,6 +103,7 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.LARGE_MUSKET_BALL_MOLD_TOOL, 0);
 		
 		registerModel(ModItems.REPAIR_KIT, 0);
+		registerModel(ModItems.HACK_SAW, 0);
 		
 		registerModel(Item.getItemFromBlock(ModBlocks.GUNSMITHS_BENCH), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.MELTER), 0);

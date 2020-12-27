@@ -157,9 +157,10 @@ public class BlockStationaryCannon extends BlockContainer {
 	public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing side, float hitX, float hitY, float hitZ) {
 		TileEntity te = TileEntityHelpers.getTileEntity(world, pos);
 		
-		if(te == null || !(te instanceof TileEntityStationaryCannon) ) {
+		if(te == null || !(te instanceof TileEntityStationaryCannon) || (hand == EnumHand.OFF_HAND)) {
 			return false;
 		}
+		
 		return ((TileEntityStationaryCannon)te).processPlayerInteraction(world, pos, state, player, side, hitX, hitY, hitZ) && (player != null);
 	}
 

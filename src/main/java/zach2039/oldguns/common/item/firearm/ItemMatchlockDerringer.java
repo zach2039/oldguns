@@ -12,7 +12,6 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.init.ModConfigs;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearms;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 import zach2039.oldguns.common.network.MessageFirearmEffect;
@@ -24,6 +23,8 @@ public class ItemMatchlockDerringer extends ItemFirearm implements IFirearm
 		super("matchlock_derringer");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
+		setFirearmSize(FirearmSize.SMALL);
+		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockDerringer.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockDerringer.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockDerringer.projectileSpeed);
@@ -55,17 +56,5 @@ public class ItemMatchlockDerringer extends ItemFirearm implements IFirearm
 						shooter.rotationPitch, shooter.rotationYaw, ((EntityPlayer)shooter).getActiveHand().ordinal()),
 				point
 				);
-	}
-
-	@Override
-	public FirearmSize getFirearmSize()
-	{
-		return FirearmSize.SMALL;
-	}
-
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
-		return FirearmWaterResiliency.POOR;
 	}
 }

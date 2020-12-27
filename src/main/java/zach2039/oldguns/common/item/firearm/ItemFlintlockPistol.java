@@ -23,6 +23,8 @@ public class ItemFlintlockPistol extends ItemFirearm implements IFirearm
 		super("flintlock_pistol");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
+		setFirearmSize(FirearmSize.SMALL);
+		setFirearmWaterResiliency(FirearmWaterResiliency.FAIR);
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockPistol.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockPistol.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockPistol.projectileSpeed);
@@ -54,17 +56,5 @@ public class ItemFlintlockPistol extends ItemFirearm implements IFirearm
 						shooter.rotationPitch, shooter.rotationYaw, ((EntityPlayer)shooter).getActiveHand().ordinal()),
 				point
 				);
-	}
-
-	@Override
-	public FirearmSize getFirearmSize()
-	{
-		return FirearmSize.SMALL;
-	}
-
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
-		return FirearmWaterResiliency.FAIR;
 	}
 }

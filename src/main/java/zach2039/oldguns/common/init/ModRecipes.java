@@ -10,12 +10,12 @@ import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.item.crafting.RecipesFirearmBreechloaderReload;
+import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
 
 @EventBusSubscriber(modid = OldGuns.MODID)
 public class ModRecipes
 {
-	public final static List<RecipesFirearmBreechloaderReload> breechloaderReloadRecipes = new ArrayList<RecipesFirearmBreechloaderReload>();
+	public final static List<BreechloadingReloadRecipe> breechloaderReloadRecipes = new ArrayList<BreechloadingReloadRecipe>();
 	
 	public static void registerOreDictEntries()
 	{	
@@ -62,19 +62,22 @@ public class ModRecipes
 		OreDictionary.registerOre("mechanismMatchlock", ModItems.MATCHLOCK_MECHANISM);
 		OreDictionary.registerOre("mechanismFlintlock", ModItems.FLINTLOCK_MECHANISM);
 		
+		OreDictionary.registerOre("breechBlock", ModItems.BREECH_BLOCK);
+		
 		OreDictionary.registerOre("toolRepairKit", ModItems.REPAIR_KIT);
+		OreDictionary.registerOre("toolSaw", ModItems.HACK_SAW);
 	}
 	
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void onRecipesUpdatedEvent(RegistryEvent.Register<IRecipe> event) {
         /* Cache recipes that we need to reference during runtime, so that we don't slow things down. */
 		event.getRegistry().forEach((recipe) -> {
-			if (recipe instanceof RecipesFirearmBreechloaderReload)
-				ModRecipes.breechloaderReloadRecipes.add((RecipesFirearmBreechloaderReload) recipe);
+			if (recipe instanceof BreechloadingReloadRecipe)
+				ModRecipes.breechloaderReloadRecipes.add((BreechloadingReloadRecipe) recipe);
 		});
 		
 		ModRecipes.breechloaderReloadRecipes.forEach((recipe) -> {
-			OldGuns.logger.info("recipe cached : " + recipe.getRegistryName());
+			OldGuns.logger.info("Recipe cached : " + recipe.getRegistryName());
 		});
     }
 }

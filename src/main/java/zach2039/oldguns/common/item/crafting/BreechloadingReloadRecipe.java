@@ -37,7 +37,7 @@ import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
  * @author sumyunguy
  * @author Darkhax
  */
-public class RecipesFirearmBreechloaderReload extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
+public class BreechloadingReloadRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IRecipe
 {
 	
 	@Nonnull
@@ -45,7 +45,7 @@ public class RecipesFirearmBreechloaderReload extends IForgeRegistryEntry.Impl<I
 	protected NonNullList<Ingredient> input = null;
 	protected final ResourceLocation group;
 	
-	public RecipesFirearmBreechloaderReload(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
+	public BreechloadingReloadRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
 		this.output = result;
 		this.input = input;
 		this.group = group;
@@ -62,6 +62,13 @@ public class RecipesFirearmBreechloaderReload extends IForgeRegistryEntry.Impl<I
 		return true;
 	}
 
+	@Override
+    @Nonnull
+    public NonNullList<Ingredient> getIngredients()
+    {
+        return this.input;
+    }
+	
 	@Override
 	public ItemStack getCraftingResult(InventoryCrafting inv)
 	{
@@ -216,7 +223,7 @@ public class RecipesFirearmBreechloaderReload extends IForgeRegistryEntry.Impl<I
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			
 			/* Store parsed recipe, as well as register. */
-			RecipesFirearmBreechloaderReload recipe = new RecipesFirearmBreechloaderReload(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
+			BreechloadingReloadRecipe recipe = new BreechloadingReloadRecipe(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
 			return recipe;
 		}
 	}

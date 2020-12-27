@@ -13,10 +13,15 @@ import mezz.jei.api.recipe.transfer.IRecipeTransferRegistry;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import zach2039.oldguns.client.gui.inventory.GuiGunsmithsBench;
+import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModBlocks;
 import zach2039.oldguns.common.inventory.ContainerGunsmithsBench;
+import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
 import zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe;
 import zach2039.oldguns.common.item.crafting.ShapelessGunsmithsBenchRecipe;
+import zach2039.oldguns.integration.jei.breechloading.BreechloadingRecipeCategory;
+import zach2039.oldguns.integration.jei.breechloading.BreechloadingRecipeChecker;
+import zach2039.oldguns.integration.jei.breechloading.BreechloadingRecipeWrapper;
 import zach2039.oldguns.integration.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
 import zach2039.oldguns.integration.jei.gunsmithsbench.GunsmithsBenchRecipeChecker;
 import zach2039.oldguns.integration.jei.gunsmithsbench.ShapedGunsmithsBenchRecipeWrapper;
@@ -34,11 +39,17 @@ public class JEIOldGunsPlugin implements IModPlugin {
 		jeiHelpers = registry.getJeiHelpers();
 		
 		List<IRecipe> gunsmithBenchRecipes = GunsmithsBenchRecipeChecker.getValidRecipes(jeiHelpers);
+		List<IRecipe> breechloadingRecipes = BreechloadingRecipeChecker.getValidRecipes(jeiHelpers);
+		
+		OldGuns.logger.info("numvalid gunsmithBenchRecipes : " + gunsmithBenchRecipes.size());
+		OldGuns.logger.info("numvalid breechloadingRecipes : " + breechloadingRecipes.size());
 
 		registry.addRecipes(gunsmithBenchRecipes, JEIOldGunsUUIDs.GUNSMITHS_BENCH);
+		registry.addRecipes(breechloadingRecipes, JEIOldGunsUUIDs.BREECHLOADING);
 		
 		registry.handleRecipes(ShapelessGunsmithsBenchRecipe.class, recipe -> new ShapelessGunsmithsBenchRecipeWrapper(jeiHelpers, recipe), JEIOldGunsUUIDs.GUNSMITHS_BENCH);
 		registry.handleRecipes(ShapedGunsmithsBenchRecipe.class, recipe -> new ShapedGunsmithsBenchRecipeWrapper(jeiHelpers, recipe), JEIOldGunsUUIDs.GUNSMITHS_BENCH);
+		registry.handleRecipes(BreechloadingReloadRecipe.class, recipe -> new BreechloadingRecipeWrapper(jeiHelpers, recipe), JEIOldGunsUUIDs.BREECHLOADING);
 		
 		registry.addRecipeClickArea(GuiGunsmithsBench.class, 88, 32, 28, 23, JEIOldGunsUUIDs.GUNSMITHS_BENCH);
 		
@@ -54,7 +65,7 @@ public class JEIOldGunsPlugin implements IModPlugin {
 	{
 		IGuiHelper guiHelper = registry.getJeiHelpers().getGuiHelper();
 		
-		registry.addRecipeCategories(new GunsmithsBenchRecipeCategory(guiHelper));
+		registry.addRecipeCategories(new GunsmithsBenchRecipeCategory(guiHelper), new BreechloadingRecipeCategory(guiHelper));
 	}
 	
     @Override

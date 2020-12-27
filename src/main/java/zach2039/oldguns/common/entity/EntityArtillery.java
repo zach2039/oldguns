@@ -25,6 +25,7 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextComponentString;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.EnumSkyBlock;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -318,9 +319,9 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
                 	amountModifier = 0.25f;
                 }
                 
-                OldGuns.logger.info("source : " + source.getTrueSource());
-                OldGuns.logger.info("type : " + source.getDamageType());
-                OldGuns.logger.info("amount : " + amount);
+                //OldGuns.logger.info("source : " + source.getTrueSource());
+                //OldGuns.logger.info("type : " + source.getDamageType());
+                //OldGuns.logger.info("amount : " + amount);
                 
                 this.setDamageTaken(this.getDamageTaken() + ((amount * 10.0F) * amountModifier));
                 this.markVelocityChanged();
@@ -726,7 +727,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         				{
         					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
+        						if (!world.isRemote) player.sendMessage(new TextComponentTranslation("text.oldguns.too_many_powder_charges.message"));
         					}
         					else
         					{
@@ -747,7 +748,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         				{
         					if (currentPowderCharge >= getMaxPowderCharge())
         					{
-        						player.sendMessage(new TextComponentString(I18n.format("text.oldguns.too_many_powder_charges.message")));
+        						if (!world.isRemote) player.sendMessage(new TextComponentTranslation("text.oldguns.too_many_powder_charges.message"));
         					}
         					else
         					{

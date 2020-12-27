@@ -22,12 +22,12 @@ import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 
-public class RecipesFirearmReload extends ShapelessOreRecipe
+public class MuzzleloadingReloadRecipe extends ShapelessOreRecipe
 {
 	/**
 	 * Default constructor.
 	 */
-	public RecipesFirearmReload(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
+	public MuzzleloadingReloadRecipe(@Nullable final ResourceLocation group, final NonNullList<Ingredient> input, final ItemStack result) {
 		super(group, input, result);
 	}
 
@@ -95,7 +95,7 @@ public class RecipesFirearmReload extends ShapelessOreRecipe
 			final NonNullList<Ingredient> ingredients = RecipeUtil.parseShapeless(context, json);
 			final ItemStack result = CraftingHelper.getItemStack(JsonUtils.getJsonObject(json, "result"), context);
 			
-			return new RecipesFirearmReload(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
+			return new MuzzleloadingReloadRecipe(group.isEmpty() ? null : new ResourceLocation(group), ingredients, result);
 		}
 	}
 }

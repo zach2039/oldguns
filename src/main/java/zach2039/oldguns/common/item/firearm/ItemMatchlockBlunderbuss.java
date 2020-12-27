@@ -23,6 +23,8 @@ public class ItemMatchlockBlunderbuss extends ItemFirearm implements IFirearm
 		super("matchlock_blunderbuss");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.MUZZLELOADER);
+		setFirearmSize(FirearmSize.LARGE);
+		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockBlunderbuss.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockBlunderbuss.projectileSpeed);
@@ -54,17 +56,5 @@ public class ItemMatchlockBlunderbuss extends ItemFirearm implements IFirearm
 						shooter.rotationPitch, shooter.rotationYaw, ((EntityPlayer)shooter).getActiveHand().ordinal()),
 				point
 				);
-	}
-
-	@Override
-	public FirearmSize getFirearmSize()
-	{
-		return FirearmSize.LARGE;
-	}
-
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
-		return FirearmWaterResiliency.POOR;
 	}
 }

@@ -23,6 +23,8 @@ public class ItemFlintlockBreechloadingPistol extends ItemFirearm implements IFi
 		super("flintlock_breechloading_pistol");
 		setAmmoCapacity(1);
 		setReloadType(FirearmReloadType.BREECHLOADER);
+		setFirearmSize(FirearmSize.SMALL);
+		setFirearmWaterResiliency(FirearmWaterResiliency.FAIR);
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.durability);
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.projectileSpeed);
@@ -55,17 +57,5 @@ public class ItemFlintlockBreechloadingPistol extends ItemFirearm implements IFi
 						shooter.rotationPitch, shooter.rotationYaw, ((EntityPlayer)shooter).getActiveHand().ordinal()),
 				point
 				);
-	}
-
-	@Override
-	public FirearmSize getFirearmSize()
-	{
-		return FirearmSize.LARGE;
-	}
-
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
-		return FirearmWaterResiliency.FAIR;
 	}
 }
