@@ -264,6 +264,7 @@ public class ModConfigs {
         		"large_wooden_stock",
         		"matchlock_mechanism",
         		"flintlock_mechanism",
+        		"breech_block",
         		"small_musket_ball_mold",
         		"medium_musket_ball_mold",
         		"large_musket_ball_mold",
