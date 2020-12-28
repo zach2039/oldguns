@@ -1,0 +1,24 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"BM",
+		" H"
+	],
+	"key": {
+		"B": {
+			"type": "forge:ore_dict",
+			"ore": "barrelMediumIron"
+		},
+		"M": {
+			"item": "oldguns:caplock_mechanism"
+		},
+		"H": {
+			"type": "forge:ore_dict",
+			"ore": "stockSmallWooden"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:caplock_caliver"
+	}
+}

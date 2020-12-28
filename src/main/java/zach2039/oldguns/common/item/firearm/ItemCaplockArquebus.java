@@ -26,7 +26,7 @@ public class ItemCaplockArquebus extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.MEDIUM);
 		setFirearmWaterResiliency(FirearmWaterResiliency.GOOD);
 		setMaxDamage(ConfigCategoryFirearms.configCaplockArquebus.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configCaplockArquebus.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configCaplockArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configCaplockArquebus.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configCaplockArquebus.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configCaplockArquebus.baseShotDeviationModifier);

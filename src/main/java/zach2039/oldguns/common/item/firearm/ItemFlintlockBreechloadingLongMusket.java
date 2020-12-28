@@ -26,7 +26,7 @@ public class ItemFlintlockBreechloadingLongMusket extends ItemFirearm implements
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.FAIR);
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockBreechloadingLongMusket.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingLongMusket.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configFlintlockBreechloadingLongMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingLongMusket.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockBreechloadingMusket.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockBreechloadingLongMusket.baseShotDeviationModifier);

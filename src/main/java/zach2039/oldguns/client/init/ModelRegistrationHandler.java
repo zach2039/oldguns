@@ -91,6 +91,14 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL_PAPER_CARTRIDGE, 0);
 		registerModel(ModItems.LARGE_IRON_MUSKET_BALL_PAPER_CARTRIDGE, 0);
 		
+		registerModel(ModItems.SMALL_IRON_BIRDSHOT_PAPER_CARTRIDGE, 0);
+		registerModel(ModItems.MEDIUM_IRON_BIRDSHOT_PAPER_CARTRIDGE, 0);
+		registerModel(ModItems.LARGE_IRON_BIRDSHOT_PAPER_CARTRIDGE, 0);
+
+		registerModel(ModItems.SMALL_IRON_BUCKSHOT_PAPER_CARTRIDGE, 0);
+		registerModel(ModItems.MEDIUM_IRON_BUCKSHOT_PAPER_CARTRIDGE, 0);
+		registerModel(ModItems.LARGE_IRON_BUCKSHOT_PAPER_CARTRIDGE, 0);
+		
 		registerModel(ModItems.PERCUSSION_CAP, 0);
 		registerModel(ModItems.PERCUSSION_POWDER, 0);
 		
@@ -116,8 +124,10 @@ public class ModelRegistrationHandler
 		
 		registerModel(ModItems.MATCHLOCK_MECHANISM, 0);
 		registerModel(ModItems.FLINTLOCK_MECHANISM, 0);
+		registerModel(ModItems.CAPLOCK_MECHANISM, 0);
 		
 		registerModel(ModItems.BREECH_BLOCK, 0);
+		registerModel(ModItems.PERCUSSION_CAP_CONE, 0);
 
 		registerModel(ModItems.SMALL_MUSKET_BALL_MOLD, 0);
 		registerModel(ModItems.MEDIUM_MUSKET_BALL_MOLD, 0);

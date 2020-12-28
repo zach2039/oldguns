@@ -39,6 +39,11 @@ public abstract class ItemFirearmAmmo extends Item implements IFirearmAmmo
 	 */
 	protected float projectileDeviation = 1.0f;
 	
+	/**
+	 * Projectile range of this firearm ammo item instance.
+	 */
+	protected float projectileEffectiveRange = 10.0f;
+	
 	public ItemFirearmAmmo(String name, int stackSize)
 	{
 		setRegistryName(OldGuns.MODID, name);
@@ -92,10 +97,21 @@ public abstract class ItemFirearmAmmo extends Item implements IFirearmAmmo
 		return this.projectileDeviation;
 	}
 
-	public void setProjectileDeviation(float projectileDeviation)
+	public void setProjectileDeviationModifier(float projectileDeviation)
 	{
 		this.projectileDeviation = projectileDeviation;
 	}
+	
+	public float getProjectileEffectiveRange()
+	{
+		return this.projectileEffectiveRange;
+	}
+
+	public void setProjectileEffectiveRange(float projectileEffectiveRange)
+	{
+		this.projectileEffectiveRange = projectileDeviation;
+	}
+
 	
 	public List<EntityProjectile> createProjectiles(World worldIn, ItemStack stack, EntityLivingBase shooter)
 	{

@@ -26,7 +26,7 @@ public class ItemCaplockDerringer extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.SMALL);
 		setFirearmWaterResiliency(FirearmWaterResiliency.GOOD);
 		setMaxDamage(ConfigCategoryFirearms.configCaplockDerringer.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configCaplockDerringer.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configCaplockDerringer.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configCaplockDerringer.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configCaplockDerringer.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configCaplockDerringer.baseShotDeviationModifier);

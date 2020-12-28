@@ -10,6 +10,7 @@ public class ItemSmallIronBirdshot extends ItemFirearmAmmo implements IFirearmAm
 		setAmmoDamage(3.0f);
 		setProjectileSize(0.2f);
 		setProjectileCount(6);
-		setProjectileDeviation(3.0f);
+		setProjectileEffectiveRange(7.0f);
+		setProjectileDeviationModifier(3.0f);
 	}
 }

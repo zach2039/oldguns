@@ -26,7 +26,7 @@ public class ItemMatchlockCaliver extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.MEDIUM);
 		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockCaliver.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configMatchlockCaliver.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configMatchlockCaliver.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockCaliver.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockCaliver.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockCaliver.baseShotDeviationModifier);

@@ -26,7 +26,7 @@ public class ItemCaplockBlunderbuss extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.GOOD);
 		setMaxDamage(ConfigCategoryFirearms.configCaplockBlunderbuss.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configCaplockBlunderbuss.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configCaplockBlunderbuss.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configCaplockBlunderbuss.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configCaplockBlunderbuss.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configCaplockBlunderbuss.baseShotDeviationModifier);

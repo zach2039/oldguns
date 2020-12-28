@@ -79,6 +79,14 @@ item.small_iron_musket_ball_paper_cartridge.name=Small Iron Musket Ball Paper Ca
 item.medium_iron_musket_ball_paper_cartridge.name=Medium Iron Musket Ball Paper Cartridge
 item.large_iron_musket_ball_paper_cartridge.name=Large Iron Musket Ball Paper Cartridge
 
+item.small_iron_birdshot_paper_cartridge.name=Small Iron Birdshot Paper Cartridge
+item.medium_iron_birdshot_paper_cartridge.name=Medium Iron Birdshot Paper Cartridge
+item.large_iron_birdshot_paper_cartridge.name=Large Iron Birdshot Paper Cartridge
+
+item.small_iron_buckshot_paper_cartridge.name=Small Iron Buckshot Paper Cartridge
+item.medium_iron_buckshot_paper_cartridge.name=Medium Iron Buckshot Paper Cartridge
+item.large_iron_buckshot_paper_cartridge.name=Large Iron Buckshot Paper Cartridge
+
 item.percussion_cap.name=Percussion Cap
 item.percussion_powder.name=Percussion Powder
 
@@ -104,8 +112,10 @@ item.large_wooden_stock.name=Large Wooden Stock
 
 item.matchlock_mechanism.name=Matchlock Mechanism
 item.flintlock_mechanism.name=Flintlock Mechanism
+item.caplock_mechanism.name=Caplock Mechanism
 
 item.breech_block.name=Breech Block
+item.percussion_cap_cone.name=Percussion Cap Cone
 
 item.small_musket_ball_mold.name=Small Musket Ball Mold
 item.medium_musket_ball_mold.name=Medium Musket Ball Mold

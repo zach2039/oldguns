@@ -18,4 +18,16 @@ public interface IFirearmAmmo
 	float getProjectileCount();
 	
 	void setProjectileCount(int count);
+
+	double getAmmoDamage();
+	
+	void setAmmoDamage(double ammoDamage);
+
+	public float getProjectileDeviationModifier();
+
+	public void setProjectileDeviationModifier(float projectileDeviation);
+	
+	public float getProjectileEffectiveRange();
+
+	public void setProjectileEffectiveRange(float projectileEffectiveRange);
 }

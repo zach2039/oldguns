@@ -28,9 +28,11 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
+import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 
 /**
  * Took a lot from Darkhax's tutorial on custom recipes.
@@ -79,10 +81,16 @@ public class BreechloadingReloadRecipe extends IForgeRegistryEntry.Impl<IRecipe>
 	}
 	
     @Override
-    public ItemStack getRecipeOutput () 
-    {  
-    	return ConfigCategoryRecipes.isRecipeEnabled(this.output) ? this.output : ItemStack.EMPTY;
-    }
+    @Nonnull
+    public ItemStack getRecipeOutput()
+	{
+		ItemStack outputStack = this.output;
+		List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
+		dummyAmmoStackList.add(new ItemStack(ModItems.MEDIUM_IRON_MUSKET_BALL));
+		
+		FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
+		return ConfigCategoryRecipes.isRecipeEnabled(this.output) ? outputStack : ItemStack.EMPTY;
+	}
 
     public Map<Ingredient, Integer> getIngredientsWithCounts()
     {

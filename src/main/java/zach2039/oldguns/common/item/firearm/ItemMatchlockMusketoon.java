@@ -26,7 +26,7 @@ public class ItemMatchlockMusketoon extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockMusketoon.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configMatchlockMusketoon.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configMatchlockMusketoon.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockMusketoon.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockMusketoon.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockMusketoon.baseShotDeviationModifier);

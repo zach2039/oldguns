@@ -369,7 +369,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     entityProjectiles.forEach((t) ->
                     {
                     	/* Set location-based data. */
-                    	t.setEffectiveRange(getEffectiveRange());
+                    	t.setEffectiveRange(itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier());
                     	t.setLaunchLocation(t.getPosition());
                     	
                     	/* Launch projectile. */
@@ -718,12 +718,12 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		ProjectileSpeed = projectileSpeed;
 	}
 
-	public float getEffectiveRange()
+	public float getEffectiveRangeModifier()
 	{
 		return EffectiveRange;
 	}
 
-	public void setEffectiveRange(float effectiveRange)
+	public void setEffectiveRangeModifier(float effectiveRange)
 	{
 		EffectiveRange = effectiveRange;
 	}

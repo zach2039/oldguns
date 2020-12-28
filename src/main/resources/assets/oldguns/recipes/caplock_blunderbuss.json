@@ -1,0 +1,24 @@
+{
+	"type": "oldguns:shaped_gunsmiths_bench",
+	"pattern": [
+		"BM",
+		" S"
+	],
+	"key": {
+		"B": {
+			"type": "forge:ore_dict",
+			"ore": "barrelHugeIron"
+		},
+		"M": {
+			"item": "oldguns:caplock_mechanism"
+		},
+		"S": {
+			"type": "forge:ore_dict",
+			"ore": "stockLargeWooden"
+		}
+	},
+	"result":
+	{
+		"item": "oldguns:caplock_blunderbuss"
+	}
+}

@@ -10,5 +10,6 @@ public class ItemSmallIronMusketBall extends ItemFirearmAmmo implements IFirearm
 		setAmmoDamage(20.0f);
 		setProjectileSize(0.3f);
 		setProjectileCount(1);
+		setProjectileEffectiveRange(50.0f);
 	}
 }

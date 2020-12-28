@@ -26,7 +26,7 @@ public class ItemFlintlockMusket extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.FAIR);
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockMusket.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configFlintlockMusket.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configFlintlockMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockMusket.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockMusket.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockMusket.baseShotDeviationModifier);

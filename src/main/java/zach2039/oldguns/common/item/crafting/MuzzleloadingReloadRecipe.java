@@ -1,5 +1,9 @@
 package zach2039.oldguns.common.item.crafting;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
@@ -17,6 +21,7 @@ import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
+import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.firearm.ItemFirearm;
@@ -79,6 +84,18 @@ public class MuzzleloadingReloadRecipe extends ShapelessOreRecipe
 		//return firearmStack;
 	}
 
+	@Override
+    @Nonnull
+    public ItemStack getRecipeOutput()
+	{
+		ItemStack outputStack = this.output;
+		List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
+		dummyAmmoStackList.add(new ItemStack(ModItems.MEDIUM_IRON_MUSKET_BALL));
+		
+		FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
+		return ConfigCategoryRecipes.isRecipeEnabled(this.output) ? outputStack : ItemStack.EMPTY;
+	}
+	
 	@Override
 	public String getGroup()
 	{

@@ -24,7 +24,7 @@ public class FirearmNBTHelper
 		stackIn.getTagCompound().setInteger("ammoCount", ammoCount);
 	}
 	
-	private static void setNBTTagMagazineStack(ItemStack stackIn, List<ItemStack> firearmAmmoList)
+	public static void setNBTTagMagazineStack(ItemStack stackIn, List<ItemStack> firearmAmmoList)
 	{
 		/* Create new NBT tag and set value to 0 if no NBT tag. */
 		if (!stackIn.hasTagCompound())
@@ -48,7 +48,7 @@ public class FirearmNBTHelper
 		setNBTTagAmmoCount(stackIn, firearmAmmoList.size());
 	}
 	
-	private static List<ItemStack> getNBTTagMagazineStack(ItemStack stackIn)
+	public static List<ItemStack> getNBTTagMagazineStack(ItemStack stackIn)
 	{
 		/* Create new NBT tag and set value to 0 if no NBT tag. */
 		if (!stackIn.hasTagCompound())

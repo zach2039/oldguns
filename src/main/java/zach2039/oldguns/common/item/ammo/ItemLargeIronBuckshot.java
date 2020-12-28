@@ -10,6 +10,7 @@ public class ItemLargeIronBuckshot extends ItemFirearmAmmo implements IFirearmAm
 		setAmmoDamage(15.0f);
 		setProjectileSize(0.3f);
 		setProjectileCount(7);
-		setProjectileDeviation(2.0f);
+		setProjectileEffectiveRange(30.0f);
+		setProjectileDeviationModifier(1.5f);
 	}
 }

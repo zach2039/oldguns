@@ -1,0 +1,23 @@
+{
+	"type": "oldguns:shapeless_gunsmiths_bench",
+	"ingredients": 
+	[
+	    {
+			"item": "minecraft:gunpowder"
+		},
+	    {
+			"item": "minecraft:paper"
+		},
+	    {
+			"item": "oldguns:small_iron_birdshot"
+		},
+		{
+			"item": "oldguns:percussion_cap"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:small_iron_birdshot_paper_cartridge",
+		"count": 1
+	}
+}

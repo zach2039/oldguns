@@ -26,7 +26,7 @@ public class ItemMatchlockArquebus extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.MEDIUM);
 		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockArquebus.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configMatchlockArquebus.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configMatchlockArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockArquebus.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDeviationModifier);

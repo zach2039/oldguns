@@ -26,7 +26,7 @@ public class ItemMatchlockMusket extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.POOR);
 		setMaxDamage(ConfigCategoryFirearms.configMatchlockMusket.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configMatchlockMusket.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configMatchlockMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockMusket.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockMusket.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockMusket.baseShotDeviationModifier);

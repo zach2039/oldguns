@@ -26,7 +26,7 @@ public class ItemCaplockLongMusket extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.GOOD);
 		setMaxDamage(ConfigCategoryFirearms.configCaplockLongMusket.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configCaplockLongMusket.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configCaplockLongMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configCaplockLongMusket.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configCaplockLongMusket.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configCaplockLongMusket.baseShotDeviationModifier);

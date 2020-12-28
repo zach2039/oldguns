@@ -7,13 +7,17 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.ammo.ItemLargeIronBirdshot;
+import zach2039.oldguns.common.item.ammo.ItemLargeIronBirdshotPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemLargeIronBuckshot;
+import zach2039.oldguns.common.item.ammo.ItemLargeIronBuckshotPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemLargeIronMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemLargeIronMusketBallPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemLargeStoneBirdshot;
 import zach2039.oldguns.common.item.ammo.ItemLargeStoneMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemMediumIronBirdshot;
+import zach2039.oldguns.common.item.ammo.ItemMediumIronBirdshotPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemMediumIronBuckshot;
+import zach2039.oldguns.common.item.ammo.ItemMediumIronBuckshotPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemMediumIronCannonball;
 import zach2039.oldguns.common.item.ammo.ItemMediumIronHEShell;
 import zach2039.oldguns.common.item.ammo.ItemMediumIronMusketBall;
@@ -21,7 +25,9 @@ import zach2039.oldguns.common.item.ammo.ItemMediumIronMusketBallPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemMediumStoneBirdshot;
 import zach2039.oldguns.common.item.ammo.ItemMediumStoneMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemSmallIronBirdshot;
+import zach2039.oldguns.common.item.ammo.ItemSmallIronBirdshotPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemSmallIronBuckshot;
+import zach2039.oldguns.common.item.ammo.ItemSmallIronBuckshotPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemSmallIronMusketBall;
 import zach2039.oldguns.common.item.ammo.ItemSmallIronMusketBallPaperCartridge;
 import zach2039.oldguns.common.item.ammo.ItemSmallStoneBirdshot;
@@ -57,6 +63,7 @@ import zach2039.oldguns.common.item.firearm.ItemMatchlockMusket;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockMusketoon;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockPistol;
 import zach2039.oldguns.common.item.part.ItemBreechBlock;
+import zach2039.oldguns.common.item.part.ItemCaplockMechanism;
 import zach2039.oldguns.common.item.part.ItemFlintlockMechanism;
 import zach2039.oldguns.common.item.part.ItemHugeIronBarrel;
 import zach2039.oldguns.common.item.part.ItemHugeStoneBarrel;
@@ -72,6 +79,7 @@ import zach2039.oldguns.common.item.part.ItemMediumIronBarrel;
 import zach2039.oldguns.common.item.part.ItemMediumStoneBarrel;
 import zach2039.oldguns.common.item.part.ItemMediumWoodenHandle;
 import zach2039.oldguns.common.item.part.ItemMediumWoodenStock;
+import zach2039.oldguns.common.item.part.ItemPercussionCapCone;
 import zach2039.oldguns.common.item.part.ItemSmallIronBarrel;
 import zach2039.oldguns.common.item.part.ItemSmallStoneBarrel;
 import zach2039.oldguns.common.item.part.ItemSmallWoodenHandle;
@@ -233,6 +241,20 @@ public class ModItems
 	@ObjectHolder("large_iron_musket_ball_paper_cartridge")
 	public static final Item LARGE_IRON_MUSKET_BALL_PAPER_CARTRIDGE = null;
 	
+	@ObjectHolder("small_iron_birdshot_paper_cartridge")
+	public static final Item SMALL_IRON_BIRDSHOT_PAPER_CARTRIDGE = null;
+	@ObjectHolder("medium_iron_birdshot_paper_cartridge")
+	public static final Item MEDIUM_IRON_BIRDSHOT_PAPER_CARTRIDGE = null;
+	@ObjectHolder("large_iron_birdshot_paper_cartridge")
+	public static final Item LARGE_IRON_BIRDSHOT_PAPER_CARTRIDGE = null;
+	
+	@ObjectHolder("small_iron_buckshot_paper_cartridge")
+	public static final Item SMALL_IRON_BUCKSHOT_PAPER_CARTRIDGE = null;
+	@ObjectHolder("medium_iron_buckshot_paper_cartridge")
+	public static final Item MEDIUM_IRON_BUCKSHOT_PAPER_CARTRIDGE = null;
+	@ObjectHolder("large_iron_buckshot_paper_cartridge")
+	public static final Item LARGE_IRON_BUCKSHOT_PAPER_CARTRIDGE = null;
+	
 	@ObjectHolder("percussion_cap")
 	public static final Item PERCUSSION_CAP = null;
 	@ObjectHolder("percussion_powder")
@@ -278,9 +300,13 @@ public class ModItems
 	public static final Item MATCHLOCK_MECHANISM = null;
 	@ObjectHolder("flintlock_mechanism")
 	public static final Item FLINTLOCK_MECHANISM = null;
+	@ObjectHolder("caplock_mechanism")
+	public static final Item CAPLOCK_MECHANISM = null;
 	
 	@ObjectHolder("breech_block")
 	public static final Item BREECH_BLOCK = null;
+	@ObjectHolder("percussion_cap_cone")
+	public static final Item PERCUSSION_CAP_CONE = null;
 	
 	@ObjectHolder("small_musket_ball_mold")
 	public static final Item SMALL_MUSKET_BALL_MOLD = null;
@@ -383,6 +409,14 @@ public class ModItems
 					new ItemMediumIronMusketBallPaperCartridge(),
 					new ItemLargeIronMusketBallPaperCartridge(),
 					
+					new ItemSmallIronBirdshotPaperCartridge(),
+					new ItemMediumIronBirdshotPaperCartridge(),
+					new ItemLargeIronBirdshotPaperCartridge(),
+					
+					new ItemSmallIronBuckshotPaperCartridge(),
+					new ItemMediumIronBuckshotPaperCartridge(),
+					new ItemLargeIronBuckshotPaperCartridge(),					
+					
 					new ItemPercussionCap(),
 					new ItemPercussionPowder(),
 					
@@ -408,8 +442,10 @@ public class ModItems
 					
 					new ItemMatchlockMechanism(),
 					new ItemFlintlockMechanism(),
+					new ItemCaplockMechanism(),
 					
 					new ItemBreechBlock(),
+					new ItemPercussionCapCone(),
 					
 					new ItemSmallMusketBallMold(),
 					new ItemMediumMusketBallMold(),

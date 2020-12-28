@@ -26,7 +26,7 @@ public class ItemCaplockCaliver extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.MEDIUM);
 		setFirearmWaterResiliency(FirearmWaterResiliency.GOOD);
 		setMaxDamage(ConfigCategoryFirearms.configCaplockCaliver.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configCaplockCaliver.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configCaplockCaliver.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configCaplockCaliver.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configCaplockCaliver.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configCaplockCaliver.baseShotDeviationModifier);

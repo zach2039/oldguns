@@ -26,7 +26,7 @@ public class ItemFlintlockBlunderbuss extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.FAIR);
 		setMaxDamage(ConfigCategoryFirearms.configFlintlockBlunderbuss.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBlunderbuss.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockBlunderbuss.baseShotDeviationModifier);

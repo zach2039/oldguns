@@ -26,7 +26,7 @@ public class ItemCaplockMusketoon extends ItemFirearm implements IFirearm
 		setFirearmSize(FirearmSize.LARGE);
 		setFirearmWaterResiliency(FirearmWaterResiliency.GOOD);
 		setMaxDamage(ConfigCategoryFirearms.configCaplockMusketoon.durability);
-		setEffectiveRange(ConfigCategoryFirearms.configCaplockMusketoon.baseEffectiveRange);
+		setEffectiveRangeModifier(ConfigCategoryFirearms.configCaplockMusketoon.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configCaplockMusketoon.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configCaplockMusketoon.baseShotDamageModifier);
 		setFirearmDeviation(ConfigCategoryFirearms.configCaplockMusketoon.baseShotDeviationModifier);

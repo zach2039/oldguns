@@ -10,5 +10,7 @@ public class ItemMediumStoneBirdshot extends ItemFirearmAmmo implements IFirearm
 		setAmmoDamage(2.0f);
 		setProjectileSize(0.1f);
 		setProjectileCount(8);
+		setProjectileEffectiveRange(5.0f);
+		setProjectileDeviationModifier(3.0f);
 	}
 }
