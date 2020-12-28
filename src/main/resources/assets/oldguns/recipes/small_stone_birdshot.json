@@ -1,0 +1,17 @@
+{
+	"type": "oldguns:shapeless_gunsmiths_bench",
+	"ingredients": 
+	[
+	    {
+			"item": "minecraft:gravel"
+		},
+	    {
+			"item": "minecraft:paper"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:small_stone_birdshot",
+		"count": 1
+	}
+}

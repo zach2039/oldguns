@@ -10,28 +10,13 @@
 			"type": "forge:ore_dict",
 			"ore": "nuggetIron"
 		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "nuggetIron"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "nuggetIron"
-		},
-		{
-			"type": "forge:ore_dict",
-			"ore": "nuggetIron"
-		},
-	    {
-			"item": "minecraft:paper"
-		},
 	    {
 			"item": "minecraft:paper"
 		}
   	],
 	"result":
 	{
-		"item": "oldguns:large_iron_birdshot",
+		"item": "oldguns:small_iron_birdshot",
 		"count": 1
 	}
 }
