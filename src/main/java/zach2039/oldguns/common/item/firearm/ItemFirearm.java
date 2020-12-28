@@ -373,7 +373,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     	t.setLaunchLocation(t.getPosition());
                     	
                     	/* Launch projectile. */
-                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getDeviationModifier() * snapshotDevMulti);
+                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier());
                     	
                     	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, firearmStack);
 
@@ -728,12 +728,12 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		EffectiveRange = effectiveRange;
 	}
 
-	public float getDeviationModifier()
+	public float getFirearmDeviation()
 	{
 		return this.deviationModifier;
 	}
 
-	public void setDeviationModifier(float deviationModifier)
+	public void setFirearmDeviation(float deviationModifier)
 	{
 		this.deviationModifier = deviationModifier;
 	}

@@ -1,0 +1,20 @@
+{
+	"type": "oldguns:shapeless_gunsmiths_bench",
+	"ingredients": 
+	[
+	    {
+			"item": "minecraft:gunpowder"
+		},
+		{
+			"item": "minecraft:redstone"
+		},
+		{
+			"item": "minecraft:blaze_powder"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:percussion_powder",
+		"count": 2
+	}
+}

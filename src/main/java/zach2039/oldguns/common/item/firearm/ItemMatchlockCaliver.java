@@ -29,7 +29,7 @@ public class ItemMatchlockCaliver extends ItemFirearm implements IFirearm
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockCaliver.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockCaliver.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockCaliver.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configMatchlockCaliver.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockCaliver.baseShotDeviationModifier);
 	}
 
 	@Override

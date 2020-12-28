@@ -1,0 +1,20 @@
+{
+	"type": "oldguns:reload_firearm_single",
+	"ingredients": 
+	[
+	    {
+			"item": "oldguns:flintlock_musketoon",
+			"data": 32767
+	    },
+	    {
+			"item": "oldguns:medium_iron_birdshot"
+		},
+		{
+			"item": "minecraft:gunpowder"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:flintlock_musketoon"
+	}
+}

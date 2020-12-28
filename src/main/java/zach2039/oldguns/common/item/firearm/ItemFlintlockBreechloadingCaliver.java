@@ -29,7 +29,7 @@ public class ItemFlintlockBreechloadingCaliver extends ItemFirearm implements IF
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingCaliver.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingCaliver.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockBreechloadingCaliver.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configFlintlockBreechloadingCaliver.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockBreechloadingCaliver.baseShotDeviationModifier);
 		setRequiredReloadTicks(ConfigCategoryFirearms.configFlintlockBreechloadingCaliver.requiredReloadTicks);
 	}
 

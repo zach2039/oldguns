@@ -17,22 +17,27 @@ public abstract class ItemFirearmAmmo extends Item implements IFirearmAmmo
 	/**
 	 * Ammo type of this firearm ammo item instance.
 	 */
-	protected FirearmAmmoType AmmoType = FirearmAmmoType.MUSKET_BALL;
+	protected FirearmAmmoType ammoType = FirearmAmmoType.MUSKET_BALL;
 	
 	/**
 	 * Damage of this firearm ammo item instance.
 	 */
-	protected double AmmoDamage = 10.0f;
+	protected double ammoDamage = 10.0f;
 	
 	/**
 	 * Projectile size of this firearm ammo item instance.
 	 */
-	protected float ProjectileSize = 1.0f;
+	protected float projectileSize = 1.0f;
 	
 	/**
 	 * Projectile count of this firearm ammo item instance.
 	 */
-	protected int ProjectileCount = 1;
+	protected int projectileCount = 1;
+	
+	/**
+	 * Projectile deviation of this firearm ammo item instance.
+	 */
+	protected float projectileDeviation = 1.0f;
 	
 	public ItemFirearmAmmo(String name, int stackSize)
 	{
@@ -44,42 +49,52 @@ public abstract class ItemFirearmAmmo extends Item implements IFirearmAmmo
 	
 	public FirearmAmmoType getAmmoType()
 	{
-		return AmmoType;
+		return this.ammoType;
 	}
 
 	public void setAmmoType(FirearmAmmoType ammoType)
 	{
-		AmmoType = ammoType;
+		this.ammoType = ammoType;
 	}
 
 	public double getAmmoDamage()
 	{
-		return AmmoDamage;
+		return this.ammoDamage;
 	}
 
 	public void setAmmoDamage(double ammoDamage)
 	{
-		AmmoDamage = ammoDamage;
+		this.ammoDamage = ammoDamage;
 	}
 	
 	public float getProjectileSize()
 	{
-		return ProjectileSize;
+		return this.projectileSize;
 	}
 
 	public void setProjectileSize(float projectileSize)
 	{
-		ProjectileSize = projectileSize;
+		this.projectileSize = projectileSize;
 	}
 	
 	public float getProjectileCount()
 	{
-		return ProjectileCount;
+		return this.projectileCount;
 	}
 
 	public void setProjectileCount(int projectileCount)
 	{
-		ProjectileCount = projectileCount;
+		this.projectileCount = projectileCount;
+	}
+	
+	public float getProjectileDeviationModifier()
+	{
+		return this.projectileDeviation;
+	}
+
+	public void setProjectileDeviation(float projectileDeviation)
+	{
+		this.projectileDeviation = projectileDeviation;
 	}
 	
 	public List<EntityProjectile> createProjectiles(World worldIn, ItemStack stack, EntityLivingBase shooter)

@@ -25,8 +25,8 @@ item.matchlock_blunderbuss.name=Matchlock Blunderbuss
 
 item.flintlock_derringer.name=Flintlock Derringer
 item.flintlock_pistol.name=Flintlock Pistol
-item.flintlock_arquebus.name=Flintlock Arquebus
-item.flintlock_caliver.name=Flintlock Caliver
+item.flintlock_arquebus.name=Flintlock Heavy Pistol
+item.flintlock_caliver.name=Flintlock Carbine
 item.flintlock_musket.name=Flintlock Musket
 item.flintlock_long_musket.name=Flintlock Long Musket
 
@@ -35,21 +35,52 @@ item.flintlock_blunderbuss.name=Flintlock Blunderbuss
 
 item.flintlock_breechloading_pistol.name=Flintlock Breechloading Pistol
 item.flintlock_breechloading_arquebus.name=Flintlock Breechloading Arquebus
-item.flintlock_breechloading_caliver.name=Flintlock Breechloading Caliver
+item.flintlock_breechloading_caliver.name=Flintlock Breechloading Carbine
 item.flintlock_breechloading_musket.name=Flintlock Breechloading Musket
 item.flintlock_breechloading_long_musket.name=Flintlock Breechloading Long Musket
+
+item.caplock_derringer.name=Caplock Derringer
+item.caplock_pistol.name=Caplock Pistol
+item.caplock_arquebus.name=Caplock Heavy Pistol
+item.caplock_caliver.name=Caplock Carbine
+item.caplock_musket.name=Caplock Musket
+item.caplock_long_musket.name=Caplock Long Musket
+
+item.caplock_musketoon.name=Caplock Musketoon
+item.caplock_blunderbuss.name=Caplock Blunderbuss
+
+item.caplock_breechloading_pistol.name=Caplock Breechloading Pistol
+item.caplock_breechloading_arquebus.name=Caplock Breechloading Arquebus
+item.caplock_breechloading_caliver.name=Caplock Breechloading Carbine
+item.caplock_breechloading_musket.name=Caplock Breechloading Musket
+item.caplock_breechloading_long_musket.name=Caplock Breechloading Long Musket
 
 item.small_stone_musket_ball.name=Small Stone Musket Ball
 item.medium_stone_musket_ball.name=Medium Stone Musket Ball
 item.large_stone_musket_ball.name=Large Stone Musket Ball
 
+item.small_stone_birdshot.name=Small Stone Birdshot
+item.medium_stone_birdshot.name=Medium Stone Birdshot
 item.large_stone_birdshot.name=Large Stone Birdshot
 
 item.small_iron_musket_ball.name=Small Iron Musket Ball
 item.medium_iron_musket_ball.name=Medium Iron Musket Ball
 item.large_iron_musket_ball.name=Large Iron Musket Ball
 
+item.small_iron_birdshot.name=Small Iron Birdshot
+item.medium_iron_birdshot.name=Medium Iron Birdshot
 item.large_iron_birdshot.name=Large Iron Birdshot
+
+item.small_iron_buckshot.name=Small Iron Buckshot
+item.medium_iron_buckshot.name=Medium Iron Buckshot
+item.large_iron_buckshot.name=Large Iron Buckshot
+
+item.small_iron_musket_ball_paper_cartridge.name=Small Iron Musket Ball Paper Cartridge
+item.medium_iron_musket_ball_paper_cartridge.name=Medium Iron Musket Ball Paper Cartridge
+item.large_iron_musket_ball_paper_cartridge.name=Large Iron Musket Ball Paper Cartridge
+
+item.percussion_cap.name=Percussion Cap
+item.percussion_powder.name=Percussion Powder
 
 item.tiny_stone_barrel.name=Tiny Stone Barrel
 item.small_stone_barrel.name=Small Stone Barrel

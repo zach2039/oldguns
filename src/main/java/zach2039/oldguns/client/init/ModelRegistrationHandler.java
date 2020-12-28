@@ -57,17 +57,42 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.FLINTLOCK_BREECHLOADING_MUSKET, 0);
 		registerModel(ModItems.FLINTLOCK_BREECHLOADING_LONG_MUSKET, 0);
 		
+		registerModel(ModItems.CAPLOCK_DERRINGER, 0);
+		registerModel(ModItems.CAPLOCK_PISTOL, 0);
+		registerModel(ModItems.CAPLOCK_ARQUEBUS, 0);
+		registerModel(ModItems.CAPLOCK_CALIVER, 0);
+		registerModel(ModItems.CAPLOCK_MUSKET, 0);
+		registerModel(ModItems.CAPLOCK_LONG_MUSKET, 0);
+		
+		registerModel(ModItems.CAPLOCK_MUSKETOON, 0);
+		registerModel(ModItems.CAPLOCK_BLUNDERBUSS, 0);
+		
 		registerModel(ModItems.SMALL_STONE_MUSKET_BALL, 0);
 		registerModel(ModItems.MEDIUM_STONE_MUSKET_BALL, 0);
 		registerModel(ModItems.LARGE_STONE_MUSKET_BALL, 0);
 		
+		registerModel(ModItems.SMALL_STONE_BIRDSHOT, 0);
+		registerModel(ModItems.MEDIUM_STONE_BIRDSHOT, 0);
 		registerModel(ModItems.LARGE_STONE_BIRDSHOT, 0);
 		
 		registerModel(ModItems.SMALL_IRON_MUSKET_BALL, 0);
 		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL, 0);
 		registerModel(ModItems.LARGE_IRON_MUSKET_BALL, 0);
 
+		registerModel(ModItems.SMALL_IRON_BIRDSHOT, 0);
+		registerModel(ModItems.MEDIUM_IRON_BIRDSHOT, 0);
 		registerModel(ModItems.LARGE_IRON_BIRDSHOT, 0);
+
+		registerModel(ModItems.SMALL_IRON_BUCKSHOT, 0);
+		registerModel(ModItems.MEDIUM_IRON_BUCKSHOT, 0);
+		registerModel(ModItems.LARGE_IRON_BUCKSHOT, 0);
+		
+		registerModel(ModItems.SMALL_IRON_MUSKET_BALL_PAPER_CARTRIDGE, 0);
+		registerModel(ModItems.MEDIUM_IRON_MUSKET_BALL_PAPER_CARTRIDGE, 0);
+		registerModel(ModItems.LARGE_IRON_MUSKET_BALL_PAPER_CARTRIDGE, 0);
+		
+		registerModel(ModItems.PERCUSSION_CAP, 0);
+		registerModel(ModItems.PERCUSSION_POWDER, 0);
 		
 		registerModel(ModItems.TINY_STONE_BARREL, 0);
 		registerModel(ModItems.SMALL_STONE_BARREL, 0);

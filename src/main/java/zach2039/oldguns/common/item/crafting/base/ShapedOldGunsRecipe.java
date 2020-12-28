@@ -31,13 +31,13 @@ import net.minecraftforge.registries.IForgeRegistryEntry;
 
 public class ShapedOldGunsRecipe extends IForgeRegistryEntry.Impl<IRecipe> implements IShapedRecipe {
 
-	@Deprecated
+	
     public static final int MAX_CRAFT_GRID_WIDTH = 3;
-    @Deprecated
+    
     public static final int MAX_CRAFT_GRID_HEIGHT = 3;
 
     @Nonnull
-    protected ItemStack output = ItemStack.EMPTY;
+	public ItemStack output = ItemStack.EMPTY;
     protected NonNullList<Ingredient> input = null;
     protected int width = 0;
     protected int height = 0;

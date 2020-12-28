@@ -29,7 +29,7 @@ public class ItemMatchlockArquebus extends ItemFirearm implements IFirearm
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockArquebus.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockArquebus.baseShotDeviationModifier);
 	}
 
 	@Override

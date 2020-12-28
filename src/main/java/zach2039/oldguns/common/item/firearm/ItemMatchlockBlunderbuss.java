@@ -29,7 +29,7 @@ public class ItemMatchlockBlunderbuss extends ItemFirearm implements IFirearm
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockBlunderbuss.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockBlunderbuss.baseShotDeviationModifier);
 	}
 
 	@Override

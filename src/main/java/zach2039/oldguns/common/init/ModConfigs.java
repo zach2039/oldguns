@@ -34,15 +34,15 @@ public class ModConfigs {
 		@Name("Matchlock Musketoon")
 		public static ConfigCategoryFirearmSettings configMatchlockMusketoon = new ConfigCategoryFirearmSettings(24, 3.75f, 14f, 7f, 1f); 
 		@Name("Matchlock Blunderbuss")
-		public static ConfigCategoryFirearmSettings configMatchlockBlunderbuss = new ConfigCategoryFirearmSettings(24, 3.25f, 6f, 10f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockBlunderbuss = new ConfigCategoryFirearmSettings(24, 3.25f, 6f, 9f, 1f); 
 		
 		@Name("Flintlock Derringer")
 		public static ConfigCategoryFirearmSettings configFlintlockDerringer = new ConfigCategoryFirearmSettings(28, 3.25f, 5f, 10f, 1f); 
 		@Name("Flintlock Pistol")
 		public static ConfigCategoryFirearmSettings configFlintlockPistol = new ConfigCategoryFirearmSettings(32, 3.5f, 8f, 9f, 1f); 
-		@Name("Flintlock Arquebus")
+		@Name("Flintlock Heavy Pistol")
 		public static ConfigCategoryFirearmSettings configFlintlockArquebus = new ConfigCategoryFirearmSettings(36, 3.75f, 11f, 8f, 1f); 
-		@Name("Flintlock Caliver")
+		@Name("Flintlock Carbine")
 		public static ConfigCategoryFirearmSettings configFlintlockCaliver = new ConfigCategoryFirearmSettings(40, 4f, 14f, 7f, 1f); 
 		@Name("Flintlock Musket")
 		public static ConfigCategoryFirearmSettings configFlintlockMusket = new ConfigCategoryFirearmSettings(44, 4.25f, 17f, 6f, 1f); 
@@ -51,18 +51,46 @@ public class ModConfigs {
 		@Name("Flintlock Musketoon")
 		public static ConfigCategoryFirearmSettings configFlintlockMusketoon = new ConfigCategoryFirearmSettings(44, 4f, 16f, 7f, 1f); 
 		@Name("Flintlock Blunderbuss")
-		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 10f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 9f, 1f); 
 		
 		@Name("Flintlock Breechloading Pistol")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(24, 3.5f, 8f, 9f, 1f, 60); 
-		@Name("Flintlock Breechloading Arquebus")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(28, 3.75f, 11f, 8f, 1f, 70); 
-		@Name("Flintlock Breechloading Caliver")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(32, 4.0f, 14f, 7f, 1f, 80); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(24, 3.5f, 8f, 9f, 1f, 70); 
+		@Name("Flintlock Breechloading Heavy Pistol")
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(28, 3.75f, 11f, 8f, 1f, 80); 
+		@Name("Flintlock Breechloading Carbine")
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(32, 4.0f, 14f, 7f, 1f, 90); 
 		@Name("Flintlock Breechloading Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(36, 4.25f, 17f, 6f, 1f, 90); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(36, 4.25f, 17f, 6f, 1f, 100); 
 		@Name("Flintlock Breechloading Long Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(40, 4.5f, 20f, 5f, 1f, 100); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(40, 4.5f, 20f, 5f, 1f, 110); 
+		
+		@Name("Caplock Derringer")
+		public static ConfigCategoryFirearmSettings configCaplockDerringer = new ConfigCategoryFirearmSettings(48, 3.5f, 7f, 10f, 1f); 
+		@Name("Caplock Pistol")
+		public static ConfigCategoryFirearmSettings configCaplockPistol = new ConfigCategoryFirearmSettings(52, 3.75f, 10f, 9f, 1f); 
+		@Name("Caplock Heavy Pistol")
+		public static ConfigCategoryFirearmSettings configCaplockArquebus = new ConfigCategoryFirearmSettings(56, 4.0f, 13f, 8f, 1f); 
+		@Name("Caplock Carbine")
+		public static ConfigCategoryFirearmSettings configCaplockCaliver = new ConfigCategoryFirearmSettings(60, 4.25f, 16f, 7f, 1f); 
+		@Name("Caplock Musket")
+		public static ConfigCategoryFirearmSettings configCaplockMusket = new ConfigCategoryFirearmSettings(64, 4.5f, 19f, 6f, 1f); 
+		@Name("Caplock Long Musket")
+		public static ConfigCategoryFirearmSettings configCaplockLongMusket = new ConfigCategoryFirearmSettings(68, 4.75f, 22f, 5f, 1f); 
+		@Name("Caplock Musketoon")
+		public static ConfigCategoryFirearmSettings configCaplockMusketoon = new ConfigCategoryFirearmSettings(64, 4.25f, 18f, 7f, 1f); 
+		@Name("Caplock Blunderbuss")
+		public static ConfigCategoryFirearmSettings configCaplockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.75f, 8f, 9f, 1f); 
+		
+		@Name("Caplock Breechloading Pistol")
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(44, 3.5f, 8f, 9f, 1f, 50); 
+		@Name("Caplock Breechloading Heavy Pistol")
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(48, 3.75f, 11f, 8f, 1f, 60); 
+		@Name("Caplock Breechloading Carbine")
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(52, 4.0f, 14f, 7f, 1f, 70); 
+		@Name("Caplock Breechloading Musket")
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(56, 4.25f, 17f, 6f, 1f, 80); 
+		@Name("Caplock Breechloading Long Musket")
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(60, 4.5f, 20f, 5f, 1f, 90); 
 		
 		public static class ConfigCategoryFirearmSettings {	
 			@Name("Firearm durability")
@@ -238,6 +266,20 @@ public class ModConfigs {
         		"flintlock_breechloading_caliver",
         		"flintlock_breechloading_musket",
         		"flintlock_breechloading_long_musket",
+        		"caplock_derringer",
+        		"caplock_pistol",
+        		"caplock_arquebus",
+        		"caplock_caliver",
+        		"caplock_musket",
+        		"caplock_long_musket",
+        		"caplock_blunderbuss",
+        		"caplock_musketoon",
+        		"caplock_breechloading_derringer",
+        		"caplock_breechloading_pistol",
+        		"caplock_breechloading_arquebus",
+        		"caplock_breechloading_caliver",
+        		"caplock_breechloading_musket",
+        		"caplock_breechloading_long_musket",
         		"small_stone_musket_ball",
         		"medium_stone_musket_ball",
         		"large_stone_musket_ball",
@@ -246,6 +288,9 @@ public class ModConfigs {
         		"medium_iron_musket_ball",
         		"large_iron_musket_ball",
         		"large_iron_birdshot",
+        		"small_iron_musket_ball_paper_cartridge",
+        		"percussion_cap",
+        		"percussion_powder",
         		"tiny_iron_barrel",
         		"small_iron_barrel",
         		"medium_iron_barrel",

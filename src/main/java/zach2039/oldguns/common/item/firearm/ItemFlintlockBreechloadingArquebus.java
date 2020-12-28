@@ -29,7 +29,7 @@ public class ItemFlintlockBreechloadingArquebus extends ItemFirearm implements I
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingArquebus.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingArquebus.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockBreechloadingArquebus.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configFlintlockBreechloadingArquebus.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockBreechloadingArquebus.baseShotDeviationModifier);
 		setRequiredReloadTicks(ConfigCategoryFirearms.configFlintlockBreechloadingArquebus.requiredReloadTicks);
 	}
 

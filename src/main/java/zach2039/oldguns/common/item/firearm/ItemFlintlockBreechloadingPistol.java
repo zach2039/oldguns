@@ -29,7 +29,7 @@ public class ItemFlintlockBreechloadingPistol extends ItemFirearm implements IFi
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.baseShotDeviationModifier);
 		setRequiredReloadTicks(ConfigCategoryFirearms.configFlintlockBreechloadingPistol.requiredReloadTicks);
 	}
 

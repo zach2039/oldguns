@@ -29,7 +29,7 @@ public class ItemFlintlockMusket extends ItemFirearm implements IFirearm
 		setEffectiveRange(ConfigCategoryFirearms.configFlintlockMusket.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configFlintlockMusket.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configFlintlockMusket.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configFlintlockMusket.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configFlintlockMusket.baseShotDeviationModifier);
 	}
 
 	@Override

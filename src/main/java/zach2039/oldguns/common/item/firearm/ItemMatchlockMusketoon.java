@@ -29,7 +29,7 @@ public class ItemMatchlockMusketoon extends ItemFirearm implements IFirearm
 		setEffectiveRange(ConfigCategoryFirearms.configMatchlockMusketoon.baseEffectiveRange);
 		setProjectileSpeed(ConfigCategoryFirearms.configMatchlockMusketoon.projectileSpeed);
 		setDamageModifier(ConfigCategoryFirearms.configMatchlockMusketoon.baseShotDamageModifier);
-		setDeviationModifier(ConfigCategoryFirearms.configMatchlockMusketoon.baseShotDeviationModifier);
+		setFirearmDeviation(ConfigCategoryFirearms.configMatchlockMusketoon.baseShotDeviationModifier);
 	}
 
 	@Override

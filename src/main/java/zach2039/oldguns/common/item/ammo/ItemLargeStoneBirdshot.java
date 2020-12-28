@@ -8,7 +8,7 @@ public class ItemLargeStoneBirdshot extends ItemFirearmAmmo implements IFirearmA
 	{
 		super("large_stone_birdshot", 4);
 		setAmmoDamage(2.0f);
-		setProjectileSize(0.2f);
+		setProjectileSize(0.1f);
 		setProjectileCount(10);
 	}
 }
