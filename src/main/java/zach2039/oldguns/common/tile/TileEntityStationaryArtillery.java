@@ -346,9 +346,10 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         	{
         		setBarrelYaw(controllingEntity.rotationYaw);
         		setBarrelPitch(controllingEntity.rotationPitch);
-        		OldGuns.network.sendToAllAround(
-        				new MessageSyncTileEntityCannonRotation(this.pos, getBarrelPitch(), getBarrelYaw()),
-        				new TargetPoint(controllingEntity.dimension, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1000));
+        		if (!this.world.isRemote)
+	        		OldGuns.network.sendToAllAround(
+	        				new MessageSyncTileEntityCannonRotation(this.pos, getBarrelPitch(), getBarrelYaw()),
+	        				new TargetPoint(controllingEntity.dimension, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1000));
         	}
         }
         
@@ -535,9 +536,10 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
         	}
         }
 		
-		OldGuns.network.sendToAllAround(
-				new MessageSyncTileEntityCannonState(this.pos, getArtilleryType(), getFiringState(), getPowderCharge(), getLoadedProjectile(), getFiringCooldown()),
-				new TargetPoint(player.dimension, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1000));
+		if (!world.isRemote)
+			OldGuns.network.sendToAllAround(
+					new MessageSyncTileEntityCannonState(this.pos, getArtilleryType(), getFiringState(), getPowderCharge(), getLoadedProjectile(), getFiringCooldown()),
+					new TargetPoint(player.dimension, this.pos.getX(), this.pos.getY(), this.pos.getZ(), 1000));
 		
 		return successfulInteract;
 	}

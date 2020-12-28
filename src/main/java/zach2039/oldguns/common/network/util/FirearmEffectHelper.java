@@ -2,8 +2,8 @@ package zach2039.oldguns.common.network.util;
 
 import java.util.Random;
 
-import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.EnumHandSide;
@@ -19,13 +19,23 @@ public class FirearmEffectHelper
 	public static void doFirearmShootEffect(World world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
 	{
 		/* Get player entity from entity reference. */
-		EntityPlayerSP player = (EntityPlayerSP)shootingEntity;
-		 
+		EntityLivingBase player;
+		boolean rightSide;	
+		if (shootingEntity instanceof EntityLivingBase)
+		{
+			player = (EntityLivingBase)shootingEntity;
+			rightSide = (player.getPrimaryHand() == EnumHandSide.RIGHT) && (EnumHand.values()[parameter] == EnumHand.MAIN_HAND); 
+		}
+		else
+		{
+			player = null;
+			rightSide = true;
+		}
+			
 		/* Create random number gen. */
 		Random rand = new Random();
 		
 		/* Calculate offset from player hand size, passed in parameter. */
-		boolean rightSide = (player.getPrimaryHand() == EnumHandSide.RIGHT) && (EnumHand.values()[parameter] == EnumHand.MAIN_HAND); 
 		float offset = (rightSide) ? 23f : -23f;
 		
 		/* Change number of particles based on effect. */
@@ -105,13 +115,23 @@ public class FirearmEffectHelper
 	public static void doFirearmMisfireEffect(World world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
 	{
 		/* Get player entity from entity reference. */
-		EntityPlayerSP player = (EntityPlayerSP)shootingEntity;
+		EntityLivingBase player;
+		boolean rightSide;	
+		if (shootingEntity instanceof EntityLivingBase)
+		{
+			player = (EntityLivingBase)shootingEntity;
+			rightSide = (player.getPrimaryHand() == EnumHandSide.RIGHT) && (EnumHand.values()[parameter] == EnumHand.MAIN_HAND); 
+		}
+		else
+		{
+			player = null;
+			rightSide = true;
+		}
 		 
 		/* Create random number gen. */
 		Random rand = new Random();
 		
 		/* Calculate offset from player hand size, passed in parameter. */
-		boolean rightSide = (player.getPrimaryHand() == EnumHandSide.RIGHT) && (EnumHand.values()[parameter] == EnumHand.MAIN_HAND); 
 		float offset = (rightSide) ? 23f : -23f;
 		
 		/* Change number of particles based on effect. */

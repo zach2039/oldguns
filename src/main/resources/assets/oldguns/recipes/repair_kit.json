@@ -1,0 +1,30 @@
+{
+	"type": "oldguns:shapeless_gunsmiths_bench",
+	"ingredients": 
+	[
+	    {
+			"item": "minecraft:slime_ball"
+		},
+		{
+			"item": "minecraft:wool",
+			"data": 32767
+		},
+		{
+			"item": "minecraft:stick"
+		},
+		{
+			"type": "forge:ore_dict",
+			"ore": "logWood"
+		},
+		{
+			"item": "minecraft:leather"
+		},
+		{
+			"item": "minecraft:lever"
+		}
+  	],
+	"result":
+	{
+		"item": "oldguns:repair_kit"
+	}
+}
