@@ -814,6 +814,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		            		t.setEffectiveRange(getEffectiveRange());
         		            		t.setLaunchLocation(t.getPosition());
         		            		t.setDamage(t.getDamage() * getDamageModifier());
+        		            		t.setShootingEntity(player);
         		            	
         		            		/* Launch projectile. */
         		            		t.shoot(this, getBarrelPitch(), getBarrelYaw(), 0.0F, f, getDeviationModifier());

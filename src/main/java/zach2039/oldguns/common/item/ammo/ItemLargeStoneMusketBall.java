@@ -10,6 +10,6 @@ public class ItemLargeStoneMusketBall extends ItemFirearmAmmo implements IFirear
 		setAmmoDamage(16.0f);
 		setProjectileSize(0.5f);
 		setProjectileCount(1);
-		setProjectileEffectiveRange(80.0f);
+		setProjectileEffectiveRange(55.0f);
 	}
 }

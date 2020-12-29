@@ -144,12 +144,10 @@ itemGroup.oldguns.all=Old Guns
 text.oldguns.too_many_powder_charges.message=This artillery piece cannot accept any more powder charges.
 
 # Death Messages
-death.attack.oldguns.bullet=%1$s was shot to death.
-death.attack.oldguns.bullet.player=%1$s was shot to death by %2$s.
-death.attack.oldguns.shot=%1$s was shot to death.
-death.attack.oldguns.shot.player=%1$s was shot to death by %2$s.
-death.attack.oldguns.cannonball=%1$s was blown apart by a cannonball.
-death.attack.oldguns.cannonball.player=%1$s was blown apart by a cannonball fired by %2$s.
+death.attack.oldguns.firearm=%1$s was shot to death.
+death.attack.oldguns.firearm.player=%1$s was shot to death by %2$s.
+death.attack.oldguns.artillery=%1$s was blown apart by artillery fire.
+death.attack.oldguns.artillery.player=%1$s was blown apart by artillery fire by %2$s.
 
 # JEI
 jei.oldguns.gunsmithsbenchrecipe.name=Gunsmith's Bench

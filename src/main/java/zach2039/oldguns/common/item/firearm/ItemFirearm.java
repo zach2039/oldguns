@@ -334,8 +334,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
             
             if (!ammoStack.isEmpty())
             {
-                float f = getProjectileSpeed();
-                
+  
                 boolean flag1 = entityplayer.capabilities.isCreativeMode || (ammoStack.getItem() instanceof ItemArrow && ((ItemArrow) ammoStack.getItem()).isInfinite(ammoStack, firearmStack, entityplayer));
 
                 if (!worldIn.isRemote)
@@ -366,14 +365,27 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     List<EntityProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, ammoStack, entityplayer);
                     
                     /* Fire all projectiles from ammo item. */
+                    float finalVelocity = getProjectileSpeed();
+                    float finalEffectiveRange = itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier();
+                    float finalDeviation = getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier();
+                    
+                    OldGuns.logger.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
+                    OldGuns.logger.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
+                    OldGuns.logger.info("FinalEffectiveRange : " + finalEffectiveRange);
+                    
+                    OldGuns.logger.info("FirearmDeviation   : " + getFirearmDeviation());
+                    OldGuns.logger.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
+                    OldGuns.logger.info("AimingDeviationMod : " + snapshotDevMulti);
+                    OldGuns.logger.info("FinalDeviation     : " + finalDeviation);
+                    
                     entityProjectiles.forEach((t) ->
                     {
                     	/* Set location-based data. */
-                    	t.setEffectiveRange(itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier());
+                    	t.setEffectiveRange(finalEffectiveRange);
                     	t.setLaunchLocation(t.getPosition());
                     	
                     	/* Launch projectile. */
-                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, f, getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier());
+                    	t.shoot(entityplayer, entityplayer.rotationPitch, entityplayer.rotationYaw, 0.0F, finalVelocity, finalDeviation);
                     	
                     	int j = EnchantmentHelper.getEnchantmentLevel(Enchantments.POWER, firearmStack);
 

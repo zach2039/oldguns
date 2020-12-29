@@ -10,9 +10,8 @@ import zach2039.oldguns.common.entity.EntityProjectile;
 public class ModDamageSources
 {
 	public static enum DamageType {
-		BULLET 		("bullet"),
-		SHOT		("shot"),
-		CANNONBALL	("cannonball");
+		FIREARM		("firearm"),
+		ARTILLERY	("artillery");
 		
 		private DamageType(String typeName)
 		{
@@ -59,11 +58,13 @@ public class ModDamageSources
 		}
 	}
 	
-	public static DamageSource causeBulletDamage(EntityProjectile projectileEntity, Entity shooter)
+	public static DamageSource causeBulletDamage(DamageType type, EntityProjectile projectileEntity, Entity shooter)
 	{
-		if(shooter==null)
-			return new BulletDamageSource(DamageType.BULLET.getTypeName());
+		if(shooter==null) 
+			return new BulletDamageSource(type.getTypeName());
 		
-		return new OldGunsDamageSourceIndirect(DamageType.BULLET.getTypeName(), projectileEntity, shooter);
+		OldGuns.logger.debug("shooter : " + shooter);
+		
+		return new OldGunsDamageSourceIndirect(type.getTypeName() + ".player", projectileEntity, shooter);
 	}
 }

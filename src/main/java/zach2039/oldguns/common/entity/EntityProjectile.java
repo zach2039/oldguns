@@ -38,7 +38,9 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModDamageSources;
+import zach2039.oldguns.common.init.ModDamageSources.DamageType;
 import zach2039.oldguns.common.init.ModSoundEvents;
 
 public class EntityProjectile extends EntityArrow
@@ -134,18 +136,35 @@ public class EntityProjectile extends EntityArrow
 	 * @param position
 	 */
 	public void setLaunchLocation(BlockPos position)
-	{
-		dataManager.set(START_POS, position);
-	}
+    {
+        this.dataManager.set(START_POS, position);
+    }
+	
+	/**
+	 * Get the start location for this entity. Will be used to calculate damage falloff.
+	 * @param position
+	 */
+	public BlockPos getLaunchLocation()
+    {
+        return ((BlockPos)this.dataManager.get(START_POS));
+    }
 	
 	/**
 	 * Set the effective range of this projectile. Damage to entities is halved when outside this range.
 	 * @param range
 	 */
 	public void setEffectiveRange(float range)
-	{
-		dataManager.set(EFFECTIVE_RANGE, range);
-	}
+    {
+        this.dataManager.set(EFFECTIVE_RANGE, Float.valueOf(range));
+    }
+	
+	/**
+	 * Get the effective range of this projectile. Damage to entities is halved when outside this range.
+	 */
+	public float getEffectiveRange()
+    {
+        return ((Float)this.dataManager.get(EFFECTIVE_RANGE)).floatValue();
+    }
 	
 	/**
 	 * Set the shooting entity for this entity.
@@ -185,10 +204,10 @@ public class EntityProjectile extends EntityArrow
 	protected boolean isInsideEffectiveRange()
 	{
 		/* Get effective range. */
-		float effectiveRange = dataManager.get(EFFECTIVE_RANGE);
+		float effectiveRange = getEffectiveRange();
 		
 		/* Get launch position. */
-		BlockPos launch = dataManager.get(START_POS);
+		BlockPos launch = getLaunchLocation();
 		
 		/* Get current position. */
 		BlockPos current = getPosition();
@@ -561,11 +580,11 @@ public class EntityProjectile extends EntityArrow
 
             if (this.shootingEntity == null)
             {
-                damagesource = ModDamageSources.causeBulletDamage(this, null);
+                damagesource = ModDamageSources.causeBulletDamage(getDamageType(), this, null);
             }
             else
             {
-                damagesource = ModDamageSources.causeBulletDamage(this, this.shootingEntity);
+                damagesource = ModDamageSources.causeBulletDamage(getDamageType(), this, this.shootingEntity);
             }
 
             if (this.isBurning() && !(entity instanceof EntityEnderman))
@@ -611,6 +630,11 @@ public class EntityProjectile extends EntityArrow
                 }
 
                 /* Play hit sound. */
+                OldGuns.logger.info("EffectiveRange : " + getEffectiveRange());
+                OldGuns.logger.info("LaunchLocation : " + getLaunchLocation());
+                OldGuns.logger.info("HitLocation    : " + getPosition());
+                OldGuns.logger.info("IsEffective?   : " + isInsideEffectiveRange());
+                OldGuns.logger.info("Damage         : " + (float)i);
                 this.playSound(ModSoundEvents.BULLET_HIT_MOB, 0.5F, 1.0F / (this.rand.nextFloat() * 0.3F + 0.9F));
 
                 this.setDead();
@@ -700,6 +724,10 @@ public class EntityProjectile extends EntityArrow
         	}
         }
     }
+
+	protected DamageType getDamageType() {
+		return DamageType.FIREARM;
+	}
 
 	@Override
 	public void move(MoverType type, double x, double y, double z)

@@ -9,6 +9,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import zach2039.oldguns.api.artillery.ArtilleryAmmoType;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModDamageSources.DamageType;
 
 public class EntityArtilleryProjectile extends EntityProjectile
 {
@@ -130,6 +131,11 @@ public class EntityArtilleryProjectile extends EntityProjectile
 		}
 	}
 
+	@Override
+	protected DamageType getDamageType() {
+		return DamageType.ARTILLERY;
+	}
+	
 	@Override
 	protected double getGravity()
 	{		

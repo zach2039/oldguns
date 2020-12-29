@@ -109,9 +109,8 @@ public abstract class ItemFirearmAmmo extends Item implements IFirearmAmmo
 
 	public void setProjectileEffectiveRange(float projectileEffectiveRange)
 	{
-		this.projectileEffectiveRange = projectileDeviation;
+		this.projectileEffectiveRange = projectileEffectiveRange;
 	}
-
 	
 	public List<EntityProjectile> createProjectiles(World worldIn, ItemStack stack, EntityLivingBase shooter)
 	{

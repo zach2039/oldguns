@@ -10,6 +10,6 @@ public class ItemSmallIronMusketBallPaperCartridge extends ItemFirearmAmmo imple
 		setAmmoDamage(20.0f);
 		setProjectileSize(0.3f);
 		setProjectileCount(1);
-		setProjectileEffectiveRange(50.0f);
+		setProjectileEffectiveRange(25.0f);
 	}
 }

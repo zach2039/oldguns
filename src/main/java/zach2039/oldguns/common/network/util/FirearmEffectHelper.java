@@ -89,23 +89,23 @@ public class FirearmEffectHelper
 		switch (effect)
 		{
 			case SMALL_FIREARM_SHOOT:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case MEDIUM_FIREARM_SHOOT:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS,
 						1.0f, 2.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case LARGE_FIREARM_SHOOT:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS,
 						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			default:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 		}
@@ -168,12 +168,12 @@ public class FirearmEffectHelper
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case MISFIRE_WET:
-				player.world.playSound(posX, posY, posZ, SoundEvents.BLOCK_NOTE_HAT, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.BLOCK_NOTE_HAT, SoundCategory.PLAYERS,
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
-				player.world.playSound(posX, posY, posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.PLAYERS,
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 			case BREAK:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ITEM_SHIELD_BREAK, SoundCategory.PLAYERS,
 						0.5f, 0.25f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			default:
@@ -183,10 +183,7 @@ public class FirearmEffectHelper
 	}
 	
 	public static void doArtilleryShootEffect(World world, Entity shootingEntity, ArtilleryEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
-	{
-		/* Get player entity from entity reference. */
-		Entity player = (Entity)shootingEntity;
-		 
+	{		 
 		/* Create random number gen. */
 		Random rand = new Random();
 		
@@ -235,13 +232,13 @@ public class FirearmEffectHelper
 		switch (effect)
 		{
 			case CANNON_SHOT:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_LIGHTNING_THUNDER, SoundCategory.PLAYERS,
 						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			default:
-				player.world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
+				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 		}

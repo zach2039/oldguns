@@ -1,6 +1,5 @@
 package zach2039.oldguns.common.init;
 
-import java.lang.ref.Reference;
 import java.util.Map;
 
 import com.google.common.collect.Maps;
@@ -9,6 +8,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.Name;
+import net.minecraftforge.common.config.Config.RangeDouble;
+import net.minecraftforge.common.config.Config.RangeInt;
 import net.minecraftforge.common.config.Config.RequiresMcRestart;
 import zach2039.oldguns.common.OldGuns;
 
@@ -20,85 +21,301 @@ public class ModConfigs {
 	@Config(modid = OldGuns.MODID, category = "Firearms")
 	public static class ConfigCategoryFirearms {
 		@Name("Matchlock Derringer")
-		public static ConfigCategoryFirearmSettings configMatchlockDerringer = new ConfigCategoryFirearmSettings(8, 3f, 3f, 10f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockDerringer = new ConfigCategoryFirearmSettings(
+				8,     	// durability              
+				3f,    	// projectile speed        
+				0.5f,  	// effective range modifier
+				5.0f,   // shot deviation            
+				1f     	// shot damage modifier    
+			); 
 		@Name("Matchlock Pistol")
-		public static ConfigCategoryFirearmSettings configMatchlockPistol = new ConfigCategoryFirearmSettings(12, 3.25f, 6f, 9f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockPistol = new ConfigCategoryFirearmSettings(
+				12,    	// durability              
+				3.25f, 	// projectile speed        
+				1.2f,  	// effective range modifier
+				2.0f,   // shot deviation          
+				1f     	// shot damage modifier    
+			); 
 		@Name("Matchlock Arquebus")
-		public static ConfigCategoryFirearmSettings configMatchlockArquebus = new ConfigCategoryFirearmSettings(16, 3.5f, 9f, 8f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockArquebus = new ConfigCategoryFirearmSettings(
+				16,    	// durability              
+				3.5f,  	// projectile speed        
+				1.0f,  	// effective range modifier
+				1.8f,   // shot deviation       
+				1f     	// shot damage modifier    
+			); 
 		@Name("Matchlock Caliver")
-		public static ConfigCategoryFirearmSettings configMatchlockCaliver = new ConfigCategoryFirearmSettings(20, 3.75f, 12f, 7f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockCaliver = new ConfigCategoryFirearmSettings(
+				20,     // durability              
+				3.75f,  // projectile speed        
+				1.2f,  	// effective range modifier
+				1.6f,   // shot deviation        
+				1f      // shot damage modifier    
+			); 
 		@Name("Matchlock Musket")
-		public static ConfigCategoryFirearmSettings configMatchlockMusket = new ConfigCategoryFirearmSettings(24, 4f, 15f, 6f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockMusket = new ConfigCategoryFirearmSettings(
+				24,     // durability              
+				4f,     // projectile speed        
+				1f,    	// effective range modifier
+				1.4f,   // shot deviation          
+				1f      // shot damage modifier    
+			); 
 		@Name("Matchlock Long Musket")
-		public static ConfigCategoryFirearmSettings configMatchlockLongMusket = new ConfigCategoryFirearmSettings(28, 4.25f, 18f, 5f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockLongMusket = new ConfigCategoryFirearmSettings(
+				28,     // durability              
+				4.25f,  // projectile speed        
+				1.2f,  	// effective range modifier
+				1.2f,   // shot deviation         
+				1f      // shot damage modifier    
+			); 
 		@Name("Matchlock Musketoon")
-		public static ConfigCategoryFirearmSettings configMatchlockMusketoon = new ConfigCategoryFirearmSettings(24, 3.75f, 14f, 7f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockMusketoon = new ConfigCategoryFirearmSettings(
+				24,     // durability              
+				3.75f,  // projectile speed        
+				0.8f,    // effective range modifier
+				1.5f,   // shot deviation       
+				1f      // shot damage modifier    
+			); 
 		@Name("Matchlock Blunderbuss")
-		public static ConfigCategoryFirearmSettings configMatchlockBlunderbuss = new ConfigCategoryFirearmSettings(24, 3.25f, 6f, 9f, 1f); 
+		public static ConfigCategoryFirearmSettings configMatchlockBlunderbuss = new ConfigCategoryFirearmSettings(
+				24,     // durability              
+				3.25f,  // projectile speed        
+				1f,     // effective range modifier
+				1.7f,   // shot deviation      
+				1f      // shot damage modifier    
+			); 
 		
 		@Name("Flintlock Derringer")
-		public static ConfigCategoryFirearmSettings configFlintlockDerringer = new ConfigCategoryFirearmSettings(28, 3.25f, 5f, 10f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockDerringer = new ConfigCategoryFirearmSettings(
+				28,     // durability              
+				3.25f,  // projectile speed        
+				0.5f,  	// effective range modifier
+				5.0f,   // shot deviation    
+				1f      // shot damage modifier    
+			);
 		@Name("Flintlock Pistol")
-		public static ConfigCategoryFirearmSettings configFlintlockPistol = new ConfigCategoryFirearmSettings(32, 3.5f, 8f, 9f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockPistol = new ConfigCategoryFirearmSettings(
+				32,     // durability              
+				3.5f,   // projectile speed        
+				1.2f,   // effective range modifier
+				2.0f,   // shot deviation     
+				1f      // shot damage modifier    
+			); 
 		@Name("Flintlock Heavy Pistol")
-		public static ConfigCategoryFirearmSettings configFlintlockArquebus = new ConfigCategoryFirearmSettings(36, 3.75f, 11f, 8f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockArquebus = new ConfigCategoryFirearmSettings(
+				36,     // durability              
+				3.75f,  // projectile speed        
+				1.0f,   // effective range modifier
+				1.8f,   // shot deviation     
+				1f      // shot damage modifier    
+			); 
 		@Name("Flintlock Carbine")
-		public static ConfigCategoryFirearmSettings configFlintlockCaliver = new ConfigCategoryFirearmSettings(40, 4f, 14f, 7f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockCaliver = new ConfigCategoryFirearmSettings(
+				40,     // durability              
+				4f,     // projectile speed        
+				1.2f,    // effective range modifier
+				1.6f,   // shot deviation         
+				1f      // shot damage modifier    
+			); 
 		@Name("Flintlock Musket")
-		public static ConfigCategoryFirearmSettings configFlintlockMusket = new ConfigCategoryFirearmSettings(44, 4.25f, 17f, 6f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockMusket = new ConfigCategoryFirearmSettings(
+				44,     // durability              
+				4.25f,  // projectile speed        
+				1f,   	// effective range modifier
+				1.4f,   // shot deviation          
+				1f      // shot damage modifier    
+			); 
 		@Name("Flintlock Long Musket")
-		public static ConfigCategoryFirearmSettings configFlintlockLongMusket = new ConfigCategoryFirearmSettings(48, 4.5f, 20f, 5f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockLongMusket = new ConfigCategoryFirearmSettings(
+				48,     // durability              
+				4.5f,   // projectile speed        
+				1.2f,    // effective range modifier
+				1.2f,   // shot deviation    
+				1f      // shot damage modifier    
+			); 
 		@Name("Flintlock Musketoon")
-		public static ConfigCategoryFirearmSettings configFlintlockMusketoon = new ConfigCategoryFirearmSettings(44, 4f, 16f, 7f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockMusketoon = new ConfigCategoryFirearmSettings(
+				44,     // durability              
+				4f,     // projectile speed        
+				0.8f,    // effective range modifier
+				1.5f,   // shot deviation         
+				1f      // shot damage modifier    
+			); 
 		@Name("Flintlock Blunderbuss")
-		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.5f, 8f, 9f, 1f); 
+		public static ConfigCategoryFirearmSettings configFlintlockBlunderbuss = new ConfigCategoryFirearmSettings(
+				44,     // durability              
+				3.5f,   // projectile speed        
+				1.0f,    // effective range modifier
+				1.7f,   // shot deviation          
+				1f      // shot damage modifier    
+			); 
 		
 		@Name("Flintlock Breechloading Pistol")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(24, 3.5f, 8f, 9f, 1f, 70); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(
+				24,     // durability              
+				3.5f,   // projectile speed        
+				1.2f,    // effective range modifier
+				2.0f,   // shot deviation      
+				1f,     // shot damage modifier    
+				70		// reloading ticks
+			); 
 		@Name("Flintlock Breechloading Heavy Pistol")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(28, 3.75f, 11f, 8f, 1f, 80); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(
+				28,     // durability              
+				3.75f,  // projectile speed        
+				1.0f,    // effective range modifier
+				1.8f,   // shot deviation             
+				1f,     // shot damage modifier    
+				80		// reloading ticks
+			); 
 		@Name("Flintlock Breechloading Carbine")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(32, 4.0f, 14f, 7f, 1f, 90); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(
+				32,     // durability              
+				4.0f,   // projectile speed        
+				1.2f,    // effective range modifier
+				1.6f,   // shot deviation         
+				1f,     // shot damage modifier    
+				90		// reloading ticks
+			); 
 		@Name("Flintlock Breechloading Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(36, 4.25f, 17f, 6f, 1f, 100); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(
+				36,     // durability              
+				4.25f,  // projectile speed        
+				1f,  	// effective range modifier
+				1.4f,   // shot deviation      
+				1f,     // shot damage modifier    
+				100		// reloading ticks
+			); 
 		@Name("Flintlock Breechloading Long Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(40, 4.5f, 20f, 5f, 1f, 110); 
+		public static ConfigCategoryBreechloadingFirearmSettings configFlintlockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(
+				40,     // durability              
+				4.5f,   // projectile speed        
+				1.2f,    // effective range modifier
+				1.2f,   // shot deviation       
+				1f,     // shot damage modifier    
+				110		// reloading ticks
+			); 
 		
 		@Name("Caplock Derringer")
-		public static ConfigCategoryFirearmSettings configCaplockDerringer = new ConfigCategoryFirearmSettings(48, 3.5f, 7f, 10f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockDerringer = new ConfigCategoryFirearmSettings(
+				48,     // durability              
+				3.5f,   // projectile speed        
+				0.5f,  	// effective range modifier
+				5.0f,   // shot deviation         
+				1f      // shot damage modifier    
+			); 
 		@Name("Caplock Pistol")
-		public static ConfigCategoryFirearmSettings configCaplockPistol = new ConfigCategoryFirearmSettings(52, 3.75f, 10f, 9f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockPistol = new ConfigCategoryFirearmSettings(
+				52,     // durability              
+				3.75f,  // projectile speed        
+				1.2f,    // effective range modifier
+				2.0f,   // shot deviation       
+				1f      // shot damage modifier    
+			); 
 		@Name("Caplock Heavy Pistol")
-		public static ConfigCategoryFirearmSettings configCaplockArquebus = new ConfigCategoryFirearmSettings(56, 4.0f, 13f, 8f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockArquebus = new ConfigCategoryFirearmSettings(
+				56,     // durability              
+				4.0f,   // projectile speed        
+				1.0f,    // effective range modifier
+				1.8f,   // shot deviation          
+				1f      // shot damage modifier    
+			); 
 		@Name("Caplock Carbine")
-		public static ConfigCategoryFirearmSettings configCaplockCaliver = new ConfigCategoryFirearmSettings(60, 4.25f, 16f, 7f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockCaliver = new ConfigCategoryFirearmSettings(
+				60,     // durability              
+				4.25f,  // projectile speed        
+				1.2f,    // effective range modifier
+				1.6f,   // shot deviation          
+				1f      // shot damage modifier    
+			); 
 		@Name("Caplock Musket")
-		public static ConfigCategoryFirearmSettings configCaplockMusket = new ConfigCategoryFirearmSettings(64, 4.5f, 19f, 6f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockMusket = new ConfigCategoryFirearmSettings(
+				64,		// durability              
+				4.5f,	// projectile speed        
+				1.0f,    // effective range modifier
+				1.4f,   // shot deviation       
+				1f		// shot damage modifier    
+			); 
 		@Name("Caplock Long Musket")
-		public static ConfigCategoryFirearmSettings configCaplockLongMusket = new ConfigCategoryFirearmSettings(68, 4.75f, 22f, 5f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockLongMusket = new ConfigCategoryFirearmSettings(
+				68,		// durability              
+				4.75f,	// projectile speed        
+				1.2f,    // effective range modifier
+				1.2f,   // shot deviation     
+				1f		// shot damage modifier    
+			); 
 		@Name("Caplock Musketoon")
-		public static ConfigCategoryFirearmSettings configCaplockMusketoon = new ConfigCategoryFirearmSettings(64, 4.25f, 18f, 7f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockMusketoon = new ConfigCategoryFirearmSettings(
+				64,		// durability
+				4.25f,	// projectile speed
+				0.8f,    // effective range modifier
+				1.5f,   // shot deviation
+				1f		// shot damage modifier
+			);   
 		@Name("Caplock Blunderbuss")
-		public static ConfigCategoryFirearmSettings configCaplockBlunderbuss = new ConfigCategoryFirearmSettings(44, 3.75f, 8f, 9f, 1f); 
+		public static ConfigCategoryFirearmSettings configCaplockBlunderbuss = new ConfigCategoryFirearmSettings(
+				44,		// durability
+				3.75f,	// projectile speed
+				1.0f,	// effective range modifier
+				1.7f,   // shot deviation      
+				1f		// shot damage modifier
+			); 
 		
 		@Name("Caplock Breechloading Pistol")
-		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(44, 3.5f, 8f, 9f, 1f, 50); 
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingPistol = new ConfigCategoryBreechloadingFirearmSettings(
+				44,     // durability              
+				3.5f,   // projectile speed        
+				1.2f,	// effective range modifier
+				2.0f,   // shot deviation         
+				1f,     // shot damage modifier    
+				50		// reloading ticks
+			); 
 		@Name("Caplock Breechloading Heavy Pistol")
-		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(48, 3.75f, 11f, 8f, 1f, 60); 
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingArquebus = new ConfigCategoryBreechloadingFirearmSettings(
+				48,     // durability              
+				3.75f,  // projectile speed        
+				1.0f,	// effective range modifier
+				1.8f,   // shot deviation        
+				1f,     // shot damage modifier    
+				60		// reloading ticks
+			); 
 		@Name("Caplock Breechloading Carbine")
-		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(52, 4.0f, 14f, 7f, 1f, 70); 
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingCaliver = new ConfigCategoryBreechloadingFirearmSettings(
+				52,     // durability              
+				4.0f,   // projectile speed        
+				1.2f,	// effective range modifier
+				1.6f,   // shot deviation            
+				1f,     // shot damage modifier    
+				70		// reloading ticks
+			); 
 		@Name("Caplock Breechloading Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(56, 4.25f, 17f, 6f, 1f, 80); 
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingMusket = new ConfigCategoryBreechloadingFirearmSettings(
+				56,     // durability              
+				4.25f,  // projectile speed        
+				1.0f,	// effective range modifier
+				1.4f,   // shot deviation          
+				1f,     // shot damage modifier    
+				80		// reloading ticks
+			); 
 		@Name("Caplock Breechloading Long Musket")
-		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(60, 4.5f, 20f, 5f, 1f, 90); 
+		public static ConfigCategoryBreechloadingFirearmSettings configCaplockBreechloadingLongMusket = new ConfigCategoryBreechloadingFirearmSettings(
+				60,     // durability              
+				4.5f,   // projectile speed        
+				1.2f,	// effective range modifier
+				1.2f,   // shot deviation          
+				1f,     // shot damage modifier    
+				90		// reloading ticks 
+			); 
 		
 		public static class ConfigCategoryFirearmSettings {	
 			@Name("Firearm durability")
 			@Comment("Affects the number of times a firearm can be shot/used before breaking.")
+			@RangeInt(min = 1) 
 			public int durability = 32;
 			
 			@Name("Projectile speed")
 			@Comment("Affects the speed of projectiles followed from this firearm.")
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float projectileSpeed = 2f; 
 			
 			@Name("Base effective range")
@@ -106,6 +323,7 @@ public class ModConfigs {
 				"Affects the default range past which projectiles fired from this firearm do half damage.",
 				"This is sometimes overriden by the type of projectile loaded."
 			})
+			@RangeDouble(min = 0.1f, max = 10000f) 
 			public float baseEffectiveRange = 10f; 
 			
 			@Name("Base shot deviation")
@@ -113,6 +331,7 @@ public class ModConfigs {
 				"Affects the deviation of projectiles fired from this firearm.",
 				"This is multiplied with the base deviation of the ammo loaded to get the final deviation."
 			})
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float baseShotDeviationModifier = 1f; 
 			
 			@Name("Base shot damage modifier")
@@ -120,6 +339,7 @@ public class ModConfigs {
 				"Affects the damage of projectiles fired from this firearm.",
 				"This is multiplied with the base damage of the ammo loaded to get the final damage."
 			})
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float baseShotDamageModifier = 1f;
 			
 			public ConfigCategoryFirearmSettings(int defaultDurability, float defaultProjectileSpeed, float defaultEffectiveRange, float defaultShotDeviationModifier, float defaultShotDamageModifier) {
@@ -135,6 +355,7 @@ public class ModConfigs {
 		public static class ConfigCategoryBreechloadingFirearmSettings {	
 			@Name("Firearm durability")
 			@Comment("Affects the number of times a firearm can be shot/used before breaking.")
+			@RangeInt(min = 1)
 			public int durability = 32;
 			
 			@Name("Projectile speed")
@@ -146,6 +367,7 @@ public class ModConfigs {
 				"Affects the default range past which projectiles fired from this firearm do half damage.",
 				"This is sometimes overriden by the type of projectile loaded."
 			})
+			@RangeDouble(min = 0.1f, max = 10000f) 
 			public float baseEffectiveRange = 10f; 
 			
 			@Name("Base shot deviation")
@@ -153,6 +375,7 @@ public class ModConfigs {
 				"Affects the deviation of projectiles fired from this firearm.",
 				"This is multiplied with the base deviation of the ammo loaded to get the final deviation."
 			})
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float baseShotDeviationModifier = 1f; 
 			
 			@Name("Base shot damage modifier")
@@ -160,6 +383,7 @@ public class ModConfigs {
 				"Affects the damage of projectiles fired from this firearm.",
 				"This is multiplied with the base damage of the ammo loaded to get the final damage."
 			})
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float baseShotDamageModifier = 1f;
 			
 			@Name("Ticks required for reload")
@@ -167,6 +391,7 @@ public class ModConfigs {
 				"Affects the reload duration of this breechloading firearm.",
 				"For reference, 20 ticks is 1 second."
 			})
+			@RangeInt(min = 1)
 			public int requiredReloadTicks = 80;
 			
 			public ConfigCategoryBreechloadingFirearmSettings(int defaultDurability, float defaultProjectileSpeed, float defaultEffectiveRange, float defaultShotDeviationModifier, float defaultShotDamageModifier, int defaultReloadTicks) {
@@ -187,13 +412,24 @@ public class ModConfigs {
 		public static boolean dropArtilleryItemOnBreak = false;
 		
 		@Name("Medium Cannon")
-        public static ConfigCategoryArtillerySettings configMediumCannon = new ConfigCategoryArtillerySettings(2.5f, 500f, 1f, 1f);
+        public static ConfigCategoryArtillerySettings configMediumCannon = new ConfigCategoryArtillerySettings(
+        		2.5f,	// projectile speed
+        		500f,	// effective range
+        		1f,		// shot deviation modifier
+        		1f		// shot damage modifier
+        	);
 		@Name("Naval Cannon")
-        public static ConfigCategoryArtillerySettings configNavalCannon = new ConfigCategoryArtillerySettings(2.5f, 500f, 1f, 1f);
+        public static ConfigCategoryArtillerySettings configNavalCannon = new ConfigCategoryArtillerySettings(
+        		2.5f,	// projectile speed         
+        		500f,	// effective range          
+        		1f,  	// shot deviation modifier  
+        		1f   	// shot damage modifier     
+        	);
 		
 		public static class ConfigCategoryArtillerySettings {		
 			@Name("Projectile speed")
 			@Comment("Affects the speed of projectiles followed from this artillery piece.")
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float projectileSpeed = 2.5f; 
 			
 			@Name("Base effective range")
@@ -201,6 +437,7 @@ public class ModConfigs {
 				"Affects the default range past which projectiles fired from this artillery piece do half damage.",
 				"This is sometimes overriden by the type of projectile loaded."
 			})
+			@RangeDouble(min = 0.1f, max = 10000f) 
 			public float baseEffectiveRange = 500f; 
 			
 			@Name("Base shot deviation")
@@ -208,6 +445,7 @@ public class ModConfigs {
 				"Affects the deviation of projectiles fired from this artillery piece.",
 				"This is multiplied with the base deviation of the ammo loaded to get the final deviation."
 			})
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float baseShotDeviationModifier = 1f; 
 			
 			@Name("Base shot damage modifier")
@@ -215,6 +453,7 @@ public class ModConfigs {
 				"Affects the damage of projectiles fired from this artillery piece.",
 				"This is multiplied with the base damage of the ammo loaded to get the final damage."
 			})
+			@RangeDouble(min = 0.1f, max = 1000f) 
 			public float baseShotDamageModifier = 1f;
 			
 			public ConfigCategoryArtillerySettings(float defaultProjectileSpeed, float defaultEffectiveRange, float defaultShotDeviationModifier, float defaultShotDamageModifier) {
