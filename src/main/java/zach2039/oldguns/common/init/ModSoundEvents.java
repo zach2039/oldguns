@@ -26,6 +26,9 @@ public class ModSoundEvents
 	@ObjectHolder("bullet.hit.mob")
 	public static final SoundEvent BULLET_HIT_MOB = null;
 	
+	@ObjectHolder("bullet.shoot")
+	public static final SoundEvent BULLET_SHOOT = null;
+	
 	@Mod.EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler {
 		private static Map<ResourceLocation, SoundEvent> SOUND_EVENTS;
@@ -58,6 +61,7 @@ public class ModSoundEvents
 					.put(createSoundEvent("bullet.ricochet"))
 					.put(createSoundEvent("bullet.hit.block"))
 					.put(createSoundEvent("bullet.hit.mob"))
+					.put(createSoundEvent("bullet.shoot"))
 					.build();
 		}
 

@@ -20,6 +20,10 @@ public class ModConfigs {
 	
 	@Config(modid = OldGuns.MODID, category = "Firearms")
 	public static class ConfigCategoryFirearms {
+		@Name("Print firearm debug details to console")
+		@Comment("Set true to print debug messages to the console, to help tune firearm settings.")
+		public static boolean printFirearmDebugMessages = false;
+		
 		@Name("Matchlock Derringer")
 		public static ConfigCategoryFirearmSettings configMatchlockDerringer = new ConfigCategoryFirearmSettings(
 				8,     	// durability              

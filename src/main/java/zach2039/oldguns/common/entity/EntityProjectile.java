@@ -39,6 +39,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import zach2039.oldguns.common.OldGuns;
+import zach2039.oldguns.common.init.ModConfigs;
 import zach2039.oldguns.common.init.ModDamageSources;
 import zach2039.oldguns.common.init.ModDamageSources.DamageType;
 import zach2039.oldguns.common.init.ModSoundEvents;
@@ -630,11 +631,14 @@ public class EntityProjectile extends EntityArrow
                 }
 
                 /* Play hit sound. */
-                OldGuns.logger.info("EffectiveRange : " + getEffectiveRange());
-                OldGuns.logger.info("LaunchLocation : " + getLaunchLocation());
-                OldGuns.logger.info("HitLocation    : " + getPosition());
-                OldGuns.logger.info("IsEffective?   : " + isInsideEffectiveRange());
-                OldGuns.logger.info("Damage         : " + (float)i);
+                if (ModConfigs.ConfigCategoryFirearms.printFirearmDebugMessages)
+                {
+	                OldGuns.logger.info("EffectiveRange : " + getEffectiveRange());
+	                OldGuns.logger.info("LaunchLocation : " + getLaunchLocation());
+	                OldGuns.logger.info("HitLocation    : " + getPosition());
+	                OldGuns.logger.info("IsEffective?   : " + isInsideEffectiveRange());
+	                OldGuns.logger.info("Damage         : " + (float)i);
+                }
                 this.playSound(ModSoundEvents.BULLET_HIT_MOB, 0.5F, 1.0F / (this.rand.nextFloat() * 0.3F + 0.9F));
 
                 this.setDead();

@@ -42,6 +42,7 @@ import zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.entity.EntityProjectile;
+import zach2039.oldguns.common.init.ModConfigs;
 import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
@@ -369,14 +370,17 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     float finalEffectiveRange = itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier();
                     float finalDeviation = getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier();
                     
-                    OldGuns.logger.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
-                    OldGuns.logger.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
-                    OldGuns.logger.info("FinalEffectiveRange : " + finalEffectiveRange);
-                    
-                    OldGuns.logger.info("FirearmDeviation   : " + getFirearmDeviation());
-                    OldGuns.logger.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
-                    OldGuns.logger.info("AimingDeviationMod : " + snapshotDevMulti);
-                    OldGuns.logger.info("FinalDeviation     : " + finalDeviation);
+                    if (ModConfigs.ConfigCategoryFirearms.printFirearmDebugMessages)
+                    {
+	                    OldGuns.logger.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
+	                    OldGuns.logger.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
+	                    OldGuns.logger.info("FinalEffectiveRange : " + finalEffectiveRange);
+	                    
+	                    OldGuns.logger.info("FirearmDeviation   : " + getFirearmDeviation());
+	                    OldGuns.logger.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
+	                    OldGuns.logger.info("AimingDeviationMod : " + snapshotDevMulti);
+	                    OldGuns.logger.info("FinalDeviation     : " + finalDeviation);
+                    }
                     
                     entityProjectiles.forEach((t) ->
                     {
@@ -652,7 +656,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
             stackIn.setItemDamage(stackIn.getMaxDamage());
             
             NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(
-					shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 64d);
+					shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 100d);
 			
 			OldGuns.network.sendToAllAround(
 					new MessageFirearmEffect((EntityLivingBase)shooter, FirearmEffect.BREAK, shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ,
@@ -666,7 +670,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 			failure = true;
 			
 			NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(
-					shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 64d);
+					shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 100d);
 			
 			OldGuns.network.sendToAllAround(
 					new MessageFirearmEffect((EntityLivingBase)shooter, FirearmEffect.MISFIRE, shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ,
@@ -697,7 +701,7 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 				failure = true;
 				
 				NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(
-						shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 64d);
+						shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 100d);
 				
 				OldGuns.network.sendToAllAround(
 						new MessageFirearmEffect((EntityLivingBase)shooter, FirearmEffect.MISFIRE_WET, shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ,

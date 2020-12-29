@@ -31,5 +31,14 @@
 			"oldguns:bullethitmob1"
 		],
 		"subtitle": "subtitle.bullet.hit.mob"
+	},
+	"bullet.shoot": 
+	{
+		"category": "neutral",
+		"sounds":
+		[
+			"minecraft:ambient/weather/thunder3"
+		],
+		"subtitle": "subtitle.bullet.shoot"
 	}
 }

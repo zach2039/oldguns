@@ -63,8 +63,6 @@ public class ModDamageSources
 		if(shooter==null) 
 			return new BulletDamageSource(type.getTypeName());
 		
-		OldGuns.logger.debug("shooter : " + shooter);
-		
 		return new OldGunsDamageSourceIndirect(type.getTypeName() + ".player", projectileEntity, shooter);
 	}
 }

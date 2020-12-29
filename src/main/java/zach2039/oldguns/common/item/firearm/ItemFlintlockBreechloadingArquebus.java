@@ -50,7 +50,7 @@ public class ItemFlintlockBreechloadingArquebus extends ItemFirearm implements I
 	public void doFiringEffect(World worldIn, Entity shooter, ItemStack stackIn)
 	{
 		NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(
-				shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 64d);
+				shooter.dimension, shooter.posX, shooter.posY, shooter.posZ, 1600d);
 		
 		OldGuns.network.sendToAllAround(
 				new MessageFirearmEffect((EntityLivingBase)shooter, FirearmEffect.LARGE_FIREARM_SHOOT, shooter.posX, shooter.posY + shooter.getEyeHeight(), shooter.posZ,

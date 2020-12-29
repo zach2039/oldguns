@@ -40,7 +40,7 @@ public class EntityArtilleryCannon extends EntityArtillery implements IArtillery
 	public void doFiringEffect(World worldIn, EntityPlayer player, double posX, double posY, double posZ)
 	{
 		NetworkRegistry.TargetPoint point = new NetworkRegistry.TargetPoint(
-				player.dimension, posX, posY, posZ, 64d);
+				player.dimension, posX, posY, posZ, 1600d);
 		
 		OldGuns.network.sendToAllAround(
 				new MessageArtilleryEffect(player, ArtilleryEffect.CANNON_SHOT, posX, posY + getBarrelHeight(), posZ,
