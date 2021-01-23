@@ -316,7 +316,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
                 /* Reduce damage taken if source was not a player with a tool. */
                 float amountModifier = 1.0f;
                 if (!(source.getTrueSource() instanceof EntityPlayer && source.getDamageType() == "player")) {                		
-                	amountModifier = 0.25f;
+                	amountModifier = 0.1f;
                 }
                 
                 //OldGuns.logger.info("source : " + source.getTrueSource());

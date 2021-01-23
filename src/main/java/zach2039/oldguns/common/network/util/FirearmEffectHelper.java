@@ -96,9 +96,9 @@ public class FirearmEffectHelper
 				break;
 			case MEDIUM_FIREARM_SHOOT:
 				world.playSound(posX, posY, posZ, ModSoundEvents.BULLET_SHOOT, SoundCategory.PLAYERS,
-						25.0F, 3.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
+						25.0F, 3.0f / (new Random().nextFloat() * 0.6F + 1.2F), true);
 				world.playSound(posX, posY, posZ, SoundEvents.ENTITY_GENERIC_EXPLODE, SoundCategory.PLAYERS,
-						1.0f, 1.5f / (new Random().nextFloat() * 0.6F + 1.2F), true);
+						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case LARGE_FIREARM_SHOOT:
 				world.playSound(posX, posY, posZ, ModSoundEvents.BULLET_SHOOT, SoundCategory.PLAYERS,
@@ -117,7 +117,7 @@ public class FirearmEffectHelper
 	public static void doFirearmMisfireEffect(World world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
 	{
 		/* Get player entity from entity reference. */
-		EntityLivingBase player;/
+		EntityLivingBase player;
 		boolean rightSide;	
 		if (shootingEntity instanceof EntityLivingBase)
 		{

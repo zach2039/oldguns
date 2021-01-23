@@ -42,7 +42,7 @@ public class ModEntities
 					createBuilder("entity_artillery_cannon")
 							.entity(EntityArtilleryCannon.class)
 							.tracker(500, 3, true)
-							.build(),
+							.build()
 			};
 			
 			event.getRegistry().registerAll(entries);

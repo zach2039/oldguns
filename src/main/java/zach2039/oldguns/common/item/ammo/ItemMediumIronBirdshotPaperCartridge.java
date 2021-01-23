@@ -1,16 +1,17 @@
 package zach2039.oldguns.common.item.ammo;
 
 import zach2039.oldguns.api.ammo.IFirearmAmmo;
+import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearmAmmo;
 
 public class ItemMediumIronBirdshotPaperCartridge extends ItemFirearmAmmo implements IFirearmAmmo
 {
 	public ItemMediumIronBirdshotPaperCartridge()
 	{
-		super("medium_iron_birdshot_paper_cartridge", 6);
-		setAmmoDamage(3.0f);
-		setProjectileSize(0.2f);
-		setProjectileCount(8);
-		setProjectileEffectiveRange(7.0f);
-		setProjectileDeviationModifier(3.0f);
+		super("medium_iron_birdshot_paper_cartridge", ConfigCategoryFirearmAmmo.configMediumIronBirdshot.maxStacksize);
+		setAmmoDamage(ConfigCategoryFirearmAmmo.configMediumIronBirdshot.projectileDamage);
+		setProjectileSize(ConfigCategoryFirearmAmmo.configMediumIronBirdshot.projectileSize);
+		setProjectileCount(ConfigCategoryFirearmAmmo.configMediumIronBirdshot.projectileCount);
+		setProjectileEffectiveRange(ConfigCategoryFirearmAmmo.configMediumIronBirdshot.projectileEffectiveRange);
+		setProjectileDeviationModifier(ConfigCategoryFirearmAmmo.configMediumIronBirdshot.projectileDeviationModifier);	
 	}
 }
