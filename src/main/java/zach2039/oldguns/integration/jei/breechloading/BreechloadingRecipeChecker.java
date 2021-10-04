@@ -12,10 +12,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraftforge.oredict.OreIngredient;
-import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
-import zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe;
-import zach2039.oldguns.common.item.crafting.ShapelessGunsmithsBenchRecipe;
 
 public final class BreechloadingRecipeChecker {
 

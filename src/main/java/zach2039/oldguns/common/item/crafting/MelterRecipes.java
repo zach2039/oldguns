@@ -9,6 +9,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.init.ModItems;
@@ -33,7 +34,10 @@ public class MelterRecipes
     
     private MelterRecipes()
     {
-        this.addMeltingRecipeForBlock(Blocks.IRON_ORE, ModItems.SMALL_MUSKET_BALL_MOLD, new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL, 8), 0.7F);
+        //this.addMeltingRecipeForBlock(Blocks.IRON_ORE, ModItems.SMALL_MUSKET_BALL_MOLD, new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL, 8), 0.7F);
+    	this.addMelting(ModItems.IRON_BITS, 1, ModItems.SMALL_MUSKET_BALL_MOLD, new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL, 1), 0.7F);
+    	this.addMelting(ModItems.IRON_BITS, 2, ModItems.MEDIUM_MUSKET_BALL_MOLD, new ItemStack(ModItems.MEDIUM_IRON_MUSKET_BALL, 1), 0.7F);
+    	this.addMelting(ModItems.IRON_BITS, 3, ModItems.LARGE_MUSKET_BALL_MOLD, new ItemStack(ModItems.LARGE_IRON_MUSKET_BALL, 1), 0.7F);
     }
  
     /**
@@ -44,6 +48,14 @@ public class MelterRecipes
         this.addMelting(Item.getItemFromBlock(input), cast, stack, experience);
     }
 
+    /**
+     * Adds a melting recipe using an Item as the input item.
+     */
+    public void addMelting(Item input, int amount, Item cast, ItemStack stack, float experience)
+    {
+        this.addMeltingRecipe(new ItemStack(input, amount, 32767), new ItemStack(cast, 1, 32767), stack, experience);
+    }
+    
     /**
      * Adds a melting recipe using an Item as the input item.
      */

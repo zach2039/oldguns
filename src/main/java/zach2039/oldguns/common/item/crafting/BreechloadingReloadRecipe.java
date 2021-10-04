@@ -11,10 +11,8 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
@@ -27,9 +25,8 @@ import net.minecraftforge.common.crafting.IRecipeFactory;
 import net.minecraftforge.common.crafting.JsonContext;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 import zach2039.oldguns.api.firearm.impl.IFirearm;
-import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
+import zach2039.oldguns.common.init.ModItems;
 import zach2039.oldguns.common.item.ammo.ItemFirearmAmmo;
 import zach2039.oldguns.common.item.crafting.util.RecipeUtil;
 import zach2039.oldguns.common.item.util.FirearmNBTHelper;

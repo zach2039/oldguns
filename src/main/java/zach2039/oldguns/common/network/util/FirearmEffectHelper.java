@@ -13,7 +13,6 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import zach2039.oldguns.api.artillery.ArtilleryEffect;
 import zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
-import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModSoundEvents;
 
 public class FirearmEffectHelper

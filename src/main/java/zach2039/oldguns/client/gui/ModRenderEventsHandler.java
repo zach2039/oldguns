@@ -2,23 +2,13 @@ package zach2039.oldguns.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.BufferBuilder;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
-import zach2039.oldguns.api.firearm.impl.IFirearm;
-import zach2039.oldguns.client.gui.inventory.GuiGunsmithsBench;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.item.firearm.ItemFirearm;
 import zach2039.oldguns.common.item.tools.ItemGunnersQuadrant;
-import zach2039.oldguns.common.item.util.FirearmNBTHelper;
 
 @EventBusSubscriber(value = Side.CLIENT, modid = OldGuns.MODID)
 public class ModRenderEventsHandler

@@ -62,6 +62,8 @@ import zach2039.oldguns.common.item.firearm.ItemMatchlockLongMusket;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockMusket;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockMusketoon;
 import zach2039.oldguns.common.item.firearm.ItemMatchlockPistol;
+import zach2039.oldguns.common.item.material.ItemIronBits;
+import zach2039.oldguns.common.item.material.ItemLeadBits;
 import zach2039.oldguns.common.item.part.ItemBreechBlock;
 import zach2039.oldguns.common.item.part.ItemCaplockMechanism;
 import zach2039.oldguns.common.item.part.ItemFlintlockMechanism;
@@ -327,6 +329,11 @@ public class ModItems
 	@ObjectHolder("hack_saw")
 	public static final Item HACK_SAW = null;
 	
+	@ObjectHolder("iron_bits")
+	public static final Item IRON_BITS = null;
+	@ObjectHolder("lead_bits")
+	public static final Item LEAD_BITS = null;
+	
 	@EventBusSubscriber(modid = OldGuns.MODID)
 	public static class RegistrationHandler
 	{
@@ -456,7 +463,10 @@ public class ModItems
 					new ItemLargeMusketBallMoldTool(),
 					
 					new ItemRepairKit(),
-					new ItemHackSaw()
+					new ItemHackSaw(),
+					
+					new ItemIronBits(),
+					new ItemLeadBits()
 				};
 			
 			event.getRegistry().registerAll(items);

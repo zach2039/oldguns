@@ -140,6 +140,9 @@ public class ModelRegistrationHandler
 		registerModel(ModItems.REPAIR_KIT, 0);
 		registerModel(ModItems.HACK_SAW, 0);
 		
+		registerModel(ModItems.IRON_BITS, 0);
+		registerModel(ModItems.LEAD_BITS, 0);
+		
 		registerModel(Item.getItemFromBlock(ModBlocks.GUNSMITHS_BENCH), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.MELTER), 0);
 		registerModel(Item.getItemFromBlock(ModBlocks.STATIONARY_CANNON), 0);

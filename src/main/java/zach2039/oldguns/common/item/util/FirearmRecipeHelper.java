@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
 import zach2039.oldguns.common.init.ModRecipes;
 import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
 

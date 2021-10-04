@@ -270,6 +270,11 @@ public class TileEntityMelter extends TileEntityLockable implements ITickable, I
             	currentResultStack.grow(resultFromInputStack.getCount());
             }
 
+            OldGuns.logger.info("inputStack.amt " + inputStack.getCount());
+            OldGuns.logger.info("castStack.amt " + castStack.getCount());
+            OldGuns.logger.info("currentResultStack.amt " + currentResultStack.getCount());
+            OldGuns.logger.info("resultFromInputStack.amt " + resultFromInputStack.getCount());
+            
             // Shrink input stack on completion of melt.
             inputStack.shrink(1);
             

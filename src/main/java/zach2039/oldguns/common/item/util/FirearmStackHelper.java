@@ -2,7 +2,6 @@ package zach2039.oldguns.common.item.util;
 
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.math.MathHelper;
-import zach2039.oldguns.common.OldGuns;
 
 public class FirearmStackHelper {
 

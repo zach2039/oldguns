@@ -1,7 +1,6 @@
 package zach2039.oldguns.common.item.ammo;
 
 import zach2039.oldguns.api.ammo.IFirearmAmmo;
-import zach2039.oldguns.common.init.ModConfigs;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryFirearmAmmo;
 
 public class ItemMediumIronBirdshot extends ItemFirearmAmmo implements IFirearmAmmo
