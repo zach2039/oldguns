@@ -127,6 +127,9 @@ public class EntityProjectile extends EntityArrow
 		
 		/* Register projectile size for rendering. */
 		dataManager.register(PROJECTILE_SIZE, 1f);
+		
+		/* Register CRITICAL flag for critical damage application. */
+		dataManager.register(CRITICAL, (byte)0);
 	}
 	
 	/**
