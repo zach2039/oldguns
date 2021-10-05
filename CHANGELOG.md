@@ -1,6 +1,7 @@
 #### v2.0.5
 
 - Fixed Null error on projectile file with Astral Sorcery.
+- Added melter for bullet creation (not finished).
 
 #### v2.0.4
 
