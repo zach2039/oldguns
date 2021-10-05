@@ -1,3 +1,7 @@
+#### v2.0.5
+
+- Fixed Null error on projectile file with Astral Sorcery.
+
 #### v2.0.4
 
 - Fixed more packet errors.
