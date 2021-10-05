@@ -1,0 +1,36 @@
+#### v2.0.4
+
+- Change license format
+- Reorder licenses
+- Add crafting item and item interaction
+- Add config options to ammo
+- New sounds for firing plus some edits.
+- Rebalance and fix of gun properties.
+- Need to fix errors in client effect packet when running client and server. Need to adjust and test effective ranges and shot deviations of guns.
+- Recipe work.
+- More caplock work.
+- More firearms and caplock stuff.
+- Bitbucket pipeline junk.
+- Initial Bitbucket Pipelines configuration
+- Added breech_block item to list of recipes in config.
+- Fixed stuff and added breechloaders.
+- Trying to fix issue with NBT and two breechloaders. Recipes are fixed.
+- Trying to fix counts issue of breechloader reload.
+- First implementation of breechloading firearms.
+- More config stuff.
+- Config file setup and implementation.
+- Fixed JEI plugin using scala lib. Fixed missing recipes.
+- Updated to 1.12.2-14.23.5.2847.
+- Lots of changes
+- Trying to add stationary cannon, but it aint workin.
+- Start of tile entity artillery. Some api organizing.
+- Fixes to recipes and additional quadrant functions.
+- Recipes edits.
+- Model, textures, and new guns. More recipes.
+- Cannon fixes and effects; more items.
+- Added functionality to cannon; loading stages. Fixed misfire while submerged for firearms.
+- Cannons!
+- Models and stuff for cannons
+- Stuff
+- More work on crafting stuff.
+- Redo stuff
