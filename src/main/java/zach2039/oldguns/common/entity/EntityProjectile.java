@@ -60,6 +60,7 @@ public class EntityProjectile extends EntityArrow
 	private static final DataParameter<Float> EFFECTIVE_RANGE = EntityDataManager.<Float>createKey(EntityProjectile.class, DataSerializers.FLOAT);
 	private static final DataParameter<String> SHOOTING_ENTITY = EntityDataManager.<String>createKey(EntityProjectile.class, DataSerializers.STRING);
 	private static final DataParameter<Float> DAMAGE = EntityDataManager.<Float>createKey(EntityProjectile.class, DataSerializers.FLOAT);
+	private static final DataParameter<Byte> CRITICAL = EntityDataManager.<Byte>createKey(EntityProjectile.class, DataSerializers.BYTE);
 	
 	protected int xTile = -1;
 	protected int yTile = -1;
@@ -103,6 +104,13 @@ public class EntityProjectile extends EntityArrow
 	}
 
 	@Override
+	public boolean getIsCritical()
+    {
+        byte b0 = ((Byte)this.dataManager.get(CRITICAL)).byteValue();
+        return (b0 & 1) != 0;
+    }
+	
+	@Override
 	public void entityInit()
 	{		
 		/* Register spawn coordinates to datamanager for later damage falloff calculation. */
@@ -119,6 +127,9 @@ public class EntityProjectile extends EntityArrow
 		
 		/* Register projectile size for rendering. */
 		dataManager.register(PROJECTILE_SIZE, 1f);
+		
+		/* Register CRITICAL flag for critical damage application. */
+		dataManager.register(CRITICAL, (byte)0);
 	}
 	
 	/**
