@@ -14,6 +14,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import zach2039.oldguns.api.capability.casting.CapabilityCast;
@@ -21,6 +22,7 @@ import zach2039.oldguns.client.gui.ModGuiHandler;
 import zach2039.oldguns.common.init.ModMessages;
 import zach2039.oldguns.common.init.ModRecipes;
 import zach2039.oldguns.common.init.ModSoundEvents;
+import zach2039.oldguns.common.init.ModConfigs.ConfigOptions;
 import zach2039.oldguns.common.item.OldGunsCreativeTab;
 import zach2039.oldguns.util.IProxy;
 
@@ -48,6 +50,10 @@ public class OldGuns
     public static SimpleNetworkWrapper network;
     
     public static final CreativeTabs OLDGUNS_CREATIVE_TAB = new OldGunsCreativeTab();
+    
+    public static final ConfigOptions serverOptions = new ConfigOptions();
+	
+	protected static final ConfigOptions clientOptions = new ConfigOptions();
     
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -106,5 +112,11 @@ public class OldGuns
         {
             ConfigManager.sync(OldGuns.MODID, Type.INSTANCE);
         }
+    }
+    
+    @SubscribeEvent
+    public void onPlayerLoggedInEventEvent(PlayerLoggedInEvent event)
+    {
+        
     }
 }
