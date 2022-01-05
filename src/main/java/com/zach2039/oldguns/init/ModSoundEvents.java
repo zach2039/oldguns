@@ -30,7 +30,7 @@ public class ModSoundEvents {
 	 * @author choonster
 	 * @param modEventBus The mod event bus
 	 */
-	public static void initialise(final IEventBus modEventBus) {
+	public static void initialize(final IEventBus modEventBus) {
 		if (isInitialized) {
 			throw new IllegalStateException("Already initialised");
 		}

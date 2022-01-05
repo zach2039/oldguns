@@ -32,15 +32,17 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 
 	public BulletProjectile(final EntityType<? extends BulletProjectile> entityType, final Level world) {
 		super(entityType, world);
+		this.pickup = Pickup.DISALLOWED;
 	}
 	
-	public BulletProjectile(final Level world, double x, double y, double z) {
-		super(world, x, y, z);
-		this.setLocationAndAngles(x, y, z, this.xRotO, this.yRotO);
+	public BulletProjectile(final EntityType<? extends BulletProjectile> entityType, final Level world, double x, double y, double z) {
+		this(entityType, world);
+		this.moveTo(x, y, z, this.xRotO, this.yRotO);
+		this.setPos(x, y, z);
 	}
 
 	public BulletProjectile(final Level world, final LivingEntity shooter) {
-		this(world, shooter.xo, shooter.yo + (double)shooter.getEyeHeight() - 0.10000000149011612d, shooter.zo);
+		this(ModEntities.BULLET_PROJECTILE.get(), world, shooter.xo, shooter.yo + (double)shooter.getEyeHeight() - 0.10000000149011612d, shooter.zo);
 		this.setOwner(shooter);
 	}
 	
@@ -85,6 +87,8 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	
 	@Override
 	protected void defineSynchedData() {
+		super.defineSynchedData();
+		
 		/* Register spawn coordinates to datamanager for later damage falloff calculation. */
 		this.entityData.define(START_POS, this.blockPosition());
 		
@@ -92,7 +96,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.entityData.define(EFFECTIVE_RANGE, 1f);
 		
 		/* Register storage for shooting entity reference. */
-		this.entityData.define(SHOOTING_ENTITY, null);
+		this.entityData.define(SHOOTING_ENTITY, new CompoundTag());
 		
 		/* Register storage for damage. */
 		this.entityData.define(DAMAGE, 0.0f);
@@ -102,11 +106,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		
 		/* Register CRITICAL flag for critical damage application. */
 		this.entityData.define(CRITICAL, (byte)0);
-	}
-	
-	public void setLocationAndAngles(double x, double y, double z, float xRot, float yRot) {
-		this.setPos(x, y, z);
-		this.setRot(xRot, yRot);
 	}
 	
 	public void shoot(double x, double y, double z, float vel, float acc) {

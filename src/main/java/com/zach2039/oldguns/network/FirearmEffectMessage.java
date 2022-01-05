@@ -4,13 +4,19 @@ import java.util.function.Supplier;
 
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.util.FirearmEffectHelper;
+import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.network.NetworkEvent;
 
 /**
@@ -33,35 +39,34 @@ public class FirearmEffectMessage {
 		this.rotationYaw = yaw;
 	}
 	
-	public void fromBytes(ByteBuf buf)
-	{
-		this.shootingEntityId = buf.readInt();
-		this.parameter = buf.readInt();
-		this.effectType = FirearmEffect.values()[buf.readInt()];
-		this.posX = buf.readDouble();
-		this.posY = buf.readDouble();
-		this.posZ = buf.readDouble();
-		this.rotationPitch = buf.readFloat();
-		this.rotationYaw = buf.readFloat();
+	public static FirearmEffectMessage decode(final FriendlyByteBuf buf) {
+		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level.getEntity(buf.readInt());
+		int parameter = buf.readInt();
+		FirearmEffect effectType = FirearmEffect.values()[buf.readInt()];
+		double x = buf.readDouble();
+		double y = buf.readDouble();
+		double z = buf.readDouble();
+		float pitch = buf.readFloat();
+		float yaw = buf.readFloat();
+		
+		return new FirearmEffectMessage(shooter, effectType, x, y, z, pitch, yaw, parameter);
 	}
 
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.shootingEntityId);
-		buf.writeInt(this.parameter);
-		buf.writeInt(this.effectType.ordinal());
-		buf.writeDouble(this.posX);
-		buf.writeDouble(this.posY);
-		buf.writeDouble(this.posZ);
-		buf.writeFloat(this.rotationPitch);
-		buf.writeFloat(this.rotationYaw);
+	public static void encode(final FirearmEffectMessage message, final FriendlyByteBuf buf) {
+		buf.writeInt(message.shootingEntityId);
+		buf.writeInt(message.parameter);
+		buf.writeInt(message.effectType.ordinal());
+		buf.writeDouble(message.posX);
+		buf.writeDouble(message.posY);
+		buf.writeDouble(message.posZ);
+		buf.writeFloat(message.rotationPitch);
+		buf.writeFloat(message.rotationYaw);
 	}
 
-	public static void onMessage(FirearmEffectMessage message, final Supplier<NetworkEvent.Context> ctx)
-	{
+	public static void handle(final FirearmEffectMessage message, final Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
 			/* Get world of client. */
-			Level world = Minecraft.getInstance().player.level;
+			Level world = ClientUtil.getClientPlayer().level;
 			
 			/* Only process effects if world isn't null. */
 			if (world != null)
@@ -95,6 +100,32 @@ public class FirearmEffectMessage {
 						break;
 				}
 			}
+		});
+
+		ctx.get().setPacketHandled(true);
+	}
+	
+	public void fromBytes(ByteBuf buf)
+	{
+		this.shootingEntityId = buf.readInt();
+		this.parameter = buf.readInt();
+		this.effectType = FirearmEffect.values()[buf.readInt()];
+		this.posX = buf.readDouble();
+		this.posY = buf.readDouble();
+		this.posZ = buf.readDouble();
+		this.rotationPitch = buf.readFloat();
+		this.rotationYaw = buf.readFloat();
+	}
+
+	public void toBytes(ByteBuf buf)
+	{
+		
+	}
+
+	public static void onMessage(FirearmEffectMessage message, final Supplier<NetworkEvent.Context> ctx)
+	{
+		ctx.get().enqueueWork(() -> {
+			
 		});
 		
 		ctx.get().setPacketHandled(true);
