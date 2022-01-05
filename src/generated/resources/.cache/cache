@@ -2,3 +2,5 @@
 5219719561acbf15f751895d8d02a45214bb1e05 assets/oldguns/models/item/flintlock_pistol_empty.json
 ec094ff469f31f36fecd102c62ad4d0e265e9373 assets/oldguns/models/item/simple_model.json
 5e3842ac83544f719c9f3dc1277522ad12d73bb5 assets/oldguns/models/item/small_iron_musket_ball.json
+fd276dadd15469803b82d530d1f27e9493dbb545 data/oldguns/advancements/recipes/oldguns/flintlock_pistol_reload.json
+7e4628bacec44af7cf2533ec2af68cc9f28480dd data/oldguns/recipes/flintlock_pistol_reload.json
