@@ -311,10 +311,10 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
                         worldIn.addFreshEntity(t);
                     });
                     
-                    stackIn.hurt(1, worldIn.random, (ServerPlayer) entityplayer);
+                    if (!entityplayer.isCreative()) stackIn.hurt(1, worldIn.random, (ServerPlayer) entityplayer);
                     
                     /* Do firing effects. */
-                    doFiringEffect(worldIn, entityplayer, stackIn);        
+                    //doFiringEffect(worldIn, entityplayer, stackIn);        
                     
                     if (!flag1 && !entityplayer.isCreative() && (stackIn != null))
                     {
