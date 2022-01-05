@@ -1,65 +1,157 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
+        maven { url = 'https://maven.minecraftforge.net' }
+        mavenCentral()
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
-//Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-
+apply plugin: 'net.minecraftforge.gradle'
+// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
 
 version = "${mc_version}-${version}"
-group = "zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "oldguns"
 
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
+// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
+minecraft {
+    mappings channel: 'official', version: '1.18.1'
+    runs {
+        client {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                oldguns {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        server {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                oldguns {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        data {
+            workingDirectory project.file('run')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+
+            property 'forge.logging.console.level', 'debug'
+
+            args '--mod', 'oldguns', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+
+            mods {
+                oldguns {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
 }
 
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
-    mappings = "snapshot_20171003"
-	replace '@VERSION@', project.version
-	useDepAts = true
-}
+sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	maven {
-		// location of the maven that hosts JEI files
-		name = "Progwml6 maven"
-		url = "https://dvs1.progwml6.com/files/maven/"
-	}
-	maven {
-		// location of a maven mirror for JEI files, as a fallback
-		name = "ModMaven"
-		url = "https://modmaven.k-4u.nl"
-	}
-    maven { 
-		// CraftTweaker (MineTweaker3)
-        name 'jared maven'
-        url "http://maven.blamejared.com/"
+	maven { // JEI & Tinkers
+        name 'DVS1 Maven FS'
+        url 'https://dvs1.progwml6.com/files/maven'
     }
 }
 
 dependencies {
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.10'
+
 	// Crafttweaker stuff
-	compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"	
+	//compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"	
 	
 	// compile against the JEI API but do not include it at runtime
-	deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
+	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
 	// at runtime, use the full JEI jar
-	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+	//runtime "mezz.jei:jei_${mc_version}:${jei_version}"
 }
+
+jar {
+    manifest {
+        attributes([
+                "Specification-Title"     : "oldgunsmod",
+                "Specification-Vendor"    : "zach2039",
+                "Specification-Version"   : "3", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : project.jar.archiveVersion,
+                "Implementation-Vendor"   : "zach2039",
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            url "file://${project.projectDir}/mcmodsrepo"
+        }
+    }
+}
+
+//minecraft {
+//    version = "1.12.2-14.23.5.2847"
+//    runDir = "run"
+//    mappings = "snapshot_20171003"
+//	replace '@VERSION@', project.version
+//	useDepAts = true
+//}
+//
+//repositories {
+//	maven {
+//		// location of the maven that hosts JEI files
+//		name = "Progwml6 maven"
+//		url = "https://dvs1.progwml6.com/files/maven/"
+//	}
+//	maven {
+//		// location of a maven mirror for JEI files, as a fallback
+//		name = "ModMaven"
+//		url = "https://modmaven.k-4u.nl"
+//	}
+//    maven { 
+//		// CraftTweaker (MineTweaker3)
+//        name 'jared maven'
+//        url "http://maven.blamejared.com/"
+//    }
+//}
+//
+//dependencies {
+//	}
 
 processResources {
 	/* Ensure tasks redone with version change. */
 	inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
+    //inputs.property "mcversion", project.minecraft.version
 
     /* Replace stuff in mcmod.info, nothing else. */
     from(sourceSets.main.resources.srcDirs)
@@ -67,7 +159,8 @@ processResources {
         include 'mcmod.info'
                 
         // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
+        expand 'version':project.version
+		//expand 'mcversion':project.minecraft.version
     }
         
     /* Copy everything else except the mcmod.info. */

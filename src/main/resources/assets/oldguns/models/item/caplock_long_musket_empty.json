@@ -1,6 +1,0 @@
-{
-	"parent": "oldguns:item/simple_firearm",
-	"textures": {
-		"layer0": "oldguns:items/caplock_long_musket_empty"
-	}
-}
