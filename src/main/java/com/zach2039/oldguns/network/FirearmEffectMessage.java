@@ -8,15 +8,10 @@ import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.network.NetworkEvent;
 
 /**

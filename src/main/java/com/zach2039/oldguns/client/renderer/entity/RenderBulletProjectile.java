@@ -1,12 +1,10 @@
 package com.zach2039.oldguns.client.renderer.entity;
 
-import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Quaternion;
 import com.mojang.math.Vector3f;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
-import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
@@ -15,7 +13,7 @@ import net.minecraft.resources.ResourceLocation;
 public class RenderBulletProjectile extends EntityRenderer<BulletProjectile> {
 	
 	private ResourceLocation entityTexture;
-	private EntityModel model = new BulletProjectileModel();
+	//private EntityModel model = new BulletProjectileModel();
 	
 	public RenderBulletProjectile(final EntityRendererProvider.Context context, final ResourceLocation entityTexture)	{
 		super(context);
@@ -42,10 +40,6 @@ public class RenderBulletProjectile extends EntityRenderer<BulletProjectile> {
 		//model.render(entity, 0.0F, 0.0F, -0.1F, (float)yaw, (float)pitch, 0.025F);
 		matrixStackIn.popPose();
 		super.render(entity, (float) yaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
-	}
-	
-	private static void renderEntity() {
-		
 	}
 	
 	@Override
