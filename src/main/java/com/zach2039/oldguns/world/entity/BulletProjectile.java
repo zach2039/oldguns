@@ -16,16 +16,24 @@ import com.zach2039.oldguns.init.ModSoundEvents;
 
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
+import net.minecraft.core.Vec3i;
+import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtUtils;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -37,6 +45,7 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
+import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
@@ -61,7 +70,9 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	private static final EntityDataAccessor<CompoundTag> SHOOTING_ENTITY = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.COMPOUND_TAG);
 	private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
 	private static final EntityDataAccessor<Byte> CRITICAL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
-	private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(Arrow.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
+	private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
 
 	@Nullable
 	private UUID ownerUUID;
@@ -85,12 +96,14 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	//private static final byte EVENT_POTION_PUFF = 0;
 	private Potion potion = Potions.EMPTY;
 	private final Set<MobEffectInstance> effects = Sets.newHashSet();
-	//private boolean fixedColor;
+	private boolean fixedColor;
+	private int totalInGroundTime;
 	
 	
 	public BulletProjectile(EntityType<? extends BulletProjectile> entityType, Level world) {
 		super(entityType, world);
 		this.pickup = Pickup.DISALLOWED;
+		this.totalInGroundTime = 0;
 	}
 
 	public BulletProjectile(Level world, double x, double y, double z) {
@@ -150,8 +163,12 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	}
 	
 	@Override
-	protected void defineSynchedData() {
-		super.defineSynchedData();
+	protected void defineSynchedData() {	
+		this.entityData.define(ID_FLAGS, (byte)0);
+		
+		this.entityData.define(PIERCE_LEVEL, (byte)0);
+		
+		this.entityData.define(ID_EFFECT_COLOR, -1);
 		
 		/* Register spawn coordinates to datamanager for later damage falloff calculation. */
 		this.entityData.define(START_POS, this.blockPosition());
@@ -172,11 +189,160 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.entityData.define(CRITICAL, (byte)0);
 	}
 	
+	@Override
+	public void setPierceLevel(byte p_36768_) {
+		this.entityData.set(PIERCE_LEVEL, p_36768_);
+	}
+	
+	@Override
+	public void setCritArrow(boolean p_36763_) {
+		this.setFlag(1, p_36763_);
+	}
+	
+	private void setFlag(int p_36738_, boolean p_36739_) {
+		byte b0 = this.entityData.get(ID_FLAGS);
+		if (p_36739_) {
+			this.entityData.set(ID_FLAGS, (byte)(b0 | p_36738_));
+		} else {
+			this.entityData.set(ID_FLAGS, (byte)(b0 & ~p_36738_));
+		}
+	}
+	
+	@Override
+	public boolean shotFromCrossbow() {
+		byte b0 = this.entityData.get(ID_FLAGS);
+		return (b0 & 4) != 0;
+	}
+	
+	@Override
+	public byte getPierceLevel() {
+		return this.entityData.get(PIERCE_LEVEL);
+	}	
+	
+	@Override
+	public int getColor() {
+		return this.entityData.get(ID_EFFECT_COLOR);
+	}
+
+	@Override
+	public void setShotFromCrossbow(boolean isShotFromCrossbow) {
+		this.setFlag(4, isShotFromCrossbow);
+	}
+	
+	private void setFixedColor(int color) {
+		this.fixedColor = true;
+		this.entityData.set(ID_EFFECT_COLOR, color);
+	}
+	
+	private void updateColor() {
+		this.fixedColor = false;
+		if (this.potion == Potions.EMPTY && this.effects.isEmpty()) {
+			this.entityData.set(ID_EFFECT_COLOR, -1);
+		} else {
+			this.entityData.set(ID_EFFECT_COLOR, PotionUtils.getColor(PotionUtils.getAllEffects(this.potion, this.effects)));
+		}
+	}
+	
+	@Override
+	public void addAdditionalSaveData(CompoundTag compound) {
+		if (this.ownerUUID != null) {
+			compound.putUUID("Owner", this.ownerUUID);
+		}
+		
+		if (this.leftOwner) {
+			compound.putBoolean("LeftOwner", true);
+		}
+		
+		compound.putBoolean("HasBeenShot", this.hasBeenShot);
+
+		if (this.potion != Potions.EMPTY) {
+			compound.putString("Potion", Registry.POTION.getKey(this.potion).toString());
+		}
+		
+		if (this.fixedColor) {
+			compound.putInt("Color", this.getColor());
+		}
+		
+		if (!this.effects.isEmpty()) {
+			ListTag listtag = new ListTag();
+
+			for(MobEffectInstance mobeffectinstance : this.effects) {
+				listtag.add(mobeffectinstance.save(new CompoundTag()));
+			}
+			
+			compound.put("CustomPotionEffects", listtag);
+		}
+
+		compound.putShort("life", (short)this.life);
+		if (this.lastState != null) {
+			compound.put("inBlockState", NbtUtils.writeBlockState(this.lastState));
+		}
+		
+		compound.putByte("shake", (byte)this.shakeTime);
+		compound.putBoolean("inGround", this.inGround);
+		compound.putInt("totalInGroundTime", this.totalInGroundTime);
+		compound.putByte("pickup", (byte)this.pickup.ordinal());
+		compound.putDouble("damage", this.baseDamage);
+		compound.putBoolean("crit", this.isCritArrow());
+		compound.putByte("PierceLevel", this.getPierceLevel());
+		compound.putString("SoundEvent", Registry.SOUND_EVENT.getKey(this.soundEvent).toString());
+		compound.putBoolean("ShotFromCrossbow", this.shotFromCrossbow());
+		compound.putFloat("projectileSize", getProjectileSize());
+	}
+	
+	@Override
+	public void readAdditionalSaveData(CompoundTag compound) {
+		if (compound.hasUUID("Owner")) {
+			this.ownerUUID = compound.getUUID("Owner");
+		}
+		
+		this.leftOwner = compound.getBoolean("LeftOwner");
+		this.hasBeenShot = compound.getBoolean("HasBeenShot");
+		
+		
+		if (compound.contains("Potion", 8)) {
+			this.potion = PotionUtils.getPotion(compound);
+		}
+		
+		for(MobEffectInstance mobeffectinstance : PotionUtils.getCustomEffects(compound)) {
+			this.addEffect(mobeffectinstance);
+		}
+		
+		if (compound.contains("Color", 99)) {
+			this.setFixedColor(compound.getInt("Color"));
+		} else {
+			this.updateColor();
+		}
+		
+		this.life = compound.getShort("life");
+		if (compound.contains("inBlockState", Tag.TAG_COMPOUND)) {
+			this.lastState = NbtUtils.readBlockState(compound.getCompound("inBlockState"));
+		}
+		
+		this.shakeTime = compound.getByte("shake") & 255;
+		this.inGround = compound.getBoolean("inGround");
+		this.totalInGroundTime = compound.getInt("totalInGroundTime");
+		if (compound.contains("damage", Tag.TAG_DOUBLE)) {
+			this.baseDamage = compound.getDouble("damage");
+		}
+		
+		this.pickup = AbstractArrow.Pickup.byOrdinal(compound.getByte("pickup"));
+		this.setCritArrow(compound.getBoolean("crit"));
+		this.setPierceLevel(compound.getByte("PierceLevel"));
+		if (compound.contains("SoundEvent", Tag.TAG_STRING)) {
+			this.soundEvent = Registry.SOUND_EVENT.getOptional(new ResourceLocation(compound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
+		}
+		
+		this.setShotFromCrossbow(compound.getBoolean("ShotFromCrossbow"));
+		
+		this.setProjectileSize(compound.getFloat("projectileSize"));
+	}
+	
 	private boolean checkLeftOwner() {
 		Entity entity = this.getOwner();
 		if (entity != null) {
-			for(Entity entity1 : this.level.getEntities(this, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), (p_37272_) -> {
-				return !p_37272_.isSpectator() && p_37272_.isPickable();
+			for(Entity entity1 : this.level.getEntities(this, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), (ent) -> {
+				return !ent.isSpectator() && ent.isPickable();
 				})) {
 				if (entity1.getRootVehicle() == entity.getRootVehicle()) {
 					return false;
@@ -195,7 +361,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.inGround = false;
 		Vec3 vec3 = this.getDeltaMovement();
 		this.setDeltaMovement(vec3.multiply((double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
-		this.life = 0;
 	}
 	
 	/**
@@ -228,11 +393,21 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	}
 
 	@Override
-	protected void onHitEntity(EntityHitResult p_36757_) {
-		super.onHitEntity(p_36757_);
-		Entity entity = p_36757_.getEntity();
-		float f = (float)this.getDeltaMovement().length();
-		int i = Mth.ceil(Mth.clamp((double)f * this.baseDamage, 0.0D, 2.147483647E9D));
+	protected void onHitEntity(EntityHitResult result) {
+		Entity entity = result.getEntity();
+		
+		int i = Mth.ceil(this.baseDamage);
+		
+        /* Cut damage in half if outside effective range or low speed. */
+        if ((this.getVelocityMagnitude() < 0.5f) || (this.totalInGroundTime > 0))
+        {
+        	i = i / 4;
+        }
+        else if (!this.isInsideEffectiveRange())
+        {
+        	i = i / 2;
+        }
+
 		if (this.getPierceLevel() > 0) {
 			if (this.piercingIgnoreEntityIds == null) {
 				this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
@@ -318,7 +493,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 				entity.invulnerableTime = 0;
 			}
 			
-			this.playSound(ModSoundEvents.BULLET_HIT_MOB.get(), 0.5F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
+			this.playSound(ModSoundEvents.BULLET_HIT_MOB.get(), 0.3F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
 			if (this.getPierceLevel() <= 0) {
 				this.discard();
 			}
@@ -356,26 +531,78 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		return Math.sqrt(Math.pow(this.getDeltaMovement().x, 2) + Math.pow(this.getDeltaMovement().y, 2) + Math.pow(this.getDeltaMovement().z, 2));
 	}
 
+	protected boolean allowBlockHitSlowdown() {
+		return true;
+	}
+	
+    protected boolean canCollideWithBlockState(BlockState blockstate)
+    {
+    	if (!blockstate.isAir())
+    		return true;
+    	
+    	return false;
+    }
+	
 	@Override
 	protected void onHitBlock(BlockHitResult result) {
 		// Allow ricochet for projectiles
 		
-		boolean ricochet = result.getDirection().getAxis().isVertical() && (Mth.abs(this.yRotO) < 10f) && (this.getm); 
+		Vec3i hitNormal = result.getDirection().getNormal();
+		boolean isShallowAngle = Mth.abs((float) this.getDeltaMovement().normalize().dot(new Vec3(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())) < 0.4;
+		boolean ricochet = result.getDirection().getAxis().isVertical() && (isShallowAngle) && (this.getVelocityMagnitude() > 1f);
+		
+//		OldGuns.LOGGER.info("ricochet: " + ricochet);
+//		OldGuns.LOGGER.info("vertical: " + result.getDirection().getAxis().isVertical());
+//		OldGuns.LOGGER.info("math: " + Mth.abs((float) this.getDeltaMovement().normalize().dot(new Vec3(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())));
+//		OldGuns.LOGGER.info("velMag: " + (this.getVelocityMagnitude() > 1f));
 		
 		this.lastState = this.level.getBlockState(result.getBlockPos());
 		BlockState blockstate = this.level.getBlockState(result.getBlockPos());
-		blockstate.onProjectileHit(this.level, blockstate, result, this);
-		Vec3 vec3 = result.getLocation().subtract(this.getX(), this.getY(), this.getZ());
-		this.setDeltaMovement(vec3);
-		Vec3 vec31 = vec3.normalize().scale((double)0.05F);
-		this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
-		this.playSound(ModSoundEvents.BULLET_HIT_BLOCK.get(), 0.9F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
-		this.inGround = true;
-		this.shakeTime = 7;
-		this.setCritArrow(false);
-		this.setPierceLevel((byte)0);
-		this.setShotFromCrossbow(false);
-		this.resetPiercedEntities();
+		
+		if (!ricochet) {
+			if (this.allowBlockHitSlowdown()) {
+				Vec3 vec3 = result.getLocation().subtract(this.getX(), this.getY(), this.getZ());
+				this.setDeltaMovement(vec3);
+				Vec3 vec31 = vec3.normalize().scale((double)0.05F);
+				this.setPosRaw(this.getX() - vec31.x, this.getY() - vec31.y, this.getZ() - vec31.z);
+				
+			} else {
+				this.setDeltaMovement(this.getDeltaMovement().scale(0.5f));
+			}
+			
+			if (canCollideWithBlockState(blockstate)) {
+				blockstate.onProjectileHit(this.level, blockstate, result, this);
+				if (!this.isInWater() && this.getVelocityMagnitude() > 1.0f) {
+					this.playSound(ModSoundEvents.BULLET_HIT_BLOCK.get(), 0.7F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
+				} else {
+					this.playSound(SoundEvents.ANVIL_HIT, 0.7F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
+				}
+				this.inGround = true;
+				this.shakeTime = 7;
+				this.setCritArrow(false);
+				this.setPierceLevel((byte)0);
+				this.setShotFromCrossbow(false);
+				this.resetPiercedEntities();
+			}
+		} else {
+			this.inGround = false;
+			double xMotMod = 0.70f + (this.random.nextFloat() * 0.15f);
+			double yMotMod = -0.70f;
+			double zMotMod = 0.70f + (this.random.nextFloat() * 0.15f);
+			this.setDeltaMovement(this.getDeltaMovement().multiply(xMotMod, yMotMod, zMotMod));
+			
+            for(int i = 0; i < 3; ++i) {
+            	BlockParticleOption blockPart = new BlockParticleOption(ParticleTypes.BLOCK, blockstate);
+				this.level.addParticle(blockPart, 
+						this.xo - this.getDeltaMovement().x * 0.25D, this.yo - this.getDeltaMovement().y * 0.25, this.zo - this.getDeltaMovement().z * 0.25,
+						0, 0, 0);
+			}
+            
+            this.playSound(ModSoundEvents.BULLET_RICOCHET.get(), 0.3F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
+            
+            // Add to totalInGroundTime to reduce damage after ricochet
+            ++this.totalInGroundTime;
+		}
 	}
 	
 	@Override
@@ -398,6 +625,15 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		++this.life;
 		if (this.life >= 1200) {
 			this.discard();
+		}
+	}
+	
+	@Override
+	public boolean isNoPhysics() {
+		if (!this.level.isClientSide) {
+			return this.noPhysics;
+		} else {
+			return (this.entityData.get(ID_FLAGS) & 2) != 0;
 		}
 	}
 	
@@ -426,7 +662,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		
 		BlockPos blockpos = this.blockPosition();
 		BlockState blockstate = this.level.getBlockState(blockpos);
-		if (!blockstate.isAir() && !flag) {
+		if (!this.canCollideWithBlockState(blockstate) && !flag) {
 			VoxelShape voxelshape = blockstate.getCollisionShape(this.level, blockpos);
 			if (!voxelshape.isEmpty()) {
 				Vec3 vec31 = this.position();
@@ -451,11 +687,10 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		if (this.inGround && !flag) {
 			if (this.lastState != blockstate && this.shouldFall()) {
 				this.startFalling();
-			} else if (!this.level.isClientSide) {
-				this.tickDespawn();
 			}
 
 			++this.inGroundTime;
+			++this.totalInGroundTime;
 		} else {
 			this.inGroundTime = 0;
 			Vec3 vec32 = this.position();
@@ -503,10 +738,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 				}
 			}
 			
-			if (this.inGroundTime < 100 && (this.life % (20 + this.random.nextInt(10) - 5)) == 0) {
-				this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
-			}
-	         
 			double d7 = this.getX() + d5;
 			double d2 = this.getY() + d6;
 			double d3 = this.getZ() + d1;
@@ -534,7 +765,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.setDeltaMovement(vec3.scale((double)f));
 			if (!this.isNoGravity() && !flag) {
 				Vec3 vec34 = this.getDeltaMovement();
-				double gravityForce = this.isInsideEffectiveRange() ? 0.0d : 0.05d;
+				double gravityForce = (this.isInsideEffectiveRange() && this.totalInGroundTime == 0) ? 0.0d : 0.05d;
 				this.setDeltaMovement(vec34.x, vec34.y - gravityForce, vec34.z);
 			}
 
@@ -555,6 +786,14 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.potion = Potions.EMPTY;
 			this.effects.clear();
 			this.entityData.set(ID_EFFECT_COLOR, -1);
+		}
+		
+		this.tickDespawn();
+				
+		if (this.totalInGroundTime >= 100 && ((this.life % (20 + this.random.nextInt(10) - 5)) == 0)) {
+			this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
+		} else if (this.totalInGroundTime == 0 && (this.life % 2) == 0) {
+			this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
 		}
 	}
 	

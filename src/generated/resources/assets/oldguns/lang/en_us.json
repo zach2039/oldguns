@@ -1,0 +1,6 @@
+{
+  "entity.oldguns.bullet_projectile": "Projectile",
+  "item.oldguns.flintlock_pistol": "Flintlock Pistol",
+  "item.oldguns.small_iron_musket_ball": "Small Iron Musket Ball",
+  "itemGroup.oldguns": "Old Guns"
+}

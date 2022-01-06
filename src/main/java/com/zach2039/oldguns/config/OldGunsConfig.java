@@ -58,7 +58,7 @@ public class OldGunsConfig {
 					3.5f,
 					1.2f,
 					2.0f,
-					1f
+					1.0f
 					);
 			
 			small_iron_musket_ball = new FirearmAmmoAttributes(
@@ -85,8 +85,8 @@ public class OldGunsConfig {
 		public final DoubleValue projectileSpeed;
 		
 		MuzzleloadingFirearmAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
-				final int defaultDurability, final float defaultEffectiveRangeModifier, final float defaultShotDamageModifier, final float defaultShotDeviaitionModifier,
-				final float defaultProjectileSpeed) {
+				final int defaultDurability, final float defaultProjectileSpeed, final float defaultEffectiveRangeModifier, 
+				final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
 			builder.comment(comment).push(path);
 			
 			durability = builder

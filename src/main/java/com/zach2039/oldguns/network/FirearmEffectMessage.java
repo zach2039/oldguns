@@ -8,10 +8,13 @@ import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.network.NetworkEvent;
 
 /**
@@ -60,41 +63,46 @@ public class FirearmEffectMessage {
 
 	public static void handle(final FirearmEffectMessage message, final Supplier<NetworkEvent.Context> ctx) {
 		ctx.get().enqueueWork(() -> {
-			/* Get world of client. */
-			Level world = ClientUtil.getClientPlayer().level;
+			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
+                if (ClientUtil.getClientPlayer() == null) return;
+ 
+                /* Get world of client. */
+    			Level world = ClientUtil.getClientPlayer().level;
+    			
+    			/* Only process effects if world isn't null. */
+    			if (world != null)
+    			{
+    				/* Get information from message. */
+    				Entity entity = world.getEntity(message.shootingEntityId);
+    				FirearmEffect effect = message.effectType;
+    				double x = message.posX;
+    				double y = message.posY;
+    				double z = message.posZ;
+    				double pitch = message.rotationPitch;
+    				double yaw = message.rotationYaw;
+    				int parameter = message.parameter;
+    				
+    				/* Pick particle effect from message. */
+    				switch (effect)
+    				{
+    					case SMALL_FIREARM_SHOOT:
+    					case MEDIUM_FIREARM_SHOOT:
+    					case LARGE_FIREARM_SHOOT:
+    						FirearmEffectHelper.doFirearmShootEffect(world, entity, effect,
+    								x, y, z, pitch, yaw, parameter);
+    						break;
+    					case MISFIRE:
+    					case MISFIRE_WET:
+    					case BREAK:
+    						FirearmEffectHelper.doFirearmMisfireEffect(world, entity, effect,
+    								x, y, z, pitch, yaw, parameter);
+    						break;
+    					default:
+    						break;
+    				}
+    			}
+            });
 			
-			/* Only process effects if world isn't null. */
-			if (world != null)
-			{
-				/* Get information from message. */
-				Entity entity = world.getEntity(message.shootingEntityId);
-				FirearmEffect effect = message.effectType;
-				double x = message.posX;
-				double y = message.posY;
-				double z = message.posZ;
-				double pitch = message.rotationPitch;
-				double yaw = message.rotationYaw;
-				int parameter = message.parameter;
-				
-				/* Pick particle effect from message. */
-				switch (effect)
-				{
-					case SMALL_FIREARM_SHOOT:
-					case MEDIUM_FIREARM_SHOOT:
-					case LARGE_FIREARM_SHOOT:
-						FirearmEffectHelper.doFirearmShootEffect(world, entity, effect,
-								x, y, z, pitch, yaw, parameter);
-						break;
-					case MISFIRE:
-					case MISFIRE_WET:
-					case BREAK:
-						FirearmEffectHelper.doFirearmMisfireEffect(world, entity, effect,
-								x, y, z, pitch, yaw, parameter);
-						break;
-					default:
-						break;
-				}
-			}
 		});
 
 		ctx.get().setPacketHandled(true);

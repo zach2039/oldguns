@@ -1,5 +1,7 @@
 package com.zach2039.oldguns;
 
+import com.zach2039.oldguns.init.ModItems;
+
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -10,7 +12,7 @@ public class OldGunsCreativeModeTab extends CreativeModeTab {
 	
 	public OldGunsCreativeModeTab()	{
 		super(OldGuns.MODID);
-		itemstackIcon = new ItemStack(Items.STONE_SWORD);
+		itemstackIcon = new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
 	}
 
 	@Override
@@ -20,7 +22,6 @@ public class OldGunsCreativeModeTab extends CreativeModeTab {
 	
 	@Override
 	public void fillItemList(final NonNullList<ItemStack> items) {
-		items.add(itemstackIcon.copy());
 		super.fillItemList(items);
 	}
 }

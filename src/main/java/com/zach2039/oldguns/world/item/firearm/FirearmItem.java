@@ -196,12 +196,12 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
     		//boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
     		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
             
-    		OldGuns.LOGGER.debug("readyToFire : " + readyToFire);
-    		OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
-    		OldGuns.LOGGER.debug("notBroken : " + notBroken);
-    		OldGuns.LOGGER.debug("canReload : " + canReload);
-    		OldGuns.LOGGER.debug("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
-    		OldGuns.LOGGER.debug("isReloadableBreechloader : " + isReloadableBreechloader);
+//    		OldGuns.LOGGER.debug("readyToFire : " + readyToFire);
+//    		OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
+//    		OldGuns.LOGGER.debug("notBroken : " + notBroken);
+//    		OldGuns.LOGGER.debug("canReload : " + canReload);
+//    		OldGuns.LOGGER.debug("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
+//    		OldGuns.LOGGER.debug("isReloadableBreechloader : " + isReloadableBreechloader);
     		
             if (isReloadableBreechloader && canReload)
             {
@@ -314,7 +314,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
                     if (!entityplayer.isCreative()) stackIn.hurt(1, worldIn.random, (ServerPlayer) entityplayer);
                     
                     /* Do firing effects. */
-                    //doFiringEffect(worldIn, entityplayer, stackIn);        
+                    doFiringEffect(worldIn, entityplayer, stackIn);        
                     
                     if (!flag1 && !entityplayer.isCreative() && (stackIn != null))
                     {
@@ -409,12 +409,12 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
 		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && !holdingLoadedFirearmOffhand && readyToFire && notBroken && !holdingLargeFirearmOffhand);
 		
-		if (!worldIn.isClientSide()) {
-			OldGuns.LOGGER.info("itemstack                : " + itemstack);
-			//OldGuns.LOGGER.debug("isReloadableBreechloader : " + isReloadableBreechloader);
-			OldGuns.LOGGER.info("canAim                   : " + canAim);
-			OldGuns.LOGGER.info("canReload                : " + canReload);
-		}
+//		if (!worldIn.isClientSide()) {
+//			OldGuns.LOGGER.info("itemstack                : " + itemstack);
+//			//OldGuns.LOGGER.debug("isReloadableBreechloader : " + isReloadableBreechloader);
+//			OldGuns.LOGGER.info("canAim                   : " + canAim);
+//			OldGuns.LOGGER.info("canReload                : " + canReload);
+//		}
 		
 		InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, canAim);
 		if (ret != null) return ret;
@@ -431,7 +431,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		    result = InteractionResultHolder.fail(itemstack);
 		} else if (canAim) {
 		    playerIn.startUsingItem(handIn);
-		    result = InteractionResultHolder.success(itemstack);
+		    result = InteractionResultHolder.pass(itemstack);
 		} else {
 			 playerIn.startUsingItem(handIn);
 			 result = InteractionResultHolder.pass(itemstack);
