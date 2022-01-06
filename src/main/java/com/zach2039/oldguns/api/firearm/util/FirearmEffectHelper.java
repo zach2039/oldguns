@@ -36,7 +36,7 @@ public class FirearmEffectHelper {
 		Random rand = new Random();
 		
 		/* Calculate offset from player hand size, passed in parameter. */
-		float offset = (rightSide) ? 23f : -23f;
+		float offset = (rightSide) ? -23f : 23f;
 		
 		/* Change number of particles based on effect. */
 		int numParticles = 0;
@@ -73,7 +73,7 @@ public class FirearmEffectHelper {
 			double particleY = posY + handY;
 			double particleZ = posZ + handZ;
 			
-			world.addParticle(ParticleTypes.EXPLOSION,
+			world.addParticle(ParticleTypes.SMOKE,
 					particleX + (float)(rand.nextFloat() / 16f),
 					particleY + (float)(rand.nextFloat() / 16f),
 					particleZ + (float)(rand.nextFloat() / 16f),

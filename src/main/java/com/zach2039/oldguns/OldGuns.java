@@ -1,5 +1,7 @@
 package com.zach2039.oldguns;
 
+import javax.annotation.Nonnull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,6 +12,8 @@ import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModNetwork;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
+import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -28,8 +32,6 @@ public class OldGuns
 	
 	public static final String MODID = "oldguns";
 	public static final String NAME = "Old Guns Mod";
-
-	public static final OldGunsCreativeModeTab CREATIVE_MODE_TAB = new OldGunsCreativeModeTab();
 
 	public static final SimpleChannel network = ModNetwork.getNetworkChannel();
 
@@ -57,4 +59,14 @@ public class OldGuns
 	public static void enqueue(final InterModEnqueueEvent event) {
 
 	}
+	
+	public static final CreativeModeTab CREATIVE_MODE_TAB = new CreativeModeTab(MODID)
+	{
+		@Override
+		@Nonnull
+		public ItemStack makeIcon()
+		{
+			return new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
+		}
+	};
 }

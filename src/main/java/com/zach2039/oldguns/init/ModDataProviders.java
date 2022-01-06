@@ -2,6 +2,7 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.data.OldGunsItemModelProvider;
+import com.zach2039.oldguns.data.OldGunsLanguageProvider;
 import com.zach2039.oldguns.data.OldGunsRecipeProvider;
 
 import net.minecraft.data.DataGenerator;
@@ -19,12 +20,15 @@ public class ModDataProviders {
 		final ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
 		if (event.includeClient()) {
+			dataGenerator.addProvider(new OldGunsLanguageProvider(dataGenerator));
+			
 			final OldGunsItemModelProvider itemModelProvider = new OldGunsItemModelProvider(dataGenerator, existingFileHelper);
 			dataGenerator.addProvider(itemModelProvider);
 		}
 
 		if (event.includeServer()) {
 			dataGenerator.addProvider(new OldGunsRecipeProvider(dataGenerator));
+			
 		}
 	}
 }

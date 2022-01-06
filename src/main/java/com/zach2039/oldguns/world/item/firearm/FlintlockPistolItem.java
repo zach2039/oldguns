@@ -1,7 +1,5 @@
 package com.zach2039.oldguns.world.item.firearm;
 
-import java.util.function.Supplier;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
@@ -18,7 +16,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.NetworkRegistry;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
@@ -61,6 +58,7 @@ public class FlintlockPistolItem extends FirearmItem implements IFirearm {
 	{
 		TargetPoint point = new PacketDistributor.TargetPoint(
 				shooter.xo, shooter.yo, shooter.zo, 1600d, shooter.level.dimension());
+		
 		
 		OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
 				new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.SMALL_FIREARM_SHOOT, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
