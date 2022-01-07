@@ -6,9 +6,11 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
+import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
@@ -42,7 +44,9 @@ public class OldGuns
 
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+		ModBlocks.initialize(modEventBus);
 		ModItems.initialize(modEventBus);
+		ModMenuTypes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
 		ModSoundEvents.initialize(modEventBus);

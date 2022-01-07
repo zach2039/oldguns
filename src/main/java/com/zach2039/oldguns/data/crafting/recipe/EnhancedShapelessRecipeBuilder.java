@@ -22,6 +22,7 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.ItemLike;
@@ -34,7 +35,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  * @author Choonster
  */
 public class EnhancedShapelessRecipeBuilder<
-		RECIPE extends ShapelessRecipe,
+		RECIPE extends Recipe<?>,
 		BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 		> extends ShapelessRecipeBuilder {
 	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapelessRecipeBuilder.class, /* ensureValid */ "m_126207_", ResourceLocation.class);

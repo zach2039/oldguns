@@ -32,7 +32,7 @@ public class ModSoundEvents {
 	 */
 	public static void initialize(final IEventBus modEventBus) {
 		if (isInitialized) {
-			throw new IllegalStateException("Already initialised");
+			throw new IllegalStateException("Already initialized");
 		}
 
 		SOUND_EVENTS.register(modEventBus);

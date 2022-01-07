@@ -1,5 +1,5 @@
 {
-  "parent": "oldguns:item/simple_model",
+  "parent": "minecraft:item/generated",
   "textures": {
     "layer0": "oldguns:item/small_iron_musket_ball"
   }

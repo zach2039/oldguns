@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.world.item.ammo;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.ammo.impl.IFirearmAmmo;
+import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;

@@ -6,9 +6,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.api.ammo.impl.IFirearmAmmo;
+import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
+import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
-import com.zach2039.oldguns.api.firearm.impl.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;

@@ -37,11 +37,6 @@ public class FirearmEmpty implements IFirearmEmpty, INBTSerializable<ByteTag> {
 	}
 	
 	@Override
-	public boolean automaticUpdates() {
-		return this.automaticUpdates;
-	}
-	
-	@Override
 	public boolean equals(@Nullable final Object obj) {
 		if (this == obj) return true;
 		if (obj == null || getClass() != obj.getClass()) return false;

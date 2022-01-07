@@ -5,9 +5,11 @@ import java.util.Map;
 
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.text.OldGunsLang;
+import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.data.DataGenerator;
@@ -51,17 +53,36 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	@Override
 	public String getName() {
-		return "TestMo3 " + super.getName();
+		return "OldGuns " + super.getName();
 	}
 
 	private void addBlocks() {
-		
+		addBlock(ModBlocks.GUNSMITHS_BENCH, "Gunsmith's Bench");
 	}
 
 	private void addItems() {
 		addItem(ModItems.FLINTLOCK_PISTOL, "Flintlock Pistol");
 		
 		addItem(ModItems.SMALL_IRON_MUSKET_BALL, "Small Iron Musket Ball");
+		
+		addItem(ModItems.FLINTLOCK_MECHANISM, "Flintlock Mechanism");
+		
+		addItem(ModItems.SMALL_WOODEN_HANDLE, "Small Wooden Handle");
+		addItem(ModItems.MEDIUM_WOODEN_HANDLE, "Medium Wooden Handle");
+		addItem(ModItems.LARGE_WOODEN_HANDLE, "Large Wooden Handle");
+		
+		addItem(ModItems.SMALL_WOODEN_STOCK, "Small Wooden Stock");
+		addItem(ModItems.MEDIUM_WOODEN_STOCK, "Medium Wooden Stock");
+		addItem(ModItems.LARGE_WOODEN_STOCK, "Large Wooden Stock");
+		
+		addItem(ModItems.SMALL_IRON_BARREL, "Small Iron Barrel");
+		addItem(ModItems.MEDIUM_IRON_BARREL, "Medium Iron Barrel");
+		addItem(ModItems.LARGE_IRON_BARREL, "Large Iron Barrel");
+		
+		addItem(ModItems.LEAD_BITS, "Lead Bits");
+		addItem(ModItems.IRON_BITS, "Iron Bits");
+		
+		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 	}
 
 	private void addFluids() {
@@ -77,7 +98,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addContainers() {
-		
+		add(GunsmithsBenchBlock.CONTAINER_TITLE.getString(), "Gunsmith's Bench");
 	}
 
 	private void addCommands() {
@@ -89,7 +110,11 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addChatMessages() {
-		
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart by artillery fire by %2$s.");
+
 	}
 
 	private void addKeyBindings() {

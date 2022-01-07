@@ -18,15 +18,6 @@ public interface IFirearmEmpty {
 	void set(final boolean isEmpty);
 
 	/**
-	 * Should this object's last use time be updated automatically?
-	 *
-	 * @return Whether to receive automatic updates
-	 */
-	default boolean automaticUpdates() {
-		return true;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 * <p>
 	 * Implementations must override {@link Object#equals(Object)} to perform a value comparison instead of a reference
