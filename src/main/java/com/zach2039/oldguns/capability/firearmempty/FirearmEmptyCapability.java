@@ -59,8 +59,6 @@ public class FirearmEmptyCapability {
 	 */
 	public static void updateIsEmpty(final Player player, final ItemStack itemStack) {
 		getIsEmpty(itemStack).ifPresent((isEmpty) -> {
-			final Level world = player.getCommandSenderWorld();
-
 			isEmpty.set(FirearmNBTHelper.getNBTTagMagazineStack(itemStack).isEmpty());
 		});
 	}
@@ -73,27 +71,5 @@ public class FirearmEmptyCapability {
 	 */
 	public static ICapabilityProvider createProvider(final IFirearmEmpty isEmpty) {
 		return new SerializableCapabilityProvider<>(FIREARM_EMPTY_CAPABILITY, DEFAULT_FACING, isEmpty);
-	}
-
-	/**
-	 * Event handler for the {@link ILastUseTime} capability.
-	 */
-	@Mod.EventBusSubscriber(modid = OldGuns.MODID)
-	public static class EventHandler {
-		/**
-		 * Update the {@link IFirearmEmpty} of the player's held item when they right-click.
-		 *
-		 * @param event The event
-		 */
-		@SubscribeEvent
-		public static void playerInteract(final PlayerInteractEvent.RightClickItem event) {
-			final ItemStack itemStack = event.getItemStack();
-
-			getIsEmpty(itemStack).ifPresent(lastUseTime -> {
-				if (lastUseTime.automaticUpdates()) {
-					updateIsEmpty(event.getPlayer(), itemStack);
-				}
-			});
-		}
 	}
 }

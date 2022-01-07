@@ -7,13 +7,13 @@ import javax.annotation.Nullable;
 
 import com.mojang.datafixers.util.Pair;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.ammo.impl.IFirearmAmmo;
+import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
+import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
-import com.zach2039.oldguns.api.firearm.impl.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmStackHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmTooltipHelper;
@@ -47,6 +47,7 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.client.RenderProperties;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.network.PacketDistributor;
 
@@ -112,8 +113,6 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 	@Override
 	public ICapabilityProvider initCapabilities(final ItemStack stack, @Nullable final CompoundTag nbt) {
-		if (FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY == null) return null;
-
 		return FirearmEmptyCapability.createProvider(new FirearmEmpty(false));
 	}
 	
@@ -335,8 +334,14 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
     			slots.add(new Pair<EquipmentSlot, ItemStack>((entityplayer.getUsedItemHand() == InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND, stackIn));
     			ClientboundSetEquipmentPacket pkt = new ClientboundSetEquipmentPacket(entityplayer.getId(),	slots);
     			playerMP.connection.send(pkt);
+    			
+    			 FirearmEmptyCapability.updateIsEmpty(entityplayer, stackIn);
     		}
+            
+           
         }
+		
+		
 	}
 	
 	@Override
@@ -435,10 +440,6 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		} else {
 			 playerIn.startUsingItem(handIn);
 			 result = InteractionResultHolder.pass(itemstack);
-		}
-		
-		if (result.getResult() == InteractionResult.SUCCESS) {
-			FirearmEmptyCapability.updateIsEmpty(playerIn, playerIn.getItemInHand(handIn));
 		}
 		
 		return result;

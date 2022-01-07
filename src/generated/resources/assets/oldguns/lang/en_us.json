@@ -1,6 +1,25 @@
 {
+  "block.oldguns.gunsmiths_bench": "Gunsmith's Bench",
+  "container.gunsmiths_bench": "Gunsmith's Bench",
   "entity.oldguns.bullet_projectile": "Projectile",
+  "item.oldguns.flintlock_mechanism": "Flintlock Mechanism",
   "item.oldguns.flintlock_pistol": "Flintlock Pistol",
+  "item.oldguns.iron_bits": "Iron Bits",
+  "item.oldguns.large_iron_barrel": "Large Iron Barrel",
+  "item.oldguns.large_wooden_handle": "Large Wooden Handle",
+  "item.oldguns.large_wooden_stock": "Large Wooden Stock",
+  "item.oldguns.lead_bits": "Lead Bits",
+  "item.oldguns.medium_iron_barrel": "Medium Iron Barrel",
+  "item.oldguns.medium_wooden_handle": "Medium Wooden Handle",
+  "item.oldguns.medium_wooden_stock": "Medium Wooden Stock",
+  "item.oldguns.repair_kit": "Firearm Repair Kit",
+  "item.oldguns.small_iron_barrel": "Small Iron Barrel",
   "item.oldguns.small_iron_musket_ball": "Small Iron Musket Ball",
-  "itemGroup.oldguns": "Old Guns"
+  "item.oldguns.small_wooden_handle": "Small Wooden Handle",
+  "item.oldguns.small_wooden_stock": "Small Wooden Stock",
+  "itemGroup.oldguns": "Old Guns",
+  "message.oldguns.death.attack.oldguns.artillery": "%1$s was blown apart by artillery fire.",
+  "message.oldguns.death.attack.oldguns.artillery.player": "%1$s was blown apart by artillery fire by %2$s.",
+  "message.oldguns.death.attack.oldguns.firearm": "%1$s was shot to death.",
+  "message.oldguns.death.attack.oldguns.firearm.player": "%1$s was shot to death by %2$s."
 }

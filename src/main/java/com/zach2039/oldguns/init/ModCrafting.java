@@ -2,7 +2,9 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.ingredient.FirearmIngredient;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -29,6 +31,15 @@ public class ModCrafting {
 		public static final RegistryObject<ShapelessFirearmMuzzleloaderReloadRecipe.Serializer> FIREARM_MUZZLELOADER_RELOAD_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_muzzleloader_reload_shapeless",
 				ShapelessFirearmMuzzleloaderReloadRecipe.Serializer::new
 		);
+		
+		public static final RegistryObject<ShapelessGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_shapeless",
+				ShapelessGunsmithsBenchRecipe.Serializer::new
+		);
+		
+		public static final RegistryObject<ShapedGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPED = RECIPE_SERIALIZERS.register("gunsmiths_bench_shaped",
+				ShapedGunsmithsBenchRecipe.Serializer::new
+		);
+		
 		/**
 		 * Registers the {@link DeferredRegister} instance with the mod event bus.
 		 * <p>
@@ -38,7 +49,7 @@ public class ModCrafting {
 		 */
 		public static void initialize(final IEventBus modEventBus) {
 			if (isInitialized) {
-				throw new IllegalStateException("Already initialised");
+				throw new IllegalStateException("Already initialized");
 			}
 
 			RECIPE_SERIALIZERS.register(modEventBus);

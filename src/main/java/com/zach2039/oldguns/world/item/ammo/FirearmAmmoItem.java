@@ -3,7 +3,7 @@ package com.zach2039.oldguns.world.item.ammo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zach2039.oldguns.api.ammo.impl.IFirearmAmmo;
+import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmAmmoType;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.world.entity.BulletProjectile;

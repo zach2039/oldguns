@@ -26,16 +26,13 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.Lazy;
 
 /**
- * A lot of this is taken from TestMod3 project on GitHub by Choonster
+ * Taken from TestMod3 on GitHub
  * @author grilled-salmon
- * @author choonster
+ * @author Choonster
  */
 public class OldGunsItemModelProvider extends ItemModelProvider {
 	private static final String LAYER_0 = "layer0";
 	
-	/**
-	 * A model that extends item/generated and uses the same transforms as the Vanilla bow.
-	 */
 	private final Supplier<ModelFile> simpleModel = Lazy.of(() ->
 			withGeneratedParent("simple_model")
 					.transforms()
@@ -67,6 +64,37 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 					.end()
 	);
 
+	private final Supplier<ModelFile> simpleFirearmModel = Lazy.of(() ->
+			withGeneratedParent("simple_model")
+					.transforms()
+
+					.transform(Perspective.THIRDPERSON_RIGHT)
+					.rotation(-80, 260, -40)
+					.translation(-1, 1, 0f)
+					.scale(0.9f, 0.9f, 0.9f)
+					.end()
+
+					.transform(Perspective.THIRDPERSON_LEFT)
+					.rotation(-80, -280, 40)
+					.translation(-1, 1, 0f)
+					.scale(0.9f, 0.9f, 0.9f)
+					.end()
+
+					.transform(Perspective.FIRSTPERSON_RIGHT)
+					.rotation(0, -90, 25)
+					.translation(1.13f, 3.2f, 1.13f)
+					.scale(0.68f, 0.68f, 0.68f)
+					.end()
+
+					.transform(Perspective.FIRSTPERSON_LEFT)
+					.rotation(0, 90, -25)
+					.translation(1.13f, 3.2f, 1.13f)
+					.scale(0.68f, 0.68f, 0.68f)
+					.end()
+
+					.end()
+	);
+	
 	public OldGunsItemModelProvider(final DataGenerator generator, final ExistingFileHelper existingFileHelper) {
 		super(generator, OldGuns.MODID, existingFileHelper);
 	}
@@ -81,10 +109,29 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
-		withSimpleParentAndDefaultTexture(ModItems.SMALL_IRON_MUSKET_BALL.get());
-		
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_PISTOL.get());
-
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_MUSKET_BALL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.FLINTLOCK_MECHANISM.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_HANDLE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_HANDLE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_WOODEN_HANDLE.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_STOCK.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_STOCK.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_WOODEN_STOCK.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BARREL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.LEAD_BITS.get());
+		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
+		
 		//withGeneratedParentAndDefaultTexture(ModItems.ARROW.get());
 	}
 
@@ -133,9 +180,23 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 				.parent(simpleModel.get());
 	}
 
+	private ItemModelBuilder withSimpleFirearmParent(final String name) {
+		return getBuilder(name)
+				.parent(simpleFirearmModel.get());
+	}
+	
+	private ItemModelBuilder withSimpleFirearmParent(final Item item, final String texture) {
+		return withSimpleFirearmParent(name(item))
+				.texture(LAYER_0, texture);
+	}
+	
+	private ItemModelBuilder withSimpleFirearmParent(final Item item, final ResourceLocation texture) {
+		return withSimpleFirearmParent(item, texture.toString());
+	}
+	
 	private void firearmMuzzleloaderItem(final Item item) {
 		// Create the parent model
-		final ItemModelBuilder firearm = withSimpleParent(item, itemTexture(ModItems.FLINTLOCK_PISTOL.get()));
+		final ItemModelBuilder firearm = withSimpleFirearmParent(item, itemTexture(ModItems.FLINTLOCK_PISTOL.get()));
 
 		ItemModelBuilder firearmEmpty = getBuilder(name(item) + "_empty")
 				.parent(firearm)

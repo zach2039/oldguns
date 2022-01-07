@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.api.firearm.impl;
+package com.zach2039.oldguns.api.firearm;
 
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
