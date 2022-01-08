@@ -16,6 +16,9 @@ public class ModItemModelProperties {
 	public static void registerItemModelProperties(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_CALIVER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_LONG_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
 		});
 	}
 }

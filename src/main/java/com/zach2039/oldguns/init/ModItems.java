@@ -2,12 +2,24 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.ammo.FirearmAmmoItem;
+import com.zach2039.oldguns.world.item.ammo.LargeIronBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.LargeIronBuckshotItem;
+import com.zach2039.oldguns.world.item.ammo.LargeIronMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.MediumIronBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.MediumIronBuckshotItem;
+import com.zach2039.oldguns.world.item.ammo.MediumIronMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.SmallIronBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.SmallIronBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronMusketBallItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.world.item.firearm.FlintlockBlunderbussItem;
+import com.zach2039.oldguns.world.item.firearm.FlintlockCaliverItem;
+import com.zach2039.oldguns.world.item.firearm.FlintlockLongMusketItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockPistolItem;
 import com.zach2039.oldguns.world.item.material.IronBitsItem;
 import com.zach2039.oldguns.world.item.material.LeadBitsItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
+import com.zach2039.oldguns.world.item.part.HugeIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenStockItem;
@@ -41,10 +53,43 @@ public class ModItems {
 	public static final RegistryObject<FirearmItem> FLINTLOCK_PISTOL = ITEMS.register("flintlock_pistol",
 			() -> new FlintlockPistolItem()
 		);
+	public static final RegistryObject<FirearmItem> FLINTLOCK_CALIVER = ITEMS.register("flintlock_caliver",
+			() -> new FlintlockCaliverItem()
+		);
+	public static final RegistryObject<FirearmItem> FLINTLOCK_LONG_MUSKET = ITEMS.register("flintlock_long_musket",
+			() -> new FlintlockLongMusketItem()
+		);
+	public static final RegistryObject<FirearmItem> FLINTLOCK_BLUNDERBUSS = ITEMS.register("flintlock_blunderbuss",
+			() -> new FlintlockBlunderbussItem()
+		);
 	
 	// Ammo
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL = ITEMS.register("small_iron_musket_ball",
 			() -> new SmallIronMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_MUSKET_BALL = ITEMS.register("medium_iron_musket_ball",
+			() -> new MediumIronMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_MUSKET_BALL = ITEMS.register("large_iron_musket_ball",
+			() -> new LargeIronMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_BUCKSHOT = ITEMS.register("small_iron_buckshot",
+			() -> new SmallIronBuckshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_BUCKSHOT = ITEMS.register("medium_iron_buckshot",
+			() -> new MediumIronBuckshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_BUCKSHOT = ITEMS.register("large_iron_buckshot",
+			() -> new LargeIronBuckshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_BIRDSHOT = ITEMS.register("small_iron_birdshot",
+			() -> new SmallIronBirdshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_BIRDSHOT = ITEMS.register("medium_iron_birdshot",
+			() -> new MediumIronBirdshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_BIRDSHOT = ITEMS.register("large_iron_birdshot",
+			() -> new LargeIronBirdshotItem()
 		);
 	
 	// Parts
@@ -86,6 +131,10 @@ public class ModItems {
 	
 	public static final RegistryObject<LargeIronBarrelItem> LARGE_IRON_BARREL = ITEMS.register("large_iron_barrel",
 			() -> new LargeIronBarrelItem()
+		);
+	
+	public static final RegistryObject<HugeIronBarrelItem> HUGE_IRON_BARREL = ITEMS.register("huge_iron_barrel",
+			() -> new HugeIronBarrelItem()
 		);
 	
 	// Materials

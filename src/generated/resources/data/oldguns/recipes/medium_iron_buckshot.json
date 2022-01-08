@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "ingredients": [
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_iron_buckshot"
+  }
+}

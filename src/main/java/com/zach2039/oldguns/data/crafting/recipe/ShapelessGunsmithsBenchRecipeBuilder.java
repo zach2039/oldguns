@@ -18,4 +18,8 @@ public class ShapelessGunsmithsBenchRecipeBuilder extends EnhancedShapelessRecip
 	public static ShapelessGunsmithsBenchRecipeBuilder shapelessGunsmithsBenchRecipe(final ItemStack result) {
 		return new ShapelessGunsmithsBenchRecipeBuilder(result);
 	}
+	
+	public static ShapelessGunsmithsBenchRecipeBuilder shapelessGunsmithsBenchRecipe(final ItemLike result, final int count) {
+		return shapelessGunsmithsBenchRecipe(new ItemStack(result, count));
+	}
 }

@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:medium_iron_buckshot"
+    ]
+  },
+  "criteria": {
+    "has_small_metal_musket_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_metal_musket_ball"
+          }
+        ]
+      }
+    },
+    "has_paper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:paper"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:medium_iron_buckshot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_small_metal_musket_ball",
+      "has_paper",
+      "has_the_recipe"
+    ]
+  ]
+}

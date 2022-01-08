@@ -137,6 +137,8 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
 		
 		((FirearmItem)outputStack.getItem()).initNBTTags(outputStack);
     	
+		FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
+		FirearmNBTHelper.refreshFirearmCondition(outputStack);
 		FirearmEmptyCapability.update(null, outputStack);
 		
 		return outputStack;

@@ -24,6 +24,7 @@ public class FirearmTooltipHelper {
 		/* Print condition to tooltip. Color based on status. */
 		ChatFormatting conditionFormatting = ChatFormatting.GREEN;
 		String conditionString = "Very Good";
+		
 		FirearmNBTHelper.refreshFirearmCondition(stackIn);
 		switch (FirearmNBTHelper.getNBTTagCondition(stackIn))
 		{
