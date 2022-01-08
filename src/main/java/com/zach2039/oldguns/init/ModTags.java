@@ -18,9 +18,26 @@ public class ModTags {
 	
 	public static class Items {
 		
-		public static final Tag.Named<Item> SMALL_BARREL = tag("small_barrel");
-		public static final Tag.Named<Item> MEDIUM_BARREL = tag("medium_barrel");
-		public static final Tag.Named<Item> LARGE_BARREL = tag("large_barrel");
+		// Ammo
+		public static final Tag.Named<Item> SMALL_METAL_MUSKET_BALL = tag("small_metal_musket_ball");
+		public static final Tag.Named<Item> MEDIUM_METAL_MUSKET_BALL = tag("medium_metal_musket_ball");
+		public static final Tag.Named<Item> LARGE_METAL_MUSKET_BALL = tag("large_metal_musket_ball");
+		
+		public static final Tag.Named<Item> SMALL_METAL_BUCKSHOT = tag("small_metal_buckshot");
+		public static final Tag.Named<Item> MEDIUM_METAL_BUCKSHOT = tag("medium_metal_buckshot");
+		public static final Tag.Named<Item> LARGE_METAL_BUCKSHOT = tag("large_metal_buckshot");
+		
+		public static final Tag.Named<Item> SMALL_METAL_BIRDSHOT = tag("small_metal_birdshot");
+		public static final Tag.Named<Item> MEDIUM_METAL_BIRDSHOT = tag("medium_metal_birdshot");
+		public static final Tag.Named<Item> LARGE_METAL_BIRDSHOT = tag("large_metal_birdshot");
+		
+		// Parts
+		public static final Tag.Named<Item> FLINTLOCK_MECHANISM = tag("flintlock_mechanism");
+		
+		public static final Tag.Named<Item> SMALL_METAL_BARREL = tag("small_metal_barrel");
+		public static final Tag.Named<Item> MEDIUM_METAL_BARREL = tag("medium_metal_barrel");
+		public static final Tag.Named<Item> LARGE_METAL_BARREL = tag("large_metal_barrel");
+		public static final Tag.Named<Item> HUGE_METAL_BARREL = tag("huge_metal_barrel");
 		
 		public static final Tag.Named<Item> SMALL_HANDLE = tag("small_handle");
 		public static final Tag.Named<Item> MEDIUM_HANDLE = tag("medium_handle");
@@ -30,7 +47,7 @@ public class ModTags {
 		public static final Tag.Named<Item> MEDIUM_STOCK = tag("medium_stock");
 		public static final Tag.Named<Item> LARGE_STOCK = tag("large_stock");
 		
-		public static final Tag.Named<Item> FLINTLOCK_MECHANISM = tag("flintlock_mechanism");
+		
 		
 		private static Tag.Named<Item> tag(final String name) {
 			return ItemTags.bind(new ResourceLocation(OldGuns.MODID, name).toString());

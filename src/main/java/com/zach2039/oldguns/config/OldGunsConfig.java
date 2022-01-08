@@ -49,8 +49,21 @@ public class OldGunsConfig {
 	
 	public static class FirearmSettings {
 		public final MuzzleloadingFirearmAttributes flintlock_pistol;
+		public final MuzzleloadingFirearmAttributes flintlock_caliver;
+		public final MuzzleloadingFirearmAttributes flintlock_long_musket;
+		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss;
 		
 		public final FirearmAmmoAttributes small_iron_musket_ball;
+		public final FirearmAmmoAttributes medium_iron_musket_ball;
+		public final FirearmAmmoAttributes large_iron_musket_ball;
+		
+		public final FirearmAmmoAttributes small_iron_buckshot;
+		public final FirearmAmmoAttributes medium_iron_buckshot;
+		public final FirearmAmmoAttributes large_iron_buckshot;
+		
+		public final FirearmAmmoAttributes small_iron_birdshot;
+		public final FirearmAmmoAttributes medium_iron_birdshot;
+		public final FirearmAmmoAttributes large_iron_birdshot;
 		
 		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -66,9 +79,42 @@ public class OldGunsConfig {
 					1.0f
 					);
 			
+			flintlock_caliver = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Calivers",
+					"flintlock_caliver",
+					40,
+					4.0f,
+					1.2f,
+					1.6f,
+					1.0f
+					);
+			
+			flintlock_long_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Long Muskets",
+					"flintlock_long_musket",
+					48,
+					4.5f,
+					1.2f,
+					1.2f,
+					1.0f
+					);
+			
+			flintlock_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Blunderbusses",
+					"flintlock_blunderbuss",
+					44,
+					3.5f,
+					1.0f,
+					1.7f,
+					1.0f
+					);
+			
 			small_iron_musket_ball = new FirearmAmmoAttributes(
 					builder,
-					"Attributes of Small Iron Musket Balls",
+					"Attributes of Small Iron Musket Ball Ammo",
 					"small_iron_musket_ball",
 					8,
 					1,
@@ -76,6 +122,102 @@ public class OldGunsConfig {
 					0.3f,
 					25.0f,
 					1.0f
+					);
+			
+			medium_iron_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Musket Ball Ammo",
+					"medium_iron_musket_ball",
+					6,
+					1,
+					23.0f,
+					0.4f,
+					50.0f,
+					1.0f
+					);
+			
+			large_iron_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Iron Musket Ball Ammo",
+					"large_iron_musket_ball",
+					4,
+					1,
+					26.0f,
+					0.5f,
+					75.0f,
+					1.0f
+					);
+			
+			small_iron_buckshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Iron Buckshot Ammo",
+					"small_iron_buckshot",
+					8,
+					3,
+					15.0f,
+					0.3f,
+					30.0f,
+					1.5f
+					);
+			
+			medium_iron_buckshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Buckshot Ammo",
+					"medium_iron_buckshot",
+					6,
+					5,
+					15.0f,
+					0.3f,
+					30.0f,
+					1.5f
+					);
+			
+			large_iron_buckshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Iron Buckshot Ammo",
+					"large_iron_buckshot",
+					4,
+					7,
+					15.0f,
+					0.3f,
+					30.0f,
+					1.5f
+					);
+			
+			small_iron_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Iron Birdshot Ammo",
+					"small_iron_birdshot",
+					8,
+					6,
+					3.0f,
+					0.2f,
+					7.0f,
+					3.0f
+					);
+			
+			medium_iron_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Birdshot Ammo",
+					"medium_iron_birdshot",
+					6,
+					8,
+					3.0f,
+					0.2f,
+					7.0f,
+					3.0f
+					);
+			
+			large_iron_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Iron Birdshot Ammo",
+					"large_iron_birdshot",
+					4,
+					10,
+					3.0f,
+					0.2f,
+					7.0f,
+					3.0f
 					);
 			
 			builder.pop();

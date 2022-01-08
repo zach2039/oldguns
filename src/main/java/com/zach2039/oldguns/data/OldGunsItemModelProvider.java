@@ -104,8 +104,21 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	@Override
 	protected void registerModels() {
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_CALIVER.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_LONG_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_MUSKET_BALL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_MUSKET_BALL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BUCKSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BUCKSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BUCKSHOT.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BIRDSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BIRDSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BIRDSHOT.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.FLINTLOCK_MECHANISM.get());
 		
@@ -120,6 +133,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.HUGE_IRON_BARREL.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.LEAD_BITS.get());
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
@@ -190,11 +204,11 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	private void firearmMuzzleloaderItem(final Item item) {
 		// Create the parent model
-		final ItemModelBuilder firearm = withSimpleFirearmParent(item, itemTexture(ModItems.FLINTLOCK_PISTOL.get()));
+		final ItemModelBuilder firearm = withSimpleFirearmParent(item, itemTexture(item));
 
 		ItemModelBuilder firearmEmpty = getBuilder(name(item) + "_empty")
 				.parent(firearm)
-				.texture(LAYER_0, itemTexture(ModItems.FLINTLOCK_PISTOL.get()) + "_empty");
+				.texture(LAYER_0, itemTexture(item) + "_empty");
 		
 		firearm
 			.override()

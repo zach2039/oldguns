@@ -1,5 +1,6 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -34,6 +35,7 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
+	
 	static int MAX_WIDTH = 3;
 	static int MAX_HEIGHT = 3;
 
@@ -289,13 +291,17 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 	}
 
 	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapedGunsmithsBenchRecipe> {
+		
 		@Override
 		public ShapedGunsmithsBenchRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");
 			final ModRecipeUtil.ShapedPrimer primer = ModRecipeUtil.parseShaped(json);
 			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 
-			return new ShapedGunsmithsBenchRecipe(recipeID, group, primer.recipeWidth(), primer.recipeHeight(), primer.ingredients(), result);
+			ShapedGunsmithsBenchRecipe recipeFromJson = new ShapedGunsmithsBenchRecipe(recipeID, group, 
+					primer.recipeWidth(), primer.recipeHeight(), primer.ingredients(), result);
+			
+			return recipeFromJson;
 		}
 
 		@Override

@@ -5,7 +5,7 @@
       "item": "oldguns:flintlock_pistol"
     },
     {
-      "item": "oldguns:small_iron_musket_ball"
+      "tag": "oldguns:small_metal_musket_ball"
     },
     {
       "tag": "forge:gunpowder"

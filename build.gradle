@@ -3,19 +3,25 @@ buildscript {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
-        maven {url 'https://repo.spongepowered.org/repository/maven-public/'}
+        maven { url = 'https://plugins.gradle.org/m2/'}
+        maven {
+			url = 'https://repo.spongepowered.org/repository/maven-public/'
+			content { includeGroup "org.spongepowered" }
+		}
+        mavenLocal()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.spongepowered.mixin'
 
-version = "${mc_version}-${version}"
+version = "${mc_version}-${mod_version}"
 group = "com.zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "oldguns"
 
@@ -86,14 +92,24 @@ repositories {
         name 'DVS1 Maven FS'
         url 'https://dvs1.progwml6.com/files/maven'
     }
+	maven { 
+		url = "https://repo.spongepowered.org/repository/maven-public/" 
+	}
+    maven { // Mirror for JEI
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
 }
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.1-39.0.10'
 		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-		
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+
+	if (System.getProperty("idea.sync.active") != "true") {
+        annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
+    }
 }
 
 jar {
@@ -101,9 +117,9 @@ jar {
         attributes([
                 "Specification-Title"     : "oldgunsmod",
                 "Specification-Vendor"    : "zach2039",
-                "Specification-Version"   : "3", // We are version 1 of ourselves
-                "Implementation-Title"    : project.mc_version,
-                "Implementation-Version"  : project.version,
+                "Specification-Version"   : "${mc_version}-${mod_version}", // We are version 1 of ourselves
+                "Implementation-Title"    : project.name,
+                "Implementation-Version"  : "${archiveVersion}",
                 "Implementation-Vendor"   : "zach2039",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
                 "MixinConfigs"            : "oldguns.mixins.json"
@@ -126,7 +142,6 @@ publishing {
     }
 }
 
-apply plugin: 'org.spongepowered.mixin'
 
 mixin {
     add sourceSets.main, "oldguns.refmap.json"
@@ -186,3 +201,9 @@ mixin {
 //	// Move access transformers to META-INF
 //	rename '(.+_at.cfg)', 'META-INF/$1'
 //}
+
+eclipse {
+    afterEvaluate {
+        synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt
+    }
+}

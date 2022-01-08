@@ -1,5 +1,8 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
+import java.util.Collections;
+import java.util.Map;
+
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
@@ -91,13 +94,16 @@ public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraft
 	}
 
 	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchRecipe> {
+		
 		@Override
 		public ShapelessGunsmithsBenchRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");
 			final NonNullList<Ingredient> ingredients = ModRecipeUtil.parseShapeless(json);
 			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 
-			return new ShapelessGunsmithsBenchRecipe(recipeID, group, result, ingredients);
+			ShapelessGunsmithsBenchRecipe recipeFromJson = new ShapelessGunsmithsBenchRecipe(recipeID, group, result, ingredients);
+			
+			return recipeFromJson;
 		}
 
 		@Override

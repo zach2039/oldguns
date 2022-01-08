@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/iron"
+    },
+    {
+      "tag": "forge:nuggets/iron"
+    },
+    {
+      "tag": "forge:nuggets/iron"
+    },
+    {
+      "tag": "forge:nuggets/iron"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_iron_birdshot"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    " I ",
+    "III",
+    " I "
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "oldguns:large_iron_musket_ball",
+    "count": 2
+  }
+}

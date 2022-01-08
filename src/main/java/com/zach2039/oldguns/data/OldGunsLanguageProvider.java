@@ -62,8 +62,21 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addItems() {
 		addItem(ModItems.FLINTLOCK_PISTOL, "Flintlock Pistol");
+		addItem(ModItems.FLINTLOCK_CALIVER, "Flintlock Caliver");
+		addItem(ModItems.FLINTLOCK_LONG_MUSKET, "Flintlock Long Musket");
+		addItem(ModItems.FLINTLOCK_BLUNDERBUSS, "Flintlock Blunderbuss");
 		
 		addItem(ModItems.SMALL_IRON_MUSKET_BALL, "Small Iron Musket Ball");
+		addItem(ModItems.MEDIUM_IRON_MUSKET_BALL, "Medium Iron Musket Ball");
+		addItem(ModItems.LARGE_IRON_MUSKET_BALL, "Large Iron Musket Ball");
+		
+		addItem(ModItems.SMALL_IRON_BUCKSHOT, "Small Iron Buckshot");
+		addItem(ModItems.MEDIUM_IRON_BUCKSHOT, "Medium Iron Buckshot");
+		addItem(ModItems.LARGE_IRON_BUCKSHOT, "Large Iron Buckshot");
+		
+		addItem(ModItems.SMALL_IRON_BIRDSHOT, "Small Iron Birdshot");
+		addItem(ModItems.MEDIUM_IRON_BIRDSHOT, "Medium Iron Birdshot");
+		addItem(ModItems.LARGE_IRON_BIRDSHOT, "Large Iron Birdshot");
 		
 		addItem(ModItems.FLINTLOCK_MECHANISM, "Flintlock Mechanism");
 		
@@ -78,6 +91,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.SMALL_IRON_BARREL, "Small Iron Barrel");
 		addItem(ModItems.MEDIUM_IRON_BARREL, "Medium Iron Barrel");
 		addItem(ModItems.LARGE_IRON_BARREL, "Large Iron Barrel");
+		addItem(ModItems.HUGE_IRON_BARREL, "Huge Iron Barrel");
 		
 		addItem(ModItems.LEAD_BITS, "Lead Bits");
 		addItem(ModItems.IRON_BITS, "Iron Bits");
