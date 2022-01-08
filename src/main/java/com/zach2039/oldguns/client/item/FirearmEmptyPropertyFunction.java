@@ -9,16 +9,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.Level;
 
+/**
+ * Some taken from TestMod3 on Github
+ * @author grilled-salmon
+ * @author Choonster
+ */
 public class FirearmEmptyPropertyFunction {
-	/**
-	 * The ID of this function.
-	 */
-	public static final ResourceLocation ID = new ResourceLocation(OldGuns.MODID, "firearm_empty");
 
-	/**
-	 * The function.
-	 */
-	private static final ClampedItemPropertyFunction GETTER = (stack, level, entity, seed) -> // TODO: This may be clamped
+	public static final ResourceLocation ID = new ResourceLocation(OldGuns.MODID, "firearm_empty");
+	
+	private static final ClampedItemPropertyFunction GETTER = (stack, level, entity, seed) ->
 	{
 		final Level world = level != null ? level : entity != null ? entity.getCommandSenderWorld() : null;
 
@@ -27,15 +27,10 @@ public class FirearmEmptyPropertyFunction {
 		}
 
 		return FirearmEmptyCapability.getIsEmpty(stack)
-				.map(isEmpty -> (isEmpty.get() ? 1f : 0f) )
+				.map(isEmpty -> (float) (isEmpty.get() ? 1f : 0f))
 				.orElse(0f);
 	};
-
-	/**
-	 * Add this getter to an {@link Item}.
-	 *
-	 * @param item The item
-	 */
+	
 	public static void registerForItem(final Item item) {
 		ItemProperties.register(item, ID, GETTER);
 	}

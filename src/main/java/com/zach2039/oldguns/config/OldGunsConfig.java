@@ -13,6 +13,7 @@ import net.minecraftforge.fml.config.ModConfig;
 public class OldGunsConfig {
 	
 	public static class Common {
+		public final BooleanValue patchRecipeBook;
 		public final BooleanValue printDebugMessages;
 		public final FirearmSettings firearmSettings;
 		
@@ -23,6 +24,10 @@ public class OldGunsConfig {
 			printDebugMessages = builder
 					.comment("Print debug messages to console")
 					.define("printDebugMessages", false);
+			
+			patchRecipeBook = builder
+					.comment("Patch vanilla recipe book to handle NBT items")
+					.define("patchRecipeBook", true);
 			
 			firearmSettings = new FirearmSettings(
 					builder,

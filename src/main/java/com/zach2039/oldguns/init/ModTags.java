@@ -11,14 +11,13 @@ import net.minecraft.world.level.block.Block;
 
 public class ModTags {
 	public static class Blocks {
-		
-		
 		private static Tag.Named<Block> tag(final String name) {
 			return BlockTags.bind(new ResourceLocation(OldGuns.MODID, name).toString());
 		}
 	}
 	
 	public static class Items {
+		
 		public static final Tag.Named<Item> SMALL_BARREL = tag("small_barrel");
 		public static final Tag.Named<Item> MEDIUM_BARREL = tag("medium_barrel");
 		public static final Tag.Named<Item> LARGE_BARREL = tag("large_barrel");

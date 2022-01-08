@@ -20,7 +20,7 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 
 	@Override
 	protected void addTags() {
-
+		
 		tag(ModTags.Items.FLINTLOCK_MECHANISM)
 				.add(ModItems.FLINTLOCK_MECHANISM.get());
 		

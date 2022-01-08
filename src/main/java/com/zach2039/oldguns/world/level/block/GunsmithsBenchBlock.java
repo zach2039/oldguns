@@ -36,6 +36,7 @@ public class GunsmithsBenchBlock extends Block {
 		super(Block.Properties
 				.of(Material.WOOD)
 				.sound(SoundType.WOOD)
+				.strength(3.0F)
 				.dynamicShape()
 				.noOcclusion()
 				);

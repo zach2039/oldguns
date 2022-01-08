@@ -8,12 +8,12 @@ import javax.annotation.Nullable;
 import com.mojang.datafixers.util.Pair;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
-import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
+import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmStackHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmTooltipHelper;
@@ -24,6 +24,7 @@ import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
+import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
@@ -32,7 +33,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -40,6 +40,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.UseAnim;
@@ -47,7 +48,6 @@ import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.client.RenderProperties;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.network.PacketDistributor;
 
@@ -113,7 +113,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 	@Override
 	public ICapabilityProvider initCapabilities(final ItemStack stack, @Nullable final CompoundTag nbt) {
-		return FirearmEmptyCapability.createProvider(new FirearmEmpty(false));
+		return FirearmEmptyCapability.createProvider(new FirearmEmpty());
 	}
 	
 	@Override
@@ -125,16 +125,19 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 	
 	@Override
+	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
+		if (this.allowdedIn(tab)) {
+			ItemStack stackIn = new ItemStack(this);
+			FirearmEmptyCapability.update(null, stackIn);
+			stackList.add(stackIn);
+		}
+	}
+	
+	@Override
 	public void onCraftedBy(ItemStack stackIn, Level worldIn, Player playerIn)	{
 		super.onCraftedBy(stackIn, worldIn, playerIn);
 		
-    	/* Make sure item has NBT tag. */
-    	if (!stackIn.hasTag())
-			initNBTTags(stackIn);
-    	
-    	/* Recalculate firearm condition. */
-    	FirearmNBTHelper.refreshFirearmCondition(stackIn);
-		
+		initNBTTags(stackIn);
 	}
 	
 	@Override	
@@ -335,7 +338,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
     			ClientboundSetEquipmentPacket pkt = new ClientboundSetEquipmentPacket(entityplayer.getId(),	slots);
     			playerMP.connection.send(pkt);
     			
-    			 FirearmEmptyCapability.updateIsEmpty(entityplayer, stackIn);
+    			 FirearmEmptyCapability.update(entityplayer, stackIn);
     		}
             
            
@@ -347,8 +350,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	@Override
 	public void onUseTick(Level worldIn, LivingEntity playerIn, ItemStack stackIn, int currentUseTicks) {
 		/* Make sure item has NBT tag. */
-		if (!stackIn.hasTag())
-			initNBTTags(stackIn);
+		initNBTTags(stackIn);
 		
 		/* Process reloading animations based on active use ticks, if this item is a breechloader. */
 		if (playerIn != null) 

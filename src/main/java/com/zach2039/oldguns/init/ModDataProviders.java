@@ -5,6 +5,7 @@ import com.zach2039.oldguns.data.OldGunsBlockTagsProvider;
 import com.zach2039.oldguns.data.OldGunsItemModelProvider;
 import com.zach2039.oldguns.data.OldGunsItemTagsProvider;
 import com.zach2039.oldguns.data.OldGunsLanguageProvider;
+import com.zach2039.oldguns.data.OldGunsLootTableProvider;
 import com.zach2039.oldguns.data.OldGunsRecipeProvider;
 
 import net.minecraft.data.DataGenerator;
@@ -35,7 +36,8 @@ public class ModDataProviders {
 
 		if (event.includeServer()) {
 			dataGenerator.addProvider(new OldGunsRecipeProvider(dataGenerator));
-		
+			dataGenerator.addProvider(new OldGunsLootTableProvider(dataGenerator));
+			
 			final OldGunsBlockTagsProvider blockTagsProvider = new OldGunsBlockTagsProvider(dataGenerator, existingFileHelper);
 			dataGenerator.addProvider(blockTagsProvider);
 			dataGenerator.addProvider(new OldGunsItemTagsProvider(dataGenerator, blockTagsProvider, existingFileHelper));
