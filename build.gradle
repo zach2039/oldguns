@@ -3,9 +3,11 @@ buildscript {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
         mavenCentral()
+        maven {url 'https://repo.spongepowered.org/repository/maven-public/'}
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -29,7 +31,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
-
+			arg "-mixin.config=oldguns.mixins.json"
             mods {
                 oldguns {
                     source sourceSets.main
@@ -43,7 +45,12 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
-
+         	property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+            
+            arg '-nogui'
+            arg "-mixin.config=oldguns.mixins.json"
+            
             mods {
                 oldguns {
                     source sourceSets.main
@@ -57,9 +64,12 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
 
             property 'forge.logging.console.level', 'debug'
+     		property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
             args '--mod', 'oldguns', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
+			arg "-mixin.config=oldguns.mixins.json"
+			
             mods {
                 oldguns {
                     source sourceSets.main
@@ -80,14 +90,10 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.18.1-39.0.10'
-
-	// Crafttweaker stuff
-	//compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"	
-	
-	// compile against the JEI API but do not include it at runtime
+		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-	// at runtime, use the full JEI jar
-	//runtime "mezz.jei:jei_${mc_version}:${jei_version}"
+		
+	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
@@ -99,7 +105,8 @@ jar {
                 "Implementation-Title"    : project.mc_version,
                 "Implementation-Version"  : project.version,
                 "Implementation-Vendor"   : "zach2039",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
+                "MixinConfigs"            : "oldguns.mixins.json"
         ])
     }
 }
@@ -118,6 +125,13 @@ publishing {
         }
     }
 }
+
+apply plugin: 'org.spongepowered.mixin'
+
+mixin {
+    add sourceSets.main, "oldguns.refmap.json"
+}
+
 
 //minecraft {
 //    version = "1.12.2-14.23.5.2847"

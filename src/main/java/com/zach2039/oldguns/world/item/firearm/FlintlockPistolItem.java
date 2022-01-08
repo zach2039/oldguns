@@ -7,6 +7,7 @@ import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
+import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.MuzzleloadingFirearmAttributes;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
@@ -43,8 +44,11 @@ public class FlintlockPistolItem extends FirearmItem implements IFirearm {
 	@Override
 	public void initNBTTags(ItemStack stackIn)
 	{
-		/* Set ammo NBT by peeking top of magazine stack. */
+		FirearmNBTHelper.refreshFirearmCondition(stackIn);
+		
 		FirearmNBTHelper.peekNBTTagAmmo(stackIn);
+		
+		FirearmEmptyCapability.update(null, stackIn);
 	}
 
 	@Override

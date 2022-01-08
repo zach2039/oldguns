@@ -1,21 +1,15 @@
 package com.zach2039.oldguns.data;
 
-import java.util.List;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
 import com.zach2039.oldguns.init.ModItems;
 
-import net.minecraft.client.renderer.item.ItemPropertyFunction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;

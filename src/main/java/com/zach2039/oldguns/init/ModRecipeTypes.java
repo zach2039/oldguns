@@ -13,6 +13,7 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
 public interface ModRecipeTypes<T extends Recipe<?>> {
+	
 	RecipeType<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench");
 
 	static <T extends Recipe<?>> RecipeType<T> register(final String name) {

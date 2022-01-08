@@ -11,26 +11,9 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
 
 public class FirearmNBTHelper {
-	/**
-	 * Sets the ammo count of the firearm itemstack instance.
-	 * @param stackIn
-	 * @param ammoCount
-	 */
-	private static void setNBTTagAmmoCount(ItemStack stackIn, int ammoCount)
-	{
-		/* Create new NBT tag if none. */
-		if (!stackIn.hasTag())
-			stackIn.setTag(new CompoundTag());
-		
-		stackIn.getTag().putInt("ammoCount", ammoCount);
-	}
 	
 	public static void setNBTTagMagazineStack(ItemStack stackIn, List<ItemStack> firearmAmmoList)
-	{
-		/* Create new NBT tag and set value to 0 if no NBT tag. */
-		if (!stackIn.hasTag())
-			setNBTTagAmmoCount(stackIn, 0);
-		
+	{		
 		/* Accumulate list of firearm ammo objects into NBT form. */
 		ListTag ammoStackNBTTagList = new ListTag();
 		for (ItemStack ammoStack : firearmAmmoList)
@@ -44,9 +27,6 @@ public class FirearmNBTHelper {
 		
 		/* Set tag list on firearm stack. */
 		stackIn.getTag().put("ammoList", ammoStackNBTTagList);
-		
-		/* Set ammo count. */
-		setNBTTagAmmoCount(stackIn, firearmAmmoList.size());
 	}
 	
 	public static List<ItemStack> getNBTTagMagazineStack(ItemStack stackIn)
@@ -171,7 +151,7 @@ public class FirearmNBTHelper {
 	public static FirearmCondition getNBTTagCondition(ItemStack stackIn)
 	{
 		/* Create new NBT tag and set value if no NBT tag. */
-		if (!stackIn.hasTag() || !stackIn.getTag().contains("condition"))
+		if (!stackIn.getTag().contains("condition"))
 			setNBTTagCondition(stackIn, FirearmCondition.VERY_GOOD);
 
 		return FirearmCondition.values()[stackIn.getTag().getInt("condition")];
