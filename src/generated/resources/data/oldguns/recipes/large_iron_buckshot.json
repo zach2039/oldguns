@@ -2,19 +2,19 @@
   "type": "oldguns:gunsmiths_bench_shapeless",
   "ingredients": [
     {
-      "tag": "oldguns:small_metal_musket_ball"
+      "item": "oldguns:small_iron_musket_ball"
     },
     {
-      "tag": "oldguns:small_metal_musket_ball"
+      "item": "oldguns:small_iron_musket_ball"
     },
     {
-      "tag": "oldguns:small_metal_musket_ball"
+      "item": "oldguns:small_iron_musket_ball"
     },
     {
-      "tag": "oldguns:small_metal_musket_ball"
+      "item": "oldguns:small_iron_musket_ball"
     },
     {
-      "tag": "oldguns:small_metal_musket_ball"
+      "item": "oldguns:small_iron_musket_ball"
     },
     {
       "item": "minecraft:paper"

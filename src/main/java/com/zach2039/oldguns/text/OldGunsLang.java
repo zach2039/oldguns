@@ -31,10 +31,10 @@ import net.minecraft.resources.ResourceLocation;
  * SOFTWARE.
  */
 public enum OldGunsLang {
-	MESSAGE_DEATH_FIREARM("message", "death.attack.oldguns.firearm"),
-	MESSAGE_DEATH_FIREARM_PLAYER("message", "death.attack.oldguns.firearm.player"),
-	MESSAGE_DEATH_ARTILLERY("message", "death.attack.oldguns.artillery"),
-	MESSAGE_DEATH_ARTILLERY_PLAYER("message", "death.attack.oldguns.artillery.player")
+	MESSAGE_DEATH_FIREARM("death.attack.oldguns.firearm"),
+	MESSAGE_DEATH_FIREARM_PLAYER("death.attack.oldguns.firearm.player"),
+	MESSAGE_DEATH_ARTILLERY("death.attack.oldguns.artillery"),
+	MESSAGE_DEATH_ARTILLERY_PLAYER("death.attack.oldguns.artillery.player")
 	;
 
 	private final String key;

@@ -3,6 +3,8 @@ package com.zach2039.oldguns.data;
 import java.util.function.Consumer;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.data.crafting.ConditionBuilder;
+import com.zach2039.oldguns.data.crafting.ingredient.NotConditionalIngredientBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchRecipeBuilder;
@@ -19,6 +21,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.crafting.conditions.ItemExistsCondition;
 
 public class OldGunsRecipeProvider extends RecipeProvider {
 	
@@ -196,11 +199,11 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create small iron buckshot
 		{
 			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.SMALL_IRON_BUCKSHOT.get(), 1)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
 					.requires(Items.PAPER)
-					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.unlockedBy("has_small_iron_musket_ball", has(ModItems.SMALL_IRON_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_iron_buckshot"));
 		}
@@ -208,13 +211,13 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create medium iron buckshot
 		{
 			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.MEDIUM_IRON_BUCKSHOT.get(), 1)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
 					.requires(Items.PAPER)
 					.requires(Items.PAPER)
-					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.unlockedBy("has_small_iron_musket_ball", has(ModItems.SMALL_IRON_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_buckshot"));
 		}
@@ -222,14 +225,14 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create large iron buckshot
 		{
 			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.LARGE_IRON_BUCKSHOT.get(), 1)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_IRON_MUSKET_BALL.get())					
 					.requires(Items.PAPER)
 					.requires(Items.PAPER)
-					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.unlockedBy("has_small_iron_musket_ball", has(ModItems.SMALL_IRON_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_buckshot"));
 		}
@@ -273,6 +276,123 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.unlockedBy("has_paper", has(Items.PAPER))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_birdshot"));
+		}
+		
+		// Create small lead musket ball
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shapedGunsmithsBenchRecipe(ModItems.SMALL_LEAD_MUSKET_BALL.get(), 2)
+					.pattern(" l ")
+					.pattern("lll")
+					.pattern(" l ")
+					.define('l', ModTags.Items.NUGGETS_LEAD)
+					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_musket_ball"));
+		}
+		
+		// Create medium lead musket ball
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shapedGunsmithsBenchRecipe(ModItems.MEDIUM_LEAD_MUSKET_BALL.get(), 2)
+					.pattern(" l ")
+					.pattern("lLl")
+					.pattern(" l ")
+					.define('l', ModTags.Items.NUGGETS_LEAD)
+					.define('L', ModTags.Items.INGOTS_LEAD)						
+					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
+					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))					
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_lead_musket_ball"));
+		}
+		
+		// Create large lead musket ball
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shapedGunsmithsBenchRecipe(ModItems.LARGE_LEAD_MUSKET_BALL.get(), 2)
+					.pattern(" L ")
+					.pattern("LLL")
+					.pattern(" L ")
+					.define('L', ModTags.Items.INGOTS_LEAD)	
+					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_musket_ball"));
+		}
+		
+		// Create small lead buckshot
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.SMALL_LEAD_BUCKSHOT.get(), 1)
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(Items.PAPER)
+					.unlockedBy("has_small_lead_musket_ball", has(ModItems.SMALL_LEAD_MUSKET_BALL.get()))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_buckshot"));
+		}
+		
+		// Create medium lead buckshot
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.MEDIUM_LEAD_BUCKSHOT.get(), 1)
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())					
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_small_lead_musket_ball", has(ModItems.SMALL_LEAD_MUSKET_BALL.get()))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_lead_buckshot"));
+		}
+		
+		// Create large lead buckshot
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.LARGE_LEAD_BUCKSHOT.get(), 1)
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_small_lead_musket_ball", has(ModItems.SMALL_LEAD_MUSKET_BALL.get()))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_buckshot"));
+		}
+		
+		// Create small lead birdshot
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.SMALL_LEAD_BIRDSHOT.get(), 1)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)					
+					.requires(Items.PAPER)
+					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_birdshot"));
+		}
+		
+		// Create medium lead birdshot
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.MEDIUM_LEAD_BIRDSHOT.get(), 1)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))					
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_lead_birdshot"));
+		}
+		
+		// Create large lead birdshot
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.LARGE_LEAD_BIRDSHOT.get(), 1)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(ModTags.Items.NUGGETS_LEAD)
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_birdshot"));
 		}
 		
 		// Parts
@@ -411,7 +531,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_mechanism"));
 		}
 	}
-
+	
 	@Override
 	public String getName() {
 		return "OldGunsRecipes";

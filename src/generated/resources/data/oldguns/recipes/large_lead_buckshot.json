@@ -1,0 +1,29 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:small_lead_musket_ball"
+    },
+    {
+      "item": "oldguns:small_lead_musket_ball"
+    },
+    {
+      "item": "oldguns:small_lead_musket_ball"
+    },
+    {
+      "item": "oldguns:small_lead_musket_ball"
+    },
+    {
+      "item": "oldguns:small_lead_musket_ball"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "oldguns:large_lead_buckshot"
+  }
+}

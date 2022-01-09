@@ -5,12 +5,21 @@ import com.zach2039.oldguns.world.item.ammo.FirearmAmmoItem;
 import com.zach2039.oldguns.world.item.ammo.LargeIronBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.LargeIronBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.LargeIronMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.LargeLeadBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.LargeLeadBuckshotItem;
+import com.zach2039.oldguns.world.item.ammo.LargeLeadMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.MediumIronBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.MediumIronBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.MediumIronMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.MediumLeadBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.MediumLeadBuckshotItem;
+import com.zach2039.oldguns.world.item.ammo.MediumLeadMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.SmallLeadBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.SmallLeadBuckshotItem;
+import com.zach2039.oldguns.world.item.ammo.SmallLeadMusketBallItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockBlunderbussItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockCaliverItem;
@@ -18,6 +27,8 @@ import com.zach2039.oldguns.world.item.firearm.FlintlockLongMusketItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockPistolItem;
 import com.zach2039.oldguns.world.item.material.IronBitsItem;
 import com.zach2039.oldguns.world.item.material.LeadBitsItem;
+import com.zach2039.oldguns.world.item.material.LeadIngotItem;
+import com.zach2039.oldguns.world.item.material.LeadNuggetItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.HugeIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronBarrelItem;
@@ -92,6 +103,34 @@ public class ModItems {
 			() -> new LargeIronBirdshotItem()
 		);
 	
+	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL = ITEMS.register("small_lead_musket_ball",
+			() -> new SmallLeadMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_MUSKET_BALL = ITEMS.register("medium_lead_musket_ball",
+			() -> new MediumLeadMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_MUSKET_BALL = ITEMS.register("large_lead_musket_ball",
+			() -> new LargeLeadMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_BUCKSHOT = ITEMS.register("small_lead_buckshot",
+			() -> new SmallLeadBuckshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_BUCKSHOT = ITEMS.register("medium_lead_buckshot",
+			() -> new MediumLeadBuckshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_BUCKSHOT = ITEMS.register("large_lead_buckshot",
+			() -> new LargeLeadBuckshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_BIRDSHOT = ITEMS.register("small_lead_birdshot",
+			() -> new SmallLeadBirdshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_BIRDSHOT = ITEMS.register("medium_lead_birdshot",
+			() -> new MediumLeadBirdshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_BIRDSHOT = ITEMS.register("large_lead_birdshot",
+			() -> new LargeLeadBirdshotItem()
+		);
+	
 	// Parts
 	public static final RegistryObject<FlintlockMechanismItem> FLINTLOCK_MECHANISM = ITEMS.register("flintlock_mechanism",
 			() -> new FlintlockMechanismItem()
@@ -144,6 +183,14 @@ public class ModItems {
 	
 	public static final RegistryObject<LeadBitsItem> LEAD_BITS = ITEMS.register("lead_bits",
 			() -> new LeadBitsItem()
+		);
+	
+	public static final RegistryObject<LeadIngotItem> LEAD_INGOT = ITEMS.register("lead_ingot",
+			() -> new LeadIngotItem()
+		);
+	
+	public static final RegistryObject<LeadNuggetItem> LEAD_NUGGET = ITEMS.register("lead_nugget",
+			() -> new LeadNuggetItem()
 		);
 	
 	// Tools

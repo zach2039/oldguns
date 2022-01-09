@@ -65,6 +65,18 @@ public class OldGunsConfig {
 		public final FirearmAmmoAttributes medium_iron_birdshot;
 		public final FirearmAmmoAttributes large_iron_birdshot;
 		
+		public final FirearmAmmoAttributes small_lead_musket_ball;
+		public final FirearmAmmoAttributes medium_lead_musket_ball;
+		public final FirearmAmmoAttributes large_lead_musket_ball;
+		
+		public final FirearmAmmoAttributes small_lead_buckshot;
+		public final FirearmAmmoAttributes medium_lead_buckshot;
+		public final FirearmAmmoAttributes large_lead_buckshot;
+		
+		public final FirearmAmmoAttributes small_lead_birdshot;
+		public final FirearmAmmoAttributes medium_lead_birdshot;
+		public final FirearmAmmoAttributes large_lead_birdshot;
+		
 		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
@@ -212,6 +224,114 @@ public class OldGunsConfig {
 					builder,
 					"Attributes of Large Iron Birdshot Ammo",
 					"large_iron_birdshot",
+					4,
+					10,
+					3.0f,
+					0.2f,
+					7.0f,
+					3.0f
+					);
+			
+			small_lead_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Lead Musket Ball Ammo",
+					"small_lead_musket_ball",
+					8,
+					1,
+					20.0f,
+					0.3f,
+					25.0f,
+					1.0f
+					);
+			
+			medium_lead_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Lead Musket Ball Ammo",
+					"medium_lead_musket_ball",
+					6,
+					1,
+					23.0f,
+					0.4f,
+					50.0f,
+					1.0f
+					);
+			
+			large_lead_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Lead Musket Ball Ammo",
+					"large_lead_musket_ball",
+					4,
+					1,
+					26.0f,
+					0.5f,
+					75.0f,
+					1.0f
+					);
+			
+			small_lead_buckshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Lead Buckshot Ammo",
+					"small_lead_buckshot",
+					8,
+					3,
+					15.0f,
+					0.3f,
+					30.0f,
+					1.5f
+					);
+			
+			medium_lead_buckshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Lead Buckshot Ammo",
+					"medium_lead_buckshot",
+					6,
+					5,
+					15.0f,
+					0.3f,
+					30.0f,
+					1.5f
+					);
+			
+			large_lead_buckshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Lead Buckshot Ammo",
+					"large_lead_buckshot",
+					4,
+					7,
+					15.0f,
+					0.3f,
+					30.0f,
+					1.5f
+					);
+			
+			small_lead_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Lead Birdshot Ammo",
+					"small_lead_birdshot",
+					8,
+					6,
+					3.0f,
+					0.2f,
+					7.0f,
+					3.0f
+					);
+			
+			medium_lead_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Lead Birdshot Ammo",
+					"medium_lead_birdshot",
+					6,
+					8,
+					3.0f,
+					0.2f,
+					7.0f,
+					3.0f
+					);
+			
+			large_lead_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Lead Birdshot Ammo",
+					"large_lead_birdshot",
 					4,
 					10,
 					3.0f,

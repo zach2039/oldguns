@@ -8,6 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.versions.forge.ForgeVersion;
 
 public class ModTags {
 	public static class Blocks {
@@ -47,10 +48,16 @@ public class ModTags {
 		public static final Tag.Named<Item> MEDIUM_STOCK = tag("medium_stock");
 		public static final Tag.Named<Item> LARGE_STOCK = tag("large_stock");
 		
-		
+		// Forge Tags
+		public static final Tag.Named<Item> NUGGETS_LEAD = forgeTag("nuggets/lead");
+		public static final Tag.Named<Item> INGOTS_LEAD = forgeTag("ingots/lead");
 		
 		private static Tag.Named<Item> tag(final String name) {
 			return ItemTags.bind(new ResourceLocation(OldGuns.MODID, name).toString());
+		}
+		
+		private static Tag.Named<Item> forgeTag(final String name) {
+			return ItemTags.bind(new ResourceLocation(ForgeVersion.MOD_ID, name).toString());
 		}
 	}
 }

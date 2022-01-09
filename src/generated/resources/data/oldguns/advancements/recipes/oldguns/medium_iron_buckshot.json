@@ -6,12 +6,14 @@
     ]
   },
   "criteria": {
-    "has_small_metal_musket_ball": {
+    "has_small_iron_musket_ball": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "oldguns:small_metal_musket_ball"
+            "items": [
+              "oldguns:small_iron_musket_ball"
+            ]
           }
         ]
       }
@@ -37,7 +39,7 @@
   },
   "requirements": [
     [
-      "has_small_metal_musket_ball",
+      "has_small_iron_musket_ball",
       "has_paper",
       "has_the_recipe"
     ]

@@ -1,0 +1,43 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:medium_lead_musket_ball"
+    ]
+  },
+  "criteria": {
+    "has_lead_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/lead"
+          }
+        ]
+      }
+    },
+    "has_lead_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/lead"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:medium_lead_musket_ball"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_lead_nugget",
+      "has_lead_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

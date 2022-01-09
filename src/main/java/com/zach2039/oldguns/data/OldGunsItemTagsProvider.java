@@ -22,30 +22,39 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		
 		// Ammo
 		tag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+				.add(ModItems.SMALL_LEAD_MUSKET_BALL.get())
 				.add(ModItems.SMALL_IRON_MUSKET_BALL.get());
 		
 		tag(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
+				.add(ModItems.MEDIUM_LEAD_MUSKET_BALL.get())
 				.add(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
 		
 		tag(ModTags.Items.LARGE_METAL_MUSKET_BALL)
+				.add(ModItems.LARGE_LEAD_MUSKET_BALL.get())
 				.add(ModItems.LARGE_IRON_MUSKET_BALL.get());
 		
 		tag(ModTags.Items.SMALL_METAL_BUCKSHOT)
+				.add(ModItems.SMALL_LEAD_BUCKSHOT.get())
 				.add(ModItems.SMALL_IRON_BUCKSHOT.get());
 
 		tag(ModTags.Items.MEDIUM_METAL_BUCKSHOT)
+				.add(ModItems.MEDIUM_LEAD_BUCKSHOT.get())
 				.add(ModItems.MEDIUM_IRON_BUCKSHOT.get());
 
 		tag(ModTags.Items.LARGE_METAL_BUCKSHOT)
+				.add(ModItems.LARGE_LEAD_BUCKSHOT.get())
 				.add(ModItems.LARGE_IRON_BUCKSHOT.get());
 		
 		tag(ModTags.Items.SMALL_METAL_BIRDSHOT)
+				.add(ModItems.SMALL_LEAD_BIRDSHOT.get())
 				.add(ModItems.SMALL_IRON_BIRDSHOT.get());
 
 		tag(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
+				.add(ModItems.MEDIUM_LEAD_BIRDSHOT.get())
 				.add(ModItems.MEDIUM_IRON_BIRDSHOT.get());
 
 		tag(ModTags.Items.LARGE_METAL_BIRDSHOT)
+				.add(ModItems.LARGE_LEAD_BIRDSHOT.get())
 				.add(ModItems.LARGE_IRON_BIRDSHOT.get());
 		
 		// Parts
@@ -82,5 +91,11 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		tag(ModTags.Items.LARGE_STOCK)
 				.add(ModItems.LARGE_WOODEN_STOCK.get());
 		
+		// Materials
+		tag(ModTags.Items.INGOTS_LEAD)
+				.add(ModItems.LEAD_INGOT.get());
+		
+		tag(ModTags.Items.NUGGETS_LEAD)
+				.add(ModItems.LEAD_NUGGET.get());
 	}
 }
