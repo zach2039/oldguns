@@ -103,10 +103,19 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DERRINGER.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_ARQUEBUS.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_CALIVER.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_MUSKETOON.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_NOCK_GUN.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_LONG_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
+		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_MUSKET_BALL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
@@ -132,7 +141,6 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_BIRDSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_LEAD_BIRDSHOT.get());
 		
-		
 		withGeneratedParentAndDefaultTexture(ModItems.FLINTLOCK_MECHANISM.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_HANDLE.get());
@@ -143,15 +151,32 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_STOCK.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_WOODEN_STOCK.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.TINY_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BARREL.get());
-		withGeneratedParentAndDefaultTexture(ModItems.HUGE_IRON_BARREL.get());
 		
-		withGeneratedParentAndDefaultTexture(ModItems.LEAD_BITS.get());
+		withGeneratedParentAndDefaultTexture(ModItems.TINY_BRASS_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_BRASS_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_BRASS_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_BRASS_BARREL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_FLARED_BARREL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_BRASS_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_BRASS_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_BRASS_FLARED_BARREL.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.LEAD_INGOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LEAD_NUGGET.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LEAD_BITS.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.BRASS_INGOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.BRASS_NUGGET.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
 		

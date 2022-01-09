@@ -15,10 +15,19 @@ public class ModItemModelProperties {
 	@SubscribeEvent
 	public static void registerItemModelProperties(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DERRINGER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_ARQUEBUS.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_CALIVER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_MUSKETOON.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_NOCK_GUN.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_LONG_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
 		});
 	}
 }

@@ -1,0 +1,25 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    "BB ",
+    "BMH",
+    "BB "
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:large_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:large_stock"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_nock_gun",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

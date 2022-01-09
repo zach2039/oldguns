@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/flintlock_derringer",
+  "textures": {
+    "layer0": "oldguns:item/flintlock_derringer_empty"
+  }
+}

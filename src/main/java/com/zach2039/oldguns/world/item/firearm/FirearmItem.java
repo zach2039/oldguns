@@ -6,9 +6,8 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
+import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
@@ -62,7 +61,8 @@ import net.minecraftforge.network.PacketDistributor;
 public abstract class FirearmItem extends BowItem implements IFirearm {
 	
 	private final Enchantment [] VALID_ENCHANTMENTS = {
-			Enchantments.PUNCH_ARROWS, Enchantments.FLAMING_ARROWS, Enchantments.POWER_ARROWS,
+			Enchantments.PUNCH_ARROWS, Enchantments.FLAMING_ARROWS, 
+			Enchantments.POWER_ARROWS, Enchantments.PIERCING, 
 			Enchantments.UNBREAKING, Enchantments.MENDING
 		};
 
@@ -80,6 +80,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		this.reloadType = builder.reloadType;
 		this.firearmSize = builder.firearmSize;
 		this.firearmWaterResiliency = builder.firearmWaterResiliency;
+		this.firesAllLoadedAmmoAtOnce = builder.firesAllLoadedAmmoAtOnce;
 		initAttributes();
 	}
 
@@ -305,66 +306,71 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
                     	return;
                     }
                     
-                    IFirearmAmmo itemFirearmAmmo = (IFirearmAmmo)(ammoStack.getItem() instanceof IFirearmAmmo ? ammoStack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
-                    List<BulletProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, ammoStack, entityplayer);
                     
-                    /* Fire all projectiles from ammo item. */
-                    float finalVelocity = getProjectileSpeed();
-                    float finalEffectiveRange = itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier();
-                    float finalDeviation = getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier();
-                    
-                    if (OldGunsConfig.COMMON.printDebugMessages.get())
-                    {
-	                    OldGuns.LOGGER.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
-	                    OldGuns.LOGGER.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
-	                    OldGuns.LOGGER.info("FinalEffectiveRange : " + finalEffectiveRange);
+                    int maxShots = (firesAllLoadedAmmoAtOnce() && !ammoStack.isEmpty()) ? FirearmNBTHelper.peekNBTTagAmmoCount(stackIn) : 1; 
+                    for (int i = 0; i < maxShots; i++) {
+                    	ammoStack = FirearmNBTHelper.peekNBTTagAmmo(stackIn);
+	                    IFirearmAmmo itemFirearmAmmo = (IFirearmAmmo)(ammoStack.getItem() instanceof IFirearmAmmo ? ammoStack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
+	                    List<BulletProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, ammoStack, entityplayer);
 	                    
-	                    OldGuns.LOGGER.info("FirearmDeviation   : " + getFirearmDeviation());
-	                    OldGuns.LOGGER.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
-	                    OldGuns.LOGGER.info("AimingDeviationMod : " + snapshotDevMulti);
-	                    OldGuns.LOGGER.info("FinalDeviation     : " + finalDeviation);
-                    }
-                    
-                    entityProjectiles.forEach((t) ->
-                    {
-                    	/* Set location-based data. */
-                    	t.setEffectiveRange(finalEffectiveRange);
-                    	t.setLaunchLocation(t.blockPosition());
-                    	
-                    	/* Launch projectile. */
-                    	t.shoot(entityplayer, entityplayer.getXRot(), entityplayer.getYRot(), 0.0F, finalVelocity, finalDeviation);
-                    	
-                    	int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stackIn);
-
-                        if (j > 0)
-                        {
-                            t.setDamage((t.getDamage() * getDamageModifier()) + (double)j * 0.5D + 0.5D);
-                        }
-
-                        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stackIn);
-
-                        if (k > 0)
-                        {
-                            t.setKnockback(k);
-                        }
-
-                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stackIn) > 0)
-                        {
-                            t.setRemainingFireTicks(100);
-                        }
-                        
-                        worldIn.addFreshEntity(t);
-                    });
-                    
-                    if (!entityplayer.isCreative()) stackIn.hurt(1, worldIn.random, (ServerPlayer) entityplayer);
-                    
-                    /* Do firing effects. */
-                    doFiringEffect(worldIn, entityplayer, stackIn);        
-                    
-                    if (!flag1 && !entityplayer.isCreative() && (stackIn != null))
-                    {
-                    	/* Remove ammo from firearm. */
-                        FirearmNBTHelper.popNBTTagAmmo(stackIn);
+	                    /* Fire all projectiles from ammo item. */
+	                    float finalVelocity = getProjectileSpeed();
+	                    float finalEffectiveRange = itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier();
+	                    float finalDeviation = getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier();
+	                    
+	                    if (OldGunsConfig.COMMON.printDebugMessages.get())
+	                    {
+		                    OldGuns.LOGGER.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
+		                    OldGuns.LOGGER.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
+		                    OldGuns.LOGGER.info("FinalEffectiveRange : " + finalEffectiveRange);
+		                    
+		                    OldGuns.LOGGER.info("FirearmDeviation   : " + getFirearmDeviation());
+		                    OldGuns.LOGGER.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
+		                    OldGuns.LOGGER.info("AimingDeviationMod : " + snapshotDevMulti);
+		                    OldGuns.LOGGER.info("FinalDeviation     : " + finalDeviation);
+	                    }
+	                    
+	                    entityProjectiles.forEach((t) ->
+	                    {
+	                    	/* Set location-based data. */
+	                    	t.setEffectiveRange(finalEffectiveRange);
+	                    	t.setLaunchLocation(t.blockPosition());
+	                    	
+	                    	/* Launch projectile. */
+	                    	t.shoot(entityplayer, entityplayer.getXRot(), entityplayer.getYRot(), 0.0F, finalVelocity, finalDeviation);
+	                    	
+	                    	int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stackIn);
+	
+	                        if (j > 0)
+	                        {
+	                            t.setDamage((t.getDamage() * getDamageModifier()) + (double)j * 0.5D + 0.5D);
+	                        }
+	
+	                        int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stackIn);
+	
+	                        if (k > 0)
+	                        {
+	                            t.setKnockback(k);
+	                        }
+	
+	                        if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stackIn) > 0)
+	                        {
+	                            t.setRemainingFireTicks(100);
+	                        }
+	                        
+	                        worldIn.addFreshEntity(t);
+	                    });
+	                    
+	                    if (!entityplayer.isCreative()) stackIn.hurt(1, worldIn.random, (ServerPlayer) entityplayer);
+	                    
+	                    /* Do firing effects. */
+	                    doFiringEffect(worldIn, entityplayer, stackIn);        
+	                    
+	                    if (!flag1 && !entityplayer.isCreative() && (stackIn != null))
+	                    {
+	                    	/* Remove ammo from firearm. */
+	                        FirearmNBTHelper.popNBTTagAmmo(stackIn);
+	                    }
                     }
                 }
 
@@ -373,6 +379,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
                 
                 entityplayer.awardStat(Stats.ITEM_USED.get(this));
             }
+            
             if (!worldIn.isClientSide())
     		{
             	ServerPlayer playerMP = (ServerPlayer) entityplayer;
@@ -670,48 +677,53 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		return isLoadedFirearmInOtherHand;
 	}
 
-	public int getAmmoCapacity()
-	{
+	@Override
+	public int getAmmoCapacity() {
 		return this.ammoCapacity;
 	}
 
-	public float getProjectileSpeed()
-	{
+	@Override
+	public float getProjectileSpeed() {
 		return this.projectileSpeed;
 	}
 
-	public float getEffectiveRangeModifier()
-	{
+	@Override
+	public float getEffectiveRangeModifier() {
 		return this.effectiveRangeModifier;
 	}
 
-	public float getFirearmDeviation()
-	{
+	@Override
+	public float getFirearmDeviation() {
 		return this.deviationModifier;
 	}
 	
-	public float getDamageModifier()
-	{
+	@Override
+	public float getDamageModifier() {
 		return this.damageModifier;
 	}
 	
-	public int getRequiredReloadTicks()
-	{
+	@Override
+	public int getRequiredReloadTicks() {
 		return this.requiredReloadTicks;
 	}
 	
-	public FirearmReloadType getReloadType()
-	{
+	@Override
+	public boolean firesAllLoadedAmmoAtOnce() {
+		return this.firesAllLoadedAmmoAtOnce;
+	}
+	
+	@Override
+	public FirearmReloadType getReloadType() {
 		return this.reloadType;
 	}
 	
-	public FirearmSize getFirearmSize()
-	{
+	@Override
+	public FirearmSize getFirearmSize()	{
 		return this.firearmSize;
 	}
 	
-	public FirearmWaterResiliency getFirearmWaterResiliency()
-	{
+	@Override
+	public FirearmWaterResiliency getFirearmWaterResiliency() {
 		return this.firearmWaterResiliency;
 	}
 	
@@ -745,6 +757,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		 * Required reload ticks of this firearm item instance.
 		 */
 		int requiredReloadTicks = 80;
+		
+		/**
+		 * Whether the firearm fires all loaded ammo at once. Used for nockguns and duckfoot firearms.
+		 */
+		private boolean firesAllLoadedAmmoAtOnce = false;
 		
 		/**
 		 * Reload type of the firearm.
@@ -788,6 +805,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		
 		public FirearmProperties requiredReloadTicks(int requiredReloadTicks) {
 			this.requiredReloadTicks = requiredReloadTicks;
+			return this;
+		}
+		
+		public FirearmProperties firesAllLoadedAmmoAtOnce() {
+			this.firesAllLoadedAmmoAtOnce = true;
 			return this;
 		}
 		
@@ -842,6 +864,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	 * Required reload ticks of this firearm item instance.
 	 */
 	private int requiredReloadTicks = 80;
+	
+	/**
+	 * Whether the firearm fires all loaded ammo at once. Used for nockguns and duckfoot firearms.
+	 */
+	private boolean firesAllLoadedAmmoAtOnce = false;
 	
 	/**
 	 * Reload type of the firearm.

@@ -1,8 +1,7 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "pattern": [
-    "BM",
-    " H"
+    "BMH"
   ],
   "key": {
     "B": {
@@ -12,7 +11,7 @@
       "tag": "oldguns:flintlock_mechanism"
     },
     "H": {
-      "tag": "oldguns:medium_stock"
+      "tag": "oldguns:small_stock"
     }
   },
   "result": {

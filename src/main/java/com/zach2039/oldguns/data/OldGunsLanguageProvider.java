@@ -61,10 +61,19 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addItems() {
+		addItem(ModItems.FLINTLOCK_DERRINGER, "Flintlock Derringer");
+		addItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER, "Flintlock Duckfoot Derringer");
 		addItem(ModItems.FLINTLOCK_PISTOL, "Flintlock Pistol");
+		addItem(ModItems.FLINTLOCK_PEPPERBOX_PISTOL, "Flintlock Pepperbox Pistol");
+		addItem(ModItems.FLINTLOCK_ARQUEBUS, "Flintlock Arquebus");
 		addItem(ModItems.FLINTLOCK_CALIVER, "Flintlock Caliver");
+		addItem(ModItems.FLINTLOCK_MUSKETOON, "Flintlock Musketoon");
+		addItem(ModItems.FLINTLOCK_MUSKET, "Flintlock Musket");
+		addItem(ModItems.FLINTLOCK_NOCK_GUN, "Flintlock Nock Gun");
 		addItem(ModItems.FLINTLOCK_LONG_MUSKET, "Flintlock Long Musket");
+		addItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL, "Flintlock Blunderbuss Pistol");
 		addItem(ModItems.FLINTLOCK_BLUNDERBUSS, "Flintlock Blunderbuss");
+		addItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS, "Flintlock Doublebarrel Blunderbuss");
 		
 		addItem(ModItems.SMALL_IRON_MUSKET_BALL, "Small Iron Musket Ball");
 		addItem(ModItems.MEDIUM_IRON_MUSKET_BALL, "Medium Iron Musket Ball");
@@ -100,16 +109,32 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MEDIUM_WOODEN_STOCK, "Medium Wooden Stock");
 		addItem(ModItems.LARGE_WOODEN_STOCK, "Large Wooden Stock");
 		
+		addItem(ModItems.TINY_IRON_BARREL, "Tiny Iron Barrel");
 		addItem(ModItems.SMALL_IRON_BARREL, "Small Iron Barrel");
 		addItem(ModItems.MEDIUM_IRON_BARREL, "Medium Iron Barrel");
 		addItem(ModItems.LARGE_IRON_BARREL, "Large Iron Barrel");
-		addItem(ModItems.HUGE_IRON_BARREL, "Huge Iron Barrel");
 		
-		addItem(ModItems.LEAD_BITS, "Lead Bits");
+		addItem(ModItems.TINY_BRASS_BARREL, "Tiny Brass Barrel");
+		addItem(ModItems.SMALL_BRASS_BARREL, "Small Brass Barrel");
+		addItem(ModItems.MEDIUM_BRASS_BARREL, "Medium Brass Barrel");
+		addItem(ModItems.LARGE_BRASS_BARREL, "Large Brass Barrel");
+		
+		addItem(ModItems.SMALL_IRON_FLARED_BARREL, "Small Iron Flared Barrel");
+		addItem(ModItems.MEDIUM_IRON_FLARED_BARREL, "Medium Iron Flared Barrel");
+		addItem(ModItems.LARGE_IRON_FLARED_BARREL, "Large Iron Flared Barrel");
+		
+		addItem(ModItems.SMALL_BRASS_FLARED_BARREL, "Small Brass Flared Barrel");
+		addItem(ModItems.MEDIUM_BRASS_FLARED_BARREL, "Medium Brass Flared Barrel");
+		addItem(ModItems.LARGE_BRASS_FLARED_BARREL, "Large Brass Flared Barrel");
+		
 		addItem(ModItems.IRON_BITS, "Iron Bits");
 		
 		addItem(ModItems.LEAD_INGOT, "Lead Ingot");
 		addItem(ModItems.LEAD_NUGGET, "Lead Nugget");
+		addItem(ModItems.LEAD_BITS, "Lead Bits");
+		
+		addItem(ModItems.BRASS_INGOT, "Brass Ingot");
+		addItem(ModItems.BRASS_NUGGET, "Brass Nugget");
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 	}
@@ -139,7 +164,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addChatMessages() {
-		
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart by artillery fire by %2$s.");
 	}
 
 	private void addKeyBindings() {
@@ -156,10 +184,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addMisc() {
 		add("itemGroup." + OldGuns.MODID, "Old Guns");
-		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
-		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart by artillery fire by %2$s.");
+		
 	}
 
 	public void addEntityType(Supplier<? extends EntityType<?>> key, String name) {

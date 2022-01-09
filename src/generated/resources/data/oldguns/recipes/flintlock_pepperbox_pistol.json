@@ -1,0 +1,25 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    "BB ",
+    "BMH",
+    "B  "
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:medium_handle"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_pepperbox_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

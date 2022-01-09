@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:small_iron_flared_barrel"
+    ]
+  },
+  "criteria": {
+    "has_small_iron_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:small_iron_barrel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_iron_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/iron"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:small_iron_flared_barrel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_small_iron_barrel",
+      "has_iron_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

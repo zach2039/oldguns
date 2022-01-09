@@ -28,6 +28,8 @@ public interface IFirearm {
 	
 	int getRequiredReloadTicks();
 	
+	boolean firesAllLoadedAmmoAtOnce();
+	
 	FirearmReloadType getReloadType();
 	
 	FirearmSize getFirearmSize();

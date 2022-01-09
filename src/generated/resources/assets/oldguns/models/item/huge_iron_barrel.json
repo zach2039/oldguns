@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "oldguns:item/huge_iron_barrel"
-  }
-}
