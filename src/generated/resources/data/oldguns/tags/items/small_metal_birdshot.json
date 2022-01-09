@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "oldguns:small_lead_birdshot",
     "oldguns:small_iron_birdshot"
   ]
 }

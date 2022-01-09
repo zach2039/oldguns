@@ -120,6 +120,19 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BIRDSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BIRDSHOT.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_LEAD_MUSKET_BALL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_MUSKET_BALL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_LEAD_MUSKET_BALL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_LEAD_BUCKSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_BUCKSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_LEAD_BUCKSHOT.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_LEAD_BIRDSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_BIRDSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_LEAD_BIRDSHOT.get());
+		
+		
 		withGeneratedParentAndDefaultTexture(ModItems.FLINTLOCK_MECHANISM.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_HANDLE.get());
@@ -137,6 +150,8 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		
 		withGeneratedParentAndDefaultTexture(ModItems.LEAD_BITS.get());
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LEAD_INGOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LEAD_NUGGET.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
 		

@@ -1,0 +1,17 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    " l ",
+    "lll",
+    " l "
+  ],
+  "key": {
+    "l": {
+      "tag": "forge:nuggets/lead"
+    }
+  },
+  "result": {
+    "item": "oldguns:small_lead_musket_ball",
+    "count": 2
+  }
+}

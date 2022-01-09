@@ -78,6 +78,18 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MEDIUM_IRON_BIRDSHOT, "Medium Iron Birdshot");
 		addItem(ModItems.LARGE_IRON_BIRDSHOT, "Large Iron Birdshot");
 		
+		addItem(ModItems.SMALL_LEAD_MUSKET_BALL, "Small Lead Musket Ball");
+		addItem(ModItems.MEDIUM_LEAD_MUSKET_BALL, "Medium Lead Musket Ball");
+		addItem(ModItems.LARGE_LEAD_MUSKET_BALL, "Large Lead Musket Ball");
+		
+		addItem(ModItems.SMALL_LEAD_BUCKSHOT, "Small Lead Buckshot");
+		addItem(ModItems.MEDIUM_LEAD_BUCKSHOT, "Medium Lead Buckshot");
+		addItem(ModItems.LARGE_LEAD_BUCKSHOT, "Large Lead Buckshot");
+		
+		addItem(ModItems.SMALL_LEAD_BIRDSHOT, "Small Lead Birdshot");
+		addItem(ModItems.MEDIUM_LEAD_BIRDSHOT, "Medium Lead Birdshot");
+		addItem(ModItems.LARGE_LEAD_BIRDSHOT, "Large Lead Birdshot");
+		
 		addItem(ModItems.FLINTLOCK_MECHANISM, "Flintlock Mechanism");
 		
 		addItem(ModItems.SMALL_WOODEN_HANDLE, "Small Wooden Handle");
@@ -95,6 +107,9 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.LEAD_BITS, "Lead Bits");
 		addItem(ModItems.IRON_BITS, "Iron Bits");
+		
+		addItem(ModItems.LEAD_INGOT, "Lead Ingot");
+		addItem(ModItems.LEAD_NUGGET, "Lead Nugget");
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 	}
@@ -124,11 +139,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addChatMessages() {
-		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
-		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart by artillery fire by %2$s.");
-
+		
 	}
 
 	private void addKeyBindings() {
@@ -145,6 +156,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addMisc() {
 		add("itemGroup." + OldGuns.MODID, "Old Guns");
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart by artillery fire by %2$s.");
 	}
 
 	public void addEntityType(Supplier<? extends EntityType<?>> key, String name) {
