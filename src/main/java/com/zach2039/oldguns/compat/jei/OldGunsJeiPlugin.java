@@ -5,13 +5,14 @@ import java.util.stream.Collectors;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
-import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeTransferHandler;
+import com.zach2039.oldguns.init.ModBlocks;
+import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -25,6 +26,7 @@ import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -77,12 +79,12 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(new GunsmithsBenchRecipeTransferHandler(registration.getTransferHelper()), GunsmithsBenchRecipeCategory.UID);
+		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, GunsmithsBenchRecipeCategory.UID, 1, 9, 10, 36);
 	}
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-
+		registration.addRecipeCatalyst(new ItemStack(ModBlocks.GUNSMITHS_BENCH.get()), GunsmithsBenchRecipeCategory.UID);
 	}
 
 	@Override
