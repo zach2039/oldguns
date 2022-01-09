@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "oldguns:medium_brass_barrel",
     "oldguns:medium_iron_barrel"
   ]
 }

@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:medium_metal_flared_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:medium_stock"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_musketoon",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

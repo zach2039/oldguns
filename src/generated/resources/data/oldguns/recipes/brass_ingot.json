@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    },
+    {
+      "item": "oldguns:brass_nugget"
+    }
+  ],
+  "result": {
+    "item": "oldguns:brass_ingot"
+  }
+}

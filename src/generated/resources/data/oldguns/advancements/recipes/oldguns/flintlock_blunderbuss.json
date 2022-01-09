@@ -6,12 +6,12 @@
     ]
   },
   "criteria": {
-    "has_huge_metal_barrel": {
+    "has_large_metal_flared_barrel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "oldguns:huge_metal_barrel"
+            "tag": "oldguns:large_metal_flared_barrel"
           }
         ]
       }
@@ -45,7 +45,7 @@
   },
   "requirements": [
     [
-      "has_huge_metal_barrel",
+      "has_large_metal_flared_barrel",
       "has_flintlock_mechanism",
       "has_large_stock",
       "has_the_recipe"

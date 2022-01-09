@@ -1,0 +1,20 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:flintlock_duckfoot_derringer"
+    },
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "tag": "forge:gunpowder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:flintlock_duckfoot_derringer",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

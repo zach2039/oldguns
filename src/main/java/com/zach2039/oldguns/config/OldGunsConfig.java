@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.config;
 
 import org.apache.commons.lang3.tuple.Pair;
-import org.checkerframework.common.value.qual.BoolVal;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
@@ -48,10 +47,22 @@ public class OldGunsConfig {
 	}
 	
 	public static class FirearmSettings {
+		public final MuzzleloadingFirearmAttributes flintlock_derringer;
+		public final MuzzleloadingFirearmAttributes flintlock_duckfoot_derringer;
 		public final MuzzleloadingFirearmAttributes flintlock_pistol;
+		public final MuzzleloadingFirearmAttributes flintlock_pepperbox_pistol;
+		public final MuzzleloadingFirearmAttributes flintlock_arquebus;
+		
 		public final MuzzleloadingFirearmAttributes flintlock_caliver;
-		public final MuzzleloadingFirearmAttributes flintlock_long_musket;
+		public final MuzzleloadingFirearmAttributes flintlock_musketoon;
+		
+		public final MuzzleloadingFirearmAttributes flintlock_musket;
+		public final MuzzleloadingFirearmAttributes flintlock_nock_gun;
+		public final MuzzleloadingFirearmAttributes flintlock_long_musket;		
+		
+		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss_pistol;
 		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss;
+		public final MuzzleloadingFirearmAttributes flintlock_doublebarrel_blunderbuss;	
 		
 		public final FirearmAmmoAttributes small_iron_musket_ball;
 		public final FirearmAmmoAttributes medium_iron_musket_ball;
@@ -80,14 +91,58 @@ public class OldGunsConfig {
 		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
+			flintlock_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Derringers",
+					"flintlock_derringer",
+					28,
+					3.25f,
+					0.5f,
+					5.0f,
+					1.0f
+					);
+			
+			flintlock_duckfoot_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Duckfoot Derringers",
+					"flintlock_duckfoot_derringers",
+					24,
+					3.0f,
+					0.3f,
+					10.0f,
+					0.8f
+					);
+			
 			flintlock_pistol = new MuzzleloadingFirearmAttributes(
 					builder,
 					"Attributes of Flintlock Pistols",
 					"flintlock_pistol",
 					32,
 					3.5f,
-					1.2f,
+					1.0f,
 					2.0f,
+					1.0f
+					);
+			
+			flintlock_pepperbox_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Pepperbox Pistols",
+					"flintlock_pepperbox_pistol",
+					28,
+					3.4f,
+					0.8f,
+					3.0f,
+					0.8f
+					);
+			
+			flintlock_arquebus = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Arquebus",
+					"flintlock_arquebus",
+					36,
+					3.75f,
+					1.2f,
+					1.8f,
 					1.0f
 					);
 			
@@ -102,6 +157,39 @@ public class OldGunsConfig {
 					1.0f
 					);
 			
+			flintlock_musketoon = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Musketoons",
+					"flintlock_musketoon",
+					44,
+					4.0f,
+					0.8f,
+					1.5f,
+					1.0f
+					);
+			
+			flintlock_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Muskets",
+					"flintlock_musket",
+					44,
+					4.25f,
+					1.0f,
+					1.2f,
+					1.0f
+					);
+			
+			flintlock_nock_gun = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Nock Guns",
+					"flintlock_nock_gun",
+					40,
+					4.0f,
+					0.8f,
+					1.8f,
+					0.8f
+					);
+			
 			flintlock_long_musket = new MuzzleloadingFirearmAttributes(
 					builder,
 					"Attributes of Flintlock Long Muskets",
@@ -110,6 +198,17 @@ public class OldGunsConfig {
 					4.5f,
 					1.2f,
 					1.2f,
+					1.0f
+					);
+			
+			flintlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Blunderbuss Pistols",
+					"flintlock_blunderbuss_pistol",
+					28,
+					3.0f,
+					0.4f,
+					3.5f,
 					1.0f
 					);
 			
@@ -122,6 +221,17 @@ public class OldGunsConfig {
 					1.0f,
 					1.7f,
 					1.0f
+					);
+			
+			flintlock_doublebarrel_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Doublebarrel Blunderbusses",
+					"flintlock_doublebarrel_blunderbuss",
+					40,
+					3.5f,
+					0.8f,
+					1.7f,
+					0.8f
 					);
 			
 			small_iron_musket_ball = new FirearmAmmoAttributes(

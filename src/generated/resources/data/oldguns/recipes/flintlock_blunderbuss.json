@@ -1,12 +1,11 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "pattern": [
-    "BM",
-    " H"
+    "BMH"
   ],
   "key": {
     "B": {
-      "tag": "oldguns:huge_metal_barrel"
+      "tag": "oldguns:large_metal_flared_barrel"
     },
     "M": {
       "tag": "oldguns:flintlock_mechanism"

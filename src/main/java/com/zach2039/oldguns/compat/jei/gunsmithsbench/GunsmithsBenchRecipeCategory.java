@@ -65,7 +65,9 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 		List<List<ItemStack>> outputs = ingredients.getOutputs(VanillaTypes.ITEM);
 		
 		if (recipe instanceof ShapedGunsmithsBenchRecipe) {
-			gridHelper.setInputs(guiItemStacks, inputs);
+			int width = ((ShapedGunsmithsBenchRecipe)recipe).getWidth();
+			int height = ((ShapedGunsmithsBenchRecipe)recipe).getHeight();
+			gridHelper.setInputs(guiItemStacks, inputs, width, height);
 		} else if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
 			gridHelper.setInputs(guiItemStacks, inputs);
 			recipeLayout.setShapeless();

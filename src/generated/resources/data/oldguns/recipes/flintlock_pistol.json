@@ -1,8 +1,7 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "pattern": [
-    "BM",
-    " H"
+    "BMH"
   ],
   "key": {
     "B": {

@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:small_brass_flared_barrel"
+    ]
+  },
+  "criteria": {
+    "has_small_brass_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:small_brass_barrel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_brass_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/brass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:small_brass_flared_barrel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_small_brass_barrel",
+      "has_brass_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

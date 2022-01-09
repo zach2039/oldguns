@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:large_handle"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_arquebus",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

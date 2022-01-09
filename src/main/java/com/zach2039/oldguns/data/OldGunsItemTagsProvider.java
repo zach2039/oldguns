@@ -61,17 +61,33 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		tag(ModTags.Items.FLINTLOCK_MECHANISM)
 				.add(ModItems.FLINTLOCK_MECHANISM.get());
 		
+		tag(ModTags.Items.TINY_METAL_BARREL)
+				.add(ModItems.TINY_BRASS_BARREL.get())
+				.add(ModItems.TINY_IRON_BARREL.get());		
+		
 		tag(ModTags.Items.SMALL_METAL_BARREL)
+				.add(ModItems.SMALL_BRASS_BARREL.get())
 				.add(ModItems.SMALL_IRON_BARREL.get());
 
 		tag(ModTags.Items.MEDIUM_METAL_BARREL)
+				.add(ModItems.MEDIUM_BRASS_BARREL.get())
 				.add(ModItems.MEDIUM_IRON_BARREL.get());
 		
 		tag(ModTags.Items.LARGE_METAL_BARREL)
+				.add(ModItems.LARGE_BRASS_BARREL.get())
 				.add(ModItems.LARGE_IRON_BARREL.get());
 		
-		tag(ModTags.Items.HUGE_METAL_BARREL)
-				.add(ModItems.HUGE_IRON_BARREL.get());
+		tag(ModTags.Items.SMALL_METAL_FLARED_BARREL)
+				.add(ModItems.SMALL_BRASS_FLARED_BARREL.get())
+				.add(ModItems.SMALL_IRON_FLARED_BARREL.get());
+		
+		tag(ModTags.Items.MEDIUM_METAL_FLARED_BARREL)
+				.add(ModItems.MEDIUM_BRASS_FLARED_BARREL.get())
+				.add(ModItems.MEDIUM_IRON_FLARED_BARREL.get());
+		
+		tag(ModTags.Items.LARGE_METAL_FLARED_BARREL)
+				.add(ModItems.LARGE_BRASS_FLARED_BARREL.get())
+				.add(ModItems.LARGE_IRON_FLARED_BARREL.get());
 		
 		tag(ModTags.Items.SMALL_HANDLE)
 				.add(ModItems.SMALL_WOODEN_HANDLE.get());
@@ -97,5 +113,11 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		
 		tag(ModTags.Items.NUGGETS_LEAD)
 				.add(ModItems.LEAD_NUGGET.get());
+		
+		tag(ModTags.Items.INGOTS_BRASS)
+				.add(ModItems.BRASS_INGOT.get());
+
+		tag(ModTags.Items.NUGGETS_BRASS)
+				.add(ModItems.BRASS_NUGGET.get());
 	}
 }

@@ -35,10 +35,14 @@ public class ModTags {
 		// Parts
 		public static final Tag.Named<Item> FLINTLOCK_MECHANISM = tag("flintlock_mechanism");
 		
+		public static final Tag.Named<Item> TINY_METAL_BARREL = tag("tiny_metal_barrel");
 		public static final Tag.Named<Item> SMALL_METAL_BARREL = tag("small_metal_barrel");
 		public static final Tag.Named<Item> MEDIUM_METAL_BARREL = tag("medium_metal_barrel");
 		public static final Tag.Named<Item> LARGE_METAL_BARREL = tag("large_metal_barrel");
-		public static final Tag.Named<Item> HUGE_METAL_BARREL = tag("huge_metal_barrel");
+		
+		public static final Tag.Named<Item> SMALL_METAL_FLARED_BARREL = tag("small_metal_flared_barrel");
+		public static final Tag.Named<Item> MEDIUM_METAL_FLARED_BARREL = tag("medium_metal_flared_barrel");
+		public static final Tag.Named<Item> LARGE_METAL_FLARED_BARREL = tag("large_metal_flared_barrel");
 		
 		public static final Tag.Named<Item> SMALL_HANDLE = tag("small_handle");
 		public static final Tag.Named<Item> MEDIUM_HANDLE = tag("medium_handle");
@@ -51,6 +55,8 @@ public class ModTags {
 		// Forge Tags
 		public static final Tag.Named<Item> NUGGETS_LEAD = forgeTag("nuggets/lead");
 		public static final Tag.Named<Item> INGOTS_LEAD = forgeTag("ingots/lead");
+		public static final Tag.Named<Item> NUGGETS_BRASS = forgeTag("nuggets/brass");
+		public static final Tag.Named<Item> INGOTS_BRASS = forgeTag("ingots/brass");
 		
 		private static Tag.Named<Item> tag(final String name) {
 			return ItemTags.bind(new ResourceLocation(OldGuns.MODID, name).toString());

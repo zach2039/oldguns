@@ -1,0 +1,19 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "pattern": [
+    "i ",
+    " X",
+    "i "
+  ],
+  "key": {
+    "X": {
+      "item": "oldguns:small_iron_barrel"
+    },
+    "i": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
+  "result": {
+    "item": "oldguns:small_iron_flared_barrel"
+  }
+}

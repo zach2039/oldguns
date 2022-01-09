@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:medium_brass_flared_barrel"
+    ]
+  },
+  "criteria": {
+    "has_medium_brass_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:medium_iron_barrel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_brass_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/brass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:medium_brass_flared_barrel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_medium_brass_barrel",
+      "has_brass_ingot",
+      "has_the_recipe"
+    ]
+  ]
+}

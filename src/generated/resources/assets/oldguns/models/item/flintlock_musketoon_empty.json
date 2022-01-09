@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/flintlock_musketoon",
+  "textures": {
+    "layer0": "oldguns:item/flintlock_musketoon_empty"
+  }
+}

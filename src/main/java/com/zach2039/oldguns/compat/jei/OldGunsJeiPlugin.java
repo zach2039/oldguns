@@ -5,11 +5,13 @@ import java.util.stream.Collectors;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
+import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeTransferHandler;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaRecipeCategoryUid;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -75,7 +77,7 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-
+		registration.addRecipeTransferHandler(new GunsmithsBenchRecipeTransferHandler(registration.getTransferHelper()), GunsmithsBenchRecipeCategory.UID);
 	}
 
 	@Override
