@@ -11,6 +11,14 @@ import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
+/**
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
+ * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
+ */
 public class OldGunsItemTagsProvider extends ItemTagsProvider {
 	
 	public OldGunsItemTagsProvider(final DataGenerator dataGenerator, final BlockTagsProvider blockTagProvider, @Nullable final ExistingFileHelper existingFileHelper) {
@@ -20,6 +28,22 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 	@Override
 	protected void addTags() {
 		
+		// Firearms
+		tag(ModTags.Items.FIREARM)
+			.add(ModItems.FLINTLOCK_DERRINGER.get())
+			.add(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
+			.add(ModItems.FLINTLOCK_PISTOL.get())
+			.add(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
+			.add(ModItems.FLINTLOCK_ARQUEBUS.get())
+			.add(ModItems.FLINTLOCK_CALIVER.get())
+			.add(ModItems.FLINTLOCK_MUSKETOON.get())
+			.add(ModItems.FLINTLOCK_MUSKET.get())
+			.add(ModItems.FLINTLOCK_NOCK_GUN.get())
+			.add(ModItems.FLINTLOCK_LONG_MUSKET.get())
+			.add(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.FLINTLOCK_BLUNDERBUSS.get())
+			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
+			
 		// Ammo
 		tag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
 				.add(ModItems.SMALL_LEAD_MUSKET_BALL.get())

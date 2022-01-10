@@ -26,7 +26,7 @@ public class FlintlockArquebusItem extends FirearmItem implements IFirearm {
 	
 	public FlintlockArquebusItem()
 	{		
-		super((FirearmProperties) new FirearmProperties()				
+		super((FirearmProperties) new FirearmProperties()
 				.ammoCapacity(1)
 				.firearmSize(FirearmSize.SMALL)
 				.firearmWaterResiliency(FirearmWaterResiliency.FAIR)

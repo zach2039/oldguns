@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import com.google.gson.JsonObject;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
@@ -21,6 +22,7 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {

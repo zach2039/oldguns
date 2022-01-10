@@ -5,6 +5,7 @@ import com.zach2039.oldguns.data.OldGunsBlockTagsProvider;
 import com.zach2039.oldguns.data.OldGunsItemModelProvider;
 import com.zach2039.oldguns.data.OldGunsItemTagsProvider;
 import com.zach2039.oldguns.data.OldGunsLanguageProvider;
+import com.zach2039.oldguns.data.OldGunsLootModifierProvider;
 import com.zach2039.oldguns.data.OldGunsLootTableProvider;
 import com.zach2039.oldguns.data.OldGunsRecipeProvider;
 
@@ -16,9 +17,12 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
 
 /**
- * Taken from TestMod3 on Github
- * @author grilled-salmon
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
  * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
  */
 @Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 public class ModDataProviders {
@@ -37,6 +41,7 @@ public class ModDataProviders {
 		if (event.includeServer()) {
 			dataGenerator.addProvider(new OldGunsRecipeProvider(dataGenerator));
 			dataGenerator.addProvider(new OldGunsLootTableProvider(dataGenerator));
+			dataGenerator.addProvider(new OldGunsLootModifierProvider(dataGenerator));
 			
 			final OldGunsBlockTagsProvider blockTagsProvider = new OldGunsBlockTagsProvider(dataGenerator, existingFileHelper);
 			dataGenerator.addProvider(blockTagsProvider);

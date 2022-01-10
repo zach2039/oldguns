@@ -37,6 +37,9 @@ import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.effect.MobEffect;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
@@ -61,8 +64,7 @@ import net.minecraftforge.network.PacketDistributor;
 public abstract class FirearmItem extends BowItem implements IFirearm {
 	
 	private final Enchantment [] VALID_ENCHANTMENTS = {
-			Enchantments.PUNCH_ARROWS, Enchantments.FLAMING_ARROWS, 
-			Enchantments.POWER_ARROWS, Enchantments.PIERCING, 
+			Enchantments.PUNCH_ARROWS, Enchantments.PIERCING, 
 			Enchantments.UNBREAKING, Enchantments.MENDING
 		};
 
@@ -121,40 +123,44 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 	
 	private void initAttributes() {
-	       double baseAttackDamage = 1f;
-	        double baseAttackSpeed = 1f;
-	        
-	        /* Get attack speed and base from size. */
-	        switch (getFirearmSize())
-	        {
-	        	case SMALL:
-	        		baseAttackDamage = 1f;
-	        		baseAttackSpeed = -1f;
-	        		break;
-	        	case MEDIUM:
-	        		baseAttackDamage = 2f;
-	        		baseAttackSpeed = -2f;
-	        		break;
-	        	case LARGE:
-	        		baseAttackDamage = 3f;
-	        		baseAttackSpeed = -3f;
-	        		break;
-	        	default:
-	        		break;
-	        }
-	        
-	        {            
-	            Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-	            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)baseAttackDamage, AttributeModifier.Operation.ADDITION));
-	            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)baseAttackSpeed, AttributeModifier.Operation.ADDITION));
-	        	this.mainhandModifiers = builder.build();
-	        }
+		double baseAttackDamage;
+		double baseAttackSpeed;
 
-	        {
-	        	Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-	        	builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)baseAttackSpeed, AttributeModifier.Operation.ADDITION));
-	        	this.offhandModifiers = builder.build();
-	        }
+
+		/* Get attack speed and base from size. */
+		switch (getFirearmSize())
+		{
+			case SMALL:
+				baseAttackDamage = 0f;
+				baseAttackSpeed = -1f;
+				break;
+			default:
+			case MEDIUM:
+				baseAttackDamage = 1f;
+				baseAttackSpeed = -2f;
+				break;
+			case LARGE:
+				baseAttackDamage = 2f;
+				baseAttackSpeed = -3f;
+				break;
+			case HUGE:
+				baseAttackDamage = 3f;
+				baseAttackSpeed = -3.5f;
+				break;
+		}
+
+        {            
+            Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+            builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Weapon modifier", (double)baseAttackDamage, AttributeModifier.Operation.ADDITION));
+            builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)baseAttackSpeed, AttributeModifier.Operation.ADDITION));
+        	this.mainhandModifiers = builder.build();
+        }
+
+        {
+        	Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
+        	builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Weapon modifier", (double)baseAttackSpeed, AttributeModifier.Operation.ADDITION));
+        	this.offhandModifiers = builder.build();
+        }
 	}
 	
 	@Override
@@ -199,6 +205,33 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
         return !oldStack.equals(newStack); //!ItemStack.areItemStacksEqual(oldStack, newStack);
     }
 
+	@Override
+	public void inventoryTick(ItemStack stackIn, Level levelIn, Entity entityIn, int slot, boolean par5) {
+		
+		if (OldGunsConfig.COMMON.firearmSettings.hugeFirearmDebuffs.get()) {
+			// Apply huge firearm debuffs for balancing reasons
+		    if (entityIn instanceof Player)
+		    {
+		    	Player player = (Player) entityIn;
+		        if (player.isCreative())
+		            return;
+		        if (ItemStack.isSame(player.getMainHandItem(), stackIn) || ItemStack.isSame(player.getOffhandItem (), stackIn)) {
+		        	if (getFirearmSize() == FirearmSize.HUGE) {
+		        		addEffect(player, MobEffects.MOVEMENT_SLOWDOWN, 0);
+		        	}
+		        }
+		    }
+		}
+	}
+	
+	private void addEffect(Player player, MobEffect effect, int amplifier)
+    {
+		MobEffectInstance effectIn = player.getEffect(effect);
+        if (effectIn == null || effectIn.getDuration() < 20) {
+            player.addEffect(new MobEffectInstance(effect, 20 * 3, amplifier));
+        }
+    }
+	
 	@SuppressWarnings("unused")
 	@Override
 	public void releaseUsing(ItemStack stackIn, Level worldIn, LivingEntity livingEntityIn, int ticksRemaining) {
@@ -239,9 +272,9 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
     		boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(stackIn) > 0);
     		boolean notBroken = FirearmNBTHelper.getNBTTagCondition(stackIn) != FirearmCondition.BROKEN;
     		
-    		boolean holdingLargeFirearmOffhand = isCarryingLargeFirearmInOtherHand(worldIn, entityplayer, InteractionHand.MAIN_HAND);
+    		boolean holdingSizableFirearmOffhand = isCarryingSizableFirearmInOtherHand(worldIn, entityplayer, InteractionHand.MAIN_HAND);
     		//boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
-    		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+    		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingSizableFirearmOffhand);
             
 //    		OldGuns.LOGGER.debug("readyToFire : " + readyToFire);
 //    		OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
@@ -460,11 +493,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) > 0);
 		boolean notBroken = FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN;
 		
-		boolean holdingLargeFirearmOffhand = isCarryingLargeFirearmInOtherHand(worldIn, playerIn, handIn);
+		boolean holdingSizableFirearmOffhand = isCarryingSizableFirearmInOtherHand(worldIn, playerIn, handIn);
 		/* Need this to allow firing of an offhand firearm. */
 		boolean holdingLoadedFirearmOffhand = hasLoadedFirearmInOtherHand(worldIn, playerIn, handIn);
-		boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
-		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && !holdingLoadedFirearmOffhand && readyToFire && notBroken && !holdingLargeFirearmOffhand);
+		boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingSizableFirearmOffhand);
+		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && !holdingLoadedFirearmOffhand && readyToFire && notBroken && !holdingSizableFirearmOffhand);
 		
 //		if (!worldIn.isClientSide()) {
 //			OldGuns.LOGGER.info("itemstack                : " + itemstack);
@@ -645,20 +678,18 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	
-	private boolean isCarryingLargeFirearmInOtherHand(Level worldIn, Player playerIn, InteractionHand handIn)
+	private boolean isCarryingSizableFirearmInOtherHand(Level worldIn, Player playerIn, InteractionHand handIn)
 	{
-		boolean isCarryingLargeFirearm = false;
+		boolean isCarryingSizableFirearm = false;
 		
-		/* Item in other hand. */
 		ItemStack itemstackOther = playerIn.getItemInHand((handIn == InteractionHand.MAIN_HAND) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
 		
-		/* If item in other hand is instance of ItemFirearm, return true if firearm is large size. */
-		if (itemstackOther.getItem() instanceof FirearmItem)
+		if (itemstackOther.getItem() instanceof IFirearm)
 		{
-			isCarryingLargeFirearm = ((FirearmItem)itemstackOther.getItem()).getFirearmSize() == FirearmSize.LARGE;
+			isCarryingSizableFirearm = ((IFirearm)itemstackOther.getItem()).getFirearmSize().ordinal() >= FirearmSize.MEDIUM.ordinal();
 		}
 		
-		return isCarryingLargeFirearm;
+		return isCarryingSizableFirearm;
 	}
 	
 	private boolean hasLoadedFirearmInOtherHand(Level worldIn, Player playerIn, InteractionHand handIn)
@@ -676,58 +707,9 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		
 		return isLoadedFirearmInOtherHand;
 	}
-
-	@Override
-	public int getAmmoCapacity() {
-		return this.ammoCapacity;
-	}
-
-	@Override
-	public float getProjectileSpeed() {
-		return this.projectileSpeed;
-	}
-
-	@Override
-	public float getEffectiveRangeModifier() {
-		return this.effectiveRangeModifier;
-	}
-
-	@Override
-	public float getFirearmDeviation() {
-		return this.deviationModifier;
-	}
-	
-	@Override
-	public float getDamageModifier() {
-		return this.damageModifier;
-	}
-	
-	@Override
-	public int getRequiredReloadTicks() {
-		return this.requiredReloadTicks;
-	}
-	
-	@Override
-	public boolean firesAllLoadedAmmoAtOnce() {
-		return this.firesAllLoadedAmmoAtOnce;
-	}
-	
-	@Override
-	public FirearmReloadType getReloadType() {
-		return this.reloadType;
-	}
-	
-	@Override
-	public FirearmSize getFirearmSize()	{
-		return this.firearmSize;
-	}
-	
-	@Override
-	public FirearmWaterResiliency getFirearmWaterResiliency() {
-		return this.firearmWaterResiliency;
-	}
 	
 	public static class FirearmProperties extends Properties {
+		
 		/**
 		 * Ammo capacity of this firearm item instance.
 		 */
@@ -834,6 +816,56 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	public abstract boolean canReload(ItemStack stackIn);
 
 	public abstract void doFiringEffect(Level worldIn, Entity entityShooter, ItemStack stackIn);
+	
+	@Override
+	public int getAmmoCapacity() {
+		return this.ammoCapacity;
+	}
+
+	@Override
+	public float getProjectileSpeed() {
+		return this.projectileSpeed;
+	}
+
+	@Override
+	public float getEffectiveRangeModifier() {
+		return this.effectiveRangeModifier;
+	}
+
+	@Override
+	public float getFirearmDeviation() {
+		return this.deviationModifier;
+	}
+	
+	@Override
+	public float getDamageModifier() {
+		return this.damageModifier;
+	}
+	
+	@Override
+	public int getRequiredReloadTicks() {
+		return this.requiredReloadTicks;
+	}
+	
+	@Override
+	public boolean firesAllLoadedAmmoAtOnce() {
+		return this.firesAllLoadedAmmoAtOnce;
+	}
+	
+	@Override
+	public FirearmReloadType getReloadType() {
+		return this.reloadType;
+	}
+	
+	@Override
+	public FirearmSize getFirearmSize()	{
+		return this.firearmSize;
+	}
+	
+	@Override
+	public FirearmWaterResiliency getFirearmWaterResiliency() {
+		return this.firearmWaterResiliency;
+	}
 	
 	/**
 	 * Ammo capacity of this firearm item instance.

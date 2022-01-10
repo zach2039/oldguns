@@ -20,9 +20,12 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.Lazy;
 
 /**
- * Taken from TestMod3 on GitHub
- * @author grilled-salmon
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
  * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
  */
 public class OldGunsItemModelProvider extends ItemModelProvider {
 	private static final String LAYER_0 = "layer0";

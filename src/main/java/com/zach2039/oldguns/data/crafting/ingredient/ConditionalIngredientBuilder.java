@@ -10,6 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag.Named;
@@ -17,51 +18,49 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.crafting.conditions.ItemExistsCondition;
-import net.minecraftforge.common.crafting.conditions.NotCondition;
 
 /**
  * Builds an {@link Ingredient} that can be deserialised by {@link ConditionalIngredientSerializer}.
  *
  * @author Choonster
  */
-public class NotConditionalIngredientBuilder {
+public class ConditionalIngredientBuilder {
 	private final Ingredient ingredient;
-	private final List<ItemExistsCondition> conditions;
+	private final List<Condition> conditions;
 
-	private NotConditionalIngredientBuilder(final Ingredient ingredient) {
+	private ConditionalIngredientBuilder(final Ingredient ingredient) {
 		this.ingredient = ingredient;
 		conditions = new ArrayList<>();
 	}
 
 	/**
-	 * Creates a new {@link NotConditionalIngredientBuilder}.
+	 * Creates a new {@link ConditionalIngredientBuilder}.
 	 *
 	 * @param items The Ingredient Items to be used when the conditions are met
 	 * @return The builder
 	 */
-	public static NotConditionalIngredientBuilder conditionalIngredient(final Named<Item> tag) {
-		return conditionalIngredient(Ingredient.of(tag));
-	}
-	
-	/**
-	 * Creates a new {@link NotConditionalIngredientBuilder}.
-	 *
-	 * @param items The Ingredient Items to be used when the conditions are met
-	 * @return The builder
-	 */
-	public static NotConditionalIngredientBuilder conditionalIngredient(final ItemLike... items) {
+	public static ConditionalIngredientBuilder conditionalIngredient(final ItemLike... items) {
 		return conditionalIngredient(Ingredient.of(items));
 	}
-	
+
 	/**
-	 * Creates a new {@link NotConditionalIngredientBuilder}.
+	 * Creates a new {@link ConditionalIngredientBuilder}.
 	 *
 	 * @param ingredient The Ingredient to be used when the conditions are met
 	 * @return The builder
 	 */
-	public static NotConditionalIngredientBuilder conditionalIngredient(final Ingredient ingredient) {
-		return new NotConditionalIngredientBuilder(ingredient);
+	public static ConditionalIngredientBuilder conditionalIngredient(final Ingredient ingredient) {
+		return new ConditionalIngredientBuilder(ingredient);
+	}
+
+	/**
+	 * Adds a condition without any extra data.
+	 *
+	 * @param type The condition type
+	 * @return This builder
+	 */
+	public ConditionalIngredientBuilder addCondition(final ResourceLocation type) {
+		return addCondition(type, new JsonObject());
 	}
 
 	/**
@@ -71,8 +70,8 @@ public class NotConditionalIngredientBuilder {
 	 * @param data The data
 	 * @return This builder
 	 */
-	public NotConditionalIngredientBuilder addCondition(ItemExistsCondition condition) {
-		conditions.add(condition);
+	public ConditionalIngredientBuilder addCondition(final ResourceLocation type, final JsonObject data) {
+		conditions.add(new Condition(type, data));
 		return this;
 	}
 
@@ -100,15 +99,25 @@ public class NotConditionalIngredientBuilder {
 	}
 
 	/**
+	 * Represents a condition type and its accompanying data.
+	 */
+	private record Condition(ResourceLocation type, JsonObject data) {
+		public JsonElement serialize() {
+			data.addProperty("type", type.toString());
+			return data;
+		}
+	}
+
+	/**
 	 * An {@link Ingredient} that serialises into JSON that can be deserialised by {@link ConditionalIngredientSerializer}.
 	 * <p>
 	 * Note: This is only intended for use during recipe generation, it won't match any items if used in a recipe during gameplay.
 	 */
 	public static class Result extends Ingredient {
 		private final Ingredient ingredient;
-		private final List<ItemExistsCondition> conditions;
+		private final List<Condition> conditions;
 
-		private Result(final Ingredient ingredient, final List<ItemExistsCondition> conditions) {
+		private Result(final Ingredient ingredient, final List<Condition> conditions) {
 			super(Stream.empty());
 			this.ingredient = ingredient;
 			this.conditions = conditions;
@@ -120,7 +129,7 @@ public class NotConditionalIngredientBuilder {
 			rootObject.addProperty("type", new ResourceLocation(OldGuns.MODID, "conditional").toString());
 
 			final JsonArray conditionsArray = new JsonArray();
-			conditions.forEach(condition -> conditionsArray.add(ItemExistsCondition.Serializer.INSTANCE.getJson(condition)));
+			conditions.forEach(condition -> conditionsArray.add(condition.serialize()));
 			rootObject.add("conditions", conditionsArray);
 
 			final JsonElement ingredientObject = ingredient.toJson();

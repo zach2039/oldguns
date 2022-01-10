@@ -46,6 +46,7 @@ public class EnhancedShapelessRecipeBuilder<
 	protected final ItemStack result;
 	protected final RecipeSerializer<? extends RECIPE> serializer;
 	protected String itemGroup;
+	protected boolean hasDummyOutput;
 
 	protected EnhancedShapelessRecipeBuilder(final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
 		super(result.getItem(), result.getCount());
@@ -63,6 +64,12 @@ public class EnhancedShapelessRecipeBuilder<
 	@SuppressWarnings("unchecked")
 	public BUILDER itemGroup(final String group) {
 		itemGroup = group;
+		return (BUILDER) this;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BUILDER hasDummyOutput() {
+		hasDummyOutput = true;
 		return (BUILDER) this;
 	}
 
@@ -167,7 +174,7 @@ public class EnhancedShapelessRecipeBuilder<
 			final List<Ingredient> ingredients = getIngredients();
 
 			String itemGroupName = itemGroup;
-			if (itemGroupName == null) {
+			if (itemGroupName == null && !hasDummyOutput) {
 				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
 				itemGroupName = itemGroup.getRecipeFolderName();
 			}
@@ -192,7 +199,7 @@ public class EnhancedShapelessRecipeBuilder<
 	}
 
 	protected void validate(final ResourceLocation id) {
-		if (itemGroup == null && result.getItem().getItemCategory() == null) {
+		if (itemGroup == null && result.getItem().getItemCategory() == null && !hasDummyOutput) {
 			throw new IllegalStateException("Enhanced Shapeless Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
 		}
 	}
@@ -216,7 +223,7 @@ public class EnhancedShapelessRecipeBuilder<
 		protected void validate(final ResourceLocation id) {
 			super.validate(id);
 
-			if (!result.hasTag() && itemGroup == null) {
+			if (!result.hasTag() && itemGroup == null && !hasDummyOutput) {
 				throw new IllegalStateException("Vanilla Shapeless Recipe " + id + " has no NBT and no custom item group - use ShapelessRecipeBuilder instead");
 			}
 		}

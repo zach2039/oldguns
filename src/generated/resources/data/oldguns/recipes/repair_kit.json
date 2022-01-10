@@ -1,0 +1,29 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:slimeballs"
+    },
+    {
+      "tag": "minecraft:wool"
+    },
+    {
+      "tag": "forge:rods/wooden"
+    },
+    {
+      "tag": "forge:leather"
+    },
+    {
+      "tag": "minecraft:logs"
+    },
+    {
+      "item": "minecraft:lever"
+    }
+  ],
+  "result": {
+    "item": "oldguns:repair_kit",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

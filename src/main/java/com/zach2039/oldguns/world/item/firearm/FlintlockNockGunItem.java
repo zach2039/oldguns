@@ -28,7 +28,7 @@ public class FlintlockNockGunItem extends FirearmItem implements IFirearm {
 	{		
 		super((FirearmProperties) new FirearmProperties()				
 				.ammoCapacity(5)
-				.firearmSize(FirearmSize.LARGE)
+				.firearmSize(FirearmSize.HUGE)
 				.firearmWaterResiliency(FirearmWaterResiliency.FAIR)
 				.reloadType(FirearmReloadType.MUZZLELOADER)
 				.effectiveRangeModifier(firearmAttributes.effectiveRangeModifier.get().floatValue())

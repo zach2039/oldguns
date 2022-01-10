@@ -26,9 +26,11 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 /**
- * Taken from TestMod3 on Github
- *
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
  * @author Choonster
+ *
+ * With additions by:
  * @author grilled-salmon
  */
 public class OldGunsLootTableProvider extends LootTableProvider {

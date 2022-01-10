@@ -10,6 +10,14 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.versions.forge.ForgeVersion;
 
+/**
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
+ * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
+ */
 public class ModTags {
 	public static class Blocks {
 		private static Tag.Named<Block> tag(final String name) {
@@ -18,6 +26,9 @@ public class ModTags {
 	}
 	
 	public static class Items {
+		
+		// Firearms
+		public static final Tag.Named<Item> FIREARM = tag("firearm");
 		
 		// Ammo
 		public static final Tag.Named<Item> SMALL_METAL_MUSKET_BALL = tag("small_metal_musket_ball");

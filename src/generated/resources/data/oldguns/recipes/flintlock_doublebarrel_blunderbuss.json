@@ -1,5 +1,10 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_flintlock_weapons"
+    }
+  ],
   "pattern": [
     "B  ",
     "BMH"

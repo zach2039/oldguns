@@ -12,6 +12,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;

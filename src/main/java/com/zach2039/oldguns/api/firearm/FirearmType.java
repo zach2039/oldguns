@@ -32,7 +32,8 @@ public class FirearmType {
 	{
 		SMALL,
 		MEDIUM,
-		LARGE
+		LARGE,
+		HUGE
 	}
 	
 	public static enum FirearmCondition

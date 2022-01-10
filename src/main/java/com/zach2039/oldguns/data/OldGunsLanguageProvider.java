@@ -23,9 +23,12 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /**
- * Generates this mod's en-US language file.
- *
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
  * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
  */
 public class OldGunsLanguageProvider extends LanguageProvider {
 	private final Map<EntityType<?>, String> ENTITY_TYPE_NAMES = new HashMap<>();

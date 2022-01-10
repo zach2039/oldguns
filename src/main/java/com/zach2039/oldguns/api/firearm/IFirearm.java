@@ -9,7 +9,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public interface IFirearm {
-
+	
 	void initNBTTags(ItemStack stackIn);
 	
 	boolean canReload(ItemStack stackIn);
@@ -35,5 +35,7 @@ public interface IFirearm {
 	FirearmSize getFirearmSize();
 	
 	FirearmWaterResiliency getFirearmWaterResiliency();
+
+
 }
 

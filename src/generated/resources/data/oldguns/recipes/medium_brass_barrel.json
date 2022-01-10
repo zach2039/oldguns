@@ -1,5 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
   "pattern": [
     "BBb",
     " bB"
