@@ -1,14 +1,18 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
-import java.util.Collections;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.init.ModCrafting;
+import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
+import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
@@ -22,7 +26,6 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
@@ -62,7 +65,12 @@ public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraft
 
 	@Override
 	public ItemStack assemble(GunsmithsBenchCraftingContainer craftinv) {
-		return this.result.copy();
+		ItemStack resultStack = this.result.copy();
+		
+		if (resultStack.getItem() instanceof IFirearm)
+			((IFirearm)this.result.getItem()).initNBTTags(resultStack);
+		
+		return resultStack;
 	}
 
 	@Override
@@ -81,8 +89,15 @@ public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraft
 	}
 	
 	@Override
-	public ItemStack getResultItem() {
-		return this.result;
+    @Nonnull
+    public ItemStack getResultItem()
+	{
+		ItemStack outputStack = this.result;
+		
+		if (outputStack.getItem() instanceof IFirearm)
+			((IFirearm)outputStack.getItem()).initNBTTags(outputStack);
+		
+		return outputStack;
 	}
 
 	@Override
