@@ -15,6 +15,7 @@ import java.util.List;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
 import com.zach2039.oldguns.compat.jei.util.JEIIngredientStackListBuilder;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;

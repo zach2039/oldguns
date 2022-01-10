@@ -13,7 +13,6 @@ import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
@@ -27,8 +26,8 @@ import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -123,7 +122,6 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
 			return firearmStack;
 		}
 		
-		//return ConfigCategoryRecipes.isRecipeEnabled(firearmStack) ? firearmStack : ItemStack.EMPTY;
 		return ItemStack.EMPTY;
 	}
 

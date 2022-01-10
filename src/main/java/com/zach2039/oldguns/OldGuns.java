@@ -10,6 +10,8 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
+import com.zach2039.oldguns.init.ModLootConditionTypes;
+import com.zach2039.oldguns.init.ModLootModifierSerializers;
 import com.zach2039.oldguns.init.ModLootTables;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
@@ -21,6 +23,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -28,6 +31,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(OldGuns.MODID)
+@Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 public class OldGuns
 {
 	// Directly reference a log4j logger.
@@ -49,6 +53,7 @@ public class OldGuns
 		ModItems.initialize(modEventBus);
 		ModMenuTypes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
+		ModLootModifierSerializers.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
 		ModSoundEvents.initialize(modEventBus);
     }
@@ -58,6 +63,7 @@ public class OldGuns
 		event.enqueueWork(() -> {
 			ModCrafting.Ingredients.register();
 			ModLootTables.registerLootTables();
+			ModLootConditionTypes.register();
 		});
 	}
 

@@ -9,8 +9,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
+/**
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
+ * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
+ */
 public class ModLootTables {
-	public static final ResourceLocation LOOT_TABLE_FIREARMS = RegistrationHandler.register("loot_table_firearms");
+	public static final ResourceLocation LOOT_TABLE_EXOTIC_FIREARMS = RegistrationHandler.register("loot_table_exotic_firearms");
 	public static final ResourceLocation LOOT_TABLE_AMMO = RegistrationHandler.register("loot_table_ammo");
 
 	public static void registerLootTables() {}

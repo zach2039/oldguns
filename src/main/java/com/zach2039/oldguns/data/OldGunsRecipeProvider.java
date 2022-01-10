@@ -3,10 +3,9 @@ package com.zach2039.oldguns.data;
 import java.util.function.Consumer;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.data.crafting.ConditionBuilder;
-import com.zach2039.oldguns.data.crafting.ingredient.NotConditionalIngredientBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmRepairRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
@@ -20,11 +19,17 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
-import net.minecraftforge.common.crafting.conditions.ItemExistsCondition;
 
+/**
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
+ * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
+ */
 public class OldGunsRecipeProvider extends RecipeProvider {
 	
 	public OldGunsRecipeProvider(final DataGenerator dataGenerator) {
@@ -86,6 +91,17 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "gunsmiths_bench"));
 		}
 			
+		// Firearm Repair
+		{
+			ShapelessFirearmRepairRecipeBuilder.shapelessFirearmRepairRecipe()
+					.requires(ModTags.Items.FIREARM)
+					.requires(ModItems.REPAIR_KIT.get())						
+					.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+					.unlockedBy("has_repair_kit", has(ModItems.REPAIR_KIT.get()))
+					.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "firearm_repair"));
+		}
+		
 		// Firearm Reloading
 		// Reload flintlock derringer
 		{
@@ -287,6 +303,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_tiny_barrel", has(ModTags.Items.TINY_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_small_handle", has(ModTags.Items.SMALL_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_derringer"));
 		}
 		
@@ -302,6 +319,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_tiny_barrel", has(ModTags.Items.TINY_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_small_handle", has(ModTags.Items.SMALL_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_duckfoot_derringer"));
 		}
 				
@@ -315,6 +334,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_pistol"));
 		}
 		
@@ -330,6 +350,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_pepperbox_pistol"));
 		}
 		
@@ -343,6 +365,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_large_handle", has(ModTags.Items.LARGE_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_arquebus"));
 		}
 		
@@ -356,6 +379,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_medium_metal_barrel", has(ModTags.Items.MEDIUM_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_small_stock", has(ModTags.Items.SMALL_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_caliver"));
 		}
 		
@@ -369,6 +393,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_medium_metal_flared_barrel", has(ModTags.Items.MEDIUM_METAL_FLARED_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_musketoon"));
 		}
 		
@@ -382,6 +408,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_musket"));
 		}
 		
@@ -397,6 +424,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_nock_gun"));
 		}
 		
@@ -410,6 +439,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_long_musket"));
 		}
 		
@@ -423,6 +453,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_metal_flared_barrel", has(ModTags.Items.SMALL_METAL_FLARED_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss_pistol"));
 		}
 		
@@ -436,6 +468,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_metal_flared_barrel", has(ModTags.Items.LARGE_METAL_FLARED_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss"));
 		}
 		
@@ -450,6 +483,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_metal_flared_barrel", has(ModTags.Items.LARGE_METAL_FLARED_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_doublebarrel_blunderbuss"));
 		}
 		
@@ -947,6 +981,20 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
 					.unlockedBy("has_lever", has(Items.LEVER))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_mechanism"));
+		}
+		
+		// Tools
+		// Create repair kit
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapelessGunsmithsBenchRecipe(ModItems.REPAIR_KIT.get())
+					.requires(Tags.Items.SLIMEBALLS)
+					.requires(ItemTags.WOOL)
+					.requires(Tags.Items.RODS_WOODEN)
+					.requires(Tags.Items.LEATHER)
+					.requires(ItemTags.LOGS)
+					.requires(Items.LEVER)
+					.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "repair_kit"));
 		}
 	}
 	

@@ -5,9 +5,12 @@ import com.zach2039.oldguns.api.capability.empty.IFirearmEmpty;
 import net.minecraft.network.FriendlyByteBuf;
 
 /**
- * Some taken from TestMod3 on Github
- * @author grilled-salmon
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
  * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
  */
 class FirearmEmptyFunctions {
 	static boolean convertFirearmEmptyToFirearmEmptyValue(final IFirearmEmpty firearmEmpty) {

@@ -22,9 +22,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 /**
- * Some taken from TestMod3 on Github
- * @author grilled-salmon
+ * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
+ * 
  * @author Choonster
+ *
+ * With additions by:
+ * @author grilled-salmon
  */
 public final class FirearmEmptyCapability {
 	public static final Capability<IFirearmEmpty> FIREARM_EMPTY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});

@@ -3,11 +3,17 @@ package com.zach2039.oldguns.data.crafting.recipe;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.function.Consumer;
 
+import javax.annotation.Nullable;
+
 import com.google.common.base.Preconditions;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.advancements.Advancement;
@@ -15,6 +21,7 @@ import net.minecraft.advancements.AdvancementRewards;
 import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
+import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -27,6 +34,8 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.crafting.conditions.ICondition;
+import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
 /**
@@ -48,11 +57,13 @@ public class EnhancedShapedRecipeBuilder<
 	protected final ItemStack result;
 	protected final RecipeSerializer<? extends RECIPE> serializer;
 	protected String itemGroup;
+	protected final List<ResourceLocation> conditions;
 
 	protected EnhancedShapedRecipeBuilder(final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
 		super(result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = serializer;
+		this.conditions = new ArrayList<ResourceLocation>();
 	}
 
 	/**
@@ -117,6 +128,12 @@ public class EnhancedShapedRecipeBuilder<
 	@Override
 	public BUILDER group(final String group) {
 		return (BUILDER) super.group(group);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public BUILDER condition(final ResourceLocation condition) {
+		this.conditions.add(condition);
+		return (BUILDER) this;
 	}
 
 	/**
@@ -192,7 +209,7 @@ public class EnhancedShapedRecipeBuilder<
 
 			final ResourceLocation advancementID = new ResourceLocation(id.getNamespace(), "recipes/" + itemGroupName + "/" + id.getPath());
 
-			final Result baseRecipe = new Result(id, result.getItem(), result.getCount(), group, rows, key, advancementBuilder, advancementID);
+			final ConditionedResult baseRecipe = new ConditionedResult(id, result.getItem(), result.getCount(), group, rows, key, advancementBuilder, advancementID, conditions);
 
 			consumer.accept(new SimpleFinishedRecipe(baseRecipe, result, serializer));
 		} catch (final IllegalAccessException | InvocationTargetException e) {
@@ -224,4 +241,83 @@ public class EnhancedShapedRecipeBuilder<
 			}
 		}
 	}
+	
+	 public static class ConditionedResult implements FinishedRecipe {
+	      private final ResourceLocation id;
+	      private final Item result;
+	      private final int count;
+	      private final String group;
+	      private final List<String> pattern;
+	      private final Map<Character, Ingredient> key;
+	      private final Advancement.Builder advancement;
+	      private final ResourceLocation advancementId;
+	      private final List<ResourceLocation> conditions;
+
+	      public ConditionedResult(ResourceLocation p_176754_, Item p_176755_, int p_176756_, String p_176757_, List<String> p_176758_, Map<Character, Ingredient> p_176759_, Advancement.Builder p_176760_, ResourceLocation p_176761_, List<ResourceLocation> conditions) {
+	         this.id = p_176754_;
+	         this.result = p_176755_;
+	         this.count = p_176756_;
+	         this.group = p_176757_;
+	         this.pattern = p_176758_;
+	         this.key = p_176759_;
+	         this.advancement = p_176760_;
+	         this.advancementId = p_176761_;
+	         this.conditions = conditions;
+	      }
+
+	      public void serializeRecipeData(JsonObject p_126167_) {
+	         if (!this.group.isEmpty()) {
+	            p_126167_.addProperty("group", this.group);
+	         }
+	         
+	         JsonArray condArray = new JsonArray();
+	         
+	         for(ResourceLocation l : this.conditions) {
+	        	 JsonObject typeObj = new JsonObject();
+	        	 typeObj.addProperty("type", l.toString());
+	        	 condArray.add(typeObj); 
+	         }
+	         
+	         p_126167_.add("conditions", condArray);
+	         JsonArray jsonarray = new JsonArray();
+
+	         for(String s : this.pattern) {
+	            jsonarray.add(s);
+	         }
+
+	         p_126167_.add("pattern", jsonarray);
+	         JsonObject jsonobject = new JsonObject();
+
+	         for(Entry<Character, Ingredient> entry : this.key.entrySet()) {
+	            jsonobject.add(String.valueOf(entry.getKey()), entry.getValue().toJson());
+	         }
+
+	         p_126167_.add("key", jsonobject);
+	         JsonObject jsonobject1 = new JsonObject();
+	         jsonobject1.addProperty("item", Registry.ITEM.getKey(this.result).toString());
+	         if (this.count > 1) {
+	            jsonobject1.addProperty("count", this.count);
+	         }
+
+	         p_126167_.add("result", jsonobject1);
+	      }
+
+	      public RecipeSerializer<?> getType() {
+	         return RecipeSerializer.SHAPED_RECIPE;
+	      }
+
+	      public ResourceLocation getId() {
+	         return this.id;
+	      }
+
+	      @Nullable
+	      public JsonObject serializeAdvancement() {
+	         return this.advancement.serializeToJson();
+	      }
+
+	      @Nullable
+	      public ResourceLocation getAdvancementId() {
+	         return this.advancementId;
+	      }
+	   }
 }

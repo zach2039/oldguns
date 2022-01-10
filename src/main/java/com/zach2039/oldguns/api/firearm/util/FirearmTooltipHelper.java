@@ -2,6 +2,8 @@ package com.zach2039.oldguns.api.firearm.util;
 
 import java.util.List;
 
+import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import net.minecraft.ChatFormatting;
@@ -22,37 +24,62 @@ public class FirearmTooltipHelper {
 		tooltip.add(new TextComponent(ammoFormatting + String.format("Ammo: %d/%d", ammoCount, ammoCapacity)));
 		
 		/* Print condition to tooltip. Color based on status. */
-		ChatFormatting conditionFormatting = ChatFormatting.GREEN;
-		String conditionString = "Very Good";
+		ChatFormatting formatString = ChatFormatting.GREEN;
+		String tooltipString = "Very Good";
 		
 		FirearmNBTHelper.refreshFirearmCondition(stackIn);
 		switch (FirearmNBTHelper.getNBTTagCondition(stackIn))
 		{
 			case BROKEN:
-				conditionFormatting = ChatFormatting.DARK_RED;
-				conditionString = "Broken";
+				formatString = ChatFormatting.DARK_RED;
+				tooltipString = "Broken";
 				break;
 			case VERY_POOR:
-				conditionFormatting = ChatFormatting.RED;
-				conditionString = "Very Poor";
+				formatString = ChatFormatting.RED;
+				tooltipString = "Very Poor";
 				break;
 			case POOR:
-				conditionFormatting = ChatFormatting.RED;
-				conditionString = "Poor";
+				formatString = ChatFormatting.RED;
+				tooltipString = "Poor";
 				break;
 			case FAIR:
-				conditionFormatting = ChatFormatting.YELLOW;
-				conditionString = "Fair";
+				formatString = ChatFormatting.YELLOW;
+				tooltipString = "Fair";
 				break;
 			case GOOD:
-				conditionFormatting = ChatFormatting.GREEN;
-				conditionString = "Good";
+				formatString = ChatFormatting.GREEN;
+				tooltipString = "Good";
 				break;
 			default:
 				break;
 		}
 		
-		tooltip.add(new TextComponent(conditionFormatting + String.format("Cnd: %s", conditionString)));
+		if (tooltipString != "")
+			tooltip.add(new TextComponent(formatString + String.format("Cnd: %s", tooltipString)));
+		
+		switch (itemIn.getFirearmSize())
+		{
+			case SMALL:
+				formatString = ChatFormatting.AQUA;
+				tooltipString = "Light";
+				break;
+			case MEDIUM:
+				formatString = ChatFormatting.WHITE;
+				tooltipString = "";
+				break;
+			case LARGE:
+				formatString = ChatFormatting.YELLOW;
+				tooltipString = "Heavy";
+				break;
+			case HUGE:
+				formatString = ChatFormatting.RED;
+				tooltipString = "Unwieldy";
+				break;
+			default:
+				break;
+		}
+		
+		if (tooltipString != "")
+			tooltip.add(new TextComponent(formatString + tooltipString));
 	}
-
 }

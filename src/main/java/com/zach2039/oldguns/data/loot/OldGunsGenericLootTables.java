@@ -19,16 +19,40 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 	@Override
 	public void accept(final BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 		consumer.accept(
-				ModLootTables.LOOT_TABLE_FIREARMS,
+				ModLootTables.LOOT_TABLE_EXOTIC_FIREARMS,
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
 						.setRolls(ConstantValue.exactly(1))
 						.add(
-								LootItem.lootTableItem(ModItems.FLINTLOCK_PISTOL.get())
-								.setWeight(1)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
-								.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 1.0f)))
+								LootItem.lootTableItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
+									.setWeight(50)
+									.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
+									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
+									.setWeight(40)
+									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
+									.setWeight(30)
+									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.FLINTLOCK_MUSKETOON.get())
+									.setWeight(20)
+									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.FLINTLOCK_NOCK_GUN.get())
+									.setWeight(5)
+									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
+									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
 							)
 						)
 				);
@@ -37,12 +61,53 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(UniformGenerator.between(2, 4))
+						.setRolls(UniformGenerator.between(1, 3))
 						.add(
 								LootItem.lootTableItem(ModItems.SMALL_IRON_MUSKET_BALL.get())
-								.setWeight(10)
+								.setWeight(100)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.SMALL_IRON_BIRDSHOT.get())
+								.setWeight(100)
 								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
 							)
+						.add(
+								LootItem.lootTableItem(ModItems.SMALL_IRON_BUCKSHOT.get())
+								.setWeight(100)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.MEDIUM_IRON_MUSKET_BALL.get())
+								.setWeight(50)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.MEDIUM_IRON_BIRDSHOT.get())
+								.setWeight(50)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.MEDIUM_IRON_BUCKSHOT.get())
+								.setWeight(50)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.LARGE_IRON_MUSKET_BALL.get())
+								.setWeight(25)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.LARGE_IRON_BIRDSHOT.get())
+								.setWeight(25)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+							)
+						.add(
+								LootItem.lootTableItem(ModItems.LARGE_IRON_BUCKSHOT.get())
+								.setWeight(25)
+								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+							)
+						
 						)
 				);
 	}

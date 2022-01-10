@@ -14,6 +14,8 @@ public class OldGunsConfig {
 	public static class Common {
 		public final BooleanValue patchRecipeBook;
 		public final BooleanValue printDebugMessages;
+		public final RecipeSettings recipeSettings;
+		public final LootSettings lootSettings;
 		public final FirearmSettings firearmSettings;
 		
 		Common(final ForgeConfigSpec.Builder builder) {
@@ -27,6 +29,16 @@ public class OldGunsConfig {
 			patchRecipeBook = builder
 					.comment("Patch vanilla recipe book to handle NBT items")
 					.define("patchRecipeBook", true);
+			
+			recipeSettings = new RecipeSettings(
+					builder,
+					"Recipe enable and disable settings",
+					"recipeSettings");
+			
+			lootSettings = new LootSettings(
+					builder,
+					"Loot enable and disable settings",
+					"lootSettings");
 			
 			firearmSettings = new FirearmSettings(
 					builder,
@@ -47,6 +59,8 @@ public class OldGunsConfig {
 	}
 	
 	public static class FirearmSettings {
+		public final BooleanValue hugeFirearmDebuffs;
+		
 		public final MuzzleloadingFirearmAttributes flintlock_derringer;
 		public final MuzzleloadingFirearmAttributes flintlock_duckfoot_derringer;
 		public final MuzzleloadingFirearmAttributes flintlock_pistol;
@@ -90,6 +104,10 @@ public class OldGunsConfig {
 		
 		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
+			
+			hugeFirearmDebuffs = builder
+					.comment("Apply slowness effect while wielding huge firearms, like the nock gun")
+					.define("hugeFirearmDebuffs", true);
 			
 			flintlock_derringer = new MuzzleloadingFirearmAttributes(
 					builder,
@@ -449,6 +467,44 @@ public class OldGunsConfig {
 					7.0f,
 					3.0f
 					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class RecipeSettings {
+		public final BooleanValue allowExoticFirearmCrafting;
+		public final BooleanValue allowFlintlockWeaponsCrafting;
+		
+		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowExoticFirearmCrafting = builder
+					.comment("Enable/disable exotic firearm crafts which will force players to find and maintain exotic weapons via loot")
+					.define("allowExoticFirearmCrafting", false);
+			
+			allowFlintlockWeaponsCrafting = builder
+					.comment("Enable/disable flintlock firearm crafts")
+					.define("allowFlintlockWeaponsCrafting", true);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class LootSettings {
+		public final BooleanValue allowExoticFirearmsInLoot;
+		public final BooleanValue allowAmmoInLoot;
+		
+		LootSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowExoticFirearmsInLoot = builder
+					.comment("Enable/disable exotic firearm spawning in dungeon loot")
+					.define("allowExoticFirearmsInLoot", true);
+			
+			allowAmmoInLoot = builder
+					.comment("Enable/disable firearm ammo spawning in dungeon loot")
+					.define("allowAmmoInLoot", true);
 			
 			builder.pop();
 		}
