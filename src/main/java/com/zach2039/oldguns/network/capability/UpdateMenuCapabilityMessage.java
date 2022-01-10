@@ -1,8 +1,9 @@
 package com.zach2039.oldguns.network.capability;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nullable;
 
-import com.google.common.base.Supplier;
 import com.zach2039.oldguns.client.util.ClientUtil;
 
 import net.minecraft.core.Direction;
