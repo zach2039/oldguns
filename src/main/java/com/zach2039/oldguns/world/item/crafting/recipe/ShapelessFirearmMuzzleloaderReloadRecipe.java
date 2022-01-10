@@ -134,10 +134,6 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
 		dummyAmmoStackList.add(new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL.get()));
 		
 		((FirearmItem)outputStack.getItem()).initNBTTags(outputStack);
-    	
-		FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
-		FirearmNBTHelper.refreshFirearmCondition(outputStack);
-		FirearmEmptyCapability.update(null, outputStack);
 		
 		return outputStack;
 	}
