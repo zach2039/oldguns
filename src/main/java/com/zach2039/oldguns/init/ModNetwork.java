@@ -2,6 +2,7 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
+import com.zach2039.oldguns.network.capability.firearmempty.UpdateMenuFirearmEmptyMessage;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.network.NetworkRegistry;
@@ -23,6 +24,12 @@ public class ModNetwork {
 				.decoder(FirearmEffectMessage::decode)
 				.encoder(FirearmEffectMessage::encode)
 				.consumer(FirearmEffectMessage::handle)
+				.add();
+		
+		channel.messageBuilder(UpdateMenuFirearmEmptyMessage.class, 2)
+				.decoder(UpdateMenuFirearmEmptyMessage::decode)
+				.encoder(UpdateMenuFirearmEmptyMessage::encode)
+				.consumer(UpdateMenuFirearmEmptyMessage::handle)
 				.add();
 		
 		return channel;

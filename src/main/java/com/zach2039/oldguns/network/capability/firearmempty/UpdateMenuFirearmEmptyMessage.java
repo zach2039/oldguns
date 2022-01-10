@@ -1,8 +1,9 @@
 package com.zach2039.oldguns.network.capability.firearmempty;
 
+import java.util.function.Supplier;
+
 import javax.annotation.Nullable;
 
-import com.google.common.base.Supplier;
 import com.zach2039.oldguns.api.capability.empty.IFirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
