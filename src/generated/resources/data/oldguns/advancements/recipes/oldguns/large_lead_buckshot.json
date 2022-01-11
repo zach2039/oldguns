@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:large_lead_buckshot"
+    ]
+  },
+  "criteria": {
+    "has_small_lead_musket_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:small_lead_musket_ball"
+            ]
+          }
+        ]
+      }
+    },
+    "has_paper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:paper"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:large_lead_buckshot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_small_lead_musket_ball",
+      "has_paper",
+      "has_the_recipe"
+    ]
+  ]
+}

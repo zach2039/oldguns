@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_blunderbuss"
+    ]
+  },
+  "criteria": {
+    "has_large_metal_flared_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_metal_flared_barrel"
+          }
+        ]
+      }
+    },
+    "has_flintlock_mechanism": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:flintlock_mechanism"
+          }
+        ]
+      }
+    },
+    "has_large_stock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_stock"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:flintlock_blunderbuss"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_large_metal_flared_barrel",
+      "has_flintlock_mechanism",
+      "has_large_stock",
+      "has_the_recipe"
+    ]
+  ]
+}

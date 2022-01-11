@@ -1,0 +1,31 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_exotics"
+    },
+    {
+      "type": "oldguns:can_craft_flintlock_weapons"
+    }
+  ],
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:medium_metal_flared_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:medium_stock"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_musketoon",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

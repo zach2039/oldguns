@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "entries": [
+    "oldguns:loot_table_ammo",
+    "oldguns:loot_table_exotic_firearms"
+  ]
+}

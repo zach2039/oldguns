@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:flintlock_doublebarrel_blunderbuss"
+    },
+    {
+      "tag": "oldguns:large_metal_buckshot"
+    },
+    {
+      "tag": "forge:gunpowder"
+    },
+    {
+      "tag": "forge:gunpowder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:flintlock_doublebarrel_blunderbuss",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}
