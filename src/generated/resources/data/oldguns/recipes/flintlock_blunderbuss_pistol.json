@@ -1,0 +1,31 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_exotics"
+    },
+    {
+      "type": "oldguns:can_craft_flintlock_weapons"
+    }
+  ],
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_metal_flared_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:medium_handle"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_blunderbuss_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

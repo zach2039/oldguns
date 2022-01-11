@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    },
+    {
+      "item": "oldguns:lead_nugget"
+    }
+  ],
+  "result": {
+    "item": "oldguns:lead_ingot"
+  }
+}

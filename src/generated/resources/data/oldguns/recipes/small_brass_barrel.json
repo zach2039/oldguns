@@ -1,0 +1,18 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    "BBb"
+  ],
+  "key": {
+    "B": {
+      "tag": "forge:ingots/brass"
+    },
+    "b": {
+      "tag": "forge:nuggets/brass"
+    }
+  },
+  "result": {
+    "item": "oldguns:small_brass_barrel"
+  }
+}

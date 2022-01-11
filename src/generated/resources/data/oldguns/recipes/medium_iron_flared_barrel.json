@@ -1,0 +1,20 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    "I ",
+    " X",
+    "I "
+  ],
+  "key": {
+    "X": {
+      "item": "oldguns:medium_iron_barrel"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "oldguns:medium_iron_flared_barrel"
+  }
+}

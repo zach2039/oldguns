@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_derringer"
+    ]
+  },
+  "criteria": {
+    "has_tiny_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:tiny_metal_barrel"
+          }
+        ]
+      }
+    },
+    "has_flintlock_mechanism": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:flintlock_mechanism"
+          }
+        ]
+      }
+    },
+    "has_small_handle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_handle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:flintlock_derringer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tiny_barrel",
+      "has_flintlock_mechanism",
+      "has_small_handle",
+      "has_the_recipe"
+    ]
+  ]
+}

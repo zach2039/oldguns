@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_arquebus_reload"
+    ]
+  },
+  "criteria": {
+    "has_flintlock_arquebus": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:flintlock_arquebus"
+            ]
+          }
+        ]
+      }
+    },
+    "has_small_metal_musket_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_metal_musket_ball"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:flintlock_arquebus_reload"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_flintlock_arquebus",
+      "has_small_metal_musket_ball",
+      "has_the_recipe"
+    ]
+  ]
+}

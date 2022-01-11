@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/lead"
+    },
+    {
+      "tag": "forge:nuggets/lead"
+    },
+    {
+      "tag": "forge:nuggets/lead"
+    },
+    {
+      "tag": "forge:nuggets/lead"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_lead_birdshot"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_flintlock_weapons"
+    }
+  ],
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:medium_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:small_stock"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_caliver",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

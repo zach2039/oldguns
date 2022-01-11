@@ -1,13 +1,13 @@
 {
 	"credit": "Made with Blockbench",
 	"textures": {
-		"0": "minecraft:blocks/anvil_base",
-		"1": "minecraft:blocks/crafting_table_top",
-		"2": "minecraft:blocks/iron_block",
-		"3": "minecraft:blocks/log_oak",
-		"4": "minecraft:blocks/planks_oak",
-		"6": "minecraft:blocks/tnt_top",
-		"particle": "minecraft:blocks/anvil_base"
+		"0": "minecraft:block/anvil",
+		"1": "minecraft:block/crafting_table_top",
+		"2": "minecraft:block/iron_block",
+		"3": "minecraft:block/oak_log",
+		"4": "minecraft:block/oak_planks",
+		"6": "minecraft:block/tnt_top",
+		"particle": "minecraft:block/anvil"
 	},
 	"elements": [
 		{

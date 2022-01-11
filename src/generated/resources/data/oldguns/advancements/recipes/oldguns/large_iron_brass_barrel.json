@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:large_iron_brass_barrel"
+    ]
+  },
+  "criteria": {
+    "has_large_brass_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:large_brass_barrel"
+            ]
+          }
+        ]
+      }
+    },
+    "has_brass_ingot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/brass"
+          }
+        ]
+      }
+    },
+    "has_brass_nugget": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/brass"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:large_iron_brass_barrel"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_large_brass_barrel",
+      "has_brass_ingot",
+      "has_brass_nugget",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_musket"
+    ]
+  },
+  "criteria": {
+    "has_large_metal_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_metal_barrel"
+          }
+        ]
+      }
+    },
+    "has_flintlock_mechanism": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:flintlock_mechanism"
+          }
+        ]
+      }
+    },
+    "has_medium_stock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:medium_stock"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:flintlock_musket"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_large_metal_barrel",
+      "has_flintlock_mechanism",
+      "has_medium_stock",
+      "has_the_recipe"
+    ]
+  ]
+}

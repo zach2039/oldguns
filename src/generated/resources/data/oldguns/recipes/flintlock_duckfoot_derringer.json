@@ -1,0 +1,33 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_exotics"
+    },
+    {
+      "type": "oldguns:can_craft_flintlock_weapons"
+    }
+  ],
+  "pattern": [
+    "B  ",
+    "BMH",
+    "B  "
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:tiny_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:small_handle"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_duckfoot_derringer",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

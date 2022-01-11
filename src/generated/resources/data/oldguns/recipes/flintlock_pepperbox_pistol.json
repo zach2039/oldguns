@@ -1,0 +1,33 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_exotics"
+    },
+    {
+      "type": "oldguns:can_craft_flintlock_weapons"
+    }
+  ],
+  "pattern": [
+    "BB ",
+    "BMH",
+    "B  "
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:medium_handle"
+    }
+  },
+  "result": {
+    "item": "oldguns:flintlock_pepperbox_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}
