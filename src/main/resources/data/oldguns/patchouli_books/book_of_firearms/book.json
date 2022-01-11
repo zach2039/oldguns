@@ -1,0 +1,13 @@
+{
+	"name": "item.oldguns.book_of_firearms",
+	"name": "oldguns.landing",
+	"version": "buildNumber",
+	"book_texture:": "patchouli:textures/gui/book_gray.png",
+	"model": "oldguns:book_of_firearms",
+	"open_sound": "item.book.put",
+	"flip_sound": "item.book.page_turn",
+	"creative_tab": "oldguns",
+	"dont_generate_book": false,
+	"use_resource_pack": true,
+	"i18n": true
+}
