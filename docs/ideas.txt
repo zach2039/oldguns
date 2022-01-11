@@ -1,0 +1,15 @@
+Mod Ideas:
+	- Old Guns
+		- Gun racks and/or display cases
+		- Bayonets
+			- Only on medium and large firearms.
+			- Give a reach boost on long muskets.
+			- Need tiered blades, similar to Balkons weapon mod.
+		- Blueprint system (?)
+			- Exotic firearms require a blueprint found via loot to craft
+
+
+	- Addons
+		- Give NPCs guns (?)
+			- Skeletal militia or minutemen would be slick, but maybe as an addon.
+
