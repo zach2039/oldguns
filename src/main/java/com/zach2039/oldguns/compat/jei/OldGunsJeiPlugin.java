@@ -6,7 +6,6 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
 import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;

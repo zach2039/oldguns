@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftExoticItemsCondition;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
@@ -14,7 +13,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

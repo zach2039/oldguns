@@ -3,7 +3,6 @@ package com.zach2039.oldguns.client.init;
 import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.gui.ClientScreenManager;
-import com.zach2039.oldguns.client.gui.ModGuiIDs;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.init.ModMenuTypes;
 
