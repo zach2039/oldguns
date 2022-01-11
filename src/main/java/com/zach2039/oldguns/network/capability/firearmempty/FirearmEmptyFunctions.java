@@ -1,6 +1,6 @@
 package com.zach2039.oldguns.network.capability.firearmempty;
 
-import com.zach2039.oldguns.api.capability.empty.IFirearmEmpty;
+import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 
 import net.minecraft.network.FriendlyByteBuf;
 
@@ -14,7 +14,7 @@ import net.minecraft.network.FriendlyByteBuf;
  */
 class FirearmEmptyFunctions {
 	static boolean convertFirearmEmptyToFirearmEmptyValue(final IFirearmEmpty firearmEmpty) {
-		return firearmEmpty.get();
+		return firearmEmpty.isEmpty();
 	}
 	
 	static boolean decodeFirearmEmptyValue(final FriendlyByteBuf buf) {
@@ -26,6 +26,6 @@ class FirearmEmptyFunctions {
 	}
 	
 	static void applyFirearmEmptyValueToFirearmEmpty(final IFirearmEmpty firearmEmpty, final boolean firearmEmptyValue) {
-		firearmEmpty.set(firearmEmptyValue);
+		firearmEmpty.setEmpty(firearmEmptyValue);
 	}
 }

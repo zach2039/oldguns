@@ -2,8 +2,6 @@ package com.zach2039.oldguns.api.firearm.util;
 
 import java.util.List;
 
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
-import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import net.minecraft.ChatFormatting;

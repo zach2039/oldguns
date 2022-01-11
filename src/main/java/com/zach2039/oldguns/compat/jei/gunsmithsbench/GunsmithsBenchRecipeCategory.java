@@ -13,10 +13,8 @@ package com.zach2039.oldguns.compat.jei.gunsmithsbench;
 import java.util.List;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
 import com.zach2039.oldguns.compat.jei.util.JEIIngredientStackListBuilder;
-import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
@@ -74,6 +72,8 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 			gridHelper.setInputs(guiItemStacks, inputs);
 			recipeLayout.setShapeless();
 		}
+		
+		
 		
 		guiItemStacks.set(0, outputs.get(0));
 	}

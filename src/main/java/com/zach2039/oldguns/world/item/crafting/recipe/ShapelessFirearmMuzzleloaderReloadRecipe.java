@@ -10,6 +10,7 @@ import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
+import com.zach2039.oldguns.capability.firearmempty.FirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
@@ -27,7 +28,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -117,7 +117,7 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
 		{
 			FirearmNBTHelper.pushNBTTagAmmo(firearmStack, ammoStack);
 			
-			FirearmEmptyCapability.update(null, firearmStack);
+			FirearmEmptyCapability.updateFirearmEmpty(firearmStack);
 			
 			return firearmStack;
 		}
@@ -129,11 +129,15 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
     @Nonnull
     public ItemStack getResultItem()
 	{
-		ItemStack outputStack = super.getResultItem();
+		ItemStack outputStack = super.getResultItem().copy();
 		List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
 		dummyAmmoStackList.add(new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL.get()));
 		
+		FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
+		
 		((FirearmItem)outputStack.getItem()).initNBTTags(outputStack);
+		
+		FirearmEmptyCapability.updateFirearmEmpty(outputStack);
 		
 		return outputStack;
 	}

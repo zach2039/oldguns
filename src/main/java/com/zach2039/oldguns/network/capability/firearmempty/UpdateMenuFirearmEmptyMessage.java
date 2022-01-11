@@ -4,7 +4,7 @@ import java.util.function.Supplier;
 
 import javax.annotation.Nullable;
 
-import com.zach2039.oldguns.api.capability.empty.IFirearmEmpty;
+import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
 
@@ -21,33 +21,33 @@ import net.minecraftforge.network.NetworkEvent;
  * @author grilled-salmon
  */
 public class UpdateMenuFirearmEmptyMessage extends UpdateMenuCapabilityMessage<IFirearmEmpty, Boolean> {
-
 	public UpdateMenuFirearmEmptyMessage(
 			@Nullable final Direction facing,
 			final int containerID,
 			final int stateID,
 			final int slotNumber,
-			final IFirearmEmpty firearmEmpty) {
+			final IFirearmEmpty hiddenBlockRevealer
+	) {
 		super(
 				FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY,
-				facing, containerID, stateID, slotNumber, firearmEmpty,
+				facing, containerID, stateID, slotNumber, hiddenBlockRevealer,
 				FirearmEmptyFunctions::convertFirearmEmptyToFirearmEmptyValue
-			);
+		);
 	}
 
 	private UpdateMenuFirearmEmptyMessage(
 			@Nullable final Direction facing,
-			final int windowID,
+			final int containerID,
 			final int stateID,
 			final int slotNumber,
-			final boolean firearmEmpty
+			final boolean revealHiddenBlocks
 	) {
 		super(
 				FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY,
-				facing, windowID, stateID, slotNumber, firearmEmpty
+				facing, containerID, stateID, slotNumber, revealHiddenBlocks
 		);
 	}
-	
+
 	public static UpdateMenuFirearmEmptyMessage decode(final FriendlyByteBuf buffer) {
 		return UpdateMenuCapabilityMessage.<IFirearmEmpty, Boolean, UpdateMenuFirearmEmptyMessage>decode(
 				buffer,
@@ -55,7 +55,7 @@ public class UpdateMenuFirearmEmptyMessage extends UpdateMenuCapabilityMessage<I
 				UpdateMenuFirearmEmptyMessage::new
 		);
 	}
-	
+
 	public static void encode(final UpdateMenuFirearmEmptyMessage message, final FriendlyByteBuf buffer) {
 		UpdateMenuCapabilityMessage.encode(
 				message,

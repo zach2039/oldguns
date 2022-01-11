@@ -8,7 +8,6 @@ import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

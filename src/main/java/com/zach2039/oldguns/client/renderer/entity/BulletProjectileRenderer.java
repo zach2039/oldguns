@@ -4,7 +4,6 @@ import javax.annotation.Nonnull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Quaternion;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
 import com.zach2039.oldguns.world.entity.BulletProjectile;

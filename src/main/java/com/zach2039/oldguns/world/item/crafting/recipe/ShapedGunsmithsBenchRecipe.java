@@ -1,14 +1,10 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
-
-import java.util.Set;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
@@ -18,14 +14,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 import com.zach2039.oldguns.api.firearm.IFirearm;
-import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
-import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;

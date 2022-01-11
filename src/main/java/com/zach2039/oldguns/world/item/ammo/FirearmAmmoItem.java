@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmAmmoType;
-import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
 import net.minecraft.world.entity.LivingEntity;

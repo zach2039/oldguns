@@ -7,7 +7,6 @@ import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
-import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.MuzzleloadingFirearmAttributes;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
@@ -47,8 +46,6 @@ public class FlintlockBlunderbussPistolItem extends FirearmItem implements IFire
 		FirearmNBTHelper.refreshFirearmCondition(stackIn);
 		
 		FirearmNBTHelper.peekNBTTagAmmo(stackIn);
-		
-		FirearmEmptyCapability.update(null, stackIn);
 	}
 
 	@Override

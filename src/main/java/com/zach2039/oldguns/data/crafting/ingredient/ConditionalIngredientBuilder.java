@@ -13,8 +13,6 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag.Named;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
