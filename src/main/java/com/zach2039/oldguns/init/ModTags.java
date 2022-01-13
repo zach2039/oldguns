@@ -43,6 +43,17 @@ public class ModTags {
 		public static final Tag.Named<Item> MEDIUM_METAL_BIRDSHOT = tag("medium_metal_birdshot");
 		public static final Tag.Named<Item> LARGE_METAL_BIRDSHOT = tag("large_metal_birdshot");
 		
+		// Powder
+		public static final Tag.Named<Item> ANY_GUNPOWDER = tag("any_gunpowder");
+		public static final Tag.Named<Item> ANY_BLACK_POWDER = tag("any_black_powder");
+		public static final Tag.Named<Item> MEDIUM_GRADE_BLACK_POWDER = tag("medium_grade_black_powder");
+		public static final Tag.Named<Item> HIGH_GRADE_BLACK_POWDER = tag("high_grade_black_powder");
+		public static final Tag.Named<Item> MATCHLOCK_SUITABLE_POWDER = tag("matchlock_suitable_powder");
+		public static final Tag.Named<Item> WHEELLOCK_SUITABLE_POWDER = tag("wheellock_suitable_powder");
+		public static final Tag.Named<Item> FLINTLOCK_SUITABLE_POWDER = tag("flintlock_suitable_powder");
+		public static final Tag.Named<Item> CAPLOCK_SUITABLE_POWDER = tag("caplock_suitable_powder");
+		public static final Tag.Named<Item> NEEDLEFIRE_SUITABLE_POWDER = tag("needlefire_suitable_powder");
+		
 		// Parts
 		public static final Tag.Named<Item> FLINTLOCK_MECHANISM = tag("flintlock_mechanism");
 		

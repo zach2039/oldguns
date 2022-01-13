@@ -129,6 +129,7 @@ public class OldGunsConfig {
 	
 	public static class CorningProcessSettings {
 		public final DoubleValue wetBlackPowderSunDryingDifficulty;
+		public final DoubleValue blackPowderRainWettingDifficulty;
 		
 		CorningProcessSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -137,6 +138,11 @@ public class OldGunsConfig {
 					.comment("How difficult it is for wet black powder cakes or blocks to dry in direct sunlight")
 					.comment("The chance for drying is 1 in (difficulty+1)*2, calculated when the block randomly ticks")
 					.defineInRange("wetBlackPowderCakeSunDryingDifficulty", 15f, 0f, Float.MAX_VALUE);
+			
+			blackPowderRainWettingDifficulty = builder
+					.comment("How difficult it is for dry black powder blocks to get wet in rain")
+					.comment("The chance for drying is 1 in (difficulty+1)*2, calculated when the block randomly ticks")
+					.defineInRange("blackPowderRainWettingDifficulty", 5f, 0f, Float.MAX_VALUE);
 			
 			builder.pop();
 		}

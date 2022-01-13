@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "minecraft:gunpowder",
+    "oldguns:high_grade_black_powder",
+    "oldguns:medium_grade_black_powder"
+  ]
+}

@@ -255,7 +255,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('L', ItemTags.LOGS)
 					.define('C', Tags.Items.COBBLESTONE)
 					.define('P', ItemTags.PLANKS)
-					.define('G', Tags.Items.GUNPOWDER)	
+					.define('G', ModTags.Items.ANY_GUNPOWDER)	
 					.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "gunsmiths_bench"));
 		}
@@ -283,7 +283,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_DERRINGER.get())
 					.requires(ModItems.FLINTLOCK_DERRINGER.get())
 					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_derringer", has(ModItems.FLINTLOCK_DERRINGER.get()))
 					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_derringer_reload"));
@@ -294,7 +294,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
 					.requires(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
 					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_duckfoot_derringer", has(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get()))
 					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_duckfoot_derringer_reload"));
@@ -305,7 +305,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_PISTOL.get())
 					.requires(ModItems.FLINTLOCK_PISTOL.get())
 					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_pistol", has(ModItems.FLINTLOCK_PISTOL.get()))
 					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_pistol_reload"));
@@ -316,7 +316,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
 					.requires(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
 					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_pepperbox_pistol", has(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get()))
 					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_pepperbox_pistol_reload"));
@@ -327,7 +327,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_ARQUEBUS.get())
 					.requires(ModItems.FLINTLOCK_ARQUEBUS.get())
 					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_arquebus", has(ModItems.FLINTLOCK_ARQUEBUS.get()))
 					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_arquebus_reload"));
@@ -338,8 +338,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_CALIVER.get())
 					.requires(ModItems.FLINTLOCK_CALIVER.get())
 					.requires(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_caliver", has(ModItems.FLINTLOCK_CALIVER.get()))
 					.unlockedBy("has_medium_metal_musket_ball", has(ModTags.Items.MEDIUM_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_caliver_reload"));
@@ -350,8 +350,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_MUSKETOON.get())
 					.requires(ModItems.FLINTLOCK_MUSKETOON.get())
 					.requires(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_musketoon", has(ModItems.FLINTLOCK_MUSKETOON.get()))
 					.unlockedBy("has_medium_metal_musket_ball", has(ModTags.Items.MEDIUM_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_musketoon_ball_reload"));
@@ -360,8 +360,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_MUSKETOON.get())
 					.requires(ModItems.FLINTLOCK_MUSKETOON.get())
 					.requires(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_musketoon", has(ModItems.FLINTLOCK_MUSKETOON.get()))
 					.unlockedBy("has_medium_metal_birdshot", has(ModTags.Items.MEDIUM_METAL_BIRDSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_musketoon_birdshot_reload"));
@@ -372,8 +372,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_MUSKET.get())
 					.requires(ModItems.FLINTLOCK_MUSKET.get())
 					.requires(ModTags.Items.LARGE_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_musket", has(ModItems.FLINTLOCK_MUSKET.get()))
 					.unlockedBy("has_large_metal_musket_ball", has(ModTags.Items.LARGE_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_musket_reload"));
@@ -384,8 +384,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_NOCK_GUN.get())
 					.requires(ModItems.FLINTLOCK_NOCK_GUN.get())
 					.requires(ModTags.Items.LARGE_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_nock_gun", has(ModItems.FLINTLOCK_MUSKET.get()))
 					.unlockedBy("has_large_metal_musket_ball", has(ModTags.Items.LARGE_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_nock_gun_reload"));
@@ -396,8 +396,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_LONG_MUSKET.get())
 					.requires(ModItems.FLINTLOCK_LONG_MUSKET.get())
 					.requires(ModTags.Items.LARGE_METAL_MUSKET_BALL)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_long_musket", has(ModItems.FLINTLOCK_LONG_MUSKET.get()))
 					.unlockedBy("has_large_metal_musket_ball", has(ModTags.Items.LARGE_METAL_MUSKET_BALL))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_long_musket_reload"));
@@ -408,7 +408,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
 					.requires(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
 					.requires(ModTags.Items.SMALL_METAL_BUCKSHOT)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_blunderbuss_pistol", has(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get()))
 					.unlockedBy("has_small_metal_buckshot", has(ModTags.Items.SMALL_METAL_BUCKSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss_pistol_buckshot_reload"));
@@ -417,7 +417,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
 					.requires(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
 					.requires(ModTags.Items.SMALL_METAL_BIRDSHOT)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_blunderbuss_pistol", has(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get()))
 					.unlockedBy("has_small_metal_birdshot", has(ModTags.Items.SMALL_METAL_BIRDSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss_pistol_birdshot_reload"));
@@ -428,8 +428,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_BLUNDERBUSS.get())
 					.requires(ModItems.FLINTLOCK_BLUNDERBUSS.get())
 					.requires(ModTags.Items.LARGE_METAL_BUCKSHOT)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_blunderbuss", has(ModItems.FLINTLOCK_BLUNDERBUSS.get()))
 					.unlockedBy("has_large_metal_buckshot", has(ModTags.Items.LARGE_METAL_BUCKSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss_buckshot_reload"));
@@ -438,8 +438,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_BLUNDERBUSS.get())
 					.requires(ModItems.FLINTLOCK_BLUNDERBUSS.get())
 					.requires(ModTags.Items.LARGE_METAL_BIRDSHOT)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_blunderbuss", has(ModItems.FLINTLOCK_BLUNDERBUSS.get()))
 					.unlockedBy("has_large_metal_birdshot", has(ModTags.Items.LARGE_METAL_BIRDSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss_birdshot_reload"));
@@ -450,8 +450,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
 					.requires(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
 					.requires(ModTags.Items.LARGE_METAL_BUCKSHOT)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_doublebarrel_blunderbuss", has(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get()))
 					.unlockedBy("has_large_metal_buckshot", has(ModTags.Items.LARGE_METAL_BUCKSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_doublebarrel_blunderbuss_buckshot_reload"));
@@ -460,8 +460,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
 					.requires(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
 					.requires(ModTags.Items.LARGE_METAL_BIRDSHOT)
-					.requires(Tags.Items.GUNPOWDER)
-					.requires(Tags.Items.GUNPOWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
 					.unlockedBy("has_flintlock_doublebarrel_blunderbuss", has(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get()))
 					.unlockedBy("has_large_metal_birdshot", has(ModTags.Items.LARGE_METAL_BIRDSHOT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_doublebarrel_blunderbuss_birdshot_reload"));

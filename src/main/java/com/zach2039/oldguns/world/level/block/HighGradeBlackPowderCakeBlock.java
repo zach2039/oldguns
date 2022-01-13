@@ -34,6 +34,20 @@ public class HighGradeBlackPowderCakeBlock extends Block {
 	}
 	
 	@Override
+	public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face)
+    {
+		int flammability = 100;
+        return flammability;
+    }
+	
+	@Override
+	public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face)
+    {
+		int spread = 500;
+        return spread;
+    }
+	
+	@Override
 	public VoxelShape getShape(BlockState p_51222_, BlockGetter p_51223_, BlockPos p_51224_, CollisionContext p_51225_) {
 		return Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D);
 	}

@@ -8,10 +8,10 @@
       "tag": "oldguns:large_metal_musket_ball"
     },
     {
-      "tag": "forge:gunpowder"
+      "tag": "oldguns:flintlock_suitable_powder"
     },
     {
-      "tag": "forge:gunpowder"
+      "tag": "oldguns:flintlock_suitable_powder"
     }
   ],
   "result": {

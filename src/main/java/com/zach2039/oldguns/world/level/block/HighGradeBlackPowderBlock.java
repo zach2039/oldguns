@@ -2,14 +2,14 @@ package com.zach2039.oldguns.world.level.block;
 
 import java.util.Random;
 
+import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -22,6 +22,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class HighGradeBlackPowderBlock extends FallingBlock {
+	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.COMMON.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public HighGradeBlackPowderBlock() {
 		super(BlockBehaviour.Properties.of(ModMaterials.BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());
@@ -29,11 +30,39 @@ public class HighGradeBlackPowderBlock extends FallingBlock {
 	}
 	
 	@Override
+	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+		boolean canGetWet = level.isRainingAt(blockpos.above());
+		
+		if (canGetWet) {
+			float difficulty = (float) Math.min(CORNING_PROCESS_SETTINGS.blackPowderRainWettingDifficulty.get(), Float.MAX_VALUE);
+			int wetRoll = rand.nextInt((int)(Math.round(difficulty)) + 1);
+			boolean allowWet = (wetRoll == 0);
+			
+			if (allowWet) {
+				level.setBlockAndUpdate(blockpos, ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState());
+			}
+		}
+	}
+	
+	@Override
+	public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face)
+    {
+		int flammability = 100;
+        return flammability;
+    }
+	
+	@Override
+	public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face)
+    {
+		int spread = 500;
+        return spread;
+    }
+	
+	@Override
 	public void onLand(Level level, BlockPos blockpos, BlockState stateA, BlockState stateB, FallingBlockEntity p_52072_) {
 		if (canGetWet(level, blockpos, stateB)) {
 			level.setBlock(blockpos, ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState(), 3);
-		}
-
+		} 
 	}
 
 	@Override

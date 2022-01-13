@@ -9,6 +9,7 @@ import com.zach2039.oldguns.init.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**
@@ -46,103 +47,137 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			
 		// Ammo
 		tag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
-				.add(ModItems.SMALL_LEAD_MUSKET_BALL.get())
-				.add(ModItems.SMALL_IRON_MUSKET_BALL.get());
+			.add(ModItems.SMALL_LEAD_MUSKET_BALL.get())
+			.add(ModItems.SMALL_IRON_MUSKET_BALL.get());
 		
 		tag(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
-				.add(ModItems.MEDIUM_LEAD_MUSKET_BALL.get())
-				.add(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
+			.add(ModItems.MEDIUM_LEAD_MUSKET_BALL.get())
+			.add(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
 		
 		tag(ModTags.Items.LARGE_METAL_MUSKET_BALL)
-				.add(ModItems.LARGE_LEAD_MUSKET_BALL.get())
-				.add(ModItems.LARGE_IRON_MUSKET_BALL.get());
+			.add(ModItems.LARGE_LEAD_MUSKET_BALL.get())
+			.add(ModItems.LARGE_IRON_MUSKET_BALL.get());
 		
 		tag(ModTags.Items.SMALL_METAL_BUCKSHOT)
-				.add(ModItems.SMALL_LEAD_BUCKSHOT.get())
-				.add(ModItems.SMALL_IRON_BUCKSHOT.get());
+			.add(ModItems.SMALL_LEAD_BUCKSHOT.get())
+			.add(ModItems.SMALL_IRON_BUCKSHOT.get());
 
 		tag(ModTags.Items.MEDIUM_METAL_BUCKSHOT)
-				.add(ModItems.MEDIUM_LEAD_BUCKSHOT.get())
-				.add(ModItems.MEDIUM_IRON_BUCKSHOT.get());
+			.add(ModItems.MEDIUM_LEAD_BUCKSHOT.get())
+			.add(ModItems.MEDIUM_IRON_BUCKSHOT.get());
 
 		tag(ModTags.Items.LARGE_METAL_BUCKSHOT)
-				.add(ModItems.LARGE_LEAD_BUCKSHOT.get())
-				.add(ModItems.LARGE_IRON_BUCKSHOT.get());
+			.add(ModItems.LARGE_LEAD_BUCKSHOT.get())
+			.add(ModItems.LARGE_IRON_BUCKSHOT.get());
 		
 		tag(ModTags.Items.SMALL_METAL_BIRDSHOT)
-				.add(ModItems.SMALL_LEAD_BIRDSHOT.get())
-				.add(ModItems.SMALL_IRON_BIRDSHOT.get());
+			.add(ModItems.SMALL_LEAD_BIRDSHOT.get())
+			.add(ModItems.SMALL_IRON_BIRDSHOT.get());
 
 		tag(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
-				.add(ModItems.MEDIUM_LEAD_BIRDSHOT.get())
-				.add(ModItems.MEDIUM_IRON_BIRDSHOT.get());
+			.add(ModItems.MEDIUM_LEAD_BIRDSHOT.get())
+			.add(ModItems.MEDIUM_IRON_BIRDSHOT.get());
 
 		tag(ModTags.Items.LARGE_METAL_BIRDSHOT)
-				.add(ModItems.LARGE_LEAD_BIRDSHOT.get())
-				.add(ModItems.LARGE_IRON_BIRDSHOT.get());
+			.add(ModItems.LARGE_LEAD_BIRDSHOT.get())
+			.add(ModItems.LARGE_IRON_BIRDSHOT.get());
+		
+		// Powder
+		tag(ModTags.Items.ANY_GUNPOWDER)
+			.add(Items.GUNPOWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get())
+			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.ANY_BLACK_POWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get())
+			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.HIGH_GRADE_BLACK_POWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.MEDIUM_GRADE_BLACK_POWDER)
+			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.MATCHLOCK_SUITABLE_POWDER)
+			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get())
+			.add(Items.GUNPOWDER);
+		
+		tag(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get())
+			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.FLINTLOCK_SUITABLE_POWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get())
+			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+	
+		tag(ModTags.Items.CAPLOCK_SUITABLE_POWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.NEEDLEFIRE_SUITABLE_POWDER)
+			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get());
 		
 		// Parts
 		tag(ModTags.Items.FLINTLOCK_MECHANISM)
-				.add(ModItems.FLINTLOCK_MECHANISM.get());
+			.add(ModItems.FLINTLOCK_MECHANISM.get());
 		
 		tag(ModTags.Items.TINY_METAL_BARREL)
-				.add(ModItems.TINY_BRASS_BARREL.get())
-				.add(ModItems.TINY_IRON_BARREL.get());		
+			.add(ModItems.TINY_BRASS_BARREL.get())
+			.add(ModItems.TINY_IRON_BARREL.get());		
 		
 		tag(ModTags.Items.SMALL_METAL_BARREL)
-				.add(ModItems.SMALL_BRASS_BARREL.get())
-				.add(ModItems.SMALL_IRON_BARREL.get());
+			.add(ModItems.SMALL_BRASS_BARREL.get())
+			.add(ModItems.SMALL_IRON_BARREL.get());
 
 		tag(ModTags.Items.MEDIUM_METAL_BARREL)
-				.add(ModItems.MEDIUM_BRASS_BARREL.get())
-				.add(ModItems.MEDIUM_IRON_BARREL.get());
+			.add(ModItems.MEDIUM_BRASS_BARREL.get())
+			.add(ModItems.MEDIUM_IRON_BARREL.get());
 		
 		tag(ModTags.Items.LARGE_METAL_BARREL)
-				.add(ModItems.LARGE_BRASS_BARREL.get())
-				.add(ModItems.LARGE_IRON_BARREL.get());
+			.add(ModItems.LARGE_BRASS_BARREL.get())
+			.add(ModItems.LARGE_IRON_BARREL.get());
 		
 		tag(ModTags.Items.SMALL_METAL_FLARED_BARREL)
-				.add(ModItems.SMALL_BRASS_FLARED_BARREL.get())
-				.add(ModItems.SMALL_IRON_FLARED_BARREL.get());
+			.add(ModItems.SMALL_BRASS_FLARED_BARREL.get())
+			.add(ModItems.SMALL_IRON_FLARED_BARREL.get());
 		
 		tag(ModTags.Items.MEDIUM_METAL_FLARED_BARREL)
-				.add(ModItems.MEDIUM_BRASS_FLARED_BARREL.get())
-				.add(ModItems.MEDIUM_IRON_FLARED_BARREL.get());
+			.add(ModItems.MEDIUM_BRASS_FLARED_BARREL.get())
+			.add(ModItems.MEDIUM_IRON_FLARED_BARREL.get());
 		
 		tag(ModTags.Items.LARGE_METAL_FLARED_BARREL)
-				.add(ModItems.LARGE_BRASS_FLARED_BARREL.get())
-				.add(ModItems.LARGE_IRON_FLARED_BARREL.get());
+			.add(ModItems.LARGE_BRASS_FLARED_BARREL.get())
+			.add(ModItems.LARGE_IRON_FLARED_BARREL.get());
 		
 		tag(ModTags.Items.SMALL_HANDLE)
-				.add(ModItems.SMALL_WOODEN_HANDLE.get());
+			.add(ModItems.SMALL_WOODEN_HANDLE.get());
 		
 		tag(ModTags.Items.MEDIUM_HANDLE)
-				.add(ModItems.MEDIUM_WOODEN_HANDLE.get());
+			.add(ModItems.MEDIUM_WOODEN_HANDLE.get());
 		
 		tag(ModTags.Items.LARGE_HANDLE)
-				.add(ModItems.LARGE_WOODEN_HANDLE.get());
+			.add(ModItems.LARGE_WOODEN_HANDLE.get());
 		
 		tag(ModTags.Items.SMALL_STOCK)
-				.add(ModItems.SMALL_WOODEN_STOCK.get());
+			.add(ModItems.SMALL_WOODEN_STOCK.get());
 
 		tag(ModTags.Items.MEDIUM_STOCK)
-				.add(ModItems.MEDIUM_WOODEN_STOCK.get());
+			.add(ModItems.MEDIUM_WOODEN_STOCK.get());
 		
 		tag(ModTags.Items.LARGE_STOCK)
-				.add(ModItems.LARGE_WOODEN_STOCK.get());
+			.add(ModItems.LARGE_WOODEN_STOCK.get());
 		
 		// Materials
 		tag(ModTags.Items.INGOTS_LEAD)
-				.add(ModItems.LEAD_INGOT.get());
+			.add(ModItems.LEAD_INGOT.get());
 		
 		tag(ModTags.Items.NUGGETS_LEAD)
-				.add(ModItems.LEAD_NUGGET.get());
+			.add(ModItems.LEAD_NUGGET.get());
 		
 		tag(ModTags.Items.INGOTS_BRASS)
-				.add(ModItems.BRASS_INGOT.get());
+			.add(ModItems.BRASS_INGOT.get());
 
 		tag(ModTags.Items.NUGGETS_BRASS)
-				.add(ModItems.BRASS_NUGGET.get());
+			.add(ModItems.BRASS_NUGGET.get());
 		
 		tag(ModTags.Items.DUST_NITER)
 			.add(ModItems.NITER.get());
