@@ -11,15 +11,15 @@ public class ShapelessGunsmithsBenchRecipeBuilder extends EnhancedShapelessRecip
 		super(result, ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPELESS.get());
 	}
 
-	public static ShapelessGunsmithsBenchRecipeBuilder shapelessGunsmithsBenchRecipe(final ItemLike result) {
-		return shapelessGunsmithsBenchRecipe(new ItemStack(result));
+	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final ItemLike result) {
+		return shapeless(new ItemStack(result));
 	}
 
-	public static ShapelessGunsmithsBenchRecipeBuilder shapelessGunsmithsBenchRecipe(final ItemStack result) {
+	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final ItemStack result) {
 		return new ShapelessGunsmithsBenchRecipeBuilder(result);
 	}
 	
-	public static ShapelessGunsmithsBenchRecipeBuilder shapelessGunsmithsBenchRecipe(final ItemLike result, final int count) {
-		return shapelessGunsmithsBenchRecipe(new ItemStack(result, count));
+	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final ItemLike result, final int count) {
+		return shapeless(new ItemStack(result, count));
 	}
 }

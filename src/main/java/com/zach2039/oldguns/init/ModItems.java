@@ -36,10 +36,16 @@ import com.zach2039.oldguns.world.item.firearm.FlintlockPepperboxPistolItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockPistolItem;
 import com.zach2039.oldguns.world.item.material.BrassIngotItem;
 import com.zach2039.oldguns.world.item.material.BrassNuggetItem;
+import com.zach2039.oldguns.world.item.material.HighGradeBlackPowderItem;
 import com.zach2039.oldguns.world.item.material.IronBitsItem;
 import com.zach2039.oldguns.world.item.material.LeadBitsItem;
 import com.zach2039.oldguns.world.item.material.LeadIngotItem;
 import com.zach2039.oldguns.world.item.material.LeadNuggetItem;
+import com.zach2039.oldguns.world.item.material.LiquidNiterItem;
+import com.zach2039.oldguns.world.item.material.MediumGradeBlackPowderItem;
+import com.zach2039.oldguns.world.item.material.NiterItem;
+import com.zach2039.oldguns.world.item.material.NitrateSoilItem;
+import com.zach2039.oldguns.world.item.material.SulfurItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassFlaredBarrelItem;
@@ -61,6 +67,7 @@ import com.zach2039.oldguns.world.item.part.SmallWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.SmallWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.TinyBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyIronBarrelItem;
+import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
 import net.minecraft.world.item.CreativeModeTab;
@@ -275,9 +282,32 @@ public class ModItems {
 			() -> new BrassNuggetItem()
 		);
 	
+	public static final RegistryObject<NitrateSoilItem> NITRATE_SOIL = ITEMS.register("nitrate_soil",
+			() -> new NitrateSoilItem()
+		);	
+	public static final RegistryObject<LiquidNiterItem> LIQUID_NITER = ITEMS.register("liquid_niter",
+			() -> new LiquidNiterItem()
+		);
+	public static final RegistryObject<NiterItem> NITER = ITEMS.register("niter",
+			() -> new NiterItem()
+		);
+	public static final RegistryObject<SulfurItem> SULFUR = ITEMS.register("sulfur",
+			() -> new SulfurItem()
+		);
+	public static final RegistryObject<MediumGradeBlackPowderItem> MEDIUM_GRADE_BLACK_POWDER = ITEMS.register("medium_grade_black_powder",
+			() -> new MediumGradeBlackPowderItem()
+		);
+	public static final RegistryObject<HighGradeBlackPowderItem> HIGH_GRADE_BLACK_POWDER = ITEMS.register("high_grade_black_powder",
+			() -> new HighGradeBlackPowderItem()
+		);
+	
 	// Tools
 	public static final RegistryObject<RepairKitItem> REPAIR_KIT = ITEMS.register("repair_kit",
 			() -> new RepairKitItem()
+		);
+	
+	public static final RegistryObject<MortarAndPestleItem> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle",
+			() -> new MortarAndPestleItem()
 		);
 	
 	/**

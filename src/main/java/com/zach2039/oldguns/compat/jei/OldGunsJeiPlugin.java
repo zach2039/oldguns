@@ -6,6 +6,7 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
 import com.zach2039.oldguns.init.ModBlocks;
+import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
@@ -98,7 +99,7 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
-
+		
 	}
 
 	@Override
@@ -108,6 +109,10 @@ public class OldGunsJeiPlugin implements IModPlugin {
 	
 	private static boolean isGunsmithsBenchRecipe(Recipe<?> recipe) {
 		RecipeSerializer<?> serializer = recipe.getSerializer();
-		return (serializer instanceof ShapedGunsmithsBenchRecipe.Serializer) || (serializer instanceof ShapelessGunsmithsBenchRecipe.Serializer);
+		return (
+				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_MORTAR_AND_PESTLE_SHAPELESS.get()) ||
+				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPED.get()) || 
+				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPELESS.get())
+				);
 	}
 }

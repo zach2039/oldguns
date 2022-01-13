@@ -1,0 +1,34 @@
+{
+  "variants": {
+    "refuse_amount=0": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=1": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=2": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=3": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=4": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=5": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=6": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=7": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=8": {
+      "model": "oldguns:block/niter_bedding_empty"
+    },
+    "refuse_amount=9": {
+      "model": "oldguns:block/niter_bedding_full"
+    }
+  }
+}

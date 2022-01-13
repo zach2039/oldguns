@@ -1,5 +1,5 @@
 {
-  "type": "oldguns:firearm_repair_shapeless",
+  "type": "oldguns:gunsmiths_bench_firearm_repair_shapeless",
   "ingredients": [
     {
       "tag": "oldguns:firearm"

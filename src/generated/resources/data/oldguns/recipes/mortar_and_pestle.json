@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    " L ",
+    "G G",
+    " G "
+  ],
+  "key": {
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "G": {
+      "item": "minecraft:polished_granite"
+    }
+  },
+  "result": {
+    "item": "oldguns:mortar_and_pestle",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

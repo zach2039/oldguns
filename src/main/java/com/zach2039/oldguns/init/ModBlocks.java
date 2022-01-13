@@ -3,6 +3,14 @@ package com.zach2039.oldguns.init;
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
+import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
+import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
+import com.zach2039.oldguns.world.level.block.MediumGradeBlackPowderBlock;
+import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
+import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
+import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.world.level.block.WetMediumGradeBlackPowderBlock;
 
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
@@ -29,6 +37,35 @@ public class ModBlocks {
 
 	public static final RegistryObject<GunsmithsBenchBlock> GUNSMITHS_BENCH = registerBlock("gunsmiths_bench",
 			() -> new GunsmithsBenchBlock()
+	);
+	
+	public static final RegistryObject<NiterBeddingBlock> NITER_BEDDING = registerBlock("niter_bedding",
+			() -> new NiterBeddingBlock()
+	);
+	
+	public static final RegistryObject<LiquidNiterCauldronBlock> LIQUID_NITER_CAULDRON = registerBlock("liquid_niter_cauldron",
+			() -> new LiquidNiterCauldronBlock()
+	);
+	
+	public static final RegistryObject<WetHighGradeBlackPowderCakeBlock> WET_HIGH_GRADE_BLACK_POWDER_CAKE = registerBlock("wet_high_grade_black_powder_cake",
+			() -> new WetHighGradeBlackPowderCakeBlock()
+	);
+	public static final RegistryObject<HighGradeBlackPowderCakeBlock> HIGH_GRADE_BLACK_POWDER_CAKE = registerBlock("high_grade_black_powder_cake",
+			() -> new HighGradeBlackPowderCakeBlock()
+	);
+	
+	public static final RegistryObject<WetHighGradeBlackPowderBlock> WET_HIGH_GRADE_BLACK_POWDER_BLOCK = registerBlock("wet_high_grade_black_powder_block",
+			() -> new WetHighGradeBlackPowderBlock()
+	);
+	public static final RegistryObject<HighGradeBlackPowderBlock> HIGH_GRADE_BLACK_POWDER_BLOCK = registerBlock("high_grade_black_powder_block",
+			() -> new HighGradeBlackPowderBlock()
+	);
+	
+	public static final RegistryObject<WetMediumGradeBlackPowderBlock> WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK = registerBlock("wet_medium_grade_black_powder_block",
+			() -> new WetMediumGradeBlackPowderBlock()
+	);
+	public static final RegistryObject<MediumGradeBlackPowderBlock> MEDIUM_GRADE_BLACK_POWDER_BLOCK = registerBlock("medium_grade_black_powder_block",
+			() -> new MediumGradeBlackPowderBlock()
 	);
 	
 	/**

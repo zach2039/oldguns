@@ -73,8 +73,6 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 			recipeLayout.setShapeless();
 		}
 		
-		
-		
 		guiItemStacks.set(0, outputs.get(0));
 	}
 }

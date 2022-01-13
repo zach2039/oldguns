@@ -1,0 +1,15 @@
+{
+  "type": "oldguns:gunsmiths_bench_mortar_and_pestle_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:gems/quartz"
+    },
+    {
+      "item": "oldguns:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "item": "oldguns:sulfur",
+    "count": 2
+  }
+}

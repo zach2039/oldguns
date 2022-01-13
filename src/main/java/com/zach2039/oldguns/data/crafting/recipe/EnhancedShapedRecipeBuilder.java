@@ -263,7 +263,8 @@ public class EnhancedShapedRecipeBuilder<
 	         this.conditions = conditions;
 	      }
 
-	      public void serializeRecipeData(JsonObject p_126167_) {
+	    @SuppressWarnings("deprecation")
+		public void serializeRecipeData(JsonObject p_126167_) {
 	         if (!this.group.isEmpty()) {
 	            p_126167_.addProperty("group", this.group);
 	         }

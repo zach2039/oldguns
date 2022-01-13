@@ -143,5 +143,17 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 
 		tag(ModTags.Items.NUGGETS_BRASS)
 				.add(ModItems.BRASS_NUGGET.get());
+		
+		tag(ModTags.Items.DUST_NITER)
+			.add(ModItems.NITER.get());
+		
+		tag(ModTags.Items.DUST_NITRE)
+			.add(ModItems.NITER.get());
+		
+		tag(ModTags.Items.DUST_SALTPETER)
+			.add(ModItems.NITER.get());
+		
+		tag(ModTags.Items.DUST_SULFUR)
+			.add(ModItems.SULFUR.get());
 	}
 }

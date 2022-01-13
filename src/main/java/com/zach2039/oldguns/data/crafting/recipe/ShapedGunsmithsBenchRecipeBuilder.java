@@ -11,15 +11,15 @@ public class ShapedGunsmithsBenchRecipeBuilder extends EnhancedShapedRecipeBuild
 		super(result, ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPED.get());
 	}
 
-	public static ShapedGunsmithsBenchRecipeBuilder shapedGunsmithsBenchRecipe(final ItemLike result) {
-		return shapedGunsmithsBenchRecipe(new ItemStack(result));
+	public static ShapedGunsmithsBenchRecipeBuilder shaped(final ItemLike result) {
+		return shaped(new ItemStack(result));
 	}
 
-	public static ShapedGunsmithsBenchRecipeBuilder shapedGunsmithsBenchRecipe(final ItemStack result) {
+	public static ShapedGunsmithsBenchRecipeBuilder shaped(final ItemStack result) {
 		return new ShapedGunsmithsBenchRecipeBuilder(result);
 	}
 	
-	public static ShapedGunsmithsBenchRecipeBuilder shapedGunsmithsBenchRecipe(final ItemLike result, final int count) {
-		return shapedGunsmithsBenchRecipe(new ItemStack(result, count));
+	public static ShapedGunsmithsBenchRecipeBuilder shaped(final ItemLike result, final int count) {
+		return shaped(new ItemStack(result, count));
 	}
 }

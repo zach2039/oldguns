@@ -1,0 +1,12 @@
+{
+  "type": "oldguns:mortar_and_pestle_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:medium_grade_black_powder_block"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_grade_black_powder",
+    "count": 9
+  }
+}

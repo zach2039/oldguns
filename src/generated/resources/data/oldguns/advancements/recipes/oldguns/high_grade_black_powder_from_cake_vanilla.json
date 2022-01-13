@@ -1,0 +1,47 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:high_grade_black_powder_from_cake_vanilla"
+    ]
+  },
+  "criteria": {
+    "has_high_grade_black_powder_cake": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:high_grade_black_powder_cake"
+            ]
+          }
+        ]
+      }
+    },
+    "has_mortar_and_pestle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:mortar_and_pestle"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:high_grade_black_powder_from_cake_vanilla"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_high_grade_black_powder_cake",
+      "has_mortar_and_pestle",
+      "has_the_recipe"
+    ]
+  ]
+}

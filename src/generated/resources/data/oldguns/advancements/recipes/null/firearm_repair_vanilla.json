@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:firearm_repair_vanilla"
+    ]
+  },
+  "criteria": {
+    "has_firearm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:firearm"
+          }
+        ]
+      }
+    },
+    "has_repair_kit": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:repair_kit"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:firearm_repair_vanilla"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_repair_kit",
+      "has_the_recipe"
+    ]
+  ]
+}

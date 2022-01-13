@@ -1,0 +1,10 @@
+{
+	"variants": {
+	    "dry=false": {
+			"model": "oldguns:block/high_grade_black_powder_cake_wet"
+    	},
+		"dry=true": {
+			"model": "oldguns:block/high_grade_black_powder_cake_dry"
+		}
+	}
+}

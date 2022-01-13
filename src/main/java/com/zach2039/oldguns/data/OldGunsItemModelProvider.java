@@ -181,7 +181,15 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.BRASS_INGOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.BRASS_NUGGET.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.NITRATE_SOIL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LIQUID_NITER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.NITER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.SULFUR.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.HIGH_GRADE_BLACK_POWDER.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MORTAR_AND_PESTLE.get());
 		
 		//withGeneratedParentAndDefaultTexture(ModItems.ARROW.get());
 	}

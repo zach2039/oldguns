@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "oldguns:gunsmiths_bench_shapeless",
   "ingredients": [
     {
       "tag": "forge:ingots/brass"

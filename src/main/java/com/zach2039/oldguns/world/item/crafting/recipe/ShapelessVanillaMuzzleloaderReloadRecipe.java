@@ -32,11 +32,11 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
+public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 {
 	private final boolean isSimple;
 	
-	private ShapelessFirearmMuzzleloaderReloadRecipe(final ResourceLocation id, final String group, final ItemStack recipeOutput, final NonNullList<Ingredient> ingredients) {
+	public ShapelessVanillaMuzzleloaderReloadRecipe(final ResourceLocation id, final String group, final ItemStack recipeOutput, final NonNullList<Ingredient> ingredients) {
 		super(id, group, recipeOutput, ingredients);
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
 	}
@@ -147,18 +147,18 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
 		return ModCrafting.Recipes.FIREARM_MUZZLELOADER_RELOAD_SHAPELESS.get();
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessFirearmMuzzleloaderReloadRecipe> {
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessVanillaMuzzleloaderReloadRecipe> {
 		@Override
-		public ShapelessFirearmMuzzleloaderReloadRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
+		public ShapelessVanillaMuzzleloaderReloadRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");
 			final NonNullList<Ingredient> ingredients = ModRecipeUtil.parseShapeless(json);
 			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 
-			return new ShapelessFirearmMuzzleloaderReloadRecipe(recipeID, group, result, ingredients);
+			return new ShapelessVanillaMuzzleloaderReloadRecipe(recipeID, group, result, ingredients);
 		}
 
 		@Override
-		public ShapelessFirearmMuzzleloaderReloadRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
+		public ShapelessVanillaMuzzleloaderReloadRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
 			final String group = buffer.readUtf(Short.MAX_VALUE);
 			final int numIngredients = buffer.readVarInt();
 			final NonNullList<Ingredient> ingredients = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
@@ -169,11 +169,11 @@ public class ShapelessFirearmMuzzleloaderReloadRecipe extends ShapelessRecipe
 
 			final ItemStack result = buffer.readItem();
 
-			return new ShapelessFirearmMuzzleloaderReloadRecipe(recipeID, group, result, ingredients);
+			return new ShapelessVanillaMuzzleloaderReloadRecipe(recipeID, group, result, ingredients);
 		}
 
 		@Override
-		public void toNetwork(final FriendlyByteBuf buffer, final ShapelessFirearmMuzzleloaderReloadRecipe recipe) {
+		public void toNetwork(final FriendlyByteBuf buffer, final ShapelessVanillaMuzzleloaderReloadRecipe recipe) {
 			buffer.writeUtf(recipe.getGroup());
 			buffer.writeVarInt(recipe.getIngredients().size());
 

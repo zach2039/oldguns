@@ -1,0 +1,20 @@
+{
+  "type": "oldguns:mortar_and_pestle_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:netherrack"
+    },
+    {
+      "tag": "forge:netherrack"
+    },
+    {
+      "tag": "forge:netherrack"
+    },
+    {
+      "item": "oldguns:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "item": "oldguns:sulfur"
+  }
+}

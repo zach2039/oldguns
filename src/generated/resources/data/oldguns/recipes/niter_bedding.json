@@ -1,0 +1,24 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    "CDC",
+    "DWD",
+    "CDC"
+  ],
+  "key": {
+    "W": {
+      "tag": "forge:crops/wheat"
+    },
+    "C": {
+      "item": "minecraft:clay_ball"
+    },
+    "D": {
+      "tag": "minecraft:dirt"
+    }
+  },
+  "result": {
+    "item": "oldguns:niter_bedding",
+    "count": 4
+  }
+}

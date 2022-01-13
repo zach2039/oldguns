@@ -19,12 +19,16 @@ import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
+import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -33,7 +37,9 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
@@ -53,7 +59,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 	private final ResourceLocation id;
 	final String group;
 
-	private ShapedGunsmithsBenchRecipe(final ResourceLocation id, final String group, final int recipeWidth, final int recipeHeight, final NonNullList<Ingredient> recipeItems, final ItemStack recipeOutput) {
+	protected ShapedGunsmithsBenchRecipe(final ResourceLocation id, final String group, final int recipeWidth, final int recipeHeight, final NonNullList<Ingredient> recipeItems, final ItemStack recipeOutput) {
 		this.id = id;
 		this.group = group;
 		this.width = recipeWidth;
@@ -90,6 +96,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 		return p_44161_ >= this.width && p_44162_ >= this.height;
 	}
 
+	@Override
 	public boolean matches(GunsmithsBenchCraftingContainer p_44176_, Level p_44177_) {
 		for(int i = 0; i <= p_44176_.getWidth() - this.width; ++i) {
 			for(int j = 0; j <= p_44176_.getHeight() - this.height; ++j) {
@@ -128,7 +135,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 
 		return true;
 	}
-
+	
 	@Override
 	public ItemStack assemble(GunsmithsBenchCraftingContainer craftinv) {
 		ItemStack resultStack = this.result.copy();

@@ -1,0 +1,14 @@
+{
+  "type": "oldguns:firearm_repair_shapeless",
+  "ingredients": [
+    {
+      "tag": "oldguns:firearm"
+    },
+    {
+      "item": "oldguns:repair_kit"
+    }
+  ],
+  "result": {
+    "item": "minecraft:air"
+  }
+}

@@ -61,6 +61,22 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addBlocks() {
 		addBlock(ModBlocks.GUNSMITHS_BENCH, "Gunsmith's Bench");
+		
+		addBlock(ModBlocks.NITER_BEDDING, "Niter Bedding");
+		
+		addBlock(ModBlocks.LIQUID_NITER_CAULDRON, "Cauldron of Liquid Niter");
+		
+		addBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE, "Wet High Grade Black Powder Cake");
+		
+		addBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE, "High Grade Black Powder Cake");
+		
+		addBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK, "Block of High Grade Black Powder");
+		
+		addBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK, "Block of Wet High Grade Black Powder");
+		
+		addBlock(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Medium Grade Black Powder");
+		
+		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium Grade Black Powder");
 	}
 
 	private void addItems() {
@@ -139,7 +155,15 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.BRASS_INGOT, "Brass Ingot");
 		addItem(ModItems.BRASS_NUGGET, "Brass Nugget");
 		
+		addItem(ModItems.NITRATE_SOIL, "Nitrate Soil");
+		addItem(ModItems.LIQUID_NITER, "Bottle of Liquid Niter");
+		addItem(ModItems.NITER, "Niter");
+		addItem(ModItems.SULFUR, "Sulfur");
+		addItem(ModItems.MEDIUM_GRADE_BLACK_POWDER, "Medium Grade Black Powder");
+		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High Grade Black Powder");
+		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
+		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
 	}
 
 	private void addFluids() {

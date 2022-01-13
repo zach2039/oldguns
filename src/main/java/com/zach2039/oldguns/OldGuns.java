@@ -15,6 +15,7 @@ import com.zach2039.oldguns.init.ModLootModifierSerializers;
 import com.zach2039.oldguns.init.ModLootTables;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
+import com.zach2039.oldguns.init.ModPotions;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
 import net.minecraft.world.item.CreativeModeTab;
@@ -54,6 +55,7 @@ public class OldGuns
 		ModMenuTypes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
 		ModLootModifierSerializers.initialize(modEventBus);
+		ModPotions.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
 		ModSoundEvents.initialize(modEventBus);
     }

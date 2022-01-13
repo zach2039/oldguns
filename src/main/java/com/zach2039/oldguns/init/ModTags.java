@@ -68,6 +68,10 @@ public class ModTags {
 		public static final Tag.Named<Item> INGOTS_LEAD = forgeTag("ingots/lead");
 		public static final Tag.Named<Item> NUGGETS_BRASS = forgeTag("nuggets/brass");
 		public static final Tag.Named<Item> INGOTS_BRASS = forgeTag("ingots/brass");
+		public static final Tag.Named<Item> DUST_NITER = forgeTag("dust/niter");
+		public static final Tag.Named<Item> DUST_NITRE = forgeTag("dust/nitre");
+		public static final Tag.Named<Item> DUST_SALTPETER = forgeTag("dust/saltpeter");
+		public static final Tag.Named<Item> DUST_SULFUR = forgeTag("dust/sulfur");
 		
 		private static Tag.Named<Item> tag(final String name) {
 			return ItemTags.bind(new ResourceLocation(OldGuns.MODID, name).toString());

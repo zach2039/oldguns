@@ -1,0 +1,35 @@
+{
+  "type": "oldguns:gunsmiths_bench_mortar_and_pestle_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    },
+    {
+      "item": "oldguns:medium_grade_black_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_grade_black_powder_block"
+  }
+}

@@ -12,7 +12,8 @@ buildscript {
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		classpath "com.diffplug.gradle:goomph:3.33.0"
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -20,6 +21,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'com.diffplug.eclipse.apt'
 
 version = "${mc_version}-${mod_version}"
 group = "com.zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
@@ -105,7 +107,7 @@ repositories {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.10'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.19'
 		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.1-64:api")
@@ -208,8 +210,9 @@ mixin {
 //	rename '(.+_at.cfg)', 'META-INF/$1'
 //}
 
+
 eclipse {
     afterEvaluate {
-        synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt
+        synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
     }
 }

@@ -3,17 +3,26 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
+import com.zach2039.oldguns.world.item.crafting.recipe.LiquidNiterRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessFirearmRepairRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaFirearmRepairRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMortarAndPestleRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -28,6 +37,22 @@ import net.minecraftforge.registries.RegistryObject;
  */
 public class ModCrafting {
 		
+	@Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
+	public static class Brewing {
+		
+		/**
+		 * Add this mod's brewing recipes.
+		 *
+		 * @param event The common setup event
+		 */
+		@SubscribeEvent
+		public static void registerBrewingRecipes(final FMLCommonSetupEvent event) {
+			event.enqueueWork(() -> {
+					BrewingRecipeRegistry.addRecipe(new LiquidNiterRecipe());
+			});
+		}
+	}
+	
 	public static class Ingredients {
 		public static final IIngredientSerializer<IngredientNever> NEVER = CraftingHelper.register(new ResourceLocation(OldGuns.MODID, "never"), new IngredientNever.Serializer());
 		public static final IIngredientSerializer<Ingredient> CONDITIONAL = CraftingHelper.register(new ResourceLocation(OldGuns.MODID, "conditional"), new ConditionalIngredientSerializer());
@@ -40,16 +65,26 @@ public class ModCrafting {
 
 		private static boolean isInitialized;
 
-		public static final RegistryObject<ShapelessFirearmMuzzleloaderReloadRecipe.Serializer> FIREARM_MUZZLELOADER_RELOAD_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_muzzleloader_reload_shapeless",
-				ShapelessFirearmMuzzleloaderReloadRecipe.Serializer::new
+		public static final RegistryObject<ShapelessVanillaMuzzleloaderReloadRecipe.Serializer> FIREARM_MUZZLELOADER_RELOAD_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_muzzleloader_reload_shapeless",
+				ShapelessVanillaMuzzleloaderReloadRecipe.Serializer::new
 		);
 		
-		public static final RegistryObject<ShapelessFirearmRepairRecipe.Serializer> FIREARM_REPAIR_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_repair_shapeless",
-				ShapelessFirearmRepairRecipe.Serializer::new
+		public static final RegistryObject<ShapelessVanillaFirearmRepairRecipe.Serializer> FIREARM_REPAIR_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_repair_shapeless",
+				ShapelessVanillaFirearmRepairRecipe.Serializer::new
+		);
+		
+		public static final RegistryObject<ShapelessVanillaMortarAndPestleRecipe.Serializer> MORTAR_AND_PESTLE_SHAPELESS = RECIPE_SERIALIZERS.register("mortar_and_pestle_shapeless",
+				ShapelessVanillaMortarAndPestleRecipe.Serializer::new
 		);
 		
 		public static final RegistryObject<ShapelessGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_shapeless",
 				ShapelessGunsmithsBenchRecipe.Serializer::new
+		);
+		public static final RegistryObject<ShapelessGunsmithsBenchMortarAndPestleRecipe.Serializer> GUNSMITHS_BENCH_MORTAR_AND_PESTLE_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_mortar_and_pestle_shapeless",
+				ShapelessGunsmithsBenchMortarAndPestleRecipe.Serializer::new
+		);
+		public static final RegistryObject<ShapelessGunsmithsBenchFirearmRepairRecipe.Serializer> GUNSMITHS_BENCH_FIREARM_REPAIR_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_firearm_repair_shapeless",
+				ShapelessGunsmithsBenchFirearmRepairRecipe.Serializer::new
 		);
 		
 		public static final RegistryObject<ShapedGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPED = RECIPE_SERIALIZERS.register("gunsmiths_bench_shaped",

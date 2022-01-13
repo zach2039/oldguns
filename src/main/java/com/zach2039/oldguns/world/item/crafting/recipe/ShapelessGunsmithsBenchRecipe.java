@@ -17,13 +17,12 @@ import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
+public class ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 	
 	private final ResourceLocation id;
 	final String group;
@@ -57,7 +56,7 @@ public class ShapelessGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraft
 
 		return i == this.ingredients.size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.ingredients) != null);
 	}
-
+	
 	@Override
 	public ItemStack assemble(GunsmithsBenchCraftingContainer craftinv) {
 		ItemStack resultStack = this.result.copy();

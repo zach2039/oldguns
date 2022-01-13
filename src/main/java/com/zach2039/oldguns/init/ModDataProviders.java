@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.data.OldGunsBlockStateProvider;
 import com.zach2039.oldguns.data.OldGunsBlockTagsProvider;
 import com.zach2039.oldguns.data.OldGunsItemModelProvider;
 import com.zach2039.oldguns.data.OldGunsItemTagsProvider;
@@ -36,6 +37,8 @@ public class ModDataProviders {
 			
 			final OldGunsItemModelProvider itemModelProvider = new OldGunsItemModelProvider(dataGenerator, existingFileHelper);
 			dataGenerator.addProvider(itemModelProvider);
+			
+			dataGenerator.addProvider(new OldGunsBlockStateProvider(dataGenerator, itemModelProvider.existingFileHelper));
 		}
 
 		if (event.includeServer()) {

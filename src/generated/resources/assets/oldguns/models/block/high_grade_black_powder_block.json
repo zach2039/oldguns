@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "oldguns:block/high_grade_black_powder_dry"
+  }
+}

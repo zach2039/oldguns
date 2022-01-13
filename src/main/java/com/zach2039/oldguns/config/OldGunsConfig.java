@@ -1,9 +1,13 @@
 package com.zach2039.oldguns.config;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang3.tuple.Pair;
 
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
+import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
 import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
 import net.minecraftforge.common.ForgeConfigSpec.IntValue;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -32,7 +36,7 @@ public class OldGunsConfig {
 			
 			recipeSettings = new RecipeSettings(
 					builder,
-					"Recipe enable and disable settings",
+					"Recipe enable and disable and other crafting settings",
 					"recipeSettings");
 			
 			lootSettings = new LootSettings(
@@ -54,6 +58,154 @@ public class OldGunsConfig {
 			builder.comment("Client-only settings")
 					.push("client");
 
+			builder.pop();
+		}
+	}
+	
+	public static class LootSettings {
+		public final BooleanValue allowExoticFirearmsInLoot;
+		public final BooleanValue allowAmmoInLoot;
+		
+		LootSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowExoticFirearmsInLoot = builder
+					.comment("Enable/disable exotic firearm spawning in dungeon loot")
+					.define("allowExoticFirearmsInLoot", true);
+			
+			allowAmmoInLoot = builder
+					.comment("Enable/disable firearm ammo spawning in dungeon loot")
+					.define("allowAmmoInLoot", true);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class RecipeSettings {
+		public final BooleanValue allowExoticFirearmCrafting;
+		public final BooleanValue allowFlintlockWeaponsCrafting;
+		public final BlackPowderManufactureSettings blackPowderManufactureSettings;
+		
+		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowExoticFirearmCrafting = builder
+					.comment("Enable/disable exotic firearm crafts which will force players to find and maintain exotic weapons via loot")
+					.define("allowExoticFirearmCrafting", false);
+			
+			allowFlintlockWeaponsCrafting = builder
+					.comment("Enable/disable flintlock firearm crafts")
+					.define("allowFlintlockWeaponsCrafting", true);
+			
+			blackPowderManufactureSettings = new BlackPowderManufactureSettings(
+					builder,
+					"Black Powder manufacture settings",
+					"blackPowderManufactureSettings");
+			
+			builder.pop();
+		}
+	}
+	
+	public static class BlackPowderManufactureSettings {
+		public final NiterProductionSettings niterProductionSettings;
+		public final CorningProcessSettings corningProcessSettings;
+		
+		BlackPowderManufactureSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			niterProductionSettings = new NiterProductionSettings(
+					builder,
+					"Nitre production settings",
+					"niterProductionSettings");
+			
+			corningProcessSettings = new CorningProcessSettings(
+					builder,
+					"Corning process settings",
+					"corningProcessSettings");
+			
+			builder.pop();
+		}
+	}
+	
+	public static class CorningProcessSettings {
+		public final DoubleValue wetBlackPowderSunDryingDifficulty;
+		
+		CorningProcessSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			wetBlackPowderSunDryingDifficulty = builder
+					.comment("How difficult it is for wet black powder cakes or blocks to dry in direct sunlight")
+					.comment("The chance for drying is 1 in (difficulty+1)*2, calculated when the block randomly ticks")
+					.defineInRange("wetBlackPowderCakeSunDryingDifficulty", 15f, 0f, Float.MAX_VALUE);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class NiterProductionSettings {
+		public final IntValue niterCrystalizationAmountMin;
+		public final IntValue niterCrystalizationAmountMax;
+		public final DoubleValue niterCrystalizationDifficulty;
+		public final IntValue niterBeddingAnimalRadius;
+		public final IntValue niterBeddingHarvestAmount;
+		public final DoubleValue niterBeddingDripstoneGenerationDifficulty;
+		public final DoubleValue niterBeddingRefuseGenerationDifficulty;
+		public final DoubleValue lowRefuseAnimalGeneratedAmount;
+		public final DoubleValue highRefuseAnimalGeneratedAmount;
+		public final ConfigValue<List<String>> lowRefuseAnimals;
+		public final ConfigValue<List<String>> highRefuseAnimals;
+		
+		NiterProductionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			niterCrystalizationAmountMin = builder
+					.comment("The min amount of Niter gained from crystalization of liquid niter")
+					.defineInRange("niterCrystalizationAmountMin", 8, 1, 64);
+			
+			niterCrystalizationAmountMax = builder
+					.comment("The max amount of Niter gained from crystalization of liquid niter")
+					.defineInRange("niterCrystalizationAmountMax", 16, 1, 64);
+			
+			niterCrystalizationDifficulty = builder
+					.comment("How difficult it is for niter to crystalize from a boiling cauldron of liquid niter")
+					.comment("The chance for crystalization is 1 in (difficulty+1)*2, calculated when the block randomly ticks")
+					.defineInRange("niterCrystalizationDifficulty", 3f, 0f, Float.MAX_VALUE);
+			
+			niterBeddingDripstoneGenerationDifficulty = builder
+					.comment("How difficult it is for niter bedding to advance through its 10 refuse levels when under dripping water dripstone")
+					.comment("The chance for advancement is 1 in (difficulty)*2, calculated when the block randomly ticks")
+					.defineInRange("niterBeddingDripstoneGenerationDifficulty", 15f, 0f, Float.MAX_VALUE);
+			
+			niterBeddingRefuseGenerationDifficulty = builder
+					.comment("How difficult it is for niter bedding to advance through its 10 refuse levels when under animals")
+					.comment("The chance for advancement is 1 in (difficulty/localRefuse+1)*2, calculated when the block randomly ticks")
+					.defineInRange("niterBeddingRefuseGenerationDifficulty", 30f, 0f, Float.MAX_VALUE);
+			
+			niterBeddingAnimalRadius = builder
+					.comment("The radius in which refuse-producting animals must be around the top of a niter bedding block for it to produce Nitrated Soil")
+					.comment("Set -1 to disable nitrated soil generation from animals")
+					.defineInRange("niterBeddingAnimalRadius", 3, -1, 32);
+			
+			niterBeddingHarvestAmount = builder
+					.comment("The amount of nitrated soil gained from right-clicking a ripe Niter Bedding with a shovel")
+					.defineInRange("niterBeddingAnimalRadius", 3, 1, 64);
+			
+			lowRefuseAnimalGeneratedAmount = builder
+					.comment("How much refuse a low refuse animal can contribute to nitrated soil production")
+					.defineInRange("lowRefuseAnimalGeneratedAmount", 1f, 0, Float.MAX_VALUE);
+			
+			highRefuseAnimalGeneratedAmount = builder
+					.comment("How much refuse a high refuse animal can contribute to nitrated soil production")
+					.defineInRange("highRefuseAnimalGeneratedAmount", 2f, 0, Float.MAX_VALUE);
+			
+			lowRefuseAnimals = builder
+					.comment("A list of animal entities that will produce a modest amount of refuse for nitrated soil production")
+					.define("lowRefuseAnimals", Arrays.asList(new String[] { "entity.minecraft.pig", "entity.minecraft.sheep", "entity.minecraft.llama" }));
+			
+			highRefuseAnimals = builder
+					.comment("A list of animal entities that will produce a large amount of refuse for nitrated soil production")
+					.define("highRefuseAnimals", Arrays.asList(new String[] { "entity.minecraft.horse", "entity.minecraft.cow" }));
+			
 			builder.pop();
 		}
 	}
@@ -471,45 +623,7 @@ public class OldGunsConfig {
 			builder.pop();
 		}
 	}
-	
-	public static class RecipeSettings {
-		public final BooleanValue allowExoticFirearmCrafting;
-		public final BooleanValue allowFlintlockWeaponsCrafting;
-		
-		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
-			builder.comment(comment).push(path);
-			
-			allowExoticFirearmCrafting = builder
-					.comment("Enable/disable exotic firearm crafts which will force players to find and maintain exotic weapons via loot")
-					.define("allowExoticFirearmCrafting", false);
-			
-			allowFlintlockWeaponsCrafting = builder
-					.comment("Enable/disable flintlock firearm crafts")
-					.define("allowFlintlockWeaponsCrafting", true);
-			
-			builder.pop();
-		}
-	}
-	
-	public static class LootSettings {
-		public final BooleanValue allowExoticFirearmsInLoot;
-		public final BooleanValue allowAmmoInLoot;
-		
-		LootSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
-			builder.comment(comment).push(path);
-			
-			allowExoticFirearmsInLoot = builder
-					.comment("Enable/disable exotic firearm spawning in dungeon loot")
-					.define("allowExoticFirearmsInLoot", true);
-			
-			allowAmmoInLoot = builder
-					.comment("Enable/disable firearm ammo spawning in dungeon loot")
-					.define("allowAmmoInLoot", true);
-			
-			builder.pop();
-		}
-	}
-	
+
 	public static class MuzzleloadingFirearmAttributes {
 		public final IntValue durability;
 		public final DoubleValue effectiveRangeModifier;

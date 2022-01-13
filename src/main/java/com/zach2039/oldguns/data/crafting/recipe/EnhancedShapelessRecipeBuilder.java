@@ -25,6 +25,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
+import net.minecraft.world.item.crafting.ShapelessRecipe.Serializer;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
@@ -52,6 +53,13 @@ public class EnhancedShapelessRecipeBuilder<
 		super(result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = serializer;
+	}
+
+	@SuppressWarnings("unchecked")
+	public EnhancedShapelessRecipeBuilder(ItemStack result, Serializer serializer) {
+		super(result.getItem(), result.getCount());
+		this.result = result;
+		this.serializer = (RecipeSerializer<? extends RECIPE>) serializer;
 	}
 
 	/**
@@ -188,7 +196,7 @@ public class EnhancedShapelessRecipeBuilder<
 			throw new RuntimeException("Failed to build Enhanced Shapeless Recipe " + id, e);
 		}
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	protected List<Ingredient> getIngredients() {
 		try {

@@ -1,0 +1,35 @@
+{
+  "type": "oldguns:mortar_and_pestle_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    },
+    {
+      "item": "oldguns:high_grade_black_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:high_grade_black_powder_block"
+  }
+}
