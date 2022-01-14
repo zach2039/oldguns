@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/matchlock_musketoon",
+  "textures": {
+    "layer0": "oldguns:item/matchlock_musketoon_empty"
+  }
+}

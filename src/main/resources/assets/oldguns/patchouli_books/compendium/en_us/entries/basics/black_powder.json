@@ -9,17 +9,8 @@
 			"text": "oldguns.page.basics.black_powder0"
 		},
 		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"heading": "oldguns.page.basics.black_powder1.heading",
-			"heading2": "oldguns.page.basics.black_powder1.heading2",
-			"recipes": [
-				"oldguns:medium_grade_black_powder_from_block",
-				"oldguns:medium_grade_black_powder"
-			],
-			"recipes2": [
-				"oldguns:high_grade_black_powder_from_cake",
-				"oldguns:high_grade_black_powder_from_block"
-			]
+			"type": "spotlight",
+			"item": "oldguns:medium_grade_black_powder"
 		}
 	]
 }

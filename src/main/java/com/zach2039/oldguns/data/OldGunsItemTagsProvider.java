@@ -31,6 +31,15 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		
 		// Firearms
 		tag(ModTags.Items.FIREARM)
+			.add(ModItems.MATCHLOCK_DERRINGER.get())
+			.add(ModItems.MATCHLOCK_PISTOL.get())
+			.add(ModItems.MATCHLOCK_ARQUEBUS.get())
+			.add(ModItems.MATCHLOCK_CALIVER.get())
+			.add(ModItems.MATCHLOCK_MUSKETOON.get())
+			.add(ModItems.MATCHLOCK_MUSKET.get())
+			.add(ModItems.MATCHLOCK_LONG_MUSKET.get())
+			.add(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.MATCHLOCK_BLUNDERBUSS.get())
 			.add(ModItems.FLINTLOCK_DERRINGER.get())
 			.add(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
 			.add(ModItems.FLINTLOCK_PISTOL.get())
@@ -46,6 +55,24 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
 			
 		// Ammo
+		tag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)
+			.add(ModItems.SMALL_STONE_MUSKET_BALL.get());
+	
+		tag(ModTags.Items.MEDIUM_ROCK_MUSKET_BALL)
+			.add(ModItems.MEDIUM_STONE_MUSKET_BALL.get());
+	
+		tag(ModTags.Items.LARGE_ROCK_MUSKET_BALL)
+			.add(ModItems.LARGE_STONE_MUSKET_BALL.get());
+	
+		tag(ModTags.Items.SMALL_ROCK_BIRDSHOT)
+			.add(ModItems.SMALL_STONE_BIRDSHOT.get());
+
+		tag(ModTags.Items.MEDIUM_ROCK_BIRDSHOT)
+			.add(ModItems.MEDIUM_STONE_BIRDSHOT.get());
+
+		tag(ModTags.Items.LARGE_ROCK_BIRDSHOT)
+			.add(ModItems.LARGE_STONE_BIRDSHOT.get());
+		
 		tag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
 			.add(ModItems.SMALL_LEAD_MUSKET_BALL.get())
 			.add(ModItems.SMALL_IRON_MUSKET_BALL.get());
@@ -117,8 +144,38 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get());
 		
 		// Parts
+		tag(ModTags.Items.MATCHLOCK_MECHANISM)
+			.add(ModItems.MATCHLOCK_MECHANISM.get());
+		
+		tag(ModTags.Items.WHEELLOCK_MECHANISM)
+			.add(ModItems.WHEELLOCK_MECHANISM.get());
+		
 		tag(ModTags.Items.FLINTLOCK_MECHANISM)
 			.add(ModItems.FLINTLOCK_MECHANISM.get());
+		
+		tag(ModTags.Items.CAPLOCK_MECHANISM)
+			.add(ModItems.CAPLOCK_MECHANISM.get());
+		
+		tag(ModTags.Items.TINY_ROCK_BARREL)
+			.add(ModItems.TINY_STONE_BARREL.get());		
+	
+		tag(ModTags.Items.SMALL_ROCK_BARREL)
+			.add(ModItems.SMALL_STONE_BARREL.get());
+
+		tag(ModTags.Items.MEDIUM_ROCK_BARREL)
+			.add(ModItems.MEDIUM_STONE_BARREL.get());
+	
+		tag(ModTags.Items.LARGE_ROCK_BARREL)
+			.add(ModItems.LARGE_STONE_BARREL.get());
+	
+		tag(ModTags.Items.SMALL_ROCK_FLARED_BARREL)
+			.add(ModItems.SMALL_STONE_FLARED_BARREL.get());
+
+		tag(ModTags.Items.MEDIUM_ROCK_FLARED_BARREL)
+			.add(ModItems.MEDIUM_STONE_FLARED_BARREL.get());
+		
+		tag(ModTags.Items.LARGE_ROCK_FLARED_BARREL)
+			.add(ModItems.LARGE_STONE_FLARED_BARREL.get());
 		
 		tag(ModTags.Items.TINY_METAL_BARREL)
 			.add(ModItems.TINY_BRASS_BARREL.get())

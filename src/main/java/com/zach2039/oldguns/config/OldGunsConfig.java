@@ -83,6 +83,8 @@ public class OldGunsConfig {
 	
 	public static class RecipeSettings {
 		public final BooleanValue allowExoticFirearmCrafting;
+		public final BooleanValue allowMatchlockWeaponsCrafting;
+		public final BooleanValue allowWheellockWeaponsCrafting;
 		public final BooleanValue allowFlintlockWeaponsCrafting;
 		public final BlackPowderManufactureSettings blackPowderManufactureSettings;
 		
@@ -92,6 +94,14 @@ public class OldGunsConfig {
 			allowExoticFirearmCrafting = builder
 					.comment("Enable/disable exotic firearm crafts which will force players to find and maintain exotic weapons via loot")
 					.define("allowExoticFirearmCrafting", false);
+			
+			allowMatchlockWeaponsCrafting = builder
+					.comment("Enable/disable matchlock firearm crafts")
+					.define("allowMatchlockWeaponsCrafting", true);
+			
+			allowWheellockWeaponsCrafting = builder
+					.comment("Enable/disable wheellock firearm crafts")
+					.define("allowWheellockWeaponsCrafting", true);
 			
 			allowFlintlockWeaponsCrafting = builder
 					.comment("Enable/disable flintlock firearm crafts")
@@ -219,6 +229,19 @@ public class OldGunsConfig {
 	public static class FirearmSettings {
 		public final BooleanValue hugeFirearmDebuffs;
 		
+		public final MuzzleloadingFirearmAttributes matchlock_derringer;
+		public final MuzzleloadingFirearmAttributes matchlock_pistol;
+		public final MuzzleloadingFirearmAttributes matchlock_arquebus;
+		
+		public final MuzzleloadingFirearmAttributes matchlock_caliver;
+		public final MuzzleloadingFirearmAttributes matchlock_musketoon;
+		
+		public final MuzzleloadingFirearmAttributes matchlock_musket;
+		public final MuzzleloadingFirearmAttributes matchlock_long_musket;	
+		
+		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss_pistol;
+		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss;
+		
 		public final MuzzleloadingFirearmAttributes flintlock_derringer;
 		public final MuzzleloadingFirearmAttributes flintlock_duckfoot_derringer;
 		public final MuzzleloadingFirearmAttributes flintlock_pistol;
@@ -235,6 +258,14 @@ public class OldGunsConfig {
 		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss_pistol;
 		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss;
 		public final MuzzleloadingFirearmAttributes flintlock_doublebarrel_blunderbuss;	
+		
+		public final FirearmAmmoAttributes small_stone_musket_ball;
+		public final FirearmAmmoAttributes medium_stone_musket_ball;
+		public final FirearmAmmoAttributes large_stone_musket_ball;
+		
+		public final FirearmAmmoAttributes small_stone_birdshot;
+		public final FirearmAmmoAttributes medium_stone_birdshot;
+		public final FirearmAmmoAttributes large_stone_birdshot;
 		
 		public final FirearmAmmoAttributes small_iron_musket_ball;
 		public final FirearmAmmoAttributes medium_iron_musket_ball;
@@ -267,6 +298,107 @@ public class OldGunsConfig {
 					.comment("Apply slowness effect while wielding huge firearms, like the nock gun")
 					.define("hugeFirearmDebuffs", true);
 			
+			// Matchlock
+			matchlock_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Derringers",
+					"matchlock_derringer",
+					8,
+					3.0f,
+					0.5f,
+					5.0f,
+					1.0f
+					);
+			
+			matchlock_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Pistols",
+					"matchlock_pistol",
+					12,
+					3.25f,
+					1.0f,
+					2.0f,
+					1.0f
+					);
+			
+			matchlock_arquebus = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Arquebus",
+					"matchlock_arquebus",
+					16,
+					3.5f,
+					1.2f,
+					1.8f,
+					1.0f
+					);
+			
+			matchlock_caliver = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Calivers",
+					"matchlock_caliver",
+					20,
+					3.75f,
+					1.2f,
+					1.6f,
+					1.0f
+					);
+			
+			matchlock_musketoon = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Musketoons",
+					"matchlock_musketoon",
+					24,
+					3.75f,
+					0.8f,
+					1.5f,
+					1.0f
+					);
+			
+			matchlock_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Muskets",
+					"matchlock_musket",
+					24,
+					4.0f,
+					1.0f,
+					1.2f,
+					1.0f
+					);
+			
+			matchlock_long_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Long Muskets",
+					"matchlock_long_musket",
+					28,
+					4.25f,
+					1.2f,
+					1.2f,
+					1.0f
+					);
+			
+			matchlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Blunderbuss Pistols",
+					"matchlock_blunderbuss_pistol",
+					8,
+					2.75f,
+					0.4f,
+					3.5f,
+					1.0f
+					);
+			
+			matchlock_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Blunderbusses",
+					"matchlock_blunderbuss",
+					24,
+					3.5f,
+					1.0f,
+					1.7f,
+					1.0f
+					);
+			
+			// Flintlock
 			flintlock_derringer = new MuzzleloadingFirearmAttributes(
 					builder,
 					"Attributes of Flintlock Derringers",
@@ -410,6 +542,80 @@ public class OldGunsConfig {
 					0.8f
 					);
 			
+			// Stone ammo
+			small_stone_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Stone Musket Ball Ammo",
+					"small_stone_musket_ball",
+					8,
+					1,
+					10.0f,
+					0.3f,
+					15.0f,
+					1.0f
+					);
+			
+			medium_stone_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Stone Musket Ball Ammo",
+					"medium_stone_musket_ball",
+					6,
+					1,
+					13.0f,
+					0.4f,
+					30.0f,
+					1.0f
+					);
+			
+			large_stone_musket_ball = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Stone Musket Ball Ammo",
+					"large_stone_musket_ball",
+					4,
+					1,
+					16.0f,
+					0.5f,
+					55.0f,
+					1.0f
+					);
+			
+			small_stone_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Small Stone Birdshot Ammo",
+					"small_stone_birdshot",
+					8,
+					6,
+					2.0f,
+					0.1f,
+					5.0f,
+					3.0f
+					);
+			
+			medium_stone_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Medium Stone Birdshot Ammo",
+					"medium_stone_birdshot",
+					6,
+					8,
+					2.0f,
+					0.1f,
+					5.0f,
+					3.0f
+					);
+			
+			large_stone_birdshot = new FirearmAmmoAttributes(
+					builder,
+					"Attributes of Large Stone Birdshot Ammo",
+					"large_stone_birdshot",
+					4,
+					10,
+					2.0f,
+					0.1f,
+					5.0f,
+					3.0f
+					);
+			
+			// Iron ammo
 			small_iron_musket_ball = new FirearmAmmoAttributes(
 					builder,
 					"Attributes of Small Iron Musket Ball Ammo",

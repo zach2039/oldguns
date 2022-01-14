@@ -8,18 +8,24 @@ import com.zach2039.oldguns.world.item.ammo.LargeIronMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.LargeLeadBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.LargeLeadBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.LargeLeadMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.LargeStoneBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.LargeStoneMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.MediumIronBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.MediumIronBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.MediumIronMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.MediumLeadBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.MediumLeadBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.MediumLeadMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.MediumStoneBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.MediumStoneMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallIronMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.SmallLeadBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallLeadBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallLeadMusketBallItem;
+import com.zach2039.oldguns.world.item.ammo.SmallStoneBirdshotItem;
+import com.zach2039.oldguns.world.item.ammo.SmallStoneMusketBallItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockArquebusItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockBlunderbussItem;
@@ -34,6 +40,15 @@ import com.zach2039.oldguns.world.item.firearm.FlintlockMusketoonItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockNockGunItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockPepperboxPistolItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockPistolItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockArquebusItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockBlunderbussItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockBlunderbussPistolItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockCaliverItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockDerringerItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockLongMusketItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockMusketItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockMusketoonItem;
+import com.zach2039.oldguns.world.item.firearm.MatchlockPistolItem;
 import com.zach2039.oldguns.world.item.material.BrassIngotItem;
 import com.zach2039.oldguns.world.item.material.BrassNuggetItem;
 import com.zach2039.oldguns.world.item.material.HighGradeBlackPowderItem;
@@ -47,11 +62,14 @@ import com.zach2039.oldguns.world.item.material.NiterItem;
 import com.zach2039.oldguns.world.item.material.NitrateSoilItem;
 import com.zach2039.oldguns.world.item.material.SulfurItem;
 import com.zach2039.oldguns.world.item.part.CaplockMechanismItem;
+import com.zach2039.oldguns.world.item.part.FirearmPartItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronFlaredBarrelItem;
+import com.zach2039.oldguns.world.item.part.LargeStoneBarrelItem;
+import com.zach2039.oldguns.world.item.part.LargeStoneFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.MatchlockMechanismItem;
@@ -59,16 +77,21 @@ import com.zach2039.oldguns.world.item.part.MediumBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumIronFlaredBarrelItem;
+import com.zach2039.oldguns.world.item.part.MediumStoneBarrelItem;
+import com.zach2039.oldguns.world.item.part.MediumStoneFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.MediumWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.SmallBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallIronFlaredBarrelItem;
+import com.zach2039.oldguns.world.item.part.SmallStoneBarrelItem;
+import com.zach2039.oldguns.world.item.part.SmallStoneFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.SmallWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.TinyBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyIronBarrelItem;
+import com.zach2039.oldguns.world.item.part.TinyStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.WheellockMechanismItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
@@ -95,6 +118,36 @@ public class ModItems {
 	private static boolean isInitialized;
 	
 	// Firearms
+	// Matchlock
+	public static final RegistryObject<FirearmItem> MATCHLOCK_DERRINGER = ITEMS.register("matchlock_derringer",
+			() -> new MatchlockDerringerItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_PISTOL = ITEMS.register("matchlock_pistol",
+			() -> new MatchlockPistolItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_ARQUEBUS = ITEMS.register("matchlock_arquebus",
+			() -> new MatchlockArquebusItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_CALIVER = ITEMS.register("matchlock_caliver",
+			() -> new MatchlockCaliverItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_MUSKETOON = ITEMS.register("matchlock_musketoon",
+			() -> new MatchlockMusketoonItem()
+		);
+	public static final RegistryObject<FirearmItem>MATCHLOCK_MUSKET = ITEMS.register("matchlock_musket",
+			() -> new MatchlockMusketItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_LONG_MUSKET = ITEMS.register("matchlock_long_musket",
+			() -> new MatchlockLongMusketItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_BLUNDERBUSS_PISTOL = ITEMS.register("matchlock_blunderbuss_pistol",
+			() -> new MatchlockBlunderbussPistolItem()
+		);
+	public static final RegistryObject<FirearmItem> MATCHLOCK_BLUNDERBUSS = ITEMS.register("matchlock_blunderbuss",
+			() -> new MatchlockBlunderbussItem()
+		);
+	
+	// Flintlock
 	public static final RegistryObject<FirearmItem> FLINTLOCK_DERRINGER = ITEMS.register("flintlock_derringer",
 			() -> new FlintlockDerringerItem()
 		);
@@ -136,6 +189,27 @@ public class ModItems {
 		);
 	
 	// Ammo
+	// Stone
+	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_MUSKET_BALL = ITEMS.register("small_stone_musket_ball",
+			() -> new SmallStoneMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_MUSKET_BALL = ITEMS.register("medium_stone_musket_ball",
+			() -> new MediumStoneMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_MUSKET_BALL = ITEMS.register("large_stone_musket_ball",
+			() -> new LargeStoneMusketBallItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_BIRDSHOT = ITEMS.register("small_stone_birdshot",
+			() -> new SmallStoneBirdshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_BIRDSHOT = ITEMS.register("medium_stone_birdshot",
+			() -> new MediumStoneBirdshotItem()
+		);
+	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_BIRDSHOT = ITEMS.register("large_stone_birdshot",
+			() -> new LargeStoneBirdshotItem()
+		);
+	
+	// Iron
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL = ITEMS.register("small_iron_musket_ball",
 			() -> new SmallIronMusketBallItem()
 		);
@@ -164,6 +238,7 @@ public class ModItems {
 			() -> new LargeIronBirdshotItem()
 		);
 	
+	// Lead
 	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL = ITEMS.register("small_lead_musket_ball",
 			() -> new SmallLeadMusketBallItem()
 		);
@@ -193,82 +268,105 @@ public class ModItems {
 		);
 	
 	// Parts
-	public static final RegistryObject<MatchlockMechanismItem> MATCHLOCK_MECHANISM = ITEMS.register("matchlock_mechanism",
+	public static final RegistryObject<FirearmPartItem> MATCHLOCK_MECHANISM = ITEMS.register("matchlock_mechanism",
 			() -> new MatchlockMechanismItem()
 		);
-	public static final RegistryObject<WheellockMechanismItem> WHEELLOCK_MECHANISM = ITEMS.register("wheellock_mechanism",
+	public static final RegistryObject<FirearmPartItem> WHEELLOCK_MECHANISM = ITEMS.register("wheellock_mechanism",
 			() -> new WheellockMechanismItem()
 		);
-	public static final RegistryObject<FlintlockMechanismItem> FLINTLOCK_MECHANISM = ITEMS.register("flintlock_mechanism",
+	public static final RegistryObject<FirearmPartItem> FLINTLOCK_MECHANISM = ITEMS.register("flintlock_mechanism",
 			() -> new FlintlockMechanismItem()
 		);
-	public static final RegistryObject<CaplockMechanismItem> CAPLOCK_MECHANISM = ITEMS.register("caplock_mechanism",
+	public static final RegistryObject<FirearmPartItem> CAPLOCK_MECHANISM = ITEMS.register("caplock_mechanism",
 			() -> new CaplockMechanismItem()
 		);
 	
-	public static final RegistryObject<SmallWoodenHandleItem> SMALL_WOODEN_HANDLE = ITEMS.register("small_wooden_handle",
+	public static final RegistryObject<FirearmPartItem> SMALL_WOODEN_HANDLE = ITEMS.register("small_wooden_handle",
 			() -> new SmallWoodenHandleItem()
 		);
-	public static final RegistryObject<MediumWoodenHandleItem> MEDIUM_WOODEN_HANDLE = ITEMS.register("medium_wooden_handle",
+	public static final RegistryObject<FirearmPartItem> MEDIUM_WOODEN_HANDLE = ITEMS.register("medium_wooden_handle",
 			() -> new MediumWoodenHandleItem()
 		);
-	public static final RegistryObject<LargeWoodenHandleItem> LARGE_WOODEN_HANDLE = ITEMS.register("large_wooden_handle",
+	public static final RegistryObject<FirearmPartItem> LARGE_WOODEN_HANDLE = ITEMS.register("large_wooden_handle",
 			() -> new LargeWoodenHandleItem()
 		);
 	
-	public static final RegistryObject<SmallWoodenStockItem> SMALL_WOODEN_STOCK = ITEMS.register("small_wooden_stock",
+	public static final RegistryObject<FirearmPartItem> SMALL_WOODEN_STOCK = ITEMS.register("small_wooden_stock",
 			() -> new SmallWoodenStockItem()
 		);
-	public static final RegistryObject<MediumWoodenStockItem> MEDIUM_WOODEN_STOCK = ITEMS.register("medium_wooden_stock",
+	public static final RegistryObject<FirearmPartItem> MEDIUM_WOODEN_STOCK = ITEMS.register("medium_wooden_stock",
 			() -> new MediumWoodenStockItem()
 		);
-	public static final RegistryObject<LargeWoodenStockItem> LARGE_WOODEN_STOCK = ITEMS.register("large_wooden_stock",
+	public static final RegistryObject<FirearmPartItem> LARGE_WOODEN_STOCK = ITEMS.register("large_wooden_stock",
 			() -> new LargeWoodenStockItem()
 		);
 	
-	public static final RegistryObject<TinyIronBarrelItem> TINY_IRON_BARREL = ITEMS.register("tiny_iron_barrel",
+	public static final RegistryObject<FirearmPartItem> TINY_STONE_BARREL = ITEMS.register("tiny_stone_barrel",
+			() -> new TinyStoneBarrelItem()
+		);
+	public static final RegistryObject<FirearmPartItem> SMALL_STONE_BARREL = ITEMS.register("small_stone_barrel",
+			() -> new SmallStoneBarrelItem()
+		);
+	public static final RegistryObject<FirearmPartItem> MEDIUM_STONE_BARREL = ITEMS.register("medium_stone_barrel",
+			() -> new MediumStoneBarrelItem()
+		);
+	public static final RegistryObject<FirearmPartItem> LARGE_STONE_BARREL = ITEMS.register("large_stone_barrel",
+			() -> new LargeStoneBarrelItem()
+		);
+	
+	public static final RegistryObject<FirearmPartItem> TINY_IRON_BARREL = ITEMS.register("tiny_iron_barrel",
 			() -> new TinyIronBarrelItem()
 		);
-	public static final RegistryObject<SmallIronBarrelItem> SMALL_IRON_BARREL = ITEMS.register("small_iron_barrel",
+	public static final RegistryObject<FirearmPartItem> SMALL_IRON_BARREL = ITEMS.register("small_iron_barrel",
 			() -> new SmallIronBarrelItem()
 		);
-	public static final RegistryObject<MediumIronBarrelItem> MEDIUM_IRON_BARREL = ITEMS.register("medium_iron_barrel",
+	public static final RegistryObject<FirearmPartItem> MEDIUM_IRON_BARREL = ITEMS.register("medium_iron_barrel",
 			() -> new MediumIronBarrelItem()
 		);
-	public static final RegistryObject<LargeIronBarrelItem> LARGE_IRON_BARREL = ITEMS.register("large_iron_barrel",
+	public static final RegistryObject<FirearmPartItem> LARGE_IRON_BARREL = ITEMS.register("large_iron_barrel",
 			() -> new LargeIronBarrelItem()
 		);
 	
-	public static final RegistryObject<TinyBrassBarrelItem> TINY_BRASS_BARREL = ITEMS.register("tiny_brass_barrel",
+	public static final RegistryObject<FirearmPartItem> TINY_BRASS_BARREL = ITEMS.register("tiny_brass_barrel",
 			() -> new TinyBrassBarrelItem()
 		);
-	public static final RegistryObject<SmallBrassBarrelItem> SMALL_BRASS_BARREL = ITEMS.register("small_brass_barrel",
+	public static final RegistryObject<FirearmPartItem> SMALL_BRASS_BARREL = ITEMS.register("small_brass_barrel",
 			() -> new SmallBrassBarrelItem()
 		);
-	public static final RegistryObject<MediumBrassBarrelItem> MEDIUM_BRASS_BARREL = ITEMS.register("medium_brass_barrel",
+	public static final RegistryObject<FirearmPartItem> MEDIUM_BRASS_BARREL = ITEMS.register("medium_brass_barrel",
 			() -> new MediumBrassBarrelItem()
 		);
-	public static final RegistryObject<LargeBrassBarrelItem> LARGE_BRASS_BARREL = ITEMS.register("large_brass_barrel",
+	public static final RegistryObject<FirearmPartItem> LARGE_BRASS_BARREL = ITEMS.register("large_brass_barrel",
 			() -> new LargeBrassBarrelItem()
 		);
 	
-	public static final RegistryObject<SmallIronFlaredBarrelItem> SMALL_IRON_FLARED_BARREL = ITEMS.register("small_iron_flared_barrel",
+	public static final RegistryObject<FirearmPartItem> SMALL_STONE_FLARED_BARREL = ITEMS.register("small_stone_flared_barrel",
+			() -> new SmallStoneFlaredBarrelItem()
+		);
+	public static final RegistryObject<FirearmPartItem> MEDIUM_STONE_FLARED_BARREL = ITEMS.register("medium_stone_flared_barrel",
+			() -> new MediumStoneFlaredBarrelItem()
+		);
+	public static final RegistryObject<FirearmPartItem> LARGE_STONE_FLARED_BARREL = ITEMS.register("large_stone_flared_barrel",
+			() -> new LargeStoneFlaredBarrelItem()
+		);
+	
+	public static final RegistryObject<FirearmPartItem> SMALL_IRON_FLARED_BARREL = ITEMS.register("small_iron_flared_barrel",
 			() -> new SmallIronFlaredBarrelItem()
 		);
-	public static final RegistryObject<MediumIronFlaredBarrelItem> MEDIUM_IRON_FLARED_BARREL = ITEMS.register("medium_iron_flared_barrel",
+	public static final RegistryObject<FirearmPartItem> MEDIUM_IRON_FLARED_BARREL = ITEMS.register("medium_iron_flared_barrel",
 			() -> new MediumIronFlaredBarrelItem()
 		);
-	public static final RegistryObject<LargeIronFlaredBarrelItem> LARGE_IRON_FLARED_BARREL = ITEMS.register("large_iron_flared_barrel",
+	public static final RegistryObject<FirearmPartItem> LARGE_IRON_FLARED_BARREL = ITEMS.register("large_iron_flared_barrel",
 			() -> new LargeIronFlaredBarrelItem()
 		);
 	
-	public static final RegistryObject<SmallBrassFlaredBarrelItem> SMALL_BRASS_FLARED_BARREL = ITEMS.register("small_brass_flared_barrel",
+	public static final RegistryObject<FirearmPartItem> SMALL_BRASS_FLARED_BARREL = ITEMS.register("small_brass_flared_barrel",
 			() -> new SmallBrassFlaredBarrelItem()
 		);
-	public static final RegistryObject<MediumBrassFlaredBarrelItem> MEDIUM_BRASS_FLARED_BARREL = ITEMS.register("medium_brass_flared_barrel",
+	public static final RegistryObject<FirearmPartItem> MEDIUM_BRASS_FLARED_BARREL = ITEMS.register("medium_brass_flared_barrel",
 			() -> new MediumBrassFlaredBarrelItem()
 		);
-	public static final RegistryObject<LargeBrassFlaredBarrelItem> LARGE_BRASS_FLARED_BARREL = ITEMS.register("large_brass_flared_barrel",
+	public static final RegistryObject<FirearmPartItem> LARGE_BRASS_FLARED_BARREL = ITEMS.register("large_brass_flared_barrel",
 			() -> new LargeBrassFlaredBarrelItem()
 		);
 	

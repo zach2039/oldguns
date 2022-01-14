@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:matchlock_arquebus"
+    ]
+  },
+  "criteria": {
+    "has_small_rock_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_rock_barrel"
+          }
+        ]
+      }
+    },
+    "has_matchlock_mechanism": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:matchlock_mechanism"
+          }
+        ]
+      }
+    },
+    "has_large_handle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_handle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:matchlock_arquebus"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_small_rock_barrel",
+      "has_matchlock_mechanism",
+      "has_large_handle",
+      "has_the_recipe"
+    ]
+  ]
+}

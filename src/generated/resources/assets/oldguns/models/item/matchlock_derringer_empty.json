@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/matchlock_derringer",
+  "textures": {
+    "layer0": "oldguns:item/matchlock_derringer_empty"
+  }
+}

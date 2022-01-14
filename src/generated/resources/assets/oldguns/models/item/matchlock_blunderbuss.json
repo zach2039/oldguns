@@ -1,0 +1,14 @@
+{
+  "parent": "oldguns:item/simple_model",
+  "textures": {
+    "layer0": "oldguns:item/matchlock_blunderbuss"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oldguns:firearm_empty": 1.0
+      },
+      "model": "oldguns:item/matchlock_blunderbuss_empty"
+    }
+  ]
+}

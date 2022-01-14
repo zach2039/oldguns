@@ -1,0 +1,18 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "ingredients": [
+    {
+      "tag": "forge:stone"
+    },
+    {
+      "item": "minecraft:flint"
+    },
+    {
+      "item": "minecraft:flint"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_stone_musket_ball",
+    "count": 2
+  }
+}

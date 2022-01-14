@@ -3,6 +3,8 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftExoticItemsCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftFlintlockWeaponsCondition;
+import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftMatchlockWeaponsCondition;
+import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftWheellockWeaponsCondition;
 
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
@@ -16,6 +18,8 @@ public class ModConditions {
 	@SubscribeEvent
 	public static void registerConditions(final RegistryEvent.Register<RecipeSerializer<?>> event) {
 		CraftingHelper.register(CanCraftExoticItemsCondition.Serializer.INSTANCE);
+		CraftingHelper.register(CanCraftMatchlockWeaponsCondition.Serializer.INSTANCE);
+		CraftingHelper.register(CanCraftWheellockWeaponsCondition.Serializer.INSTANCE);
 		CraftingHelper.register(CanCraftFlintlockWeaponsCondition.Serializer.INSTANCE);
 	}
 }

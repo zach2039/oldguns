@@ -9,9 +9,8 @@
 			"text": "oldguns.page.basics.mortar_and_pestle0"
 		},
 		{
-			"type": "oldguns:gunsmiths_bench",
-			"text": "oldguns.page.basics.mortar_and_pestle1",
-			"recipe": "oldguns:mortar_and_pestle"
+			"type": "spotlight",
+			"item": "oldguns:mortar_and_pestle"
 		}
 	]
 }

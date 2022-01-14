@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:matchlock_blunderbuss"
+    ]
+  },
+  "criteria": {
+    "has_large_rock_flared_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_rock_flared_barrel"
+          }
+        ]
+      }
+    },
+    "has_matchlock_mechanism": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:matchlock_mechanism"
+          }
+        ]
+      }
+    },
+    "has_large_stock": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_stock"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:matchlock_blunderbuss"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_large_rock_flared_barrel",
+      "has_matchlock_mechanism",
+      "has_large_stock",
+      "has_the_recipe"
+    ]
+  ]
+}

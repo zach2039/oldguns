@@ -27,9 +27,7 @@ public class OldGunsCompendiumLang {
 			public static final String ENTRY = "Gunsmith's Bench";
 			
 			public static final String PAGE0 = "To create firearms, tools, and some materials, a Gunsmith's Bench must be used. $(br)$(br)"
-					+ "The Gunsmith's Bench can be crafted as follows.";
-			
-			public static final String PAGE1 = "The Gunsmith's Bench can also create crafting tools like the $(l:basics/mortar_and_pestle)Mortar and Pestle$(/l).";
+					+ "The Gunsmith's Bench can also create crafting tools like the $(l:basics/mortar_and_pestle)Mortar and Pestle$(/l).";
 		
 		}
 		
@@ -37,10 +35,9 @@ public class OldGunsCompendiumLang {
 			
 			public static final String ENTRY = "Mortar and Pestle";
 			
-			public static final String PAGE0 = "The Mortar and Pestle is a crafting tool which grinds reagents into various dusts.";
-			
-			public static final String PAGE1 = "The dusts produced are used in the production of $(l:basics/black_powder)Black Powder$(/l).";
-		
+			public static final String PAGE0 = "The Mortar and Pestle is a crafting tool which grinds reagents into various dusts.$(br)$(br)"
+					+ "The dusts produced are used in the production of $(l:basics/black_powder)Black Powder$(/l).";
+
 		}
 		
 		public static class BlackPowder {
@@ -48,12 +45,30 @@ public class OldGunsCompendiumLang {
 			public static final String ENTRY = "Black Powder";
 			
 			public static final String PAGE0 = "Black Powder is an important alchemical output used in $(l:basics/firearms)Firearms$(/l), $(l:basics/artillery)Artillery$(/l), and other explosive tools.$(br)$(br)"
-					+ "Black Powder has grades: low, medium, and high. Normal gunpowder is low grade. Firearms and artillery can require certain grades.$(br)$(br)"
+					+ "Black Powder has grades of low, medium, and high. Normal gunpowder is low grade. Firearms and artillery can require certain grades.$(br)$(br)"
 					+ "See $(l:black_powder/types)Black Powder Production$(/l) for more details.";
+	
+		}
+		
+		public static class Firearms {
 			
-			public static final String PAGE1_HEADING = "Medium Grade";
-			public static final String PAGE1_HEADING2 = "High Grade";
+			public static final String ENTRY = "Firearms";
+			
+			public static final String PAGE0 = "Firearms are ranged, black powder weapons that have high damage and long reload time.$(br)$(br)"
+					+ "Various types of firearm mechanisms exist: Matchlock, Wheellock, Flintlock, Caplock; these types have increasing "
+					+ "damage and reliability, as well as variants that alter shot spread, ammo capacity, and other attributes.";
 
+		}
+		
+		public static class Artillery {
+			
+			public static final String ENTRY = "Artillery";
+			
+			public static final String PAGE0 = "Artillery includes various gun and missle emplacements that are used to lay siege "
+					+ "to fortifications or deal massive damage to groups of mobs or players.$(br)$(br)"
+					+ "While more suited to medium to large-scale engagements, artillery pieces can still find use as home"
+					+ " defense for the more adventurous artilleryman.";
+			
 		}
 	}
 	

@@ -1,0 +1,54 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:matchlock_derringer"
+    ]
+  },
+  "criteria": {
+    "has_tiny_rock_barrel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:tiny_rock_barrel"
+          }
+        ]
+      }
+    },
+    "has_matchlock_mechanism": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:matchlock_mechanism"
+          }
+        ]
+      }
+    },
+    "has_small_handle": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_handle"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:matchlock_derringer"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_tiny_rock_barrel",
+      "has_matchlock_mechanism",
+      "has_small_handle",
+      "has_the_recipe"
+    ]
+  ]
+}

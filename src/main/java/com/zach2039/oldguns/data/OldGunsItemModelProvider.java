@@ -106,6 +106,16 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_DERRINGER.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_ARQUEBUS.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_CALIVER.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_MUSKETOON.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_LONG_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.MATCHLOCK_BLUNDERBUSS.get());
+		
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_PISTOL.get());
@@ -119,6 +129,14 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_MUSKET_BALL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_STONE_MUSKET_BALL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_MUSKET_BALL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_BIRDSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_STONE_BIRDSHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_BIRDSHOT.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_MUSKET_BALL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
@@ -157,6 +175,11 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_STOCK.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_WOODEN_STOCK.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.TINY_STONE_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_STONE_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_BARREL.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.TINY_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BARREL.get());
@@ -167,8 +190,11 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_BRASS_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_BRASS_BARREL.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_STONE_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_FLARED_BARREL.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_FLARED_BARREL.get());
-		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_FLARED_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_FLARED_BARREL.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_BRASS_FLARED_BARREL.get());

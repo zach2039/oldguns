@@ -1,0 +1,20 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:matchlock_derringer"
+    },
+    {
+      "tag": "oldguns:small_rock_musket_ball"
+    },
+    {
+      "tag": "oldguns:matchlock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:matchlock_derringer",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

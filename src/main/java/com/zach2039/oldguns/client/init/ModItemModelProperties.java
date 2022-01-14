@@ -15,6 +15,16 @@ public class ModItemModelProperties {
 	@SubscribeEvent
 	public static void registerItemModelProperties(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_DERRINGER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_ARQUEBUS.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_CALIVER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_MUSKETOON.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_LONG_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_BLUNDERBUSS.get());
+			
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DERRINGER.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_PISTOL.get());

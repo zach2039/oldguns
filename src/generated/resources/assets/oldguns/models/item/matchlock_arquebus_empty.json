@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/matchlock_arquebus",
+  "textures": {
+    "layer0": "oldguns:item/matchlock_arquebus_empty"
+  }
+}

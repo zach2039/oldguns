@@ -1,6 +1,15 @@
 {
   "replace": false,
   "values": [
+    "oldguns:matchlock_derringer",
+    "oldguns:matchlock_pistol",
+    "oldguns:matchlock_arquebus",
+    "oldguns:matchlock_caliver",
+    "oldguns:matchlock_musketoon",
+    "oldguns:matchlock_musket",
+    "oldguns:matchlock_long_musket",
+    "oldguns:matchlock_blunderbuss_pistol",
+    "oldguns:matchlock_blunderbuss",
     "oldguns:flintlock_derringer",
     "oldguns:flintlock_duckfoot_derringer",
     "oldguns:flintlock_pistol",

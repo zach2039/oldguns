@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:matchlock_caliver"
+    },
+    {
+      "tag": "oldguns:medium_rock_musket_ball"
+    },
+    {
+      "tag": "oldguns:matchlock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:matchlock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:matchlock_caliver",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

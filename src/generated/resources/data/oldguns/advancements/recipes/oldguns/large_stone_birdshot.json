@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:large_stone_birdshot"
+    ]
+  },
+  "criteria": {
+    "has_gravel": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:gravel"
+          }
+        ]
+      }
+    },
+    "has_paper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:paper"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:large_stone_birdshot"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_gravel",
+      "has_paper",
+      "has_the_recipe"
+    ]
+  ]
+}

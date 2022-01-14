@@ -31,6 +31,14 @@ public class ModTags {
 		public static final Tag.Named<Item> FIREARM = tag("firearm");
 		
 		// Ammo
+		public static final Tag.Named<Item> SMALL_ROCK_MUSKET_BALL = tag("small_rock_musket_ball");
+		public static final Tag.Named<Item> MEDIUM_ROCK_MUSKET_BALL = tag("medium_rock_musket_ball");
+		public static final Tag.Named<Item> LARGE_ROCK_MUSKET_BALL = tag("large_rock_musket_ball");
+		
+		public static final Tag.Named<Item> SMALL_ROCK_BIRDSHOT = tag("small_rock_birdshot");
+		public static final Tag.Named<Item> MEDIUM_ROCK_BIRDSHOT = tag("medium_rock_birdshot");
+		public static final Tag.Named<Item> LARGE_ROCK_BIRDSHOT = tag("large_rock_birdshot");
+		
 		public static final Tag.Named<Item> SMALL_METAL_MUSKET_BALL = tag("small_metal_musket_ball");
 		public static final Tag.Named<Item> MEDIUM_METAL_MUSKET_BALL = tag("medium_metal_musket_ball");
 		public static final Tag.Named<Item> LARGE_METAL_MUSKET_BALL = tag("large_metal_musket_ball");
@@ -55,7 +63,19 @@ public class ModTags {
 		public static final Tag.Named<Item> NEEDLEFIRE_SUITABLE_POWDER = tag("needlefire_suitable_powder");
 		
 		// Parts
+		public static final Tag.Named<Item> MATCHLOCK_MECHANISM = tag("matchlock_mechanism");
+		public static final Tag.Named<Item> WHEELLOCK_MECHANISM = tag("wheellock_mechanism");
 		public static final Tag.Named<Item> FLINTLOCK_MECHANISM = tag("flintlock_mechanism");
+		public static final Tag.Named<Item> CAPLOCK_MECHANISM = tag("caplock_mechanism");
+		
+		public static final Tag.Named<Item> TINY_ROCK_BARREL = tag("tiny_rock_barrel");
+		public static final Tag.Named<Item> SMALL_ROCK_BARREL = tag("small_rock_barrel");
+		public static final Tag.Named<Item> MEDIUM_ROCK_BARREL = tag("medium_rock_barrel");
+		public static final Tag.Named<Item> LARGE_ROCK_BARREL = tag("large_rock_barrel");
+		
+		public static final Tag.Named<Item> SMALL_ROCK_FLARED_BARREL = tag("small_rock_flared_barrel");
+		public static final Tag.Named<Item> MEDIUM_ROCK_FLARED_BARREL = tag("medium_rock_flared_barrel");
+		public static final Tag.Named<Item> LARGE_ROCK_FLARED_BARREL = tag("large_rock_flared_barrel");
 		
 		public static final Tag.Named<Item> TINY_METAL_BARREL = tag("tiny_metal_barrel");
 		public static final Tag.Named<Item> SMALL_METAL_BARREL = tag("small_metal_barrel");

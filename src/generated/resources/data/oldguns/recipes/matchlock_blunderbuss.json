@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_matchlock_weapons"
+    }
+  ],
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:large_rock_flared_barrel"
+    },
+    "M": {
+      "tag": "oldguns:matchlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:large_stock"
+    }
+  },
+  "result": {
+    "item": "oldguns:matchlock_blunderbuss",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

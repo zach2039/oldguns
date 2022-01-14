@@ -1,0 +1,16 @@
+{
+	"name": "oldguns.entry.basics.firearms",
+	"category": "oldguns:basics",
+	"icon": "oldguns:matchlock_derringer",
+	"sortnum": 4,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.basics.firearms0"
+		},
+		{
+			"type": "spotlight",
+			"item": "oldguns:matchlock_derringer"
+		}
+	]
+}

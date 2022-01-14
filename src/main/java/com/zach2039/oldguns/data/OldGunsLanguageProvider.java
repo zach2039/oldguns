@@ -82,6 +82,16 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addItems() {
+		addItem(ModItems.MATCHLOCK_DERRINGER, "Matchlock Derringer");
+		addItem(ModItems.MATCHLOCK_PISTOL, "Matchlock Pistol");
+		addItem(ModItems.MATCHLOCK_ARQUEBUS, "Matchlock Arquebus");
+		addItem(ModItems.MATCHLOCK_CALIVER, "Matchlock Caliver");
+		addItem(ModItems.MATCHLOCK_MUSKETOON, "Matchlock Musketoon");
+		addItem(ModItems.MATCHLOCK_MUSKET, "Matchlock Musket");
+		addItem(ModItems.MATCHLOCK_LONG_MUSKET, "Matchlock Long Musket");
+		addItem(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL, "Matchlock Blunderbuss Pistol");
+		addItem(ModItems.MATCHLOCK_BLUNDERBUSS, "Matchlock Blunderbuss");
+		
 		addItem(ModItems.FLINTLOCK_DERRINGER, "Flintlock Derringer");
 		addItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER, "Flintlock Duckfoot Derringer");
 		addItem(ModItems.FLINTLOCK_PISTOL, "Flintlock Pistol");
@@ -95,6 +105,14 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL, "Flintlock Blunderbuss Pistol");
 		addItem(ModItems.FLINTLOCK_BLUNDERBUSS, "Flintlock Blunderbuss");
 		addItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS, "Flintlock Doublebarrel Blunderbuss");
+	
+		addItem(ModItems.SMALL_STONE_MUSKET_BALL, "Small Stone Musket Ball");
+		addItem(ModItems.MEDIUM_STONE_MUSKET_BALL, "Medium Stone Musket Ball");
+		addItem(ModItems.LARGE_STONE_MUSKET_BALL, "Large Stone Musket Ball");
+		
+		addItem(ModItems.SMALL_STONE_BIRDSHOT, "Small Stone Birdshot");
+		addItem(ModItems.MEDIUM_STONE_BIRDSHOT, "Medium Stone Birdshot");
+		addItem(ModItems.LARGE_STONE_BIRDSHOT, "Large Stone Birdshot");
 		
 		addItem(ModItems.SMALL_IRON_MUSKET_BALL, "Small Iron Musket Ball");
 		addItem(ModItems.MEDIUM_IRON_MUSKET_BALL, "Medium Iron Musket Ball");
@@ -120,7 +138,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MEDIUM_LEAD_BIRDSHOT, "Medium Lead Birdshot");
 		addItem(ModItems.LARGE_LEAD_BIRDSHOT, "Large Lead Birdshot");
 		
+		addItem(ModItems.MATCHLOCK_MECHANISM, "Matchlock Mechanism");
+		addItem(ModItems.WHEELLOCK_MECHANISM, "Wheellock Mechanism");
 		addItem(ModItems.FLINTLOCK_MECHANISM, "Flintlock Mechanism");
+		addItem(ModItems.CAPLOCK_MECHANISM, "Caplock Mechanism");
 		
 		addItem(ModItems.SMALL_WOODEN_HANDLE, "Small Wooden Handle");
 		addItem(ModItems.MEDIUM_WOODEN_HANDLE, "Medium Wooden Handle");
@@ -129,6 +150,11 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.SMALL_WOODEN_STOCK, "Small Wooden Stock");
 		addItem(ModItems.MEDIUM_WOODEN_STOCK, "Medium Wooden Stock");
 		addItem(ModItems.LARGE_WOODEN_STOCK, "Large Wooden Stock");
+
+		addItem(ModItems.TINY_STONE_BARREL, "Tiny Stone Barrel");
+		addItem(ModItems.SMALL_STONE_BARREL, "Small Stone Barrel");
+		addItem(ModItems.MEDIUM_STONE_BARREL, "Medium Stone Barrel");
+		addItem(ModItems.LARGE_STONE_BARREL, "Large Stone Barrel");
 		
 		addItem(ModItems.TINY_IRON_BARREL, "Tiny Iron Barrel");
 		addItem(ModItems.SMALL_IRON_BARREL, "Small Iron Barrel");
@@ -139,6 +165,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.SMALL_BRASS_BARREL, "Small Brass Barrel");
 		addItem(ModItems.MEDIUM_BRASS_BARREL, "Medium Brass Barrel");
 		addItem(ModItems.LARGE_BRASS_BARREL, "Large Brass Barrel");
+		
+		addItem(ModItems.SMALL_STONE_FLARED_BARREL, "Small Stone Flared Barrel");
+		addItem(ModItems.MEDIUM_STONE_FLARED_BARREL, "Medium Stone Flared Barrel");
+		addItem(ModItems.LARGE_STONE_FLARED_BARREL, "Large Stone Flared Barrel");
 		
 		addItem(ModItems.SMALL_IRON_FLARED_BARREL, "Small Iron Flared Barrel");
 		addItem(ModItems.MEDIUM_IRON_FLARED_BARREL, "Medium Iron Flared Barrel");
@@ -224,16 +254,18 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addPatchouliBookEntry("basics.gunsmiths_bench", OldGunsCompendiumLang.Basics.GunsmithsBench.ENTRY);
 		addPatchouliBookPage("basics.gunsmiths_bench0", OldGunsCompendiumLang.Basics.GunsmithsBench.PAGE0);
-		addPatchouliBookPage("basics.gunsmiths_bench1", OldGunsCompendiumLang.Basics.GunsmithsBench.PAGE1);
 		
 		addPatchouliBookEntry("basics.mortar_and_pestle", OldGunsCompendiumLang.Basics.MortarAndPestle.ENTRY);
 		addPatchouliBookPage("basics.mortar_and_pestle0", OldGunsCompendiumLang.Basics.MortarAndPestle.PAGE0);
-		addPatchouliBookPage("basics.mortar_and_pestle1", OldGunsCompendiumLang.Basics.MortarAndPestle.PAGE1);
 		
 		addPatchouliBookEntry("basics.black_powder", OldGunsCompendiumLang.Basics.BlackPowder.ENTRY);
 		addPatchouliBookPage("basics.black_powder0", OldGunsCompendiumLang.Basics.BlackPowder.PAGE0);
-		addPatchouliBookPage("basics.black_powder1.heading", OldGunsCompendiumLang.Basics.BlackPowder.PAGE1_HEADING);
-		addPatchouliBookPage("basics.black_powder1.heading2", OldGunsCompendiumLang.Basics.BlackPowder.PAGE1_HEADING2);
+		
+		addPatchouliBookEntry("basics.firearms", OldGunsCompendiumLang.Basics.Firearms.ENTRY);
+		addPatchouliBookPage("basics.firearms0", OldGunsCompendiumLang.Basics.Firearms.PAGE0);
+		
+		addPatchouliBookEntry("basics.artillery", OldGunsCompendiumLang.Basics.Artillery.ENTRY);
+		addPatchouliBookPage("basics.artillery0", OldGunsCompendiumLang.Basics.Artillery.PAGE0);
 	}
 
 	private void addMisc() {

@@ -1,0 +1,31 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_exotics"
+    },
+    {
+      "type": "oldguns:can_craft_matchlock_weapons"
+    }
+  ],
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_rock_flared_barrel"
+    },
+    "M": {
+      "tag": "oldguns:matchlock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:medium_handle"
+    }
+  },
+  "result": {
+    "item": "oldguns:matchlock_blunderbuss_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}
