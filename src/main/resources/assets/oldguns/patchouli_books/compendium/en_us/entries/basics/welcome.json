@@ -1,0 +1,17 @@
+{
+	"name": "oldguns.entry.basics.welcome",
+	"category": "oldguns:basics",
+	"icon": "oldguns:matchlock_mechanism",
+	"priority": true,
+	"sortnum": -10,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.basics.welcome0"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.basics.welcome1"
+		}
+	]
+}

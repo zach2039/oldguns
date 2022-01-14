@@ -1,0 +1,17 @@
+{
+	"name": "oldguns.entry.basics.gunsmiths_bench",
+	"category": "oldguns:basics",
+	"icon": "oldguns:gunsmiths_bench",
+	"sortnum": 1,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.basics.gunsmiths_bench0"
+		},
+		{
+			"type": "crafting",
+			"text": "oldguns.page.basics.gunsmiths_bench1",
+			"recipe": "oldguns:gunsmiths_bench"
+		}
+	]
+}

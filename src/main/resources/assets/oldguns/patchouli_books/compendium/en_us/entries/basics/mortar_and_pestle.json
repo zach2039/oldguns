@@ -1,0 +1,17 @@
+{
+	"name": "oldguns.entry.basics.mortar_and_pestle",
+	"category": "oldguns:basics",
+	"icon": "oldguns:mortar_and_pestle",
+	"sortnum": 2,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.basics.mortar_and_pestle0"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"text": "oldguns.page.basics.mortar_and_pestle1",
+			"recipe": "oldguns:mortar_and_pestle"
+		}
+	]
+}

@@ -1,0 +1,216 @@
+{
+	"processor": "com.zach2039.oldguns.compat.patchouli.processor.MultiGunsmithsBenchRecipeProcessor", 
+	"components":[ 
+		{
+			"type": "patchouli:header",
+			"text": "#heading",
+			"x": -1,
+			"y":-6
+		},
+		{
+			"type": "patchouli:header",
+			"text": "#heading2",
+			"guard": "#heading2->exists",
+			"x": -1,
+			"y":66
+		},
+		{
+			"type": "patchouli:image", 
+			"image": "patchouli:textures/gui/crafting.png", 
+			"x": 7, 
+			"y": 2, 
+			"u": 0, 
+			"v": 0, 
+			"texture_width": 128, 
+			"texture_height": 256,
+			"width": 100,
+			"height":62
+		}, 
+		{
+			"type": "patchouli:image", 
+			"image": "patchouli:textures/gui/crafting.png", 
+			"guard": "#output2->exists",
+			"x": 7, 
+			"y": 74, 
+			"u": 0, 
+			"v": 0, 
+			"texture_width": 128, 
+			"texture_height": 256,
+			"width": 100,
+			"height":62
+		}, 
+		{
+			"type": "patchouli:image",
+			"image": "patchouli:textures/gui/crafting.png",
+			"guard": "#shapeless",
+			"x": 71,
+			"y": 6,
+			"u": 0,
+			"v": 64,
+			"texture_width": 128,
+			"texture_height": 256,
+			"width": 11,
+			"height":11
+		},
+		{
+			"type": "patchouli:image",
+			"image": "patchouli:textures/gui/crafting.png",
+			"guard": "#shapeless2->exists",
+			"x": 71,
+			"y": 78,
+			"u": 0,
+			"v": 64,
+			"texture_width": 128,
+			"texture_height": 256,
+			"width": 11,
+			"height":11
+		},
+		{
+			"type": "patchouli:tooltip",
+			"guard": "#shapeless", 
+			"tooltip": ["patchouli.gui.lexicon.shapeless->i18n"], 
+			"x": 71,
+			"y": 6, 
+			"width": 11,
+			"height":11
+		},
+		{
+			"type": "patchouli:tooltip",
+			"guard": "#shapeless2->exists", 
+			"tooltip": ["patchouli.gui.lexicon.shapeless->i18n"], 
+			"x": 71,
+			"y": 78, 
+			"width": 11,
+			"height":11
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input1", 
+			"x": 12,
+			"y": 7
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input2", 
+			"x": 31,
+			"y": 7
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input3",
+			"x": 50,
+			"y": 7
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input4", 
+			"x": 12, 
+			"y": 26
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input5",
+			"x": 31,
+			"y": 26
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input6",
+			"x": 50,
+			"y": 26
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input7",
+			"x": 12,
+			"y": 45
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input8", 
+			"x": 31,
+			"y": 45
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input9", 
+			"x": 50, 
+			"y": 45
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input10", 
+			"x": 12,
+			"y": 79
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input11", 
+			"x": 31,
+			"y": 79
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input12",
+			"x": 50,
+			"y": 79
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input13", 
+			"x": 12, 
+			"y": 98
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input14",
+			"x": 31,
+			"y": 98
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input15",
+			"x": 50,
+			"y": 98
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input16",
+			"x": 12,
+			"y": 147
+		},
+		{
+			"type": "patchouli:item",
+			"item": "#input17", 
+			"x": 31,
+			"y": 147
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#input18", 
+			"x": 50, 
+			"y": 147
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#output",
+			"link_recipe": true, 
+			"x": 88,
+			"y": 26
+		},
+		{
+			"type": "patchouli:item", 
+			"item": "#output2",
+			"link_recipe": true, 
+			"guard": "#output2->exists",
+			"x": 88,
+			"y": 98
+		},
+		{
+			"type": "patchouli:text",
+			"text": "#text",
+			"guard": "#text->exists",
+			"y":69
+		}
+	]
+}
