@@ -144,7 +144,10 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_BIRDSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_LEAD_BIRDSHOT.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.MATCHLOCK_MECHANISM.get());
+		withGeneratedParentAndDefaultTexture(ModItems.WHEELLOCK_MECHANISM.get());
 		withGeneratedParentAndDefaultTexture(ModItems.FLINTLOCK_MECHANISM.get());
+		withGeneratedParentAndDefaultTexture(ModItems.CAPLOCK_MECHANISM.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_HANDLE.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_HANDLE.get());

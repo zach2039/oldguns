@@ -1,5 +1,8 @@
 package com.zach2039.oldguns.init;
 
+import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
@@ -13,8 +16,12 @@ import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMortarAnd
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
@@ -108,4 +115,13 @@ public class ModCrafting {
 			isInitialized = true;
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static <C extends Container, T extends Recipe<C>> Map<ResourceLocation, Recipe<C>> getRecipes(Level world, RecipeType<T> type) {
+		return  (Map<ResourceLocation, Recipe<C>>) world.getRecipeManager().getRecipeIds()
+				.collect(Collectors.toMap(v -> v, v -> world.getRecipeManager().byKey(v).orElseThrow(IllegalArgumentException::new)));
+	}
 }
+
+
+

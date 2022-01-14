@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.data.lang.OldGunsCompendiumLang;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
@@ -51,6 +52,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addConfig();
 		addChatMessages();
 		addSubtitles();
+		addPatchouliEntries();
 		addMisc();
 	}
 
@@ -164,6 +166,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
+		
+		add("item.oldguns.compendium", "Old Guns Compendium");
 	}
 
 	private void addFluids() {
@@ -208,10 +212,32 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	private void addSubtitles() {
 
 	}
+	
+	private void addPatchouliEntries() {
+		addPatchouliBookLanding(OldGunsCompendiumLang.LANDING);
+		addPatchouliBookCategory("basics", OldGunsCompendiumLang.Basics.NAME);
+		addPatchouliBookCategoryDescription("basics", OldGunsCompendiumLang.Basics.DESCRIPTION);
+		
+		addPatchouliBookEntry("basics.welcome", OldGunsCompendiumLang.Basics.Welcome.ENTRY);
+		addPatchouliBookPage("basics.welcome0", OldGunsCompendiumLang.Basics.Welcome.PAGE0);
+		addPatchouliBookPage("basics.welcome1", OldGunsCompendiumLang.Basics.Welcome.PAGE1);
+		
+		addPatchouliBookEntry("basics.gunsmiths_bench", OldGunsCompendiumLang.Basics.GunsmithsBench.ENTRY);
+		addPatchouliBookPage("basics.gunsmiths_bench0", OldGunsCompendiumLang.Basics.GunsmithsBench.PAGE0);
+		addPatchouliBookPage("basics.gunsmiths_bench1", OldGunsCompendiumLang.Basics.GunsmithsBench.PAGE1);
+		
+		addPatchouliBookEntry("basics.mortar_and_pestle", OldGunsCompendiumLang.Basics.MortarAndPestle.ENTRY);
+		addPatchouliBookPage("basics.mortar_and_pestle0", OldGunsCompendiumLang.Basics.MortarAndPestle.PAGE0);
+		addPatchouliBookPage("basics.mortar_and_pestle1", OldGunsCompendiumLang.Basics.MortarAndPestle.PAGE1);
+		
+		addPatchouliBookEntry("basics.black_powder", OldGunsCompendiumLang.Basics.BlackPowder.ENTRY);
+		addPatchouliBookPage("basics.black_powder0", OldGunsCompendiumLang.Basics.BlackPowder.PAGE0);
+		addPatchouliBookPage("basics.black_powder1.heading", OldGunsCompendiumLang.Basics.BlackPowder.PAGE1_HEADING);
+		addPatchouliBookPage("basics.black_powder1.heading2", OldGunsCompendiumLang.Basics.BlackPowder.PAGE1_HEADING2);
+	}
 
 	private void addMisc() {
 		add("itemGroup." + OldGuns.MODID, "Old Guns");
-		
 	}
 
 	public void addEntityType(Supplier<? extends EntityType<?>> key, String name) {
@@ -227,7 +253,27 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	private void add(final OldGunsLang lang, final String value) {
 		add(lang.getTranslationKey(), value);
 	}
+	
+	private void addPatchouliBookPage(final String key, final String value) {		
+		add("oldguns.page." + key, value);
+	}
+	
+	private void addPatchouliBookEntry(final String key, final String value) {
+		add("oldguns.entry." + key, value);
+	}
+	
+	private void addPatchouliBookCategory(final String key, final String value) {
+		add("oldguns.category." + key, value);
+	}
+	
+	private void addPatchouliBookCategoryDescription(final String key, final String value) {
+		add("oldguns.description." + key, value);
+	}
 
+	private void addPatchouliBookLanding(final String value) {
+		add("oldguns.landing", value);
+	}
+	
 	private void add(final OldGunsLang prefix, final StringRepresentable enumValue, final String name) {
 		add(prefix.getTranslationKey() + "." + enumValue.getSerializedName(), name);
 	}

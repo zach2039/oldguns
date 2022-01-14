@@ -34,7 +34,7 @@ credits="Friends who helped test" #optional
 authors="Grilled_salmon" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
-A Minecraft mod that adds a collection of antique firearms. Heavily inspired by Ye Olde Minegunner mod from the beta days of modded Minecraft. Smelt bullets and craft parts to create guns.
+Antique weapons for that colonial feel.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.oldguns]] #optional

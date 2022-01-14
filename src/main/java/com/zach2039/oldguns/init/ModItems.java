@@ -46,6 +46,7 @@ import com.zach2039.oldguns.world.item.material.MediumGradeBlackPowderItem;
 import com.zach2039.oldguns.world.item.material.NiterItem;
 import com.zach2039.oldguns.world.item.material.NitrateSoilItem;
 import com.zach2039.oldguns.world.item.material.SulfurItem;
+import com.zach2039.oldguns.world.item.part.CaplockMechanismItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassFlaredBarrelItem;
@@ -53,6 +54,7 @@ import com.zach2039.oldguns.world.item.part.LargeIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenStockItem;
+import com.zach2039.oldguns.world.item.part.MatchlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumIronBarrelItem;
@@ -67,6 +69,7 @@ import com.zach2039.oldguns.world.item.part.SmallWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.SmallWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.TinyBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyIronBarrelItem;
+import com.zach2039.oldguns.world.item.part.WheellockMechanismItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
@@ -190,8 +193,17 @@ public class ModItems {
 		);
 	
 	// Parts
+	public static final RegistryObject<MatchlockMechanismItem> MATCHLOCK_MECHANISM = ITEMS.register("matchlock_mechanism",
+			() -> new MatchlockMechanismItem()
+		);
+	public static final RegistryObject<WheellockMechanismItem> WHEELLOCK_MECHANISM = ITEMS.register("wheellock_mechanism",
+			() -> new WheellockMechanismItem()
+		);
 	public static final RegistryObject<FlintlockMechanismItem> FLINTLOCK_MECHANISM = ITEMS.register("flintlock_mechanism",
 			() -> new FlintlockMechanismItem()
+		);
+	public static final RegistryObject<CaplockMechanismItem> CAPLOCK_MECHANISM = ITEMS.register("caplock_mechanism",
+			() -> new CaplockMechanismItem()
 		);
 	
 	public static final RegistryObject<SmallWoodenHandleItem> SMALL_WOODEN_HANDLE = ITEMS.register("small_wooden_handle",

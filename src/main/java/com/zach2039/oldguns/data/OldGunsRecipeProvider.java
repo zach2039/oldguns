@@ -216,7 +216,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 
 			ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 					.requires(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
-					.unlockedBy("has_medium_grade_black_powder_cake", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
+					.unlockedBy("has_medium_grade_black_powder_cake", has(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_from_block"));
 		}
 		
