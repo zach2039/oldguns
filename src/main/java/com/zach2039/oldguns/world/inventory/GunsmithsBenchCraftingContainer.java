@@ -10,13 +10,14 @@ import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 
 public class GunsmithsBenchCraftingContainer implements Container, StackedContentsCompatible {
+	
 	private final NonNullList<ItemStack> items;
 	private final int width;
 	private final int height;
 	private final AbstractContainerMenu menu;
 
 	public GunsmithsBenchCraftingContainer(AbstractContainerMenu menu, int width, int height) {
-		this.items = NonNullList.withSize(width * height, ItemStack.EMPTY);
+		this.items = NonNullList.withSize((width * height) + 1, ItemStack.EMPTY);
 		this.menu = menu;
 		this.width = width;
 		this.height = height;

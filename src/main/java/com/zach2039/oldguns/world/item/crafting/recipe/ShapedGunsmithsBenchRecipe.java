@@ -13,10 +13,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
+import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
@@ -113,11 +116,11 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 		return false;
 	}
 
-	private boolean matches(GunsmithsBenchCraftingContainer p_44171_, int p_44172_, int p_44173_, boolean p_44174_) {
-		for(int i = 0; i < p_44171_.getWidth(); ++i) {
-			for(int j = 0; j < p_44171_.getHeight(); ++j) {
-				int k = i - p_44172_;
-				int l = j - p_44173_;
+	private boolean matches(GunsmithsBenchCraftingContainer containerCrafting, int width, int height, boolean p_44174_) {
+		for(int i = 0; i < containerCrafting.getWidth(); ++i) {
+			for(int j = 0; j < containerCrafting.getHeight(); ++j) {
+				int k = i - width;
+				int l = j - height;
 				Ingredient ingredient = Ingredient.EMPTY;
 				if (k >= 0 && l >= 0 && k < this.width && l < this.height) {
 					if (p_44174_) {
@@ -127,7 +130,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 					}
 				}
 
-				if (!ingredient.test(p_44171_.getItem(i + j * p_44171_.getWidth()))) {
+				if (!ingredient.test(containerCrafting.getItem(i + j * containerCrafting.getWidth()))) {
 					return false;
 				}
 			}
@@ -139,6 +142,17 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 	@Override
 	public ItemStack assemble(GunsmithsBenchCraftingContainer craftinv) {
 		ItemStack resultStack = this.result.copy();
+		
+		if (requiresDesignNotes(resultStack.getItem())) {
+			ItemStack item = craftinv.getItem(GunsmithsBenchMenu.NOTES_SLOT);
+			if (!(item.getItem() instanceof IDesignNotes))
+				return ItemStack.EMPTY;
+			
+			String designName = IDesignNotes.getDesign(item);
+			String resultName = resultStack.getItem().getRegistryName().toString();
+			if (!designName.equals(resultName))
+				return ItemStack.EMPTY;
+		}
 		
 		if (resultStack.getItem() instanceof IFirearm)
 			((IFirearm)this.result.getItem()).initNBTTags(resultStack);

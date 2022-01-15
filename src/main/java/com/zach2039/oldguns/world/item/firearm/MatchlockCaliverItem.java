@@ -21,14 +21,14 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class MatchlockCaliverItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.matchlock_caliver;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.matchlockSettings.matchlock_caliver;
 	
 	public MatchlockCaliverItem()
 	{		
 		super((FirearmProperties) new FirearmProperties()				
 				.ammoCapacity(1)
 				.firearmSize(FirearmSize.MEDIUM)
-				.firearmWaterResiliency(FirearmWaterResiliency.POOR)
+				.firearmWaterResiliency(FirearmWaterResiliency.VERY_POOR)
 				.reloadType(FirearmReloadType.MUZZLELOADER)
 				.effectiveRangeModifier(firearmAttributes.effectiveRangeModifier.get().floatValue())
 				.damageModifier(firearmAttributes.shotDamageModifier.get().floatValue())

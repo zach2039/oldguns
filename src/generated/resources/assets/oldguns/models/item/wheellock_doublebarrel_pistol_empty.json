@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/wheellock_doublebarrel_pistol",
+  "textures": {
+    "layer0": "oldguns:item/wheellock_doublebarrel_pistol_empty"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_musketoon"
+    },
+    {
+      "tag": "oldguns:medium_metal_birdshot"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_musketoon",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

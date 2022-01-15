@@ -49,6 +49,17 @@ import com.zach2039.oldguns.world.item.firearm.MatchlockLongMusketItem;
 import com.zach2039.oldguns.world.item.firearm.MatchlockMusketItem;
 import com.zach2039.oldguns.world.item.firearm.MatchlockMusketoonItem;
 import com.zach2039.oldguns.world.item.firearm.MatchlockPistolItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockArquebusItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockBlunderbussItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockBlunderbussPistolItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockCaliverItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockDerringerItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockDoublebarrelPistolItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockHandMortarItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockLongMusketItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockMusketItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockMusketoonItem;
+import com.zach2039.oldguns.world.item.firearm.WheellockPistolItem;
 import com.zach2039.oldguns.world.item.material.BrassIngotItem;
 import com.zach2039.oldguns.world.item.material.BrassNuggetItem;
 import com.zach2039.oldguns.world.item.material.HighGradeBlackPowderItem;
@@ -93,6 +104,7 @@ import com.zach2039.oldguns.world.item.part.TinyBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.WheellockMechanismItem;
+import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
@@ -145,6 +157,41 @@ public class ModItems {
 		);
 	public static final RegistryObject<FirearmItem> MATCHLOCK_BLUNDERBUSS = ITEMS.register("matchlock_blunderbuss",
 			() -> new MatchlockBlunderbussItem()
+		);
+	
+	// Wheelock
+	public static final RegistryObject<FirearmItem> WHEELLOCK_DERRINGER = ITEMS.register("wheellock_derringer",
+			() -> new WheellockDerringerItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_PISTOL = ITEMS.register("wheellock_pistol",
+			() -> new WheellockPistolItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_DOUBLEBARREL_PISTOL = ITEMS.register("wheellock_doublebarrel_pistol",
+			() -> new WheellockDoublebarrelPistolItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_ARQUEBUS = ITEMS.register("wheellock_arquebus",
+			() -> new WheellockArquebusItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_CALIVER = ITEMS.register("wheellock_caliver",
+			() -> new WheellockCaliverItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_MUSKETOON = ITEMS.register("wheellock_musketoon",
+			() -> new WheellockMusketoonItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_MUSKET = ITEMS.register("wheellock_musket",
+			() -> new WheellockMusketItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_LONG_MUSKET = ITEMS.register("wheellock_long_musket",
+			() -> new WheellockLongMusketItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_BLUNDERBUSS_PISTOL = ITEMS.register("wheellock_blunderbuss_pistol",
+			() -> new WheellockBlunderbussPistolItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_BLUNDERBUSS = ITEMS.register("wheellock_blunderbuss",
+			() -> new WheellockBlunderbussItem()
+		);
+	public static final RegistryObject<FirearmItem> WHEELLOCK_HAND_MORTAR = ITEMS.register("wheellock_hand_mortar",
+			() -> new WheellockHandMortarItem()
 		);
 	
 	// Flintlock
@@ -418,6 +465,10 @@ public class ModItems {
 	
 	public static final RegistryObject<MortarAndPestleItem> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle",
 			() -> new MortarAndPestleItem()
+		);
+	
+	public static final RegistryObject<DesignNotesItem> DESIGN_NOTES = ITEMS.register("design_notes",
+			() -> new DesignNotesItem()
 		);
 	
 	/**

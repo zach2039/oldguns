@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_wheellock_weapons"
+    }
+  ],
+  "pattern": [
+    "BMH"
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:medium_metal_barrel"
+    },
+    "M": {
+      "tag": "oldguns:wheellock_mechanism"
+    },
+    "H": {
+      "tag": "oldguns:small_stock"
+    }
+  },
+  "result": {
+    "item": "oldguns:wheellock_caliver",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

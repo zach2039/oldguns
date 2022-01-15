@@ -1,0 +1,14 @@
+{
+  "parent": "oldguns:item/simple_model",
+  "textures": {
+    "layer0": "oldguns:item/wheellock_blunderbuss_pistol"
+  },
+  "overrides": [
+    {
+      "predicate": {
+        "oldguns:firearm_empty": 1.0
+      },
+      "model": "oldguns:item/wheellock_blunderbuss_pistol_empty"
+    }
+  ]
+}

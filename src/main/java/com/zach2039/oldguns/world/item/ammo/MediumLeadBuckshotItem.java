@@ -7,7 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
 public class MediumLeadBuckshotItem extends FirearmAmmoItem implements IFirearmAmmo {
 
-	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.medium_lead_buckshot;
+	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.ammoSettings.medium_lead_buckshot;
 	
 	public MediumLeadBuckshotItem() {
 		super((FirearmAmmoProperties) new FirearmAmmoProperties()

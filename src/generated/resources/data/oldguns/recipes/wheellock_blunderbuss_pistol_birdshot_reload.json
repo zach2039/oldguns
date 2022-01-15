@@ -1,0 +1,20 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_blunderbuss_pistol"
+    },
+    {
+      "tag": "oldguns:small_metal_birdshot"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_blunderbuss_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

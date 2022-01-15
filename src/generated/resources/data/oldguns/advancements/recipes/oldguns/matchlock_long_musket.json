@@ -6,7 +6,7 @@
     ]
   },
   "criteria": {
-    "has_large_metal_barrel": {
+    "has_large_rock_barrel": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
@@ -45,7 +45,7 @@
   },
   "requirements": [
     [
-      "has_large_metal_barrel",
+      "has_large_rock_barrel",
       "has_matchlock_mechanism",
       "has_large_stock",
       "has_the_recipe"

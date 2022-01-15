@@ -21,14 +21,14 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FlintlockDuckfootDerringerItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlock_duckfoot_derringer;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlockSettings.flintlock_duckfoot_derringer;
 	
 	public FlintlockDuckfootDerringerItem()
 	{		
 		super((FirearmProperties) new FirearmProperties()				
 				.ammoCapacity(3)
 				.firearmSize(FirearmSize.SMALL)
-				.firearmWaterResiliency(FirearmWaterResiliency.FAIR)
+				.firearmWaterResiliency(FirearmWaterResiliency.POOR)
 				.reloadType(FirearmReloadType.MUZZLELOADER)
 				.effectiveRangeModifier(firearmAttributes.effectiveRangeModifier.get().floatValue())
 				.damageModifier(firearmAttributes.shotDamageModifier.get().floatValue())

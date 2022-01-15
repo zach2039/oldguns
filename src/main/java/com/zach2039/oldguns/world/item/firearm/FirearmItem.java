@@ -576,10 +576,14 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		float misfireWaterChance = 0.0f;
 		switch (this.getFirearmWaterResiliency())
 		{
+		case VERY_POOR:
+			misfireWaterChance += 0.75f;
 		case POOR:
-			misfireWaterChance += 0.25f;
+			misfireWaterChance += 0.50f;
 		case FAIR:
 			misfireWaterChance += 0.25f;
+		case GOOD:
+		case VERY_GOOD:
 		default:
 			break;
 		}
@@ -639,21 +643,23 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 					);
 		}
-		else if (this.getFirearmWaterResiliency() != FirearmWaterResiliency.GOOD)
+		else if (this.getFirearmWaterResiliency() != FirearmWaterResiliency.VERY_GOOD)
 		{
 			/* Check for rain or water, if firearm is vulnerable to it. */
 
 			boolean misfire = false;
 
-			/* If poor water resiliency and wet or submerged, misfire. */
+			/* If poor water resiliency and wet or submerged, misfire */
 			if (shooter.isInWaterOrRain() && !shooter.isInWater())
 			{
 				misfire = ((worldIn.random.nextFloat() < misfireWaterChance) ||
-						(this.getFirearmWaterResiliency() == FirearmWaterResiliency.POOR)) ? true : false;
+						(this.getFirearmWaterResiliency() == FirearmWaterResiliency.VERY_POOR)) ? true : false;
 			}
 			else if (shooter.isInWater())
 			{
-				misfire = true;
+				/* If good water resiliency, try misfire in water. Otherwise, always misfire */
+				misfire = ((worldIn.random.nextFloat() < misfireWaterChance) &&
+						(this.getFirearmWaterResiliency() != FirearmWaterResiliency.GOOD)) ? true : false;
 			}
 
 			/* Misfire and flag as failure if needed. */

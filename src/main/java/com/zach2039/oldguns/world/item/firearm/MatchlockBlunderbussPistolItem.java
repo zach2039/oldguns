@@ -21,14 +21,14 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class MatchlockBlunderbussPistolItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.matchlock_blunderbuss_pistol;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.matchlockSettings.matchlock_blunderbuss_pistol;
 	
 	public MatchlockBlunderbussPistolItem()
 	{		
 		super((FirearmProperties) new FirearmProperties()				
 				.ammoCapacity(1)
 				.firearmSize(FirearmSize.SMALL)
-				.firearmWaterResiliency(FirearmWaterResiliency.POOR)
+				.firearmWaterResiliency(FirearmWaterResiliency.VERY_POOR)
 				.reloadType(FirearmReloadType.MUZZLELOADER)
 				.effectiveRangeModifier(firearmAttributes.effectiveRangeModifier.get().floatValue())
 				.damageModifier(firearmAttributes.shotDamageModifier.get().floatValue())

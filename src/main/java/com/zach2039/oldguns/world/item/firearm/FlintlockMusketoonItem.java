@@ -21,14 +21,14 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FlintlockMusketoonItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlock_musketoon;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlockSettings.flintlock_musketoon;
 	
 	public FlintlockMusketoonItem()
 	{		
 		super((FirearmProperties) new FirearmProperties()				
 				.ammoCapacity(1)
 				.firearmSize(FirearmSize.MEDIUM)
-				.firearmWaterResiliency(FirearmWaterResiliency.FAIR)
+				.firearmWaterResiliency(FirearmWaterResiliency.POOR)
 				.reloadType(FirearmReloadType.MUZZLELOADER)
 				.effectiveRangeModifier(firearmAttributes.effectiveRangeModifier.get().floatValue())
 				.damageModifier(firearmAttributes.shotDamageModifier.get().floatValue())

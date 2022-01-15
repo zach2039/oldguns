@@ -369,7 +369,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_long_musket_reload"));
 		}
 		
-		// Reload flintlock blunderbuss pistol birdshot
+		// Reload matchlock blunderbuss pistol birdshot
 		{
 			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get())
 					.requires(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get())
@@ -392,6 +392,151 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_blunderbuss_birdshot_reload"));
 		}
 
+		// Wheellock
+		// Reload wheellock derringer
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_DERRINGER.get())
+					.requires(ModItems.WHEELLOCK_DERRINGER.get())
+					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_derringer", has(ModItems.WHEELLOCK_DERRINGER.get()))
+					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_derringer_reload"));
+		}
+				
+		// Reload wheellock pistol
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_PISTOL.get())
+					.requires(ModItems.WHEELLOCK_PISTOL.get())
+					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_pistol", has(ModItems.WHEELLOCK_PISTOL.get()))
+					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_pistol_reload"));
+		}
+		
+		// Reload wheellock doublebarrel pistol
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
+					.requires(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
+					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_doublebarrel_pistol", has(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get()))
+					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_doublebarrel_pistol_reload"));
+		}
+		
+		// Reload wheellock arquebus
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_ARQUEBUS.get())
+					.requires(ModItems.WHEELLOCK_ARQUEBUS.get())
+					.requires(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_arquebus", has(ModItems.WHEELLOCK_ARQUEBUS.get()))
+					.unlockedBy("has_small_metal_musket_ball", has(ModTags.Items.SMALL_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_arquebus_reload"));
+		}
+		
+		// Reload wheellock caliver
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_CALIVER.get())
+					.requires(ModItems.WHEELLOCK_CALIVER.get())
+					.requires(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_caliver", has(ModItems.WHEELLOCK_CALIVER.get()))
+					.unlockedBy("has_medium_metal_musket_ball", has(ModTags.Items.MEDIUM_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_caliver_reload"));
+		}
+		
+		// Reload wheellock musketoon ball and birdshot
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_MUSKETOON.get())
+					.requires(ModItems.WHEELLOCK_MUSKETOON.get())
+					.requires(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_musketoon", has(ModItems.WHEELLOCK_MUSKETOON.get()))
+					.unlockedBy("has_medium_metal_musket_ball", has(ModTags.Items.MEDIUM_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_musketoon_ball_reload"));
+		}
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_MUSKETOON.get())
+					.requires(ModItems.WHEELLOCK_MUSKETOON.get())
+					.requires(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_musketoon", has(ModItems.WHEELLOCK_MUSKETOON.get()))
+					.unlockedBy("has_medium_metal_birdshot", has(ModTags.Items.MEDIUM_METAL_BIRDSHOT))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_musketoon_birdshot_reload"));
+		}
+		
+		// Reload wheellock musket
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_MUSKET.get())
+					.requires(ModItems.WHEELLOCK_MUSKET.get())
+					.requires(ModTags.Items.LARGE_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_musket", has(ModItems.WHEELLOCK_MUSKET.get()))
+					.unlockedBy("has_large_metal_musket_ball", has(ModTags.Items.LARGE_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_musket_reload"));
+		}
+		
+		// Reload wheellock long musket
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_LONG_MUSKET.get())
+					.requires(ModItems.WHEELLOCK_LONG_MUSKET.get())
+					.requires(ModTags.Items.LARGE_METAL_MUSKET_BALL)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_long_musket", has(ModItems.WHEELLOCK_LONG_MUSKET.get()))
+					.unlockedBy("has_large_metal_musket_ball", has(ModTags.Items.LARGE_METAL_MUSKET_BALL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_long_musket_reload"));
+		}
+		
+		// Reload wheellock blunderbuss pistol buckshot and birdshot
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+					.requires(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+					.requires(ModTags.Items.SMALL_METAL_BUCKSHOT)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_blunderbuss_pistol", has(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get()))
+					.unlockedBy("has_small_metal_buckshot", has(ModTags.Items.SMALL_METAL_BUCKSHOT))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_blunderbuss_pistol_buckshot_reload"));
+		}
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+					.requires(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+					.requires(ModTags.Items.SMALL_METAL_BIRDSHOT)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_blunderbuss_pistol", has(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get()))
+					.unlockedBy("has_small_metal_birdshot", has(ModTags.Items.SMALL_METAL_BIRDSHOT))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_blunderbuss_pistol_birdshot_reload"));
+		}
+		
+		// Reload wheellock blunderbuss buckshot and birdshot
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+					.requires(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+					.requires(ModTags.Items.LARGE_METAL_BUCKSHOT)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_blunderbuss", has(ModItems.WHEELLOCK_BLUNDERBUSS.get()))
+					.unlockedBy("has_large_metal_buckshot", has(ModTags.Items.LARGE_METAL_BUCKSHOT))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_blunderbuss_buckshot_reload"));
+		}
+		{
+			ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+					.requires(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+					.requires(ModTags.Items.LARGE_METAL_BIRDSHOT)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.requires(ModTags.Items.WHEELLOCK_SUITABLE_POWDER)
+					.unlockedBy("has_wheellock_blunderbuss", has(ModItems.WHEELLOCK_BLUNDERBUSS.get()))
+					.unlockedBy("has_large_metal_birdshot", has(ModTags.Items.LARGE_METAL_BIRDSHOT))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_blunderbuss_birdshot_reload"));
+		}		
+		
 		// Flintlock
 		// Reload flintlock derringer
 		{
@@ -650,7 +795,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_medium_rock_flared_barrel", has(ModTags.Items.MEDIUM_ROCK_FLARED_BARREL))
 					.unlockedBy("has_matchlock_mechanism", has(ModTags.Items.MATCHLOCK_MECHANISM))
 					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_matchlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_musketoon"));
 		}
@@ -662,7 +806,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('B', ModTags.Items.LARGE_ROCK_BARREL)
 					.define('M', ModTags.Items.MATCHLOCK_MECHANISM)
 					.define('H', ModTags.Items.MEDIUM_STOCK)
-					.unlockedBy("has_large_rock_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
+					.unlockedBy("has_large_rock_barrel", has(ModTags.Items.LARGE_ROCK_BARREL))
 					.unlockedBy("has_matchlock_mechanism", has(ModTags.Items.MATCHLOCK_MECHANISM))
 					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_matchlock_weapons"))
@@ -676,7 +820,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('B', ModTags.Items.LARGE_ROCK_BARREL)
 					.define('M', ModTags.Items.MATCHLOCK_MECHANISM)
 					.define('H', ModTags.Items.LARGE_STOCK)
-					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_ROCK_BARREL))
+					.unlockedBy("has_large_rock_barrel", has(ModTags.Items.LARGE_ROCK_BARREL))
 					.unlockedBy("has_matchlock_mechanism", has(ModTags.Items.MATCHLOCK_MECHANISM))
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_matchlock_weapons"))
@@ -693,7 +837,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_rock_flared_barrel", has(ModTags.Items.SMALL_ROCK_FLARED_BARREL))
 					.unlockedBy("has_matchlock_mechanism", has(ModTags.Items.MATCHLOCK_MECHANISM))
 					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_matchlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_blunderbuss_pistol"));
 		}
@@ -710,6 +853,148 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_matchlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_blunderbuss"));
+		}
+		
+		// Wheellock
+		// Create wheellock derringer
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_DERRINGER.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.TINY_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.SMALL_HANDLE)
+					.unlockedBy("has_tiny_metal_barrel", has(ModTags.Items.TINY_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_small_handle", has(ModTags.Items.SMALL_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_derringer"));
+		}
+				
+		// Create wheellock pistol
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_PISTOL.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.SMALL_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.MEDIUM_HANDLE)
+					.unlockedBy("has_small_metal_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_pistol"));
+		}
+		
+		// Create wheellock doublebarrel pistol
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
+					.pattern("BM ")
+					.pattern("BMH")
+					.define('B', ModTags.Items.SMALL_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.MEDIUM_HANDLE)
+					.unlockedBy("has_small_metal_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_doublebarrel_pistol"));
+		}
+
+		// Create wheellock arquebus
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_ARQUEBUS.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.SMALL_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.LARGE_HANDLE)
+					.unlockedBy("has_small_metal_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_large_handle", has(ModTags.Items.LARGE_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_arquebus"));
+		}
+		
+		// Create wheellock caliver
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_CALIVER.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.MEDIUM_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.SMALL_STOCK)
+					.unlockedBy("has_medium_metal_barrel", has(ModTags.Items.MEDIUM_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_small_stock", has(ModTags.Items.SMALL_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_caliver"));
+		}
+		
+		// Create wheellock musketoon
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_MUSKETOON.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.MEDIUM_METAL_FLARED_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.MEDIUM_STOCK)
+					.unlockedBy("has_medium_metal_flared_barrel", has(ModTags.Items.MEDIUM_METAL_FLARED_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_musketoon"));
+		}
+		
+		// Create wheellock musket
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_MUSKET.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.LARGE_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.MEDIUM_STOCK)
+					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_musket"));
+		}
+		
+		// Create wheellock long musket
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_LONG_MUSKET.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.LARGE_METAL_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.LARGE_STOCK)
+					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_long_musket"));
+		}
+		
+		// Create wheellock blunderbuss pistol
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.SMALL_METAL_FLARED_BARREL)
+					.define('M', ModTags.Items.MATCHLOCK_MECHANISM)
+					.define('H', ModTags.Items.MEDIUM_HANDLE)
+					.unlockedBy("has_small_metal_flared_barrel", has(ModTags.Items.SMALL_METAL_FLARED_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_blunderbuss_pistol"));
+		}
+		
+		// Create wheelock blunderbuss
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+					.pattern("BMH")
+					.define('B', ModTags.Items.LARGE_METAL_FLARED_BARREL)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
+					.define('H', ModTags.Items.LARGE_STOCK)
+					.unlockedBy("has_large_metal_flared_barrel", has(ModTags.Items.LARGE_METAL_FLARED_BARREL))
+					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
+					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_blunderbuss"));
 		}
 		
 		// Flintlock		
@@ -739,7 +1024,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_tiny_barrel", has(ModTags.Items.TINY_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_small_handle", has(ModTags.Items.SMALL_HANDLE))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_duckfoot_derringer"));
 		}
@@ -770,7 +1054,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_barrel", has(ModTags.Items.SMALL_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_pepperbox_pistol"));
 		}
@@ -813,7 +1096,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_medium_metal_flared_barrel", has(ModTags.Items.MEDIUM_METAL_FLARED_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_stock", has(ModTags.Items.MEDIUM_STOCK))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_musketoon"));
 		}
@@ -844,7 +1126,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_large_metal_barrel", has(ModTags.Items.LARGE_METAL_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_large_stock", has(ModTags.Items.LARGE_STOCK))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_nock_gun"));
 		}
@@ -873,7 +1154,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_small_metal_flared_barrel", has(ModTags.Items.SMALL_METAL_FLARED_BARREL))
 					.unlockedBy("has_flintlock_mechanism", has(ModTags.Items.FLINTLOCK_MECHANISM))
 					.unlockedBy("has_medium_handle", has(ModTags.Items.MEDIUM_HANDLE))
-					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_exotics"))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_blunderbuss_pistol"));
 		}

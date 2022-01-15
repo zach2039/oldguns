@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/wheellock_hand_mortar",
+  "textures": {
+    "layer0": "oldguns:item/wheellock_hand_mortar_empty"
+  }
+}

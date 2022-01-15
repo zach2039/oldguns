@@ -92,6 +92,18 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL, "Matchlock Blunderbuss Pistol");
 		addItem(ModItems.MATCHLOCK_BLUNDERBUSS, "Matchlock Blunderbuss");
 		
+		addItem(ModItems.WHEELLOCK_DERRINGER, "Wheellock Derringer");
+		addItem(ModItems.WHEELLOCK_PISTOL, "Wheellock Pistol");
+		addItem(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL, "Wheellock Doublebarrel Pistol");
+		addItem(ModItems.WHEELLOCK_ARQUEBUS, "Wheellock Arquebus");
+		addItem(ModItems.WHEELLOCK_CALIVER, "Wheellock Caliver");
+		addItem(ModItems.WHEELLOCK_MUSKETOON, "Wheellock Musketoon");
+		addItem(ModItems.WHEELLOCK_MUSKET, "Wheellock Musket");
+		addItem(ModItems.WHEELLOCK_LONG_MUSKET, "Wheellock Long Musket");
+		addItem(ModItems.WHEELLOCK_BLUNDERBUSS, "Wheellock Blunderbuss");
+		addItem(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL, "Wheellock Blunderbuss Pistol");
+		addItem(ModItems.WHEELLOCK_HAND_MORTAR, "Wheellock Hand Mortar");
+		
 		addItem(ModItems.FLINTLOCK_DERRINGER, "Flintlock Derringer");
 		addItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER, "Flintlock Duckfoot Derringer");
 		addItem(ModItems.FLINTLOCK_PISTOL, "Flintlock Pistol");
@@ -196,6 +208,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
+		addItem(ModItems.DESIGN_NOTES, "Design Notes");
 		
 		add("item.oldguns.compendium", "Old Guns Compendium");
 	}

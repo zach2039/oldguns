@@ -18,8 +18,12 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  * @author grilled-salmon
  */
 public class ModLootTables {
-	public static final ResourceLocation LOOT_TABLE_EXOTIC_FIREARMS = RegistrationHandler.register("loot_table_exotic_firearms");
-	public static final ResourceLocation LOOT_TABLE_AMMO = RegistrationHandler.register("loot_table_ammo");
+	public static final ResourceLocation LOOT_TABLE_MECHANISM = RegistrationHandler.register("loot_table_mechanism");
+	public static final ResourceLocation LOOT_TABLE_MATCHLOCK_FIREARM = RegistrationHandler.register("loot_table_matchlock_firearm");
+	public static final ResourceLocation LOOT_TABLE_DESIGN_NOTES_MECHANISM = RegistrationHandler.register("loot_table_design_notes_mechanism");
+	public static final ResourceLocation LOOT_TABLE_DESIGN_NOTES_MATCHLOCK = RegistrationHandler.register("loot_table_design_notes_matchlock");
+	public static final ResourceLocation LOOT_TABLE_DESIGN_NOTES_WHEELLOCK = RegistrationHandler.register("loot_table_design_notes_wheellock");
+	public static final ResourceLocation LOOT_TABLE_DESIGN_NOTES_FLINTLOCK = RegistrationHandler.register("loot_table_design_notes_flintlock");
 
 	public static void registerLootTables() {}
 

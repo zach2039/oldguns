@@ -24,6 +24,18 @@ public class ModItemModelProperties {
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_LONG_MUSKET.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.MATCHLOCK_BLUNDERBUSS.get());
+		
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_DERRINGER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_ARQUEBUS.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_CALIVER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_MUSKETOON.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_LONG_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_BLUNDERBUSS.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.WHEELLOCK_HAND_MORTAR.get());
 			
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DERRINGER.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get());

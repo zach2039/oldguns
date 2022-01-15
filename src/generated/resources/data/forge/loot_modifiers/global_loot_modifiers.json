@@ -1,7 +1,11 @@
 {
   "replace": false,
   "entries": [
-    "oldguns:loot_table_ammo",
-    "oldguns:loot_table_exotic_firearms"
+    "oldguns:loot_table_mechanism",
+    "oldguns:loot_table_matchlock_firearm",
+    "oldguns:loot_table_design_notes_matchlock",
+    "oldguns:loot_table_design_notes_wheellock",
+    "oldguns:loot_table_design_notes_flintlock",
+    "oldguns:loot_table_design_notes_mechanism"
   ]
 }

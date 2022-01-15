@@ -3,111 +3,161 @@ package com.zach2039.oldguns.data.loot;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
+import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModLootTables;
 
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer.Builder;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
+import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
+	
+	@SuppressWarnings("deprecation")
+	private Builder<?> createDesignNotesForItem(int weight, Item item) {
+		CompoundTag tag = new CompoundTag();
+		IDesignNotes.setDesignOnTag(tag, item);
+		
+		return (Builder<?>) LootItem.lootTableItem(ModItems.DESIGN_NOTES.get())
+				.setWeight(weight)
+				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
+				.apply(SetNbtFunction.setTag(tag));
+	}
+	
+	private Builder<?> createItem(int weight, Item item) {
+		return (Builder<?>) LootItem.lootTableItem(item)
+				.setWeight(weight)
+				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)));
+	}
+	
+	private Builder<?> createDamagedItem(int weight, Item item) {
+		return (Builder<?>) LootItem.lootTableItem(item)
+				.setWeight(weight)
+				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
+				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.70f)));
+	}
+	
 	@Override
 	public void accept(final BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 		consumer.accept(
-				ModLootTables.LOOT_TABLE_EXOTIC_FIREARMS,
+				ModLootTables.LOOT_TABLE_MECHANISM,
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
 						.setRolls(ConstantValue.exactly(1))
 						.add(
-								LootItem.lootTableItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
-									.setWeight(50)
-									.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
-									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
+								createItem(75, ModItems.FLINTLOCK_MECHANISM.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
-									.setWeight(40)
-									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
-							)
-						.add(
-								LootItem.lootTableItem(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
-									.setWeight(30)
-									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
-							)
-						.add(
-								LootItem.lootTableItem(ModItems.FLINTLOCK_MUSKETOON.get())
-									.setWeight(20)
-									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
-							)
-						.add(
-								LootItem.lootTableItem(ModItems.FLINTLOCK_NOCK_GUN.get())
-									.setWeight(5)
-									.apply(SetItemCountFunction.setCount(ConstantValue.exactly(1)))
-									.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.8f)))
+								createItem(25, ModItems.CAPLOCK_MECHANISM.get())
 							)
 						)
 				);
 		consumer.accept(
-				ModLootTables.LOOT_TABLE_AMMO,
+				ModLootTables.LOOT_TABLE_MATCHLOCK_FIREARM,
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(UniformGenerator.between(1, 3))
+						.setRolls(ConstantValue.exactly(1))
 						.add(
-								LootItem.lootTableItem(ModItems.SMALL_IRON_MUSKET_BALL.get())
-								.setWeight(100)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 4)))
+								createDamagedItem(25, ModItems.MATCHLOCK_DERRINGER.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.SMALL_IRON_BIRDSHOT.get())
-								.setWeight(100)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+								createDamagedItem(25, ModItems.MATCHLOCK_PISTOL.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.SMALL_IRON_BUCKSHOT.get())
-								.setWeight(100)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 3)))
+								createDamagedItem(25, ModItems.MATCHLOCK_ARQUEBUS.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.MEDIUM_IRON_MUSKET_BALL.get())
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								createDamagedItem(25, ModItems.MATCHLOCK_CALIVER.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.MEDIUM_IRON_BIRDSHOT.get())
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								createDamagedItem(25, ModItems.MATCHLOCK_MUSKET.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.MEDIUM_IRON_BUCKSHOT.get())
-								.setWeight(50)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								createDamagedItem(25, ModItems.MATCHLOCK_LONG_MUSKET.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.LARGE_IRON_MUSKET_BALL.get())
-								.setWeight(25)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								createDamagedItem(25, ModItems.MATCHLOCK_BLUNDERBUSS.get())
+							)
+						)
+				);
+		consumer.accept(
+				ModLootTables.LOOT_TABLE_DESIGN_NOTES_MECHANISM,
+				LootTable.lootTable()
+				.withPool(
+						LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1))
+						.add(
+								createDesignNotesForItem(75, ModItems.FLINTLOCK_MECHANISM.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.LARGE_IRON_BIRDSHOT.get())
-								.setWeight(25)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								createDesignNotesForItem(25, ModItems.CAPLOCK_MECHANISM.get())
+							)
+						)
+				);
+		consumer.accept(
+				ModLootTables.LOOT_TABLE_DESIGN_NOTES_MATCHLOCK,
+				LootTable.lootTable()
+				.withPool(
+						LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1))
+						.add(
+								createDesignNotesForItem(25, ModItems.MATCHLOCK_MUSKETOON.get())
 							)
 						.add(
-								LootItem.lootTableItem(ModItems.LARGE_IRON_BUCKSHOT.get())
-								.setWeight(25)
-								.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 2)))
+								createDesignNotesForItem(25, ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get())
 							)
-						
+						)
+				);
+		consumer.accept(
+				ModLootTables.LOOT_TABLE_DESIGN_NOTES_WHEELLOCK,
+				LootTable.lootTable()
+				.withPool(
+						LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1))
+						.add(
+								createDesignNotesForItem(25, ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
+							)
+						.add(
+								createDesignNotesForItem(25, ModItems.WHEELLOCK_MUSKETOON.get())
+							)
+						.add(
+								createDesignNotesForItem(25, ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+							)
+						)
+				);
+		consumer.accept(
+				ModLootTables.LOOT_TABLE_DESIGN_NOTES_FLINTLOCK,
+				LootTable.lootTable()
+				.withPool(
+						LootPool.lootPool()
+						.setRolls(ConstantValue.exactly(1))
+						.add(
+								createDesignNotesForItem(25, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
+							)
+						.add(
+								createDesignNotesForItem(25, ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
+							)
+						.add(
+								createDesignNotesForItem(25, ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
+							)
+						.add(
+								createDesignNotesForItem(25, ModItems.FLINTLOCK_MUSKETOON.get())
+							)
+						.add(
+								createDesignNotesForItem(25, ModItems.FLINTLOCK_NOCK_GUN.get())
+							)
 						)
 				);
 	}

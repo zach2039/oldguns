@@ -7,7 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
 public class SmallLeadMusketBallItem extends FirearmAmmoItem implements IFirearmAmmo {
 
-	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.small_lead_musket_ball;
+	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.ammoSettings.small_lead_musket_ball;
 	
 	public SmallLeadMusketBallItem() {
 		super((FirearmAmmoProperties) new FirearmAmmoProperties()

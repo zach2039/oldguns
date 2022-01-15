@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:wheellock_long_musket_reload"
+    ]
+  },
+  "criteria": {
+    "has_wheellock_long_musket": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:wheellock_long_musket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_large_metal_musket_ball": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_metal_musket_ball"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:wheellock_long_musket_reload"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wheellock_long_musket",
+      "has_large_metal_musket_ball",
+      "has_the_recipe"
+    ]
+  ]
+}

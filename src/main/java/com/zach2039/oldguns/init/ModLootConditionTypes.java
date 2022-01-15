@@ -1,8 +1,9 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnAmmoLootCondition;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnExoticsLootCondition;
+import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnDesignNotesLootCondition;
+import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnFirearmsLootCondition;
+import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnMechanismsLootCondition;
 
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -19,8 +20,9 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
  * @author grilled-salmon
  */
 public class ModLootConditionTypes {
-	public static final LootItemConditionType SPAWN_EXOTICS_LOOT = register("can_spawn_exotics_in_loot", new LootSpawnExoticsLootCondition.ConditionSerializer());
-	public static final LootItemConditionType SPAWN_AMMO_LOOT = register("can_spawn_ammo_in_loot", new LootSpawnAmmoLootCondition.ConditionSerializer());
+	public static final LootItemConditionType ALLOW_DESIGN_NOTES_LOOT = register("can_spawn_design_notes_in_loot", new LootSpawnDesignNotesLootCondition.ConditionSerializer());
+	public static final LootItemConditionType ALLOW_MECHANISMS_LOOT = register("can_spawn_mechansims_in_loot", new LootSpawnMechanismsLootCondition.ConditionSerializer());
+	public static final LootItemConditionType ALLOW_FIREARMS_LOOT = register("can_spawn_firearms_in_loot", new LootSpawnFirearmsLootCondition.ConditionSerializer());
 
 	public static void register() {
 		// No-op method to ensure that this class is loaded and its static initialisers are run

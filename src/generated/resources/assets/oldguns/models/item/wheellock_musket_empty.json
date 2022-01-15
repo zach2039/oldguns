@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/wheellock_musket",
+  "textures": {
+    "layer0": "oldguns:item/wheellock_musket_empty"
+  }
+}

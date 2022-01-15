@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 50,
+          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",
@@ -18,100 +18,91 @@
               "add": false
             },
             {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.8
-              },
-              "add": false
+              "function": "minecraft:set_nbt",
+              "tag": "{item:\"oldguns:flintlock_duckfoot_derringer\"}"
             }
           ],
-          "name": "oldguns:flintlock_duckfoot_derringer"
+          "name": "oldguns:design_notes"
         },
         {
           "type": "minecraft:item",
-          "weight": 40,
+          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 1.0,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              },
               "add": false
             },
             {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.8
-              },
-              "add": false
+              "function": "minecraft:set_nbt",
+              "tag": "{item:\"oldguns:flintlock_blunderbuss_pistol\"}"
             }
           ],
-          "name": "oldguns:flintlock_blunderbuss_pistol"
+          "name": "oldguns:design_notes"
         },
         {
           "type": "minecraft:item",
-          "weight": 30,
+          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 1.0,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              },
               "add": false
             },
             {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.8
-              },
-              "add": false
+              "function": "minecraft:set_nbt",
+              "tag": "{item:\"oldguns:flintlock_pepperbox_pistol\"}"
             }
           ],
-          "name": "oldguns:flintlock_pepperbox_pistol"
+          "name": "oldguns:design_notes"
         },
         {
           "type": "minecraft:item",
-          "weight": 20,
+          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 1.0,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              },
               "add": false
             },
             {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.8
-              },
-              "add": false
+              "function": "minecraft:set_nbt",
+              "tag": "{item:\"oldguns:flintlock_musketoon\"}"
             }
           ],
-          "name": "oldguns:flintlock_musketoon"
+          "name": "oldguns:design_notes"
         },
         {
           "type": "minecraft:item",
-          "weight": 5,
+          "weight": 25,
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 1.0,
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1.0,
+                "max": 1.0
+              },
               "add": false
             },
             {
-              "function": "minecraft:set_damage",
-              "damage": {
-                "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.8
-              },
-              "add": false
+              "function": "minecraft:set_nbt",
+              "tag": "{item:\"oldguns:flintlock_nock_gun\"}"
             }
           ],
-          "name": "oldguns:flintlock_nock_gun"
+          "name": "oldguns:design_notes"
         }
       ]
     }

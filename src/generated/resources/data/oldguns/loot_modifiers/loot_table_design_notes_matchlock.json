@@ -1,0 +1,30 @@
+{
+  "conditions": [
+    {
+      "condition": "oldguns:can_spawn_design_notes_in_loot"
+    },
+    {
+      "condition": "minecraft:random_chance",
+      "chance": 0.4
+    },
+    {
+      "condition": "minecraft:alternative",
+      "terms": [
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/simple_dungeon"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/shipwreck_supply"
+        },
+        {
+          "condition": "forge:loot_table_id",
+          "loot_table_id": "minecraft:chests/shipwreck_treasure"
+        }
+      ]
+    }
+  ],
+  "loot_table": "oldguns:loot_table_design_notes_matchlock",
+  "type": "oldguns:loot_table"
+}

@@ -1,0 +1,20 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_arquebus"
+    },
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_arquebus",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

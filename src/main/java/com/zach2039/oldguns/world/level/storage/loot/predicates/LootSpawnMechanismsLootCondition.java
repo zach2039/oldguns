@@ -11,30 +11,30 @@ import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
-public class LootSpawnExoticsLootCondition implements LootItemCondition {
-	private static final LootSpawnExoticsLootCondition INSTANCE = new LootSpawnExoticsLootCondition();
+public class LootSpawnMechanismsLootCondition implements LootItemCondition {
+	private static final LootSpawnMechanismsLootCondition INSTANCE = new LootSpawnMechanismsLootCondition();
 	
 	@Override
 	public LootItemConditionType getType() {
-		return ModLootConditionTypes.SPAWN_EXOTICS_LOOT;
+		return ModLootConditionTypes.ALLOW_MECHANISMS_LOOT;
 	}
 	
 	@Override
 	public boolean test(LootContext p_81930_) {
-		return OldGunsConfig.COMMON.lootSettings.allowExoticFirearmsInLoot.get();
+		return OldGunsConfig.COMMON.lootSettings.allowMechanismsInLoot.get();
 	}
 
 	public static LootItemCondition.Builder builder() {
 		return () -> INSTANCE;
 	}
 
-	public static class ConditionSerializer implements Serializer<LootSpawnExoticsLootCondition> {
+	public static class ConditionSerializer implements Serializer<LootSpawnMechanismsLootCondition> {
 		@Override
-		public void serialize(final JsonObject object, final LootSpawnExoticsLootCondition instance, final JsonSerializationContext context) {}
+		public void serialize(final JsonObject object, final LootSpawnMechanismsLootCondition instance, final JsonSerializationContext context) {}
 
 		@Override	
-		public LootSpawnExoticsLootCondition deserialize(final JsonObject object, final JsonDeserializationContext context) {
-			return LootSpawnExoticsLootCondition.INSTANCE;
+		public LootSpawnMechanismsLootCondition deserialize(final JsonObject object, final JsonDeserializationContext context) {
+			return LootSpawnMechanismsLootCondition.INSTANCE;
 		}
 	}
 }

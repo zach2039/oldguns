@@ -3,9 +3,11 @@ package com.zach2039.oldguns.world.item.crafting.recipe;
 import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
+import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 
@@ -60,6 +62,17 @@ public class ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 	@Override
 	public ItemStack assemble(GunsmithsBenchCraftingContainer craftinv) {
 		ItemStack resultStack = this.result.copy();
+		
+		if (requiresDesignNotes(resultStack.getItem())) {
+			ItemStack item = craftinv.getItem(GunsmithsBenchMenu.NOTES_SLOT);
+			if (!(item.getItem() instanceof IDesignNotes))
+				return ItemStack.EMPTY;
+			
+			String designName = IDesignNotes.getDesign(item);
+			String resultName = resultStack.getItem().getRegistryName().toString();
+			if (!designName.equals(resultName))
+				return ItemStack.EMPTY;
+		}
 		
 		if (resultStack.getItem() instanceof IFirearm)
 			((IFirearm)this.result.getItem()).initNBTTags(resultStack);

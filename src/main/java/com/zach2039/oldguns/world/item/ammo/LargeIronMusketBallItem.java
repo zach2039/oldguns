@@ -7,7 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
 public class LargeIronMusketBallItem extends FirearmAmmoItem implements IFirearmAmmo {
 
-	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.large_iron_musket_ball;
+	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.ammoSettings.large_iron_musket_ball;
 	
 	public LargeIronMusketBallItem() {
 		super((FirearmAmmoProperties) new FirearmAmmoProperties()

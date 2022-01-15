@@ -48,10 +48,11 @@ public class FirearmType {
 	
 	public static enum FirearmWaterResiliency
 	{
-		GREAT,
+		VERY_GOOD,
 		GOOD,
 		FAIR,
-		POOR
+		POOR,
+		VERY_POOR
 	}
 	
 	public static enum FirearmPart

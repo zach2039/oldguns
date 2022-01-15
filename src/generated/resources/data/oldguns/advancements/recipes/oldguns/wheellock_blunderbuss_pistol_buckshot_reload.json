@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:wheellock_blunderbuss_pistol_buckshot_reload"
+    ]
+  },
+  "criteria": {
+    "has_wheellock_blunderbuss_pistol": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:wheellock_blunderbuss_pistol"
+            ]
+          }
+        ]
+      }
+    },
+    "has_small_metal_buckshot": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_metal_buckshot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:wheellock_blunderbuss_pistol_buckshot_reload"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_wheellock_blunderbuss_pistol",
+      "has_small_metal_buckshot",
+      "has_the_recipe"
+    ]
+  ]
+}

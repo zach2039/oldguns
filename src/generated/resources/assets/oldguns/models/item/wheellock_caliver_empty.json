@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/wheellock_caliver",
+  "textures": {
+    "layer0": "oldguns:item/wheellock_caliver_empty"
+  }
+}

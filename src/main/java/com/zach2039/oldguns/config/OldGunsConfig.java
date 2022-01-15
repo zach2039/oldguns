@@ -63,37 +63,38 @@ public class OldGunsConfig {
 	}
 	
 	public static class LootSettings {
-		public final BooleanValue allowExoticFirearmsInLoot;
-		public final BooleanValue allowAmmoInLoot;
+		public final BooleanValue allowDesignNotesInLoot;
+		public final BooleanValue allowMechanismsInLoot;
+		public final BooleanValue allowFirearmsInLoot;
 		
 		LootSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
-			allowExoticFirearmsInLoot = builder
-					.comment("Enable/disable exotic firearm spawning in dungeon loot")
-					.define("allowExoticFirearmsInLoot", true);
+			allowDesignNotesInLoot = builder
+					.comment("Enable/disable design notes built-in loot tables")
+					.define("allowDesignNotesInLoot", true);
 			
-			allowAmmoInLoot = builder
-					.comment("Enable/disable firearm ammo spawning in dungeon loot")
-					.define("allowAmmoInLoot", true);
+			allowMechanismsInLoot = builder
+					.comment("Enable/disable mechanisms built-in loot tables")
+					.define("allowMechanismsInLoot", true);
+			
+			allowFirearmsInLoot = builder
+					.comment("Enable/disable firearms built-in loot tables")
+					.define("allowFirearmsInLoot", true);
 			
 			builder.pop();
 		}
 	}
 	
 	public static class RecipeSettings {
-		public final BooleanValue allowExoticFirearmCrafting;
 		public final BooleanValue allowMatchlockWeaponsCrafting;
 		public final BooleanValue allowWheellockWeaponsCrafting;
 		public final BooleanValue allowFlintlockWeaponsCrafting;
+		public final DesignNotesSettings designNotesSettings;
 		public final BlackPowderManufactureSettings blackPowderManufactureSettings;
 		
 		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
-			
-			allowExoticFirearmCrafting = builder
-					.comment("Enable/disable exotic firearm crafts which will force players to find and maintain exotic weapons via loot")
-					.define("allowExoticFirearmCrafting", false);
 			
 			allowMatchlockWeaponsCrafting = builder
 					.comment("Enable/disable matchlock firearm crafts")
@@ -107,10 +108,43 @@ public class OldGunsConfig {
 					.comment("Enable/disable flintlock firearm crafts")
 					.define("allowFlintlockWeaponsCrafting", true);
 			
+			designNotesSettings = new DesignNotesSettings(
+					builder,
+					"Design notes settings",
+					"designNotesSettings");
+			
 			blackPowderManufactureSettings = new BlackPowderManufactureSettings(
 					builder,
 					"Black Powder manufacture settings",
 					"blackPowderManufactureSettings");
+			
+			builder.pop();
+		}
+	}
+	
+	public static class DesignNotesSettings {
+		public final ConfigValue<List<String>> designNotesRequiredItems;
+		
+		DesignNotesSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			designNotesRequiredItems = builder
+					.comment("A list of items that require design notes to be crafted in the gunsmith's bench")
+					.comment("Design Notes can be found in dungeon chests, villager chests, and mob loot")
+					.define("designNotesRequiredItems", Arrays.asList(new String[] {
+							"oldguns:flintlock_mechanism",
+							"oldguns:caplock_mechanism",
+							"oldguns:matchlock_musketoon",
+							"oldguns:matchlock_blunderbuss_pistol",
+							"oldguns:wheellock_doublebarrel_pistol",
+							"oldguns:wheellock_musketoon",
+							"oldguns:wheellock_blunderbuss_pistol",
+							"oldguns:flintlock_duckfoot_derringer",
+							"oldguns:flintlock_pepperbox_pistol",
+							"oldguns:flintlock_musketoon",
+							"oldguns:flintlock_nock_gun",
+							"oldguns:flintlock_blunderbuss_pistol"						
+							}));
 			
 			builder.pop();
 		}
@@ -227,38 +261,44 @@ public class OldGunsConfig {
 	}
 	
 	public static class FirearmSettings {
-		public final BooleanValue hugeFirearmDebuffs;
+		public final BooleanValue hugeFirearmDebuffs;	
+		public final AmmoSettings ammoSettings;
+		public final MatchlockSettings matchlockSettings;
+		public final WheellockSettings wheellockSettings;
+		public final FlintlockSettings flintlockSettings;
 		
-		public final MuzzleloadingFirearmAttributes matchlock_derringer;
-		public final MuzzleloadingFirearmAttributes matchlock_pistol;
-		public final MuzzleloadingFirearmAttributes matchlock_arquebus;
-		
-		public final MuzzleloadingFirearmAttributes matchlock_caliver;
-		public final MuzzleloadingFirearmAttributes matchlock_musketoon;
-		
-		public final MuzzleloadingFirearmAttributes matchlock_musket;
-		public final MuzzleloadingFirearmAttributes matchlock_long_musket;	
-		
-		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss_pistol;
-		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss;
-		
-		public final MuzzleloadingFirearmAttributes flintlock_derringer;
-		public final MuzzleloadingFirearmAttributes flintlock_duckfoot_derringer;
-		public final MuzzleloadingFirearmAttributes flintlock_pistol;
-		public final MuzzleloadingFirearmAttributes flintlock_pepperbox_pistol;
-		public final MuzzleloadingFirearmAttributes flintlock_arquebus;
-		
-		public final MuzzleloadingFirearmAttributes flintlock_caliver;
-		public final MuzzleloadingFirearmAttributes flintlock_musketoon;
-		
-		public final MuzzleloadingFirearmAttributes flintlock_musket;
-		public final MuzzleloadingFirearmAttributes flintlock_nock_gun;
-		public final MuzzleloadingFirearmAttributes flintlock_long_musket;		
-		
-		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss_pistol;
-		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss;
-		public final MuzzleloadingFirearmAttributes flintlock_doublebarrel_blunderbuss;	
-		
+		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			hugeFirearmDebuffs = builder
+					.comment("Apply slowness effect while wielding huge firearms, like the nock gun")
+					.define("hugeFirearmDebuffs", true);
+			
+			ammoSettings = new AmmoSettings(
+					builder,
+					"Firearm ammo settings",
+					"ammoSettings");
+			
+			matchlockSettings = new MatchlockSettings(
+					builder,
+					"Matchlock firearm settings",
+					"matchlockSettings");
+			
+			wheellockSettings = new WheellockSettings(
+					builder,
+					"Wheellock firearm settings",
+					"wheellockSettings");
+			
+			flintlockSettings = new FlintlockSettings(
+					builder,
+					"Flintlock firearm settings",
+					"flintlockSettings");
+			
+			builder.pop();
+		}
+	}
+	
+	public static class AmmoSettings {		
 		public final FirearmAmmoAttributes small_stone_musket_ball;
 		public final FirearmAmmoAttributes medium_stone_musket_ball;
 		public final FirearmAmmoAttributes large_stone_musket_ball;
@@ -291,256 +331,8 @@ public class OldGunsConfig {
 		public final FirearmAmmoAttributes medium_lead_birdshot;
 		public final FirearmAmmoAttributes large_lead_birdshot;
 		
-		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		AmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
-			
-			hugeFirearmDebuffs = builder
-					.comment("Apply slowness effect while wielding huge firearms, like the nock gun")
-					.define("hugeFirearmDebuffs", true);
-			
-			// Matchlock
-			matchlock_derringer = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Derringers",
-					"matchlock_derringer",
-					8,
-					3.0f,
-					0.5f,
-					5.0f,
-					1.0f
-					);
-			
-			matchlock_pistol = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Pistols",
-					"matchlock_pistol",
-					12,
-					3.25f,
-					1.0f,
-					2.0f,
-					1.0f
-					);
-			
-			matchlock_arquebus = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Arquebus",
-					"matchlock_arquebus",
-					16,
-					3.5f,
-					1.2f,
-					1.8f,
-					1.0f
-					);
-			
-			matchlock_caliver = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Calivers",
-					"matchlock_caliver",
-					20,
-					3.75f,
-					1.2f,
-					1.6f,
-					1.0f
-					);
-			
-			matchlock_musketoon = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Musketoons",
-					"matchlock_musketoon",
-					24,
-					3.75f,
-					0.8f,
-					1.5f,
-					1.0f
-					);
-			
-			matchlock_musket = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Muskets",
-					"matchlock_musket",
-					24,
-					4.0f,
-					1.0f,
-					1.2f,
-					1.0f
-					);
-			
-			matchlock_long_musket = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Long Muskets",
-					"matchlock_long_musket",
-					28,
-					4.25f,
-					1.2f,
-					1.2f,
-					1.0f
-					);
-			
-			matchlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Blunderbuss Pistols",
-					"matchlock_blunderbuss_pistol",
-					8,
-					2.75f,
-					0.4f,
-					3.5f,
-					1.0f
-					);
-			
-			matchlock_blunderbuss = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Matchlock Blunderbusses",
-					"matchlock_blunderbuss",
-					24,
-					3.5f,
-					1.0f,
-					1.7f,
-					1.0f
-					);
-			
-			// Flintlock
-			flintlock_derringer = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Derringers",
-					"flintlock_derringer",
-					28,
-					3.25f,
-					0.5f,
-					5.0f,
-					1.0f
-					);
-			
-			flintlock_duckfoot_derringer = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Duckfoot Derringers",
-					"flintlock_duckfoot_derringers",
-					24,
-					3.0f,
-					0.3f,
-					10.0f,
-					0.8f
-					);
-			
-			flintlock_pistol = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Pistols",
-					"flintlock_pistol",
-					32,
-					3.5f,
-					1.0f,
-					2.0f,
-					1.0f
-					);
-			
-			flintlock_pepperbox_pistol = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Pepperbox Pistols",
-					"flintlock_pepperbox_pistol",
-					28,
-					3.4f,
-					0.8f,
-					3.0f,
-					0.8f
-					);
-			
-			flintlock_arquebus = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Arquebus",
-					"flintlock_arquebus",
-					36,
-					3.75f,
-					1.2f,
-					1.8f,
-					1.0f
-					);
-			
-			flintlock_caliver = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Calivers",
-					"flintlock_caliver",
-					40,
-					4.0f,
-					1.2f,
-					1.6f,
-					1.0f
-					);
-			
-			flintlock_musketoon = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Musketoons",
-					"flintlock_musketoon",
-					44,
-					4.0f,
-					0.8f,
-					1.5f,
-					1.0f
-					);
-			
-			flintlock_musket = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Muskets",
-					"flintlock_musket",
-					44,
-					4.25f,
-					1.0f,
-					1.2f,
-					1.0f
-					);
-			
-			flintlock_nock_gun = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Nock Guns",
-					"flintlock_nock_gun",
-					40,
-					4.0f,
-					0.8f,
-					1.8f,
-					0.8f
-					);
-			
-			flintlock_long_musket = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Long Muskets",
-					"flintlock_long_musket",
-					48,
-					4.5f,
-					1.2f,
-					1.2f,
-					1.0f
-					);
-			
-			flintlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Blunderbuss Pistols",
-					"flintlock_blunderbuss_pistol",
-					28,
-					3.0f,
-					0.4f,
-					3.5f,
-					1.0f
-					);
-			
-			flintlock_blunderbuss = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Blunderbusses",
-					"flintlock_blunderbuss",
-					44,
-					3.5f,
-					1.0f,
-					1.7f,
-					1.0f
-					);
-			
-			flintlock_doublebarrel_blunderbuss = new MuzzleloadingFirearmAttributes(
-					builder,
-					"Attributes of Flintlock Doublebarrel Blunderbusses",
-					"flintlock_doublebarrel_blunderbuss",
-					40,
-					3.5f,
-					0.8f,
-					1.7f,
-					0.8f
-					);
 			
 			// Stone ammo
 			small_stone_musket_ball = new FirearmAmmoAttributes(
@@ -836,6 +628,442 @@ public class OldGunsConfig {
 		}
 	}
 
+	public static class MatchlockSettings {		
+		public final MuzzleloadingFirearmAttributes matchlock_derringer;
+		public final MuzzleloadingFirearmAttributes matchlock_pistol;
+		public final MuzzleloadingFirearmAttributes matchlock_arquebus;
+		
+		public final MuzzleloadingFirearmAttributes matchlock_caliver;
+		public final MuzzleloadingFirearmAttributes matchlock_musketoon;
+		
+		public final MuzzleloadingFirearmAttributes matchlock_musket;
+		public final MuzzleloadingFirearmAttributes matchlock_long_musket;	
+		
+		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss_pistol;
+		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss;
+		
+		MatchlockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			// Matchlock
+			matchlock_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Derringers",
+					"matchlock_derringer",
+					8,
+					3.0f,
+					0.5f,
+					5.8f,
+					1.0f
+					);
+			
+			matchlock_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Pistols",
+					"matchlock_pistol",
+					12,
+					3.25f,
+					1.0f,
+					2.8f,
+					1.0f
+					);
+			
+			matchlock_arquebus = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Arquebus",
+					"matchlock_arquebus",
+					16,
+					3.5f,
+					1.2f,
+					2.6f,
+					1.0f
+					);
+			
+			matchlock_caliver = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Calivers",
+					"matchlock_caliver",
+					20,
+					3.75f,
+					1.2f,
+					2.4f,
+					1.0f
+					);
+			
+			matchlock_musketoon = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Musketoons",
+					"matchlock_musketoon",
+					24,
+					3.75f,
+					0.8f,
+					2.2f,
+					1.0f
+					);
+			
+			matchlock_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Muskets",
+					"matchlock_musket",
+					24,
+					4.0f,
+					1.0f,
+					2.0f,
+					1.0f
+					);
+			
+			matchlock_long_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Long Muskets",
+					"matchlock_long_musket",
+					28,
+					4.25f,
+					1.2f,
+					1.8f,
+					1.0f
+					);
+			
+			matchlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Blunderbuss Pistols",
+					"matchlock_blunderbuss_pistol",
+					8,
+					2.75f,
+					0.4f,
+					4.1f,
+					1.0f
+					);
+			
+			matchlock_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Matchlock Blunderbusses",
+					"matchlock_blunderbuss",
+					24,
+					3.5f,
+					1.0f,
+					2.3f,
+					1.0f
+					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class WheellockSettings {		
+		public final MuzzleloadingFirearmAttributes wheellock_derringer;
+		public final MuzzleloadingFirearmAttributes wheellock_pistol;
+		public final MuzzleloadingFirearmAttributes wheellock_doublebarrel_pistol;
+		public final MuzzleloadingFirearmAttributes wheellock_arquebus;
+		
+		public final MuzzleloadingFirearmAttributes wheellock_caliver;
+		public final MuzzleloadingFirearmAttributes wheellock_musketoon;
+		
+		public final MuzzleloadingFirearmAttributes wheellock_musket;
+		public final MuzzleloadingFirearmAttributes wheellock_long_musket;	
+		
+		public final MuzzleloadingFirearmAttributes wheellock_blunderbuss_pistol;
+		public final MuzzleloadingFirearmAttributes wheellock_blunderbuss;
+		
+		public final MuzzleloadingFirearmAttributes wheellock_hand_mortar;
+		
+		WheellockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			// Wheellock
+			wheellock_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Derringers",
+					"wheellock_derringer",
+					16,
+					3.125f,
+					0.5f,
+					5.5f,
+					1.0f
+					);
+			
+			wheellock_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Pistols",
+					"wheellock_pistol",
+					20,
+					3.375f,
+					1.0f,
+					2.7f,
+					1.0f
+					);
+			
+			wheellock_doublebarrel_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Double Barrel Pistols",
+					"wheellock_double_barrel_pistol",
+					20,
+					3.275f,
+					0.8f,
+					3.7f,
+					0.8f
+					);
+			
+			wheellock_arquebus = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Arquebus",
+					"wheellock_arquebus",
+					24,
+					3.625f,
+					1.2f,
+					2.4f,
+					1.0f
+					);
+			
+			wheellock_caliver = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Calivers",
+					"wheellock_caliver",
+					28,
+					3.875f,
+					1.2f,
+					2.1f,
+					1.0f
+					);
+			
+			wheellock_musketoon = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Musketoons",
+					"wheellock_musketoon",
+					32,
+					3.875f,
+					0.8f,
+					1.8f,
+					1.0f
+					);
+			
+			wheellock_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Muskets",
+					"wheellock_musket",
+					32,
+					4.125f,
+					1.0f,
+					1.8f,
+					1.0f
+					);
+			
+			wheellock_long_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Long Muskets",
+					"wheellock_long_musket",
+					36,
+					4.375f,
+					1.2f,
+					1.5f,
+					1.0f
+					);
+			
+			wheellock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Blunderbuss Pistols",
+					"flintlock_blunderbuss_pistol",
+					28,
+					3.875f,
+					0.4f,
+					4.2f,
+					1.0f
+					);
+			
+			wheellock_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Blunderbusses",
+					"wheellock_blunderbuss",
+					32,
+					3.625f,
+					1.0f,
+					2.0f,
+					1.0f
+					);
+			
+			wheellock_hand_mortar = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Wheellock Hand Mortars",
+					"wheellock_hand_mortar",
+					18,
+					2.5f,
+					1.0f,
+					7.0f,
+					1.0f
+					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class FlintlockSettings {		
+		public final MuzzleloadingFirearmAttributes flintlock_derringer;
+		public final MuzzleloadingFirearmAttributes flintlock_duckfoot_derringer;
+		public final MuzzleloadingFirearmAttributes flintlock_pistol;
+		public final MuzzleloadingFirearmAttributes flintlock_pepperbox_pistol;
+		public final MuzzleloadingFirearmAttributes flintlock_arquebus;
+		
+		public final MuzzleloadingFirearmAttributes flintlock_caliver;
+		public final MuzzleloadingFirearmAttributes flintlock_musketoon;
+		
+		public final MuzzleloadingFirearmAttributes flintlock_musket;
+		public final MuzzleloadingFirearmAttributes flintlock_nock_gun;
+		public final MuzzleloadingFirearmAttributes flintlock_long_musket;		
+		
+		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss_pistol;
+		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss;
+		public final MuzzleloadingFirearmAttributes flintlock_doublebarrel_blunderbuss;	
+		
+		FlintlockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			// Flintlock
+			flintlock_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Derringers",
+					"flintlock_derringer",
+					28,
+					3.25f,
+					0.5f,
+					5.0f,
+					1.0f
+					);
+			
+			flintlock_duckfoot_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Duckfoot Derringers",
+					"flintlock_duckfoot_derringers",
+					24,
+					3.0f,
+					0.3f,
+					10.0f,
+					0.8f
+					);
+			
+			flintlock_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Pistols",
+					"flintlock_pistol",
+					32,
+					3.5f,
+					1.0f,
+					2.0f,
+					1.0f
+					);
+			
+			flintlock_pepperbox_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Pepperbox Pistols",
+					"flintlock_pepperbox_pistol",
+					28,
+					3.4f,
+					0.8f,
+					3.0f,
+					0.8f
+					);
+			
+			flintlock_arquebus = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Arquebus",
+					"flintlock_arquebus",
+					36,
+					3.75f,
+					1.2f,
+					1.8f,
+					1.0f
+					);
+			
+			flintlock_caliver = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Calivers",
+					"flintlock_caliver",
+					40,
+					4.0f,
+					1.2f,
+					1.6f,
+					1.0f
+					);
+			
+			flintlock_musketoon = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Musketoons",
+					"flintlock_musketoon",
+					44,
+					4.0f,
+					0.8f,
+					1.5f,
+					1.0f
+					);
+			
+			flintlock_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Muskets",
+					"flintlock_musket",
+					44,
+					4.25f,
+					1.0f,
+					1.4f,
+					1.0f
+					);
+			
+			flintlock_nock_gun = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Nock Guns",
+					"flintlock_nock_gun",
+					40,
+					4.0f,
+					0.8f,
+					1.8f,
+					0.8f
+					);
+			
+			flintlock_long_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Long Muskets",
+					"flintlock_long_musket",
+					48,
+					4.5f,
+					1.2f,
+					1.2f,
+					1.0f
+					);
+			
+			flintlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Blunderbuss Pistols",
+					"flintlock_blunderbuss_pistol",
+					28,
+					3.0f,
+					0.4f,
+					3.5f,
+					1.0f
+					);
+			
+			flintlock_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Blunderbusses",
+					"flintlock_blunderbuss",
+					44,
+					3.5f,
+					1.0f,
+					1.7f,
+					1.0f
+					);
+			
+			flintlock_doublebarrel_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Flintlock Doublebarrel Blunderbusses",
+					"flintlock_doublebarrel_blunderbuss",
+					40,
+					3.5f,
+					0.8f,
+					1.7f,
+					0.8f
+					);
+			
+			builder.pop();
+		}
+	}
+	
 	public static class MuzzleloadingFirearmAttributes {
 		public final IntValue durability;
 		public final DoubleValue effectiveRangeModifier;

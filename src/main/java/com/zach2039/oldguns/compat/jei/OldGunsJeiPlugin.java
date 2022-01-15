@@ -3,17 +3,19 @@ package com.zach2039.oldguns.compat.jei;
 import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
+import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
+import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
 import mezz.jei.api.registration.IModIngredientRegistration;
@@ -38,7 +40,9 @@ public class OldGunsJeiPlugin implements IModPlugin {
 	
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistration registration) {
-
+		registration.registerSubtypeInterpreter(ModItems.DESIGN_NOTES.get(), (stack, ctx) -> {
+			return (IDesignNotes.getDesign(stack) != "") ? IDesignNotes.getDesign(stack) : IIngredientSubtypeInterpreter.NONE;
+		});
 	}
 
 	@Override
@@ -79,7 +83,7 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, GunsmithsBenchRecipeCategory.UID, 1, 9, 10, 36);
+		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, GunsmithsBenchRecipeCategory.UID, 1, 10, 11, 36);
 	}
 
 	@Override

@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_long_musket"
+    },
+    {
+      "tag": "oldguns:large_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_long_musket",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

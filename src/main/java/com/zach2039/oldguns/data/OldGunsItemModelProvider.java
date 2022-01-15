@@ -116,6 +116,18 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_BLUNDERBUSS.get());
 		
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_DERRINGER.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_ARQUEBUS.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_CALIVER.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_MUSKETOON.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_LONG_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_BLUNDERBUSS.get());
+		firearmMuzzleloaderItem(ModItems.WHEELLOCK_HAND_MORTAR.get());
+		
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_PISTOL.get());
@@ -195,6 +207,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_FLARED_BARREL.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_FLARED_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_FLARED_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_FLARED_BARREL.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_BRASS_FLARED_BARREL.get());
@@ -219,6 +232,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MORTAR_AND_PESTLE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.DESIGN_NOTES.get());
 		
 		//withGeneratedParentAndDefaultTexture(ModItems.ARROW.get());
 	}

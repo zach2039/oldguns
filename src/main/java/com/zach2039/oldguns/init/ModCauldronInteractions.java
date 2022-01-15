@@ -37,75 +37,103 @@ public class ModCauldronInteractions {
 	public static class LiquidNiterInteraction implements CauldronInteraction {
 		public static Map<Item, CauldronInteraction> LIQUID_NITER = CauldronInteraction.newInteractionMap();
 
-		CauldronInteraction FILL_LIQUID_NITER = (p_175683_, p_175684_, p_175685_, p_175686_, p_175687_, p_175688_) -> {
-			return emptyBucket(p_175684_, p_175685_, p_175686_, p_175687_, p_175688_, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3)), SoundEvents.BUCKET_EMPTY);
+		CauldronInteraction FILL_LIQUID_NITER = (state, level, blockpos, player, hand, stack) -> {
+			return emptyBucket(level, blockpos, player, hand, stack, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3)), SoundEvents.BUCKET_EMPTY);
 		};;
 
 		@Override
-		public InteractionResult interact(BlockState p_175711_, Level p_175712_, BlockPos p_175713_, Player p_175714_,
-				InteractionHand p_175715_, ItemStack p_175716_) {
+		public InteractionResult interact(BlockState state, Level level, BlockPos blockpos, Player player,
+				InteractionHand hand, ItemStack stack) {
 			// TODO Auto-generated method stub
 			return null;
 		}
 
 		static void bootstrap() {
-			CauldronInteraction.EMPTY.put(ModItems.LIQUID_NITER.get(), (p_175732_, p_175733_, p_175734_, p_175735_, p_175736_, p_175737_) -> {
-				if (!p_175733_.isClientSide) {
-					Item item = p_175737_.getItem();
-					p_175735_.setItemInHand(p_175736_, ItemUtils.createFilledResult(p_175737_, p_175735_, new ItemStack(Items.GLASS_BOTTLE)));
-					p_175735_.awardStat(Stats.USE_CAULDRON);
-					p_175735_.awardStat(Stats.ITEM_USED.get(item));
-					p_175733_.setBlockAndUpdate(p_175734_, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState());
-					p_175733_.playSound((Player)null, p_175734_, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-					p_175733_.gameEvent((Entity)null, GameEvent.FLUID_PLACE, p_175734_);
+			CauldronInteraction.EMPTY.put(ModItems.LIQUID_NITER.get(), (state, level, blockpos, player, hand, stack) -> {
+				if (!level.isClientSide) {
+					Item item = stack.getItem();
+					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
+					player.awardStat(Stats.USE_CAULDRON);
+					player.awardStat(Stats.ITEM_USED.get(item));
+					level.setBlockAndUpdate(blockpos, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState());
+					level.playSound((Player)null, blockpos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 				}
 
-				return InteractionResult.sidedSuccess(p_175733_.isClientSide);
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			});
-
-			LIQUID_NITER.put(Items.GLASS_BOTTLE, (p_175718_, p_175719_, p_175720_, p_175721_, p_175722_, p_175723_) -> {
-				if (!p_175719_.isClientSide) {
-					Item item = p_175723_.getItem();
-					p_175721_.setItemInHand(p_175722_, ItemUtils.createFilledResult(p_175723_, p_175721_, new ItemStack(ModItems.LIQUID_NITER.get())));
-					p_175721_.awardStat(Stats.USE_CAULDRON);
-					p_175721_.awardStat(Stats.ITEM_USED.get(item));
-					LayeredCauldronBlock.lowerFillLevel(p_175718_, p_175719_, p_175720_);
-					p_175719_.playSound((Player)null, p_175720_, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
-					p_175719_.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, p_175720_);
+			
+			CauldronInteraction.WATER.put(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().asItem(), (state, level, blockpos, player, hand, stack) -> {
+				if (!level.isClientSide) {
+					Item item = stack.getItem();
+					int amount = player.getItemInHand(hand).getCount();
+					player.setItemInHand(hand, new ItemStack(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), amount));
+					player.awardStat(Stats.USE_CAULDRON);
+					player.awardStat(Stats.ITEM_USED.get(item));
+					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+					level.playSound((Player)null, blockpos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
 
-				return InteractionResult.sidedSuccess(p_175719_.isClientSide);
+				return InteractionResult.sidedSuccess(level.isClientSide);
 			});
-			LIQUID_NITER.put(ModItems.LIQUID_NITER.get(), (p_175704_, p_175705_, p_175706_, p_175707_, p_175708_, p_175709_) -> {
-				if (p_175704_.getValue(LayeredCauldronBlock.LEVEL) != 3) {
-					if (!p_175705_.isClientSide) {
-						p_175707_.setItemInHand(p_175708_, ItemUtils.createFilledResult(p_175709_, p_175707_, new ItemStack(Items.GLASS_BOTTLE)));
-						p_175707_.awardStat(Stats.USE_CAULDRON);
-						p_175707_.awardStat(Stats.ITEM_USED.get(p_175709_.getItem()));
-						p_175705_.setBlockAndUpdate(p_175706_, p_175704_.cycle(LayeredCauldronBlock.LEVEL));
-						p_175705_.playSound((Player)null, p_175706_, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
-						p_175705_.gameEvent((Entity)null, GameEvent.FLUID_PLACE, p_175706_);
+			
+			CauldronInteraction.WATER.put(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get().asItem(), (state, level, blockpos, player, hand, stack) -> {
+				if (!level.isClientSide) {
+					Item item = stack.getItem();
+					int amount = player.getItemInHand(hand).getCount();
+					player.setItemInHand(hand, new ItemStack(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), amount));
+					player.awardStat(Stats.USE_CAULDRON);
+					player.awardStat(Stats.ITEM_USED.get(item));
+					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+					level.playSound((Player)null, blockpos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
+				}
+
+				return InteractionResult.sidedSuccess(level.isClientSide);
+			});
+
+			LIQUID_NITER.put(Items.GLASS_BOTTLE, (state, level, blockpos, player, hand, stack) -> {
+				if (!level.isClientSide) {
+					Item item = stack.getItem();
+					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.LIQUID_NITER.get())));
+					player.awardStat(Stats.USE_CAULDRON);
+					player.awardStat(Stats.ITEM_USED.get(item));
+					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+					level.playSound((Player)null, blockpos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, blockpos);
+				}
+
+				return InteractionResult.sidedSuccess(level.isClientSide);
+			});
+			LIQUID_NITER.put(ModItems.LIQUID_NITER.get(), (state, level, blockpos, player, hand, stack) -> {
+				if (state.getValue(LayeredCauldronBlock.LEVEL) != 3) {
+					if (!level.isClientSide) {
+						player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
+						player.awardStat(Stats.USE_CAULDRON);
+						player.awardStat(Stats.ITEM_USED.get(stack.getItem()));
+						level.setBlockAndUpdate(blockpos, state.cycle(LayeredCauldronBlock.LEVEL));
+						level.playSound((Player)null, blockpos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+						level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 					}
 
-					return InteractionResult.sidedSuccess(p_175705_.isClientSide);
+					return InteractionResult.sidedSuccess(level.isClientSide);
 				} else {
 					return InteractionResult.PASS;
 				}
 			});
 		}
 
-		static InteractionResult emptyBucket(Level p_175619_, BlockPos p_175620_, Player p_175621_, InteractionHand p_175622_, ItemStack p_175623_, BlockState p_175624_, SoundEvent p_175625_) {
-			if (!p_175619_.isClientSide) {
-				Item item = p_175623_.getItem();
-				p_175621_.setItemInHand(p_175622_, ItemUtils.createFilledResult(p_175623_, p_175621_, new ItemStack(Items.BUCKET)));
-				p_175621_.awardStat(Stats.FILL_CAULDRON);
-				p_175621_.awardStat(Stats.ITEM_USED.get(item));
-				p_175619_.setBlockAndUpdate(p_175620_, p_175624_);
-				p_175619_.playSound((Player)null, p_175620_, p_175625_, SoundSource.BLOCKS, 1.0F, 1.0F);
-				p_175619_.gameEvent((Entity)null, GameEvent.FLUID_PLACE, p_175620_);
+		static InteractionResult emptyBucket(Level level, BlockPos blockpos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent soundEvent) {
+			if (!level.isClientSide) {
+				Item item = stack.getItem();
+				player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
+				player.awardStat(Stats.FILL_CAULDRON);
+				player.awardStat(Stats.ITEM_USED.get(item));
+				level.setBlockAndUpdate(blockpos, state);
+				level.playSound((Player)null, blockpos, soundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
+				level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 			}
 
-			return InteractionResult.sidedSuccess(p_175619_.isClientSide);
+			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
 	}
 

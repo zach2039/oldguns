@@ -11,7 +11,7 @@ import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
 public class CanCraftWheellockWeaponsCondition implements ICondition
 {
 	public static final CanCraftWheellockWeaponsCondition INSTANCE = new CanCraftWheellockWeaponsCondition();
-    private static final ResourceLocation NAME = new ResourceLocation(OldGuns.MODID, "can_craft_matchlock_weapons");
+    private static final ResourceLocation NAME = new ResourceLocation(OldGuns.MODID, "can_craft_wheellock_weapons");
 
     public CanCraftWheellockWeaponsCondition() {}
 
@@ -30,7 +30,7 @@ public class CanCraftWheellockWeaponsCondition implements ICondition
     @Override
     public String toString()
     {
-        return "can_craft_matchlock_weapons";
+        return "can_craft_wheellock_weapons";
     }
 
     public static class Serializer implements IConditionSerializer<CanCraftWheellockWeaponsCondition>

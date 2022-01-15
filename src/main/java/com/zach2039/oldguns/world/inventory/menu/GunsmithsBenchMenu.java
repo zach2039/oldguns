@@ -6,6 +6,8 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesContainer;
+import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesSlot;
 import com.zach2039.oldguns.world.inventory.OldGunsResultContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsResultSlot;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
@@ -27,19 +29,22 @@ import net.minecraftforge.network.IContainerFactory;
 
 public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	public static final int RESULT_SLOT = 0;
+	public static final int NOTES_SLOT = 9;
+	
 	private final GunsmithsBenchCraftingContainer craftSlots = new GunsmithsBenchCraftingContainer(this, 3, 3);
 	private final OldGunsResultContainer resultSlots = new OldGunsResultContainer();
 	private final ContainerLevelAccess access;
 	private final Player player;
 
-	public GunsmithsBenchMenu(int p_39353_, Inventory p_39354_) {
-		this(p_39353_, p_39354_, ContainerLevelAccess.NULL);
+	public GunsmithsBenchMenu(int containerId, Inventory inv) {
+		this(containerId, inv, ContainerLevelAccess.NULL);
 	}
 
 	public GunsmithsBenchMenu(int containerId, Inventory inv, ContainerLevelAccess access) {
 		super(ModMenuTypes.GUNSMITHS_BENCH.get(), containerId);
 		this.access = access;
 		this.player = inv.player;
+		
 		this.addSlot(new OldGunsResultSlot(inv.player, this.craftSlots, this.resultSlots, 0, 124, 35));
 
 		for(int i = 0; i < 3; ++i) {
@@ -47,7 +52,9 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 				this.addSlot(new Slot(this.craftSlots, j + i * 3, 30 + j * 18, 17 + i * 18));
 			}
 		}
-
+		
+		this.addSlot(new OldGunsDesignNotesSlot(this.craftSlots, NOTES_SLOT, 8, 35));
+		
 		for(int k = 0; k < 3; ++k) {
 			for(int i1 = 0; i1 < 9; ++i1) {
 				this.addSlot(new Slot(inv, i1 + k * 9 + 9, 8 + i1 * 18, 84 + k * 18));
@@ -60,21 +67,21 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 
 	}
 
-	protected static void slotChangedCraftingGrid(AbstractContainerMenu p_150547_, Level p_150548_, Player p_150549_, GunsmithsBenchCraftingContainer p_150550_, OldGunsResultContainer p_150551_) {
-		if (!p_150548_.isClientSide) {
-			ServerPlayer serverplayer = (ServerPlayer)p_150549_;
+	protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, Level level, Player player, GunsmithsBenchCraftingContainer containerCrafting, OldGunsResultContainer containerResult) {
+		if (!level.isClientSide) {
+			ServerPlayer serverplayer = (ServerPlayer)player;
 			ItemStack itemstack = ItemStack.EMPTY;
-			Optional<GunsmithsBenchRecipe> optional = p_150548_.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH, p_150550_, p_150548_);
+			Optional<GunsmithsBenchRecipe> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH, containerCrafting, level);
 			if (optional.isPresent()) {
 				GunsmithsBenchRecipe craftingrecipe = optional.get();
-				if (p_150551_.setRecipeUsed(p_150548_, serverplayer, craftingrecipe)) {
-					itemstack = craftingrecipe.assemble(p_150550_);
+				if (containerResult.setRecipeUsed(level, serverplayer, craftingrecipe)) {
+					itemstack = craftingrecipe.assemble(containerCrafting);
 				}
 			}
 
-			p_150551_.setItem(0, itemstack);
-			p_150547_.setRemoteSlot(0, itemstack);
-			serverplayer.connection.send(new ClientboundContainerSetSlotPacket(p_150547_.containerId, p_150547_.incrementStateId(), 0, itemstack));
+			containerResult.setItem(0, itemstack);
+			menu.setRemoteSlot(0, itemstack);
+			serverplayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), 0, itemstack));
 		}
 	}
 
@@ -84,23 +91,23 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 		});
 	}
 
-	public void fillCraftSlotsStackedContents(StackedContents p_39374_) {
-		this.craftSlots.fillStackedContents(p_39374_);
+	public void fillCraftSlotsStackedContents(StackedContents contents) {
+		this.craftSlots.fillStackedContents(contents);
 	}
 
 	public void clearCraftingContent() {
 		this.craftSlots.clearContent();
 		this.resultSlots.clearContent();
 	}
-
-	public boolean recipeMatches(Recipe<? super GunsmithsBenchCraftingContainer> p_39384_) {
-		return p_39384_.matches(this.craftSlots, this.player.level);
+	
+	public boolean recipeMatches(Recipe<? super GunsmithsBenchCraftingContainer> recipe) {
+		return recipe.matches(this.craftSlots, this.player.level);
 	}
 
-	public void removed(Player p_39389_) {
-		super.removed(p_39389_);
+	public void removed(Player player) {
+		super.removed(player);
 		this.access.execute((p_39371_, p_39372_) -> {
-			this.clearContainer(p_39389_, this.craftSlots);
+			this.clearContainer(player, this.craftSlots);
 		});
 	}
 
@@ -108,32 +115,36 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 		return stillValid(this.access, p_39368_, ModBlocks.GUNSMITHS_BENCH.get());
 	}
 
-	public ItemStack quickMoveStack(Player p_39391_, int p_39392_) {
+	public ItemStack quickMoveStack(Player player, int slotIdx) {
 		ItemStack itemstack = ItemStack.EMPTY;
-		Slot slot = this.slots.get(p_39392_);
+		Slot slot = this.slots.get(slotIdx);
+		int playerTotalInvSize = player.getInventory().items.size();
+		int totalInvSize = (getSize() + playerTotalInvSize);
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
-			if (p_39392_ == 0) {
+			if (slotIdx == 0) {
 				this.access.execute((p_39378_, p_39379_) -> {
-					itemstack1.getItem().onCraftedBy(itemstack1, p_39378_, p_39391_);
+					itemstack1.getItem().onCraftedBy(itemstack1, p_39378_, player);
 				});
-				if (!this.moveItemStackTo(itemstack1, 10, 46, true)) {
+				if (!this.moveItemStackTo(itemstack1, getSize(), totalInvSize, true)) {
 					return ItemStack.EMPTY;
 				}
 
 				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (p_39392_ >= 10 && p_39392_ < 46) {
-				if (!this.moveItemStackTo(itemstack1, 1, 10, false)) {
-					if (p_39392_ < 37) {
-						if (!this.moveItemStackTo(itemstack1, 37, 46, false)) {
+			} else if (slotIdx >= getSize() && slotIdx < (totalInvSize)) {
+				if (!this.moveItemStackTo(itemstack1, getSize() - 1, getSize(), false)) {
+					if (!this.moveItemStackTo(itemstack1, 1, getSize(), false)) {
+						if (slotIdx < (totalInvSize - getSize())) {
+							if (!this.moveItemStackTo(itemstack1, (totalInvSize - getSize()), totalInvSize, false)) {
+								return ItemStack.EMPTY;
+							}
+						} else if (!this.moveItemStackTo(itemstack1, getSize(), (totalInvSize - getSize()), false)) {
 							return ItemStack.EMPTY;
 						}
-					} else if (!this.moveItemStackTo(itemstack1, 10, 37, false)) {
-						return ItemStack.EMPTY;
 					}
 				}
-			} else if (!this.moveItemStackTo(itemstack1, 10, 46, false)) {
+			} else if (!this.moveItemStackTo(itemstack1, getSize(), totalInvSize, false)) {
 				return ItemStack.EMPTY;
 			}
 
@@ -147,9 +158,9 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 				return ItemStack.EMPTY;
 			}
 
-			slot.onTake(p_39391_, itemstack1);
-			if (p_39392_ == 0) {
-				p_39391_.drop(itemstack1, false);
+			slot.onTake(player, itemstack1);
+			if (slotIdx == 0) {
+				player.drop(itemstack1, false);
 			}
 		}
 
@@ -163,6 +174,10 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	public int getResultSlotIndex() {
 		return 0;
 	}
+	
+	public int getDesignNotesSlotIndex() {
+		return 10;
+	}
 
 	public int getGridWidth() {
 		return this.craftSlots.getWidth();
@@ -173,11 +188,11 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	}
 
 	public int getSize() {
-		return 10;
+		return 11;
 	}
 
-	public boolean shouldMoveToInventory(int p_150553_) {
-		return p_150553_ != this.getResultSlotIndex();
+	public boolean shouldMoveToInventory(int slot) {
+		return (slot != this.getResultSlotIndex());
 	}
 	
 	public static class Factory implements IContainerFactory<GunsmithsBenchMenu> {

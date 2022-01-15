@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/wheellock_blunderbuss_pistol",
+  "textures": {
+    "layer0": "oldguns:item/wheellock_blunderbuss_pistol_empty"
+  }
+}
