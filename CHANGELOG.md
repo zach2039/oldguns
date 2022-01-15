@@ -1,3 +1,15 @@
+#### v3.0.1-alpha
+
+- Reimplement matchlock firearms
+- Reimplement wheellock firearms
+- Add black powder creation, medium and high grade
+- Add piston and obsidian interaction to product wet high grade powder cakes
+- Add nitrated soil, niter, and niter bedding to produce niter
+- Add design notes and craft gating via notes
+- Add loot spawn to design notes
+- Add patchouli support (WIP)
+- Add config options for loot and crafting
+
 #### v3.0.0
 
 - Rewrite for Minecraft version 1.18.1 
