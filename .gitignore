@@ -16,7 +16,6 @@ out
 # gradle
 build
 .gradle
-.factorypath
 
 # other
 eclipse
