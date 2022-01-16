@@ -31,8 +31,14 @@
 		},
 		{
 			"type": "spotlight",
-			"item": "oldguns:niter_bedding",
+			"item": "oldguns:nitrate_soil",
 			"text": "oldguns.page.black_powder_production.niter3"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:niter_bedding",
+			"item": "oldguns:niter_bedding",
+			"text": "oldguns.page.black_powder_production.niter4"
 		}
 	]
 }

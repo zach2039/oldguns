@@ -57,6 +57,7 @@ public class OldGuns
 		ModLootModifierSerializers.initialize(modEventBus);
 		ModPotions.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
+		
 		ModSoundEvents.initialize(modEventBus);
     }
 
@@ -64,6 +65,7 @@ public class OldGuns
 	public static void commonSetup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			ModCrafting.Ingredients.register();
+			ModCrafting.Brewing.register();
 			ModLootTables.registerLootTables();
 			ModLootConditionTypes.register();
 		});

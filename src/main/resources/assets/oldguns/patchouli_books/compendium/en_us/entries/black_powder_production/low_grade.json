@@ -9,7 +9,8 @@
 			"text": "oldguns.page.black_powder_production.low_grade0"
 		},
 		{
-			"type": "text",
+			"type": "entity",
+			"entity": "minecraft:creeper",
 			"text": "oldguns.page.black_powder_production.low_grade1"
 		}
 	]

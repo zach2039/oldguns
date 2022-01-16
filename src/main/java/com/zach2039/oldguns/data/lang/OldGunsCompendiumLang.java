@@ -129,7 +129,7 @@ public class OldGunsCompendiumLang {
 					+ "Normal gunpowder found in the world can be considered low-grade; it has weaker explosive properties, "
 					+ "making it suitable for more crude weapons like the Matchlock firearm.";
 			
-			public static final String PAGE1 = "Low-grade Black Powder does not require special methods of production.";
+			public static final String PAGE1 = "Low-grade Black Powder can be acquired via conventional means.";
 			
 		}
 		
@@ -153,15 +153,16 @@ public class OldGunsCompendiumLang {
 			
 			public static final String HIGH_GRADE_CAKE = "Black Powder Cake";
 			
-			public static final String PAGE0 = "High-grade Black Powder is the most refined and potent form of black powder, and is required in high-tier firearms. " +
+			public static final String PAGE0 = "High-grade Black Powder is the most refined and potent form of black powder, and is required in high-tier firearms.$(br)$(br)" +
 					"High-grade Black Powder is derived from wet medium-grade black powder via a process called \"Corning\". " +
-					"Corning black powder involves crushing wet powder into a cake and leaving it to dry in the sun. " +
-					"Corning provides more weight per volume, a more durable powder, and a reliabile burn rate."; 
+					"Corning provides more weight per volume, a more durable powder, and a reliable burn rate."; 
 			
-			public static final String PAGE1 = "The cake is broken into powder after drying.";
+			public static final String PAGE1 = "Corning involves crushing wet powder into a cake and drying it in the sun.";
 			
 			public static final String PAGE3 = "To create a Wet Cake of High-grade Black Powder, one must crush a Block of Wet Medium-grade Black Powder "
 					+ "using a piston and an Obsidian block as a crushing surface.";
+			
+			public static final String PAGE4 = "The cake is broken into powder after drying.";
 			
 		}
 		
@@ -178,8 +179,9 @@ public class OldGunsCompendiumLang {
 			public static final String PAGE2 = "To collect Liquid Niter, once must brew Nitrated Soil gathed from Niter Bedding in a brewing stand with "
 					+ "Water Bottles beneath, leaching the Niter from the soil.";
 			
-			public static final String PAGE3 = "Nitrated Soil can be harvested from Niter Bedding be right-clicking when efflorescence is present on the block. "
-					+ "Niter Bedding can accure efflorescence under farm animals or slowly from dripstone droplets.";
+			public static final String PAGE3 = "Nitrated Soil can be harvested from Niter Bedding by right-clicking when a white efflorescence is present on the block.";
+			
+			public static final String PAGE4 = "Niter Bedding can accure efflorescence under farm animals or slowly from dripstone droplets.";
 			
 		}
 		

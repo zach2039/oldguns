@@ -39,6 +39,12 @@
 			"title": "oldguns.lang.black_powder_production.high_grade_cake",
 			"item": "oldguns:wet_high_grade_black_powder_cake",
 			"text": "oldguns.page.black_powder_production.high_grade3"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:high_grade_black_powder_from_cake",
+			"heading": "oldguns.entry.black_powder_production.high_grade",
+			"text": "oldguns.page.black_powder_production.high_grade4"
 		}
 	]
 }

@@ -320,12 +320,14 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addPatchouliBookPage("black_powder_production.high_grade0", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE0);
 		addPatchouliBookPage("black_powder_production.high_grade1", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE1);
 		addPatchouliBookPage("black_powder_production.high_grade3", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE3);
+		addPatchouliBookPage("black_powder_production.high_grade4", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE4);
 		
 		addPatchouliBookEntry("black_powder_production.niter", OldGunsCompendiumLang.BlackPowderProduction.Niter.ENTRY);
 		addPatchouliBookLang("black_powder_production.crystalization", OldGunsCompendiumLang.BlackPowderProduction.Niter.CRYSTALIZATION);
 		addPatchouliBookPage("black_powder_production.niter0", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE0);
 		addPatchouliBookPage("black_powder_production.niter2", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE2);
 		addPatchouliBookPage("black_powder_production.niter3", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE3);
+		addPatchouliBookPage("black_powder_production.niter4", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE4);
 		
 		addPatchouliBookEntry("black_powder_production.sulfur", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.ENTRY);
 		addPatchouliBookPage("black_powder_production.sulfur0", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.PAGE0);

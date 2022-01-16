@@ -1,7 +1,5 @@
 package com.zach2039.oldguns.compat.jei;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
@@ -31,8 +29,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.alchemy.PotionUtils;
-import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -84,14 +80,6 @@ public class OldGunsJeiPlugin implements IModPlugin {
 			registration.addRecipes(recipeManager.getRecipes().stream()
 					.filter(OldGunsJeiPlugin::isGunsmithsBenchRecipe)
 					.collect(Collectors.toList()), GunsmithsBenchRecipeCategory.UID);
-			
-			List<ItemStack> niterPotionIns = new ArrayList<ItemStack>();
-			niterPotionIns.add(ModItems.NITRATE_SOIL.get().getDefaultInstance());
-			
-			registration.getVanillaRecipeFactory().createBrewingRecipe(
-					niterPotionIns, 
-					PotionUtils.setPotion(POTION.copy(), Potions.WATER),
-					ModItems.LIQUID_NITER.get().getDefaultInstance());
 		}	
 	}
 

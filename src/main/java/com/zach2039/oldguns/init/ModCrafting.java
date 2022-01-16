@@ -17,6 +17,9 @@ import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloa
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -44,19 +47,14 @@ import net.minecraftforge.registries.RegistryObject;
  */
 public class ModCrafting {
 		
-	@Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 	public static class Brewing {
-		
-		/**
-		 * Add this mod's brewing recipes.
-		 *
-		 * @param event The common setup event
-		 */
-		@SubscribeEvent
-		public static void registerBrewingRecipes(final FMLCommonSetupEvent event) {
-			event.enqueueWork(() -> {
-					BrewingRecipeRegistry.addRecipe(new LiquidNiterRecipe());
-			});
+
+		public static void register() {
+			BrewingRecipeRegistry.addRecipe(
+					Ingredient.of(Items.POTION.getDefaultInstance()),
+					Ingredient.of(ModItems.NITRATE_SOIL.get().getDefaultInstance()),
+					ModItems.LIQUID_NITER.get().getDefaultInstance()
+					);	
 		}
 	}
 	
