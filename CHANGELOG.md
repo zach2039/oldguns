@@ -1,3 +1,14 @@
+#### v3.0.2-alpha
+
+- Move common configs to server
+- Guide book and config additions
+- Add patchouli recipes, entires, and multiblock pages
+- Edit mods.toml for license and depends
+- Add entity.minecraft.chicken to refuseLow animals
+- Add patchouli pages
+- Add missing recipes for matchlock and wheellock mechanism
+- Add more crafting items
+
 #### v3.0.1-alpha
 
 - Reimplement matchlock firearms
