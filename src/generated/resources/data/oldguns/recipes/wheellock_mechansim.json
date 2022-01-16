@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    "EFE",
+    "ITI",
+    " E "
+  ],
+  "key": {
+    "F": {
+      "item": "minecraft:flint"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "T": {
+      "tag": "oldguns:iron_trigger_assembly"
+    },
+    "E": {
+      "tag": "oldguns:iron_gear_set"
+    }
+  },
+  "result": {
+    "item": "oldguns:wheellock_mechanism"
+  }
+}

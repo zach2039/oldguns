@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    " T ",
+    "IEI",
+    "  L"
+  ],
+  "key": {
+    "E": {
+      "tag": "oldguns:iron_gear_set"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "result": {
+    "item": "oldguns:iron_trigger_assembly"
+  }
+}

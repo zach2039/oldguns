@@ -46,7 +46,7 @@ public class OldGunsCompendiumLang {
 			
 			public static final String PAGE0 = "Black Powder is an important alchemical output used in $(l:basics/firearms)Firearms$(/l), $(l:basics/artillery)Artillery$(/l), and other explosive tools.$(br)$(br)"
 					+ "Black Powder has grades of low, medium, and high. Normal gunpowder is low grade. Firearms and artillery can require certain grades.$(br)$(br)"
-					+ "See $(l:black_powder/types)Black Powder Production$(/l) for more details.";
+					+ "See $(l:black_powder_production)Black Powder Production$(/l) for more details.";
 	
 		}
 		
@@ -68,6 +68,129 @@ public class OldGunsCompendiumLang {
 					+ "to fortifications or deal massive damage to groups of mobs or players.$(br)$(br)"
 					+ "While more suited to medium to large-scale engagements, artillery pieces can still find use as home"
 					+ " defense for the more adventurous artilleryman.";
+			
+		}
+		
+		public static class DesignNotes {
+			
+			public static final String ENTRY = "Design Notes";
+			
+			public static final String PAGE0 = "Certain recipes in the Gunsmith's Bench require Design Notes to craft. "
+					+ "These notes can be found within dungeons or shipwrecks.$(br)$(br)"
+					+ "Some parts like advanced mechanisms for firearms require notes to craft, but can also be found "
+					+ "as loot.";
+
+		}
+	}
+	
+	public static class Firearms {
+
+		public static final String NAME = "Firearms";
+		
+		public static final String DESCRIPTION = "Details on handheld ranged weapons that employ black powder to launch projectiles.";
+		
+		public static class General {
+			
+			public static final String ENTRY = "General Information";
+			
+			public static final String PAGE0 = "Matchlock and Wheellock firearms are craftable from the outset of spawn, but more advanced types "
+					+ "and exotic firearms require finding $(l:basics/design_notes)Design Notes$(/l) that can be used in the Gunsmith's Bench to enable crafting.";
+			
+			public static final String PAGE1 = "While most firearms are reloaded in the user's inventory, modifications can be applied to allow breechloading, "
+					+ "which allows reloading in a manner similar to the crossbow.";
+			
+			public static final String PAGE2 = "Firearms are also limited to the type of propellant that can be used, depending on the type.$(br)$(br)"
+					+ "Matchlock weapons can reload with low or medium grade black powder. $(br)Wheellock weapons can reload with medium or high grade "
+					+ "black powder.";
+			
+			public static final String PAGE3 = "Flintlock weapons can reload with medium or high grade black powder. $(br)Caplock weapons can reload with high grade "
+					+ "black powder.";
+			
+		}
+		
+		public static class Recipes {
+			
+			public static final String ENTRY = "Recipes";
+			
+		}
+	}
+	
+	public static class BlackPowderProduction {
+
+		public static final String NAME = "Black Powder Production";
+		
+		public static final String DESCRIPTION = "Details on the production of black powder.";
+		
+		public static class LowGrade {
+			
+			public static final String ENTRY = "Low-grade Black Powder";
+			
+			public static final String PAGE0 = "Low-grade Black Powder is the most basic type of black powder available for firearms. "
+					+ "Normal gunpowder found in the world can be considered low-grade; it has weaker explosive properties, "
+					+ "making it suitable for more crude weapons like the Matchlock firearm.";
+			
+			public static final String PAGE1 = "Low-grade Black Powder does not require special methods of production.";
+			
+		}
+		
+		public static class MediumGrade {
+			
+			public static final String ENTRY = "Medium-grade Black Powder";
+			
+			public static final String PAGE0 = "Medium-grade Black Powder is more potent black powder for firearms; while production is more involved "
+					+ "than with Low-grade Black Powder, this propellant offers higher performance and is required in mid-tier firearms";
+			
+			public static final String PAGE1 = "Creating Medium-grade Black Powder requires Niter, Sulfur, and Charcoal. While charcoal can be gathered "
+					+ "by conventional means, Niter requires more elaborate setups to produce and Sulfur must be extracted from Nether items.";
+			
+		}
+		
+		public static class HighGrade {
+			
+			public static final String ENTRY = "High-grade Black Powder";
+			
+			public static final String PAGE0 = "High-grade Black Powder is the most refined and potent form of black powder, and is required in high-tier firearms.";
+			
+			public static final String PAGE1 = "High-grade Black Powder is derived from wet medium-grade black powder via a process called \"Corning\". "
+					+ "Corning black powder involves crushing wet powder into a cake and leaving it to dry in the sun; the cake is broken after drying, "
+					+ "which provides more weight per volume, a more durable powder, and a reliabile burn rate.";
+			
+			public static final String PAGE2 = "To create a Wet Cake of High-grade Black Powder, one must crush a Block of Wet Medium-grade Black Powder "
+					+ "using a piston and an Obsidian block as a crushing surface.";
+			
+		}
+		
+		public static class Niter {
+			
+			public static final String ENTRY = "Niter";
+			
+			public static final String PAGE0 = "Niter (or Saltpeter) is an oxidizer used in black powder. Niter must be crystalized from Liquid Niter in a "
+					+ "boiling Cauldron.";
+			
+			public static final String PAGE1 = "A Cauldron of Liquid Niter is boiled by placing a suitable heat source beneath the Cauldron; when the process "
+					+ "begins, an audible boiling noise can be heard and bubbles will appear.";
+			
+			public static final String PAGE2 = "To collect Liquid Niter, once must brew Nitrated Soil gathed from Niter Bedding in a brewing stand with "
+					+ "Water Bottles beneath, leaching the Niter from the soil.";
+			
+			public static final String PAGE3 = "Nitrated Soil can be harvested from Niter Bedding be right-clicking when efflorescence is present on the block. "
+					+ "Niter Bedding can accure efflorescence under farm animals or slowly from dripstone droplets.";
+			
+		}
+		
+		public static class Sulfur {
+			
+			public static final String ENTRY = "Sulfur";
+			
+			public static final String PAGE0 = "Sulfur is used as fuel and a ignition temperature reducer in black powder.";
+			
+			public static final String PAGE1 = "Sulfur can be extracted from Netherrack and Nether Quartz using a Mortar and Pestle";
+			
+		}
+		
+		public static class Recipes {
+			
+			public static final String ENTRY = "Recipes";
 			
 		}
 	}

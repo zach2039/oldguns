@@ -236,6 +236,27 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		tag(ModTags.Items.LARGE_STOCK)
 			.add(ModItems.LARGE_WOODEN_STOCK.get());
 		
+		tag(ModTags.Items.WOOD_GEAR_SET)
+			.add(ModItems.WOOD_GEAR_SET.get());
+		
+		tag(ModTags.Items.IRON_GEAR_SET)
+			.add(ModItems.IRON_GEAR_SET.get());
+		
+		tag(ModTags.Items.GOLD_GEAR_SET)
+			.add(ModItems.GOLD_GEAR_SET.get());
+		
+		tag(ModTags.Items.WOOD_TRIGGER_ASSEMBLY)
+			.add(ModItems.WOOD_TRIGGER_ASSEMBLY.get());
+	
+		tag(ModTags.Items.IRON_TRIGGER_ASSEMBLY)
+			.add(ModItems.IRON_TRIGGER_ASSEMBLY.get());
+		
+		tag(ModTags.Items.GOLD_TRIGGER_ASSEMBLY)
+			.add(ModItems.GOLD_TRIGGER_ASSEMBLY.get());
+		
+		tag(ModTags.Items.MATCH_CORD)
+			.add(ModItems.MATCH_CORD.get());
+		
 		// Materials
 		tag(ModTags.Items.INGOTS_LEAD)
 			.add(ModItems.LEAD_INGOT.get());

@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    " M ",
+    "STS",
+    " E "
+  ],
+  "key": {
+    "M": {
+      "tag": "oldguns:match_cord"
+    },
+    "S": {
+      "tag": "forge:stone"
+    },
+    "T": {
+      "tag": "oldguns:wood_trigger_assembly"
+    },
+    "E": {
+      "tag": "oldguns:wood_gear_set"
+    }
+  },
+  "result": {
+    "item": "oldguns:matchlock_mechanism"
+  }
+}

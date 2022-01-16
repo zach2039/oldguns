@@ -94,6 +94,16 @@ public class ModTags {
 		public static final Tag.Named<Item> MEDIUM_STOCK = tag("medium_stock");
 		public static final Tag.Named<Item> LARGE_STOCK = tag("large_stock");
 		
+		public static final Tag.Named<Item> WOOD_GEAR_SET = tag("wood_gear_set");
+		public static final Tag.Named<Item> IRON_GEAR_SET = tag("iron_gear_set");
+		public static final Tag.Named<Item> GOLD_GEAR_SET = tag("gold_gear_set");
+		
+		public static final Tag.Named<Item> WOOD_TRIGGER_ASSEMBLY = tag("wood_trigger_assembly");
+		public static final Tag.Named<Item> IRON_TRIGGER_ASSEMBLY = tag("iron_trigger_assembly");
+		public static final Tag.Named<Item> GOLD_TRIGGER_ASSEMBLY = tag("gold_trigger_assembly");
+		
+		public static final Tag.Named<Item> MATCH_CORD = tag("match_cord");
+		
 		// Forge Tags
 		public static final Tag.Named<Item> NUGGETS_LEAD = forgeTag("nuggets/lead");
 		public static final Tag.Named<Item> INGOTS_LEAD = forgeTag("ingots/lead");

@@ -1,0 +1,16 @@
+{
+	"name": "oldguns.entry.black_powder_production.medium_grade",
+	"category": "oldguns:firearms",
+	"icon": "oldguns:medium_grade_black_powder",
+	"sortnum": 2,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.medium_grade0"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.medium_grade1"
+		}
+	]
+}

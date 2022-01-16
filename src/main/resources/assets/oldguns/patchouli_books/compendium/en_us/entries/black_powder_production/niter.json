@@ -1,0 +1,24 @@
+{
+	"name": "oldguns.entry.black_powder_production.niter",
+	"category": "oldguns:firearms",
+	"icon": "oldguns:niter",
+	"sortnum": 4,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.niter0"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.niter1"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.niter2"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.niter3"
+		}
+	]
+}

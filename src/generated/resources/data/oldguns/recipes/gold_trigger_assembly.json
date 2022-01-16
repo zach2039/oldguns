@@ -2,16 +2,13 @@
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
   "pattern": [
-    "  F",
-    "IGL",
-    " R "
+    " T ",
+    "GEG",
+    "  L"
   ],
   "key": {
-    "F": {
-      "item": "minecraft:flint"
-    },
-    "I": {
-      "tag": "forge:ingots/iron"
+    "E": {
+      "tag": "oldguns:gold_gear_set"
     },
     "G": {
       "tag": "forge:ingots/gold"
@@ -19,11 +16,11 @@
     "L": {
       "item": "minecraft:lever"
     },
-    "R": {
-      "tag": "forge:rods/wooden"
+    "T": {
+      "item": "minecraft:tripwire_hook"
     }
   },
   "result": {
-    "item": "oldguns:flintlock_mechanism"
+    "item": "oldguns:gold_trigger_assembly"
   }
 }

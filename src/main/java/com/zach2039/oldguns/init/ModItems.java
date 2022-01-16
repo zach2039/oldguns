@@ -75,6 +75,10 @@ import com.zach2039.oldguns.world.item.material.SulfurItem;
 import com.zach2039.oldguns.world.item.part.CaplockMechanismItem;
 import com.zach2039.oldguns.world.item.part.FirearmPartItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
+import com.zach2039.oldguns.world.item.part.GoldGearSetItem;
+import com.zach2039.oldguns.world.item.part.GoldTriggerAssemblyItem;
+import com.zach2039.oldguns.world.item.part.IronGearSetItem;
+import com.zach2039.oldguns.world.item.part.IronTriggerAssemblyItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronBarrelItem;
@@ -83,6 +87,7 @@ import com.zach2039.oldguns.world.item.part.LargeStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeStoneFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenHandleItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenStockItem;
+import com.zach2039.oldguns.world.item.part.MatchCordItem;
 import com.zach2039.oldguns.world.item.part.MatchlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassFlaredBarrelItem;
@@ -104,6 +109,8 @@ import com.zach2039.oldguns.world.item.part.TinyBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.WheellockMechanismItem;
+import com.zach2039.oldguns.world.item.part.WoodGearSetItem;
+import com.zach2039.oldguns.world.item.part.WoodTriggerAssemblyItem;
 import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
@@ -415,6 +422,30 @@ public class ModItems {
 		);
 	public static final RegistryObject<FirearmPartItem> LARGE_BRASS_FLARED_BARREL = ITEMS.register("large_brass_flared_barrel",
 			() -> new LargeBrassFlaredBarrelItem()
+		);
+	
+	public static final RegistryObject<FirearmPartItem> WOOD_GEAR_SET = ITEMS.register("wood_gear_set",
+			() -> new WoodGearSetItem()
+		);
+	public static final RegistryObject<FirearmPartItem> IRON_GEAR_SET = ITEMS.register("iron_gear_set",
+			() -> new IronGearSetItem()
+		);
+	public static final RegistryObject<FirearmPartItem> GOLD_GEAR_SET = ITEMS.register("gold_gear_set",
+			() -> new GoldGearSetItem()
+		);
+	
+	public static final RegistryObject<FirearmPartItem> WOOD_TRIGGER_ASSEMBLY = ITEMS.register("wood_trigger_assembly",
+			() -> new WoodTriggerAssemblyItem()
+		);
+	public static final RegistryObject<FirearmPartItem> IRON_TRIGGER_ASSEMBLY = ITEMS.register("iron_trigger_assembly",
+			() -> new IronTriggerAssemblyItem()
+		);
+	public static final RegistryObject<FirearmPartItem> GOLD_TRIGGER_ASSEMBLY = ITEMS.register("gold_trigger_assembly",
+			() -> new GoldTriggerAssemblyItem()
+		);
+	
+	public static final RegistryObject<FirearmPartItem> MATCH_CORD = ITEMS.register("match_cord",
+			() -> new MatchCordItem()
 		);
 	
 	// Materials

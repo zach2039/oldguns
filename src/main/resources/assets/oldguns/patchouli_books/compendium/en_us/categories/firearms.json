@@ -1,6 +1,6 @@
 {
 	"name": "oldguns.category.firearms",
-	"description": "botania.category.firearms",
-	"icon": "oldguns:matchlock_derringer",
+	"description": "oldguns.category.firearms",
+	"icon": "oldguns:matchlock_pistol",
 	"sortnum": 1
 }

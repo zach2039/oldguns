@@ -2,28 +2,16 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "oldguns:flintlock_mechanism"
+      "oldguns:iron_trigger_assembly"
     ]
   },
   "criteria": {
-    "has_stick": {
+    "has_iron_gear_set": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:rods/wooden"
-          }
-        ]
-      }
-    },
-    "has_flint": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:flint"
-            ]
+            "tag": "oldguns:iron_gear_set"
           }
         ]
       }
@@ -34,16 +22,6 @@
         "items": [
           {
             "tag": "forge:ingots/iron"
-          }
-        ]
-      }
-    },
-    "has_gold_ingot": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:ingots/gold"
           }
         ]
       }
@@ -60,20 +38,31 @@
         ]
       }
     },
+    "has_tripwire_hook": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:tripwire_hook"
+            ]
+          }
+        ]
+      }
+    },
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "oldguns:flintlock_mechanism"
+        "recipe": "oldguns:iron_trigger_assembly"
       }
     }
   },
   "requirements": [
     [
-      "has_stick",
-      "has_flint",
+      "has_iron_gear_set",
       "has_iron_ingot",
-      "has_gold_ingot",
       "has_lever",
+      "has_tripwire_hook",
       "has_the_recipe"
     ]
   ]

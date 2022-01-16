@@ -214,6 +214,16 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_BRASS_FLARED_BARREL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_BRASS_FLARED_BARREL.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.WOOD_GEAR_SET.get());
+		withGeneratedParentAndDefaultTexture(ModItems.IRON_GEAR_SET.get());
+		withGeneratedParentAndDefaultTexture(ModItems.GOLD_GEAR_SET.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.WOOD_TRIGGER_ASSEMBLY.get());
+		withGeneratedParentAndDefaultTexture(ModItems.IRON_TRIGGER_ASSEMBLY.get());
+		withGeneratedParentAndDefaultTexture(ModItems.GOLD_TRIGGER_ASSEMBLY.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.MATCH_CORD.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.LEAD_INGOT.get());

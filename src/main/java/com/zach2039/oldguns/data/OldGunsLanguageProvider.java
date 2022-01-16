@@ -190,6 +190,16 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MEDIUM_BRASS_FLARED_BARREL, "Medium Brass Flared Barrel");
 		addItem(ModItems.LARGE_BRASS_FLARED_BARREL, "Large Brass Flared Barrel");
 		
+		addItem(ModItems.WOOD_GEAR_SET, "Wood Gear Set");
+		addItem(ModItems.IRON_GEAR_SET, "Iron Gear Set");
+		addItem(ModItems.GOLD_GEAR_SET, "Gold Gear Set");
+		
+		addItem(ModItems.WOOD_TRIGGER_ASSEMBLY, "Wood Trigger Assembly");
+		addItem(ModItems.IRON_TRIGGER_ASSEMBLY, "Iron Trigger Assembly");
+		addItem(ModItems.GOLD_TRIGGER_ASSEMBLY, "Gold Trigger Assembly");
+		
+		addItem(ModItems.MATCH_CORD, "Match Cord");
+		
 		addItem(ModItems.IRON_BITS, "Iron Bits");
 		
 		addItem(ModItems.LEAD_INGOT, "Lead Ingot");
@@ -203,8 +213,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.LIQUID_NITER, "Bottle of Liquid Niter");
 		addItem(ModItems.NITER, "Niter");
 		addItem(ModItems.SULFUR, "Sulfur");
-		addItem(ModItems.MEDIUM_GRADE_BLACK_POWDER, "Medium Grade Black Powder");
-		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High Grade Black Powder");
+		addItem(ModItems.MEDIUM_GRADE_BLACK_POWDER, "Medium-grade Black Powder");
+		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High-grade Black Powder");
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
@@ -258,8 +268,15 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	
 	private void addPatchouliEntries() {
 		addPatchouliBookLanding(OldGunsCompendiumLang.LANDING);
+		
 		addPatchouliBookCategory("basics", OldGunsCompendiumLang.Basics.NAME);
 		addPatchouliBookCategoryDescription("basics", OldGunsCompendiumLang.Basics.DESCRIPTION);
+		
+		addPatchouliBookCategory("firearms", OldGunsCompendiumLang.Firearms.NAME);
+		addPatchouliBookCategoryDescription("firearms", OldGunsCompendiumLang.Firearms.DESCRIPTION);
+		
+		addPatchouliBookCategory("black_powder_production", OldGunsCompendiumLang.BlackPowderProduction.NAME);
+		addPatchouliBookCategoryDescription("black_powder_production", OldGunsCompendiumLang.BlackPowderProduction.DESCRIPTION);
 		
 		addPatchouliBookEntry("basics.welcome", OldGunsCompendiumLang.Basics.Welcome.ENTRY);
 		addPatchouliBookPage("basics.welcome0", OldGunsCompendiumLang.Basics.Welcome.PAGE0);
@@ -279,6 +296,39 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addPatchouliBookEntry("basics.artillery", OldGunsCompendiumLang.Basics.Artillery.ENTRY);
 		addPatchouliBookPage("basics.artillery0", OldGunsCompendiumLang.Basics.Artillery.PAGE0);
+		
+		addPatchouliBookEntry("basics.design_notes", OldGunsCompendiumLang.Basics.DesignNotes.ENTRY);
+		addPatchouliBookPage("basics.design_notes0", OldGunsCompendiumLang.Basics.DesignNotes.PAGE0);
+		
+		addPatchouliBookEntry("firearms.general", OldGunsCompendiumLang.Firearms.General.ENTRY);
+		addPatchouliBookPage("firearms.general0", OldGunsCompendiumLang.Firearms.General.PAGE0);
+		addPatchouliBookPage("firearms.general1", OldGunsCompendiumLang.Firearms.General.PAGE1);
+		addPatchouliBookPage("firearms.general2", OldGunsCompendiumLang.Firearms.General.PAGE2);
+		addPatchouliBookPage("firearms.general3", OldGunsCompendiumLang.Firearms.General.PAGE3);
+		
+		addPatchouliBookEntry("black_powder_production.low_grade", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.ENTRY);
+		addPatchouliBookPage("black_powder_production.low_grade0", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.PAGE0);
+		addPatchouliBookPage("black_powder_production.low_grade1", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.PAGE1);
+		
+		addPatchouliBookEntry("black_powder_production.medium_grade", OldGunsCompendiumLang.BlackPowderProduction.MediumGrade.ENTRY);
+		addPatchouliBookPage("black_powder_production.medium_grade0", OldGunsCompendiumLang.BlackPowderProduction.MediumGrade.PAGE0);
+		addPatchouliBookPage("black_powder_production.medium_grade1", OldGunsCompendiumLang.BlackPowderProduction.MediumGrade.PAGE1);
+		
+		addPatchouliBookEntry("black_powder_production.high_grade", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.ENTRY);
+		addPatchouliBookPage("black_powder_production.high_grade0", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE0);
+		addPatchouliBookPage("black_powder_production.high_grade1", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE1);
+		addPatchouliBookPage("black_powder_production.high_grade2", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE2);
+		
+		addPatchouliBookEntry("black_powder_production.niter", OldGunsCompendiumLang.BlackPowderProduction.Niter.ENTRY);
+		addPatchouliBookPage("black_powder_production.niter0", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE0);
+		addPatchouliBookPage("black_powder_production.niter1", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE1);
+		addPatchouliBookPage("black_powder_production.niter2", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE2);
+		addPatchouliBookPage("black_powder_production.niter3", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE3);
+		
+		addPatchouliBookEntry("black_powder_production.sulfur", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.ENTRY);
+		addPatchouliBookPage("black_powder_production.sulfur0", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.PAGE0);
+		addPatchouliBookPage("black_powder_production.sulfur1", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.PAGE1);
+		
 	}
 
 	private void addMisc() {

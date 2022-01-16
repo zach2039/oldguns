@@ -57,6 +57,13 @@ public class FirearmType {
 	
 	public static enum FirearmPart
 	{
+		MATCH_CORD,
+		WOOD_GEAR_SET,
+		IRON_GEAR_SET,
+		GOLD_GEAR_SET,
+		WOOD_TRIGGER_ASSEMBLY,
+		IRON_TRIGGER_ASSEMBLY,
+		GOLD_TRIGGER_ASSEMBLY,
 		SMALL_HANDLE,
 		MEDIUM_HANDLE,
 		LARGE_HANDLE,
@@ -89,3 +96,4 @@ public class FirearmType {
 	}
 
 }
+

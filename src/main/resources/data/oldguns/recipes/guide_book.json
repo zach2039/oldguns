@@ -1,0 +1,22 @@
+{
+	"conditions": [
+		{
+			"modid": "patchouli",
+			"type": "forge:mod_loaded"
+		}
+	],
+	"type": "minecraft:crafting_shapeless",
+	"ingredients": [
+	    {"item": "minecraft:leather"},
+	    {"item": "minecraft:paper"},
+	    {"item": "minecraft:paper"},
+	    {"item": "minecraft:paper"},
+	    {"item": "minecraft:gunpowder"}
+	],
+	"result": {
+		"item": "patchouli:guide_book",
+		"nbt": {
+			"patchouli:book": "oldguns:compendium"
+		}
+	}
+}

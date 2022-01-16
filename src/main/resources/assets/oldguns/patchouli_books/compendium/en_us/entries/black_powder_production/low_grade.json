@@ -1,0 +1,16 @@
+{
+	"name": "oldguns.entry.black_powder_production.low_grade",
+	"category": "oldguns:firearms",
+	"icon": "minecraft:gunpowder",
+	"sortnum": 1,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.low_grade0"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.low_grade1"
+		}
+	]
+}

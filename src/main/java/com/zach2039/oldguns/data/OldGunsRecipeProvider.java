@@ -3,6 +3,7 @@ package com.zach2039.oldguns.data;
 import java.util.function.Consumer;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.data.crafting.recipe.EnhancedShapelessRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmRepairRecipeBuilder;
@@ -21,9 +22,11 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
+import vazkii.patchouli.api.PatchouliAPI;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -1732,23 +1735,157 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_wooden_stock"));
 		}
 		
+		// Create wood gear set
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WOOD_GEAR_SET.get(), 2)
+					.pattern(" S ")
+					.pattern("SPS")
+					.pattern(" S ")
+					.define('S', ItemTags.WOODEN_SLABS)
+					.define('P', ItemTags.PLANKS)
+					.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+					.unlockedBy("has_plank", has(ItemTags.PLANKS))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wood_gear_set"));
+		}
+		
+		// Create iron gear set
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.IRON_GEAR_SET.get(), 2)
+					.pattern(" i ")
+					.pattern("iIi")
+					.pattern(" i ")
+					.define('i', Tags.Items.NUGGETS_IRON)
+					.define('I', Tags.Items.INGOTS_IRON)
+					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "iron_gear_set"));
+		}
+		
+		// Create gold gear set
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.GOLD_GEAR_SET.get(), 2)
+					.pattern(" g ")
+					.pattern("gGg")
+					.pattern(" g ")
+					.define('g', Tags.Items.NUGGETS_GOLD)
+					.define('G', Tags.Items.INGOTS_GOLD)
+					.unlockedBy("has_gold_nugget", has(Tags.Items.NUGGETS_GOLD))
+					.unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "gold_gear_set"));
+		}
+		
+		// Create wood trigger assembly
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WOOD_TRIGGER_ASSEMBLY.get())
+					.pattern(" S ")
+					.pattern("PEP")
+					.pattern("  L")
+					.define('E', ModTags.Items.WOOD_GEAR_SET)
+					.define('P', ItemTags.PLANKS)
+					.define('S', Tags.Items.RODS_WOODEN)
+					.define('L', Items.LEVER)
+					.unlockedBy("has_wood_gear_set", has(ModTags.Items.WOOD_GEAR_SET))
+					.unlockedBy("has_plank", has(ItemTags.PLANKS))
+					.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+					.unlockedBy("has_lever", has(Items.LEVER))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wood_trigger_assembly"));
+		}
+		
+		// Create iron trigger assembly
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.IRON_TRIGGER_ASSEMBLY.get())
+					.pattern(" T ")
+					.pattern("IEI")
+					.pattern("  L")
+					.define('E', ModTags.Items.IRON_GEAR_SET)
+					.define('I', Tags.Items.INGOTS_IRON)
+					.define('L', Items.LEVER)
+					.define('T', Items.TRIPWIRE_HOOK)
+					.unlockedBy("has_iron_gear_set", has(ModTags.Items.IRON_GEAR_SET))
+					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.unlockedBy("has_lever", has(Items.LEVER))
+					.unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "iron_trigger_assembly"));
+		}
+		
+		// Create gold trigger assembly
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.GOLD_TRIGGER_ASSEMBLY.get())
+					.pattern(" T ")
+					.pattern("GEG")
+					.pattern("  L")
+					.define('E', ModTags.Items.GOLD_GEAR_SET)
+					.define('G', Tags.Items.INGOTS_GOLD)
+					.define('L', Items.LEVER)
+					.define('T', Items.TRIPWIRE_HOOK)
+					.unlockedBy("has_gold_gear_set", has(ModTags.Items.GOLD_GEAR_SET))
+					.unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
+					.unlockedBy("has_lever", has(Items.LEVER))
+					.unlockedBy("has_tripwire_hook", has(Items.TRIPWIRE_HOOK))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "gold_trigger_assembly"));
+		}
+		
+		// Create match cord
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MATCH_CORD.get())
+					.requires(Tags.Items.STRING)
+					.requires(Items.TORCH)			
+					.unlockedBy("has_string", has(Tags.Items.STRING))
+					.unlockedBy("has_torch", has(Items.TORCH))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "match_cord"));
+		}
+		
+		// Create matchlock mechanism
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MATCHLOCK_MECHANISM.get())
+					.pattern(" M ")
+					.pattern("STS")
+					.pattern(" E ")
+					.define('M', ModTags.Items.MATCH_CORD)
+					.define('S', Tags.Items.STONE)
+					.define('T', ModTags.Items.WOOD_TRIGGER_ASSEMBLY)
+					.define('E', ModTags.Items.WOOD_GEAR_SET)
+					.unlockedBy("has_match_cord", has(ModTags.Items.MATCH_CORD))
+					.unlockedBy("has_stone", has(Tags.Items.STONE))
+					.unlockedBy("has_wood_trigger_assembly", has(ModTags.Items.WOOD_TRIGGER_ASSEMBLY))
+					.unlockedBy("has_wood_gear_set", has(ModTags.Items.WOOD_GEAR_SET))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_mechansim"));
+		}
+		
+		// Create wheellock mechanism
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_MECHANISM.get())
+					.pattern("EFE")
+					.pattern("ITI")
+					.pattern(" E ")
+					.define('F', Items.FLINT)
+					.define('I', Tags.Items.INGOTS_IRON)
+					.define('T', ModTags.Items.IRON_TRIGGER_ASSEMBLY)
+					.define('E', ModTags.Items.IRON_GEAR_SET)
+					.unlockedBy("has_flint", has(Items.FLINT))
+					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.unlockedBy("has_iron_trigger_assembly", has(ModTags.Items.IRON_TRIGGER_ASSEMBLY))
+					.unlockedBy("has_iron_gear_set", has(ModTags.Items.IRON_GEAR_SET))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_mechansim"));
+		}
+		
 		// Create flintlock mechanism
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.FLINTLOCK_MECHANISM.get())
-					.pattern("  F")
-					.pattern("IGL")
-					.pattern(" R ")
+					.pattern(" FL")
+					.pattern("GTG")
+					.pattern(" E ")
 					.define('F', Items.FLINT)
-					.define('I', Tags.Items.INGOTS_IRON)
-					.define('G', Tags.Items.INGOTS_GOLD)
 					.define('L', Items.LEVER)
-					.define('R', Tags.Items.RODS_WOODEN)
-					.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+					.define('G', Tags.Items.INGOTS_GOLD)
+					.define('T', ModTags.Items.GOLD_TRIGGER_ASSEMBLY)
+					.define('E', ModTags.Items.GOLD_GEAR_SET)
 					.unlockedBy("has_flint", has(Items.FLINT))
-					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
-					.unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
 					.unlockedBy("has_lever", has(Items.LEVER))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_mechanism"));
+					.unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
+					.unlockedBy("has_gold_trigger_assembly", has(ModTags.Items.GOLD_TRIGGER_ASSEMBLY))
+					.unlockedBy("has_gold_gear_set", has(ModTags.Items.GOLD_GEAR_SET))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_mechansim"));
 		}
 		
 		// Tools
@@ -1777,6 +1914,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_stone", has(Tags.Items.STONE))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "mortar_and_pestle"));
 		}
+		
 	}
 	
 	@Override
