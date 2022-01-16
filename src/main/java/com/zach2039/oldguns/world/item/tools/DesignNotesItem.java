@@ -32,7 +32,7 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 		if (this.allowdedIn(tab)) {
 
 			ItemStack stackBase = new ItemStack(this);
-			OldGunsConfig.COMMON.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
+			OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
 				stackList.add(IDesignNotes.setDesignTagOnItem(stackBase, e));
 			});
 			

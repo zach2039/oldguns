@@ -209,7 +209,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	@Override
 	public void inventoryTick(ItemStack stackIn, Level levelIn, Entity entityIn, int slot, boolean par5) {
 
-		if (OldGunsConfig.COMMON.firearmSettings.hugeFirearmDebuffs.get()) {
+		if (OldGunsConfig.SERVER.firearmSettings.hugeFirearmDebuffs.get()) {
 			// Apply huge firearm debuffs for balancing reasons
 			if (entityIn instanceof Player)
 			{

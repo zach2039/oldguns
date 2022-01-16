@@ -7,7 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
 public class LargeIronBirdshotItem extends FirearmAmmoItem implements IFirearmAmmo {
 
-	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.ammoSettings.large_iron_birdshot;
+	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.SERVER.firearmSettings.ammoSettings.large_iron_birdshot;
 	
 	public LargeIronBirdshotItem() {
 		super((FirearmAmmoProperties) new FirearmAmmoProperties()

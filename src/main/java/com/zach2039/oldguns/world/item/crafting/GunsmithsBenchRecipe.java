@@ -18,7 +18,7 @@ public interface GunsmithsBenchRecipe extends Recipe<GunsmithsBenchCraftingConta
 	}
 	
 	default boolean requiresDesignNotes(Item item) {
-		return OldGunsConfig.COMMON.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(item.getRegistryName().toString());
+		return OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(item.getRegistryName().toString());
 	}
 	
 	default NonNullList<ItemStack> getRemainingItems(final GunsmithsBenchCraftingContainer inv) {

@@ -28,7 +28,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class WetHighGradeBlackPowderCakeBlock extends Block {
-	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.COMMON.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
+	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 
 	public static final BooleanProperty DRY = BooleanProperty.create("dry");
 	

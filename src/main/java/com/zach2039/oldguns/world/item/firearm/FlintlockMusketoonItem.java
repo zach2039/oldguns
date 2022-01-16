@@ -21,7 +21,7 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FlintlockMusketoonItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlockSettings.flintlock_musketoon;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.SERVER.firearmSettings.flintlockSettings.flintlock_musketoon;
 	
 	public FlintlockMusketoonItem()
 	{		

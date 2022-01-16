@@ -31,7 +31,7 @@ import net.minecraft.world.phys.Vec3;
 
 public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	
-	private static final NiterProductionSettings NITER_PRODUCTION_SETTINGS = OldGunsConfig.COMMON.recipeSettings.blackPowderManufactureSettings.niterProductionSettings;
+	private static final NiterProductionSettings NITER_PRODUCTION_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.niterProductionSettings;
 	
 	public static final int MIN_FILL_LEVEL = 1;
 	public static final int MAX_FILL_LEVEL = 3;

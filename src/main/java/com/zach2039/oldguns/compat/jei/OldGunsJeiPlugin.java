@@ -1,5 +1,8 @@
 package com.zach2039.oldguns.compat.jei;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
@@ -10,6 +13,7 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
+import com.zach2039.oldguns.world.item.material.LiquidNiterItem;
 import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
 
 import mezz.jei.api.IModPlugin;
@@ -26,12 +30,19 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
+import mezz.jei.plugins.vanilla.brewing.BrewingRecipeUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.PotionItem;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraftforge.common.brewing.BrewingRecipeRegistry;
+import net.minecraftforge.common.brewing.IBrewingRecipe;
 
 @JeiPlugin
 public class OldGunsJeiPlugin implements IModPlugin {
@@ -79,6 +90,10 @@ public class OldGunsJeiPlugin implements IModPlugin {
 					.filter(OldGunsJeiPlugin::isGunsmithsBenchRecipe)
 					.collect(Collectors.toList()), GunsmithsBenchRecipeCategory.UID);
 		}
+
+		List<ItemStack> niterPotionIns = new ArrayList<ItemStack>();
+		niterPotionIns.add(ModItems.NITRATE_SOIL.get().getDefaultInstance());
+		
 	}
 
 	@Override
@@ -98,7 +113,7 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerAdvanced(IAdvancedRegistration registration) {
-
+		
 	}
 
 	@Override

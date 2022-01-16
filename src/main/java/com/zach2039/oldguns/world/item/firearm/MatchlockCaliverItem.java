@@ -21,7 +21,7 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class MatchlockCaliverItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.matchlockSettings.matchlock_caliver;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.SERVER.firearmSettings.matchlockSettings.matchlock_caliver;
 	
 	public MatchlockCaliverItem()
 	{		

@@ -21,7 +21,7 @@ public class LootSpawnMechanismsLootCondition implements LootItemCondition {
 	
 	@Override
 	public boolean test(LootContext p_81930_) {
-		return OldGunsConfig.COMMON.lootSettings.allowMechanismsInLoot.get();
+		return OldGunsConfig.SERVER.lootSettings.allowMechanismsInLoot.get();
 	}
 
 	public static LootItemCondition.Builder builder() {

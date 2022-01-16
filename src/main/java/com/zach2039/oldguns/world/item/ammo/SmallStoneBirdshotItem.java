@@ -7,7 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
 public class SmallStoneBirdshotItem extends FirearmAmmoItem implements IFirearmAmmo {
 
-	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.ammoSettings.small_stone_birdshot;
+	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.SERVER.firearmSettings.ammoSettings.small_stone_birdshot;
 	
 	public SmallStoneBirdshotItem() {
 		super((FirearmAmmoProperties) new FirearmAmmoProperties()

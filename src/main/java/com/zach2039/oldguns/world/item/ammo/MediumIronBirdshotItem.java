@@ -7,7 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
 public class MediumIronBirdshotItem extends FirearmAmmoItem implements IFirearmAmmo {
 
-	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.COMMON.firearmSettings.ammoSettings.medium_iron_birdshot;
+	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.SERVER.firearmSettings.ammoSettings.medium_iron_birdshot;
 	
 	public MediumIronBirdshotItem() {
 		super((FirearmAmmoProperties) new FirearmAmmoProperties()

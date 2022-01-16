@@ -31,7 +31,7 @@ public interface IDesignNotes {
 	}	
 	
 	static boolean hasDesignNotes(Item item) {
-		return OldGunsConfig.COMMON.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(item.asItem().getRegistryName().toString());
+		return OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(item.asItem().getRegistryName().toString());
 	}
 	
 	static ItemStack getDesignNotesForItem(Item item) {

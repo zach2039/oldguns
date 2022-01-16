@@ -33,7 +33,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class NiterBeddingBlock extends Block {
 
-	private static final NiterProductionSettings NITER_PRODUCTION_SETTINGS = OldGunsConfig.COMMON.recipeSettings.blackPowderManufactureSettings.niterProductionSettings;
+	private static final NiterProductionSettings NITER_PRODUCTION_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.niterProductionSettings;
 	
 	public static final int MAX_REFUSE_AMOUNT = 9;
 	public static final Property<Integer> REFUSE_AMOUNT = IntegerProperty.create("refuse_amount", 0, MAX_REFUSE_AMOUNT);

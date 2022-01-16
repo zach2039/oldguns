@@ -21,7 +21,7 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FlintlockNockGunItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlockSettings.flintlock_nock_gun;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.SERVER.firearmSettings.flintlockSettings.flintlock_nock_gun;
 	
 	public FlintlockNockGunItem()
 	{		

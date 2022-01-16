@@ -22,7 +22,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class HighGradeBlackPowderBlock extends FallingBlock {
-	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.COMMON.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
+	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public HighGradeBlackPowderBlock() {
 		super(BlockBehaviour.Properties.of(ModMaterials.BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());

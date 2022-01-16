@@ -21,7 +21,7 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FlintlockBlunderbussPistolItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.flintlockSettings.flintlock_blunderbuss_pistol;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.SERVER.firearmSettings.flintlockSettings.flintlock_blunderbuss_pistol;
 	
 	public FlintlockBlunderbussPistolItem()
 	{		

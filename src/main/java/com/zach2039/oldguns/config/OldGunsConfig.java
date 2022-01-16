@@ -15,16 +15,31 @@ import net.minecraftforge.fml.config.ModConfig;
 
 public class OldGunsConfig {
 	
+	public static class Client {
+		Client(final ForgeConfigSpec.Builder builder) {
+			builder.comment("Client-only settings")
+					.push("client");
+
+			builder.pop();
+		}
+	}
+	
 	public static class Common {
-		public final BooleanValue patchRecipeBook;
 		public final BooleanValue printDebugMessages;
-		public final RecipeSettings recipeSettings;
-		public final LootSettings lootSettings;
-		public final FirearmSettings firearmSettings;
+		public final BooleanValue patchRecipeBook;
 		
 		Common(final ForgeConfigSpec.Builder builder) {
 			builder.comment("Common config settings")
-					.push("common");			
+					.push("common");
+			
+			builder.comment(
+					"IMPORTANT NOTICE:",
+					"THIS IS ONLY THE COMMON CONFIG. It does not contain all the values adjustable for Old Guns.",
+					"All modifiers for recipes, firearms, and other things reside in oldguns-server.toml.",
+					"That file is PER WORLD, meaning you have to go into 'saves/<world name>/serverconfig' to adjust it. Those changes will then only apply for THAT WORLD.",
+					"You can then take that config file and put it in the 'defaultconfigs' folder to make it apply automatically to all NEW worlds you generate FROM THERE ON.",
+					"This is a sensible way to handle configuration, because the server configuration is synced when playing multiplayer."
+			).define("importantInfo", true);
 
 			printDebugMessages = builder
 					.comment("Print debug messages to console")
@@ -33,6 +48,20 @@ public class OldGunsConfig {
 			patchRecipeBook = builder
 					.comment("Patch vanilla recipe book to handle NBT items")
 					.define("patchRecipeBook", true);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class Server {
+		public final RecipeSettings recipeSettings;
+		public final LootSettings lootSettings;
+		public final FirearmSettings firearmSettings;
+		
+		Server(final ForgeConfigSpec.Builder builder) {
+			builder.comment("Server config settings")
+					.push("server");			
+
 			
 			recipeSettings = new RecipeSettings(
 					builder,
@@ -53,14 +82,7 @@ public class OldGunsConfig {
 		}
 	}
 	
-	public static class Client {
-		Client(final ForgeConfigSpec.Builder builder) {
-			builder.comment("Client-only settings")
-					.push("client");
-
-			builder.pop();
-		}
-	}
+	
 	
 	public static class LootSettings {
 		public final BooleanValue allowDesignNotesInLoot;
@@ -1141,6 +1163,15 @@ public class OldGunsConfig {
 		}
 	}
 	
+	private static final ForgeConfigSpec serverSpec;
+	public static final Server SERVER;
+
+	static {
+		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
+		serverSpec = specPair.getRight();
+		SERVER = specPair.getLeft();
+	}
+	
 	private static final ForgeConfigSpec commonSpec;
 	public static final Common COMMON;
 
@@ -1161,6 +1192,7 @@ public class OldGunsConfig {
 	}
 	
 	public static void register(final ModLoadingContext context) {
+		context.registerConfig(ModConfig.Type.SERVER, serverSpec);
 		context.registerConfig(ModConfig.Type.COMMON, commonSpec);
 		context.registerConfig(ModConfig.Type.CLIENT, clientSpec);
 	}

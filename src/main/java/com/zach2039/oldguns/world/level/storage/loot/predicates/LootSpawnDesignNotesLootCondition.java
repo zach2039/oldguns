@@ -21,7 +21,7 @@ public class LootSpawnDesignNotesLootCondition implements LootItemCondition {
 	
 	@Override
 	public boolean test(LootContext p_81930_) {
-		return OldGunsConfig.COMMON.lootSettings.allowDesignNotesInLoot.get();
+		return OldGunsConfig.SERVER.lootSettings.allowDesignNotesInLoot.get();
 	}
 
 	public static LootItemCondition.Builder builder() {

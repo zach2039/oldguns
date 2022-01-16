@@ -21,7 +21,7 @@ import net.minecraft.world.level.material.Material;
 
 public class WetMediumGradeBlackPowderBlock extends Block {
 
-	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.COMMON.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
+	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public WetMediumGradeBlackPowderBlock() {
 		super(BlockBehaviour.Properties.of(ModMaterials.WET_BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());

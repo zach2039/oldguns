@@ -24,7 +24,7 @@ public class CanCraftWheellockWeaponsCondition implements ICondition
     @Override
     public boolean test()
     {
-        return OldGunsConfig.COMMON.recipeSettings.allowMatchlockWeaponsCrafting.get();
+        return OldGunsConfig.SERVER.recipeSettings.allowMatchlockWeaponsCrafting.get();
     }
 
     @Override

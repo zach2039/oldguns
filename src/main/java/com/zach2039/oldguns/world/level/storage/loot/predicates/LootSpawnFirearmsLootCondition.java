@@ -21,7 +21,7 @@ public class LootSpawnFirearmsLootCondition implements LootItemCondition {
 	
 	@Override
 	public boolean test(LootContext p_81930_) {
-		return OldGunsConfig.COMMON.lootSettings.allowFirearmsInLoot.get();
+		return OldGunsConfig.SERVER.lootSettings.allowFirearmsInLoot.get();
 	}
 
 	public static LootItemCondition.Builder builder() {

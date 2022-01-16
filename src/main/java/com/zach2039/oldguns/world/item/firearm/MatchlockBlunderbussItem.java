@@ -21,7 +21,7 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class MatchlockBlunderbussItem extends FirearmItem implements IFirearm {
 	
-	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.COMMON.firearmSettings.matchlockSettings.matchlock_blunderbuss;
+	private static final MuzzleloadingFirearmAttributes firearmAttributes = OldGunsConfig.SERVER.firearmSettings.matchlockSettings.matchlock_blunderbuss;
 	
 	public MatchlockBlunderbussItem()
 	{		
