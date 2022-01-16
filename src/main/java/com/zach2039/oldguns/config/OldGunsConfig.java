@@ -250,7 +250,7 @@ public class OldGunsConfig {
 			
 			lowRefuseAnimals = builder
 					.comment("A list of animal entities that will produce a modest amount of refuse for nitrated soil production")
-					.define("lowRefuseAnimals", Arrays.asList(new String[] { "entity.minecraft.pig", "entity.minecraft.sheep", "entity.minecraft.llama" }));
+					.define("lowRefuseAnimals", Arrays.asList(new String[] { "entity.minecraft.chicken", "entity.minecraft.pig", "entity.minecraft.sheep", "entity.minecraft.llama" }));
 			
 			highRefuseAnimals = builder
 					.comment("A list of animal entities that will produce a large amount of refuse for nitrated soil production")

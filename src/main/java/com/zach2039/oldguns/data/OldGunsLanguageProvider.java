@@ -68,17 +68,17 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addBlock(ModBlocks.LIQUID_NITER_CAULDRON, "Cauldron of Liquid Niter");
 		
-		addBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE, "Wet High Grade Black Powder Cake");
+		addBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE, "Wet High-grade Black Powder Cake");
 		
-		addBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE, "High Grade Black Powder Cake");
+		addBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE, "High-grade Black Powder Cake");
 		
-		addBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK, "Block of High Grade Black Powder");
+		addBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK, "Block of High-grade Black Powder");
 		
-		addBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK, "Block of Wet High Grade Black Powder");
+		addBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK, "Block of Wet High-grade Black Powder");
 		
-		addBlock(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Medium Grade Black Powder");
+		addBlock(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Medium-grade Black Powder");
 		
-		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium Grade Black Powder");
+		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium-grade Black Powder");
 	}
 
 	private void addItems() {
@@ -315,13 +315,15 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addPatchouliBookPage("black_powder_production.medium_grade1", OldGunsCompendiumLang.BlackPowderProduction.MediumGrade.PAGE1);
 		
 		addPatchouliBookEntry("black_powder_production.high_grade", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.ENTRY);
+		addPatchouliBookLang("black_powder_production.pressing", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PRESSING);
+		addPatchouliBookLang("black_powder_production.high_grade_cake", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.HIGH_GRADE_CAKE);
 		addPatchouliBookPage("black_powder_production.high_grade0", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE0);
 		addPatchouliBookPage("black_powder_production.high_grade1", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE1);
-		addPatchouliBookPage("black_powder_production.high_grade2", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE2);
+		addPatchouliBookPage("black_powder_production.high_grade3", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.PAGE3);
 		
 		addPatchouliBookEntry("black_powder_production.niter", OldGunsCompendiumLang.BlackPowderProduction.Niter.ENTRY);
+		addPatchouliBookLang("black_powder_production.crystalization", OldGunsCompendiumLang.BlackPowderProduction.Niter.CRYSTALIZATION);
 		addPatchouliBookPage("black_powder_production.niter0", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE0);
-		addPatchouliBookPage("black_powder_production.niter1", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE1);
 		addPatchouliBookPage("black_powder_production.niter2", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE2);
 		addPatchouliBookPage("black_powder_production.niter3", OldGunsCompendiumLang.BlackPowderProduction.Niter.PAGE3);
 		
@@ -351,6 +353,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	
 	private void addPatchouliBookPage(final String key, final String value) {		
 		add("oldguns.page." + key, value);
+	}
+	
+	private void addPatchouliBookLang(final String key, final String value) {		
+		add("oldguns.lang." + key, value);
 	}
 	
 	private void addPatchouliBookEntry(final String key, final String value) {

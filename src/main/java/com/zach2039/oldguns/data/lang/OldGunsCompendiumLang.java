@@ -46,7 +46,7 @@ public class OldGunsCompendiumLang {
 			
 			public static final String PAGE0 = "Black Powder is an important alchemical output used in $(l:basics/firearms)Firearms$(/l), $(l:basics/artillery)Artillery$(/l), and other explosive tools.$(br)$(br)"
 					+ "Black Powder has grades of low, medium, and high. Normal gunpowder is low grade. Firearms and artillery can require certain grades.$(br)$(br)"
-					+ "See $(l:black_powder_production)Black Powder Production$(/l) for more details.";
+					+ "See $(l:black_powder_production/low_grade)Black Powder Production$(/l) for more details.";
 	
 		}
 		
@@ -123,7 +123,7 @@ public class OldGunsCompendiumLang {
 		
 		public static class LowGrade {
 			
-			public static final String ENTRY = "Low-grade Black Powder";
+			public static final String ENTRY = "Lo-grade Blk Powder";
 			
 			public static final String PAGE0 = "Low-grade Black Powder is the most basic type of black powder available for firearms. "
 					+ "Normal gunpowder found in the world can be considered low-grade; it has weaker explosive properties, "
@@ -135,7 +135,7 @@ public class OldGunsCompendiumLang {
 		
 		public static class MediumGrade {
 			
-			public static final String ENTRY = "Medium-grade Black Powder";
+			public static final String ENTRY = "Med-grade Blk Powder";
 			
 			public static final String PAGE0 = "Medium-grade Black Powder is more potent black powder for firearms; while production is more involved "
 					+ "than with Low-grade Black Powder, this propellant offers higher performance and is required in mid-tier firearms";
@@ -147,15 +147,20 @@ public class OldGunsCompendiumLang {
 		
 		public static class HighGrade {
 			
-			public static final String ENTRY = "High-grade Black Powder";
+			public static final String ENTRY = "Hi-grade Blk Powder";
 			
-			public static final String PAGE0 = "High-grade Black Powder is the most refined and potent form of black powder, and is required in high-tier firearms.";
+			public static final String PRESSING = "Corning Press";
 			
-			public static final String PAGE1 = "High-grade Black Powder is derived from wet medium-grade black powder via a process called \"Corning\". "
-					+ "Corning black powder involves crushing wet powder into a cake and leaving it to dry in the sun; the cake is broken after drying, "
-					+ "which provides more weight per volume, a more durable powder, and a reliabile burn rate.";
+			public static final String HIGH_GRADE_CAKE = "Black Powder Cake";
 			
-			public static final String PAGE2 = "To create a Wet Cake of High-grade Black Powder, one must crush a Block of Wet Medium-grade Black Powder "
+			public static final String PAGE0 = "High-grade Black Powder is the most refined and potent form of black powder, and is required in high-tier firearms. " +
+					"High-grade Black Powder is derived from wet medium-grade black powder via a process called \"Corning\". " +
+					"Corning black powder involves crushing wet powder into a cake and leaving it to dry in the sun. " +
+					"Corning provides more weight per volume, a more durable powder, and a reliabile burn rate."; 
+			
+			public static final String PAGE1 = "The cake is broken into powder after drying.";
+			
+			public static final String PAGE3 = "To create a Wet Cake of High-grade Black Powder, one must crush a Block of Wet Medium-grade Black Powder "
 					+ "using a piston and an Obsidian block as a crushing surface.";
 			
 		}
@@ -164,11 +169,11 @@ public class OldGunsCompendiumLang {
 			
 			public static final String ENTRY = "Niter";
 			
-			public static final String PAGE0 = "Niter (or Saltpeter) is an oxidizer used in black powder. Niter must be crystalized from Liquid Niter in a "
-					+ "boiling Cauldron.";
+			public static final String CRYSTALIZATION = "Crystalization";
 			
-			public static final String PAGE1 = "A Cauldron of Liquid Niter is boiled by placing a suitable heat source beneath the Cauldron; when the process "
-					+ "begins, an audible boiling noise can be heard and bubbles will appear.";
+			public static final String PAGE0 = "Niter (or Saltpeter) is an oxidizer used in black powder. Niter must be crystalized from Liquid Niter in a "
+					+ "boiling Cauldron. $(br)$(br)A Cauldron of Liquid Niter is boiled by placing a suitable heat source beneath the Cauldron; when the "
+					+ "process begins, an audible boiling noise can be heard and bubbles will appear.";
 			
 			public static final String PAGE2 = "To collect Liquid Niter, once must brew Nitrated Soil gathed from Niter Bedding in a brewing stand with "
 					+ "Water Bottles beneath, leaching the Niter from the soil.";
