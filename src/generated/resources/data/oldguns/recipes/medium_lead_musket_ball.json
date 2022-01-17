@@ -2,9 +2,8 @@
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
   "pattern": [
-    " l ",
-    "lLl",
-    " l "
+    "Ll",
+    "lL"
   ],
   "key": {
     "l": {

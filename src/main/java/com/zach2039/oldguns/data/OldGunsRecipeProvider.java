@@ -1262,9 +1262,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create small iron musket ball
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_IRON_MUSKET_BALL.get(), 2)
-					.pattern(" i ")
-					.pattern("iii")
-					.pattern(" i ")
+					.pattern("ii")
+					.pattern("ii")
 					.define('i', Tags.Items.NUGGETS_IRON)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_iron_musket_ball"));
@@ -1273,9 +1272,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create medium iron musket ball
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_MUSKET_BALL.get(), 2)
-					.pattern(" i ")
-					.pattern("iIi")
-					.pattern(" i ")
+					.pattern("Ii")
+					.pattern("iI")
 					.define('i', Tags.Items.NUGGETS_IRON)
 					.define('I', Tags.Items.INGOTS_IRON)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
@@ -1286,9 +1284,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create large iron musket ball
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_IRON_MUSKET_BALL.get(), 2)
-					.pattern(" I ")
-					.pattern("III")
-					.pattern(" I ")
+					.pattern("II")
+					.pattern("II")
 					.define('I', Tags.Items.INGOTS_IRON)
 					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_musket_ball"));
@@ -1379,9 +1376,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create small lead musket ball
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_LEAD_MUSKET_BALL.get(), 2)
-					.pattern(" l ")
-					.pattern("lll")
-					.pattern(" l ")
+					.pattern("ll")
+					.pattern("ll")
 					.define('l', ModTags.Items.NUGGETS_LEAD)
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_musket_ball"));
@@ -1390,9 +1386,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create medium lead musket ball
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_LEAD_MUSKET_BALL.get(), 2)
-					.pattern(" l ")
-					.pattern("lLl")
-					.pattern(" l ")
+					.pattern("Ll")
+					.pattern("lL")
 					.define('l', ModTags.Items.NUGGETS_LEAD)
 					.define('L', ModTags.Items.INGOTS_LEAD)						
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
@@ -1403,9 +1398,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create large lead musket ball
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_LEAD_MUSKET_BALL.get(), 2)
-					.pattern(" L ")
-					.pattern("LLL")
-					.pattern(" L ")
+					.pattern("LL")
+					.pattern("LL")
 					.define('L', ModTags.Items.INGOTS_LEAD)	
 					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_musket_ball"));

@@ -82,6 +82,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addItems() {
+		addItem(ModItems.BOMBARD, "Bombard [WIP]");
+		
 		addItem(ModItems.MATCHLOCK_DERRINGER, "Matchlock Derringer");
 		addItem(ModItems.MATCHLOCK_PISTOL, "Matchlock Pistol");
 		addItem(ModItems.MATCHLOCK_ARQUEBUS, "Matchlock Arquebus");
@@ -229,6 +231,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addEntities() {
 		addEntityType(ModEntities.BULLET_PROJECTILE, "Projectile");
+		addEntityType(ModEntities.BOMBARD, "Bombard");
 	}
 
 	private void addPotions() {
