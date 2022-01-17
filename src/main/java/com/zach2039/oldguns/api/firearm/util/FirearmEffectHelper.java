@@ -7,22 +7,24 @@ import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
 import net.minecraft.client.audio.SoundSource;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.Mth;
+import net.minecraft.util.HandSide;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.entity.HumanoidArm;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.World;
 
 public class FirearmEffectHelper {
-	public static void doFirearmShootEffect(Level world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
+	public static void doFirearmShootEffect(World world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
 	{
 		/* Get player entity from entity reference. */
-		Player player;
+		PlayerEntity player;
 		boolean rightSide;	
-		if (shootingEntity instanceof Player)
+		if (shootingEntity instanceof PlayerEntity)
 		{
-			player = (Player)shootingEntity;
-			rightSide = (player.getMainArm() == HumanoidArm.RIGHT) && (HumanoidArm.values()[parameter] == HumanoidArm.RIGHT); 
+			player = (PlayerEntity)shootingEntity;
+			rightSide = (player.getMainArm() == HandSide.RIGHT) && (HandSide.values()[parameter] == HandSide.RIGHT); 
 		}
 		else
 		{
@@ -62,9 +64,9 @@ public class FirearmEffectHelper {
 			float range = 1.0f * (1.2f * (i + 1));
 			
 			// Get the position of the player's hand using trig.
-			float handX = -Mth.sin((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
-			float handY = -Mth.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F;
-			float handZ = Mth.cos((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
+			float handX = (float) (-Math.sin((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Math.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range);
+			float handY = (float) (-Math.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F);
+			float handZ = (float) (Math.cos((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Math.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range);
 			
 			// Calculate the actual position of the particles.
 			double particleX = posX + handX;
@@ -87,38 +89,38 @@ public class FirearmEffectHelper {
 		switch (effect)
 		{
 			case SMALL_FIREARM_SHOOT:
-				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case MEDIUM_FIREARM_SHOOT:
-				world.playLocalSound(posX, posY, posZ, ModSoundEvents.BULLET_SHOOT.get(), SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, ModSoundEvents.BULLET_SHOOT.get(), SoundCategory.PLAYERS,
 						25.0F, 3.0f / (new Random().nextFloat() * 0.6F + 1.2F), true);
-				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case LARGE_FIREARM_SHOOT:
-				world.playLocalSound(posX, posY, posZ, ModSoundEvents.BULLET_SHOOT.get(), SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, ModSoundEvents.BULLET_SHOOT.get(), SoundCategory.PLAYERS,
 						50.0F, 2.2f / (new Random().nextFloat() * 0.6F + 1.2F), true);
-				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			default:
-				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break; 
 		}
 		
 	}
 	
-	public static void doFirearmMisfireEffect(Level world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
+	public static void doFirearmMisfireEffect(World world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
 	{
 		/* Get player entity from entity reference. */
-		Player player;
+		PlayerEntity player;
 		boolean rightSide;	
-		if (shootingEntity instanceof Player)
+		if (shootingEntity instanceof PlayerEntity)
 		{
-			player = (Player)shootingEntity;
-			rightSide = (player.getMainArm() == HumanoidArm.RIGHT) && (HumanoidArm.values()[parameter] == HumanoidArm.RIGHT); 
+			player = (PlayerEntity)shootingEntity;
+			rightSide = (player.getMainArm() == HandSide.RIGHT) && (HandSide.values()[parameter] == HandSide.RIGHT); 
 		}
 		else
 		{
@@ -142,9 +144,9 @@ public class FirearmEffectHelper {
 			float range = 1.0f * (1.2f * (i + 1));
 			
 			// Get the position of the player's hand using trig.
-			float handX = -Mth.sin((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
-			float handY = -Mth.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F;
-			float handZ = Mth.cos((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
+			float handX = (float) (-Math.sin((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Math.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range);
+			float handY = (float) (-Math.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F);
+			float handZ = (float) (Math.cos((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Math.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range);
 			
 			// Calculate the actual position of the particles.
 			double particleX = posX + handX;
@@ -162,16 +164,16 @@ public class FirearmEffectHelper {
 		switch (effect)
 		{
 			case MISFIRE:
-				player.level.playLocalSound(posX, posY, posZ, SoundEvents.NOTE_BLOCK_HAT, SoundSource.PLAYERS,
+				player.level.playLocalSound(posX, posY, posZ, SoundEvents.NOTE_BLOCK_HAT, SoundCategory.PLAYERS,
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case MISFIRE_WET:
-				world.playLocalSound(posX, posY, posZ, SoundEvents.NOTE_BLOCK_HAT, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.NOTE_BLOCK_HAT, SoundCategory.PLAYERS,
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
-				world.playLocalSound(posX, posY, posZ, SoundEvents.FIRE_EXTINGUISH, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.FIRE_EXTINGUISH, SoundCategory.PLAYERS,
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 			case BREAK:
-				world.playLocalSound(posX, posY, posZ, SoundEvents.SHIELD_BREAK, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.SHIELD_BREAK, SoundCategory.PLAYERS,
 						0.5f, 0.25f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			default:
@@ -180,7 +182,7 @@ public class FirearmEffectHelper {
 		
 	}
 	
-	public static void doArtilleryShootEffect(Level world, Entity shootingEntity, ArtilleryEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
+	public static void doArtilleryShootEffect(World world, Entity shootingEntity, ArtilleryEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)
 	{		 
 		/* Create random number gen. */
 		Random rand = new Random();
@@ -205,9 +207,9 @@ public class FirearmEffectHelper {
 			float range = 1.0f * (1.2f * (i + 1));
 			
 			// Get the position of the player's hand using trig.
-			float handX = -Mth.sin((float) (((rotationYaw) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
-			float handY = -Mth.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F;
-			float handZ = Mth.cos((float) (((rotationYaw) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
+			float handX = (float) (-Math.sin((float) (((rotationYaw) / 180F) * 3.141593F)) * Math.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range);
+			float handY = (float) (-Math.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F);
+			float handZ = (float) (Math.cos((float) (((rotationYaw) / 180F) * 3.141593F)) * Math.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range);
 			
 			// Calculate the actual position of the particles.
 			double particleX = posX + handX;
@@ -230,13 +232,13 @@ public class FirearmEffectHelper {
 		switch (effect)
 		{
 			case CANNON_SHOT:
-				world.playLocalSound(posX, posY, posZ, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.LIGHTNING_BOLT_THUNDER, SoundCategory.PLAYERS,
 						10000.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
-				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 1.5f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			default:
-				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,
+				world.playLocalSound(posX, posY, posZ, SoundEvents.GENERIC_EXPLODE, SoundCategory.PLAYERS,
 						1.0f, 2.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 		}

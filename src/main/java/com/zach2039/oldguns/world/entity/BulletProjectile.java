@@ -94,20 +94,20 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	private int totalInGroundTime;
 	
 	
-	public BulletProjectile(EntityType<? extends BulletProjectile> entityType, Level world) {
+	public BulletProjectile(EntityType<? extends BulletProjectile> entityType, World world) {
 		super(entityType, world);
 		this.pickup = Pickup.DISALLOWED;
 		this.totalInGroundTime = 0;
 	}
 
-	public BulletProjectile(Level world, double x, double y, double z) {
+	public BulletProjectile(World world, double x, double y, double z) {
 		this(ModEntities.BULLET_PROJECTILE.get(), world);
 		this.pickup = Pickup.DISALLOWED;
 		this.moveTo(x, y, z, this.xRotO, this.yRotO);
 		this.setPos(x, y, z);
 	}
 	
-	public BulletProjectile(Level world, LivingEntity shooter) {
+	public BulletProjectile(World world, LivingEntity shooter) {
 		this(world, shooter.getX(), shooter.getEyeY() - (double)0.1F, shooter.getZ());		
 		this.setOwner(shooter);
 	}
@@ -184,7 +184,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	}
 	
 	@Override
-	public void setPierceLevel(byte p_36768_) {
+	public void setPierceWorld(byte p_36768_) {
 		this.entityData.set(PIERCE_LEVEL, p_36768_);
 	}
 	
@@ -209,7 +209,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	}
 	
 	@Override
-	public byte getPierceLevel() {
+	public byte getPierceWorld() {
 		return this.entityData.get(PIERCE_LEVEL);
 	}	
 	
@@ -278,7 +278,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		compound.putByte("pickup", (byte)this.pickup.ordinal());
 		compound.putDouble("damage", this.baseDamage);
 		compound.putBoolean("crit", this.isCritArrow());
-		compound.putByte("PierceLevel", this.getPierceLevel());
+		compound.putByte("PierceWorld", this.getPierceLevel());
 		compound.putString("SoundEvent", Registry.SOUND_EVENT.getKey(this.soundEvent).toString());
 		compound.putBoolean("ShotFromCrossbow", this.shotFromCrossbow());
 		compound.putFloat("projectileSize", getProjectileSize());
@@ -322,7 +322,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		
 		this.pickup = AbstractArrow.Pickup.byOrdinal(compound.getByte("pickup"));
 		this.setCritArrow(compound.getBoolean("crit"));
-		this.setPierceLevel(compound.getByte("PierceLevel"));
+		this.setPierceWorld(compound.getByte("PierceLevel"));
 		if (compound.contains("SoundEvent", Tag.TAG_STRING)) {
 			this.soundEvent = Registry.SOUND_EVENT.getOptional(new ResourceLocation(compound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
 		}
@@ -402,7 +402,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
         	i = i / 2;
         }
 
-		if (this.getPierceLevel() > 0) {
+		if (this.getPierceWorld() > 0) {
 			if (this.piercingIgnoreEntityIds == null) {
 				this.piercingIgnoreEntityIds = new IntOpenHashSet(5);
 			}
@@ -411,7 +411,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 				this.piercedAndKilledEntities = Lists.newArrayListWithCapacity(5);
 			}
 	
-			if (this.piercingIgnoreEntityIds.size() >= this.getPierceLevel() + 1) {
+			if (this.piercingIgnoreEntityIds.size() >= this.getPierceWorld() + 1) {
 				this.discard();
 				return;
 			}
@@ -449,7 +449,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 
 			if (entity instanceof LivingEntity) {
 				LivingEntity livingentity = (LivingEntity)entity;
-				if (!this.level.isClientSide && this.getPierceLevel() <= 0) {
+				if (!this.level.isClientSide && this.getPierceWorld() <= 0) {
 					//livingentity.setArrowCount(livingentity.getArrowCount() + 1);
 				}
 				
@@ -488,7 +488,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			}
 			
 			this.playSound(ModSoundEvents.BULLET_HIT_MOB.get(), 0.3F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
-			if (this.getPierceLevel() <= 0) {
+			if (this.getPierceWorld() <= 0) {
 				this.discard();
 			}
 		} else {
@@ -574,7 +574,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 				this.inGround = true;
 				this.shakeTime = 7;
 				this.setCritArrow(false);
-				this.setPierceLevel((byte)0);
+				this.setPierceWorld((byte)0);
 				this.setShotFromCrossbow(false);
 				this.resetPiercedEntities();
 			}
@@ -714,7 +714,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 					this.hasImpulse = true;
 				}
 
-				if (entityhitresult == null || this.getPierceLevel() <= 0) {
+				if (entityhitresult == null || this.getPierceWorld() <= 0) {
 					break;
 				}
 

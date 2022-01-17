@@ -1,8 +1,9 @@
 package com.zach2039.oldguns.api.artillery;
 
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.world.World;
 
 public interface IArtillery {
 
@@ -24,13 +25,13 @@ public interface IArtillery {
 	
 	ItemStack peekAmmoCharge();
 	
-	void setLoadedAmmoCharges(CompoundTag tag);
+	void setLoadedAmmoCharges(CompoundNBT tag);
 	
-	CompoundTag getLoadedAmmoCharges();
+	CompoundNBT getLoadedAmmoCharges();
 
-	void setLoadedAmmoProjectiles(CompoundTag tag);
+	void setLoadedAmmoProjectiles(CompoundNBT tag);
 	
-	CompoundTag getLoadedAmmoProjectiles();
+	CompoundNBT getLoadedAmmoProjectiles();
 	
 	void setFiringState(FiringState firingState);
 
@@ -74,5 +75,5 @@ public interface IArtillery {
 
 	float getBarrelYaw();
 
-	void doFiringEffect(Level level, Player player, double posX, double posY, double posZ);
+	void doFiringEffect(World level, PlayerEntity player, double posX, double posY, double posZ);
 }

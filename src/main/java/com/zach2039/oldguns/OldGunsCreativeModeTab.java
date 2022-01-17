@@ -2,11 +2,11 @@ package com.zach2039.oldguns;
 
 import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
-import net.minecraft.world.item.CreativeModeTab;
 
-public class OldGunsCreativeModeTab extends CreativeModeTab {
+public class OldGunsCreativeModeTab extends ItemGroup {
 	private final ItemStack itemstackIcon;
 	
 	public OldGunsCreativeModeTab()	{

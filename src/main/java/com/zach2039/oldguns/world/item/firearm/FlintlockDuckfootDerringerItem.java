@@ -54,7 +54,7 @@ public class FlintlockDuckfootDerringerItem extends FirearmItem implements IFire
 	}
 
 	@Override
-	public void doFiringEffect(Level worldIn, Entity shooter, ItemStack stackIn)
+	public void doFiringEffect(World worldIn, Entity shooter, ItemStack stackIn)
 	{
 		TargetPoint point = new PacketDistributor.TargetPoint(
 				shooter.xo, shooter.yo, shooter.zo, 1600d, shooter.level.dimension());

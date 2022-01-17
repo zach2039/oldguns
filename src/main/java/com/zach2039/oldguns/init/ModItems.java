@@ -117,6 +117,7 @@ import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
+import net.minecraft.item.Item.Properties;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.client.event.ColorHandlerEvent.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -133,7 +134,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author grilled-salmon
  */
 public class ModItems {
-	private static final DeferredRegister<net.minecraft.world.item.Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OldGuns.MODID);
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OldGuns.MODID);
 	
 	private static boolean isInitialized;
 	
@@ -450,31 +451,31 @@ public class ModItems {
 		);
 	
 	// Materials
-	public static final RegistryObject<IronBitsItem> IRON_BITS = ITEMS.register("iron_bits",
+	public static final RegistryObject<MaterialItem> IRON_BITS = ITEMS.register("iron_bits",
 			() -> new IronBitsItem()
 		);
 	
-	public static final RegistryObject<LeadIngotItem> LEAD_INGOT = ITEMS.register("lead_ingot",
+	public static final RegistryObject<MaterialItem> LEAD_INGOT = ITEMS.register("lead_ingot",
 			() -> new LeadIngotItem()
 		);
-	public static final RegistryObject<LeadNuggetItem> LEAD_NUGGET = ITEMS.register("lead_nugget",
+	public static final RegistryObject<MaterialItem> LEAD_NUGGET = ITEMS.register("lead_nugget",
 			() -> new LeadNuggetItem()
 		);
-	public static final RegistryObject<LeadBitsItem> LEAD_BITS = ITEMS.register("lead_bits",
+	public static final RegistryObject<MaterialItem> LEAD_BITS = ITEMS.register("lead_bits",
 			() -> new LeadBitsItem()
 		);
 	
-	public static final RegistryObject<BrassIngotItem> BRASS_INGOT = ITEMS.register("brass_ingot",
+	public static final RegistryObject<MaterialItem> BRASS_INGOT = ITEMS.register("brass_ingot",
 			() -> new BrassIngotItem()
 		);
-	public static final RegistryObject<BrassNuggetItem> BRASS_NUGGET = ITEMS.register("brass_nugget",
+	public static final RegistryObject<MaterialItem> BRASS_NUGGET = ITEMS.register("brass_nugget",
 			() -> new BrassNuggetItem()
 		);
 	
-	public static final RegistryObject<NitrateSoilItem> NITRATE_SOIL = ITEMS.register("nitrate_soil",
+	public static final RegistryObject<MaterialItem> NITRATE_SOIL = ITEMS.register("nitrate_soil",
 			() -> new NitrateSoilItem()
 		);	
-	public static final RegistryObject<LiquidNiterItem> LIQUID_NITER = ITEMS.register("liquid_niter",
+	public static final RegistryObject<MaterialItem> LIQUID_NITER = ITEMS.register("liquid_niter",
 			() -> new LiquidNiterItem()
 		);
 	public static final RegistryObject<NiterItem> NITER = ITEMS.register("niter",

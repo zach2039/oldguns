@@ -81,7 +81,7 @@ public class FirearmAmmoItem extends Item implements IFirearmAmmo {
 		return this.projectileEffectiveRange;
 	}
 	
-	public List<BulletProjectile> createProjectiles(Level worldIn, ItemStack stackIn, LivingEntity shooter)
+	public List<BulletProjectile> createProjectiles(World worldIn, ItemStack stackIn, LivingEntity shooter)
 	{
 		/* Create list to hold all projectile entities that this bullet makes when fired. */
 		List<BulletProjectile> projectileEntityList = new ArrayList<BulletProjectile>();

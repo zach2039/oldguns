@@ -6,9 +6,10 @@ import com.zach2039.oldguns.world.entity.BulletProjectile;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public interface IFirearmAmmo {
-	List<BulletProjectile> createProjectiles(Level worldIn, ItemStack stack, LivingEntity shooter);
+	List<BulletProjectile> createProjectiles(World worldIn, ItemStack stack, LivingEntity shooter);
 	
 	float getProjectileSize();
 	

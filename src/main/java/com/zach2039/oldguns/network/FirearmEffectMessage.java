@@ -64,7 +64,7 @@ public class FirearmEffectMessage {
                 if (ClientUtil.getClientPlayer() == null) return;
  
                 /* Get world of client. */
-    			Level world = ClientUtil.getClientPlayer().level;
+    			World world = ClientUtil.getClientPlayer().level;
     			
     			/* Only process effects if world isn't null. */
     			if (world != null)

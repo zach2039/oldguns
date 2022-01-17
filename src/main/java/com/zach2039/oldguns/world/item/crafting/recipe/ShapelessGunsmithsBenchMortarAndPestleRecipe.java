@@ -47,7 +47,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 	private ItemStack damageItem(final ItemStack stack) {
 		final Player craftingPlayer = ForgeHooks.getCraftingPlayer();
 
-		Level level = craftingPlayer.getCommandSenderWorld();
+		World level = craftingPlayer.getCommandSenderWorld();
 		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
 			ForgeEventFactory.onPlayerDestroyItem(craftingPlayer, stack, null);
 			return ItemStack.EMPTY;

@@ -10,12 +10,12 @@ import com.zach2039.oldguns.init.ModMaterials;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerWorld;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.context.BlockItemUseContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.WorldAccessor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 
 public class MediumGradeBlackPowderBlock extends FallingBlock {
@@ -27,7 +27,7 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerWorld level, BlockPos blockpos, Random rand) {
 		boolean canGetWet = level.isRainingAt(blockpos);
 		
 		if (canGetWet) {
@@ -42,7 +42,7 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	}
 	
 	@Override
-	public void onLand(Level level, BlockPos blockpos, BlockState stateA, BlockState stateB, FallingBlockEntity p_52072_) {
+	public void onLand(World level, BlockPos blockpos, BlockState stateA, BlockState stateB, FallingBlockEntity p_52072_) {
 		if (canGetWet(level, blockpos, stateB)) {
 			level.setBlock(blockpos, ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState(), 3);
 		}
@@ -63,8 +63,8 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
     }
 	
 	@Override
-	public BlockState getStateForPlacement(BlockPlaceContext stateContext) {
-		BlockGetter blockgetter = stateContext.getLevel();
+	public BlockState getStateForPlacement(BlockItemUseContext stateContext) {
+		BlockGetter blockgetter = stateContext.getWorld();
 		BlockPos blockpos = stateContext.getClickedPos();
 		BlockState blockstate = blockgetter.getBlockState(blockpos);
 		return canGetWet(blockgetter, blockpos, blockstate) ? ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState() : super.getStateForPlacement(stateContext);
@@ -98,7 +98,7 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateA, Direction facing, BlockState stateB, LevelAccessor level, BlockPos blockposA, BlockPos blockposB) {
+	public BlockState updateShape(BlockState stateA, Direction facing, BlockState stateB, WorldAccessor level, BlockPos blockposA, BlockPos blockposB) {
 		return touchesLiquid(level, blockposA) ? ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState() : super.updateShape(stateA, facing, stateB, level, blockposA, blockposB);
 	}
 

@@ -2,7 +2,7 @@ package com.zach2039.oldguns.capability.firearmempty;
 
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 
-import net.minecraft.nbt.ByteTag;
+import net.minecraft.nbt.ByteNBT;
 import net.minecraftforge.common.util.INBTSerializable;
 
 /**
@@ -13,7 +13,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * With additions by:
  * @author grilled-salmon
  */
-public class FirearmEmpty implements IFirearmEmpty, INBTSerializable<ByteTag> {
+public class FirearmEmpty implements IFirearmEmpty, INBTSerializable<ByteNBT> {
 	private boolean isEmpty;
 	
 	public FirearmEmpty(final boolean isEmpty) {
@@ -31,12 +31,12 @@ public class FirearmEmpty implements IFirearmEmpty, INBTSerializable<ByteTag> {
 	}
 
 	@Override
-	public ByteTag serializeNBT() {
-		return ByteTag.valueOf((byte)(this.isEmpty ? 1 : 0));
+	public ByteNBT serializeNBT() {
+		return ByteNBT.valueOf((byte)(this.isEmpty ? 1 : 0));
 	}
 
 	@Override
-	public void deserializeNBT(final ByteTag tag) {
+	public void deserializeNBT(final ByteNBT tag) {
 		this.isEmpty = (tag.getAsByte() != 0);
 	}
 }

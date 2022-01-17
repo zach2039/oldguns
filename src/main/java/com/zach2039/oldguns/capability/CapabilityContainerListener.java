@@ -5,9 +5,11 @@ import javax.annotation.Nullable;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
 
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -17,11 +19,11 @@ import net.minecraftforge.fml.network.PacketDistributor;
  * @param <HANDLER> The capability handler type to sync
  * @author Choonster
  */
-public abstract class CapabilityContainerListener<HANDLER> implements net.minecraft.world.inventory.ContainerListener {
+public abstract class CapabilityContainerListener<HANDLER> implements IContainerListener {
 	/**
 	 * The player.
 	 */
-	private final ServerPlayer player;
+	private final ServerPlayerEntity player;
 
 	/**
 	 * The {@link Capability} instance to update.
@@ -34,20 +36,20 @@ public abstract class CapabilityContainerListener<HANDLER> implements net.minecr
 	@Nullable
 	private final Direction facing;
 
-	public CapabilityContainerListener(final ServerPlayer player, final Capability<HANDLER> capability, @Nullable final Direction facing) {
+	public CapabilityContainerListener(final ServerPlayerEntity player, final Capability<HANDLER> capability, @Nullable final Direction facing) {
 		this.player = player;
 		this.capability = capability;
 		this.facing = facing;
 	}
 
 	@Override
-	public final void slotChanged(final AbstractContainerMenu menu, final int slotNumber, final ItemStack stack) {
+	public final void slotChanged(final Container menu, final int slotNumber, final ItemStack stack) {
 		if (!shouldSyncItem(stack)) {
 			return;
 		}
 
 		stack.getCapability(capability, facing).ifPresent(handler -> {
-			final UpdateMenuCapabilityMessage<HANDLER, ?> message = createUpdateMessage(menu.containerId, menu.incrementStateId(), slotNumber, handler);
+			final UpdateMenuCapabilityMessage<HANDLER, ?> message = createUpdateMessage(menu.containerId, slotNumber, handler);
 			if (message.hasData()) { // Don't send the message if there's nothing to update
 				OldGuns.network.send(PacketDistributor.PLAYER.with(() -> player), message);
 			}
@@ -55,7 +57,7 @@ public abstract class CapabilityContainerListener<HANDLER> implements net.minecr
 	}
 
 	@Override
-	public void dataChanged(final AbstractContainerMenu menu, final int variable, final int newValue) {
+	public void setContainerData(final Container menu, final int variable, final int newValue) {
 		// No-op
 	}
 
@@ -78,5 +80,5 @@ public abstract class CapabilityContainerListener<HANDLER> implements net.minecr
 	 * @param handler     The capability handler instance
 	 * @return The update message
 	 */
-	protected abstract UpdateMenuCapabilityMessage<HANDLER, ?> createUpdateMessage(final int containerID, final int stateID, final int slotNumber, final HANDLER handler);
+	protected abstract UpdateMenuCapabilityMessage<HANDLER, ?> createUpdateMessage(final int containerID, final int slotNumber, final HANDLER handler);
 }

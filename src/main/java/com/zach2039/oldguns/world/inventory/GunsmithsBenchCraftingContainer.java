@@ -1,22 +1,22 @@
 package com.zach2039.oldguns.world.inventory;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IRecipeHelperPopulator;
+import net.minecraft.inventory.ItemStackHelper;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.util.NonNullList;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.StackedContentsCompatible;
 
-public class GunsmithsBenchCraftingContainer implements Container, StackedContentsCompatible {
+public class GunsmithsBenchCraftingContainer implements IInventory, IRecipeHelperPopulator {
 	
 	private final NonNullList<ItemStack> items;
 	private final int width;
 	private final int height;
-	private final AbstractContainerMenu menu;
+	private final Container menu;
 
-	public GunsmithsBenchCraftingContainer(AbstractContainerMenu menu, int width, int height) {
+	public GunsmithsBenchCraftingContainer(Container menu, int width, int height) {
 		this.items = NonNullList.withSize((width * height) + 1, ItemStack.EMPTY);
 		this.menu = menu;
 		this.width = width;
@@ -42,11 +42,11 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 	}
 
 	public ItemStack removeItemNoUpdate(int slot) {
-		return ContainerHelper.takeItem(this.items, slot);
+		return ItemStackHelper.takeItem(this.items, slot);
 	}
 
 	public ItemStack removeItem(int slot, int amount) {
-		ItemStack itemstack = ContainerHelper.removeItem(this.items, slot, amount);
+		ItemStack itemstack = ItemStackHelper.removeItem(this.items, slot, amount);
 		if (!itemstack.isEmpty()) {
 			this.menu.slotsChanged(this);
 		}
@@ -62,7 +62,7 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 	public void setChanged() {
 	}
 
-	public boolean stillValid(Player player) {
+	public boolean stillValid(PlayerEntity player) {
 		return true;
 	}
 
@@ -78,7 +78,7 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 		return this.width;
 	}
 
-	public void fillStackedContents(StackedContents p_39342_) {
+	public void fillStackedContents(RecipeItemHelper p_39342_) {
 		for(ItemStack itemstack : this.items) {
 			p_39342_.accountSimpleStack(itemstack);
 		}

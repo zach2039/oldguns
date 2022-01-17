@@ -6,9 +6,9 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.entity.Bombard;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

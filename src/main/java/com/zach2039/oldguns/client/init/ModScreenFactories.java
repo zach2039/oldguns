@@ -8,7 +8,7 @@ import com.zach2039.oldguns.init.ModMenuTypes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.MenuScreens;
-import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.multiplayer.ClientWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.api.distmarker.Dist;
@@ -40,7 +40,7 @@ public class ModScreenFactories {
 
 	@SuppressWarnings("unchecked")
 	private static <T extends BlockEntity> T getBlockEntity(final BlockPos pos, final Class<T> blockEntityClass) {
-		final ClientLevel level = getClientLevel();
+		final ClientWorld level = getClientLevel();
 
 		final BlockEntity blockEntity = level.getBlockEntity(pos);
 
@@ -50,7 +50,7 @@ public class ModScreenFactories {
 		return (T) blockEntity;
 	}
 
-	private static ClientLevel getClientLevel() {
+	private static ClientWorld getClientLevel() {
 		return Preconditions.checkNotNull(Minecraft.getInstance().level, "Client level is null");
 	}
 }

@@ -4,18 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraft.tags.Tag;
+import net.minecraftforge.common.Tags;
+import net.minecraftforge.common.util.Constants;
 
 public class ArtilleryNBTHelper {
-	public static void setNBTTagMagazineStack(CompoundTag tag, List<ItemStack> firearmAmmoList)
+	public static void setNBTTagMagazineStack(CompoundNBT tag, List<ItemStack> firearmAmmoList)
 	{		
 		/* Accumulate list of firearm ammo objects into NBT form. */
-		ListTag ammoStackNBTTagList = new ListTag();
+		ListNBT ammoStackNBTTagList = new ListNBT();
 		for (ItemStack ammoStack : firearmAmmoList)
 		{
 			/* Serialize ammo itemstack. */
-			CompoundTag ammoStackNBTForm = ammoStack.serializeNBT();
+			CompoundNBT ammoStackNBTForm = ammoStack.serializeNBT();
 			
 			/* Store in TagList. */
 			ammoStackNBTTagList.add(ammoStackNBTForm);
@@ -25,32 +28,32 @@ public class ArtilleryNBTHelper {
 		tag.put("itemList", ammoStackNBTTagList);
 	}
 	
-	public static List<ItemStack> getNBTTagMagazineStack(CompoundTag tag)
+	public static List<ItemStack> getNBTTagMagazineStack(CompoundNBT tag)
 	{		
 		/* Get tag list from tag. */
 		if (!tag.contains("itemList"))
-			tag.put("itemList", new ListTag());
+			tag.put("itemList", new ListNBT());
 			
-		ListTag ammoStackNBTTagList = tag.getList("itemList", Tag.TAG_COMPOUND);
+		ListNBT ammoStackNBTTagList = tag.getList("itemList", Constants.NBT.TAG_COMPOUND);
 		
 		/* Populate list from deserialized itemstacks. */
 		List<ItemStack> artilleryAmmoList = new ArrayList<ItemStack>();
 		ammoStackNBTTagList.forEach((t) -> 
 				{
-					artilleryAmmoList.add(ItemStack.of((CompoundTag) t)); 
+					artilleryAmmoList.add(ItemStack.of((CompoundNBT) t)); 
 				}
 			);
 		
 		return artilleryAmmoList;
 	}
 	
-	public static void emptyNBTTagAmmo(CompoundTag tag)
+	public static void emptyNBTTagAmmo(CompoundNBT tag)
 	{
 		/* Set ammo list on itemstack to empty list. */
 		setNBTTagMagazineStack(tag, new ArrayList<ItemStack>());
 	}
 	
-	public static void pushNBTTagAmmo(CompoundTag tag, ItemStack ammoStack)
+	public static void pushNBTTagAmmo(CompoundNBT tag, ItemStack ammoStack)
 	{
 		/* Get ammo list from stack. */
 		List<ItemStack> ammoStackList = getNBTTagMagazineStack(tag);
@@ -62,7 +65,7 @@ public class ArtilleryNBTHelper {
 		setNBTTagMagazineStack(tag, ammoStackList);
 	}
 	
-	public static ItemStack peekNBTTagAmmo(CompoundTag tag)
+	public static ItemStack peekNBTTagAmmo(CompoundNBT tag)
 	{
 		/* Ammo output itemstack. */
 		ItemStack ammoStackOutput = ItemStack.EMPTY;
@@ -83,7 +86,7 @@ public class ArtilleryNBTHelper {
 		return ammoStackOutput;
 	}
 	
-	public static int peekNBTTagAmmoCount(CompoundTag tag)
+	public static int peekNBTTagAmmoCount(CompoundNBT tag)
 	{
 		/* Get ammo list from stack. */
 		List<ItemStack> ammoStackList = getNBTTagMagazineStack(tag);
@@ -94,7 +97,7 @@ public class ArtilleryNBTHelper {
 		return ammoCount;
 	}
 	
-	public static ItemStack popNBTTagAmmo(CompoundTag tag)
+	public static ItemStack popNBTTagAmmo(CompoundNBT tag)
 	{
 		/* Ammo output itemstack. */
 		ItemStack ammoStackOutput = ItemStack.EMPTY;

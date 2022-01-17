@@ -19,7 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
+import net.minecraft.world.inventory.ContainerWorldAccess;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fml.network.IContainerFactory;
 
@@ -29,14 +29,14 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	
 	private final GunsmithsBenchCraftingContainer craftSlots = new GunsmithsBenchCraftingContainer(this, 3, 3);
 	private final OldGunsResultContainer resultSlots = new OldGunsResultContainer();
-	private final ContainerLevelAccess access;
+	private final ContainerWorldAccess access;
 	private final Player player;
 
 	public GunsmithsBenchMenu(int containerId, Inventory inv) {
-		this(containerId, inv, ContainerLevelAccess.NULL);
+		this(containerId, inv, ContainerWorldAccess.NULL);
 	}
 
-	public GunsmithsBenchMenu(int containerId, Inventory inv, ContainerLevelAccess access) {
+	public GunsmithsBenchMenu(int containerId, Inventory inv, ContainerWorldAccess access) {
 		super(ModMenuTypes.GUNSMITHS_BENCH.get(), containerId);
 		this.access = access;
 		this.player = inv.player;
@@ -63,7 +63,7 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 
 	}
 
-	protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, Level level, Player player, GunsmithsBenchCraftingContainer containerCrafting, OldGunsResultContainer containerResult) {
+	protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, World level, Player player, GunsmithsBenchCraftingContainer containerCrafting, OldGunsResultContainer containerResult) {
 		if (!level.isClientSide) {
 			ServerPlayer serverplayer = (ServerPlayer)player;
 			ItemStack itemstack = ItemStack.EMPTY;

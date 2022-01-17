@@ -6,19 +6,20 @@ import java.util.List;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.nbt.ListNBT;
+import net.minecraftforge.common.util.Constants;
 
 public class FirearmNBTHelper {
 	
 	public static void setNBTTagMagazineStack(ItemStack stackIn, List<ItemStack> firearmAmmoList)
 	{		
 		/* Accumulate list of firearm ammo objects into NBT form. */
-		ListTag ammoStackNBTTagList = new ListTag();
+		ListNBT ammoStackNBTTagList = new ListNBT();
 		for (ItemStack ammoStack : firearmAmmoList)
 		{
 			/* Serialize ammo itemstack. */
-			CompoundTag ammoStackNBTForm = ammoStack.serializeNBT();
+			CompoundNBT ammoStackNBTForm = ammoStack.serializeNBT();
 			
 			/* Store in TagList. */
 			ammoStackNBTTagList.add(ammoStackNBTForm);
@@ -36,15 +37,15 @@ public class FirearmNBTHelper {
 		
 		/* Get tag list from firearm item. */
 		if (!stackIn.getTag().contains("ammoList"))
-			stackIn.getTag().put("ammoList", new ListTag());
+			stackIn.getTag().put("ammoList", new ListNBT());
 			
-		ListTag ammoStackNBTTagList = stackIn.getTag().getList("ammoList", Tag.TAG_COMPOUND);
+		ListNBT ammoStackNBTTagList = stackIn.getTag().getList("ammoList", Constants.NBT.TAG_COMPOUND);
 		
 		/* Populate list from deserialized itemstacks. */
 		List<ItemStack> firearmAmmoList = new ArrayList<ItemStack>();
 		ammoStackNBTTagList.forEach((t) -> 
 				{
-					firearmAmmoList.add(ItemStack.of((CompoundTag) t)); 
+					firearmAmmoList.add(ItemStack.of((CompoundNBT) t)); 
 				}
 			);
 		
@@ -137,7 +138,7 @@ public class FirearmNBTHelper {
 	{
 		/* Create new NBT tag if none. */
 		if (!stackIn.hasTag())
-			stackIn.setTag(new CompoundTag());
+			stackIn.setTag(new CompoundNBT());
 		
 		stackIn.getTag().putInt("condition", condition.ordinal());
 	}
@@ -162,29 +163,29 @@ public class FirearmNBTHelper {
 	 */
 	public static void refreshFirearmCondition(ItemStack stackIn)
 	{
-		float damageLevel = (float)((float)stackIn.getDamageValue() / (float)stackIn.getMaxDamage());
+		float damageWorld = (float)((float)stackIn.getDamageValue() / (float)stackIn.getMaxDamage());
 		
 		/* If firearm is broken, don't bother setting state. */
 		if (FirearmNBTHelper.getNBTTagCondition(stackIn) == FirearmCondition.BROKEN)
 			return;
 		
 		/* Set condition of firearm based on damage percentage. */
-		if (damageLevel < 0.10f)
+		if (damageWorld < 0.10f)
 		{
 			/* Very good condition. */
 			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.VERY_GOOD);
 		}
-		else if (damageLevel < 0.25f)
+		else if (damageWorld < 0.25f)
 		{
 			/* Good condition. */
 			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.GOOD);
 		}
-		else if (damageLevel < 0.75f)
+		else if (damageWorld < 0.75f)
 		{
 			/* Fair condition. */
 			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.FAIR);
 		}
-		else if (damageLevel < 0.90f)
+		else if (damageWorld < 0.90f)
 		{
 			/* Poor condition. */
 			FirearmNBTHelper.setNBTTagCondition(stackIn, FirearmCondition.POOR);

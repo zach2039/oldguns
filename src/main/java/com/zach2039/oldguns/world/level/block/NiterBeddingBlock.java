@@ -12,12 +12,12 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.audio.SoundSource;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerWorld;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.Hand;
+import net.minecraft.world.ActionResultType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
@@ -43,14 +43,14 @@ public class NiterBeddingBlock extends Block {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerWorld level, BlockPos blockpos, Random rand) {
 		double locallyGeneratedRefuse = getNearbyAnimalRefuseAmount(level, blockpos);	
 		
-		tryNitrateLevelIncrease(state, level, blockpos, rand, (NITER_PRODUCTION_SETTINGS.niterBeddingRefuseGenerationDifficulty.get() / (locallyGeneratedRefuse + 1)));
+		tryNitrateWorldIncrease(state, level, blockpos, rand, (NITER_PRODUCTION_SETTINGS.niterBeddingRefuseGenerationDifficulty.get() / (locallyGeneratedRefuse + 1)));
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void tick(BlockState state, ServerWorld level, BlockPos blockpos, Random rand) {
 		BlockPos posAbove = PointedDripstoneBlock.findStalactiteTipAboveCauldron(level, blockpos);
 		if (posAbove != null) {
 			Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType(level, posAbove);
@@ -65,19 +65,19 @@ public class NiterBeddingBlock extends Block {
 		return fluid == Fluids.WATER || fluid == Fluids.EMPTY;
 	}
 	
-	private void receiveStalactiteDrip(BlockState state, Level level, BlockPos blockpos, Fluid fluid) {
-		tryNitrateLevelIncrease(state, level, blockpos, level.getRandom(), (NITER_PRODUCTION_SETTINGS.niterBeddingDripstoneGenerationDifficulty.get()));
+	private void receiveStalactiteDrip(BlockState state, World level, BlockPos blockpos, Fluid fluid) {
+		tryNitrateWorldIncrease(state, level, blockpos, level.getRandom(), (NITER_PRODUCTION_SETTINGS.niterBeddingDripstoneGenerationDifficulty.get()));
 	}
 	
-	private void tryNitrateLevelIncrease(BlockState state, Level level, BlockPos blockpos, Random rand, double difficulty) {
+	private void tryNitrateWorldIncrease(BlockState state, Level level, BlockPos blockpos, Random rand, double difficulty) {
 		int refuseAmount = state.getValue(REFUSE_AMOUNT);
 		boolean isNirateSoilReady = (refuseAmount == MAX_REFUSE_AMOUNT);
 		
 		if (!isNirateSoilReady) {
 			int advanceRefuseStageRoll = rand.nextInt((int)(difficulty) + 1);
-			boolean allowLevelIncrease = (advanceRefuseStageRoll == 0);
+			boolean allowWorldIncrease = (advanceRefuseStageRoll == 0);
 			
-			if (allowLevelIncrease) {
+			if (allowWorldIncrease) {
 				refuseAmount += 1;
 			}
 		}
@@ -89,13 +89,13 @@ public class NiterBeddingBlock extends Block {
 		level.setBlock(blockpos, state.setValue(REFUSE_AMOUNT, Integer.valueOf(refuseAmount)), 2);
 	}
 	
-	public static void dropNitrateSoil(Level level, BlockPos blockpos) {
+	public static void dropNitrateSoil(World level, BlockPos blockpos) {
 		int harvestAmt = Math.max(1, NITER_PRODUCTION_SETTINGS.niterBeddingHarvestAmount.get());
 		popResource(level, blockpos.above(), new ItemStack(ModItems.NITRATE_SOIL.get(), harvestAmt));
 	}
 	
 	@Override
-	public InteractionResult use(final BlockState state, final Level level, final BlockPos blockpos, final Player player, final InteractionHand hand, final BlockHitResult rayTraceResult) {
+	public ActionResultType use(final BlockState state, final World level, final BlockPos blockpos, final Player player, final Hand hand, final BlockHitResult rayTraceResult) {
 		final ItemStack heldItem = player.getItemInHand(hand);
 		int refuseAmount = state.getValue(REFUSE_AMOUNT);
 		boolean isNirateSoilReady = (refuseAmount == MAX_REFUSE_AMOUNT);
@@ -113,14 +113,14 @@ public class NiterBeddingBlock extends Block {
 				heldItem.hurtAndBreak(1, player, (e) -> {
 					e.broadcastBreakEvent(hand);
 	            });	
-				return InteractionResult.SUCCESS;
+				return ActionResultType.SUCCESS;
 			}
 		}
 
-		return InteractionResult.PASS;
+		return ActionResultType.PASS;
 	}
 	
-	private double getNearbyAnimalRefuseAmount(Level level, BlockPos pos) {
+	private double getNearbyAnimalRefuseAmount(World level, BlockPos pos) {
 		int animalEffectRadius = NITER_PRODUCTION_SETTINGS.niterBeddingAnimalRadius.get();
 		
 		if (animalEffectRadius == -1)

@@ -24,8 +24,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.GameRules;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.Hand;
+import net.minecraft.world.ActionResultType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.WaterlilyBlock;
@@ -89,13 +89,13 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	public Entity pullingEntity;
 	public boolean fellLastTick = false;
 
-	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, Level level) {
+	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, World level) {
 		super(entity, level);
 		this.blocksBuilding = true;
 		this.setBoundingBox(new AABB(-2, -2, -2, 2, 2, 2));
 	}
 
-	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, Level level, double x, double y, double z) {
+	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, World level, double x, double y, double z) {
 		this(entity, level);
 		this.setPos(x, y, z);
 		this.xo = x;
@@ -192,14 +192,14 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public InteractionResult interact(Player player, InteractionHand hand) {
+	public ActionResultType interact(Player player, Hand hand) {
 		if (player.isSecondaryUseActive()) {
-			return InteractionResult.PASS;
+			return ActionResultType.PASS;
 		} else {
 			if (!this.level.isClientSide) {
-				return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
+				return player.startRiding(this) ? ActionResultType.CONSUME : InteractionResult.PASS;
 			} else {
-				return InteractionResult.SUCCESS;
+				return ActionResultType.SUCCESS;
 			}
 		}
 	}
@@ -412,7 +412,7 @@ public class MoveableArtillery extends Entity implements IArtillery {
 		return new ClientboundAddEntityPacket(this);
 	}
 
-	public static MoveableArtillery create(Level level, double x, double y, double z, ArtilleryType typeIn) {
+	public static MoveableArtillery create(World level, double x, double y, double z, ArtilleryType typeIn) {
 		switch (typeIn) {
 		case BOMBARD:
 			return new Bombard(level, x, y, z);
@@ -607,7 +607,7 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ) {
+	public void doFiringEffect(World level, Player player, double posX, double posY, double posZ) {
 		// TODO Auto-generated method stub
 
 	}

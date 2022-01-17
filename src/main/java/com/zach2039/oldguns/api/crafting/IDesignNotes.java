@@ -3,8 +3,9 @@ package com.zach2039.oldguns.api.crafting;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.CompoundNBT;
 
 public interface IDesignNotes {
 	static String getDesign(ItemStack stack) {
@@ -19,7 +20,7 @@ public interface IDesignNotes {
 		return notes.copy();
 	}
 	
-	static CompoundTag setDesignOnTag(CompoundTag tag, Item item) {
+	static CompoundNBT setDesignOnTag(CompoundNBT tag, Item item) {
 		tag.putString("item", item.getRegistryName().toString());
 		return tag;
 	}

@@ -7,12 +7,17 @@ import com.zach2039.oldguns.OldGuns;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.audio.SoundSource;
 import net.minecraft.core.cauldron.CauldronInteraction;
+import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
+import net.minecraft.world.World;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
@@ -33,8 +38,8 @@ public class ModCauldronInteractions {
 		};;
 
 		@Override
-		public InteractionResult interact(BlockState state, Level level, BlockPos blockpos, Player player,
-				InteractionHand hand, ItemStack stack) {
+		public ActionResultType interact(BlockState state, World level, BlockPos blockpos, Player player,
+				Hand hand, ItemStack stack) {
 			// TODO Auto-generated method stub
 			return null;
 		}
@@ -51,7 +56,7 @@ public class ModCauldronInteractions {
 					level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 				}
 
-				return InteractionResult.sidedSuccess(level.isClientSide);
+				return ActionResultType.sidedSuccess(level.isClientSide);
 			});
 			
 			CauldronInteraction.WATER.put(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().asItem(), (state, level, blockpos, player, hand, stack) -> {
@@ -61,11 +66,11 @@ public class ModCauldronInteractions {
 					player.setItemInHand(hand, new ItemStack(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), amount));
 					player.awardStat(Stats.USE_CAULDRON);
 					player.awardStat(Stats.ITEM_USED.get(item));
-					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+					LayeredCauldronBlock.lowerFillWorld(state, level, blockpos);
 					level.playSound((Player)null, blockpos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
 
-				return InteractionResult.sidedSuccess(level.isClientSide);
+				return ActionResultType.sidedSuccess(level.isClientSide);
 			});
 			
 			CauldronInteraction.WATER.put(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get().asItem(), (state, level, blockpos, player, hand, stack) -> {
@@ -75,11 +80,11 @@ public class ModCauldronInteractions {
 					player.setItemInHand(hand, new ItemStack(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), amount));
 					player.awardStat(Stats.USE_CAULDRON);
 					player.awardStat(Stats.ITEM_USED.get(item));
-					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+					LayeredCauldronBlock.lowerFillWorld(state, level, blockpos);
 					level.playSound((Player)null, blockpos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
 				}
 
-				return InteractionResult.sidedSuccess(level.isClientSide);
+				return ActionResultType.sidedSuccess(level.isClientSide);
 			});
 
 			LIQUID_NITER.put(Items.GLASS_BOTTLE, (state, level, blockpos, player, hand, stack) -> {
@@ -88,12 +93,12 @@ public class ModCauldronInteractions {
 					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.LIQUID_NITER.get())));
 					player.awardStat(Stats.USE_CAULDRON);
 					player.awardStat(Stats.ITEM_USED.get(item));
-					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+					LayeredCauldronBlock.lowerFillWorld(state, level, blockpos);
 					level.playSound((Player)null, blockpos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 1.0F, 1.0F);
 					level.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, blockpos);
 				}
 
-				return InteractionResult.sidedSuccess(level.isClientSide);
+				return ActionResultType.sidedSuccess(level.isClientSide);
 			});
 			LIQUID_NITER.put(ModItems.LIQUID_NITER.get(), (state, level, blockpos, player, hand, stack) -> {
 				if (state.getValue(LayeredCauldronBlock.LEVEL) != 3) {
@@ -106,14 +111,14 @@ public class ModCauldronInteractions {
 						level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 					}
 
-					return InteractionResult.sidedSuccess(level.isClientSide);
+					return ActionResultType.sidedSuccess(level.isClientSide);
 				} else {
-					return InteractionResult.PASS;
+					return ActionResultType.PASS;
 				}
 			});
 		}
 
-		static InteractionResult emptyBucket(Level level, BlockPos blockpos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent soundEvent) {
+		static ActionResultType emptyBucket(World level, BlockPos blockpos, Player player, Hand hand, ItemStack stack, BlockState state, SoundEvent soundEvent) {
 			if (!level.isClientSide) {
 				Item item = stack.getItem();
 				player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.BUCKET)));
@@ -124,7 +129,7 @@ public class ModCauldronInteractions {
 				level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 			}
 
-			return InteractionResult.sidedSuccess(level.isClientSide);
+			return ActionResultType.sidedSuccess(level.isClientSide);
 		}
 	}
 

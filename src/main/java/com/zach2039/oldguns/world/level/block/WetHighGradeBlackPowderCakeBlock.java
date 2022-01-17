@@ -8,13 +8,13 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.block.BlockState;
-import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerWorld;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.WorldAccessor;
+import net.minecraft.world.level.WorldReader;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -31,7 +31,7 @@ public class WetHighGradeBlackPowderCakeBlock extends Block {
 		this.registerDefaultState(this.stateDefinition.any().setValue(DRY, Boolean.valueOf(false)));
 	}
 
-	private static boolean canDry(BlockState state, ServerLevel level, BlockPos blockpos) {
+	private static boolean canDry(BlockState state, ServerWorld level, BlockPos blockpos) {
 		return level.isDay() && (level.getBrightness(LightLayer.SKY, blockpos) >= 12);			
 	}
 	
@@ -41,12 +41,12 @@ public class WetHighGradeBlackPowderCakeBlock extends Block {
 	}
 	
 	@Override
-	public BlockState updateShape(BlockState p_51213_, Direction p_51214_, BlockState p_51215_, LevelAccessor p_51216_, BlockPos p_51217_, BlockPos p_51218_) {
+	public BlockState updateShape(BlockState p_51213_, Direction p_51214_, BlockState p_51215_, WorldAccessor p_51216_, BlockPos p_51217_, BlockPos p_51218_) {
 		return p_51214_ == Direction.DOWN && !p_51213_.canSurvive(p_51216_, p_51217_) ? Blocks.AIR.defaultBlockState() : super.updateShape(p_51213_, p_51214_, p_51215_, p_51216_, p_51217_, p_51218_);
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerWorld level, BlockPos blockpos, Random rand) {
 		boolean canDry = canDry(state, level, blockpos);
 		
 		if (canDry) {
@@ -61,7 +61,7 @@ public class WetHighGradeBlackPowderCakeBlock extends Block {
 	}
 	
 	@Override
-	public boolean canSurvive(BlockState state, LevelReader level, BlockPos p_51211_) {
+	public boolean canSurvive(BlockState state, WorldReader level, BlockPos p_51211_) {
 		return level.getBlockState(p_51211_.below()).getMaterial().isSolid();
 	}
 

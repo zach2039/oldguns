@@ -1,25 +1,20 @@
 package com.zach2039.oldguns.init;
 
+import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.block.entity.NiterBeddingEntity;
 
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.block.Block;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class ModBlockEntities {
-	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, OldGuns.MODID);
+	private static final DeferredRegister<TileEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, OldGuns.MODID);
 
 	private static boolean isInitialized;
-
-	public static final RegistryObject<BlockEntityType<NiterBeddingEntity>> NITER_BEDDING = registerBlockEntityType("niter_bedding",
-			NiterBeddingEntity::new,
-			ModBlocks.NITER_BEDDING
-	);
-
 
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.
@@ -47,11 +42,11 @@ public class ModBlockEntities {
 	 * @param <T>                 The block entity class
 	 * @return A RegistryObject reference to the block entity type
 	 */
-	private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntityType(final String name, final BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier, final RegistryObject<? extends Block> validBlock) {
+	private static <T extends TileEntity> RegistryObject<TileEntityType<T>> registerBlockEntityType(final String name, final Supplier<T> blockEntitySupplier, final RegistryObject<? extends Block> validBlock) {
 		return BLOCK_ENTITY_TYPES.register(name, () -> {
 			@SuppressWarnings("ConstantConditions")
 			// dataFixerType will always be null until mod data fixers are implemented
-			final BlockEntityType<T> blockEntityType = BlockEntityType.Builder
+			final TileEntityType<T> blockEntityType = TileEntityType.Builder
 					.of(blockEntitySupplier, validBlock.get())
 					.build(null);
 

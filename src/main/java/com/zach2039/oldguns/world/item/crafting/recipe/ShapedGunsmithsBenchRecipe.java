@@ -9,6 +9,7 @@ import javax.annotation.Nonnull;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -22,19 +23,23 @@ import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
+public class ShapedGunsmithsBenchRecipe implements IRecipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
 	
 	static int MAX_WIDTH = 3;
 	static int MAX_HEIGHT = 3;
@@ -89,7 +94,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 	}
 
 	@Override
-	public boolean matches(GunsmithsBenchCraftingContainer p_44176_, Level p_44177_) {
+	public boolean matches(GunsmithsBenchCraftingContainer p_44176_, World p_44177_) {
 		for(int i = 0; i <= p_44176_.getWidth() - this.width; ++i) {
 			for(int j = 0; j <= p_44176_.getHeight() - this.height; ++j) {
 				if (this.matches(p_44176_, i, j, true)) {
@@ -259,7 +264,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 			throw new JsonSyntaxException("Invalid pattern: empty pattern not allowed");
 		} else {
 			for(int i = 0; i < astring.length; ++i) {
-				String s = GsonHelper.convertToString(p_44197_.get(i), "pattern[" + i + "]");
+				String s = GsonBuilder.convertToString(p_44197_.get(i), "pattern[" + i + "]");
 				if (s.length() > MAX_WIDTH) {
 					throw new JsonSyntaxException("Invalid pattern: too many columns, " + MAX_WIDTH + " is maximum");
 				}

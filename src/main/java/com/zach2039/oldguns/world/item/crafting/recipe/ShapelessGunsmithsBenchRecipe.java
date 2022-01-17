@@ -40,7 +40,7 @@ public class ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 	}
 
 	@Override
-	public boolean matches(GunsmithsBenchCraftingContainer craftinv, Level level) {
+	public boolean matches(GunsmithsBenchCraftingContainer craftinv, World level) {
 		StackedContents stackedcontents = new StackedContents();
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;

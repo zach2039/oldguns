@@ -4,7 +4,9 @@ import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public interface IFirearm {
 	
@@ -12,7 +14,7 @@ public interface IFirearm {
 	
 	boolean canReload(ItemStack stackIn);
 	
-	void doFiringEffect(Level worldIn, Entity entityShooter, ItemStack stackIn);
+	void doFiringEffect(World worldIn, Entity entityShooter, ItemStack stackIn);
 	
 	int getAmmoCapacity();
 

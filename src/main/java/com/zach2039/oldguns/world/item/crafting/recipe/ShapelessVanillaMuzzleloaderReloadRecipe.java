@@ -17,6 +17,7 @@ import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapelessRecipe;
@@ -24,8 +25,8 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
@@ -40,7 +41,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 	}
 	
 	@Override
-	public boolean matches(CraftingContainer p_44262_, Level p_44263_) {
+	public boolean matches(CraftingInventory p_44262_, World p_44263_) {
 		StackedContents stackedcontents = new StackedContents();
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
@@ -73,7 +74,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 	}
 	
 	@Override
-	public ItemStack assemble(final CraftingContainer inv)
+	public ItemStack assemble(final CraftingInventory inv)
 	{
 		/* Required itemstacks for proper nbt results. */
 		ItemStack firearmStack = ItemStack.EMPTY;

@@ -5,24 +5,28 @@ import java.util.Optional;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
+import net.minecraft.util.registry.Registry;
+import net.minecraft.world.World;
 
-public interface ModRecipeTypes<T extends Recipe<?>> {
+public interface ModRecipeTypes<T extends IRecipe<?>> {
 	
-	RecipeType<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench");
-	RecipeType<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft");
+	IRecipeType<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench");
+	IRecipeType<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft");
 
-	static <T extends Recipe<?>> RecipeType<T> register(final String name) {
-		return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(OldGuns.MODID, name), new RecipeType<T>() {
+	static <T extends IRecipe<?>> IRecipeType<T> register(final String name) {
+		return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(OldGuns.MODID, name), new IRecipeType<T>() {
 			public String toString() {
 				return name;
 			}
 		});
 	}
 
-	default <C extends Container> Optional<T> tryMatch(Recipe<C> p_44116_, Level p_44117_, C p_44118_) {
+	default <C extends IInventory> Optional<T> tryMatch(IRecipe<C> p_44116_, World p_44117_, C p_44118_) {
 		return p_44116_.matches(p_44118_, p_44117_) ? Optional.of((T)p_44116_) : Optional.empty();
 	}
 }

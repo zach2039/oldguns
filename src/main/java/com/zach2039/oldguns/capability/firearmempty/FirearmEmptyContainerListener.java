@@ -4,7 +4,7 @@ import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 import com.zach2039.oldguns.capability.CapabilityContainerListener;
 import com.zach2039.oldguns.network.capability.firearmempty.UpdateMenuFirearmEmptyMessage;
 
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.entity.player.ServerPlayerEntity;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -16,7 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
  */
 public class FirearmEmptyContainerListener extends CapabilityContainerListener<IFirearmEmpty> {
 
-	public FirearmEmptyContainerListener(final ServerPlayer player) {
+	public FirearmEmptyContainerListener(final ServerPlayerEntity player) {
 		super(player, FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY, FirearmEmptyCapability.DEFAULT_FACING);
 	}
 

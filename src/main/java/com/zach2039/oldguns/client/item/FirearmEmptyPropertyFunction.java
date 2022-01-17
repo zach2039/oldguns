@@ -22,7 +22,7 @@ public class FirearmEmptyPropertyFunction {
 	
 	private static final ClampedItemPropertyFunction GETTER = (stack, level, entity, seed) -> 
 	{
-		final Level world = level != null ? level : entity != null ? entity.getCommandSenderWorld() : null;
+		final World world = level != null ? level : entity != null ? entity.getCommandSenderWorld() : null;
 
 		if (world == null) {
 			return 1f;

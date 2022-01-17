@@ -3,6 +3,7 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;

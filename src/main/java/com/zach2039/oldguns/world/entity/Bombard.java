@@ -17,11 +17,11 @@ import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 public class Bombard extends MoveableArtillery {
 	private static final ArtilleryAttributes artilleryAttributes = OldGunsConfig.SERVER.artillerySettings.bombard;
 	
-	public Bombard(EntityType<? extends MoveableArtillery> entity, Level level) {
+	public Bombard(EntityType<? extends MoveableArtillery> entity, World level) {
 		super(ModEntities.BOMBARD.get(), level);
 	}
 
-	public Bombard(Level level, double x, double y, double z) {
+	public Bombard(World level, double x, double y, double z) {
 		super(ModEntities.BOMBARD.get(), level, x, y, z);
 	}
 
@@ -35,7 +35,7 @@ public class Bombard extends MoveableArtillery {
 	}
 	
 	@Override
-	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ)
+	public void doFiringEffect(World level, Player player, double posX, double posY, double posZ)
 	{
 		TargetPoint point = new PacketDistributor.TargetPoint(
 				posX, posY, posZ, 1600d, level.dimension());
