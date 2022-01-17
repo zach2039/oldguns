@@ -57,12 +57,12 @@ public class OldGunsConfig {
 		public final RecipeSettings recipeSettings;
 		public final LootSettings lootSettings;
 		public final FirearmSettings firearmSettings;
+		public final ArtillerySettings artillerySettings;
 		
 		Server(final ForgeConfigSpec.Builder builder) {
 			builder.comment("Server config settings")
 					.push("server");			
 
-			
 			recipeSettings = new RecipeSettings(
 					builder,
 					"Recipe enable and disable and other crafting settings",
@@ -77,6 +77,11 @@ public class OldGunsConfig {
 					builder,
 					"Attributes of firearms",
 					"firearmSettings");
+			
+			artillerySettings = new ArtillerySettings(
+					builder,
+					"Attributes of artillery",
+					"artillerySettings");
 			
 			builder.pop();
 		}
@@ -1158,6 +1163,57 @@ public class OldGunsConfig {
 			projectileDeviationModifier = builder
 					.comment("How the ammo modifies the base deviation of the firearm")
 					.defineInRange("projectileDeviationModifier", defaultProjectileDeviationModifier, 0.001f, Float.MAX_VALUE);			
+			
+			builder.pop();
+		}
+	}
+	
+	public static class ArtillerySettings {
+		public final ArtilleryAttributes bombard;
+		
+		ArtillerySettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			bombard = new ArtilleryAttributes(
+					builder,
+					"Attributes of Bombards",
+					"bombard",
+					3.5f,
+					0.8f,
+					1.7f,
+					0.8f
+					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class ArtilleryAttributes {
+		public final DoubleValue effectiveRangeModifier;
+		public final DoubleValue damageModifier;
+		public final DoubleValue deviationModifier;
+		public final DoubleValue projectileSpeed;
+		
+		ArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+				final float defaultProjectileSpeed, final float defaultEffectiveRangeModifier, 
+				final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
+			builder.comment(comment).push(path);
+			
+			effectiveRangeModifier = builder
+					.comment("How the artillery modifies the base range of ammo shot")
+					.defineInRange("effectiveRangeModifier", defaultEffectiveRangeModifier, 0.001f, Float.MAX_VALUE);
+			
+			damageModifier = builder
+					.comment("How the artillery modifies the base damage of ammo shot")
+					.defineInRange("damageModifier", defaultShotDamageModifier, 0.001f, Float.MAX_VALUE);
+			
+			deviationModifier = builder
+					.comment("How the artillery modifies the base deviation of ammo shot")
+					.defineInRange("deviationModifier", defaultShotDeviaitionModifier, 0.001f, Float.MAX_VALUE);
+			
+			projectileSpeed = builder
+					.comment("How fast projectiles shot from the artillery are")
+					.defineInRange("projectileSpeed", defaultProjectileSpeed, 0.001f, Float.MAX_VALUE);			
 			
 			builder.pop();
 		}

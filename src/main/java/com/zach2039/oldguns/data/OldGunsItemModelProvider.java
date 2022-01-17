@@ -106,6 +106,8 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
+		withGeneratedParentAndDefaultTexture(ModItems.BOMBARD.get());
+		
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_PISTOL.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_ARQUEBUS.get());

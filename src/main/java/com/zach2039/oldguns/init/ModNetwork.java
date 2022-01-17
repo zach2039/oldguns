@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 import com.zach2039.oldguns.network.capability.firearmempty.UpdateMenuFirearmEmptyMessage;
 
@@ -26,7 +27,13 @@ public class ModNetwork {
 				.consumer(FirearmEffectMessage::handle)
 				.add();
 		
-		channel.messageBuilder(UpdateMenuFirearmEmptyMessage.class, 2)
+		channel.messageBuilder(ArtilleryEffectMessage.class, 2)
+				.decoder(ArtilleryEffectMessage::decode)
+				.encoder(ArtilleryEffectMessage::encode)
+				.consumer(ArtilleryEffectMessage::handle)
+				.add();
+		
+		channel.messageBuilder(UpdateMenuFirearmEmptyMessage.class, 3)
 				.decoder(UpdateMenuFirearmEmptyMessage::decode)
 				.encoder(UpdateMenuFirearmEmptyMessage::encode)
 				.consumer(UpdateMenuFirearmEmptyMessage::handle)

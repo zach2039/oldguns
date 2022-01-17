@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.client.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.client.renderer.entity.BombardRenderer;
 import com.zach2039.oldguns.client.renderer.entity.BulletProjectileRenderer;
 import com.zach2039.oldguns.init.ModEntities;
 
@@ -15,5 +16,6 @@ public class ModRenderers {
 	@SubscribeEvent
 	public static void registerEntityRenderers(final EntityRenderersEvent.RegisterRenderers event) {
 		event.registerEntityRenderer(ModEntities.BULLET_PROJECTILE.get(), ctx -> new BulletProjectileRenderer(ctx));
+		event.registerEntityRenderer(ModEntities.BOMBARD.get(), ctx -> new BombardRenderer(ctx));
 	}
 }

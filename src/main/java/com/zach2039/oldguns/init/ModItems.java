@@ -26,6 +26,8 @@ import com.zach2039.oldguns.world.item.ammo.SmallLeadBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallLeadMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.SmallStoneBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.SmallStoneMusketBallItem;
+import com.zach2039.oldguns.world.item.artillery.ArtilleryItem;
+import com.zach2039.oldguns.world.item.artillery.BombardItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockArquebusItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockBlunderbussItem;
@@ -500,6 +502,11 @@ public class ModItems {
 	
 	public static final RegistryObject<DesignNotesItem> DESIGN_NOTES = ITEMS.register("design_notes",
 			() -> new DesignNotesItem()
+		);
+	
+	// Artillery
+	public static final RegistryObject<ArtilleryItem> BOMBARD = ITEMS.register("bombard",
+			() -> new BombardItem()
 		);
 	
 	/**
