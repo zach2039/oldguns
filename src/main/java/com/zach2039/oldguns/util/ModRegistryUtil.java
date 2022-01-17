@@ -8,7 +8,7 @@ import java.util.stream.StreamSupport;
 import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.IForgeRegistryEntry;
 

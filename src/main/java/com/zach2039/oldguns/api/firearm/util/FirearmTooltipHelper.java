@@ -5,9 +5,7 @@ import java.util.List;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 
 public class FirearmTooltipHelper {
 	public static void populateTooltipInfo(FirearmItem itemIn, ItemStack stackIn, List<Component> tooltip)

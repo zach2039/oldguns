@@ -12,15 +12,14 @@ import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 
 import it.unimi.dsi.fastutil.ints.IntList;
-import net.minecraft.core.NonNullList;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 

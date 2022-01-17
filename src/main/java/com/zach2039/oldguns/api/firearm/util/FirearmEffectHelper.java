@@ -6,14 +6,12 @@ import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
-import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
+import net.minecraft.client.audio.SoundSource;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
 
 public class FirearmEffectHelper {
 	public static void doFirearmShootEffect(Level world, Entity shootingEntity, FirearmEffect effect, double posX, double posY, double posZ, double rotationPitch, double rotationYaw, int parameter)

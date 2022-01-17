@@ -7,19 +7,16 @@ import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMaterials;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.FallingBlock;
+import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.world.entity.item.FallingBlockEntity;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.FallingBlock;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class HighGradeBlackPowderBlock extends FallingBlock {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;

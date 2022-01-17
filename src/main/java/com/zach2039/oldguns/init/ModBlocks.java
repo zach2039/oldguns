@@ -12,14 +12,12 @@ import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
 import com.zach2039.oldguns.world.level.block.WetMediumGradeBlackPowderBlock;
 
-import net.minecraft.world.item.BlockItem;
+import net.minecraft.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

@@ -10,9 +10,9 @@ import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;

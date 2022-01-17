@@ -3,7 +3,6 @@ package com.zach2039.oldguns.data;
 import java.util.function.Consumer;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.data.crafting.recipe.EnhancedShapelessRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmRepairRecipeBuilder;
@@ -16,17 +15,13 @@ import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.RecipeProvider;
+import net.minecraft.data.ShapedRecipeBuilder;
+import net.minecraft.data.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
-import vazkii.patchouli.api.PatchouliAPI;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

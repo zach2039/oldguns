@@ -8,15 +8,11 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.config.OldGunsConfig;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.network.chat.Component;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 
 public class DesignNotesItem extends Item implements IDesignNotes {
 	

@@ -5,9 +5,7 @@ import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnDesignN
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnFirearmsLootCondition;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnMechanismsLootCondition;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.Serializer;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 

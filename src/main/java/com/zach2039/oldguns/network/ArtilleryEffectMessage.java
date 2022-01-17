@@ -3,20 +3,16 @@ package com.zach2039.oldguns.network;
 import java.util.function.Supplier;
 
 import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.util.FirearmEffectHelper;
 import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
-import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.fml.network.NetworkEvent;
 
 /**
  * Sent to the server by {@link FirearmItem} to display firing effects.

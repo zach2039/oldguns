@@ -3,9 +3,8 @@ package com.zach2039.oldguns.init;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraft.block.material.MaterialColor;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 public class ModMaterials {
 	public static final Material BLACK_POWDER = (new MaterialBuilder(MaterialColor.COLOR_BLACK).flammable()).build();

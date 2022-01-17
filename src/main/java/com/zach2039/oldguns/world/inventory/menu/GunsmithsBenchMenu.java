@@ -6,26 +6,22 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
-import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesSlot;
 import com.zach2039.oldguns.world.inventory.OldGunsResultContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsResultSlot;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.network.IContainerFactory;
+import net.minecraftforge.fml.network.IContainerFactory;
 
 public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	public static final int RESULT_SLOT = 0;

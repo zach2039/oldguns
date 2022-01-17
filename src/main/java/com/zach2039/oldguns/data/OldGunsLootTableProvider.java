@@ -16,11 +16,11 @@ import com.zach2039.oldguns.data.loot.OldGunsBlockLootTables;
 import com.zach2039.oldguns.data.loot.OldGunsGenericLootTables;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.data.LootTableProvider;
+import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTables;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
 import net.minecraft.world.level.storage.loot.ValidationContext;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;

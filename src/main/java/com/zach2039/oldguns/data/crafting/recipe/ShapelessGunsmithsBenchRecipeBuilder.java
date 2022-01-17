@@ -3,7 +3,7 @@ package com.zach2039.oldguns.data.crafting.recipe;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 
 public class ShapelessGunsmithsBenchRecipeBuilder extends EnhancedShapelessRecipeBuilder<ShapelessGunsmithsBenchRecipe, ShapelessGunsmithsBenchRecipeBuilder> {

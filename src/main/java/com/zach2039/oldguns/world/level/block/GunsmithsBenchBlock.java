@@ -2,11 +2,12 @@ package com.zach2039.oldguns.world.level.block;
 
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.network.chat.Component;
+import net.minecraft.block.BlockState;
 import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.state.DirectionProperty;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mirror;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;
@@ -14,18 +15,9 @@ import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class GunsmithsBenchBlock extends Block {

@@ -2,8 +2,7 @@ package com.zach2039.oldguns.world.item.tools;
 
 import com.zach2039.oldguns.OldGuns;
 
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
+import net.minecraft.item.ItemStack;
 
 public class RepairKitItem extends Item {
 

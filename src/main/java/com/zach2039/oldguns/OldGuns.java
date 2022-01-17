@@ -18,8 +18,8 @@ import com.zach2039.oldguns.init.ModNetwork;
 import com.zach2039.oldguns.init.ModPotions;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -28,7 +28,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import net.minecraftforge.network.simple.SimpleChannel;
+import net.minecraftforge.fml.network.simple.SimpleChannel;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(OldGuns.MODID)

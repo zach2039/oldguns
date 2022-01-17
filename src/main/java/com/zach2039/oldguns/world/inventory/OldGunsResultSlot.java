@@ -2,12 +2,10 @@ package com.zach2039.oldguns.world.inventory;
 
 import com.zach2039.oldguns.init.ModRecipeTypes;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.world.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.RecipeHolder;
-import net.minecraft.world.inventory.Slot;
-import net.minecraft.world.item.ItemStack;
 
 public class OldGunsResultSlot extends Slot {
 	   private final GunsmithsBenchCraftingContainer craftSlots;

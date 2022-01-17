@@ -5,16 +5,14 @@ import java.util.function.Supplier;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.entity.Bombard;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
-import com.zach2039.oldguns.world.entity.MoveableArtillery;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.entity.EntityType;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

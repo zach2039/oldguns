@@ -4,8 +4,8 @@ import com.google.gson.JsonObject;
 import com.zach2039.oldguns.util.ModJsonUtil;
 
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 
 /**

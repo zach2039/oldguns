@@ -5,9 +5,9 @@ import java.lang.reflect.Method;
 
 import com.zach2039.oldguns.OldGuns;
 
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

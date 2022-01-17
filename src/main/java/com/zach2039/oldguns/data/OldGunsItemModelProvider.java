@@ -8,9 +8,7 @@ import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
 import com.zach2039.oldguns.init.ModItems;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.material.Fluids;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelBuilder.Perspective;

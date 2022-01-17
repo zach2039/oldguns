@@ -3,10 +3,9 @@ package com.zach2039.oldguns.api.artillery.util;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.ItemStack;
 
 public class ArtilleryNBTHelper {
 	public static void setNBTTagMagazineStack(CompoundTag tag, List<ItemStack> firearmAmmoList)

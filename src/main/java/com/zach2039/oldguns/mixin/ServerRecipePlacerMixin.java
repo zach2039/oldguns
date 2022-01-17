@@ -34,9 +34,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
 
+import net.minecraft.inventory.Inventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.recipebook.ServerPlaceRecipe;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
 
 @Mixin(ServerPlaceRecipe.class)
 public final class ServerRecipePlacerMixin {

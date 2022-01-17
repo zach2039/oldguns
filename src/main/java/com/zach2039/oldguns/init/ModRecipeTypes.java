@@ -5,12 +5,9 @@ import java.util.Optional;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.Container;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraft.world.level.Level;
 
 public interface ModRecipeTypes<T extends Recipe<?>> {
 	

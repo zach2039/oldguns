@@ -8,12 +8,11 @@ import com.zach2039.oldguns.config.OldGunsConfig.ArtilleryAttributes;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.Level;
-import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.PacketDistributor.TargetPoint;
+import net.minecraftforge.fml.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 
 public class Bombard extends MoveableArtillery {
 	private static final ArtilleryAttributes artilleryAttributes = OldGunsConfig.SERVER.artillerySettings.bombard;

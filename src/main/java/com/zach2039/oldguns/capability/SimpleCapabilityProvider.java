@@ -4,7 +4,6 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 
-import net.minecraft.core.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.LazyOptional;

@@ -2,12 +2,12 @@ package com.zach2039.oldguns.world.inventory;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.core.NonNullList;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.RecipeHolder;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
 
 public class OldGunsDesignNotesContainer implements Container, RecipeHolder {

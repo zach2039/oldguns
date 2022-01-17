@@ -12,15 +12,14 @@ import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.text.OldGunsLang;
 import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 
-import net.minecraft.client.resources.language.I18n;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.DyeColor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionUtils;
 import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.DyeColor;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.alchemy.Potion;
-import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /**
