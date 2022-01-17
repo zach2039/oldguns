@@ -1,3 +1,12 @@
+#### v3.0.3-alpha
+    
+- Fix recipe overlap with iron gear set and medium iron musket ball
+- Add lang for bombard entity and item (WIP)
+- Add bombard (WIP)
+- Add bombard render (WIP)
+- Fix brewing recipe not appearing in JEI
+- Add guide book content
+
 #### v3.0.2-alpha
 
 - Move common configs to server
