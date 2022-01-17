@@ -6,12 +6,11 @@ import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.client.util.ClientUtil;
 
-import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.fml.network.NetworkEvent;
 
 /**
  * Base class for messages that update capability data for a single slot of an {@link AbstractContainerMenu}.

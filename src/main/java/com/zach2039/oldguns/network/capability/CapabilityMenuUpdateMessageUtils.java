@@ -2,10 +2,9 @@ package com.zach2039.oldguns.network.capability;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.core.Direction;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
 
 /**

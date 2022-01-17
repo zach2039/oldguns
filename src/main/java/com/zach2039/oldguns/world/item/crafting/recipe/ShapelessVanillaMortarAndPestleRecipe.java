@@ -3,12 +3,12 @@ package com.zach2039.oldguns.world.item.crafting.recipe;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.DamageableToolRecipe;
 
-import net.minecraft.core.NonNullList;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.item.crafting.ShapelessRecipe;
+import net.minecraft.util.NonNullList;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapelessRecipe;
 
 public class ShapelessVanillaMortarAndPestleRecipe extends ShapelessRecipe implements DamageableToolRecipe {
 	

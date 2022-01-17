@@ -3,10 +3,9 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.EntityDamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.util.DamageSource;
+import net.minecraft.util.EntityDamageSource;
+import net.minecraft.util.IndirectEntityDamageSource;
 
 public class ModDamageSources {
 	public static enum DamageType {

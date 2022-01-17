@@ -4,9 +4,7 @@ import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
 
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
+import net.minecraft.item.ItemStack;
 
 public interface IFirearm {
 	

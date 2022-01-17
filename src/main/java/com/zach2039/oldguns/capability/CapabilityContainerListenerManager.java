@@ -1,5 +1,6 @@
 package com.zach2039.oldguns.capability;
 
+import java.awt.event.ContainerListener;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -7,7 +8,6 @@ import com.google.common.base.Function;
 import com.zach2039.oldguns.OldGuns;
 
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.ContainerListener;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;

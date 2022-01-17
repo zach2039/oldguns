@@ -5,8 +5,6 @@ import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.data.loot.BlockLoot;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.registries.ForgeRegistries;
 

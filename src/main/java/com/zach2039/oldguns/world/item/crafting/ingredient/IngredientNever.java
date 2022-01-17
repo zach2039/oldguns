@@ -7,9 +7,9 @@ import javax.annotation.Nullable;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.init.ModCrafting;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 
 /**

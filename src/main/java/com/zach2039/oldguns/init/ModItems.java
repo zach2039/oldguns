@@ -118,12 +118,11 @@ import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
 import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.Item.Properties;
 import net.minecraftforge.client.event.ColorHandlerEvent.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

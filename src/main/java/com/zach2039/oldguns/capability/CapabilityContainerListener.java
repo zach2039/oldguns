@@ -5,12 +5,11 @@ import javax.annotation.Nullable;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
 
-import net.minecraft.core.Direction;
+import net.minecraft.item.ItemStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.fml.network.PacketDistributor;
 
 /**
  * Syncs the capability handler instances for items in {@link AbstractContainerMenu}s.

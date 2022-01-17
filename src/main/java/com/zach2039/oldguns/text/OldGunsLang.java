@@ -2,8 +2,7 @@ package com.zach2039.oldguns.text;
 
 import com.zach2039.oldguns.OldGuns;
 
-import net.minecraft.Util;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Adapted from Mekanism's APILang under the following license:

@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.api.firearm.util;
 
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Mth;
-import net.minecraft.world.entity.LivingEntity;
 
 public class FirearmStackHelper {
 	public static float getReloadProgress(LivingEntity entityIn, int currentUseTicks, int requiredReloadTicks)

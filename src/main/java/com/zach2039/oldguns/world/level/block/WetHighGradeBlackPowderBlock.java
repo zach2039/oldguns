@@ -7,16 +7,12 @@ import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMaterials;
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
+import net.minecraft.block.BlockState;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
 
 public class WetHighGradeBlackPowderBlock extends Block {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;

@@ -5,10 +5,9 @@ import java.util.List;
 
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.ItemStack;
 
 public class FirearmNBTHelper {
 	
