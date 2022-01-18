@@ -17,17 +17,15 @@ buildscript {
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.diffplug.eclipse.apt'
 
 version = "${mc_version}-${mod_version}"
-group = "com.zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
 
-// Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
@@ -138,79 +136,9 @@ jar {
 
 jar.finalizedBy('reobfJar')
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-
 mixin {
     add sourceSets.main, "oldguns.refmap.json"
 }
-
-
-//minecraft {
-//    version = "1.12.2-14.23.5.2847"
-//    runDir = "run"
-//    mappings = "snapshot_20171003"
-//	replace '@VERSION@', project.version
-//	useDepAts = true
-//}
-//
-//repositories {
-//	maven {
-//		// location of the maven that hosts JEI files
-//		name = "Progwml6 maven"
-//		url = "https://dvs1.progwml6.com/files/maven/"
-//	}
-//	maven {
-//		// location of a maven mirror for JEI files, as a fallback
-//		name = "ModMaven"
-//		url = "https://modmaven.k-4u.nl"
-//	}
-//    maven { 
-//		// CraftTweaker (MineTweaker3)
-//        name 'jared maven'
-//        url "http://maven.blamejared.com/"
-//    }
-//}
-//
-//dependencies {
-//	}
-
-//processResources {
-//	/* Ensure tasks redone with version change. */
-//	inputs.property "version", project.version
-//    //inputs.property "mcversion", project.minecraft.version
-//
-//    /* Replace stuff in mcmod.info, nothing else. */
-//    from(sourceSets.main.resources.srcDirs)
-//    {
-//        include 'mcmod.info'
-//                
-//        // replace version and mcversion
-//        expand 'version':project.version
-//		//expand 'mcversion':project.minecraft.version
-//    }
-//        
-//    /* Copy everything else except the mcmod.info. */
-//    from(sourceSets.main.resources.srcDirs)
-//    {
-//        exclude 'mcmod.info'
-//    }
-//	
-//	// Move access transformers to META-INF
-//	rename '(.+_at.cfg)', 'META-INF/$1'
-//}
-
 
 eclipse {
     afterEvaluate {
