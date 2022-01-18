@@ -122,7 +122,7 @@ String buildVersionString() {
         } else {
             // If the changelog file is present, we use the first line from that
             String first_line = changelog.readLines().get(0)
-            mod_output_version = first_line.substring(first_line.indexOf("-") + 1)
+            mod_output_version = first_line.substring(first_line.indexOf("v") + 1)
         }
         // Now use describe to get the number of commits since the last tag
         exec {
