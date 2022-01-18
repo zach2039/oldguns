@@ -182,6 +182,7 @@ mixin {
 
 eclipse {
     afterEvaluate {
-        synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+        //synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+        synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
     }
 }
