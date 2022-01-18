@@ -1,3 +1,7 @@
+#### v3.0.4-alpha
+
+- Add updateJson to mods.toml
+
 #### v3.0.3-alpha
     
 - Fix recipe overlap with iron gear set and medium iron musket ball

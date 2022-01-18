@@ -13,19 +13,19 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		//classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'com.diffplug.eclipse.apt'
+//apply plugin: 'com.diffplug.eclipse.apt'
 
-version = "${mc_version}-${mod_version}"
-group = "com.zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
+version = buildVersionString()
 
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
@@ -107,6 +107,45 @@ repositories {
 	}
 }
 
+// Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
+String buildVersionString() {
+    String mod_output_version = "${mod_version}-${mod_buildnumber}"
+    boolean jenkins_build = System.getenv("add_git_rev") != null
+    if (jenkins_build) {
+        File changelog = new File("CHANGELOG.md")
+        if (!changelog.exists()) {
+            // Get the current minor/patch number and bump it
+            int idx = mod_version.lastIndexOf(".")
+            String major = mod_version.substring(0, idx)
+            String minor = mod_version.substring(idx + 1)
+            int bumped = minor.toInteger() + 1
+            mod_output_version = "${major}.${bumped}-pre"
+        } else {
+            // If the changelog file is present, we use the first line from that
+            String first_line = changelog.readLines().get(0)
+            mod_output_version = first_line.substring(first_line.indexOf("v") + 1)
+        }
+        // Now use describe to get the number of commits since the last tag
+        exec {
+            commandLine 'git', 'fetch', '--force', '--tags'
+        }
+        def stdout = new ByteArrayOutputStream()
+        exec {
+            commandLine 'git', 'describe', '--long', '--abbrev=8', 'HEAD'
+            standardOutput = stdout
+        }
+        String descr = stdout.toString().trim()
+        descr = descr.substring(0, descr.length() - 10)
+        int idx = descr.lastIndexOf("-")
+        int pre_version = descr.substring(idx + 1).toInteger()
+        // If there have been more than 0 commits, consider this a pre-build
+        // otherwise use normal versioning (so a Jenkins build on the tag is equal to a release)
+        if (pre_version > 0)
+            mod_output_version = "${mod_output_version}.${pre_version}"
+    }
+    return "${mc_version}-${mod_output_version}"
+}
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.16.5-36.2.20'
 		
@@ -138,82 +177,13 @@ jar {
 
 jar.finalizedBy('reobfJar')
 
-publishing {
-    publications {
-        mavenJava(MavenPublication) {
-            artifact jar
-        }
-    }
-    repositories {
-        maven {
-            url "file://${project.projectDir}/mcmodsrepo"
-        }
-    }
-}
-
-
 mixin {
     add sourceSets.main, "oldguns.refmap.json"
 }
 
-
-//minecraft {
-//    version = "1.12.2-14.23.5.2847"
-//    runDir = "run"
-//    mappings = "snapshot_20171003"
-//	replace '@VERSION@', project.version
-//	useDepAts = true
-//}
-//
-//repositories {
-//	maven {
-//		// location of the maven that hosts JEI files
-//		name = "Progwml6 maven"
-//		url = "https://dvs1.progwml6.com/files/maven/"
-//	}
-//	maven {
-//		// location of a maven mirror for JEI files, as a fallback
-//		name = "ModMaven"
-//		url = "https://modmaven.k-4u.nl"
-//	}
-//    maven { 
-//		// CraftTweaker (MineTweaker3)
-//        name 'jared maven'
-//        url "http://maven.blamejared.com/"
-//    }
-//}
-//
-//dependencies {
-//	}
-
-//processResources {
-//	/* Ensure tasks redone with version change. */
-//	inputs.property "version", project.version
-//    //inputs.property "mcversion", project.minecraft.version
-//
-//    /* Replace stuff in mcmod.info, nothing else. */
-//    from(sourceSets.main.resources.srcDirs)
-//    {
-//        include 'mcmod.info'
-//                
-//        // replace version and mcversion
-//        expand 'version':project.version
-//		//expand 'mcversion':project.minecraft.version
-//    }
-//        
-//    /* Copy everything else except the mcmod.info. */
-//    from(sourceSets.main.resources.srcDirs)
-//    {
-//        exclude 'mcmod.info'
-//    }
-//	
-//	// Move access transformers to META-INF
-//	rename '(.+_at.cfg)', 'META-INF/$1'
-//}
-
-
 eclipse {
     afterEvaluate {
-        synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+        //synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+        synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
     }
 }
