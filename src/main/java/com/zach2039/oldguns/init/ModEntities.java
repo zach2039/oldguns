@@ -3,8 +3,8 @@ package com.zach2039.oldguns.init;
 import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.entity.Bombard;
-import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.entity.Bombard;
+import com.zach2039.oldguns.entity.BulletProjectile;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;

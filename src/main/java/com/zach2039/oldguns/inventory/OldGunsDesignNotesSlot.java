@@ -1,6 +1,6 @@
 package com.zach2039.oldguns.world.inventory;
 
-import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
+import com.zach2039.oldguns.item.tools.DesignNotesItem;
 
 import net.minecraft.item.ItemStack;
 

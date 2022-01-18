@@ -9,7 +9,7 @@ import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCatego
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
+import com.zach2039.oldguns.inventory.menu.GunsmithsBenchMenu;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;

@@ -12,18 +12,19 @@ import net.minecraft.block.material.MaterialColor;
 import net.minecraft.client.audio.SoundSource;
 import net.minecraft.fluid.Fluid;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.level.ServerWorld;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.util.ActionResultType;
+import net.minecraft.util.Hand;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.Hand;
-import net.minecraft.world.ActionResultType;
+import net.minecraft.world.World;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.server.ServerWorld;
 
 public class NiterBeddingBlock extends Block {
 

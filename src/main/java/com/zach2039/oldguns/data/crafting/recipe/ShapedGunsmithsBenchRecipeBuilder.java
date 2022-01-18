@@ -3,9 +3,8 @@ package com.zach2039.oldguns.data.crafting.recipe;
 import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModCrafting;
 
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.IItemProvider;
 
 public class ShapedGunsmithsBenchRecipeBuilder extends EnhancedShapedRecipeBuilder<ShapedGunsmithsBenchRecipe, ShapedGunsmithsBenchRecipeBuilder> {
 	protected ShapedGunsmithsBenchRecipeBuilder(final ItemStack result) {

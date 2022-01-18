@@ -1,12 +1,13 @@
 package com.zach2039.oldguns.crafting.recipe;
 
 import com.zach2039.oldguns.init.ModRecipeTypes;
-import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
-import com.zach2039.oldguns.world.item.tools.RepairKitItem;
+import com.zach2039.oldguns.item.tools.MortarAndPestleItem;
+import com.zach2039.oldguns.item.tools.RepairKitItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.crafting.CraftingRecipe;

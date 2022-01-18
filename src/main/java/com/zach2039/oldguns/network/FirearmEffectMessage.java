@@ -5,11 +5,12 @@ import java.util.function.Supplier;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.util.FirearmEffectHelper;
 import com.zach2039.oldguns.client.util.ClientUtil;
-import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.item.firearm.FirearmItem;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 import net.minecraftforge.fml.network.NetworkEvent;

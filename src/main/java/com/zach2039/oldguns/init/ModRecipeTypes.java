@@ -6,7 +6,6 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.crafting.recipe.GunsmithsBenchRecipe;
 
 import net.minecraft.inventory.IInventory;
-import net.minecraft.inventory.container.Container;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.ResourceLocation;

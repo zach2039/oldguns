@@ -3,8 +3,8 @@ package com.zach2039.oldguns.crafting.recipe;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
-import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
+import com.zach2039.oldguns.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.item.tools.MortarAndPestleItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -13,6 +13,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.ForgeHooks;

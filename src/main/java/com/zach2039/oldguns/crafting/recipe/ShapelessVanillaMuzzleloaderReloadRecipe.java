@@ -14,7 +14,7 @@ import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.item.firearm.FirearmItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.inventory.CraftingInventory;

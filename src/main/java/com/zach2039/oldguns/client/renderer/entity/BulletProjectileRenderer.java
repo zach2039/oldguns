@@ -6,7 +6,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
-import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.entity.BulletProjectile;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

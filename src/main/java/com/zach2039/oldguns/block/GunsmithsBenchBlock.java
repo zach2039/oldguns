@@ -1,6 +1,6 @@
 package com.zach2039.oldguns.block;
 
-import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
+import com.zach2039.oldguns.inventory.menu.GunsmithsBenchMenu;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

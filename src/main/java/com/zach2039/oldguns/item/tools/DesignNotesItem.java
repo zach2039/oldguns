@@ -11,6 +11,7 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.NonNullList;
+import net.minecraft.world.World;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.TooltipFlag;
 

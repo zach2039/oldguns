@@ -6,7 +6,6 @@ import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
-import net.minecraft.client.audio.SoundSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;

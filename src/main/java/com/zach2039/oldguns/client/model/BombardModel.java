@@ -2,7 +2,7 @@ package com.zach2039.oldguns.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.zach2039.oldguns.world.entity.Bombard;
+import com.zach2039.oldguns.entity.Bombard;
 
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

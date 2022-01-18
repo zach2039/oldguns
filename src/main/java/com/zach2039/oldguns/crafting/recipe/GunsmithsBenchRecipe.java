@@ -2,7 +2,7 @@ package com.zach2039.oldguns.crafting.recipe;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModRecipeTypes;
-import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.inventory.GunsmithsBenchCraftingContainer;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

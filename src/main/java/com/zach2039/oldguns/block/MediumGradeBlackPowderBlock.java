@@ -10,13 +10,14 @@ import com.zach2039.oldguns.init.ModMaterials;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
 import net.minecraft.entity.item.FallingBlockEntity;
-import net.minecraft.server.level.ServerWorld;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.world.item.context.BlockItemUseContext;
+import net.minecraft.world.World;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.WorldAccessor;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.server.ServerWorld;
 
 public class MediumGradeBlackPowderBlock extends FallingBlock {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;

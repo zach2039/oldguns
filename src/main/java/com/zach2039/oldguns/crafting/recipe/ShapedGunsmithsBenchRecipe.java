@@ -19,8 +19,8 @@ import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModRecipeTypes;
-import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
-import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
+import com.zach2039.oldguns.inventory.GunsmithsBenchCraftingContainer;
+import com.zach2039.oldguns.inventory.menu.GunsmithsBenchMenu;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

@@ -23,7 +23,7 @@ import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
+import com.zach2039.oldguns.inventory.menu.GunsmithsBenchMenu;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

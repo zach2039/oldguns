@@ -6,8 +6,6 @@ import java.util.List;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
-import net.minecraft.tags.Tag;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.util.Constants;
 
 public class ArtilleryNBTHelper {

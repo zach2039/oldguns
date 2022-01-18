@@ -1,14 +1,17 @@
-package com.zach2039.oldguns.world.item.ammo;
+package com.zach2039.oldguns.item.ammo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmAmmoType;
-import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.entity.BulletProjectile;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 
 public class FirearmAmmoItem extends Item implements IFirearmAmmo {
 	/**
@@ -97,7 +100,7 @@ public class FirearmAmmoItem extends Item implements IFirearmAmmo {
 		return projectileEntityList;
 	}
 	
-	public static class FirearmAmmoProperties extends Properties {
+	public static class FirearmAmmoProperties extends Item.Properties {
 		/**
 		 * Ammo type of this firearm ammo item instance.
 		 */

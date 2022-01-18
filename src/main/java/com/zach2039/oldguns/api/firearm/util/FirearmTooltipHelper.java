@@ -2,7 +2,7 @@ package com.zach2039.oldguns.api.firearm.util;
 
 import java.util.List;
 
-import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.item.firearm.FirearmItem;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.StringTextComponent;

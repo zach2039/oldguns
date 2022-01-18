@@ -2,7 +2,7 @@ package com.zach2039.oldguns.api.ammo;
 
 import java.util.List;
 
-import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.entity.BulletProjectile;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
