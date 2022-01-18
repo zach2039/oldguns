@@ -21,7 +21,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'com.diffplug.eclipse.apt'
+//apply plugin: 'com.diffplug.eclipse.apt'
 
 group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
