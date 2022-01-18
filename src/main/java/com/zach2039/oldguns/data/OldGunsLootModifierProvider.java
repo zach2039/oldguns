@@ -3,10 +3,10 @@ package com.zach2039.oldguns.data;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModLootModifierSerializers;
 import com.zach2039.oldguns.init.ModLootTables;
-import com.zach2039.oldguns.world.level.storage.loot.LootTableLootModifier;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnDesignNotesLootCondition;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnFirearmsLootCondition;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnMechanismsLootCondition;
+import com.zach2039.oldguns.loot.conditions.LootSpawnDesignNotesLootCondition;
+import com.zach2039.oldguns.loot.conditions.LootSpawnFirearmsLootCondition;
+import com.zach2039.oldguns.loot.conditions.LootSpawnMechanismsLootCondition;
+import com.zach2039.oldguns.loot.modifiers.LootTableLootModifier;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zach2039.oldguns.compat.patchouli.PatchouliUtils;
-import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.GunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.crafting.Ingredient;

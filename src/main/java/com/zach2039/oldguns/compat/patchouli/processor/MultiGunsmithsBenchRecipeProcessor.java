@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.compat.patchouli.PatchouliUtils;
+import com.zach2039.oldguns.crafting.recipe.GunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModRecipeTypes;
-import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.NonNullList;

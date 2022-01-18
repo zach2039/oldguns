@@ -10,7 +10,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
+import com.zach2039.oldguns.crafting.ingredient.ConditionalIngredientSerializer;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;

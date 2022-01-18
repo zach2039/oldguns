@@ -3,7 +3,7 @@ package com.zach2039.oldguns.init;
 import java.util.Optional;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.GunsmithsBenchRecipe;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.container.Container;

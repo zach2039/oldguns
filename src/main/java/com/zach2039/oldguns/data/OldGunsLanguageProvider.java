@@ -5,12 +5,12 @@ import java.util.Map;
 
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.block.GunsmithsBenchBlock;
 import com.zach2039.oldguns.data.lang.OldGunsCompendiumLang;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.text.OldGunsLang;
-import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 
 import net.minecraft.client.resources.I18n;
 import net.minecraft.data.DataGenerator;

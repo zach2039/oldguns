@@ -18,12 +18,12 @@ import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
 import com.zach2039.oldguns.compat.jei.util.JEIIngredientStackListBuilder;
 import com.zach2039.oldguns.compat.jei.util.OldGunsCraftingGridHelper;
+import com.zach2039.oldguns.crafting.recipe.GunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
-import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;

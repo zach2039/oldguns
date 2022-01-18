@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.data.crafting.recipe;
 
+import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

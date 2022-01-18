@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.data.crafting.recipe;
 
+import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
 import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.level.ItemLike;

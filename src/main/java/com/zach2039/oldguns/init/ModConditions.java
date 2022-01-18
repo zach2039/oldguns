@@ -1,9 +1,9 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftFlintlockWeaponsCondition;
-import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftMatchlockWeaponsCondition;
-import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftWheellockWeaponsCondition;
+import com.zach2039.oldguns.crafting.conditions.CanCraftFlintlockWeaponsCondition;
+import com.zach2039.oldguns.crafting.conditions.CanCraftMatchlockWeaponsCondition;
+import com.zach2039.oldguns.crafting.conditions.CanCraftWheellockWeaponsCondition;
 
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.crafting.CraftingHelper;

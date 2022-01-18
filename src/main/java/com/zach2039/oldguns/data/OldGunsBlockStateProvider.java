@@ -11,11 +11,11 @@ import java.util.function.Supplier;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.block.LiquidNiterCauldronBlock;
+import com.zach2039.oldguns.block.NiterBeddingBlock;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.util.EnumFaceRotation;
-import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
-import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
 
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;

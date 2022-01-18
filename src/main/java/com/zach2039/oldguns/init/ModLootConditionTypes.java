@@ -1,9 +1,9 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnDesignNotesLootCondition;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnFirearmsLootCondition;
-import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnMechanismsLootCondition;
+import com.zach2039.oldguns.loot.conditions.LootSpawnDesignNotesLootCondition;
+import com.zach2039.oldguns.loot.conditions.LootSpawnFirearmsLootCondition;
+import com.zach2039.oldguns.loot.conditions.LootSpawnMechanismsLootCondition;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;

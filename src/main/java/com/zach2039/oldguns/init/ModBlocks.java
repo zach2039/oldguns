@@ -2,15 +2,15 @@ package com.zach2039.oldguns.init;
 
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
-import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
-import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
-import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
-import com.zach2039.oldguns.world.level.block.MediumGradeBlackPowderBlock;
-import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
-import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
-import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
-import com.zach2039.oldguns.world.level.block.WetMediumGradeBlackPowderBlock;
+import com.zach2039.oldguns.block.GunsmithsBenchBlock;
+import com.zach2039.oldguns.block.HighGradeBlackPowderBlock;
+import com.zach2039.oldguns.block.HighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.block.LiquidNiterCauldronBlock;
+import com.zach2039.oldguns.block.MediumGradeBlackPowderBlock;
+import com.zach2039.oldguns.block.NiterBeddingBlock;
+import com.zach2039.oldguns.block.WetHighGradeBlackPowderBlock;
+import com.zach2039.oldguns.block.WetHighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.block.WetMediumGradeBlackPowderBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;

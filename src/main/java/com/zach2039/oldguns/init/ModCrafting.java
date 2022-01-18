@@ -4,15 +4,15 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
-import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaFirearmRepairRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMortarAndPestleRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
+import com.zach2039.oldguns.crafting.ingredient.ConditionalIngredientSerializer;
+import com.zach2039.oldguns.crafting.ingredient.IngredientNever;
+import com.zach2039.oldguns.crafting.recipe.ShapedGunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessVanillaFirearmRepairRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessVanillaMortarAndPestleRecipe;
+import com.zach2039.oldguns.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Items;
