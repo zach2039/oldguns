@@ -1,4 +1,4 @@
-#### v1.16.1-3.0.5-20
+#### v1.16.5-3.0.5-20
 
 - Fix missing stone barrel recipes
 
