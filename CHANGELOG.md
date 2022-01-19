@@ -1,4 +1,4 @@
-#### v1.16.5-3.0.4-15
+#### v1.16.5-3.0.4-18
 
 - Port for Minecraft 1.16.5
 - Fix patchouli template not processing issue
@@ -9,6 +9,7 @@
 - Remove artillery Port types
 - Refactor file locations for 1.16.5 standard
 - Add updateJson to mods.toml
+- Fix capability not being registered
 
 #### v1.18.1-3.0.3-alpha
     
