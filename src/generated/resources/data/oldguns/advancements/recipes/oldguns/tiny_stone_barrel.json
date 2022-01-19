@@ -2,29 +2,17 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "oldguns:large_stone_musket_ball"
+      "oldguns:tiny_stone_barrel"
     ]
   },
   "criteria": {
-    "has_stone": {
+    "has_stone_slab": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:stone"
-            ]
-          }
-        ]
-      }
-    },
-    "has_flint": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:flint"
+              "minecraft:stone_slab"
             ]
           }
         ]
@@ -33,14 +21,13 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "oldguns:large_stone_musket_ball"
+        "recipe": "oldguns:tiny_stone_barrel"
       }
     }
   },
   "requirements": [
     [
-      "has_stone",
-      "has_flint",
+      "has_stone_slab",
       "has_the_recipe"
     ]
   ]

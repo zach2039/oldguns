@@ -18,12 +18,14 @@
         ]
       }
     },
-    "has_stone": {
+    "has_polished_granite": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "forge:stone"
+            "items": [
+              "minecraft:polished_granite"
+            ]
           }
         ]
       }
@@ -38,7 +40,7 @@
   "requirements": [
     [
       "has_lever",
-      "has_stone",
+      "has_polished_granite",
       "has_the_recipe"
     ]
   ]
