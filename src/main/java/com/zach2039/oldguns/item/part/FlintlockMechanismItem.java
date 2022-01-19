@@ -8,6 +8,6 @@ public class FlintlockMechanismItem extends FirearmPartItem {
 	public FlintlockMechanismItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.FLINTLOCK_MECHANISM)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

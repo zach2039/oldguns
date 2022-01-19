@@ -17,7 +17,7 @@ public class LargeStoneBirdshotItem extends FirearmAmmoItem implements IFirearmA
 				.projectileEffectiveRange(ammoAttributes.projectileEffectiveRange.get().floatValue())
 				.projectileDeviationModifier(ammoAttributes.projectileDeviationModifier.get().floatValue())
 				.stacksTo(ammoAttributes.maxStackSize.get())				
-				.tab(OldGuns.CREATIVE_MODE_TAB)
+				.tab(OldGuns.ITEM_GROUP)
 				);
 	}
 }

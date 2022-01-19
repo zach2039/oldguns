@@ -34,20 +34,20 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
 
-import net.minecraft.inventory.Inventory;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.ServerRecipeBook;
+import net.minecraft.item.crafting.ServerRecipePlacer;
 
-@Mixin(ServerRecipeBook.class)
+@Mixin(ServerRecipePlacer.class)
 public final class ServerRecipePlacerMixin {
 	@Redirect(
 			method = "moveItemToGrid",
 			at = @At(
 					value = "INVOKE",
-					target = "net/minecraft/entity/player/Inventory.findSlotMatchingUnusedItem(Lnet/minecraft/item/ItemStack;)I"
+					target = "net/minecraft/entity/player/PlayerInventory.findSlotMatchingUnusedItem(Lnet/minecraft/item/ItemStack;)I"
 			)
 	)
-	private int getSlotWithUnusedStack(Inventory inventory, ItemStack stack) {
+	private int getSlotWithUnusedStack(PlayerInventory inventory, ItemStack stack) {
 		if (OldGunsConfig.COMMON.patchRecipeBook.get()) {
 			for (int i = 0; i < inventory.getContainerSize(); i++) {
 				final ItemStack toMatch = inventory.getItem(i);

@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:high_grade_black_powder"
-            ]
+            "item": "oldguns:high_grade_black_powder"
           }
         ]
       }

@@ -36,7 +36,7 @@ public class FlintlockDoublebarrelBlunderbussItem extends FirearmItem implements
 				.projectileSpeed(firearmAttributes.projectileSpeed.get().floatValue())
 				.defaultDurability(firearmAttributes.durability.get())		
 				.setNoRepair()
-				.tab(OldGuns.CREATIVE_MODE_TAB)
+				.tab(OldGuns.ITEM_GROUP)
 				);
 	}
 

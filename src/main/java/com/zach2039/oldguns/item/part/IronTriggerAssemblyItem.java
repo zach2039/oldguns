@@ -8,6 +8,6 @@ public class IronTriggerAssemblyItem extends FirearmPartItem {
 	public IronTriggerAssemblyItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.IRON_TRIGGER_ASSEMBLY)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

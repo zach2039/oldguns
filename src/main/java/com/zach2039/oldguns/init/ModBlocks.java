@@ -115,12 +115,12 @@ public class ModBlocks {
 	}
 
 	/**
-	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#CREATIVE_MODE_TAB}.
+	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#ITEM_GROUP}.
 	 *
 	 * @return The item properties
 	 */
 	private static Item.Properties defaultItemProperties() {
-		return new Item.Properties().tab(OldGuns.CREATIVE_MODE_TAB);
+		return new Item.Properties().tab(OldGuns.ITEM_GROUP);
 	}
 
 	/**

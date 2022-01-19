@@ -8,6 +8,6 @@ public class GoldTriggerAssemblyItem extends FirearmPartItem {
 	public GoldTriggerAssemblyItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.GOLD_TRIGGER_ASSEMBLY)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

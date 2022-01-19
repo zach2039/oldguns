@@ -17,7 +17,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * With additions by:
  * @author grilled-salmon
  */
-public class ModMenuTypes {
+public class ModContainerTypes {
 	private static final DeferredRegister<ContainerType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, OldGuns.MODID);
 
 	private static boolean isInitialized;

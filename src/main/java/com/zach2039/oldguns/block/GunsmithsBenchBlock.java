@@ -25,6 +25,7 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 
 public class GunsmithsBenchBlock extends Block {
@@ -38,6 +39,7 @@ public class GunsmithsBenchBlock extends Block {
 				.strength(3.0F)
 				.dynamicShape()
 				.noOcclusion()
+				.harvestTool(ToolType.AXE)
 				);
 		
 		this.registerDefaultState(getStateDefinition().any().setValue(FACING, Direction.NORTH));

@@ -263,6 +263,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Firearm Repair
 		{
 			ShapelessFirearmRepairRecipeBuilder.shapeless()
+					.group("")
 					.requires(ModTags.Items.FIREARM)
 					.requires(ModItems.REPAIR_KIT.get())						
 					.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))

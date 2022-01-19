@@ -27,10 +27,11 @@ import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.RecipeManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 
 @JeiPlugin
 public class OldGunsJeiPlugin implements IModPlugin {
@@ -112,8 +113,8 @@ public class OldGunsJeiPlugin implements IModPlugin {
 		return UID;
 	}
 	
-	private static boolean isGunsmithsBenchRecipe(Recipe<?> recipe) {
-		RecipeSerializer<?> serializer = recipe.getSerializer();
+	private static boolean isGunsmithsBenchRecipe(IRecipe<?> recipe) {
+		IRecipeSerializer<?> serializer = recipe.getSerializer();
 		return (
 				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_MORTAR_AND_PESTLE_SHAPELESS.get()) ||
 				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPED.get()) || 

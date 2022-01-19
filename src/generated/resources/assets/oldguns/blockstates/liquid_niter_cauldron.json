@@ -1,5 +1,8 @@
 {
   "variants": {
+    "level=0": {
+      "model": "oldguns:block/liquid_niter_cauldron"
+    },
     "level=1": {
       "model": "oldguns:block/liquid_niter_cauldron_level1"
     },

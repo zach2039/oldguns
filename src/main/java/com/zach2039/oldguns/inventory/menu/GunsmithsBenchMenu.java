@@ -4,7 +4,7 @@ import java.util.Optional;
 
 import com.zach2039.oldguns.crafting.recipe.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModMenuTypes;
+import com.zach2039.oldguns.init.ModContainerTypes;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.inventory.OldGunsDesignNotesSlot;
@@ -40,7 +40,7 @@ public class GunsmithsBenchMenu extends Container {
 	}
 
 	public GunsmithsBenchMenu(int containerId, PlayerInventory inv, IWorldPosCallable access) {
-		super(ModMenuTypes.GUNSMITHS_BENCH.get(), containerId);
+		super(ModContainerTypes.GUNSMITHS_BENCH.get(), containerId);
 		this.access = access;
 		this.player = inv.player;
 		

@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.gui.ClientScreenManager;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
-import com.zach2039.oldguns.init.ModMenuTypes;
+import com.zach2039.oldguns.init.ModContainerTypes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScreenManager;
@@ -33,7 +33,7 @@ public class ModScreenFactories {
 	}
 
 	private static void registerMenuScreenConstructors() {
-		ScreenManager.register(ModMenuTypes.GUNSMITHS_BENCH.get(), GunsmithsBenchScreen::new);
+		ScreenManager.register(ModContainerTypes.GUNSMITHS_BENCH.get(), GunsmithsBenchScreen::new);
 	}
 
 	private static void registerClientScreenConstructors() {}

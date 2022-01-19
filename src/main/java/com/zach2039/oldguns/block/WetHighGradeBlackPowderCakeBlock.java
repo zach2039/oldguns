@@ -23,6 +23,7 @@ import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.LightType;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ToolType;
 
 public class WetHighGradeBlackPowderCakeBlock extends Block {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
@@ -30,7 +31,13 @@ public class WetHighGradeBlackPowderCakeBlock extends Block {
 	public static final BooleanProperty DRY = BooleanProperty.create("dry");
 
 	public WetHighGradeBlackPowderCakeBlock() {
-		super(Block.Properties.of(ModMaterials.BLACK_POWDER_CAKE).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(Block.Properties
+				.of(ModMaterials.BLACK_POWDER_CAKE)
+				.strength(0.5F)
+				.sound(SoundType.SAND)
+				.randomTicks()
+				.harvestTool(ToolType.SHOVEL)
+				);
 		this.registerDefaultState(this.stateDefinition.any().setValue(DRY, Boolean.valueOf(false)));
 	}
 

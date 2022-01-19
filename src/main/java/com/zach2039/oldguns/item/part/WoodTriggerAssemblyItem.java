@@ -8,6 +8,6 @@ public class WoodTriggerAssemblyItem extends FirearmPartItem {
 	public WoodTriggerAssemblyItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.WOOD_TRIGGER_ASSEMBLY)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

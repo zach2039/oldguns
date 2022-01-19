@@ -37,7 +37,7 @@ public class FlintlockNockGunItem extends FirearmItem implements IFirearm {
 				.firesAllLoadedAmmoAtOnce()
 				.defaultDurability(firearmAttributes.durability.get())		
 				.setNoRepair()
-				.tab(OldGuns.CREATIVE_MODE_TAB)
+				.tab(OldGuns.ITEM_GROUP)
 				);
 	}
 

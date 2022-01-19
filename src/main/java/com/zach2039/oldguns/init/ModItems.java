@@ -522,12 +522,12 @@ public class ModItems {
 	}
 
 	/**
-	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#CREATIVE_MODE_TAB}.
+	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#ITEM_GROUP}.
 	 *
 	 * @author choonster
 	 * @return The item properties
 	 */
 	private static Properties defaultItemProperties() {
-		return new Properties().tab(OldGuns.CREATIVE_MODE_TAB);
+		return new Properties().tab(OldGuns.ITEM_GROUP);
 	}
 }

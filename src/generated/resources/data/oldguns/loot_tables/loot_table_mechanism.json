@@ -2,7 +2,6 @@
   "pools": [
     {
       "rolls": 1.0,
-      "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
@@ -10,12 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
-              },
-              "add": false
+              "count": 1
             }
           ],
           "name": "oldguns:flintlock_mechanism"
@@ -26,15 +20,16 @@
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": {
-                "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
-              },
-              "add": false
+              "count": 1
             }
           ],
           "name": "oldguns:caplock_mechanism"
+        }
+      ],
+      "functions": [
+        {
+          "function": "minecraft:set_count",
+          "count": 1
         }
       ]
     }

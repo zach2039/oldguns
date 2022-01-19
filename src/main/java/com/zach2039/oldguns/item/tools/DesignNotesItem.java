@@ -24,7 +24,7 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 		super(new Item.Properties()
 				.stacksTo(1)
 				.rarity(Rarity.RARE)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 	
 	@Override

@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:small_iron_barrel"
-            ]
+            "item": "oldguns:small_iron_barrel"
           }
         ]
       }

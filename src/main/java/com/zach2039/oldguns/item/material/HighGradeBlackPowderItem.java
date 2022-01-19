@@ -7,7 +7,7 @@ public class HighGradeBlackPowderItem extends MaterialItem {
 	public HighGradeBlackPowderItem() {
 		super(new Properties()
 				.stacksTo(64)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 
 }

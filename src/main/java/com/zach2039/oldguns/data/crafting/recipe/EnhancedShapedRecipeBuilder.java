@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.advancements.Advancement;
@@ -46,11 +47,11 @@ public class EnhancedShapedRecipeBuilder<
 		RECIPE extends IRecipe<?>,
 		BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 		> extends ShapedRecipeBuilder {
-	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapedRecipeBuilder.class, /* ensureValid */ "m_126143_", ResourceLocation.class);
-	private static final Field ADVANCEMENT = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* advancement */ "f_126110_");
-	private static final Field GROUP = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* group */ "f_126111_");
-	private static final Field ROWS = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* rows */ "f_126108_");
-	private static final Field KEY = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* key */ "f_126109_");
+	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapedRecipeBuilder.class, /* ensureValid */ "func_200463_a", ResourceLocation.class);
+	private static final Field ADVANCEMENT = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* advancement */ "field_200479_f");
+	private static final Field GROUP = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* group */ "field_200480_g");
+	private static final Field ROWS = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* rows */ "field_200477_d");
+	private static final Field KEY = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* key */ "field_200478_e");
 
 	protected final ItemStack result;
 	protected final IRecipeSerializer<? extends RECIPE> serializer;
@@ -201,7 +202,9 @@ public class EnhancedShapedRecipeBuilder<
 
 			String itemGroupName = itemGroup;
 			if (itemGroupName == null) {
-				final ItemGroup itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
+				ItemGroup itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
+				if (itemGroup == null) 
+					itemGroup = OldGuns.ITEM_GROUP;
 				itemGroupName = itemGroup.getRecipeFolderName();
 			}
 

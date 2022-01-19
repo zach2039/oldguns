@@ -8,6 +8,6 @@ public class WheellockMechanismItem extends FirearmPartItem {
 	public WheellockMechanismItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.WHEELLOCK_MECHANISM)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

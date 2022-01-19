@@ -8,6 +8,6 @@ public class GoldGearSetItem extends FirearmPartItem {
 	public GoldGearSetItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.GOLD_GEAR_SET)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

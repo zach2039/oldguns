@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:small_iron_musket_ball"
-            ]
+            "item": "oldguns:small_iron_musket_ball"
           }
         ]
       }
@@ -23,9 +21,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:paper"
-            ]
+            "item": "minecraft:paper"
           }
         ]
       }

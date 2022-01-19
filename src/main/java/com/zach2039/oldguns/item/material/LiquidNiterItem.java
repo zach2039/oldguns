@@ -7,7 +7,7 @@ public class LiquidNiterItem extends MaterialItem {
 	public LiquidNiterItem() {
 		super(new Properties()
 				.stacksTo(1)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 
 }

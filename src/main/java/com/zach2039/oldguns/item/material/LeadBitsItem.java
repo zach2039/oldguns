@@ -9,7 +9,7 @@ public class LeadBitsItem extends MaterialItem {
 	public LeadBitsItem() {
 		super(new Item.Properties()
 				.stacksTo(64)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 
 }

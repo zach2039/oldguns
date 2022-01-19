@@ -12,6 +12,8 @@
 
 package com.zach2039.oldguns.compat.jei;
 
+import java.awt.Component;
+
 import javax.annotation.Nullable;
 
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -19,16 +21,16 @@ import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 
-public abstract class OldGunsRecipeCategory<T> implements RecipeCategory<T>
+public abstract class OldGunsRecipeCategory<T> implements IRecipeCategory<T>
 {
 	public final ResourceLocation uid;
 	protected final IGuiHelper guiHelper;
 	private final Class<? extends T> recipeClass;
-	public MutableComponent title;
+	public ITextComponent title;
 	private IDrawableStatic background;
 	private IDrawable icon;
 
@@ -37,7 +39,7 @@ public abstract class OldGunsRecipeCategory<T> implements RecipeCategory<T>
 		this.recipeClass = recipeClass;
 		this.guiHelper = guiHelper;
 		this.uid = uid;
-		this.title = new TranslatableComponent(localKey);
+		this.title = new TranslationTextComponent(localKey);
 	}
 
 	@Override
@@ -75,7 +77,13 @@ public abstract class OldGunsRecipeCategory<T> implements RecipeCategory<T>
 	}
 
 	@Override
-	public Component getTitle()
+	public String getTitle()
+	{
+		return this.title.getString();
+	}
+	
+	@Override
+	public ITextComponent getTitleAsTextComponent()
 	{
 		return this.title;
 	}

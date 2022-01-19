@@ -8,6 +8,6 @@ public class MediumStoneFlaredBarrelItem extends FirearmPartItem {
 	public MediumStoneFlaredBarrelItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.MEDIUM_ROCK_FLARED_BARREL)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

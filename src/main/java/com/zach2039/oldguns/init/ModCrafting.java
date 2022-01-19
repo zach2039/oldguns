@@ -108,8 +108,8 @@ public class ModCrafting {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static <C extends IInventory, T extends IRecipe<C>> Map<ResourceLocation, IRecipe<C>> getRecipes(World world, IRecipeType<T> type) {
-		return  (Map<ResourceLocation, IRecipe<C>>) world.getRecipeManager().getRecipeIds()
+	public static <C extends IInventory, T extends IRecipe<?>> Map<ResourceLocation, IRecipe<?>> getRecipes(World world, IRecipeType<T> type) {
+		return  (Map<ResourceLocation, IRecipe<?>>) world.getRecipeManager().getRecipeIds()
 				.collect(Collectors.toMap(v -> v, v -> world.getRecipeManager().byKey(v).orElseThrow(IllegalArgumentException::new)));
 	}
 }

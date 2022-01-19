@@ -1,21 +1,25 @@
 package com.zach2039.oldguns;
 
+import javax.annotation.Nonnull;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModBlocks;
+import com.zach2039.oldguns.init.ModContainerTypes;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModLootConditionTypes;
 import com.zach2039.oldguns.init.ModLootModifierSerializers;
 import com.zach2039.oldguns.init.ModLootTables;
-import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
 import com.zach2039.oldguns.init.ModPotions;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -36,8 +40,6 @@ public class OldGuns
 	
 	public static final String MODID = "oldguns";
 	public static final String NAME = "Old Guns Mod";
-
-	public static final OldGunsCreativeModeTab CREATIVE_MODE_TAB = new OldGunsCreativeModeTab();
 	
 	public static final SimpleChannel network = ModNetwork.getNetworkChannel();
 
@@ -50,12 +52,11 @@ public class OldGuns
 
 		ModBlocks.initialize(modEventBus);
 		ModItems.initialize(modEventBus);
-		ModMenuTypes.initialize(modEventBus);
+		ModContainerTypes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
 		ModLootModifierSerializers.initialize(modEventBus);
 		ModPotions.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
-		
 		ModSoundEvents.initialize(modEventBus);
     }
 
@@ -73,4 +74,12 @@ public class OldGuns
 	public static void enqueue(final InterModEnqueueEvent event) {
 
 	}
+	
+	public static final ItemGroup ITEM_GROUP = new ItemGroup(OldGuns.MODID) {
+		@Nonnull
+		@Override
+		public ItemStack makeIcon()	{
+			return new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
+		}
+	};
 }

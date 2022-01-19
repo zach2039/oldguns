@@ -8,6 +8,6 @@ public class MatchCordItem extends FirearmPartItem {
 	public MatchCordItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.MATCH_CORD)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

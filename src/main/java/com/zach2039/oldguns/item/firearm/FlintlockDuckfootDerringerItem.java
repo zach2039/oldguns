@@ -37,7 +37,7 @@ public class FlintlockDuckfootDerringerItem extends FirearmItem implements IFire
 				.firesAllLoadedAmmoAtOnce()
 				.defaultDurability(firearmAttributes.durability.get())		
 				.setNoRepair()
-				.tab(OldGuns.CREATIVE_MODE_TAB)
+				.tab(OldGuns.ITEM_GROUP)
 				);
 	}
 

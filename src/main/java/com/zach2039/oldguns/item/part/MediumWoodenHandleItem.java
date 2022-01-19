@@ -8,6 +8,6 @@ public class MediumWoodenHandleItem extends FirearmPartItem {
 	public MediumWoodenHandleItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.MEDIUM_HANDLE)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

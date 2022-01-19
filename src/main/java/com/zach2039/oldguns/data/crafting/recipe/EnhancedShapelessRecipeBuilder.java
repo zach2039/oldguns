@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import com.google.common.base.Preconditions;
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.advancements.Advancement;
@@ -175,7 +176,9 @@ public class EnhancedShapelessRecipeBuilder<
 
 			String itemGroupName = itemGroup;
 			if (itemGroupName == null) {
-				final ItemGroup itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
+				ItemGroup itemGroup = result.getItem().getItemCategory();
+				if (itemGroup == null) 
+					itemGroup = OldGuns.ITEM_GROUP;
 				itemGroupName = itemGroup.getRecipeFolderName();
 			}
 

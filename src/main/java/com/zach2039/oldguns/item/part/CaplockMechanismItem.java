@@ -8,6 +8,6 @@ public class CaplockMechanismItem extends FirearmPartItem {
 	public CaplockMechanismItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.CAPLOCK_MECHANISM)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

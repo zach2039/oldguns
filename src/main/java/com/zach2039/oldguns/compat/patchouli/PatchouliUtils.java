@@ -10,11 +10,12 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModCrafting;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.fml.ModList;
 import vazkii.patchouli.api.IVariable;
 
@@ -27,7 +28,7 @@ public class PatchouliUtils {
 	 *
 	 * If the recipe has no replacement, it will be logged.
 	 */
-	public static <T extends Recipe<C>, C extends Container> T getRecipe(RecipeType<T> type, ResourceLocation id) {
+	public static <T extends IRecipe<?>, C extends Container> T getRecipe(IRecipeType<T> type, ResourceLocation id) {
 		@SuppressWarnings("unchecked")
 		Map<ResourceLocation, T> map = (Map<ResourceLocation, T>) ModCrafting.getRecipes(Minecraft.getInstance().level, type);
 		T r = map.get(id);
@@ -58,7 +59,7 @@ public class PatchouliUtils {
 	/**
 	 * Get all recipes of the specified type that belong to the specified recipe group.
 	 */
-	public static <T extends Recipe<C>, C extends Container> List<T> getRecipeGroup(RecipeType<T> type, String group) {
+	public static <T extends IRecipe<?>, C extends Container> List<T> getRecipeGroup(IRecipeType<T> type, String group) {
 		@SuppressWarnings("unchecked")
 		Map<ResourceLocation, T> map = (Map<ResourceLocation, T>) ModCrafting.getRecipes(Minecraft.getInstance().level, type);
 		List<T> list = new ArrayList<>();

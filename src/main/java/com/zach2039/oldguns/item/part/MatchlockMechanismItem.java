@@ -8,6 +8,6 @@ public class MatchlockMechanismItem extends FirearmPartItem {
 	public MatchlockMechanismItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.MATCHLOCK_MECHANISM)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

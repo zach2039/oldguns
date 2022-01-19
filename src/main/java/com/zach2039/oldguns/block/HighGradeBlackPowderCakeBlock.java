@@ -14,11 +14,18 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
+import net.minecraftforge.common.ToolType;
 
 public class HighGradeBlackPowderCakeBlock extends Block {
 	
 	public HighGradeBlackPowderCakeBlock() {
-		super(Block.Properties.of(ModMaterials.BLACK_POWDER_CAKE).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(Block.Properties
+				.of(ModMaterials.BLACK_POWDER_CAKE)
+				.strength(0.5F)
+				.sound(SoundType.SAND)
+				.randomTicks()
+				.harvestTool(ToolType.SHOVEL)
+				);
 		this.registerDefaultState(this.stateDefinition.any());
 	}
 	

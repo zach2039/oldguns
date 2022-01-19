@@ -100,7 +100,8 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 			
 			if (index <= 8) {
 				for (GunsmithsBenchRecipe recipe : recipes) {
-					if (recipes instanceof ShapedGunsmithsBenchRecipe shaped) {
+					if (recipe instanceof ShapedGunsmithsBenchRecipe) {
+						ShapedGunsmithsBenchRecipe shaped = (ShapedGunsmithsBenchRecipe)recipe;
 						if (shaped.getWidth() < shapedX + 1) {
 							ingredients.add(Ingredient.EMPTY);
 						} else {
@@ -118,7 +119,8 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 			
 			if (recipes2 != null && index > 8) {
 				for (GunsmithsBenchRecipe recipe2 : recipes2) {
-					if (recipe2 instanceof ShapedGunsmithsBenchRecipe shaped) {
+					if (recipe2 instanceof ShapedGunsmithsBenchRecipe) {
+						ShapedGunsmithsBenchRecipe shaped = (ShapedGunsmithsBenchRecipe)recipe2;
 						if (shaped.getWidth() < shapedX + 1) {
 							ingredients.add(Ingredient.EMPTY);
 						} else {

@@ -8,6 +8,6 @@ public class SmallWoodenStockItem extends FirearmPartItem {
 	public SmallWoodenStockItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.SMALL_STOCK)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

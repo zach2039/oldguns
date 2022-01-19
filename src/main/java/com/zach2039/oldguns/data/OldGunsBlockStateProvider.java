@@ -146,8 +146,17 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 //			  }
 //			}
 		
+		final ModelFile liquidNiterCauldron0 = models()
+				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()), mcLoc("cauldron"))
+				.texture("content", modLoc("block/liquid_niter_still"))
+				.texture("inside", mcLoc("block/cauldron_inner"))
+				.texture("particle", mcLoc("block/cauldron_side"))
+				.texture("top", mcLoc("block/cauldron_top"))
+				.texture("bottom", mcLoc("block/cauldron_bottom"))
+				.texture("side", mcLoc("block/cauldron_side"));
+		
 		final ModelFile liquidNiterCauldron1 = models()
-				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_level1", mcLoc("template_cauldron_level1"))
+				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_level1", mcLoc("cauldron_level1"))
 				.texture("content", modLoc("block/liquid_niter_still"))
 				.texture("inside", mcLoc("block/cauldron_inner"))
 				.texture("particle", mcLoc("block/cauldron_side"))
@@ -156,7 +165,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.texture("side", mcLoc("block/cauldron_side"));
 		
 		final ModelFile liquidNiterCauldron2 = models()
-				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_level2", mcLoc("template_cauldron_level2"))
+				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_level2", mcLoc("cauldron_level2"))
 				.texture("content", modLoc("block/liquid_niter_still"))
 				.texture("inside", mcLoc("block/cauldron_inner"))
 				.texture("particle", mcLoc("block/cauldron_side"))
@@ -166,7 +175,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 		
 		
 		final ModelFile liquidNiterCauldronFull = models()
-				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_full", mcLoc("template_cauldron_full"))
+				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_full", mcLoc("cauldron_level3"))
 				.texture("content", modLoc("block/liquid_niter_still"))
 				.texture("inside", mcLoc("block/cauldron_inner"))
 				.texture("particle", mcLoc("block/cauldron_side"))
@@ -175,6 +184,12 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.texture("side", mcLoc("block/cauldron_side"));
 
 		getVariantBuilder(ModBlocks.LIQUID_NITER_CAULDRON.get())
+				.partialState()
+				.with(LiquidNiterCauldronBlock.LEVEL, 0)
+				.modelForState()
+				.modelFile(liquidNiterCauldron0)
+				.addModel()
+				
 				.partialState()
 				.with(LiquidNiterCauldronBlock.LEVEL, 1)
 				.modelForState()

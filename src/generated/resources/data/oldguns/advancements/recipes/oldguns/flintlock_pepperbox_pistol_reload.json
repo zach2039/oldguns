@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:flintlock_pepperbox_pistol"
-            ]
+            "item": "oldguns:flintlock_pepperbox_pistol"
           }
         ]
       }

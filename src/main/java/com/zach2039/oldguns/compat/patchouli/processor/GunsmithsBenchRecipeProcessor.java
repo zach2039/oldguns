@@ -74,7 +74,8 @@ public class GunsmithsBenchRecipeProcessor implements IComponentProcessor {
 			List<Ingredient> ingredients = new ArrayList<>();
 			
 			if (index <= 8) {
-				if (recipe instanceof ShapedGunsmithsBenchRecipe shaped) {
+				if (recipe instanceof ShapedGunsmithsBenchRecipe)  {
+					ShapedGunsmithsBenchRecipe shaped = (ShapedGunsmithsBenchRecipe) recipe;
 					if (shaped.getWidth() < shapedX + 1) {
 						ingredients.add(Ingredient.EMPTY);
 					} else {
@@ -90,7 +91,8 @@ public class GunsmithsBenchRecipeProcessor implements IComponentProcessor {
 			}
 			
 			if (recipe2 != null && index > 8) {
-				if (recipe2 instanceof ShapedGunsmithsBenchRecipe shaped) {
+				if (recipe2 instanceof ShapedGunsmithsBenchRecipe)  {
+					ShapedGunsmithsBenchRecipe shaped = (ShapedGunsmithsBenchRecipe) recipe2;
 					if (shaped.getWidth() < shapedX + 1) {
 						ingredients.add(Ingredient.EMPTY);
 					} else {

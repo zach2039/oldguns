@@ -37,7 +37,13 @@ public class NiterBeddingBlock extends Block {
 	public static final Property<Integer> REFUSE_AMOUNT = IntegerProperty.create("refuse_amount", 0, MAX_REFUSE_AMOUNT);
 
 	public NiterBeddingBlock() {
-		super(Block.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL).randomTicks());
+		super(Block.Properties
+				.of(Material.DIRT, MaterialColor.DIRT)
+				.strength(0.5F)
+				.sound(SoundType.GRAVEL)
+				.randomTicks()
+				.harvestTool(ToolType.SHOVEL)
+				);
 		registerDefaultState(stateDefinition.any().setValue(REFUSE_AMOUNT, Integer.valueOf(0)));
 	}
 

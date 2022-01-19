@@ -8,6 +8,6 @@ public class IronGearSetItem extends FirearmPartItem {
 	public IronGearSetItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.IRON_GEAR_SET)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

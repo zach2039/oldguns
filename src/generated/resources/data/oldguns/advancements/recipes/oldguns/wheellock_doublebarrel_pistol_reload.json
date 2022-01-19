@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:wheellock_doublebarrel_pistol"
-            ]
+            "item": "oldguns:wheellock_doublebarrel_pistol"
           }
         ]
       }

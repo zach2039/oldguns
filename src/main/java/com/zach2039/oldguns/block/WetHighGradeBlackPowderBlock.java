@@ -16,12 +16,19 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.LightType;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ToolType;
 
 public class WetHighGradeBlackPowderBlock extends Block {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public WetHighGradeBlackPowderBlock() {
-		super(Block.Properties.of(ModMaterials.WET_BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(Block.Properties
+				.of(ModMaterials.WET_BLACK_POWDER)
+				.strength(0.5F)
+				.sound(SoundType.SAND)
+				.randomTicks()
+				.harvestTool(ToolType.SHOVEL)
+				);
 		this.registerDefaultState(this.stateDefinition.any());
 	}
 	

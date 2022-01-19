@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:matchlock_blunderbuss_pistol"
-            ]
+            "item": "oldguns:matchlock_blunderbuss_pistol"
           }
         ]
       }

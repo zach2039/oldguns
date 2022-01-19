@@ -8,6 +8,6 @@ public class LargeStoneBarrelItem extends FirearmPartItem {
 	public LargeStoneBarrelItem() {
 		super((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(FirearmPart.LARGE_ROCK_BARREL)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.tab(OldGuns.ITEM_GROUP));
 	}
 }

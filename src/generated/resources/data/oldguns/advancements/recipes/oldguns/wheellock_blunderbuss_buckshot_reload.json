@@ -11,9 +11,7 @@
       "conditions": {
         "items": [
           {
-            "items": [
-              "oldguns:wheellock_blunderbuss"
-            ]
+            "item": "oldguns:wheellock_blunderbuss"
           }
         ]
       }

@@ -8,6 +8,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModDamageSources;
 import com.zach2039.oldguns.init.ModDamageSources.DamageType;
 import com.zach2039.oldguns.init.ModEntities;
@@ -496,9 +497,6 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 			this.yRot += 180.0F;
 			this.yRotO += 180.0F;
 			if (!this.level.isClientSide && this.getDeltaMovement().lengthSqr() < 1.0E-7D) {
-				if (this.pickup == PickupStatus.ALLOWED) {
-					this.spawnAtLocation(this.getPickupItem(), 0.1F);
-				}
 
 				this.remove();
 			}
@@ -545,10 +543,10 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 		boolean isShallowAngle = MathHelper.abs((float) this.getDeltaMovement().normalize().dot(new Vector3d(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())) < 0.4;
 		boolean ricochet = result.getDirection().getAxis().isVertical() && (isShallowAngle) && (this.getVelocityMagnitude() > 1f);
 
-		//		OldGuns.LOGGER.info("ricochet: " + ricochet);
-		//		OldGuns.LOGGER.info("vertical: " + result.getDirection().getAxis().isVertical());
-		//		OldGuns.LOGGER.info("math: " + MathHelper.abs((float) this.getDeltaMovement().normalize().dot(new Vector3d(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())));
-		//		OldGuns.LOGGER.info("velMag: " + (this.getVelocityMagnitude() > 1f));
+		//OldGuns.LOGGER.info("ricochet: " + ricochet);
+		//OldGuns.LOGGER.info("vertical: " + result.getDirection().getAxis().isVertical());
+		//OldGuns.LOGGER.info("math: " + MathHelper.abs((float) this.getDeltaMovement().normalize().dot(new Vector3d(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())));
+		//OldGuns.LOGGER.info("velMag: " + (this.getVelocityMagnitude() > 1f));
 
 		this.lastState = this.level.getBlockState(result.getBlockPos());
 		BlockState blockstate = this.level.getBlockState(result.getBlockPos());
@@ -628,6 +626,9 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 	}
 
 	@Override
+	public void playerTouch(PlayerEntity p_70100_1_) {}
+	
+	@Override
 	public void tick() {
 		if (!this.hasBeenShot) {
 			this.hasBeenShot = true;
@@ -689,7 +690,7 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 				vec33 = hitresult.getLocation();
 			}
 
-			while(!this.isAlive()) {
+			while(this.isAlive()) {
 				EntityRayTraceResult entityhitresult = this.findHitEntity(vec32, vec33);
 				if (entityhitresult != null) {
 					hitresult = entityhitresult;

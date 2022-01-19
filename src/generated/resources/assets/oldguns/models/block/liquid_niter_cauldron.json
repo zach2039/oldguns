@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cauldron_level1",
+  "parent": "minecraft:block/cauldron",
   "textures": {
     "content": "oldguns:block/liquid_niter_still",
     "inside": "minecraft:block/cauldron_inner",
