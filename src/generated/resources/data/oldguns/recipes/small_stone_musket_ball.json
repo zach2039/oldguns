@@ -2,7 +2,7 @@
   "type": "oldguns:gunsmiths_bench_shapeless",
   "ingredients": [
     {
-      "tag": "forge:stone"
+      "item": "minecraft:stone"
     },
     {
       "item": "minecraft:flint"

@@ -11,7 +11,7 @@
       "tag": "oldguns:match_cord"
     },
     "S": {
-      "tag": "forge:stone"
+      "item": "minecraft:stone"
     },
     "T": {
       "tag": "oldguns:wood_trigger_assembly"

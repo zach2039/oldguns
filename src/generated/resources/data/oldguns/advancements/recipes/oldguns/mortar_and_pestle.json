@@ -21,7 +21,7 @@
       "conditions": {
         "items": [
           {
-            "tag": "forge:stone"
+            "item": "minecraft:polished_granite"
           }
         ]
       }
