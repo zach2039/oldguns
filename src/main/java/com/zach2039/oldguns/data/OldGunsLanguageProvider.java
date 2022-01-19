@@ -293,7 +293,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addPatchouliBookEntry("basics.black_powder", OldGunsCompendiumLang.Basics.BlackPowder.ENTRY);
 		addPatchouliBookPage("basics.black_powder0", OldGunsCompendiumLang.Basics.BlackPowder.PAGE0);
-		addPatchouliBookEntry("basics.high_grade", OldGunsCompendiumLang.BlackPowderProduction.HighGrade.ENTRY);
+		addPatchouliBookLang("basics.medium_grade", OldGunsCompendiumLang.BlackPowderProduction.MediumGrade.ENTRY);
 		
 		addPatchouliBookEntry("basics.firearms", OldGunsCompendiumLang.Basics.Firearms.ENTRY);
 		addPatchouliBookPage("basics.firearms0", OldGunsCompendiumLang.Basics.Firearms.PAGE0);

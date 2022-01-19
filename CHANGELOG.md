@@ -1,5 +1,12 @@
 #### v3.0.4-alpha
 
+- Fix patchouli template not processing issue
+- Edit mixins java version required
+- Relocate patchouli pages for 1.16.5 version
+- Fix data generation and add functionality
+- Port all except entity, jei, and patchouli
+- Remove artillery Port types
+- Refactor file locations for 1.16.5 standard
 - Add updateJson to mods.toml
 
 #### v3.0.3-alpha
