@@ -1,4 +1,4 @@
-#### v1.18.1-3.0.4-pre
+#### v1.18.1-3.0.4-16
 
 - Add capabilities registry fix from 1.16.5 branch
 
