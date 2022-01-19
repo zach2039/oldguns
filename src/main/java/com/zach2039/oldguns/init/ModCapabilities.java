@@ -12,6 +12,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 public class ModCapabilities {
 	@SubscribeEvent
 	public static void registerCapabilities(final RegisterCapabilitiesEvent event) {
-		FirearmEmptyCapability.register(null);
+		FirearmEmptyCapability.register(event);
 	}
 }
