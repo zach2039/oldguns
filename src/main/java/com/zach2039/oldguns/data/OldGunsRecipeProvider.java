@@ -1191,9 +1191,9 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create small stone musket ball
 		{
 			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.SMALL_STONE_MUSKET_BALL.get(), 2)
-					.requires(Tags.Items.STONE)
+					.requires(Items.STONE)
 					.requires(Items.FLINT)					
-					.unlockedBy("has_stone", has(Tags.Items.STONE))
+					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_flint", has(Items.FLINT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_stone_musket_ball"));
 		}
@@ -1201,10 +1201,10 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create medium stone musket ball
 		{
 			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MEDIUM_STONE_MUSKET_BALL.get(), 2)
-					.requires(Tags.Items.STONE)
+					.requires(Items.STONE)
 					.requires(Items.FLINT)
 					.requires(Items.FLINT)
-					.unlockedBy("has_stone", has(Tags.Items.STONE))
+					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_flint", has(Items.FLINT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_stone_musket_ball"));
 		}
@@ -1212,11 +1212,11 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create large stone musket ball
 		{
 			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.LARGE_STONE_MUSKET_BALL.get(), 2)
-					.requires(Tags.Items.STONE)
+					.requires(Items.STONE)
 					.requires(Items.FLINT)
 					.requires(Items.FLINT)
 					.requires(Items.FLINT)
-					.unlockedBy("has_stone", has(Tags.Items.STONE))
+					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_flint", has(Items.FLINT))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_stone_musket_ball"));
 		}
@@ -1485,6 +1485,51 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		}
 		
 		// Parts
+		// Create tiny stone barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.TINY_STONE_BARREL.get())
+					.pattern("sss")
+					.pattern(" ss")
+					.define('s', Items.STONE_SLAB)
+					.unlockedBy("has_stone_slab", has(Items.STONE_SLAB))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "tiny_stone_barrel"));
+		}
+				
+		// Create small stone barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_STONE_BARREL.get())
+					.pattern("SSs")
+					.define('S', Items.STONE)
+					.define('s', Items.STONE_SLAB)
+					.unlockedBy("has_stone_slab", has(Items.STONE_SLAB))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_stone_barrel"));
+		}
+		
+		// Create medium stone barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_STONE_BARREL.get())
+					.pattern("SSs")
+					.pattern(" sS")
+					.define('S', Items.STONE)
+					.define('s', Items.STONE_SLAB)
+					.unlockedBy("has_stone_slab", has(Items.STONE_SLAB))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_stone_barrel"));
+		}
+
+		// Create large stone barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_STONE_BARREL.get())
+					.pattern("SSS")
+					.pattern(" sS")
+					.define('S', Items.STONE)
+					.define('s', Items.STONE_SLAB)
+					.unlockedBy("has_stone_slab", has(Items.STONE_SLAB))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_stone_barrel"));
+		}
+				
 		// Create tiny iron barrel
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.TINY_IRON_BARREL.get())
@@ -1573,6 +1618,47 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_brass_ingot", has(ModTags.Items.INGOTS_BRASS))
 					.unlockedBy("has_brass_nugget", has(ModTags.Items.NUGGETS_BRASS))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_brass_barrel"));
+		}
+		
+		// Create small stone flared barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_STONE_FLARED_BARREL.get())
+					.pattern("s ")
+					.pattern(" X")
+					.pattern("s ")
+					.define('X', ModItems.SMALL_STONE_BARREL.get())
+					.define('s', Items.STONE_SLAB)
+					.unlockedBy("has_small_stone_barrel", has(ModItems.SMALL_STONE_BARREL.get()))
+					.unlockedBy("has_stone_slab", has(Items.STONE_SLAB))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_stone_flared_barrel"));
+		}
+		
+		// Create medium stone flared barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_STONE_FLARED_BARREL.get())
+					.pattern("S ")
+					.pattern(" X")
+					.pattern("S ")
+					.define('X', ModItems.MEDIUM_STONE_BARREL.get())
+					.define('S', Items.STONE)
+					.unlockedBy("has_medium_stone_barrel", has(ModItems.MEDIUM_STONE_BARREL.get()))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_stone_flared_barrel"));
+		}
+		
+		// Create large stone flared barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_STONE_FLARED_BARREL.get())
+					.pattern("Ss ")
+					.pattern("  X")
+					.pattern("Ss ")
+					.define('X', ModItems.LARGE_STONE_BARREL.get())
+					.define('S', Items.STONE)
+					.define('s', Items.STONE_SLAB)
+					.unlockedBy("has_large_stone_barrel", has(ModItems.LARGE_STONE_BARREL.get()))
+					.unlockedBy("has_stone_slab", has(Items.STONE_SLAB))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_stone_flared_barrel"));
 		}
 		
 		// Create small iron flared barrel
@@ -1833,11 +1919,11 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("STS")
 					.pattern(" E ")
 					.define('M', ModTags.Items.MATCH_CORD)
-					.define('S', Tags.Items.STONE)
+					.define('S', Items.STONE)
 					.define('T', ModTags.Items.WOOD_TRIGGER_ASSEMBLY)
 					.define('E', ModTags.Items.WOOD_GEAR_SET)
 					.unlockedBy("has_match_cord", has(ModTags.Items.MATCH_CORD))
-					.unlockedBy("has_stone", has(Tags.Items.STONE))
+					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_wood_trigger_assembly", has(ModTags.Items.WOOD_TRIGGER_ASSEMBLY))
 					.unlockedBy("has_wood_gear_set", has(ModTags.Items.WOOD_GEAR_SET))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_mechansim"));
@@ -1902,7 +1988,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('L', Blocks.LEVER)
 					.define('G', Blocks.POLISHED_GRANITE)
 					.unlockedBy("has_lever", has(Blocks.LEVER))
-					.unlockedBy("has_stone", has(Tags.Items.STONE))
+					.unlockedBy("has_stone", has(Blocks.POLISHED_GRANITE))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "mortar_and_pestle"));
 		}
 		
