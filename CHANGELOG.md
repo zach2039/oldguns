@@ -1,3 +1,7 @@
+#### v1.18.1-3.0.4-pre
+
+- Add capabilities registry fix from 1.16.5 branch
+
 #### v1.16.5-3.0.4-18
 
 - Port for Minecraft 1.16.5

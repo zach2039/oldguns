@@ -28,7 +28,14 @@ pipeline {
     post {
         always {
             archive 'build/libs/**.jar'
-			discordSend description: "Jenkins Pipeline Build", footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "https://discord.com/api/webhooks/933412044986798081/pK1G32ug5aQFfHbEIj1kZ-bYKgyX6KML7t0lcSKygv1ddMm49DUbntbnU25PDzfO8Wt6"
+			withCredentials([string(credentialsId: "oldguns-discord-webhook", variable: "discordWebhook")]) {
+				discordSend 
+					title: "Old Guns", 
+					description: "**Status:** " + currentBuild.currentResult.toLowerCase() + "\n**Branch:** ${BRANCH_NAME}\n**Build:** ${BUILD_NUMBER}\n**Changes:** ${RUN_CHANGES_DISPLAY_URL}\n",
+					link: env.BUILD_URL,
+					result: currentBuild.currentResult,
+					webhookURL: "https://discord.com/api/webhooks/933412044986798081/pK1G32ug5aQFfHbEIj1kZ-bYKgyX6KML7t0lcSKygv1ddMm49DUbntbnU25PDzfO8Wt6"
+			}
         }
     }
 }
