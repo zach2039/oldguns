@@ -140,12 +140,11 @@ String buildVersionString() {
         descr = descr.substring(0, descr.length() - 10)
         int idx = descr.lastIndexOf("-")
         int pre_version = descr.substring(idx + 1).toInteger()
+		String commit_current = System.getenv("GIT_COMMIT")
+		String commit_last = System.getenv("GIT_PREVIOUS_COMMIT")
         // If there have been more than 0 commits, consider this a pre-build
         // otherwise use normal versioning (so a Jenkins build on the tag is equal to a release)
-		println 'descr' + descr
-		println 'idx' + idx
-		println 'pre_version' + pre_version
-        if (pre_version > 0) {
+		if (!commit_current.equals(commit_last)) {
             mod_output_version = "${mod_output_version}.${pre_version}"
 		}
     }
