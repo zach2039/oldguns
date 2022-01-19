@@ -1,24 +1,26 @@
-package com.zach2039.oldguns.world.inventory;
+package com.zach2039.oldguns.inventory;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IRecipeHolder;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.RecipeHolder;
-import net.minecraft.world.item.crafting.Recipe;
 
-public class OldGunsDesignNotesContainer implements Container, RecipeHolder {
+public class OldGunsDesignNotesContainer implements IInventory, IRecipeHolder {
 	private final NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
 	@Nullable
-	private Recipe<?> recipeUsed;
+	private IRecipe<?> recipeUsed;
 
+	@Override
 	public int getContainerSize() {
 		return 1;
 	}
 
+	@Override
 	public boolean isEmpty() {
 		for(ItemStack itemstack : this.itemStacks) {
 			if (!itemstack.isEmpty()) {
@@ -29,39 +31,48 @@ public class OldGunsDesignNotesContainer implements Container, RecipeHolder {
 		return true;
 	}
 
+	@Override
 	public ItemStack getItem(int slot) {
 		return this.itemStacks.get(0);
 	}
 
+	@Override
 	public ItemStack removeItem(int slot, int amount) {
-		return ContainerHelper.takeItem(this.itemStacks, 0);
+		return ItemStackHelper.takeItem(this.itemStacks, 0);
 	}
 
+	@Override
 	public ItemStack removeItemNoUpdate(int slot) {
-		return ContainerHelper.takeItem(this.itemStacks, 0);
+		return ItemStackHelper.takeItem(this.itemStacks, 0);
 	}
 
+	@Override
 	public void setItem(int slot, ItemStack itemstack) {
 		this.itemStacks.set(0, itemstack);
 	}
 
+	@Override
 	public void setChanged() {
 	}
 
-	public boolean stillValid(Player player) {
+	@Override
+	public boolean stillValid(PlayerEntity player) {
 		return true;
 	}
 
+	@Override
 	public void clearContent() {
 		this.itemStacks.clear();
 	}
 
-	public void setRecipeUsed(@Nullable Recipe<?> recipe) {
+	@Override
+	public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
 		this.recipeUsed = recipe;
 	}
 
 	@Nullable
-	public Recipe<?> getRecipeUsed() {
+	@Override
+	public IRecipe<?> getRecipeUsed() {
 		return this.recipeUsed;
 	}
 }

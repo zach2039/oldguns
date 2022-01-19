@@ -3,7 +3,7 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.inventory.menu.GunsmithsBenchMenu;
 
-import net.minecraft.world.inventory.MenuType;
+import net.minecraft.inventory.container.ContainerType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -18,12 +18,12 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author grilled-salmon
  */
 public class ModMenuTypes {
-	private static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, OldGuns.MODID);
+	private static final DeferredRegister<ContainerType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
-	public static final RegistryObject<MenuType<GunsmithsBenchMenu>> GUNSMITHS_BENCH = MENU_TYPES.register("gunsmiths_bench",
-			() -> new MenuType<>(new GunsmithsBenchMenu.Factory())
+	public static final RegistryObject<ContainerType<GunsmithsBenchMenu>> GUNSMITHS_BENCH = MENU_TYPES.register("gunsmiths_bench",
+			() -> new ContainerType<>(new GunsmithsBenchMenu.Factory())
 	);
 
 	/**

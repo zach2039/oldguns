@@ -1,25 +1,36 @@
 package com.zach2039.oldguns.network.capability;
 
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.client.util.ClientUtil;
 
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.NetworkEvent;
 
 /**
- * Base class for messages that update capability data for a single slot of an {@link AbstractContainerMenu}.
+ * Base class for messages that update the capability data for each slot of a {@link Container}.
+ * <p>
+ * The {@link HANDLER} type must override {@link Object#equals(Object)} to perform a value comparison and
+ * {@link Object#hashCode()} to generate a hash code based on the values used in
+ * {@link Object#equals(Object)}.
  *
  * @param <HANDLER> The capability handler type
  * @param <DATA>    The data type written to and read from the buffer
  * @author Choonster
  */
-public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
+public abstract class BulkUpdateContainerCapabilityMessage<HANDLER, DATA> {
 	/**
 	 * The {@link Capability} instance to update.
 	 */
@@ -32,55 +43,49 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 	final Direction facing;
 
 	/**
-	 * The ID of the {@link AbstractContainerMenu}.
+	 * The ID of the {@link Container}.
 	 */
 	final int containerID;
 
 	/**
-	 * The state ID from the {@link AbstractContainerMenu}.
+	 * The capability data instances for each slot, indexed by their index in the original {@link NonNullList<ItemStack>}.
 	 */
-	final int stateID;
+	final Int2ObjectMap<DATA> capabilityData;
 
-	/**
-	 * The slot's index in the {@link AbstractContainerMenu}.
-	 */
-	final int slotNumber;
-
-	/**
-	 * The capability data instance.
-	 */
-	final DATA capabilityData;
-
-	public UpdateMenuCapabilityMessage(
+	public BulkUpdateContainerCapabilityMessage(
 			final Capability<HANDLER> capability,
 			@Nullable final Direction facing,
 			final int containerID,
-			final int stateID,
-			final int slotNumber,
-			final HANDLER handler,
-			final CapabilityMenuUpdateMessageUtils.CapabilityDataConverter<HANDLER, DATA> capabilityDataConverter
+			final NonNullList<ItemStack> items,
+			final CapabilityContainerUpdateMessageUtils.CapabilityDataConverter<HANDLER, DATA> capabilityDataConverter
 	) {
 		this.capability = capability;
 		this.facing = facing;
 		this.containerID = containerID;
-		this.stateID = stateID;
-		this.slotNumber = slotNumber;
-		capabilityData = capabilityDataConverter.convert(handler);
+
+		capabilityData = new Int2ObjectOpenHashMap<>();
+		IntStream.range(0, items.size()).forEach(slotNumber -> {
+			final ItemStack stack = items.get(slotNumber);
+
+			stack.getCapability(capability, facing).ifPresent((handler) -> {
+				final DATA data = capabilityDataConverter.convert(handler);
+
+				if (data != null) {
+					capabilityData.put(slotNumber, data);
+				}
+			});
+		});
 	}
 
-	protected UpdateMenuCapabilityMessage(
+	protected BulkUpdateContainerCapabilityMessage(
 			final Capability<HANDLER> capability,
 			@Nullable final Direction facing,
 			final int containerID,
-			final int stateID,
-			final int slotNumber,
-			@Nullable final DATA capabilityData
+			final Int2ObjectMap<DATA> capabilityData
 	) {
 		this.capability = capability;
 		this.facing = facing;
 		this.containerID = containerID;
-		this.stateID = stateID;
-		this.slotNumber = slotNumber;
 		this.capabilityData = capabilityData;
 	}
 
@@ -90,11 +95,11 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 	 * @return Is there any capability data to sync?
 	 */
 	public final boolean hasData() {
-		return capabilityData != null;
+		return !capabilityData.isEmpty();
 	}
 
 	/**
-	 * Decodes an update message from the network.
+	 * Decodes a bulk update message from the network.
 	 *
 	 * @param buffer                The packet buffer
 	 * @param capabilityDataDecoder A function that decodes a data instance from the buffer
@@ -107,14 +112,15 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 	protected static <
 			HANDLER,
 			DATA,
-			MESSAGE extends UpdateMenuCapabilityMessage<HANDLER, DATA>
+			MESSAGE extends BulkUpdateContainerCapabilityMessage<HANDLER, DATA>
 			>
 	MESSAGE decode(
-			final FriendlyByteBuf buffer,
-			final CapabilityMenuUpdateMessageUtils.CapabilityDataDecoder<DATA> capabilityDataDecoder,
+			final PacketBuffer buffer,
+			final CapabilityContainerUpdateMessageUtils.CapabilityDataDecoder<DATA> capabilityDataDecoder,
 			final MessageFactory<HANDLER, DATA, MESSAGE> messageFactory
 	) {
 		final boolean hasFacing = buffer.readBoolean();
+
 		final Direction facing;
 		if (hasFacing) {
 			facing = buffer.readEnum(Direction.class);
@@ -123,22 +129,21 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 		}
 
 		final int windowID = buffer.readInt();
-		final int stateID = buffer.readInt();
-		final int slotNumber = buffer.readInt();
 
-		final boolean hasData = buffer.readBoolean();
-		final DATA capabilityData;
-		if (hasData) {
-			capabilityData = capabilityDataDecoder.decode(buffer);
-		} else {
-			capabilityData = null;
+		final Int2ObjectMap<DATA> capabilityData = new Int2ObjectOpenHashMap<>();
+
+		final int numEntries = buffer.readInt();
+		for (int i = 0; i < numEntries; i++) {
+			final int slotNumber = buffer.readInt();
+			final DATA data = capabilityDataDecoder.decode(buffer);
+			capabilityData.put(slotNumber, data);
 		}
 
-		return messageFactory.createMessage(facing, windowID, stateID, slotNumber, capabilityData);
+		return messageFactory.createMessage(facing, windowID, capabilityData);
 	}
 
 	/**
-	 * Encodes an update message to be sent over the network.
+	 * Encodes a bulk update message to be sent over the network.
 	 *
 	 * @param message               The message to encode
 	 * @param buffer                The packet buffer
@@ -150,12 +155,12 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 	protected static <
 			HANDLER,
 			DATA,
-			MESSAGE extends UpdateMenuCapabilityMessage<HANDLER, DATA>
+			MESSAGE extends BulkUpdateContainerCapabilityMessage<HANDLER, DATA>
 			>
 	void encode(
 			final MESSAGE message,
-			final FriendlyByteBuf buffer,
-			final CapabilityMenuUpdateMessageUtils.CapabilityDataEncoder<DATA> capabilityDataEncoder
+			final PacketBuffer buffer,
+			final CapabilityContainerUpdateMessageUtils.CapabilityDataEncoder<DATA> capabilityDataEncoder
 	) {
 		final boolean hasFacing = message.facing != null;
 		buffer.writeBoolean(hasFacing);
@@ -165,19 +170,16 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 		}
 
 		buffer.writeInt(message.containerID);
-		buffer.writeInt(message.stateID);
-		buffer.writeInt(message.slotNumber);
 
-		final boolean hasData = message.hasData();
-		buffer.writeBoolean(hasData);
-
-		if (hasData) {
-			capabilityDataEncoder.encode(message.capabilityData, buffer);
-		}
+		buffer.writeInt(message.capabilityData.size());
+		Int2ObjectMaps.fastForEach(message.capabilityData, (entry) -> {
+			buffer.writeInt(entry.getIntKey());
+			capabilityDataEncoder.encode(entry.getValue(), buffer);
+		});
 	}
 
 	/**
-	 * Handles an update message.
+	 * Handles a bulk update message.
 	 *
 	 * @param message               The message to handle
 	 * @param ctx                   The network context
@@ -189,12 +191,12 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 	protected static <
 			HANDLER,
 			DATA,
-			MESSAGE extends UpdateMenuCapabilityMessage<HANDLER, DATA>
+			MESSAGE extends BulkUpdateContainerCapabilityMessage<HANDLER, DATA>
 			>
 	void handle(
 			final MESSAGE message,
 			final Supplier<NetworkEvent.Context> ctx,
-			final CapabilityMenuUpdateMessageUtils.CapabilityDataApplier<HANDLER, DATA> capabilityDataApplier
+			final CapabilityContainerUpdateMessageUtils.CapabilityDataApplier<HANDLER, DATA> capabilityDataApplier
 	) {
 		if (!message.hasData()) { // Don't do anything if no data was sent
 			ctx.get().setPacketHandled(true);
@@ -202,13 +204,13 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 		}
 
 		ctx.get().enqueueWork(() -> {
-			final Player player = ClientUtil.getClientPlayer();
+			final PlayerEntity player = ClientUtil.getClientPlayer();
 
 			if (player == null) {
 				return;
 			}
 
-			final AbstractContainerMenu container;
+			final Container container;
 			if (message.containerID == 0) {
 				container = player.inventoryMenu;
 			} else if (message.containerID == player.containerMenu.containerId) {
@@ -217,36 +219,38 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 				return;
 			}
 
-			CapabilityMenuUpdateMessageUtils.applyCapabilityDataToMenuSlot(
-					container,
-					message.slotNumber,
-					message.stateID,
-					message.capability,
-					message.facing,
-					message.capabilityData,
-					capabilityDataApplier
-			);
+			Int2ObjectMaps.fastForEach(message.capabilityData, (entry) -> {
+				final int slotNumber = entry.getIntKey();
+				final DATA data = entry.getValue();
+
+				CapabilityContainerUpdateMessageUtils.applyCapabilityDataToContainerSlot(
+						container,
+						slotNumber,
+						message.capability,
+						message.facing,
+						data,
+						capabilityDataApplier
+				);
+			});
 		});
 
 		ctx.get().setPacketHandled(true);
 	}
 
+
 	/**
-	 * A function that creates update message instances from network data.
+	 * A function that creates bulk update message instances from network data.
 	 *
 	 * @param <HANDLER> The capability handler type
 	 * @param <DATA>    The data type written to and read from the buffer
 	 * @param <MESSAGE> The message type
 	 */
 	@FunctionalInterface
-	public interface MessageFactory<HANDLER, DATA, MESSAGE extends UpdateMenuCapabilityMessage<HANDLER, DATA>> {
+	public interface MessageFactory<HANDLER, DATA, MESSAGE extends BulkUpdateContainerCapabilityMessage<HANDLER, DATA>> {
 		MESSAGE createMessage(
 				@Nullable Direction facing,
-				int windowID,
-				int stateID,
-				int slotNumber,
-				@Nullable DATA capabilityData
+				int containerID,
+				Int2ObjectMap<DATA> capabilityData
 		);
 	}
 }
-

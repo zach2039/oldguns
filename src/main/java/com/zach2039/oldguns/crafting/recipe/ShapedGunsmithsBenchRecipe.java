@@ -9,7 +9,6 @@ import javax.annotation.Nonnull;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -26,15 +25,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
@@ -263,7 +262,7 @@ public class ShapedGunsmithsBenchRecipe implements IRecipe<GunsmithsBenchCraftin
 			throw new JsonSyntaxException("Invalid pattern: empty pattern not allowed");
 		} else {
 			for(int i = 0; i < astring.length; ++i) {
-				String s = GsonBuilder.convertToString(p_44197_.get(i), "pattern[" + i + "]");
+				String s = JSONUtils.convertToString(p_44197_.get(i), "pattern[" + i + "]");
 				if (s.length() > MAX_WIDTH) {
 					throw new JsonSyntaxException("Invalid pattern: too many columns, " + MAX_WIDTH + " is maximum");
 				}
@@ -299,11 +298,11 @@ public class ShapedGunsmithsBenchRecipe implements IRecipe<GunsmithsBenchCraftin
 	}
 
 	public static ItemStack itemStackFromJson(JsonObject p_151275_) {
-		return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(p_151275_, true, true);
+		return net.minecraftforge.common.crafting.CraftingHelper.getItemStack(p_151275_, true);
 	}
 
 	public static Item itemFromJson(JsonObject p_151279_) {
-		String s = GsonHelper.getAsString(p_151279_, "item");
+		String s = JSONUtils.getAsString(p_151279_, "item");
 		Item item = Registry.ITEM.getOptional(new ResourceLocation(s)).orElseThrow(() -> {
 			return new JsonSyntaxException("Unknown item '" + s + "'");
 		});
@@ -315,26 +314,26 @@ public class ShapedGunsmithsBenchRecipe implements IRecipe<GunsmithsBenchCraftin
 	}
 
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public IRecipeSerializer<?> getSerializer() {
 		return ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPED.get();
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapedGunsmithsBenchRecipe> {
+	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ShapedGunsmithsBenchRecipe> {
 		
 		@Override
 		public ShapedGunsmithsBenchRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
-			final String group = GsonHelper.getAsString(json, "group", "");
+			final String group = JSONUtils.getAsString(json, "group", "");
 			final ModRecipeUtil.ShapedPrimer primer = ModRecipeUtil.parseShaped(json);
-			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
+			final ItemStack result = CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(json, "result"), true);
 
 			ShapedGunsmithsBenchRecipe recipeFromJson = new ShapedGunsmithsBenchRecipe(recipeID, group, 
-					primer.recipeWidth(), primer.recipeHeight(), primer.ingredients(), result);
+					primer.getRecipeWidth(), primer.getRecipeHeight(), primer.getIngredients(), result);
 			
 			return recipeFromJson;
 		}
 
 		@Override
-		public ShapedGunsmithsBenchRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
+		public ShapedGunsmithsBenchRecipe fromNetwork(final ResourceLocation recipeID, final PacketBuffer buffer) {
 			final int width = buffer.readVarInt();
 			final int height = buffer.readVarInt();
 			final String group = buffer.readUtf(Short.MAX_VALUE);
@@ -350,7 +349,7 @@ public class ShapedGunsmithsBenchRecipe implements IRecipe<GunsmithsBenchCraftin
 		}
 
 		@Override
-		public void toNetwork(final FriendlyByteBuf buffer, final ShapedGunsmithsBenchRecipe recipe) {
+		public void toNetwork(final PacketBuffer buffer, final ShapedGunsmithsBenchRecipe recipe) {
 			buffer.writeVarInt(recipe.getRecipeWidth());
 			buffer.writeVarInt(recipe.getRecipeHeight());
 			buffer.writeUtf(recipe.getGroup());
@@ -364,7 +363,7 @@ public class ShapedGunsmithsBenchRecipe implements IRecipe<GunsmithsBenchCraftin
 	}
 
 	@Override
-	public RecipeType<?> getType() {
+	public IRecipeType<?> getType() {
 		return ModRecipeTypes.GUNSMITHS_BENCH;
 	}
 }

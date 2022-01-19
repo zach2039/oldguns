@@ -9,6 +9,7 @@ import com.zach2039.oldguns.init.ModTags;
 import net.minecraft.data.BlockTagsProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.ItemTagsProvider;
+import net.minecraft.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
 /**

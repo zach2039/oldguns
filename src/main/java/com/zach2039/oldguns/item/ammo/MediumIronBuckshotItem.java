@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.world.item.ammo;
+package com.zach2039.oldguns.item.ammo;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.IFirearmAmmo;

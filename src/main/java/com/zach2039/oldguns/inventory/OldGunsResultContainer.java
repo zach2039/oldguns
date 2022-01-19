@@ -1,19 +1,19 @@
-package com.zach2039.oldguns.world.inventory;
+package com.zach2039.oldguns.inventory;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.IRecipeHolder;
+import net.minecraft.inventory.ItemStackHelper;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.NonNullList;
-import net.minecraft.world.Container;
-import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.RecipeHolder;
-import net.minecraft.world.item.crafting.Recipe;
 
-public class OldGunsResultContainer implements Container, RecipeHolder {
+public class OldGunsResultContainer implements IInventory, IRecipeHolder {
 	private final NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
 	@Nullable
-	private Recipe<?> recipeUsed;
+	private IRecipe<?> recipeUsed;
 
 	public int getContainerSize() {
 		return 1;
@@ -34,11 +34,11 @@ public class OldGunsResultContainer implements Container, RecipeHolder {
 	}
 
 	public ItemStack removeItem(int slot, int amount) {
-		return ContainerHelper.takeItem(this.itemStacks, 0);
+		return ItemStackHelper.takeItem(this.itemStacks, 0);
 	}
 
 	public ItemStack removeItemNoUpdate(int slot) {
-		return ContainerHelper.takeItem(this.itemStacks, 0);
+		return ItemStackHelper.takeItem(this.itemStacks, 0);
 	}
 
 	public void setItem(int slot, ItemStack itemstack) {
@@ -48,7 +48,7 @@ public class OldGunsResultContainer implements Container, RecipeHolder {
 	public void setChanged() {
 	}
 
-	public boolean stillValid(Player player) {
+	public boolean stillValid(PlayerEntity player) {
 		return true;
 	}
 
@@ -56,12 +56,13 @@ public class OldGunsResultContainer implements Container, RecipeHolder {
 		this.itemStacks.clear();
 	}
 
-	public void setRecipeUsed(@Nullable Recipe<?> recipe) {
+	public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
 		this.recipeUsed = recipe;
 	}
 
 	@Nullable
-	public Recipe<?> getRecipeUsed() {
+	public IRecipe<?> getRecipeUsed() {
 		return this.recipeUsed;
 	}
+
 }

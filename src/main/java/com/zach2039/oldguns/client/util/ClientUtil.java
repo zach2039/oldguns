@@ -2,7 +2,7 @@ package com.zach2039.oldguns.client.util;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
 
@@ -22,7 +22,7 @@ public class ClientUtil {
 	 * @return The client player
 	 */
 	@Nullable
-	public static Player getClientPlayer() {
+	public static PlayerEntity getClientPlayer() {
 		return DistExecutor.safeCallWhenOn(Dist.CLIENT, () -> ClientOnlyMethods::getClientPlayer);
 	}
 }

@@ -1,13 +1,14 @@
-package com.zach2039.oldguns.world.item.tools;
+package com.zach2039.oldguns.item.tools;
 
 import com.zach2039.oldguns.OldGuns;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class RepairKitItem extends Item {
 
 	public RepairKitItem() {
-		super(new Properties()
+		super(new Item.Properties()
 				.defaultDurability(4)
 				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);

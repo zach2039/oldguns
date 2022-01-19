@@ -7,9 +7,9 @@ import java.util.Set;
 import com.google.common.base.Function;
 import com.zach2039.oldguns.OldGuns;
 
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Container;
 import net.minecraftforge.event.entity.player.PlayerContainerEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -24,14 +24,14 @@ public class CapabilityContainerListenerManager {
 	/**
 	 * The {@link CapabilityContainerListener} factories.
 	 */
-	private static final Set<Function<ServerPlayer, CapabilityContainerListener<?>>> containerListenerFactories = new HashSet<>();
+	private static final Set<Function<ServerPlayerEntity, CapabilityContainerListener<?>>> containerListenerFactories = new HashSet<>();
 
 	/**
 	 * Register a factory for a {@link CapabilityContainerListener}.
 	 *
 	 * @param factory The factory
 	 */
-	public static void registerListenerFactory(final Function<ServerPlayer, CapabilityContainerListener<?>> factory) {
+	public static void registerListenerFactory(final Function<ServerPlayerEntity, CapabilityContainerListener<?>> factory) {
 		containerListenerFactories.add(factory);
 	}
 
@@ -40,49 +40,52 @@ public class CapabilityContainerListenerManager {
 	private static class EventHandler {
 
 		/**
-		 * Add the listeners to a {@link AbstractContainerMenu}.
+		 * Add the listeners to a {@link IInventory}.
 		 *
 		 * @param player    The player
 		 * @param container The Container
 		 */
-		private static void addListeners(final ServerPlayer player, final AbstractContainerMenu container) {
+		private static void addListeners(final ServerPlayerEntity player, final Container container) {
 			containerListenerFactories.forEach(
 					factory -> container.addSlotListener(factory.apply(player))
 			);
 		}
 
 		/**
-		 * Add the listeners to {@link Player#inventoryMenu} when a {@link ServerPlayer} logs in.
+		 * Add the listeners to {@link Player#inventoryMenu} when a {@link ServerPlayerEntity} logs in.
 		 *
 		 * @param event The event
 		 */
 		@SubscribeEvent
 		public static void playerLoggedIn(final PlayerEvent.PlayerLoggedInEvent event) {
-			if (event.getPlayer() instanceof final ServerPlayer player) {
+			if (event.getPlayer() instanceof ServerPlayerEntity) {
+				ServerPlayerEntity player = (ServerPlayerEntity)event.getPlayer();
 				addListeners(player, player.inventoryMenu);
 			}
 		}
 
 		/**
-		 * Add the listeners to {@link Player#inventoryMenu} when a {@link ServerPlayer} is cloned.
+		 * Add the listeners to {@link Player#inventoryMenu} when a {@link ServerPlayerEntity} is cloned.
 		 *
 		 * @param event The event
 		 */
 		@SubscribeEvent
 		public static void playerClone(final PlayerEvent.Clone event) {
-			if (event.getPlayer() instanceof final ServerPlayer player) {
+			if (event.getPlayer() instanceof ServerPlayerEntity) {
+				ServerPlayerEntity player = (ServerPlayerEntity)event.getPlayer();
 				addListeners(player, player.inventoryMenu);
 			}
 		}
 
 		/**
-		 * Add the listeners to an {@link AbstractContainerMenu} when it's opened by a {@link ServerPlayer}.
+		 * Add the listeners to an {@link IInventory} when it's opened by a {@link ServerPlayerEntity}.
 		 *
 		 * @param event The event
 		 */
 		@SubscribeEvent
 		public static void containerOpen(final PlayerContainerEvent.Open event) {
-			if (event.getPlayer() instanceof final ServerPlayer player) {
+			if (event.getPlayer() instanceof ServerPlayerEntity) {
+				ServerPlayerEntity player = (ServerPlayerEntity)event.getPlayer();
 				addListeners(player, event.getContainer());
 			}
 		}

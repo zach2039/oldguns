@@ -14,11 +14,13 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.RecipeProvider;
 import net.minecraft.data.ShapedRecipeBuilder;
 import net.minecraft.data.ShapelessRecipeBuilder;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.item.Items;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.Tags;
@@ -38,7 +40,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 	}
 
 	@Override
-	protected void buildCraftingRecipes(final Consumer<FinishedRecipe> recipeConsumer) {
+	protected void buildShapelessRecipes(final Consumer<IFinishedRecipe> recipeConsumer) {
 
 		// Materials
 		// Lead ingots from nuggets
@@ -109,7 +111,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("CDC")
 					.define('W', Tags.Items.CROPS_WHEAT)
 					.define('C', Items.CLAY_BALL)
-					.define('D', ItemTags.DIRT)	
+					.define('D', Items.DIRT)	
 					.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "niter_bedding"));
 		}

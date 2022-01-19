@@ -4,9 +4,13 @@ import java.util.function.Supplier;
 
 import com.google.common.base.Preconditions;
 
+import net.minecraft.block.Block;
+import net.minecraft.block.FlowingFluidBlock;
+import net.minecraft.block.material.Material;
 import net.minecraft.fluid.Fluid;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.Items;
 import net.minecraftforge.fluids.FluidAttributes;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.fml.RegistryObject;
@@ -17,7 +21,7 @@ import net.minecraftforge.registries.DeferredRegister;
  *
  * @author Choonster
  */
-public class FluidGroup<STILL extends Fluid, FLOWING extends Fluid, BLOCK extends LiquidBlock, BUCKET extends Item> {
+public class FluidGroup<STILL extends Fluid, FLOWING extends Fluid, BLOCK extends FlowingFluidBlock, BUCKET extends Item> {
 	private final RegistryObject<STILL> still;
 	private final RegistryObject<FLOWING> flowing;
 	private final RegistryObject<BLOCK> block;
@@ -66,7 +70,7 @@ public class FluidGroup<STILL extends Fluid, FLOWING extends Fluid, BLOCK extend
 		return bucket;
 	}
 
-	public static class Builder<STILL extends Fluid, FLOWING extends Fluid, BLOCK extends LiquidBlock, BUCKET extends Item> {
+	public static class Builder<STILL extends Fluid, FLOWING extends Fluid, BLOCK extends FlowingFluidBlock, BUCKET extends Item> {
 		protected final DeferredRegister<Fluid> fluids;
 		protected final DeferredRegister<Block> blocks;
 		protected final DeferredRegister<Item> items;
@@ -145,7 +149,7 @@ public class FluidGroup<STILL extends Fluid, FLOWING extends Fluid, BLOCK extend
 		@FunctionalInterface
 		protected interface IFluidGroupFactory<
 				GROUP extends FluidGroup<STILL, FLOWING, BLOCK, BUCKET>,
-				STILL extends Fluid, FLOWING extends Fluid, BLOCK extends LiquidBlock, BUCKET extends Item
+				STILL extends Fluid, FLOWING extends Fluid, BLOCK extends FlowingFluidBlock, BUCKET extends Item
 				> {
 			GROUP create(RegistryObject<STILL> still, RegistryObject<FLOWING> flowing, RegistryObject<BLOCK> block, RegistryObject<BUCKET> bucket);
 		}
@@ -162,7 +166,7 @@ public class FluidGroup<STILL extends Fluid, FLOWING extends Fluid, BLOCK extend
 		return new Item.Properties()
 				.craftRemainder(Items.BUCKET)
 				.stacksTo(1)
-				.tab(CreativeModeTab.TAB_MISC);
+				.tab(ItemGroup.TAB_MISC);
 	}
 
 	public interface IFluidFactory<FLUID extends Fluid> {

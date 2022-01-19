@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.world.inventory.menu;
+package com.zach2039.oldguns.inventory.menu;
 
 import java.util.Optional;
 
@@ -11,33 +11,35 @@ import com.zach2039.oldguns.inventory.OldGunsDesignNotesSlot;
 import com.zach2039.oldguns.inventory.OldGunsResultContainer;
 import com.zach2039.oldguns.inventory.OldGunsResultSlot;
 
-import net.minecraft.inventory.Inventory;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.RecipeItemHelper;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.network.play.server.SSetSlotPacket;
+import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.world.World;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.player.StackedContents;
-import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.inventory.ContainerWorldAccess;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.fml.network.IContainerFactory;
 
-public class GunsmithsBenchMenu extends AbstractContainerMenu {
+public class GunsmithsBenchMenu extends Container {
 	public static final int RESULT_SLOT = 0;
 	public static final int NOTES_SLOT = 9;
 	
 	private final GunsmithsBenchCraftingContainer craftSlots = new GunsmithsBenchCraftingContainer(this, 3, 3);
 	private final OldGunsResultContainer resultSlots = new OldGunsResultContainer();
-	private final ContainerWorldAccess access;
-	private final Player player;
+	private final IWorldPosCallable access;
+	private final PlayerEntity player;
 
-	public GunsmithsBenchMenu(int containerId, Inventory inv) {
-		this(containerId, inv, ContainerWorldAccess.NULL);
+	public GunsmithsBenchMenu(int containerId, PlayerInventory inv) {
+		this(containerId, inv, IWorldPosCallable.NULL);
 	}
 
-	public GunsmithsBenchMenu(int containerId, Inventory inv, ContainerWorldAccess access) {
+	public GunsmithsBenchMenu(int containerId, PlayerInventory inv, IWorldPosCallable access) {
 		super(ModMenuTypes.GUNSMITHS_BENCH.get(), containerId);
 		this.access = access;
 		this.player = inv.player;
@@ -64,9 +66,9 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 
 	}
 
-	protected static void slotChangedCraftingGrid(AbstractContainerMenu menu, World level, Player player, GunsmithsBenchCraftingContainer containerCrafting, OldGunsResultContainer containerResult) {
+	protected static void slotChangedCraftingGrid(int slot, World level, PlayerEntity player, GunsmithsBenchCraftingContainer containerCrafting, OldGunsResultContainer containerResult) {
 		if (!level.isClientSide) {
-			ServerPlayer serverplayer = (ServerPlayer)player;
+			ServerPlayerEntity serverplayer = (ServerPlayerEntity)player;
 			ItemStack itemstack = ItemStack.EMPTY;
 			Optional<GunsmithsBenchRecipe> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH, containerCrafting, level);
 			if (optional.isPresent()) {
@@ -77,18 +79,17 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 			}
 
 			containerResult.setItem(0, itemstack);
-			menu.setRemoteSlot(0, itemstack);
-			serverplayer.connection.send(new ClientboundContainerSetSlotPacket(menu.containerId, menu.incrementStateId(), 0, itemstack));
+			serverplayer.connection.send(new SSetSlotPacket(slot, 0, itemstack));
 		}
 	}
 
-	public void slotsChanged(Container p_39366_) {
+	public void slotsChanged(IInventory inv) {
 		this.access.execute((level, player) -> {
-			slotChangedCraftingGrid(this, level, this.player, this.craftSlots, this.resultSlots);
+			slotChangedCraftingGrid(this.containerId, level, this.player, this.craftSlots, this.resultSlots);
 		});
 	}
 
-	public void fillCraftSlotsStackedContents(StackedContents contents) {
+	public void fillCraftSlotsStackedContents(RecipeItemHelper contents) {
 		this.craftSlots.fillStackedContents(contents);
 	}
 
@@ -97,25 +98,28 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 		this.resultSlots.clearContent();
 	}
 	
-	public boolean recipeMatches(Recipe<? super GunsmithsBenchCraftingContainer> recipe) {
+	public boolean recipeMatches(IRecipe<? super GunsmithsBenchCraftingContainer> recipe) {
 		return recipe.matches(this.craftSlots, this.player.level);
 	}
 
-	public void removed(Player player) {
+	@Override
+	public void removed(PlayerEntity player) {
 		super.removed(player);
-		this.access.execute((p_39371_, p_39372_) -> {
-			this.clearContainer(player, this.craftSlots);
+		this.access.execute((p_217068_2_, p_217068_3_) -> {
+			this.clearContainer(player, p_217068_2_, this.craftSlots);
 		});
 	}
 
-	public boolean stillValid(Player p_39368_) {
-		return stillValid(this.access, p_39368_, ModBlocks.GUNSMITHS_BENCH.get());
+	@Override
+	public boolean stillValid(PlayerEntity player) {
+		return stillValid(this.access, player, ModBlocks.GUNSMITHS_BENCH.get());
 	}
 
-	public ItemStack quickMoveStack(Player player, int slotIdx) {
+	@Override
+	public ItemStack quickMoveStack(PlayerEntity player, int slotIdx) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(slotIdx);
-		int playerTotalInvSize = player.getInventory().items.size();
+		int playerTotalInvSize = player.inventory.getContainerSize();
 		int totalInvSize = (getSize() + playerTotalInvSize);
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
@@ -194,7 +198,7 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	
 	public static class Factory implements IContainerFactory<GunsmithsBenchMenu> {
 		@Override
-		public GunsmithsBenchMenu create(final int windowId, final Inventory inv, final FriendlyByteBuf data) {
+		public GunsmithsBenchMenu create(final int windowId, final PlayerInventory inv, final PacketBuffer data) {
 			return new GunsmithsBenchMenu(windowId, inv);
 		}
 	}

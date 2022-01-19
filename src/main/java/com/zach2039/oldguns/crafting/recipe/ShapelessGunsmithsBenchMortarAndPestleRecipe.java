@@ -6,16 +6,16 @@ import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.item.tools.MortarAndPestleItem;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
@@ -45,24 +45,24 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 	}
 
 	private ItemStack damageItem(final ItemStack stack) {
-		final Player craftingPlayer = ForgeHooks.getCraftingPlayer();
+		final PlayerEntity craftingPlayer = ForgeHooks.getCraftingPlayer();
 
 		World level = craftingPlayer.getCommandSenderWorld();
-		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
+		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayerEntity ? (ServerPlayerEntity) craftingPlayer : null)) {
 			ForgeEventFactory.onPlayerDestroyItem(craftingPlayer, stack, null);
 			return ItemStack.EMPTY;
 		}
 
-		return stack;
+		return stack;	
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchMortarAndPestleRecipe> {
+	public static class Serializer extends ForgeRegistryEntry<IRecipeSerializer<?>> implements IRecipeSerializer<ShapelessGunsmithsBenchMortarAndPestleRecipe> {
 
 		@Override
 		public ShapelessGunsmithsBenchMortarAndPestleRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
-			final String group = GsonHelper.getAsString(json, "group", "");
+			final String group = JSONUtils.getAsString(json, "group", "");
 			final NonNullList<Ingredient> ingredients = ModRecipeUtil.parseShapeless(json);
-			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
+			final ItemStack result = CraftingHelper.getItemStack(JSONUtils.getAsJsonObject(json, "result"), true);
 
 			ShapelessGunsmithsBenchMortarAndPestleRecipe recipeFromJson = new ShapelessGunsmithsBenchMortarAndPestleRecipe(recipeID, group, result, ingredients);
 
@@ -70,7 +70,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 		}
 
 		@Override
-		public ShapelessGunsmithsBenchMortarAndPestleRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
+		public ShapelessGunsmithsBenchMortarAndPestleRecipe fromNetwork(final ResourceLocation recipeID, final PacketBuffer buffer) {
 			final String group = buffer.readUtf(Short.MAX_VALUE);
 			final int numIngredients = buffer.readVarInt();
 			final NonNullList<Ingredient> ingredients = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
@@ -85,7 +85,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 		}
 
 		@Override
-		public void toNetwork(final FriendlyByteBuf buffer, final ShapelessGunsmithsBenchMortarAndPestleRecipe recipe) {
+		public void toNetwork(final PacketBuffer buffer, final ShapelessGunsmithsBenchMortarAndPestleRecipe recipe) {
 			buffer.writeUtf(recipe.getGroup());
 			buffer.writeVarInt(recipe.getIngredients().size());
 
@@ -98,7 +98,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 	}
 	
 	@Override
-	public RecipeSerializer<?> getSerializer() {
+	public IRecipeSerializer<?> getSerializer() {
 		return ModCrafting.Recipes.GUNSMITHS_BENCH_MORTAR_AND_PESTLE_SHAPELESS.get();
 	}
 }

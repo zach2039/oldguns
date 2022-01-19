@@ -17,13 +17,14 @@ import com.zach2039.oldguns.data.loot.OldGunsGenericLootTables;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.LootTableProvider;
+import net.minecraft.loot.LootParameterSet;
+import net.minecraft.loot.LootParameterSets;
 import net.minecraft.loot.LootTable;
+import net.minecraft.loot.LootTable.Builder;
+import net.minecraft.loot.LootTableManager;
 import net.minecraft.loot.LootTables;
+import net.minecraft.loot.ValidationTracker;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -34,9 +35,9 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
  * @author grilled-salmon
  */
 public class OldGunsLootTableProvider extends LootTableProvider {
-	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> lootTableGenerators = ImmutableList.of(
-			Pair.of(OldGunsBlockLootTables::new, LootContextParamSets.BLOCK),
-			Pair.of(OldGunsGenericLootTables::new, LootContextParamSets.ALL_PARAMS)
+	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootParameterSet>> lootTableGenerators = ImmutableList.of(
+			Pair.of(OldGunsBlockLootTables::new, LootParameterSets.BLOCK),
+			Pair.of(OldGunsGenericLootTables::new, LootParameterSets.ALL_PARAMS)
 	);
 
 	public OldGunsLootTableProvider(final DataGenerator dataGeneratorIn) {
@@ -44,13 +45,13 @@ public class OldGunsLootTableProvider extends LootTableProvider {
 	}
 
 	@Override
-	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
+	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, Builder>>>, LootParameterSet>> getTables() {
 		return lootTableGenerators;
 	}
 	
 	@Override
-	protected void validate(final Map<ResourceLocation, LootTable> map, final ValidationContext validationContext) {
-		final Set<ResourceLocation> modLootTableIds = BuiltInLootTables
+	protected void validate(final Map<ResourceLocation, LootTable> map, final ValidationTracker validationContext) {
+		final Set<ResourceLocation> modLootTableIds = LootTables
 				.all()
 				.stream()
 				.filter(lootTable -> lootTable.getNamespace().equals(OldGuns.MODID))
@@ -60,7 +61,7 @@ public class OldGunsLootTableProvider extends LootTableProvider {
 			validationContext.reportProblem("Missing mod loot table: " + id);
 		}
 
-		map.forEach((id, lootTable) -> LootTables.validate(validationContext, id, lootTable));
+		map.forEach((id, lootTable) -> LootTableManager.validate(validationContext, id, lootTable));
 	}
 
 	/**

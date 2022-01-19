@@ -4,14 +4,14 @@ import com.zach2039.oldguns.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 import com.zach2039.oldguns.init.ModCrafting;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.IItemProvider;
 
 public class ShapelessGunsmithsBenchRecipeBuilder extends EnhancedShapelessRecipeBuilder<ShapelessGunsmithsBenchRecipe, ShapelessGunsmithsBenchRecipeBuilder> {
 	protected ShapelessGunsmithsBenchRecipeBuilder(final ItemStack result) {
 		super(result, ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPELESS.get());
 	}
 
-	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final ItemLike result) {
+	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final IItemProvider result) {
 		return shapeless(new ItemStack(result));
 	}
 
@@ -19,7 +19,7 @@ public class ShapelessGunsmithsBenchRecipeBuilder extends EnhancedShapelessRecip
 		return new ShapelessGunsmithsBenchRecipeBuilder(result);
 	}
 	
-	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final ItemLike result, final int count) {
+	public static ShapelessGunsmithsBenchRecipeBuilder shapeless(final IItemProvider result, final int count) {
 		return shapeless(new ItemStack(result, count));
 	}
 }

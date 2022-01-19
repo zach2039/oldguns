@@ -5,11 +5,12 @@ import java.util.List;
 import com.zach2039.oldguns.item.firearm.FirearmItem;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 
 public class FirearmTooltipHelper {
-	public static void populateTooltipInfo(FirearmItem itemIn, ItemStack stackIn, List<StringTextComponent> tooltip)
+	public static void populateTooltipInfo(FirearmItem itemIn, ItemStack stackIn, List<ITextComponent> tooltip)
 	{
 		/* Get info on ammo. */
 		int ammoCount = FirearmNBTHelper.peekNBTTagAmmoCount(stackIn);

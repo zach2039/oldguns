@@ -4,19 +4,19 @@ import javax.annotation.Nullable;
 
 import com.google.gson.JsonObject;
 
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.IFinishedRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.crafting.RecipeSerializer;
 
 /**
  * A {@link FinishedRecipe} that delegates to another {@link FinishedRecipe} instance.
  *
  * @author Choonster
  */
-public class DelegateFinishedRecipe implements FinishedRecipe {
-	protected final FinishedRecipe baseRecipe;
+public class DelegateFinishedRecipe implements IFinishedRecipe {
+	protected final IFinishedRecipe baseRecipe;
 
-	public DelegateFinishedRecipe(final FinishedRecipe baseRecipe) {
+	public DelegateFinishedRecipe(final IFinishedRecipe baseRecipe) {
 		this.baseRecipe = baseRecipe;
 	}
 
@@ -34,7 +34,7 @@ public class DelegateFinishedRecipe implements FinishedRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getType() {
+	public IRecipeSerializer<?> getType() {
 		return baseRecipe.getType();
 	}
 

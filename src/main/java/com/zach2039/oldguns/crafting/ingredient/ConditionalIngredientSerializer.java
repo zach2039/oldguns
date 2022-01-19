@@ -3,7 +3,7 @@ package com.zach2039.oldguns.crafting.ingredient;
 import com.google.gson.JsonObject;
 
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 
@@ -35,12 +35,12 @@ public class ConditionalIngredientSerializer implements IIngredientSerializer<In
 	}
 
 	@Override
-	public Ingredient parse(final FriendlyByteBuf buffer) {
+	public Ingredient parse(final PacketBuffer buffer) {
 		throw new UnsupportedOperationException("Can't parse from PacketBuffer, use the Ingredient's own IIngredientSerializer instead");
 	}
 
 	@Override
-	public void write(final FriendlyByteBuf buffer, final Ingredient ingredient) {
+	public void write(final PacketBuffer buffer, final Ingredient ingredient) {
 		throw new UnsupportedOperationException("Can't write to PacketBuffer, use the Ingredient's own IIngredientSerializer instead");
 	}
 }

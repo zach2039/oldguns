@@ -16,10 +16,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.entity.EntityType;
 import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionUtils;
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.IStringSerializable;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /**
@@ -81,7 +82,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addItems() {
-		addItem(ModItems.BOMBARD, "Bombard [WIP]");
+		//addItem(ModItems.BOMBARD, "Bombard [WIP]");
 		
 		addItem(ModItems.MATCHLOCK_DERRINGER, "Matchlock Derringer");
 		addItem(ModItems.MATCHLOCK_PISTOL, "Matchlock Pistol");
@@ -230,7 +231,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addEntities() {
 		addEntityType(ModEntities.BULLET_PROJECTILE, "Projectile");
-		addEntityType(ModEntities.BOMBARD, "Bombard");
+		//addEntityType(ModEntities.BOMBARD, "Bombard");
 	}
 
 	private void addPotions() {
@@ -379,7 +380,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		add("oldguns.landing", value);
 	}
 	
-	private void add(final OldGunsLang prefix, final StringRepresentable enumValue, final String name) {
+	private void add(final OldGunsLang prefix, final IStringSerializable enumValue, final String name) {
 		add(prefix.getTranslationKey() + "." + enumValue.getSerializedName(), name);
 	}
 

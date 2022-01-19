@@ -4,6 +4,9 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 
+import net.minecraft.nbt.INBT;
+import net.minecraft.tags.Tag;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.INBTSerializable;
@@ -15,8 +18,8 @@ import net.minecraftforge.common.util.INBTSerializable;
  *
  * @author Choonster
  */
-public class SerializableCapabilityProvider<HANDLER> extends SimpleCapabilityProvider<HANDLER> implements INBTSerializable<Tag> {
-	private final INBTSerializable<Tag> serializableInstance;
+public class SerializableCapabilityProvider<HANDLER> extends SimpleCapabilityProvider<HANDLER> implements INBTSerializable<INBT> {
+	private final INBTSerializable<INBT> serializableInstance;
 
 	/**
 	 * Create a provider for the specified handler instance.
@@ -31,16 +34,16 @@ public class SerializableCapabilityProvider<HANDLER> extends SimpleCapabilityPro
 
 		Preconditions.checkArgument(instance instanceof INBTSerializable, "instance must implement INBTSerializable");
 
-		serializableInstance = (INBTSerializable<Tag>) instance;
+		serializableInstance = (INBTSerializable<INBT>) instance;
 	}
 
 	@Override
-	public Tag serializeNBT() {
+	public INBT serializeNBT() {
 		return serializableInstance.serializeNBT();
 	}
 
 	@Override
-	public void deserializeNBT(final Tag tag) {
+	public void deserializeNBT(final INBT tag) {
 		serializableInstance.deserializeNBT(tag);
 	}
 

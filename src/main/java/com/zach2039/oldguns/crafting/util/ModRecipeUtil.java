@@ -11,10 +11,9 @@ import com.google.gson.JsonParseException;
 
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.crafting.Recipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
@@ -40,9 +39,9 @@ public class ModRecipeUtil {
 	public static ShapedPrimer parseShaped(final JsonObject json) {
 		try {
 			@SuppressWarnings("unchecked")
-			final Map<String, Ingredient> key = (Map<String, Ingredient>) KEY_FROM_JSON.invoke(null, GsonHelper.getAsJsonObject(json, "key"));
+			final Map<String, Ingredient> key = (Map<String, Ingredient>) KEY_FROM_JSON.invoke(null, JSONUtils.getAsJsonObject(json, "key"));
 
-			final String[] pattern = (String[]) SHRINK.invoke(null, PATTERN_FROM_JSON.invoke(null, GsonHelper.getAsJsonArray(json, "pattern")));
+			final String[] pattern = (String[]) SHRINK.invoke(null, PATTERN_FROM_JSON.invoke(null, JSONUtils.getAsJsonArray(json, "pattern")));
 
 			final int recipeWidth = pattern[0].length();
 			final int recipeHeight = pattern.length;
@@ -64,7 +63,7 @@ public class ModRecipeUtil {
 	 */
 	public static NonNullList<Ingredient> parseShapeless(final JsonObject json) {
 		final NonNullList<Ingredient> ingredients = NonNullList.create();
-		for (final JsonElement element : GsonHelper.getAsJsonArray(json, "ingredients"))
+		for (final JsonElement element : JSONUtils.getAsJsonArray(json, "ingredients"))
 			ingredients.add(CraftingHelper.getIngredient(element));
 
 		if (ingredients.isEmpty())
@@ -73,5 +72,27 @@ public class ModRecipeUtil {
 		return ingredients;
 	}
 
-	public record ShapedPrimer(NonNullList<Ingredient> ingredients,	int recipeWidth, int recipeHeight) {}
+	public static class ShapedPrimer {
+		private final NonNullList<Ingredient> ingredients;
+		private final int recipeWidth;
+		private final int recipeHeight;
+
+		public ShapedPrimer(final NonNullList<Ingredient> ingredients, final int recipeWidth, final int recipeHeight) {
+			this.ingredients = ingredients;
+			this.recipeWidth = recipeWidth;
+			this.recipeHeight = recipeHeight;
+		}
+
+		public NonNullList<Ingredient> getIngredients() {
+			return ingredients;
+		}
+
+		public int getRecipeWidth() {
+			return recipeWidth;
+		}
+
+		public int getRecipeHeight() {
+			return recipeHeight;
+		}
+	}
 }

@@ -8,8 +8,9 @@ import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.item.firearm.FirearmItem;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
@@ -35,7 +36,7 @@ public class ArtilleryEffectMessage {
 		this.rotationYaw = yaw;
 	}
 	
-	public static ArtilleryEffectMessage decode(final FriendlyByteBuf buf) {
+	public static ArtilleryEffectMessage decode(final PacketBuffer buf) {
 		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level.getEntity(buf.readInt());
 		int parameter = buf.readInt();
 		ArtilleryEffect effectType = ArtilleryEffect.values()[buf.readInt()];
@@ -48,7 +49,7 @@ public class ArtilleryEffectMessage {
 		return new ArtilleryEffectMessage(shooter, effectType, x, y, z, pitch, yaw, parameter);
 	}
 
-	public static void encode(final ArtilleryEffectMessage message, final FriendlyByteBuf buf) {
+	public static void encode(final ArtilleryEffectMessage message, final PacketBuffer buf) {
 		buf.writeInt(message.shootingEntityId);
 		buf.writeInt(message.parameter);
 		buf.writeInt(message.effectType.ordinal());

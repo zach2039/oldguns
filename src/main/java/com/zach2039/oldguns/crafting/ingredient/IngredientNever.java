@@ -9,7 +9,7 @@ import com.zach2039.oldguns.init.ModCrafting;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
 
 /**
@@ -46,12 +46,12 @@ public class IngredientNever extends Ingredient {
 		}
 
 		@Override
-		public IngredientNever parse(final FriendlyByteBuf buffer) {
+		public IngredientNever parse(final PacketBuffer buffer) {
 			return IngredientNever.INSTANCE;
 		}
 
 		@Override
-		public void write(final FriendlyByteBuf buffer, final IngredientNever ingredient) {
+		public void write(final PacketBuffer buffer, final IngredientNever ingredient) {
 			// No-op
 		}
 	}

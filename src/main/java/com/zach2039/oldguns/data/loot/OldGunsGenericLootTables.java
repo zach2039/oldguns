@@ -7,41 +7,42 @@ import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModLootTables;
 
+import net.minecraft.item.Item;
+import net.minecraft.loot.ConstantRange;
+import net.minecraft.loot.ItemLootEntry;
+import net.minecraft.loot.LootEntry;
 import net.minecraft.loot.LootPool;
 import net.minecraft.loot.LootTable;
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.loot.RandomValueRange;
+import net.minecraft.loot.functions.SetCount;
+import net.minecraft.loot.functions.SetDamage;
+import net.minecraft.loot.functions.SetNBT;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.level.storage.loot.entries.LootItem;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
-import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
-import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
-import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
-import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
-	
-	@SuppressWarnings("deprecation")
-	private Builder<?> createDesignNotesForItem(int weight, Item item) {
-		CompoundTag tag = new CompoundTag();
+
+	private LootEntry.Builder<?> createDesignNotesForItem(int weight, Item item) {
+		CompoundNBT tag = new CompoundNBT();
 		IDesignNotes.setDesignOnTag(tag, item);
 		
-		return (Builder<?>) LootItem.lootTableItem(ModItems.DESIGN_NOTES.get())
+		return (LootEntry.Builder<?>) ItemLootEntry.lootTableItem(ModItems.DESIGN_NOTES.get())
 				.setWeight(weight)
-				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
-				.apply(SetNbtFunction.setTag(tag));
+				.apply(SetCount.setCount(ConstantRange.exactly(1)))
+				.apply(SetNBT.setTag(tag));
 	}
 	
-	private Builder<?> createItem(int weight, Item item) {
-		return (Builder<?>) LootItem.lootTableItem(item)
+	private LootEntry.Builder<?> createItem(int weight, Item item) {
+		return (LootEntry.Builder<?>) ItemLootEntry.lootTableItem(item)
 				.setWeight(weight)
-				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)));
+				.apply(SetCount.setCount(ConstantRange.exactly(1)));
 	}
 	
-	private Builder<?> createDamagedItem(int weight, Item item) {
-		return (Builder<?>) LootItem.lootTableItem(item)
+	private LootEntry.Builder<?> createDamagedItem(int weight, Item item) {
+		return (LootEntry.Builder<?>) ItemLootEntry.lootTableItem(item)
 				.setWeight(weight)
-				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
-				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.70f)));
+				.apply(SetCount.setCount(ConstantRange.exactly(1)))
+				.apply(SetDamage.setDamage(RandomValueRange.between(0.15f, 0.70f)));
 	}
 	
 	@Override
@@ -51,7 +52,7 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(ConstantValue.exactly(1))
+						.apply(SetCount.setCount(ConstantRange.exactly(1)))
 						.add(
 								createItem(75, ModItems.FLINTLOCK_MECHANISM.get())
 							)
@@ -65,7 +66,7 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(ConstantValue.exactly(1))
+						.apply(SetCount.setCount(ConstantRange.exactly(1)))
 						.add(
 								createDamagedItem(25, ModItems.MATCHLOCK_DERRINGER.get())
 							)
@@ -94,7 +95,7 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(ConstantValue.exactly(1))
+						.apply(SetCount.setCount(ConstantRange.exactly(1)))
 						.add(
 								createDesignNotesForItem(75, ModItems.FLINTLOCK_MECHANISM.get())
 							)
@@ -108,7 +109,7 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(ConstantValue.exactly(1))
+						.apply(SetCount.setCount(ConstantRange.exactly(1)))
 						.add(
 								createDesignNotesForItem(25, ModItems.MATCHLOCK_MUSKETOON.get())
 							)
@@ -122,7 +123,7 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(ConstantValue.exactly(1))
+						.apply(SetCount.setCount(ConstantRange.exactly(1)))
 						.add(
 								createDesignNotesForItem(25, ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
 							)
@@ -139,7 +140,7 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				LootTable.lootTable()
 				.withPool(
 						LootPool.lootPool()
-						.setRolls(ConstantValue.exactly(1))
+						.apply(SetCount.setCount(ConstantRange.exactly(1)))
 						.add(
 								createDesignNotesForItem(25, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
 							)

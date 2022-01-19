@@ -7,8 +7,8 @@ import com.zach2039.oldguns.capability.CapabilityContainerListenerManager;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.ByteNBT;
 import net.minecraft.nbt.INBT;
-import net.minecraft.nbt.LongNBT;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.capabilities.Capability;
@@ -18,6 +18,8 @@ import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static com.zach2039.oldguns.util.ModInjectionUtil.Null;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -37,15 +39,15 @@ public final class FirearmEmptyCapability {
 	public static final ResourceLocation ID = new ResourceLocation(OldGuns.MODID, "firearm_empty");
 	
 	public static void register() {
-		CapabilityManager.INSTANCE.register(IFirearmEmpty.class, new Capability.IStorage<ILastUseTime>() {
+		CapabilityManager.INSTANCE.register(IFirearmEmpty.class, new Capability.IStorage<IFirearmEmpty>() {
 			@Override
 			public INBT writeNBT(final Capability<IFirearmEmpty> capability, final IFirearmEmpty instance, final Direction side) {
-				return LongNBT.valueOf(instance.isEmpty());
+				return ByteNBT.valueOf(instance.isEmpty());
 			}
 
 			@Override
 			public void readNBT(final Capability<IFirearmEmpty> capability, final IFirearmEmpty instance, final Direction side, final INBT nbt) {
-				instance.set(((LongNBT) nbt).getAsLong());
+				instance.setEmpty(((ByteNBT) nbt).getAsByte() != 0);
 			}
 		}, () -> new FirearmEmpty(true));
 		

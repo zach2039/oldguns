@@ -1,26 +1,27 @@
 package com.zach2039.oldguns.client.gui.inventory;
 
+import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.inventory.menu.GunsmithsBenchMenu;
 
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
-import net.minecraft.client.renderer.GameRenderer;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.container.ClickType;
+import net.minecraft.inventory.container.Slot;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class GunsmithsBenchScreen extends AbstractContainerScreen<GunsmithsBenchMenu> {
+public class GunsmithsBenchScreen extends ContainerScreen<GunsmithsBenchMenu> {
 	
 	private static final ResourceLocation GUNSMITHS_BENCH_LOCATION = new ResourceLocation(OldGuns.MODID, "textures/gui/container/gunsmiths_bench.png");
 
 	private boolean widthTooNarrow;
 
-	public GunsmithsBenchScreen(GunsmithsBenchMenu p_98448_, Inventory p_98449_, Component p_98450_) {
+	public GunsmithsBenchScreen(GunsmithsBenchMenu p_98448_, PlayerInventory p_98449_, ITextComponent p_98450_) {
 		super(p_98448_, p_98449_, p_98450_);
 	}
 
@@ -30,23 +31,18 @@ public class GunsmithsBenchScreen extends AbstractContainerScreen<GunsmithsBench
 		this.titleLabelX = 29;
 	}
 
-	public void containerTick() {
-		super.containerTick();
-	}
-
-	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+	public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
 		this.renderBackground(matrixStack);
 		super.render(matrixStack, mouseX, mouseY, partialTicks);
 		this.renderTooltip(matrixStack, mouseX, mouseY);
 	}
 
-	protected void renderBg(PoseStack p_98474_, float p_98475_, int p_98476_, int p_98477_) {
-		RenderSystem.setShader(GameRenderer::getPositionTexShader);
-		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		RenderSystem.setShaderTexture(0, GUNSMITHS_BENCH_LOCATION);
-		int i = this.leftPos;
-		int j = (this.height - this.imageHeight) / 2;
-		this.blit(p_98474_, i, j, 0, 0, this.imageWidth, this.imageHeight);
+	protected void renderBg(MatrixStack p_98474_, float p_98475_, int p_98476_, int p_98477_) {
+		RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+	      this.minecraft.getTextureManager().bind(GUNSMITHS_BENCH_LOCATION);
+	      int i = this.leftPos;
+	      int j = (this.height - this.imageHeight) / 2;
+	      this.blit(p_98474_, i, j, 0, 0, this.imageWidth, this.imageHeight);
 	}
 
 	protected boolean isHovering(int p_98462_, int p_98463_, int p_98464_, int p_98465_, double p_98466_, double p_98467_) {

@@ -7,24 +7,27 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.NiterProductionSettings;
 import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.SoundType;
+import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
-import net.minecraft.client.audio.SoundSource;
-import net.minecraft.fluid.Fluid;
+import net.minecraft.entity.passive.AnimalEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.Property;
+import net.minecraft.state.StateContainer;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.world.World;
-import net.minecraft.world.entity.animal.Animal;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.level.block.PointedDripstoneBlock;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.common.ToolType;
 
 public class NiterBeddingBlock extends Block {
 
@@ -39,7 +42,7 @@ public class NiterBeddingBlock extends Block {
 	}
 
 	@Override
-	protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+	protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
 		builder.add(REFUSE_AMOUNT);
 	}
 	
@@ -52,25 +55,25 @@ public class NiterBeddingBlock extends Block {
 
 	@Override
 	public void tick(BlockState state, ServerWorld level, BlockPos blockpos, Random rand) {
-		BlockPos posAbove = PointedDripstoneBlock.findStalactiteTipAboveCauldron(level, blockpos);
-		if (posAbove != null) {
-			Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType(level, posAbove);
-			if (this.canReceiveStalactiteDrip(fluid)) {
-				this.receiveStalactiteDrip(state, level, blockpos, fluid);
-			}
-
-		}
+		// TODO: Add alternative way to collect niter from caves since dripstone is 1.17 and later
+		//BlockPos posAbove = PointedDripstoneBlock.findStalactiteTipAboveCauldron(level, blockpos);
+		//if (posAbove != null) {
+		//	Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType(level, posAbove);
+		//	if (this.canReceiveStalactiteDrip(fluid)) {
+		//		this.receiveStalactiteDrip(state, level, blockpos, fluid);
+		//	}
+		//}
 	}
 	
-	private boolean canReceiveStalactiteDrip(Fluid fluid) {
-		return fluid == Fluids.WATER || fluid == Fluids.EMPTY;
-	}
+	//private boolean canReceiveStalactiteDrip(Fluid fluid) {
+	//	return fluid == Fluids.WATER || fluid == Fluids.EMPTY;
+	//}
 	
-	private void receiveStalactiteDrip(BlockState state, World level, BlockPos blockpos, Fluid fluid) {
-		tryNitrateWorldIncrease(state, level, blockpos, level.getRandom(), (NITER_PRODUCTION_SETTINGS.niterBeddingDripstoneGenerationDifficulty.get()));
-	}
+	//private void receiveStalactiteDrip(BlockState state, World level, BlockPos blockpos, Fluid fluid) {
+	//	tryNitrateWorldIncrease(state, level, blockpos, level.getRandom(), (NITER_PRODUCTION_SETTINGS.niterBeddingDripstoneGenerationDifficulty.get()));
+	//}
 	
-	private void tryNitrateWorldIncrease(BlockState state, Level level, BlockPos blockpos, Random rand, double difficulty) {
+	private void tryNitrateWorldIncrease(BlockState state, World level, BlockPos blockpos, Random rand, double difficulty) {
 		int refuseAmount = state.getValue(REFUSE_AMOUNT);
 		boolean isNirateSoilReady = (refuseAmount == MAX_REFUSE_AMOUNT);
 		
@@ -96,17 +99,17 @@ public class NiterBeddingBlock extends Block {
 	}
 	
 	@Override
-	public ActionResultType use(final BlockState state, final World level, final BlockPos blockpos, final Player player, final Hand hand, final BlockHitResult rayTraceResult) {
+	public ActionResultType use(final BlockState state, final World level, final BlockPos blockpos, final PlayerEntity player, final Hand hand, final BlockRayTraceResult rayTraceResult) {
 		final ItemStack heldItem = player.getItemInHand(hand);
 		int refuseAmount = state.getValue(REFUSE_AMOUNT);
 		boolean isNirateSoilReady = (refuseAmount == MAX_REFUSE_AMOUNT);
 
 		if (!heldItem.isEmpty()) {
-			boolean isShovel = heldItem.canPerformAction(net.minecraftforge.common.ToolActions.SHOVEL_FLATTEN);
+			boolean isShovel = (heldItem.getToolTypes().contains(ToolType.SHOVEL));
 
 			if (isShovel && isNirateSoilReady) {
-				level.playSound(player, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.SHOVEL_FLATTEN, SoundSource.NEUTRAL, 1.0F, 1.0F);
-				level.playSound(player, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.SLIME_BLOCK_HIT, SoundSource.NEUTRAL, 1.0F, 1.0F);
+				level.playSound(player, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.SHOVEL_FLATTEN, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+				level.playSound(player, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.SLIME_BLOCK_HIT, SoundCategory.NEUTRAL, 1.0F, 1.0F);
 				level.setBlockAndUpdate(blockpos, state.setValue(REFUSE_AMOUNT, 0));
 				
 				dropNitrateSoil(level, blockpos);
@@ -134,13 +137,13 @@ public class NiterBeddingBlock extends Block {
 		List<String> lowRefuseAnimalEntityNames = NITER_PRODUCTION_SETTINGS.lowRefuseAnimals.get();
 		List<String> highRefuseAnimalEntityNames = NITER_PRODUCTION_SETTINGS.highRefuseAnimals.get();
 		
-		AABB niterBedNitrateRadius = new AABB(
+		AxisAlignedBB niterBedNitrateRadius = new AxisAlignedBB(
 				pos.getX() - animalEffectRadius, pos.getY() + 1, pos.getZ() - animalEffectRadius, 
 				pos.getX() + animalEffectRadius, pos.getY() + 2, pos.getZ() + animalEffectRadius);
 		
-		List<Animal> animalsInRange = level.getEntitiesOfClass(Animal.class, niterBedNitrateRadius);
+		List<AnimalEntity> animalsInRange = level.getEntitiesOfClass(AnimalEntity.class, niterBedNitrateRadius);
 		
-		for (final Animal animal : animalsInRange) {
+		for (final AnimalEntity animal : animalsInRange) {
 			String animalName = animal.getType().toString();
 			
 			if (lowRefuseAnimalEntityNames.contains(animalName)) {

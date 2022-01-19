@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.world.inventory;
+package com.zach2039.oldguns.inventory;
 
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.IInventory;

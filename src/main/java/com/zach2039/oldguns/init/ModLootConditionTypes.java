@@ -5,9 +5,11 @@ import com.zach2039.oldguns.loot.conditions.LootSpawnDesignNotesLootCondition;
 import com.zach2039.oldguns.loot.conditions.LootSpawnFirearmsLootCondition;
 import com.zach2039.oldguns.loot.conditions.LootSpawnMechanismsLootCondition;
 
+import net.minecraft.loot.ILootSerializer;
+import net.minecraft.loot.LootConditionType;
+import net.minecraft.loot.conditions.ILootCondition;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.util.registry.Registry;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -18,15 +20,15 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
  * @author grilled-salmon
  */
 public class ModLootConditionTypes {
-	public static final LootItemConditionType ALLOW_DESIGN_NOTES_LOOT = register("can_spawn_design_notes_in_loot", new LootSpawnDesignNotesLootCondition.ConditionSerializer());
-	public static final LootItemConditionType ALLOW_MECHANISMS_LOOT = register("can_spawn_mechansims_in_loot", new LootSpawnMechanismsLootCondition.ConditionSerializer());
-	public static final LootItemConditionType ALLOW_FIREARMS_LOOT = register("can_spawn_firearms_in_loot", new LootSpawnFirearmsLootCondition.ConditionSerializer());
+	public static final LootConditionType ALLOW_DESIGN_NOTES_LOOT = register("can_spawn_design_notes_in_loot", new LootSpawnDesignNotesLootCondition.ConditionSerializer());
+	public static final LootConditionType ALLOW_MECHANISMS_LOOT = register("can_spawn_mechansims_in_loot", new LootSpawnMechanismsLootCondition.ConditionSerializer());
+	public static final LootConditionType ALLOW_FIREARMS_LOOT = register("can_spawn_firearms_in_loot", new LootSpawnFirearmsLootCondition.ConditionSerializer());
 
 	public static void register() {
 		// No-op method to ensure that this class is loaded and its static initialisers are run
 	}
 
-	private static LootItemConditionType register(final String name, final Serializer<? extends LootItemCondition> serializer) {
-		return Registry.register(Registry.LOOT_CONDITION_TYPE, new ResourceLocation(OldGuns.MODID, name), new LootItemConditionType(serializer));
+	private static LootConditionType register(final String name, final ILootSerializer<? extends ILootCondition> conditionSerializer) {
+		return Registry.register(Registry.LOOT_CONDITION_TYPE, new ResourceLocation(OldGuns.MODID, name), new LootConditionType(conditionSerializer));
 	}
 }

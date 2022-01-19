@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.world.item.firearm;
+package com.zach2039.oldguns.item.firearm;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,33 +28,37 @@ import com.zach2039.oldguns.entity.BulletProjectile;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.ai.attributes.Attributes;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ArrowItem;
 import net.minecraft.item.BowItem;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.item.UseAction;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.network.play.server.SEntityEquipmentPacket;
+import net.minecraft.potion.Effect;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.Mth;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.world.ActionResultTypeHolder;
+import net.minecraft.util.math.MathHelper;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.UseAnim;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -84,12 +88,14 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	@Override
-	public ICapabilityProvider initCapabilities(final ItemStack stack, @Nullable final CompoundTag nbt) {
+	public ICapabilityProvider initCapabilities(final ItemStack stack, @Nullable final CompoundNBT nbt) {
+		if (FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY == null) return null;
+		
 		return new SerializableCapabilityProvider<>(FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY, FirearmEmptyCapability.DEFAULT_FACING, new FirearmEmpty(true));
 	}
 
 	@Override
-	public void appendHoverText(ItemStack stackIn, @Nullable World level, List<Component> tooltip, TooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stackIn, @Nullable World level, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.appendHoverText(stackIn, level, tooltip, flagIn);
 
 		/* Populate tooltip info from NBT data. */
@@ -97,7 +103,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
+	public void fillItemCategory(ItemGroup tab, NonNullList<ItemStack> stackList) {
 		if (this.allowdedIn(tab)) {
 			ItemStack stackIn = new ItemStack(this);
 			initNBTTags(stackIn);
@@ -161,7 +167,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	@Override
-	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
+	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType slot) {
 		switch(slot) {
 		case MAINHAND:
 			return this.mainhandModifiers;
@@ -173,7 +179,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	@Override
-	public void onCraftedBy(ItemStack stackIn, World worldIn, Player playerIn)	{
+	public void onCraftedBy(ItemStack stackIn, World worldIn, PlayerEntity playerIn)	{
 		super.onCraftedBy(stackIn, worldIn, playerIn);
 
 		initNBTTags(stackIn);
@@ -189,11 +195,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	@Override	
-	public UseAnim getUseAnimation(ItemStack stackIn) {
+	public UseAction getUseAnimation(ItemStack stackIn) {
 		if (FirearmNBTHelper.peekNBTTagAmmoCount(stackIn) == 0)
-			return UseAnim.BLOCK;
+			return UseAction.BLOCK;
 
-		return UseAnim.BOW;
+		return UseAction.BOW;
 	}
 
 	@Override
@@ -207,34 +213,34 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 		if (OldGunsConfig.SERVER.firearmSettings.hugeFirearmDebuffs.get()) {
 			// Apply huge firearm debuffs for balancing reasons
-			if (entityIn instanceof Player)
+			if (entityIn instanceof PlayerEntity)
 			{
-				Player player = (Player) entityIn;
+				PlayerEntity player = (PlayerEntity) entityIn;
 				if (player.isCreative())
 					return;
 				if (ItemStack.isSame(player.getMainHandItem(), stackIn) || ItemStack.isSame(player.getOffhandItem (), stackIn)) {
 					if (getFirearmSize() == FirearmSize.HUGE) {
-						addEffect(player, MobEffects.MOVEMENT_SLOWDOWN, 0);
+						addEffect(player, Effects.MOVEMENT_SLOWDOWN, 0);
 					}
 				}
 			}
 		}
 	}
 
-	private void addEffect(Player player, MobEffect effect, int amplifier)
+	private void addEffect(PlayerEntity player, Effect effect, int amplifier)
 	{
-		MobEffectInstance effectIn = player.getEffect(effect);
+		EffectInstance effectIn = player.getEffect(effect);
 		if (effectIn == null || effectIn.getDuration() < 20) {
-			player.addEffect(new MobEffectInstance(effect, 20 * 3, amplifier));
+			player.addEffect(new EffectInstance(effect, 20 * 3, amplifier));
 		}
 	}
 
 	@SuppressWarnings("unused")
 	@Override
 	public void releaseUsing(ItemStack stackIn, World worldIn, LivingEntity livingEntityIn, int ticksRemaining) {
-		if (livingEntityIn instanceof Player)
+		if (livingEntityIn instanceof PlayerEntity)
 		{
-			Player entityplayer = (Player)livingEntityIn;
+			PlayerEntity entityplayer = (PlayerEntity)livingEntityIn;
 			//boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentWorld(Enchantments.INFINITY, stack) > 0;
 			ItemStack ammoStack = FirearmNBTHelper.peekNBTTagAmmo(stackIn);
 
@@ -269,9 +275,9 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(stackIn) > 0);
 			boolean notBroken = FirearmNBTHelper.getNBTTagCondition(stackIn) != FirearmCondition.BROKEN;
 
-			boolean holdingSizableFirearmOffhand = isCarryingSizableFirearmInOtherHand(worldIn, entityplayer, Hand.MAIN_HAND);
+			boolean holdingSizeableFirearmOffhand = isCarryingSizeableFirearmInOtherHand(worldIn, entityplayer, Hand.MAIN_HAND);
 			//boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
-			boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingSizableFirearmOffhand);
+			boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingSizeableFirearmOffhand);
 
 			//    		OldGuns.LOGGER.debug("readyToFire : " + readyToFire);
 			//    		OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
@@ -327,10 +333,10 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 						FirearmNBTHelper.refreshFirearmCondition(stackIn);
 						if (!worldIn.isClientSide())
 						{
-							ServerPlayer playerMP = (ServerPlayer) entityplayer;
-							List<Pair<EquipmentSlot, ItemStack>> slots = new ArrayList<Pair<EquipmentSlot, ItemStack>>();
-							slots.add(new Pair<EquipmentSlot, ItemStack>((entityplayer.getUsedItemHand() == Hand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND, stackIn));
-							ClientboundSetEquipmentPacket pkt = new ClientboundSetEquipmentPacket(entityplayer.getId(),	slots);
+							ServerPlayerEntity playerMP = (ServerPlayerEntity) entityplayer;
+							List<Pair<EquipmentSlotType, ItemStack>> slots = new ArrayList<Pair<EquipmentSlotType, ItemStack>>();
+							slots.add(new Pair<EquipmentSlotType, ItemStack>((entityplayer.getUsedItemHand() == Hand.MAIN_HAND) ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND, stackIn));
+							SEntityEquipmentPacket pkt = new SEntityEquipmentPacket(entityplayer.getId(), slots);
 							playerMP.connection.send(pkt);
 						}
 						return;
@@ -367,23 +373,23 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 							t.setLaunchLocation(t.blockPosition());
 
 							/* Launch projectile. */
-							t.shoot(entityplayer, entityplayer.getXRot(), entityplayer.getYRot(), 0.0F, finalVelocity, finalDeviation);
+							t.shoot(entityplayer, entityplayer.xRot, entityplayer.yRot, 0.0F, finalVelocity, finalDeviation);
 
-							int j = EnchantmentHelper.getItemEnchantmentWorld(Enchantments.POWER_ARROWS, stackIn);
+							int j = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.POWER_ARROWS, stackIn);
 
 							if (j > 0)
 							{
 								t.setDamage((t.getDamage() * getDamageModifier()) + (double)j * 0.5D + 0.5D);
 							}
 
-							int k = EnchantmentHelper.getItemEnchantmentWorld(Enchantments.PUNCH_ARROWS, stackIn);
+							int k = EnchantmentHelper.getItemEnchantmentLevel(Enchantments.PUNCH_ARROWS, stackIn);
 
 							if (k > 0)
 							{
 								t.setKnockback(k);
 							}
 
-							if (EnchantmentHelper.getItemEnchantmentWorld(Enchantments.FLAMING_ARROWS, stackIn) > 0)
+							if (EnchantmentHelper.getItemEnchantmentLevel(Enchantments.FLAMING_ARROWS, stackIn) > 0)
 							{
 								t.setRemainingFireTicks(100);
 							}
@@ -391,7 +397,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 							worldIn.addFreshEntity(t);
 						});
 
-						if (!entityplayer.isCreative()) stackIn.hurt(1, worldIn.random, (ServerPlayer) entityplayer);
+						if (!entityplayer.isCreative()) stackIn.hurt(1, worldIn.random, (ServerPlayerEntity) entityplayer);
 
 						/* Do firing effects. */
 						doFiringEffect(worldIn, entityplayer, stackIn);        
@@ -412,13 +418,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 			if (!worldIn.isClientSide())
 			{
-				ServerPlayer playerMP = (ServerPlayer) entityplayer;
-				List<Pair<EquipmentSlot, ItemStack>> slots = new ArrayList<Pair<EquipmentSlot, ItemStack>>();
-				slots.add(new Pair<EquipmentSlot, ItemStack>((entityplayer.getUsedItemHand() == Hand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND, stackIn));
-				ClientboundSetEquipmentPacket pkt = new ClientboundSetEquipmentPacket(entityplayer.getId(),	slots);
+				ServerPlayerEntity playerMP = (ServerPlayerEntity) entityplayer;
+				List<Pair<EquipmentSlotType, ItemStack>> slots = new ArrayList<Pair<EquipmentSlotType, ItemStack>>();
+				slots.add(new Pair<EquipmentSlotType, ItemStack>((entityplayer.getUsedItemHand() == Hand.MAIN_HAND) ? EquipmentSlotType.MAINHAND : EquipmentSlotType.OFFHAND, stackIn));
+				SEntityEquipmentPacket pkt = new SEntityEquipmentPacket(entityplayer.getId(), slots);
 				playerMP.connection.send(pkt);
-
-				
 			}
 
 			FirearmEmptyCapability.getFirearmEmpty(stackIn).ifPresent(isEmpty -> {
@@ -468,9 +472,9 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 	@Override
-	public ActionResultTypeHolder<ItemStack> use(World worldIn, Player playerIn, Hand handIn)
+	public ActionResult<ItemStack> use(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
-		ActionResultTypeHolder<ItemStack> result;
+		ActionResult<ItemStack> result;
 		ItemStack itemstack = playerIn.getItemInHand(handIn);
 
 		//		/* Check if this firearm is a breechloader and has a valid reloading recipe. */
@@ -493,7 +497,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		boolean hasAmmoLoaded = (FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) > 0);
 		boolean notBroken = FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN;
 
-		boolean holdingSizableFirearmOffhand = isCarryingSizableFirearmInOtherHand(worldIn, playerIn, handIn);
+		boolean holdingSizableFirearmOffhand = isCarryingSizeableFirearmInOtherHand(worldIn, playerIn, handIn);
 		/* Need this to allow firing of an offhand firearm. */
 		boolean holdingLoadedFirearmOffhand = hasLoadedFirearmInOtherHand(worldIn, playerIn, handIn);
 		boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingSizableFirearmOffhand);
@@ -506,7 +510,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		//			OldGuns.LOGGER.info("canReload                : " + canReload);
 		//		}
 
-		ActionResultTypeHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, canAim);
+		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, canAim);
 		if (ret != null) return ret;
 
 		if (!canAim && !canReload) {
@@ -518,13 +522,13 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 				playerIn.playSound(SoundEvents.LEVER_CLICK, 0.25F, 0.7F / (worldIn.random.nextFloat() * 0.2F + 0.9F));		 
 			}
 
-			result = ActionResultTypeHolder.fail(itemstack);
+			result = ActionResult.fail(itemstack);
 		} else if (canAim) {
 			playerIn.startUsingItem(handIn);
-			result = ActionResultTypeHolder.pass(itemstack);
+			result = ActionResult.pass(itemstack);
 		} else {
 			playerIn.startUsingItem(handIn);
-			result = ActionResultTypeHolder.pass(itemstack);
+			result = ActionResult.pass(itemstack);
 		}
 
 		return result;
@@ -602,9 +606,9 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 				break;
 			}
 			/* Get the position of the player's front using trig. */
-			float handX = -Mth.sin(((shooter.xRotO + 23) / 180F) * 3.141593F) * Mth.cos((shooter.yRotO / 180F) * 3.141593F);
-			float handY = -Mth.sin((shooter.yRotO / 180F) * 3.141593F) - 0.1F;
-			float handZ = Mth.cos(((shooter.xRotO + 23) / 180F) * 3.141593F) * Mth.cos((shooter.yRotO / 180F) * 3.141593F);
+			float handX = -MathHelper.sin(((shooter.xRotO + 23) / 180F) * 3.141593F) * MathHelper.cos((shooter.yRotO / 180F) * 3.141593F);
+			float handY = -MathHelper.sin((shooter.yRotO / 180F) * 3.141593F) - 0.1F;
+			float handZ = MathHelper.cos(((shooter.xRotO + 23) / 180F) * 3.141593F) * MathHelper.cos((shooter.yRotO / 180F) * 3.141593F);
 
 			/* Calculate the actual position of the particles. */
 			double expX = shooter.xo + handX;
@@ -612,7 +616,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			double expZ = shooter.zo + handZ;
 
 			/* Explode for real. */
-			worldIn.explode((Entity)null, expX, expY, expZ, strength, false, Explosion.BlockInteraction.NONE);			
+			worldIn.explode((Entity)null, expX, expY, expZ, strength, false, Explosion.Mode.NONE);			
 
 			/* Empty firearm and set damage to max. */
 			FirearmNBTHelper.emptyNBTTagAmmo(stackIn);
@@ -623,7 +627,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 			OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.BREAK, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
-							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
+							shooter.xRotO, shooter.yRotO, ((PlayerEntity)shooter).getUsedItemHand().ordinal())
 					);
 		}
 		else if (worldIn.random.nextFloat() < misfireChance)
@@ -636,7 +640,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 			OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
-							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
+							shooter.xRotO, shooter.yRotO, ((PlayerEntity)shooter).getUsedItemHand().ordinal())
 					);
 		}
 		else if (this.getFirearmWaterResiliency() != FirearmWaterResiliency.VERY_GOOD)
@@ -668,7 +672,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 				OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
 						new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE_WET, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
-								shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
+								shooter.xRotO, shooter.yRotO, ((PlayerEntity)shooter).getUsedItemHand().ordinal())
 						);
 			}
 		}
@@ -684,11 +688,11 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 	}
 
 
-	private boolean isCarryingSizableFirearmInOtherHand(World worldIn, Player playerIn, Hand handIn)
+	private boolean isCarryingSizeableFirearmInOtherHand(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
 		boolean isCarryingSizableFirearm = false;
 
-		ItemStack itemstackOther = playerIn.getItemInHand((handIn == Hand.MAIN_HAND) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+		ItemStack itemstackOther = playerIn.getItemInHand((handIn == Hand.MAIN_HAND) ? Hand.OFF_HAND : Hand.MAIN_HAND);
 
 		if (itemstackOther.getItem() instanceof IFirearm)
 		{
@@ -698,12 +702,12 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		return isCarryingSizableFirearm;
 	}
 
-	private boolean hasLoadedFirearmInOtherHand(World worldIn, Player playerIn, Hand handIn)
+	private boolean hasLoadedFirearmInOtherHand(World worldIn, PlayerEntity playerIn, Hand handIn)
 	{
 		boolean isLoadedFirearmInOtherHand = false;
 
 		/* Item in other hand. */
-		ItemStack itemstackOther = playerIn.getItemInHand((handIn == Hand.MAIN_HAND) ? InteractionHand.OFF_HAND : InteractionHand.MAIN_HAND);
+		ItemStack itemstackOther = playerIn.getItemInHand((handIn == Hand.MAIN_HAND) ? Hand.OFF_HAND : Hand.MAIN_HAND);
 
 		/* If item in other hand is instance of ItemFirearm, return true if firearm is large size. */
 		if (itemstackOther.getItem() instanceof FirearmItem)

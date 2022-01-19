@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.world.item.tools;
+package com.zach2039.oldguns.item.tools;
 
 import java.util.List;
 
@@ -8,24 +8,27 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.config.OldGunsConfig;
 
+import net.minecraft.client.util.ITooltipFlag;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.item.Rarity;
 import net.minecraft.util.NonNullList;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.TooltipFlag;
 
 public class DesignNotesItem extends Item implements IDesignNotes {
 	
 	public DesignNotesItem() {
-		super(new Properties()
+		super(new Item.Properties()
 				.stacksTo(1)
 				.rarity(Rarity.RARE)
 				.tab(OldGuns.CREATIVE_MODE_TAB));
 	}
 	
 	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
+	public void fillItemCategory(ItemGroup tab, NonNullList<ItemStack> stackList) {
 		if (this.allowdedIn(tab)) {
 
 			ItemStack stackBase = new ItemStack(this);
@@ -37,11 +40,11 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 	}
 	
 	@Override
-	public void appendHoverText(ItemStack stack, @Nullable World level, List<Component> tooltip, TooltipFlag flagIn) {
+	public void appendHoverText(ItemStack stack, @Nullable World level, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
 		super.appendHoverText(stack, level, tooltip, flagIn);
 
 		if (IDesignNotes.getDesign(stack) != "") {
-			tooltip.add(new TranslatableComponent("item." + IDesignNotes.getDesign(stack).replace(':', '.')));
+			tooltip.add(new TranslationTextComponent("item." + IDesignNotes.getDesign(stack).replace(':', '.')));
 		}
 	}
 	

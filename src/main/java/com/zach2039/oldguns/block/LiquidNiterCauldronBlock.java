@@ -4,29 +4,30 @@ import java.util.Random;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.NiterProductionSettings;
-import com.zach2039.oldguns.init.ModCauldronInteractions.LiquidNiterInteraction;
 import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.CampfireBlock;
-import net.minecraft.client.audio.SoundSource;
+import net.minecraft.block.CauldronBlock;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.particles.ParticleTypes;
+import net.minecraft.potion.EffectInstance;
+import net.minecraft.potion.Effects;
 import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.level.block.LayeredCauldronBlock;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.server.ServerWorld;
 
-public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
+public class LiquidNiterCauldronBlock extends CauldronBlock {
 	
 	private static final NiterProductionSettings NITER_PRODUCTION_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.niterProductionSettings;
 	
@@ -35,7 +36,8 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_CAULDRON;
 
 	public LiquidNiterCauldronBlock() {
-		super(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(), null, LiquidNiterInteraction.LIQUID_NITER);
+		//super(Block.Properties.copy(Blocks.CAULDRON).randomTicks(), null, LiquidNiterInteraction.LIQUID_NITER);
+		super(Block.Properties.copy(Blocks.CAULDRON).randomTicks());
 		this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL, Integer.valueOf(1)));
 	}
 	
@@ -43,7 +45,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	public void animateTick(BlockState state, World level, BlockPos blockpos, Random rand) {
 		
 		if (canBoil(level, blockpos)) {
-			addParticlesAndSound(level, state, new Vec3(blockpos.getX(), blockpos.getY(), blockpos.getZ()), rand);
+			addParticlesAndSound(level, state, new Vector3d(blockpos.getX(), blockpos.getY(), blockpos.getZ()), rand);
 		}
 	}
 
@@ -61,7 +63,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 		return false;			
 	}
 	
-	private static void addParticlesAndSound(World level, BlockState state, Vec3 vec, Random rand) {
+	private static void addParticlesAndSound(World level, BlockState state, Vector3d vec, Random rand) {
 		float f = rand.nextFloat();
 		int i = state.getValue(LEVEL);
 		
@@ -78,7 +80,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 						vec.z + (rand.nextFloat() - 0.5f) + 0.5f,
 						0.0D, 0.1D, 0.0D);
 				if (f < 0.10F) {
-					level.playLocalSound(vec.x, vec.y, vec.z, SoundEvents.LAVA_POP, SoundSource.BLOCKS, 0.3F + (rand.nextFloat() / 8f), rand.nextFloat() * 2.0F, false);
+					level.playLocalSound(vec.x, vec.y, vec.z, SoundEvents.LAVA_POP, SoundCategory.BLOCKS, 0.3F + (rand.nextFloat() / 8f), rand.nextFloat() * 2.0F, false);
 					level.addParticle(ParticleTypes.BUBBLE_POP, 	
 							vec.x + (rand.nextFloat() - 0.5f) + 0.5f, 
 							vec.y + (rand.nextFloat() / 32f) + (i * 0.35f), 
@@ -89,14 +91,14 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 		}
 		
 		if (f < 0.75F) {
-			level.playLocalSound(vec.x, vec.y, vec.z, SoundEvents.REDSTONE_TORCH_BURNOUT, SoundSource.BLOCKS, 0.03F, rand.nextFloat() * 0.7F, false);
+			level.playLocalSound(vec.x, vec.y, vec.z, SoundEvents.REDSTONE_TORCH_BURNOUT, SoundCategory.BLOCKS, 0.03F, rand.nextFloat() * 0.7F, false);
 		}
 	}
 	
 	@Override
 	public void randomTick(BlockState state, ServerWorld level, BlockPos blockpos, Random rand) {
-		int fluidWorld = state.getValue(LEVEL);
-		boolean canCrystalize = (fluidWorld > 0) && canBoil(level, blockpos);
+		int fluidLevel = state.getValue(LEVEL);
+		boolean canCrystalize = (fluidLevel > 0) && canBoil(level, blockpos);
 		
 		if (canCrystalize) {
 			float difficulty = (float) Math.min(NITER_PRODUCTION_SETTINGS.niterCrystalizationDifficulty.get(), Float.MAX_VALUE);
@@ -104,40 +106,41 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 			boolean allowCrystalization = (crystalizeRoll == 0);
 			
 			if (allowCrystalization) {
-				level.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.AMETHYST_CLUSTER_BREAK, SoundSource.BLOCKS, 0.5F, 1.0F);
-				level.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.POINTED_DRIPSTONE_PLACE, SoundSource.BLOCKS, 0.75F, 1.0F);
+				level.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.GLASS_BREAK, SoundCategory.BLOCKS, 0.5F, 1.0F);
+				level.playSound(null, blockpos.getX(), blockpos.getY(), blockpos.getZ(), SoundEvents.STONE_PLACE, SoundCategory.BLOCKS, 0.75F, 1.0F);
 				
 				dropNiter(level, blockpos);
 				
-				lowerFillWorld(state, level, blockpos);
+				this.setWaterLevel(level, blockpos, state, fluidLevel - 1);
 			}
 		}
 	}
 	
 	public static void dropNiter(World level, BlockPos blockpos) {
-		int harvestAmt = Math.min(64, Math.max(1, level.random.nextInt(
-				NITER_PRODUCTION_SETTINGS.niterCrystalizationAmountMin.get(),
-				NITER_PRODUCTION_SETTINGS.niterCrystalizationAmountMax.get())
+		int harvestAmt = Math.min(NITER_PRODUCTION_SETTINGS.niterCrystalizationAmountMax.get(), 
+				Math.max(1, level.random.nextInt(NITER_PRODUCTION_SETTINGS.niterCrystalizationAmountMin.get())
 				));
 		popResource(level, blockpos.above(), new ItemStack(ModItems.NITER.get(), harvestAmt));
 	}
 	
 	@Override
 	public void entityInside(BlockState state, World level, BlockPos blockpos, Entity entity) {
-		if (!level.isClientSide && this.isEntityInsideContent(state, blockpos, entity)) {
+		int i = state.getValue(LEVEL);
+		float f = (float)entity.getY() + (6.0F + (float)(3 * i)) / 16.0F;
+		if (!level.isClientSide && entity.isOnFire() && i > 0 && entity.getY() <= (double)f) {
 			if (entity.isOnFire()) {
-				level.explode(null, blockpos.getX(), blockpos.getY() + 1, blockpos.getZ(), 3f, Explosion.BlockInteraction.BREAK);
+				level.explode(null, blockpos.getX(), blockpos.getY() + 1, blockpos.getZ(), 3f, Explosion.Mode.BREAK);
 			} else {
 				if (entity instanceof LivingEntity) {
-					((LivingEntity)entity).addEffect(new MobEffectInstance(MobEffects.POISON, 900, 0));
+					((LivingEntity)entity).addEffect(new EffectInstance(Effects.POISON, 900, 0));
 				}
 			}
 		}
 	}
 	
-	@Override
-	protected double getContentHeight(BlockState state) {
-		return (6.0D + (double)state.getValue(LEVEL).intValue() * 3.0D) / 16.0D;
-	}
+	//@Override
+	//protected double getContentHeight(BlockState state) {
+	//	return (6.0D + (double)state.getValue(LEVEL).intValue() * 3.0D) / 16.0D;
+	//}
 
 }

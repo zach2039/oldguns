@@ -1,13 +1,13 @@
 package com.zach2039.oldguns.util;
 
-import net.minecraft.util.StringRepresentable;
+import net.minecraft.util.IStringSerializable;
 
 /**
  * An enum representing the rotation of a block's face.
  *
  * @author Choonster
  */
-public enum EnumFaceRotation implements StringRepresentable {
+public enum EnumFaceRotation implements IStringSerializable {
 	UP("up"),
 	RIGHT("right"),
 	DOWN("down"),

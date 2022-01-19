@@ -9,7 +9,6 @@ import com.zach2039.oldguns.entity.BulletProjectile;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
-import net.minecraft.item.Item.Properties;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 

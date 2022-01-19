@@ -26,8 +26,6 @@ import com.zach2039.oldguns.item.ammo.SmallLeadBuckshotItem;
 import com.zach2039.oldguns.item.ammo.SmallLeadMusketBallItem;
 import com.zach2039.oldguns.item.ammo.SmallStoneBirdshotItem;
 import com.zach2039.oldguns.item.ammo.SmallStoneMusketBallItem;
-import com.zach2039.oldguns.item.artillery.ArtilleryItem;
-import com.zach2039.oldguns.item.artillery.BombardItem;
 import com.zach2039.oldguns.item.firearm.FirearmItem;
 import com.zach2039.oldguns.item.firearm.FlintlockArquebusItem;
 import com.zach2039.oldguns.item.firearm.FlintlockBlunderbussItem;
@@ -118,9 +116,8 @@ import com.zach2039.oldguns.item.tools.DesignNotesItem;
 import com.zach2039.oldguns.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.item.tools.RepairKitItem;
 
+import net.minecraft.item.Item;
 import net.minecraft.item.Item.Properties;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraftforge.client.event.ColorHandlerEvent.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -505,10 +502,6 @@ public class ModItems {
 			() -> new DesignNotesItem()
 		);
 	
-	// Artillery
-	public static final RegistryObject<ArtilleryItem> BOMBARD = ITEMS.register("bombard",
-			() -> new BombardItem()
-		);
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.

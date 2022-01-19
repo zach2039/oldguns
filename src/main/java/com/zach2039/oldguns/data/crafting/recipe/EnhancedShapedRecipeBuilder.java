@@ -18,20 +18,22 @@ import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementRewards;
-import net.minecraft.advancements.CriterionTriggerInstance;
-import net.minecraft.advancements.RequirementsStrategy;
+import net.minecraft.advancements.ICriterionInstance;
+import net.minecraft.advancements.IRequirementsStrategy;
 import net.minecraft.advancements.criterion.RecipeUnlockedTrigger;
+import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.data.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.IRecipeSerializer;
 import net.minecraft.item.crafting.Ingredient;
 import net.minecraft.item.crafting.ShapedRecipe;
-import net.minecraft.tags.Tag;
+import net.minecraft.tags.ITag;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.registry.Registry;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 /**
@@ -41,7 +43,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
  * @author Choonster
  */
 public class EnhancedShapedRecipeBuilder<
-		RECIPE extends Recipe<?>,
+		RECIPE extends IRecipe<?>,
 		BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 		> extends ShapedRecipeBuilder {
 	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapedRecipeBuilder.class, /* ensureValid */ "m_126143_", ResourceLocation.class);
@@ -51,11 +53,11 @@ public class EnhancedShapedRecipeBuilder<
 	private static final Field KEY = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* key */ "f_126109_");
 
 	protected final ItemStack result;
-	protected final RecipeSerializer<? extends RECIPE> serializer;
+	protected final IRecipeSerializer<? extends RECIPE> serializer;
 	protected String itemGroup;
 	protected final List<ResourceLocation> conditions;
 
-	protected EnhancedShapedRecipeBuilder(final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
+	protected EnhancedShapedRecipeBuilder(final ItemStack result, final IRecipeSerializer<? extends RECIPE> serializer) {
 		super(result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = serializer;
@@ -80,7 +82,7 @@ public class EnhancedShapedRecipeBuilder<
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public BUILDER define(final Character symbol, final Tag<Item> tagIn) {
+	public BUILDER define(final Character symbol, final ITag<Item> tagIn) {
 		return (BUILDER) super.define(symbol, tagIn);
 	}
 
@@ -89,7 +91,7 @@ public class EnhancedShapedRecipeBuilder<
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public BUILDER define(final Character symbol, final ItemLike itemIn) {
+	public BUILDER define(final Character symbol, final IItemProvider itemIn) {
 		return (BUILDER) super.define(symbol, itemIn);
 	}
 
@@ -116,7 +118,7 @@ public class EnhancedShapedRecipeBuilder<
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public BUILDER unlockedBy(final String name, final CriterionTriggerInstance criterion) {
+	public BUILDER unlockedBy(final String name, final ICriterionInstance criterion) {
 		return (BUILDER) super.unlockedBy(name, criterion);
 	}
 
@@ -136,7 +138,7 @@ public class EnhancedShapedRecipeBuilder<
 	 * Builds this recipe into a {@link FinishedRecipe}.
 	 */
 	@Override
-	public void save(final Consumer<FinishedRecipe> consumer) {
+	public void save(final Consumer<IFinishedRecipe> consumer) {
 		save(consumer, ModRegistryUtil.getRequiredRegistryName(result.getItem()));
 	}
 
@@ -145,7 +147,7 @@ public class EnhancedShapedRecipeBuilder<
 	 * the result.
 	 */
 	@Override
-	public void save(final Consumer<FinishedRecipe> consumer, final String save) {
+	public void save(final Consumer<IFinishedRecipe> consumer, final String save) {
 		final ResourceLocation registryName = result.getItem().getRegistryName();
 		if (new ResourceLocation(save).equals(registryName)) {
 			throw new IllegalStateException("Shaped Recipe " + save + " should remove its 'save' argument");
@@ -169,7 +171,7 @@ public class EnhancedShapedRecipeBuilder<
 	 * Builds this recipe into a {@link FinishedRecipe}.
 	 */
 	@Override
-	public void save(final Consumer<FinishedRecipe> consumer, final ResourceLocation id) {
+	public void save(final Consumer<IFinishedRecipe> consumer, final ResourceLocation id) {
 		try {
 			// Perform the super class's validation
 			ENSURE_VALID.invoke(this, id);
@@ -184,7 +186,7 @@ public class EnhancedShapedRecipeBuilder<
 					.parent(new ResourceLocation("minecraft", "recipes/root"))
 					.addCriterion("has_the_recipe", RecipeUnlockedTrigger.unlocked(id))
 					.rewards(AdvancementRewards.Builder.recipe(id))
-					.requirements(RequirementsStrategy.OR);
+					.requirements(IRequirementsStrategy.OR);
 
 			String group = (String) GROUP.get(this);
 			if (group == null) {
@@ -199,7 +201,7 @@ public class EnhancedShapedRecipeBuilder<
 
 			String itemGroupName = itemGroup;
 			if (itemGroupName == null) {
-				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
+				final ItemGroup itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
 				itemGroupName = itemGroup.getRecipeFolderName();
 			}
 
@@ -215,7 +217,7 @@ public class EnhancedShapedRecipeBuilder<
 
 	public static class Vanilla extends EnhancedShapedRecipeBuilder<ShapedRecipe, Vanilla> {
 		private Vanilla(final ItemStack result) {
-			super(result, RecipeSerializer.SHAPED_RECIPE);
+			super(result, IRecipeSerializer.SHAPED_RECIPE);
 		}
 
 		/**
@@ -238,7 +240,7 @@ public class EnhancedShapedRecipeBuilder<
 		}
 	}
 	
-	 public static class ConditionedResult implements FinishedRecipe {
+	 public static class ConditionedResult implements IFinishedRecipe {
 	      private final ResourceLocation id;
 	      private final Item result;
 	      private final int count;
@@ -299,8 +301,8 @@ public class EnhancedShapedRecipeBuilder<
 	         p_126167_.add("result", jsonobject1);
 	      }
 
-	      public RecipeSerializer<?> getType() {
-	         return RecipeSerializer.SHAPED_RECIPE;
+	      public IRecipeSerializer<?> getType() {
+	         return IRecipeSerializer.SHAPED_RECIPE;
 	      }
 
 	      public ResourceLocation getId() {

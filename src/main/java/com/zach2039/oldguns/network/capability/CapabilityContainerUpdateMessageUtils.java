@@ -2,17 +2,18 @@ package com.zach2039.oldguns.network.capability;
 
 import javax.annotation.Nullable;
 
+import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 
 /**
- * Utility methods and common interfaces for {@link UpdateMenuCapabilityMessage} .
+ * Utility methods and common interfaces for {@link UpdateContainerCapabilityMessage} .
  *
  * @author Choonster
  */
-public class CapabilityMenuUpdateMessageUtils {
+public class CapabilityContainerUpdateMessageUtils {
 	/**
 	 * Applies the data instance to the capability handler instance in the specified {@link AbstractContainerMenu} slot.
 	 *
@@ -26,9 +27,8 @@ public class CapabilityMenuUpdateMessageUtils {
 	 * @param <HANDLER>             The capability handler type
 	 * @param <DATA>                The data type written to and read from the buffer
 	 */
-	static <HANDLER, DATA> void applyCapabilityDataToMenuSlot(
-			final AbstractContainerMenu menu,
-			final int stateID,
+	static <HANDLER, DATA> void applyCapabilityDataToContainerSlot(
+			final Container menu,
 			final int slotNumber,
 			final Capability<HANDLER> capability,
 			@Nullable final Direction facing,
@@ -44,7 +44,7 @@ public class CapabilityMenuUpdateMessageUtils {
 				capabilityDataApplier.apply(newHandler, data);
 
 				if (!originalHandler.equals(newHandler)) {
-					menu.setItem(slotNumber, stateID, newStack);
+					menu.setItem(slotNumber,  newStack);
 				}
 			});
 		});
@@ -69,7 +69,7 @@ public class CapabilityMenuUpdateMessageUtils {
 	 */
 	@FunctionalInterface
 	public interface CapabilityDataDecoder<DATA> {
-		DATA decode(FriendlyByteBuf buffer);
+		DATA decode(PacketBuffer buffer);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class CapabilityMenuUpdateMessageUtils {
 	 */
 	@FunctionalInterface
 	public interface CapabilityDataEncoder<DATA> {
-		void encode(DATA data, FriendlyByteBuf buffer);
+		void encode(DATA data, PacketBuffer buffer);
 	}
 
 	/**

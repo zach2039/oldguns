@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 
 import com.zach2039.oldguns.OldGuns;
 
+import net.minecraft.loot.LootTables;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 
 /**
@@ -28,7 +28,7 @@ public class ModLootTables {
 	public static void registerLootTables() {}
 
 	public static class RegistrationHandler {
-		private static final Method REGISTER = ObfuscationReflectionHelper.findMethod(BuiltInLootTables.class, /* register */ "m_78769_", ResourceLocation.class);
+		private static final Method REGISTER = ObfuscationReflectionHelper.findMethod(LootTables.class, /* register */ "func_186375_a", ResourceLocation.class);
 
 		public static ResourceLocation register(final String name) {
 			final ResourceLocation id = new ResourceLocation(OldGuns.MODID, name);

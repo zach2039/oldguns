@@ -3,7 +3,8 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
-import com.zach2039.oldguns.network.capability.firearmempty.UpdateMenuFirearmEmptyMessage;
+import com.zach2039.oldguns.network.capability.firearmempty.BulkUpdateContainerFirearmEmptyMessage;
+import com.zach2039.oldguns.network.capability.firearmempty.UpdateContainerFirearmEmptyMessage;
 
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.network.NetworkRegistry;
@@ -33,10 +34,16 @@ public class ModNetwork {
 				.consumer(ArtilleryEffectMessage::handle)
 				.add();
 		
-		channel.messageBuilder(UpdateMenuFirearmEmptyMessage.class, 3)
-				.decoder(UpdateMenuFirearmEmptyMessage::decode)
-				.encoder(UpdateMenuFirearmEmptyMessage::encode)
-				.consumer(UpdateMenuFirearmEmptyMessage::handle)
+		channel.messageBuilder(UpdateContainerFirearmEmptyMessage.class, 3)
+				.decoder(UpdateContainerFirearmEmptyMessage::decode)
+				.encoder(UpdateContainerFirearmEmptyMessage::encode)
+				.consumer(UpdateContainerFirearmEmptyMessage::handle)
+				.add();
+		
+		channel.messageBuilder(BulkUpdateContainerFirearmEmptyMessage.class, 4)
+				.decoder(BulkUpdateContainerFirearmEmptyMessage::decode)
+				.encoder(BulkUpdateContainerFirearmEmptyMessage::encode)
+				.consumer(BulkUpdateContainerFirearmEmptyMessage::handle)
 				.add();
 		
 		return channel;

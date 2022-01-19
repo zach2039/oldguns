@@ -1,22 +1,21 @@
 package com.zach2039.oldguns.loot.conditions;
 
-import org.apache.logging.log4j.core.layout.AbstractStringLayout.Serializer;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModLootConditionTypes;
 
+import net.minecraft.loot.ILootSerializer;
+import net.minecraft.loot.LootConditionType;
 import net.minecraft.loot.LootContext;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.loot.conditions.ILootCondition;
 
-public class LootSpawnDesignNotesLootCondition implements LootItemCondition {
+public class LootSpawnDesignNotesLootCondition implements ILootCondition {
 	private static final LootSpawnDesignNotesLootCondition INSTANCE = new LootSpawnDesignNotesLootCondition();
 	
 	@Override
-	public LootItemConditionType getType() {
+	public LootConditionType getType() {
 		return ModLootConditionTypes.ALLOW_DESIGN_NOTES_LOOT;
 	}
 	
@@ -25,11 +24,11 @@ public class LootSpawnDesignNotesLootCondition implements LootItemCondition {
 		return OldGunsConfig.SERVER.lootSettings.allowDesignNotesInLoot.get();
 	}
 
-	public static LootItemCondition.Builder builder() {
+	public static ILootCondition.IBuilder builder() {
 		return () -> INSTANCE;
 	}
 
-	public static class ConditionSerializer implements Serializer<LootSpawnDesignNotesLootCondition> {
+	public static class ConditionSerializer implements ILootSerializer<LootSpawnDesignNotesLootCondition> {
 		@Override
 		public void serialize(final JsonObject object, final LootSpawnDesignNotesLootCondition instance, final JsonSerializationContext context) {}
 

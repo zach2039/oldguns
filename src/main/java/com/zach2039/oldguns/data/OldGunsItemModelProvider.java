@@ -8,6 +8,8 @@ import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
 import com.zach2039.oldguns.init.ModItems;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.fluid.Fluids;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -104,7 +106,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
-		withGeneratedParentAndDefaultTexture(ModItems.BOMBARD.get());
+		//withGeneratedParentAndDefaultTexture(ModItems.BOMBARD.get());
 		
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_PISTOL.get());

@@ -1,22 +1,21 @@
 package com.zach2039.oldguns.loot.conditions;
 
-import org.apache.logging.log4j.core.layout.AbstractStringLayout.Serializer;
-
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModLootConditionTypes;
 
+import net.minecraft.loot.ILootSerializer;
+import net.minecraft.loot.LootConditionType;
 import net.minecraft.loot.LootContext;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraft.loot.conditions.ILootCondition;
 
-public class LootSpawnMechanismsLootCondition implements LootItemCondition {
+public class LootSpawnMechanismsLootCondition implements ILootCondition {
 	private static final LootSpawnMechanismsLootCondition INSTANCE = new LootSpawnMechanismsLootCondition();
 	
 	@Override
-	public LootItemConditionType getType() {
+	public LootConditionType getType() {
 		return ModLootConditionTypes.ALLOW_MECHANISMS_LOOT;
 	}
 	
@@ -25,11 +24,11 @@ public class LootSpawnMechanismsLootCondition implements LootItemCondition {
 		return OldGunsConfig.SERVER.lootSettings.allowMechanismsInLoot.get();
 	}
 
-	public static LootItemCondition.Builder builder() {
+	public static ILootCondition.IBuilder builder() {
 		return () -> INSTANCE;
 	}
 
-	public static class ConditionSerializer implements Serializer<LootSpawnMechanismsLootCondition> {
+	public static class ConditionSerializer implements ILootSerializer<LootSpawnMechanismsLootCondition> {
 		@Override
 		public void serialize(final JsonObject object, final LootSpawnMechanismsLootCondition instance, final JsonSerializationContext context) {}
 

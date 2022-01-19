@@ -1,4 +1,4 @@
-package com.zach2039.oldguns.world.item.firearm;
+package com.zach2039.oldguns.item.firearm;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
@@ -11,10 +11,11 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.MuzzleloadingFirearmAttributes;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.fml.network.PacketDistributor;
 import net.minecraftforge.fml.network.PacketDistributor.TargetPoint;
 
@@ -62,7 +63,7 @@ public class FlintlockPistolItem extends FirearmItem implements IFirearm {
 		
 		OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
 				new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.SMALL_FIREARM_SHOOT, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
-						shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
+						shooter.xRotO, shooter.yRotO, ((PlayerEntity)shooter).getUsedItemHand().ordinal())
 				);
 	}
 	

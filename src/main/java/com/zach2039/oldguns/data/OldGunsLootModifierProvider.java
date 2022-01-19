@@ -9,9 +9,9 @@ import com.zach2039.oldguns.loot.conditions.LootSpawnMechanismsLootCondition;
 import com.zach2039.oldguns.loot.modifiers.LootTableLootModifier;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.conditions.ILootCondition;
+import net.minecraft.loot.conditions.RandomChance;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 
@@ -34,12 +34,12 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 	protected void start() {
 		
 		add("loot_table_matchlock_firearm", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
-				new LootItemCondition[]{
+				new ILootCondition[]{
 						LootSpawnFirearmsLootCondition.builder().build(),
-						LootItemRandomChanceCondition.randomChance(0.5f).build(),
-						LootTableIdCondition.builder(BuiltInLootTables.SIMPLE_DUNGEON)
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_TREASURE))
+						RandomChance.randomChance(0.5f).build(),
+						LootTableIdCondition.builder(LootTables.SIMPLE_DUNGEON)
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_SUPPLY))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_TREASURE))
 						.build(),
 				},
 				ModLootTables.LOOT_TABLE_MATCHLOCK_FIREARM
@@ -47,12 +47,12 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		
 		
 		add("loot_table_mechanism", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
-				new LootItemCondition[]{
+				new ILootCondition[]{
 						LootSpawnMechanismsLootCondition.builder().build(),
-						LootItemRandomChanceCondition.randomChance(0.5f).build(),
-						LootTableIdCondition.builder(BuiltInLootTables.SIMPLE_DUNGEON)
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_TREASURE))
+						RandomChance.randomChance(0.5f).build(),
+						LootTableIdCondition.builder(LootTables.SIMPLE_DUNGEON)
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_SUPPLY))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_TREASURE))
 						.build(),
 				},
 				ModLootTables.LOOT_TABLE_MECHANISM
@@ -60,13 +60,13 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		
 		
 		add("loot_table_design_notes_mechanism", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
-				new LootItemCondition[]{
+				new ILootCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
-						LootItemRandomChanceCondition.randomChance(0.5f).build(),
-						LootTableIdCondition.builder(BuiltInLootTables.VILLAGE_WEAPONSMITH)
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SIMPLE_DUNGEON))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_TREASURE))
+						RandomChance.randomChance(0.5f).build(),
+						LootTableIdCondition.builder(LootTables.VILLAGE_WEAPONSMITH)
+						.or(LootTableIdCondition.builder(LootTables.SIMPLE_DUNGEON))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_SUPPLY))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_TREASURE))
 						.build(),
 				},
 				ModLootTables.LOOT_TABLE_DESIGN_NOTES_MECHANISM
@@ -74,12 +74,12 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		
 		
 		add("loot_table_design_notes_matchlock", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
-				new LootItemCondition[]{
+				new ILootCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
-						LootItemRandomChanceCondition.randomChance(0.4f).build(),
-						LootTableIdCondition.builder(BuiltInLootTables.SIMPLE_DUNGEON)
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_TREASURE))
+						RandomChance.randomChance(0.4f).build(),
+						LootTableIdCondition.builder(LootTables.SIMPLE_DUNGEON)
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_SUPPLY))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_TREASURE))
 						.build(),
 				},
 				ModLootTables.LOOT_TABLE_DESIGN_NOTES_MATCHLOCK
@@ -87,12 +87,12 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		
 		
 		add("loot_table_design_notes_wheellock", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
-				new LootItemCondition[]{
+				new ILootCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
-						LootItemRandomChanceCondition.randomChance(0.3f).build(),
-						LootTableIdCondition.builder(BuiltInLootTables.SIMPLE_DUNGEON)
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_TREASURE))
+						RandomChance.randomChance(0.3f).build(),
+						LootTableIdCondition.builder(LootTables.SIMPLE_DUNGEON)
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_SUPPLY))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_TREASURE))
 						.build(),
 				},
 				ModLootTables.LOOT_TABLE_DESIGN_NOTES_WHEELLOCK
@@ -100,12 +100,12 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		
 		
 		add("loot_table_design_notes_flintlock", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
-				new LootItemCondition[]{
+				new ILootCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
-						LootItemRandomChanceCondition.randomChance(0.2f).build(),
-						LootTableIdCondition.builder(BuiltInLootTables.SIMPLE_DUNGEON)
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_SUPPLY))
-						.or(LootTableIdCondition.builder(BuiltInLootTables.SHIPWRECK_TREASURE))
+						RandomChance.randomChance(0.2f).build(),
+						LootTableIdCondition.builder(LootTables.SIMPLE_DUNGEON)
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_SUPPLY))
+						.or(LootTableIdCondition.builder(LootTables.SHIPWRECK_TREASURE))
 						.build(),
 				},
 				ModLootTables.LOOT_TABLE_DESIGN_NOTES_FLINTLOCK

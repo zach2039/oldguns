@@ -4,8 +4,9 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 
-import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
-import net.minecraft.client.renderer.item.ItemProperties;
+import net.minecraft.item.IItemPropertyGetter;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
@@ -21,7 +22,7 @@ public class FirearmEmptyPropertyFunction {
 
 	public static final ResourceLocation ID = new ResourceLocation(OldGuns.MODID, "firearm_empty");
 	
-	private static final ClampedItemPropertyFunction GETTER = (stack, level, entity, seed) -> 
+	private static final IItemPropertyGetter GETTER = (stack, level, entity) -> 
 	{
 		final World world = level != null ? level : entity != null ? entity.getCommandSenderWorld() : null;
 
@@ -37,6 +38,6 @@ public class FirearmEmptyPropertyFunction {
 		
 		
 	public static void registerForItem(final Item item) {
-		ItemProperties.register(item, ID, GETTER);
+		ItemModelsProperties.register(item, ID, GETTER);
 	}
 }

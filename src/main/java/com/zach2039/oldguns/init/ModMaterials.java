@@ -3,6 +3,7 @@ package com.zach2039.oldguns.init;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialColor;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 

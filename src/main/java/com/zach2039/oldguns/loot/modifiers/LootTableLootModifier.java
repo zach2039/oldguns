@@ -7,9 +7,9 @@ import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootContext;
 import net.minecraft.loot.LootTable;
-import net.minecraft.util.GsonHelper;
+import net.minecraft.loot.conditions.ILootCondition;
+import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.common.loot.LootModifier;
 
@@ -21,7 +21,7 @@ import net.minecraftforge.common.loot.LootModifier;
 public class LootTableLootModifier extends LootModifier {
 	private final ResourceLocation lootTableID;
 
-	public LootTableLootModifier(final LootItemCondition[] conditions, final ResourceLocation lootTableID) {
+	public LootTableLootModifier(final ILootCondition[] conditions, final ResourceLocation lootTableID) {
 		super(conditions);
 		this.lootTableID = lootTableID;
 	}
@@ -39,8 +39,8 @@ public class LootTableLootModifier extends LootModifier {
 
 	public static class Serializer extends GlobalLootModifierSerializer<LootTableLootModifier> {
 		@Override
-		public LootTableLootModifier read(final ResourceLocation location, final JsonObject object, final LootItemCondition[] lootConditions) {
-			final ResourceLocation lootTableID = new ResourceLocation(GsonHelper.getAsString(object, "loot_table"));
+		public LootTableLootModifier read(final ResourceLocation location, final JsonObject object, final ILootCondition[] lootConditions) {
+			final ResourceLocation lootTableID = new ResourceLocation(JSONUtils.getAsString(object, "loot_table"));
 			return new LootTableLootModifier(lootConditions, lootTableID);
 		}
 

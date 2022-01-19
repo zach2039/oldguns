@@ -3,10 +3,10 @@ package com.zach2039.oldguns.data.crafting.recipe;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.util.ModJsonUtil;
 
-import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.IFinishedRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.item.crafting.IRecipeSerializer;
+import net.minecraft.nbt.CompoundNBT;
 
 /**
  * A {@link FinishedRecipe} that allows the recipe result to have NBT.
@@ -14,11 +14,11 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
  *
  * @author Choonster
  */
-public class SimpleFinishedRecipe extends DelegateFinishedRecipe {
-	private final RecipeSerializer<?> serializer;
-	private final CompoundTag resultNBT;
+public class SimpleFinishedRecipe extends DelegateFinishedRecipe implements IFinishedRecipe {
+	private final IRecipeSerializer<?> serializer;
+	private final CompoundNBT resultNBT;
 
-	public SimpleFinishedRecipe(final FinishedRecipe baseRecipe, final ItemStack result, final RecipeSerializer<?> serializer) {
+	public SimpleFinishedRecipe(final IFinishedRecipe baseRecipe, final ItemStack result, final IRecipeSerializer<?> serializer) {
 		super(baseRecipe);
 		this.serializer = serializer;
 		resultNBT = result.getTag();
@@ -34,7 +34,7 @@ public class SimpleFinishedRecipe extends DelegateFinishedRecipe {
 	}
 
 	@Override
-	public RecipeSerializer<?> getType() {
+	public IRecipeSerializer<?> getType() {
 		return serializer;
 	}
 }

@@ -6,10 +6,12 @@ import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
-import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
+import com.zach2039.oldguns.network.capability.UpdateContainerCapabilityMessage;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.PacketBuffer;
+import net.minecraft.util.Direction;
 import net.minecraftforge.fml.network.NetworkEvent;
+
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -19,52 +21,50 @@ import net.minecraftforge.fml.network.NetworkEvent;
  * With additions by:
  * @author grilled-salmon
  */
-public class UpdateMenuFirearmEmptyMessage extends UpdateMenuCapabilityMessage<IFirearmEmpty, Boolean> {
-	public UpdateMenuFirearmEmptyMessage(
+public class UpdateContainerFirearmEmptyMessage extends UpdateContainerCapabilityMessage<IFirearmEmpty, Boolean> {
+	public UpdateContainerFirearmEmptyMessage(
 			@Nullable final Direction facing,
-			final int containerID,
-			final int stateID,
+			final int containerID,	
 			final int slotNumber,
-			final IFirearmEmpty hiddenBlockRevealer
+			final IFirearmEmpty firearmEmpty
 	) {
 		super(
 				FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY,
-				facing, containerID, stateID, slotNumber, hiddenBlockRevealer,
+				facing, containerID, slotNumber, firearmEmpty,
 				FirearmEmptyFunctions::convertFirearmEmptyToFirearmEmptyValue
 		);
 	}
 
-	private UpdateMenuFirearmEmptyMessage(
+	private UpdateContainerFirearmEmptyMessage(
 			@Nullable final Direction facing,
 			final int containerID,
-			final int stateID,
 			final int slotNumber,
-			final boolean revealHiddenBlocks
+			final boolean isEmpty
 	) {
 		super(
 				FirearmEmptyCapability.FIREARM_EMPTY_CAPABILITY,
-				facing, containerID, stateID, slotNumber, revealHiddenBlocks
+				facing, containerID, slotNumber, isEmpty
 		);
 	}
 
-	public static UpdateMenuFirearmEmptyMessage decode(final FriendlyByteBuf buffer) {
-		return UpdateMenuCapabilityMessage.<IFirearmEmpty, Boolean, UpdateMenuFirearmEmptyMessage>decode(
+	public static UpdateContainerFirearmEmptyMessage decode(final PacketBuffer buffer) {
+		return UpdateContainerCapabilityMessage.<IFirearmEmpty, Boolean, UpdateContainerFirearmEmptyMessage>decode(
 				buffer,
 				FirearmEmptyFunctions::decodeFirearmEmptyValue,
-				UpdateMenuFirearmEmptyMessage::new
+				UpdateContainerFirearmEmptyMessage::new
 		);
 	}
 
-	public static void encode(final UpdateMenuFirearmEmptyMessage message, final FriendlyByteBuf buffer) {
-		UpdateMenuCapabilityMessage.encode(
+	public static void encode(final UpdateContainerFirearmEmptyMessage message, final PacketBuffer buffer) {
+		UpdateContainerCapabilityMessage.encode(
 				message,
 				buffer,
 				FirearmEmptyFunctions::encodeFirearmEmptyValue
 		);
 	}
 
-	public static void handle(final UpdateMenuFirearmEmptyMessage message, final Supplier<NetworkEvent.Context> ctx) {
-		UpdateMenuCapabilityMessage.handle(
+	public static void handle(final UpdateContainerFirearmEmptyMessage message, final Supplier<NetworkEvent.Context> ctx) {
+		UpdateContainerCapabilityMessage.handle(
 				message,
 				ctx,
 				FirearmEmptyFunctions::applyFirearmEmptyValueToFirearmEmpty

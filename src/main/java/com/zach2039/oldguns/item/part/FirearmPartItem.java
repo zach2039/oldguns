@@ -1,13 +1,15 @@
-package com.zach2039.oldguns.world.item.part;
+package com.zach2039.oldguns.item.part;
 
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmPart;
+
+import net.minecraft.item.Item;
 
 public abstract class FirearmPartItem extends Item {
 
 	private FirearmPart partType = FirearmPart.SMALL_HANDLE;
 	
 	public FirearmPartItem(FirearmPartProperties builder) {
-		super((Properties) builder);
+		super((Item.Properties) builder);
 		this.partType = builder.partType;
 	}
 	

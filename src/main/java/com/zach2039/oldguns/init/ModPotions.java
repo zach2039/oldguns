@@ -6,9 +6,8 @@ import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.OldGuns;
 
+import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Potion;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -23,7 +22,7 @@ import net.minecraftforge.registries.ForgeRegistries;
  * @author grilled-salmon
  */
 public class ModPotions {
-	private static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, OldGuns.MODID);
+	private static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTION_TYPES, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
@@ -53,7 +52,7 @@ public class ModPotions {
 	 * @param effectInstanceFactory The factory used to create the potion's effect instance
 	 * @return A RegistryObject reference to the potion
 	 */
-	private static RegistryObject<Potion> registerPotion(final String name, final Supplier<MobEffectInstance> effectInstanceFactory) {
+	private static RegistryObject<Potion> registerPotion(final String name, final Supplier<EffectInstance> effectInstanceFactory) {
 		return registerPotion(name, effectInstanceFactory, null);
 	}
 
@@ -67,15 +66,12 @@ public class ModPotions {
 	 * @param namePrefix            The name prefix, if any
 	 * @return The PotionType
 	 */
-	private static RegistryObject<Potion> registerPotion(final String name, final Supplier<MobEffectInstance> effectInstanceFactory, @Nullable final String namePrefix) {
+	private static RegistryObject<Potion> registerPotion(final String name, final Supplier<EffectInstance> effectInstanceFactory, @Nullable final String namePrefix) {
 		final String fullName = namePrefix != null ? namePrefix + name : name;
 
 		return POTIONS.register(fullName, () -> {
 			// Based on net.minecraft.util.Util.makeTranslationKey. This ensures that the base name is valid in ResourceLocation paths.
 			final String potionBaseName = OldGuns.MODID + "." + name.replace('/', '.');
-
-			if (effectInstanceFactory == null)
-				return new Potion(potionBaseName);
 			
 			return new Potion(potionBaseName, effectInstanceFactory.get());
 		});

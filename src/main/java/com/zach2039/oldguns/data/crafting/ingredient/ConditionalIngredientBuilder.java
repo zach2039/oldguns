@@ -3,6 +3,7 @@ package com.zach2039.oldguns.data.crafting.ingredient;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,10 +13,10 @@ import com.google.gson.JsonObject;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.crafting.ingredient.ConditionalIngredientSerializer;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.Ingredient;
+import net.minecraft.util.IItemProvider;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Builds an {@link Ingredient} that can be deserialised by {@link ConditionalIngredientSerializer}.
@@ -37,7 +38,7 @@ public class ConditionalIngredientBuilder {
 	 * @param items The Ingredient Items to be used when the conditions are met
 	 * @return The builder
 	 */
-	public static ConditionalIngredientBuilder conditionalIngredient(final ItemLike... items) {
+	public static ConditionalIngredientBuilder conditionalIngredient(final IItemProvider... items) {
 		return conditionalIngredient(Ingredient.of(items));
 	}
 
@@ -99,8 +100,16 @@ public class ConditionalIngredientBuilder {
 	/**
 	 * Represents a condition type and its accompanying data.
 	 */
-	private record Condition(ResourceLocation type, JsonObject data) {
-		public JsonElement serialize() {
+	private static class Condition {
+		private final ResourceLocation type;
+		private final JsonObject data;
+
+		Condition(final ResourceLocation type, final JsonObject data) {
+			this.type = type;
+			this.data = data;
+		}
+
+		JsonElement serialize() {
 			data.addProperty("type", type.toString());
 			return data;
 		}

@@ -2,7 +2,7 @@ package com.zach2039.oldguns.network.capability.firearmempty;
 
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 
-import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.PacketBuffer;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -17,11 +17,11 @@ class FirearmEmptyFunctions {
 		return firearmEmpty.isEmpty();
 	}
 	
-	static boolean decodeFirearmEmptyValue(final FriendlyByteBuf buf) {
+	static boolean decodeFirearmEmptyValue(final PacketBuffer buf) {
 		return buf.readBoolean();
 	}
 	
-	static void encodeFirearmEmptyValue(final boolean firearmEmptyValue, final FriendlyByteBuf buf) {
+	static void encodeFirearmEmptyValue(final boolean firearmEmptyValue, final PacketBuffer buf) {
 		buf.writeBoolean(firearmEmptyValue);
 	}
 	

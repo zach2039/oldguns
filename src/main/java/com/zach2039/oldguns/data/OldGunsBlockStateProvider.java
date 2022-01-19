@@ -6,31 +6,29 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.block.NiterBeddingBlock;
-import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.util.EnumFaceRotation;
 
-import net.minecraft.core.Direction;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.data.DataGenerator;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.item.Item;
+import net.minecraft.state.properties.BlockStateProperties;
+import net.minecraft.util.Direction;
+import net.minecraft.util.LazyValue;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
 import net.minecraftforge.client.model.generators.ModelBuilder;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.common.util.Lazy;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -48,7 +46,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 	/**
 	 * Orientable models for each {@link EnumFaceRotation} value.
 	 */
-	private final Supplier<Map<EnumFaceRotation, ModelFile>> rotatedOrientables = Lazy.of(() -> {
+	private final LazyValue<Map<EnumFaceRotation, ModelFile>> rotatedOrientables = new LazyValue<>(() -> {
 		Map<EnumFaceRotation, ModelFile> map = new EnumMap<>(EnumFaceRotation.class);
 		map.put(EnumFaceRotation.UP, existingMcModel("orientable"));
 
@@ -63,16 +61,19 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 											.texture("#" + direction.getSerializedName())
 											.cullface(direction)
 							)
-							.allFaces((direction, faceBuilder) ->
-									faceBuilder.rotation(
-											switch (faceRotation) {
-												case LEFT -> ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90;
-												case RIGHT -> ModelBuilder.FaceRotation.CLOCKWISE_90;
-												case DOWN -> ModelBuilder.FaceRotation.UPSIDE_DOWN;
-												default -> throw new IllegalStateException("Invalid rotation: " + faceRotation);
-											}
-									)
-							)
+							.allFaces((direction, faceBuilder) -> {
+								switch (faceRotation) {
+									case LEFT:
+										faceBuilder.rotation(ModelBuilder.FaceRotation.COUNTERCLOCKWISE_90);
+										break;
+									case RIGHT:
+										faceBuilder.rotation(ModelBuilder.FaceRotation.CLOCKWISE_90);
+										break;
+									case DOWN:
+										faceBuilder.rotation(ModelBuilder.FaceRotation.UPSIDE_DOWN);
+										break;
+								}
+							})
 							.end();
 
 					final ModelFile orientableWithBottom = models().getBuilder("orientable_with_bottom_rotated_" + faceRotation.getSerializedName())
@@ -315,14 +316,6 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 							.rotationY(getRotationY(direction))
 							.build();
 				});
-	}
-
-	private void fluidBlock(final FluidGroup<?, ?, ?, ?> fluidGroup) {
-		final var block = fluidGroup.getBlock().get();
-		final var model = models().getBuilder(name(block))
-				.texture("particle", fluidGroup.getStill().get().getAttributes().getStillTexture());
-
-		simpleBlock(block, model);
 	}
 
 	private int getRotationX(final Direction direction) {

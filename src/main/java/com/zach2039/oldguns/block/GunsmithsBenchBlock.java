@@ -6,6 +6,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.inventory.container.SimpleNamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
@@ -13,9 +16,12 @@ import net.minecraft.state.StateContainer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
+import net.minecraft.util.Hand;
+import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
@@ -64,7 +70,7 @@ public class GunsmithsBenchBlock extends Block {
 		return blockstate.setValue(FACING, mirror.mirror(blockstate.getValue(FACING)));
 	}
 	
-	public ActionResultType use(BlockState blockstate, World level, BlockPos blockpos, Player player, InteractionHand hand, BlockHitResult result) {
+	public ActionResultType use(BlockState blockstate, World level, BlockPos blockpos, PlayerEntity player, Hand hand, BlockRayTraceResult result) {
 		if (level.isClientSide) {
 			return ActionResultType.SUCCESS;
 		} else {
@@ -74,9 +80,9 @@ public class GunsmithsBenchBlock extends Block {
 		}
 	}
 
-	   public MenuProvider getMenuProvider(BlockState blockstate, World level, BlockPos blockpos) {
-	      return new SimpleMenuProvider((p_52229_, p_52230_, p_52231_) -> {
-	         return new GunsmithsBenchMenu(p_52229_, p_52230_, ContainerWorldAccess.create(level, blockpos));
+	   public INamedContainerProvider getMenuProvider(BlockState blockstate, World level, BlockPos blockpos) {
+	      return new SimpleNamedContainerProvider((p_52229_, p_52230_, p_52231_) -> {
+	         return new GunsmithsBenchMenu(p_52229_, p_52230_, IWorldPosCallable.create(level, blockpos));
 	      }, CONTAINER_TITLE);
 	   }
 }

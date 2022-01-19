@@ -26,16 +26,16 @@ public class OldGunsBlockTagsProvider extends BlockTagsProvider {
 
 	@Override
 	protected void addTags() {
-		tag(BlockTags.MINEABLE_WITH_PICKAXE)
-				.add(ModBlocks.LIQUID_NITER_CAULDRON.get());
-		
-		tag(BlockTags.MINEABLE_WITH_AXE)
-				.add(ModBlocks.GUNSMITHS_BENCH.get());
-
-		tag(BlockTags.MINEABLE_WITH_SHOVEL)
-				.add(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
-				.add(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE.get())
-				.add(ModBlocks.NITER_BEDDING.get());
+//		tag(BlockTags.MINEABLE_WITH_PICKAXE)
+//				.add(ModBlocks.LIQUID_NITER_CAULDRON.get());
+//		
+//		tag(BlockTags.MINEABLE_WITH_AXE)
+//				.add(ModBlocks.GUNSMITHS_BENCH.get());
+//
+//		tag(BlockTags.MINEABLE_WITH_SHOVEL)
+//				.add(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
+//				.add(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE.get())
+//				.add(ModBlocks.NITER_BEDDING.get());
 		
 	}
 }

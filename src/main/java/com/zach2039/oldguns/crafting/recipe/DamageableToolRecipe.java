@@ -4,23 +4,23 @@ import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.item.tools.RepairKitItem;
 
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.ServerPlayerEntity;
+import net.minecraft.inventory.CraftingInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.item.crafting.ICraftingRecipe;
+import net.minecraft.item.crafting.IRecipeType;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.crafting.CraftingRecipe;
-import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.event.ForgeEventFactory;
 
-public interface DamageableToolRecipe extends CraftingRecipe {
-	default RecipeType<?> getType() {
+public interface DamageableToolRecipe extends ICraftingRecipe {
+	default IRecipeType<?> getType() {
 		return ModRecipeTypes.DAMAGEABLE_TOOL_CRAFT;
 	}
 	
-	default NonNullList<ItemStack> getRemainingItems(final CraftingContainer inv) {
+	default NonNullList<ItemStack> getRemainingItems(final CraftingInventory inv) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
 
 		for (int i = 0; i < remainingItems.size(); ++i) {
@@ -37,10 +37,10 @@ public interface DamageableToolRecipe extends CraftingRecipe {
 	}
 	
 	default ItemStack damageItem(final ItemStack stack) {
-		final Player craftingPlayer = ForgeHooks.getCraftingPlayer();
+		final PlayerEntity craftingPlayer = ForgeHooks.getCraftingPlayer();
 		
 		World level = craftingPlayer.getCommandSenderWorld();
-		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
+		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayerEntity ? (ServerPlayerEntity) craftingPlayer : null)) {
 			ForgeEventFactory.onPlayerDestroyItem(craftingPlayer, stack, null);
 			return ItemStack.EMPTY;
 		}

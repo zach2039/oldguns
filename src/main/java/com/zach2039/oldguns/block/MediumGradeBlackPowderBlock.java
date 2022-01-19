@@ -7,23 +7,26 @@ import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMaterials;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FallingBlock;
+import net.minecraft.block.SoundType;
 import net.minecraft.entity.item.FallingBlockEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockPos.Mutable;
+import net.minecraft.world.IBlockReader;
+import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.WorldAccessor;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.server.ServerWorld;
 
 public class MediumGradeBlackPowderBlock extends FallingBlock {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public MediumGradeBlackPowderBlock() {
-		super(BlockBehaviour.Properties.of(ModMaterials.BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(Block.Properties.of(ModMaterials.BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());
 		this.registerDefaultState(this.stateDefinition.any());
 	}
 	
@@ -50,14 +53,14 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	}
 
 	@Override
-	public int getFlammability(BlockState state, BlockGetter world, BlockPos pos, Direction face)
+	public int getFlammability(BlockState state, IBlockReader world, BlockPos pos, Direction face)
     {
 		int flammability = 100;
         return flammability;
     }
 	
 	@Override
-	public int getFireSpreadSpeed(BlockState state, BlockGetter world, BlockPos pos, Direction face)
+	public int getFireSpreadSpeed(BlockState state, IBlockReader world, BlockPos pos, Direction face)
     {
 		int spread = 500;
         return spread;
@@ -65,19 +68,19 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	
 	@Override
 	public BlockState getStateForPlacement(BlockItemUseContext stateContext) {
-		BlockGetter blockgetter = stateContext.getWorld();
+		IBlockReader blockgetter = stateContext.getLevel();
 		BlockPos blockpos = stateContext.getClickedPos();
 		BlockState blockstate = blockgetter.getBlockState(blockpos);
 		return canGetWet(blockgetter, blockpos, blockstate) ? ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState() : super.getStateForPlacement(stateContext);
 	}
 
-	private static boolean canGetWet(BlockGetter blockGet, BlockPos blockpos, BlockState state) {
+	private static boolean canGetWet(IBlockReader blockGet, BlockPos blockpos, BlockState state) {
 		return canSolidify(state) || touchesLiquid(blockGet, blockpos);
 	}
 
-	private static boolean touchesLiquid(BlockGetter blockGet, BlockPos blockpos) {
+	private static boolean touchesLiquid(IBlockReader blockGet, BlockPos blockpos) {
 		boolean flag = false;
-		BlockPos.MutableBlockPos blockpos$mutableblockpos = blockpos.mutable();
+		Mutable blockpos$mutableblockpos = blockpos.mutable();
 
 		for(Direction direction : Direction.values()) {
 			BlockState blockstate = blockGet.getBlockState(blockpos$mutableblockpos);
@@ -99,12 +102,12 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	}
 
 	@Override
-	public BlockState updateShape(BlockState stateA, Direction facing, BlockState stateB, WorldAccessor level, BlockPos blockposA, BlockPos blockposB) {
+	public BlockState updateShape(BlockState stateA, Direction facing, BlockState stateB, IWorld level, BlockPos blockposA, BlockPos blockposB) {
 		return touchesLiquid(level, blockposA) ? ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().defaultBlockState() : super.updateShape(stateA, facing, stateB, level, blockposA, blockposB);
 	}
 
 	@Override
-	public int getDustColor(BlockState state, BlockGetter blockGet, BlockPos blockpos) {
+	public int getDustColor(BlockState state, IBlockReader blockGet, BlockPos blockpos) {
 		return state.getMapColor(blockGet, blockpos).col;
 	}
 }

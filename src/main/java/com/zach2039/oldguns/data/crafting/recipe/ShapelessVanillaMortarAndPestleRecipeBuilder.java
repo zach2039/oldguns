@@ -4,14 +4,14 @@ import com.zach2039.oldguns.crafting.recipe.ShapelessVanillaMortarAndPestleRecip
 import com.zach2039.oldguns.init.ModCrafting;
 
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
+import net.minecraft.util.IItemProvider;
 
 public class ShapelessVanillaMortarAndPestleRecipeBuilder extends EnhancedShapelessRecipeBuilder<ShapelessVanillaMortarAndPestleRecipe, ShapelessVanillaMortarAndPestleRecipeBuilder> {
 	protected ShapelessVanillaMortarAndPestleRecipeBuilder(final ItemStack result) {
 		super(result, ModCrafting.Recipes.MORTAR_AND_PESTLE_SHAPELESS.get());
 	}
 
-	public static ShapelessVanillaMortarAndPestleRecipeBuilder shapeless(final ItemLike result) {
+	public static ShapelessVanillaMortarAndPestleRecipeBuilder shapeless(final IItemProvider result) {
 		return shapeless(new ItemStack(result));
 	}
 
@@ -19,7 +19,7 @@ public class ShapelessVanillaMortarAndPestleRecipeBuilder extends EnhancedShapel
 		return new ShapelessVanillaMortarAndPestleRecipeBuilder(result);
 	}
 	
-	public static ShapelessVanillaMortarAndPestleRecipeBuilder shapeless(final ItemLike result, final int count) {
+	public static ShapelessVanillaMortarAndPestleRecipeBuilder shapeless(final IItemProvider result, final int count) {
 		return shapeless(new ItemStack(result, count));
 	}
 }

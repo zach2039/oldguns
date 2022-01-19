@@ -23,7 +23,7 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.util.ResourceLocation;
 
-public abstract class OldGunsRecipeCategory<T> implements IRecipeCategory<T>
+public abstract class OldGunsRecipeCategory<T> implements RecipeCategory<T>
 {
 	public final ResourceLocation uid;
 	protected final IGuiHelper guiHelper;

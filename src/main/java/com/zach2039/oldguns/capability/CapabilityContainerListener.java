@@ -3,13 +3,15 @@ package com.zach2039.oldguns.capability;
 import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
+import com.zach2039.oldguns.network.capability.BulkUpdateContainerCapabilityMessage;
+import com.zach2039.oldguns.network.capability.UpdateContainerCapabilityMessage;
 
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.network.PacketDistributor;
 
@@ -49,13 +51,31 @@ public abstract class CapabilityContainerListener<HANDLER> implements IContainer
 		}
 
 		stack.getCapability(capability, facing).ifPresent(handler -> {
-			final UpdateMenuCapabilityMessage<HANDLER, ?> message = createUpdateMessage(menu.containerId, slotNumber, handler);
+			final UpdateContainerCapabilityMessage<HANDLER, ?> message = createSingleUpdateMessage(menu.containerId, slotNumber, handler);
 			if (message.hasData()) { // Don't send the message if there's nothing to update
 				OldGuns.network.send(PacketDistributor.PLAYER.with(() -> player), message);
 			}
 		});
 	}
 
+	@Override
+	public final void refreshContainer(final Container containerToSend, final NonNullList<ItemStack> itemsList) {
+		// Filter out any items from the list that shouldn't be synced
+		final NonNullList<ItemStack> syncableItemsList = NonNullList.withSize(itemsList.size(), ItemStack.EMPTY);
+		for (int index = 0; index < syncableItemsList.size(); index++) {
+			final ItemStack stack = itemsList.get(index);
+			if (shouldSyncItem(stack)) {
+				syncableItemsList.set(index, stack);
+			}
+		}
+
+		final BulkUpdateContainerCapabilityMessage<HANDLER, ?> message = createBulkUpdateMessage(containerToSend.containerId, syncableItemsList);
+		if (message.hasData()) { // Don't send the message if there's nothing to update
+			OldGuns.network.send(PacketDistributor.PLAYER.with(() -> player), message);
+		}
+	}
+
+	
 	@Override
 	public void setContainerData(final Container menu, final int variable, final int newValue) {
 		// No-op
@@ -72,13 +92,21 @@ public abstract class CapabilityContainerListener<HANDLER> implements IContainer
 	}
 
 	/**
-	 * Create an instance of the update message.
+	 * Create an instance of the bulk update message.
 	 *
-	 * @param containerID The ID of the menu
-	 * @param stateID     The state ID from the menu
-	 * @param slotNumber  The slot's index in the menu
-	 * @param handler     The capability handler instance
-	 * @return The update message
+	 * @param containerID The ID of the Container
+	 * @param items    The items list
+	 * @return The bulk update message
 	 */
-	protected abstract UpdateMenuCapabilityMessage<HANDLER, ?> createUpdateMessage(final int containerID, final int slotNumber, final HANDLER handler);
+	protected abstract BulkUpdateContainerCapabilityMessage<HANDLER, ?> createBulkUpdateMessage(final int containerID, final NonNullList<ItemStack> items);
+
+	/**
+	 * Create an instance of the single update message.
+	 *
+	 * @param containerID   The ID of the Container
+	 * @param slotNumber The slot's index in the Container
+	 * @param handler    The capability handler instance
+	 * @return The single update message
+	 */
+	protected abstract UpdateContainerCapabilityMessage<HANDLER, ?> createSingleUpdateMessage(final int containerID, final int slotNumber, final HANDLER handler);
 }
