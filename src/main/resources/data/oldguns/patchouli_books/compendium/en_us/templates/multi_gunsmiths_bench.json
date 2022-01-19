@@ -2,20 +2,20 @@
 	"processor": "com.zach2039.oldguns.compat.patchouli.processor.MultiGunsmithsBenchRecipeProcessor", 
 	"components":[ 
 		{
-			"type": "patchouli:header",
+			"type": "header",
 			"text": "#heading",
 			"x": -1,
 			"y":-6
 		},
 		{
-			"type": "patchouli:header",
+			"type": "header",
 			"text": "#heading2",
 			"guard": "#heading2->exists",
 			"x": -1,
 			"y":66
 		},
 		{
-			"type": "patchouli:image", 
+			"type": "image", 
 			"image": "patchouli:textures/gui/crafting.png", 
 			"x": 7, 
 			"y": 2, 
@@ -27,7 +27,7 @@
 			"height":62
 		}, 
 		{
-			"type": "patchouli:image", 
+			"type": "image", 
 			"image": "patchouli:textures/gui/crafting.png", 
 			"guard": "#output2->exists",
 			"x": 7, 
@@ -40,7 +40,7 @@
 			"height":62
 		}, 
 		{
-			"type": "patchouli:image",
+			"type": "image",
 			"image": "patchouli:textures/gui/crafting.png",
 			"guard": "#shapeless",
 			"x": 71,
@@ -53,7 +53,7 @@
 			"height":11
 		},
 		{
-			"type": "patchouli:image",
+			"type": "image",
 			"image": "patchouli:textures/gui/crafting.png",
 			"guard": "#shapeless2->exists",
 			"x": 71,
@@ -66,7 +66,7 @@
 			"height":11
 		},
 		{
-			"type": "patchouli:tooltip",
+			"type": "tooltip",
 			"guard": "#shapeless", 
 			"tooltip": ["patchouli.gui.lexicon.shapeless->i18n"], 
 			"x": 71,
@@ -75,7 +75,7 @@
 			"height":11
 		},
 		{
-			"type": "patchouli:tooltip",
+			"type": "tooltip",
 			"guard": "#shapeless2->exists", 
 			"tooltip": ["patchouli.gui.lexicon.shapeless->i18n"], 
 			"x": 71,
@@ -84,122 +84,122 @@
 			"height":11
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input1", 
 			"x": 12,
 			"y": 7
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input2", 
 			"x": 31,
 			"y": 7
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input3",
 			"x": 50,
 			"y": 7
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input4", 
 			"x": 12, 
 			"y": 26
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input5",
 			"x": 31,
 			"y": 26
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input6",
 			"x": 50,
 			"y": 26
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input7",
 			"x": 12,
 			"y": 45
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input8", 
 			"x": 31,
 			"y": 45
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input9", 
 			"x": 50, 
 			"y": 45
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input10", 
 			"x": 12,
 			"y": 79
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input11", 
 			"x": 31,
 			"y": 79
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input12",
 			"x": 50,
 			"y": 79
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input13", 
 			"x": 12, 
 			"y": 98
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input14",
 			"x": 31,
 			"y": 98
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input15",
 			"x": 50,
 			"y": 98
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input16",
 			"x": 12,
 			"y": 147
 		},
 		{
-			"type": "patchouli:item",
+			"type": "item",
 			"item": "#input17", 
 			"x": 31,
 			"y": 147
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#input18", 
 			"x": 50, 
 			"y": 147
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#output",
 			"link_recipe": true, 
 			"x": 88,
 			"y": 26
 		},
 		{
-			"type": "patchouli:item", 
+			"type": "item", 
 			"item": "#output2",
 			"link_recipe": true, 
 			"guard": "#output2->exists",
@@ -207,7 +207,7 @@
 			"y": 98
 		},
 		{
-			"type": "patchouli:text",
+			"type": "text",
 			"text": "#text",
 			"guard": "#text->exists",
 			"y":69

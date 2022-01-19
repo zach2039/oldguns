@@ -10,6 +10,7 @@
 		},
 		{
 			"type": "spotlight",
+			"title": "oldguns.lang.basics.high_grade",
 			"item": "oldguns:medium_grade_black_powder"
 		}
 	]
