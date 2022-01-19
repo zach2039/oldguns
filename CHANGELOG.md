@@ -1,6 +1,7 @@
 #### v1.18.1-3.0.5-19
 
 - Add capabilities registry fix from 1.16.5 branch
+- Fix missing stone barrel recipes
 
 #### v1.16.5-3.0.4-18
 
