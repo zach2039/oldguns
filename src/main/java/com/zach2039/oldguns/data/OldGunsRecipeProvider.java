@@ -111,7 +111,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("CDC")
 					.define('W', Tags.Items.CROPS_WHEAT)
 					.define('C', Items.CLAY_BALL)
-					.define('D', Items.DIRT)	
+					.define('D', Blocks.DIRT)	
 					.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "niter_bedding"));
 		}
@@ -263,7 +263,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Firearm Repair
 		{
 			ShapelessFirearmRepairRecipeBuilder.shapeless()
-					.group("")
 					.requires(ModTags.Items.FIREARM)
 					.requires(ModItems.REPAIR_KIT.get())						
 					.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
@@ -1868,12 +1867,12 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("GTG")
 					.pattern(" E ")
 					.define('F', Items.FLINT)
-					.define('L', Items.LEVER)
+					.define('L', Blocks.LEVER)
 					.define('G', Tags.Items.INGOTS_GOLD)
 					.define('T', ModTags.Items.GOLD_TRIGGER_ASSEMBLY)
 					.define('E', ModTags.Items.GOLD_GEAR_SET)
 					.unlockedBy("has_flint", has(Items.FLINT))
-					.unlockedBy("has_lever", has(Items.LEVER))
+					.unlockedBy("has_lever", has(Blocks.LEVER))
 					.unlockedBy("has_gold_ingot", has(Tags.Items.INGOTS_GOLD))
 					.unlockedBy("has_gold_trigger_assembly", has(ModTags.Items.GOLD_TRIGGER_ASSEMBLY))
 					.unlockedBy("has_gold_gear_set", has(ModTags.Items.GOLD_GEAR_SET))
@@ -1889,7 +1888,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Tags.Items.RODS_WOODEN)
 					.requires(Tags.Items.LEATHER)
 					.requires(ItemTags.LOGS)
-					.requires(Items.LEVER)
+					.requires(Blocks.LEVER)
 					.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "repair_kit"));
 		}
@@ -1900,9 +1899,9 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern(" L ")
 					.pattern("G G")
 					.pattern(" G ")
-					.define('L', Items.LEVER)
-					.define('G', Items.POLISHED_GRANITE)
-					.unlockedBy("has_lever", has(Items.LEVER))
+					.define('L', Blocks.LEVER)
+					.define('G', Blocks.POLISHED_GRANITE)
+					.unlockedBy("has_lever", has(Blocks.LEVER))
 					.unlockedBy("has_stone", has(Tags.Items.STONE))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "mortar_and_pestle"));
 		}
