@@ -1,5 +1,6 @@
-#### v3.0.4-alpha
+#### v1.16.5-3.0.4-alpha
 
+- Port for Minecraft 1.16.5
 - Fix patchouli template not processing issue
 - Edit mixins java version required
 - Relocate patchouli pages for 1.16.5 version
@@ -9,7 +10,7 @@
 - Refactor file locations for 1.16.5 standard
 - Add updateJson to mods.toml
 
-#### v3.0.3-alpha
+#### v1.18.1-3.0.3-alpha
     
 - Fix recipe overlap with iron gear set and medium iron musket ball
 - Add lang for bombard entity and item (WIP)
@@ -18,7 +19,7 @@
 - Fix brewing recipe not appearing in JEI
 - Add guide book content
 
-#### v3.0.2-alpha
+#### v1.18.1-3.0.2-alpha
 
 - Move common configs to server
 - Guide book and config additions
@@ -29,7 +30,7 @@
 - Add missing recipes for matchlock and wheellock mechanism
 - Add more crafting items
 
-#### v3.0.1-alpha
+#### v1.18.1-3.0.1-alpha
 
 - Reimplement matchlock firearms
 - Reimplement wheellock firearms
@@ -41,7 +42,7 @@
 - Add patchouli support (WIP)
 - Add config options for loot and crafting
 
-#### v3.0.0
+#### v1.18.1-3.0.0
 
 - Rewrite for Minecraft version 1.18.1 
 - Reimplement flintlock weapons
@@ -53,13 +54,13 @@
 - Add exotic firearms with recipes disabled by default
 - Add exotic firearms to dungeon loot for balance
 
-#### v2.0.5
+#### v1.12.2-2.0.5
 
 - Fixed https://github.com/grilled-salmon/oldguns/issues/1
 - Added melter for bullet creation (not finished)
 - Added more config options for weapons
 
-#### v2.0.4
+#### v1.12.2-2.0.4
 
 - Fixed more packet errors
 - Fixed and re-balanced firearm effective ranges and accuracy values
