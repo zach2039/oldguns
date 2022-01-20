@@ -16,8 +16,8 @@ public class ModBlockEntities {
 
 	private static boolean isInitialized;
 
-	public static final RegistryObject<BlockEntityType<NiterBeddingEntity>> NITER_BEDDING = registerBlockEntityType("niter_bedding",
-			NiterBeddingEntity::new,
+	public static final RegistryObject<BlockEntityType<StationaryArtilleryEntity>> MEDIUM_NAVAL_CANNON = registerBlockEntityType("medium_naval_cannon",
+			MediumNavalCannon::new,
 			ModBlocks.NITER_BEDDING
 	);
 

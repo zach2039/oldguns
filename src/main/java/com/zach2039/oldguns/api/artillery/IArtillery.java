@@ -1,79 +1,71 @@
 package com.zach2039.oldguns.api.artillery;
 
-import net.minecraft.nbt.CompoundTag;
+import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.IArtilleryCharge;
+
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public interface IArtillery {
 
-	void initArtilleryConfiguration();
-
-	void setArtilleryType(ArtilleryType artilleryType);
-
 	ArtilleryType getArtilleryType();
+	
+	ArtilleryFiringState determineOverallFiringState();
+	
+	AmmoFiringState determineFiringStateOfSlot(int slot); 
 
-	void pushAmmoProjectile(ItemStack stackIn);
+	void pushAmmoProjectile(int slot, ItemStack stackIn);
 	
-	void pushAmmoCharge(ItemStack stackIn);
+	void pushAmmoCharge(int slot, ItemStack stackIn);
 
-	ItemStack popAmmoProjectile();
+	void ramAmmoProjectile(int slot);
 	
-	ItemStack popAmmoCharge();
+	void ramAmmoCharge(int slot);
 	
-	ItemStack peekAmmoProjectile();
+	IArtilleryAmmo popAmmoProjectile(int slot);
 	
-	ItemStack peekAmmoCharge();
+	IArtilleryCharge popAmmoCharge(int slot);
 	
-	void setLoadedAmmoCharges(CompoundTag tag);
+	ItemStack peekAmmoProjectile(int slot);
 	
-	CompoundTag getLoadedAmmoCharges();
-
-	void setLoadedAmmoProjectiles(CompoundTag tag);
+	ItemStack peekAmmoCharge(int slot);
 	
-	CompoundTag getLoadedAmmoProjectiles();
+	boolean isAmmoProjectileRammed(int slot);
 	
-	void setFiringState(FiringState firingState);
-
-	FiringState getFiringState();
+	boolean isAmmoChargeRammed(int slot);
+	
+	int getAmmoSlots();
 
 	void setFiringCooldown(int cooldown);
 
 	int getFiringCooldown();
 
-	void setBaseProjectileSpeed(double projectileSpeed);
-
 	float getBaseProjectileSpeed();
 
-	void setBaseDeviation(double deviationModifier);
+	float getBaseProjectileDeviation();
 
-	float getBaseDeviation();
-
-	void setDamageModifier(double damageModifier);
-
-	float getDamageModifier();
-
-	void setEffectiveRangeModifier(double effectiveRangeModifier);
+	float getProjectileDamageModifier();
 
 	float getEffectiveRangeModifier();
 
-	float getBarrelHeight();
+	float getShotHeight();
 
-	float getMinBarrelPitch();
+	float getMinShotPitch();
 
-	float getMaxBarrelPitch();
+	float getMaxShotPitch();
 
-	float getMinBarrelYaw();
+	float getMinShotYaw();
 
-	float getMaxBarrelYaw();
+	float getMaxShotYaw();
 
-	void setBarrelPitch(float pitch);
+	void setShotPitch(float pitch);
 
-	float getBarrelPitch();
+	float getShotPitch();
 
-	void setBarrelYaw(float yaw);
+	void setShotYaw(float yaw);
 
-	float getBarrelYaw();
+	float getShotYaw();
 
 	void doFiringEffect(Level level, Player player, double posX, double posY, double posZ);
 }

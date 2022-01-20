@@ -10,7 +10,7 @@ import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
+import com.zach2039.oldguns.api.ammo.IAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
@@ -344,7 +344,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 					int maxShots = (firesAllLoadedAmmoAtOnce() && !ammoStack.isEmpty()) ? FirearmNBTHelper.peekNBTTagAmmoCount(stackIn) : 1; 
 					for (int i = 0; i < maxShots; i++) {
 						ammoStack = FirearmNBTHelper.peekNBTTagAmmo(stackIn);
-						IFirearmAmmo itemFirearmAmmo = (IFirearmAmmo)(ammoStack.getItem() instanceof IFirearmAmmo ? ammoStack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
+						IAmmo itemFirearmAmmo = (IAmmo)(ammoStack.getItem() instanceof IAmmo ? ammoStack.getItem() : ModItems.SMALL_IRON_MUSKET_BALL);
 						List<BulletProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(worldIn, ammoStack, entityplayer);
 
 						/* Fire all projectiles from ammo item. */

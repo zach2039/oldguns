@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.api.ammo.IFirearmAmmo;
+import com.zach2039.oldguns.api.ammo.IAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
@@ -105,7 +105,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 			ItemStack stack = inv.getItem(i);
 			
 			/* If item is a ammo instance, set input ammo stack and break. */
-			if (stack.getItem() instanceof IFirearmAmmo)
+			if (stack.getItem() instanceof IAmmo)
 			{
 				ammoStack = stack.copy();
 				break;

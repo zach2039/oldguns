@@ -289,7 +289,7 @@ public class OldGunsConfig {
 	
 	public static class FirearmSettings {
 		public final BooleanValue hugeFirearmDebuffs;	
-		public final AmmoSettings ammoSettings;
+		public final FirearmAmmoSettings ammoSettings;
 		public final MatchlockSettings matchlockSettings;
 		public final WheellockSettings wheellockSettings;
 		public final FlintlockSettings flintlockSettings;
@@ -301,7 +301,7 @@ public class OldGunsConfig {
 					.comment("Apply slowness effect while wielding huge firearms, like the nock gun")
 					.define("hugeFirearmDebuffs", true);
 			
-			ammoSettings = new AmmoSettings(
+			ammoSettings = new FirearmAmmoSettings(
 					builder,
 					"Firearm ammo settings",
 					"ammoSettings");
@@ -325,7 +325,7 @@ public class OldGunsConfig {
 		}
 	}
 	
-	public static class AmmoSettings {		
+	public static class FirearmAmmoSettings {		
 		public final FirearmAmmoAttributes small_stone_musket_ball;
 		public final FirearmAmmoAttributes medium_stone_musket_ball;
 		public final FirearmAmmoAttributes large_stone_musket_ball;
@@ -358,7 +358,7 @@ public class OldGunsConfig {
 		public final FirearmAmmoAttributes medium_lead_birdshot;
 		public final FirearmAmmoAttributes large_lead_birdshot;
 		
-		AmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		FirearmAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Stone ammo
@@ -1170,6 +1170,7 @@ public class OldGunsConfig {
 	
 	public static class ArtillerySettings {
 		public final ArtilleryAttributes bombard;
+		public final ArtilleryAmmoSettings artilleryAmmoSettings;
 		
 		ArtillerySettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -1183,6 +1184,11 @@ public class OldGunsConfig {
 					1.7f,
 					0.8f
 					);
+			
+			artilleryAmmoSettings = new ArtilleryAmmoSettings(
+					builder,
+					"Artillery ammo settings",
+					"artilleryAmmoAttributes");
 			
 			builder.pop();
 		}
@@ -1214,6 +1220,113 @@ public class OldGunsConfig {
 			projectileSpeed = builder
 					.comment("How fast projectiles shot from the artillery are")
 					.defineInRange("projectileSpeed", defaultProjectileSpeed, 0.001f, Float.MAX_VALUE);			
+			
+			builder.pop();
+		}
+	}
+	
+	public static class ArtilleryAmmoSettings {		
+		public final ArtilleryAmmoAttributes small_iron_cannonball;
+		public final ArtilleryAmmoAttributes medium_iron_cannonball;
+		public final ArtilleryAmmoAttributes large_iron_cannonball;
+		
+		ArtilleryAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			// Iron ammo
+			small_iron_cannonball = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Small Stone Musket Ball Ammo",
+					"small_iron_cannonball",
+					1,
+					1,
+					10.0f,
+					0.3f,
+					15.0f,
+					1.0f,
+					0,
+					0f
+					);
+			
+			medium_iron_cannonball = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Medium Stone Musket Ball Ammo",
+					"medium_stone_musket_ball",
+					1,
+					1,
+					13.0f,
+					0.4f,
+					30.0f,
+					1.0f,
+					0,
+					0f
+					);
+			
+			large_iron_cannonball = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Large Stone Musket Ball Ammo",
+					"large_stone_musket_ball",
+					1,
+					1,
+					16.0f,
+					0.5f,
+					55.0f,
+					1.0f,
+					0,
+					0f
+					);
+	
+			builder.pop();
+		}
+	}
+	
+	public static class ArtilleryAmmoAttributes {
+		public final IntValue maxStackSize;
+		public final IntValue projectileCount;
+		public final DoubleValue projectileDamage;
+		public final DoubleValue projectileSize;		
+		public final DoubleValue projectileEffectiveRange;
+		public final DoubleValue projectileDeviationModifier;
+		public final IntValue effectTicks;
+		public final DoubleValue effectPotency;
+		
+		ArtilleryAmmoAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+				final int defaultMaxStackSize, final int defaultProjectileCount, final float defaultProjectileDamage,
+				final float defaultProjectileSize, final float defaultProjectileEffectiveRange, 
+				final float defaultProjectileDeviationModifier, final int defaultEffectTicks, final float defaultEffectPotency) {
+			builder.comment(comment).push(path);
+			
+			maxStackSize = builder
+					.comment("How much ammo can be stored per stack")
+					.defineInRange("maxStackSize", defaultMaxStackSize, 1, Integer.MAX_VALUE);
+			
+			projectileCount = builder
+					.comment("How many projectiles launched")
+					.defineInRange("projectileCount", defaultProjectileCount, 1, Integer.MAX_VALUE);
+			
+			projectileDamage = builder
+					.comment("How much damage each projectile does")
+					.defineInRange("projectileDamage", defaultProjectileDamage, 0.001f, Float.MAX_VALUE);
+			
+			projectileSize = builder
+					.comment("How large the each projectile is")
+					.defineInRange("projectileSize", defaultProjectileSize, 0.001f, Float.MAX_VALUE);
+			
+			projectileEffectiveRange = builder
+					.comment("How far each projectile can travel before applying damage falloff")
+					.defineInRange("projectileEffectiveRange", defaultProjectileEffectiveRange, 0.001f, Float.MAX_VALUE);
+			
+			projectileDeviationModifier = builder
+					.comment("How the ammo modifies the base deviation of the firearm")
+					.defineInRange("projectileDeviationModifier", defaultProjectileDeviationModifier, 0.001f, Float.MAX_VALUE);			
+			
+			effectTicks = builder
+					.comment("How long do any effects from this projectile last in ticks")
+					.defineInRange("effectTicks", defaultEffectTicks, 1, Integer.MAX_VALUE);
+			
+			effectPotency = builder
+					.comment("How potent are any effects from this projectile")
+					.defineInRange("effectPotency", defaultEffectPotency, 0f, Float.MAX_VALUE);
 			
 			builder.pop();
 		}

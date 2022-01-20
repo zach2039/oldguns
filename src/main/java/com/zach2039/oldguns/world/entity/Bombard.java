@@ -31,7 +31,7 @@ public class Bombard extends MoveableArtillery {
 		setArtilleryType(ArtilleryType.BOMBARD);
 		setBaseProjectileSpeed(artilleryAttributes.projectileSpeed.get());
 		setEffectiveRangeModifier(artilleryAttributes.effectiveRangeModifier.get());
-		setBaseDeviation(artilleryAttributes.deviationModifier.get());
+		setBaseProjectileDeviation(artilleryAttributes.deviationModifier.get());
 		setDamageModifier(artilleryAttributes.damageModifier.get());
 	}
 	
@@ -43,8 +43,8 @@ public class Bombard extends MoveableArtillery {
 		
 		
 		OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
-				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.CANNON_SHOT, posX, posY + getBarrelHeight(), posZ,
-						getBarrelPitch(), getBarrelYaw(), 0)
+				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.CANNON_SHOT, posX, posY + getShotHeight(), posZ,
+						getShotPitch(), getShotYaw(), 0)
 				);
 	}
 }

@@ -3,7 +3,7 @@ package com.zach2039.oldguns.world.entity;
 import java.util.List;
 
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
-import com.zach2039.oldguns.api.artillery.FiringState;
+import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.IArtillery;
 import com.zach2039.oldguns.api.artillery.util.ArtilleryNBTHelper;
 
@@ -116,7 +116,7 @@ public class MoveableArtillery extends Entity implements IArtillery {
 		this.entityData.define(DAMAGE_TAKEN, Float.valueOf(0.0F));
 
 		this.entityData.define(WHEEL_SPIN, Float.valueOf(0.0F));
-		this.entityData.define(FIRING_STATE, Integer.valueOf(FiringState.UNLOADED.ordinal()));
+		this.entityData.define(FIRING_STATE, Integer.valueOf(AmmoFiringState.UNLOADED.ordinal()));
 		this.entityData.define(FIRING_COOLDOWN, Integer.valueOf(0));
 
 		this.entityData.define(AMMO_CHARGE_TAG, new CompoundTag());
@@ -348,14 +348,14 @@ public class MoveableArtillery extends Entity implements IArtillery {
 		compound.putInt("firingstate", getFiringState().ordinal());
 		compound.put("ammoProjectiles", getLoadedAmmoProjectiles());
 		compound.put("ammoCharges", getLoadedAmmoCharges());
-		compound.putFloat("barrelpitch", getBarrelPitch());
-		compound.putFloat("barrelyaw", getBarrelYaw());
+		compound.putFloat("barrelpitch", getShotPitch());
+		compound.putFloat("barrelyaw", getShotYaw());
 	}
 
 	@Override
 	protected void readAdditionalSaveData(CompoundTag compound) {
 		setArtilleryType(ArtilleryType.values()[compound.getInt("artillerytype")]);
-		setFiringState(FiringState.values()[compound.getInt("firingstate")]);
+		setFiringState(AmmoFiringState.values()[compound.getInt("firingstate")]);
 		setLoadedAmmoProjectiles(compound.getCompound("ammoProjectiles"));
 		setLoadedAmmoCharges(compound.getCompound("ammoCharges"));
 		setBarrelPitch(compound.getFloat("barrelpitch"));
@@ -476,13 +476,13 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public void setFiringState(FiringState firingState) {
+	public void setFiringState(AmmoFiringState firingState) {
 		this.entityData.set(FIRING_STATE, Integer.valueOf(firingState.ordinal()));
 	}
 
 	@Override
-	public FiringState getFiringState() {
-		return FiringState.values()[((Integer)this.entityData.get(FIRING_STATE)).intValue()];
+	public AmmoFiringState getFiringState() {
+		return AmmoFiringState.values()[((Integer)this.entityData.get(FIRING_STATE)).intValue()];
 	}
 
 	@Override
@@ -526,12 +526,12 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public void setBaseDeviation(double baseDeviation) {
+	public void setBaseProjectileDeviation(double baseDeviation) {
 		this.baseDeviation = (float)baseDeviation;
 	}
 
 	@Override
-	public float getBaseDeviation() {
+	public float getBaseProjectileDeviation() {
 		return this.baseDeviation;
 	}
 
@@ -541,7 +541,7 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public float getDamageModifier() {
+	public float getProjectileDamageModifier() {
 		return this.damageModifier;
 	}
 
@@ -556,31 +556,31 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public float getBarrelHeight() {
+	public float getShotHeight() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public float getMinBarrelPitch() {
+	public float getMinShotPitch() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public float getMaxBarrelPitch() {
+	public float getMaxShotPitch() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public float getMinBarrelYaw() {
+	public float getMinShotYaw() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public float getMaxBarrelYaw() {
+	public float getMaxShotYaw() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -592,7 +592,7 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public float getBarrelPitch() {
+	public float getShotPitch() {
 		// TODO Auto-generated method stub
 		return 10;
 	}
@@ -604,7 +604,7 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	}
 
 	@Override
-	public float getBarrelYaw() {
+	public float getShotYaw() {
 		// TODO Auto-generated method stub
 		return 0;
 	}
