@@ -39,7 +39,7 @@ pipeline {
 					title: "Old Guns", 
 					link: env.BUILD_URL,
 					result: currentBuild.currentResult,
-					webhookURL: "https://discord.com/api/webhooks/933412044986798081/pK1G32ug5aQFfHbEIj1kZ-bYKgyX6KML7t0lcSKygv1ddMm49DUbntbnU25PDzfO8Wt6"
+					webhookURL: "https://discord.com/api/webhooks/934911518796025946/v9inpI5wHMg8J7mMjCc0SCONLpKmwfkG3kLzAUmAEWbkcBZxTGwUwucuFf7jKtc_d3NS"
 			}
         }
     }
