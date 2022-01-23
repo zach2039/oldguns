@@ -789,7 +789,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		
 		// Create large powder charge
 		{
-			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MEDIUM_POWDER_CHARGE.get(), 1)
+			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.LARGE_POWDER_CHARGE.get(), 1)
 					.requires(ModTags.Items.ANY_GUNPOWDER)
 					.requires(ModTags.Items.ANY_GUNPOWDER)
 					.requires(ModTags.Items.ANY_GUNPOWDER)

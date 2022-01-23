@@ -257,11 +257,10 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 	
 	public InteractionResult processInteraction(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
 		InteractionResult result = InteractionResult.PASS;
+		ItemStack handItem = player.getItemInHand(hand);
 		
-		if (player.getItemInHand(hand) == ItemStack.EMPTY) {
-			if (!level.isClientSide()) {
-				this.shotPitch = Mth.clamp(this.shotPitch + (!player.isCrouching() ? -2f : 2f), getMinShotPitch(), getMaxShotPitch());
-			}
+		if (handItem == ItemStack.EMPTY && !level.isClientSide()) {
+			this.shotPitch = Mth.clamp(this.shotPitch + (!player.isCrouching() ? -2f : 2f), getMinShotPitch(), getMaxShotPitch());
 		} else if (!player.isCrouching()) {
 			// Interaction behavior is determined by overall load state, player item, and slot load state
 			
