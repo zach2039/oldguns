@@ -1,3 +1,28 @@
+#### v1.18.1-3.1.0-21
+
+- Add gunners quadrant artillery info interact
+- Add lang entries
+- Add recipes for artillery tools
+- Add canister shot
+- Add canister shot effects on tick
+- Add medium iron grapeshot
+- Make bullet projectile entity more generic to handle special artillery ammo
+- Edit configs for artillery cannonballs
+- Add more artillery recipe items and recipes
+- Add more conditions and implement conditions on shapeless recipes
+- Add datagen to Jenkinsfile
+- Add --no-daemon option to Jenkinsfile stages
+- Add forceExit false in runData gradle task so things don't grenade
+- Reimplement naval cannon
+- Reimplement gunners quadrant
+- Add trajectory analysis on loaded cannons with gunners quadrant
+- Add artillery tools
+- Tweak recipe for medium-grade bp to use 2 saltpeter
+
+#### v1.16.5-3.0.5-20
+
+- Fix missing stone barrel recipes
+
 #### v1.18.1-3.0.5-19
 
 - Add capabilities registry fix from 1.16.5 branch
