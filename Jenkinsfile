@@ -34,12 +34,12 @@ pipeline {
     post {
         always {
             archive 'build/libs/**.jar'
-			withCredentials([string(credentialsId: "oldguns-discord-webhook", variable: "discordWebhook")]) {
+			withCredentials([string(credentialsId: "oldguns-discord-webhook", variable: "${discordWebhookSecret}")]) {
 				discordSend description: "**Status:** " + currentBuild.currentResult.toLowerCase() + "\n**Branch:** ${BRANCH_NAME}\n**Build:** ${BUILD_NUMBER}\n**Changes:** ${RUN_CHANGES_DISPLAY_URL}\n",
 					title: "Old Guns", 
 					link: env.BUILD_URL,
 					result: currentBuild.currentResult,
-					webhookURL: "https://discord.com/api/webhooks/934911518796025946/v9inpI5wHMg8J7mMjCc0SCONLpKmwfkG3kLzAUmAEWbkcBZxTGwUwucuFf7jKtc_d3NS"
+					webhookURL: "${discordWebhook}"
 			}
         }
     }
