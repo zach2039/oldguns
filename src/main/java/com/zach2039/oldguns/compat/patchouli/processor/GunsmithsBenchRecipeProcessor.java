@@ -1,14 +1,11 @@
 package com.zach2039.oldguns.compat.patchouli.processor;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.compat.patchouli.PatchouliUtils;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;

@@ -6,7 +6,6 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
-import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesSlot;
 import com.zach2039.oldguns.world.inventory.OldGunsResultContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsResultSlot;

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModEntities;
@@ -41,7 +42,7 @@ public class OldGuns
 	public static final String MODID = "oldguns";
 	public static final String NAME = "Old Guns Mod";
 
-	public static final SimpleChannel network = ModNetwork.getNetworkChannel();
+	public static final SimpleChannel NETWORK = ModNetwork.getNetworkChannel();
 
     public OldGuns() {
     	LOGGER = LogManager.getLogger(OldGuns.MODID);
@@ -57,8 +58,8 @@ public class OldGuns
 		ModLootModifierSerializers.initialize(modEventBus);
 		ModPotions.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
-		
 		ModSoundEvents.initialize(modEventBus);
+		ModBlockEntities.initialize(modEventBus);
     }
 
     @SubscribeEvent

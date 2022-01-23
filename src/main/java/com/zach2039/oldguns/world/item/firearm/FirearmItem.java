@@ -625,7 +625,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
 					shooter.xo, shooter.yo, shooter.zo, 100d, shooter.level.dimension());
 
-			OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
+			OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.BREAK, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 					);
@@ -638,7 +638,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
 					shooter.xo, shooter.yo, shooter.zo, 100d, shooter.level.dimension());
 
-			OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
+			OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 					);
@@ -670,7 +670,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 				PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
 						shooter.xo, shooter.yo, shooter.zo, 100d, shooter.level.dimension());
 
-				OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
+				OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
 						new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE_WET, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 								shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 						);

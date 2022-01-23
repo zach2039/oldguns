@@ -1,6 +1,5 @@
 package com.zach2039.oldguns.world.item.artillery;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.world.entity.MoveableArtillery;
 

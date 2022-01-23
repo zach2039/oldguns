@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
+import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 
 import net.minecraft.data.DataGenerator;
@@ -105,8 +106,12 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	}
 	
 	@Override
-	protected void registerModels() {
-		withGeneratedParentAndDefaultTexture(ModItems.BOMBARD.get());
+	protected void registerModels() {		
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANNONBALL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_POWDER_CHARGE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_POWDER_CHARGE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_POWDER_CHARGE.get());
 		
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_PISTOL.get());
@@ -244,9 +249,13 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MORTAR_AND_PESTLE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.GUNNERS_QUADRANT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.RAM_ROD.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LONG_MATCH.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.DESIGN_NOTES.get());
 		
-		//withGeneratedParentAndDefaultTexture(ModItems.ARROW.get());
+		//withGeneratedParentAndDefaultTexture(ModBlocks.NAVAL_CANNON.get());
 	}
 
 

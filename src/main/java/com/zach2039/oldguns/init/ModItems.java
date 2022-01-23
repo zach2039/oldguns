@@ -1,6 +1,8 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
+import com.zach2039.oldguns.world.item.ammo.artillery.MediumIronCannonball;
 import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.LargeIronBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.LargeIronBuckshotItem;
@@ -26,8 +28,9 @@ import com.zach2039.oldguns.world.item.ammo.firearm.SmallLeadBuckshotItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.SmallLeadMusketBallItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.SmallStoneBirdshotItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.SmallStoneMusketBallItem;
-import com.zach2039.oldguns.world.item.artillery.ArtilleryItem;
-import com.zach2039.oldguns.world.item.artillery.BombardItem;
+import com.zach2039.oldguns.world.item.artillery.LargePowderCharge;
+import com.zach2039.oldguns.world.item.artillery.MediumPowderCharge;
+import com.zach2039.oldguns.world.item.artillery.SmallPowderCharge;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockArquebusItem;
 import com.zach2039.oldguns.world.item.firearm.FlintlockBlunderbussItem;
@@ -114,7 +117,10 @@ import com.zach2039.oldguns.world.item.part.WheellockMechanismItem;
 import com.zach2039.oldguns.world.item.part.WoodGearSetItem;
 import com.zach2039.oldguns.world.item.part.WoodTriggerAssemblyItem;
 import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
+import com.zach2039.oldguns.world.item.tools.GunnersQuadrantItem;
+import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
+import com.zach2039.oldguns.world.item.tools.RamRodItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
 import net.minecraft.world.item.CreativeModeTab;
@@ -137,6 +143,24 @@ public class ModItems {
 	private static final DeferredRegister<net.minecraft.world.item.Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OldGuns.MODID);
 	
 	private static boolean isInitialized;
+	
+	// Artillery	
+	
+	// Artillery ammo
+	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANNONBALL = ITEMS.register("medium_iron_cannonball",
+			() -> new MediumIronCannonball()
+		);
+	
+	// Artillery Charges
+	public static final RegistryObject<SmallPowderCharge> SMALL_POWDER_CHARGE = ITEMS.register("small_powder_charge",
+			() -> new SmallPowderCharge()
+		);
+	public static final RegistryObject<MediumPowderCharge> MEDIUM_POWDER_CHARGE = ITEMS.register("medium_powder_charge",
+			() -> new MediumPowderCharge()
+		);
+	public static final RegistryObject<LargePowderCharge> LARGE_POWDER_CHARGE = ITEMS.register("large_powder_charge",
+			() -> new LargePowderCharge()
+		);
 	
 	// Firearms
 	// Matchlock
@@ -504,10 +528,19 @@ public class ModItems {
 			() -> new DesignNotesItem()
 		);
 	
-	// Artillery
-	public static final RegistryObject<ArtilleryItem> BOMBARD = ITEMS.register("bombard",
-			() -> new BombardItem()
+	public static final RegistryObject<RamRodItem> RAM_ROD = ITEMS.register("ram_rod",
+			() -> new RamRodItem()
 		);
+	
+	public static final RegistryObject<LongMatchItem> LONG_MATCH = ITEMS.register("long_match",
+			() -> new LongMatchItem()
+		);
+	
+	public static final RegistryObject<GunnersQuadrantItem> GUNNERS_QUADRANT = ITEMS.register("gunners_quadrant",
+			() -> new GunnersQuadrantItem()
+		);
+	
+	
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.

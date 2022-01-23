@@ -1,39 +1,45 @@
 package com.zach2039.oldguns.world.level.block.entity;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.annotation.Nullable;
-
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.IArtilleryCharge;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.api.artillery.IArtillery;
+import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
+import com.zach2039.oldguns.world.level.block.NavalCannonBlock;
 
-import net.minecraft.client.renderer.texture.Tickable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.datafix.fixes.ChunkPalettedStorageFix.Direction;
+import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.minecraftforge.network.PacketDistributor;
 
-public class StationaryArtilleryEntity extends BlockEntity implements  INBTSerializable<CompoundTag>, Tickable, IArtillery {
+public class StationaryArtilleryBlockEntity extends BlockEntity implements IArtillery {
 
-	public StationaryArtilleryEntity(BlockEntityType<?> type, BlockPos blockpos, BlockState state, ArtilleryProperties builder) {
+	public StationaryArtilleryBlockEntity(BlockEntityType<?> type, BlockPos blockpos, BlockState state, ArtilleryProperties builder) {
 		super(type, blockpos, state);
 		this.effectiveRangeModifier = builder.effectiveRangeModifier;
 		this.artilleryType = builder.artilleryType;
@@ -45,66 +51,89 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 		this.projectileDamageModifier = builder.projectileDamageModifier;
 	}
 	
-	@Nullable
 	@Override
-	public ClientboundBlockEntityDataPacket getUpdatePacket() {
-		return ClientboundBlockEntityDataPacket.create(this);
-	}
+    public ClientboundBlockEntityDataPacket getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
 
-	private CompoundTag saveMetadata(final CompoundTag tag) {
-		tag.putInt("artilleryType", getArtilleryType().ordinal());
-		tag.putFloat("shotYaw", getShotYaw());
-		tag.putInt("facing", this.facing.ordinal());
-		tag.putInt("firingCooldown", this.getFiringCooldown());
+	public CompoundTag writeToTag(CompoundTag tag) {
+		tag.putInt("artilleryType", this.artilleryType.ordinal());
+		tag.putFloat("shotPitch", this.shotPitch);
+		tag.putInt("firingCooldown", this.firingCooldown);
+		tag.putByteArray("chargeRamStatus", this.chargeRamStatus);
+		tag.putByteArray("projectileRamStatus", this.projectileRamStatus);
+		
+		ListTag ammoChargesList = new ListTag();
+		this.ammoCharges.forEach((i) -> {
+			ammoChargesList.add(i.serializeNBT());
+		});
+		tag.put("ammoCharges", ammoChargesList);
+		
+		ListTag ammoProjectileList = new ListTag();
+		this.ammoProjectiles.forEach((i) -> {
+			ammoProjectileList.add(i.serializeNBT());
+		});
+		tag.put("ammoProjectiles", ammoProjectileList);
+		
 		return tag;
 	}
 	
-	private void loadMetadata(final CompoundTag tag) {
+	public void readFromTag(CompoundTag tag) {
 		this.artilleryType = ArtilleryType.values()[tag.getInt("artilleryType")];
-		this.shotYaw = tag.getFloat("shotYaw");
-		this.facing = Direction.values()[tag.getInt("facing")];
+		this.shotPitch = tag.getFloat("shotPitch");
 		this.firingCooldown = tag.getInt("firingCooldown");
+		this.chargeRamStatus = tag.getByteArray("chargeRamStatus");
+		this.projectileRamStatus = tag.getByteArray("projectileRamStatus");
+		
+		this.ammoCharges = tag.getList("ammoCharges", Tag.TAG_COMPOUND).stream()
+				.map(nbt -> ItemStack.of((CompoundTag) nbt))
+				.collect(Collectors.toList());
+		
+		this.ammoProjectiles = (List<ItemStack>) tag.getList("ammoProjectiles", Tag.TAG_COMPOUND).stream()
+				.map(nbt -> ItemStack.of((CompoundTag) nbt))
+				.collect(Collectors.toList());
 	}
+	
+	@Override
+    public CompoundTag getUpdateTag() {
+        return writeToTag(new CompoundTag());
+    }
+
+	@Override
+    public void handleUpdateTag(CompoundTag tag) {
+        load(tag);
+    }
+	
+	@Override
+    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+        load(pkt.getTag());
+    }
 	
 	@Override
 	public void load(final CompoundTag tag) {
 		super.load(tag);
-		loadMetadata(tag);
+		
+		readFromTag(tag);
 	}
 
 	@Override
-	public CompoundTag save(final CompoundTag tag) {
-		super.save(tag);
-		return saveMetadata(tag);
-	}
+    public void saveAdditional(CompoundTag nbt) {
+        super.saveAdditional(nbt);
+        
+        writeToTag(nbt);
+    }
 	
-	@Override
-	public CompoundTag serializeNBT() {
-		CompoundTag tag = new CompoundTag();
-		return saveMetadata(tag);
-	}
-
-	@Override
-	public void deserializeNBT(CompoundTag tag) {
-		loadMetadata(tag);
-	}
-	
-	@Override
-	public void tick() {
-		if (!this.hasLevel())
+	public static void tick(final Level level, final BlockPos pos, final BlockState state, final StationaryArtilleryBlockEntity blockEntity) {
+		if (!blockEntity.hasLevel())
 			return;
 		
-		if (this.firingCooldown > 0) {
-			this.firingCooldown--;
-		} else if (this.firingCooldown == 0) {
-			this.level.getLightEmission(this.getBlockPos());
-			this.level.getLightEmission(this.getBlockPos().above());
-			this.level.getLightEmission(this.getBlockPos().below());
-			this.level.getLightEmission(this.getBlockPos().north());
-			this.level.getLightEmission(this.getBlockPos().south());
-			this.level.getLightEmission(this.getBlockPos().east());
-			this.level.getLightEmission(this.getBlockPos().west());
+		if (blockEntity.firingCooldown > 0) {
+			blockEntity.firingCooldown = blockEntity.firingCooldown - 1;
 		}
+		
+		blockEntity.facing = state.getValue(NavalCannonBlock.HORIZONTAL_ROTATION);
+		
+		blockEntity.shotYaw = blockEntity.getYawFromFacing();
 	}
 	
 	private boolean processLoadedState(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
@@ -115,24 +144,23 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 			// Try to fire all loaded slots
 			for (int slot = 0; slot < this.ammoSlots; slot++) {
 				if (determineFiringStateOfSlot(slot) == AmmoFiringState.PROJECTILE_RAMMED) {
-					if (!level.isClientSide()) {
-						player.swing(hand);
-						
-						// Get slot charge and projectile
-						IArtilleryCharge chargeStack = popAmmoCharge(slot);
-						IArtilleryAmmo projectileStack = popAmmoProjectile(slot);
-						
-						// Need to offset spawn location of projectiles, since block pos will end up aligned to block edge
-		        		double pX = blockpos.getX() + 0.5D;
-		        		double pY = blockpos.getY() - 0.2D;
-		        		double pZ = blockpos.getZ() + 0.5D;
-						
-		        		float finalVelocity = this.baseProjectileSpeed * chargeStack.getChargeAmount();
-						float finalEffectiveRange = projectileStack.getProjectileEffectiveRange() * this.effectiveRangeModifier;
-						float finalDeviation = this.baseProjectileDeviation * projectileStack.getProjectileDeviationModifier();
-						
-		            	List<BulletProjectile> entityProjectiles = projectileStack.createProjectiles(level, pX, pY, pZ, 
-		            			projectileStack, this, player);
+					player.swing(hand);
+					
+					// Get slot charge and projectile
+					IArtilleryCharge chargeStack = getAmmoCharge(slot);
+					IArtilleryAmmo projectileStack = getAmmoProjectile(slot);
+					
+					// Need to offset spawn location of projectiles, since block pos will end up aligned to block edge
+	        		double pX = blockpos.getX() + 0.5D;
+	        		double pY = blockpos.getY() + getShotHeight();
+	        		double pZ = blockpos.getZ() + 0.5D;
+					
+	        		float finalVelocity = this.baseProjectileSpeed * chargeStack.getChargeAmount();
+					float finalEffectiveRange = projectileStack.getProjectileEffectiveRange() * this.effectiveRangeModifier;
+					float finalDeviation = this.baseProjectileDeviation * projectileStack.getProjectileDeviationModifier();
+					
+					if (!level.isClientSide()){
+		            	List<BulletProjectile> entityProjectiles = projectileStack.createProjectiles(level, pX, pY, pZ, projectileStack, this, player);
 						
 		            	entityProjectiles.forEach((t) ->
 		            	{            		
@@ -150,11 +178,11 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 		            	doFiringEffect(level, player, pX, pY, pZ);
 		            	
 		            	// TODO: Add lighting effects here
-		            	
-						setFiringCooldown(5);	 
-						
-						wasFired = true;
-					}				
+					}
+					
+					setFiringCooldown(5);
+					
+					wasFired = true;			
 				}
 			}
 			
@@ -177,22 +205,22 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 						if (!level.isClientSide()) {
 							player.swing(hand);
 							ramAmmoProjectile(slot);
-							level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
-							return true;
 						}
+						level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
+						return true;
 					}
 					break;
 				case POWDER_RAMMED:
 					if (handItem.getItem() instanceof IArtilleryAmmo) {
 						if (!level.isClientSide()) {
 							player.swing(hand);
-							pushAmmoProjectile(slot, handItem);
+							putAmmoProjectile(slot, handItem.copy());
 							if (!player.isCreative()) {
 								handItem.shrink(1);
 							}
-							level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
-							return true;
 						}
+						level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
+						return true;
 					}
 					break;
 				case POWDER_UNRAMMED:
@@ -200,22 +228,22 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 						if (!level.isClientSide()) {
 							player.swing(hand);
 							ramAmmoCharge(slot);
-							level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
-							return true;
 						}
+						level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
+						return true;
 					}
 					break;
 				case UNLOADED:
 					if (handItem.getItem() instanceof IArtilleryCharge) {
 						if (!level.isClientSide()) {
 							player.swing(hand);
-							pushAmmoCharge(slot, handItem);
+							putAmmoCharge(slot, handItem.copy());
 							if (!player.isCreative()) {
 								handItem.shrink(1);
 							}
-							level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
-							return true;
 						}
+						level.playSound(player, blockpos, SoundEvents.CHICKEN_EGG, SoundSource.PLAYERS, 0.5f, 0.5f);
+						return true;
 					}
 					break;
 				default:
@@ -227,15 +255,15 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 		return false;
 	}
 	
-	protected boolean processInteraction(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
-		boolean interactResult = false;
-
-		if (!player.isCrouching()) {
-			// Interaction behavior is determined by overall load state, player item, and slot load state
-			
-			if (player.getItemInHand(hand) == ItemStack.EMPTY) {
-				return false;
+	public InteractionResult processInteraction(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
+		InteractionResult result = InteractionResult.PASS;
+		
+		if (player.getItemInHand(hand) == ItemStack.EMPTY) {
+			if (!level.isClientSide()) {
+				this.shotPitch = Mth.clamp(this.shotPitch + (!player.isCrouching() ? -2f : 2f), getMinShotPitch(), getMaxShotPitch());
 			}
+		} else if (!player.isCrouching()) {
+			// Interaction behavior is determined by overall load state, player item, and slot load state
 			
 			switch(determineOverallFiringState()) {
 				case LOADED:
@@ -244,16 +272,25 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 					}
 				case UNLOADED:
 					processUnloadedState(level, blockpos, state, player, hand);
-					break;
 				default:
 					break;
 			}
 		}
 		
-		return interactResult;
+		if (!level.isClientSide()) {
+			OldGuns.NETWORK.send(
+	                PacketDistributor.TRACKING_CHUNK.with(() -> this.level.getChunkAt(this.worldPosition)),
+	                new ArtilleryBlockEntityUpdateMessage(this.worldPosition, this.writeToTag(new CompoundTag())));
+		}
+		
+		return result;
 	}
 	
-	protected float getYawFromFacing() {
+	public void setFacing(Direction facing) {
+		this.facing = facing;
+	}
+	
+	public float getYawFromFacing() {
 		switch(this.facing) {
 			case SOUTH:
 				return 0f;
@@ -285,11 +322,11 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 	
 	@Override 
 	public AmmoFiringState determineFiringStateOfSlot(int slot) {
-		if (peekAmmoCharge(slot) != ItemStack.EMPTY) {
+		if (peekAmmoCharge(slot) != null) {
 			
 			if (isAmmoChargeRammed(slot)) {
 				
-				if (peekAmmoProjectile(slot) != ItemStack.EMPTY) {
+				if (peekAmmoProjectile(slot) != null) {
 					
 					if (isAmmoProjectileRammed(slot)) {
 						
@@ -320,61 +357,72 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 	
 	@Override
 	public boolean isAmmoProjectileRammed(int slot) {
-		ListTag ramStatusList = this.ammoTag.getList("ramStatus", Co);
+		return (projectileRamStatus[slot] != 0);
 	}
 
 	@Override
 	public boolean isAmmoChargeRammed(int slot) {
-		// TODO Auto-generated method stub
-		return false;
+		return (chargeRamStatus[slot] != 0);
 	}
 	
 	@Override
-	public void pushAmmoProjectile(int slot, ItemStack stackIn) {
-		// TODO Auto-generated method stub
-		
+	public void putAmmoProjectile(int slot, ItemStack stackIn) {
+		ammoProjectiles.add(slot, stackIn);
 	}
 
 	@Override
-	public void pushAmmoCharge(int slot, ItemStack stackIn) {
-		// TODO Auto-generated method stub
-		
+	public void putAmmoCharge(int slot, ItemStack stackIn) {		
+		ammoCharges.add(slot, stackIn);
 	}
 
 	@Override
 	public void ramAmmoProjectile(int slot) {
-		// TODO Auto-generated method stub
+		projectileRamStatus[slot] = 1;
+	}
+
+	@Override
+	public void ramAmmoCharge(int slot) {		
+		chargeRamStatus[slot] = 1;
+	}
+
+	@Override
+	public IArtilleryAmmo getAmmoProjectile(int slot) {
+		IArtilleryAmmo projectileItem = (IArtilleryAmmo) ammoProjectiles.get(slot).getItem();
 		
-	}
-
-	@Override
-	public void ramAmmoCharge(int slot) {
-		// TODO Auto-generated method stub
+		ammoProjectiles.remove(slot);
+		projectileRamStatus[slot] = 0;
 		
+		return projectileItem;
 	}
 
 	@Override
-	public IArtilleryAmmo popAmmoProjectile(int slot) {
-		// TODO Auto-generated method stub
-		return null;
+	public IArtilleryCharge getAmmoCharge(int slot) {
+		IArtilleryCharge chargeItem = (IArtilleryCharge) ammoCharges.get(slot).getItem();
+		
+		ammoCharges.remove(slot);
+		chargeRamStatus[slot] = 0;
+		
+		return chargeItem;
 	}
 
 	@Override
-	public IArtilleryCharge popAmmoCharge(int slot) {
-		// TODO Auto-generated method stub
-		return null;
+	public IArtilleryAmmo peekAmmoProjectile(int slot) {
+		if (ammoProjectiles.isEmpty())
+			return null;
+		
+		IArtilleryAmmo projectileItem = (IArtilleryAmmo) ammoProjectiles.get(slot).getItem();
+		
+		return projectileItem;
 	}
 
 	@Override
-	public ItemStack peekAmmoProjectile(int slot) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ItemStack peekAmmoCharge(int slot) {
-		// TODO Auto-generated method stub
-		return null;
+	public IArtilleryCharge peekAmmoCharge(int slot) {
+		if (ammoCharges.isEmpty())
+			return null;
+		
+		IArtilleryCharge chargeItem = (IArtilleryCharge) ammoCharges.get(slot).getItem();
+		
+		return chargeItem;
 	}
 
 	@Override
@@ -404,12 +452,12 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 
 	@Override
 	public float getMinShotPitch() {
-		return 10f;
+		return -16f;
 	}
 
 	@Override
 	public float getMaxShotPitch() {
-		return 50f;
+		return 20f;
 	}
 
 	@Override
@@ -463,7 +511,7 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 	protected float shotYaw = 0f;
 	
 	/**
-	 * Current ptich of this artillery for projectile launching
+	 * Current pitch of this artillery for projectile launching
 	 */
 	protected float shotPitch = 0f;
 	
@@ -475,12 +523,15 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 	/**
 	 * NBT that contains ammo and charge information
 	 */
-	protected CompoundTag ammoTag = new CompoundTag();
+	protected List<ItemStack> ammoCharges = new ArrayList<ItemStack>();
+	protected List<ItemStack> ammoProjectiles = new ArrayList<ItemStack>();
+	protected byte[] chargeRamStatus = new byte[8];
+	protected byte[] projectileRamStatus = new byte[8];
 	
 	/**
 	 * Type of this artillery
 	 */
-	protected ArtilleryType artilleryType = ArtilleryType.STATIONARY_CANNON;
+	protected ArtilleryType artilleryType = ArtilleryType.NAVAL_CANNON;
 	
 	/**
 	 * Total ammo slots of this artillery
@@ -517,7 +568,7 @@ public class StationaryArtilleryEntity extends BlockEntity implements  INBTSeria
 		/**
 		 * Type of this artillery
 		 */
-		ArtilleryType artilleryType = ArtilleryType.STATIONARY_CANNON;
+		ArtilleryType artilleryType = ArtilleryType.NAVAL_CANNON;
 		
 		/**
 		 * Total ammo slots of this artillery

@@ -50,7 +50,7 @@ public abstract class CapabilityContainerListener<HANDLER> implements net.minecr
 		stack.getCapability(capability, facing).ifPresent(handler -> {
 			final UpdateMenuCapabilityMessage<HANDLER, ?> message = createUpdateMessage(menu.containerId, menu.incrementStateId(), slotNumber, handler);
 			if (message.hasData()) { // Don't send the message if there's nothing to update
-				OldGuns.network.send(PacketDistributor.PLAYER.with(() -> player), message);
+				OldGuns.NETWORK.send(PacketDistributor.PLAYER.with(() -> player), message);
 			}
 		});
 	}

@@ -3,7 +3,6 @@ package com.zach2039.oldguns.data;
 import java.util.function.Consumer;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.data.crafting.recipe.EnhancedShapelessRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmRepairRecipeBuilder;
@@ -22,11 +21,9 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
-import vazkii.patchouli.api.PatchouliAPI;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -154,10 +151,11 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_mortar_and_pestle", has(ModItems.MORTAR_AND_PESTLE.get()))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "sulfur_from_quartz"));
 		}
-		
-		// Medium grade black powder from niter, sulfur, and charcoal
+				
+		// Medium-grade black powder from niter, sulfur, and charcoal
 		{
 			ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 3)
+					.requires(ModTags.Items.DUST_SALTPETER)
 					.requires(ModTags.Items.DUST_SALTPETER)
 					.requires(ModTags.Items.DUST_SULFUR)					
 					.requires(Items.CHARCOAL)
@@ -169,6 +167,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_vanilla"));
 
 			ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 3)
+					.requires(ModTags.Items.DUST_SALTPETER)
 					.requires(ModTags.Items.DUST_SALTPETER)
 					.requires(ModTags.Items.DUST_SULFUR)					
 					.requires(Items.CHARCOAL)

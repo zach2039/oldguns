@@ -71,6 +71,7 @@ public class GunsmithsBenchBlock extends Block {
 		return blockstate.setValue(FACING, mirror.mirror(blockstate.getValue(FACING)));
 	}
 	
+	@Override
 	public InteractionResult use(BlockState blockstate, Level level, BlockPos blockpos, Player player, InteractionHand hand, BlockHitResult result) {
 		if (level.isClientSide) {
 			return InteractionResult.SUCCESS;

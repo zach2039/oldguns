@@ -3,7 +3,6 @@ package com.zach2039.oldguns.world.item.crafting;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
-import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.item.Item;

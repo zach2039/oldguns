@@ -1169,17 +1169,17 @@ public class OldGunsConfig {
 	}
 	
 	public static class ArtillerySettings {
-		public final ArtilleryAttributes bombard;
+		public final ArtilleryAttributes naval_cannon;
 		public final ArtilleryAmmoSettings artilleryAmmoSettings;
 		
 		ArtillerySettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
-			bombard = new ArtilleryAttributes(
+			naval_cannon = new ArtilleryAttributes(
 					builder,
-					"Attributes of Bombards",
-					"bombard",
-					3.5f,
+					"Attributes of Naval Cannons",
+					"naval_cannon",
+					1.5f,
 					0.8f,
 					1.7f,
 					0.8f
@@ -1188,7 +1188,7 @@ public class OldGunsConfig {
 			artilleryAmmoSettings = new ArtilleryAmmoSettings(
 					builder,
 					"Artillery ammo settings",
-					"artilleryAmmoAttributes");
+					"artilleryAmmoSettings");
 			
 			builder.pop();
 		}
@@ -1197,7 +1197,7 @@ public class OldGunsConfig {
 	public static class ArtilleryAttributes {
 		public final DoubleValue effectiveRangeModifier;
 		public final DoubleValue damageModifier;
-		public final DoubleValue deviationModifier;
+		public final DoubleValue projectileDeviation;
 		public final DoubleValue projectileSpeed;
 		
 		ArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
@@ -1213,9 +1213,9 @@ public class OldGunsConfig {
 					.comment("How the artillery modifies the base damage of ammo shot")
 					.defineInRange("damageModifier", defaultShotDamageModifier, 0.001f, Float.MAX_VALUE);
 			
-			deviationModifier = builder
-					.comment("How the artillery modifies the base deviation of ammo shot")
-					.defineInRange("deviationModifier", defaultShotDeviaitionModifier, 0.001f, Float.MAX_VALUE);
+			projectileDeviation = builder
+					.comment("How much projectiles shot from the artillery deviate")
+					.defineInRange("projectileDeviation", defaultShotDeviaitionModifier, 0.001f, Float.MAX_VALUE);
 			
 			projectileSpeed = builder
 					.comment("How fast projectiles shot from the artillery are")

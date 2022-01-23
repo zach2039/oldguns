@@ -1,8 +1,8 @@
 package com.zach2039.oldguns.client.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.client.model.BombardModel;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
+import com.zach2039.oldguns.client.model.NavalCannonModel;
 
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
@@ -15,6 +15,7 @@ public class ModLayerDefinitions {
 	@SubscribeEvent
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		event.registerLayerDefinition(BulletProjectileModel.LAYER_LOCATION, BulletProjectileModel::createBodyLayer);
-		event.registerLayerDefinition(BombardModel.LAYER_LOCATION, BombardModel::createBodyLayer);
-	}
+		
+		event.registerLayerDefinition(NavalCannonModel.LAYER_LOCATION, NavalCannonModel::createBodyLayer);
+	}	
 }

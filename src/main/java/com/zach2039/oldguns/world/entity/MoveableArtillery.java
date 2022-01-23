@@ -2,10 +2,9 @@ package com.zach2039.oldguns.world.entity;
 
 import java.util.List;
 
-import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
+import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.api.artillery.IArtillery;
-import com.zach2039.oldguns.api.artillery.util.ArtilleryNBTHelper;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,7 +37,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class MoveableArtillery extends Entity implements IArtillery {
+public abstract class MoveableArtillery extends Entity implements IArtillery {
 
 	private static final EntityDataAccessor<Integer> TIME_SINCE_HIT = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> FORWARD_DIRECTION = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);
@@ -342,25 +341,25 @@ public class MoveableArtillery extends Entity implements IArtillery {
 		return f / (float)k1;
 	}
 
-	@Override
-	protected void addAdditionalSaveData(CompoundTag compound) {
-		compound.putInt("artillerytype", getArtilleryType().ordinal());
-		compound.putInt("firingstate", getFiringState().ordinal());
-		compound.put("ammoProjectiles", getLoadedAmmoProjectiles());
-		compound.put("ammoCharges", getLoadedAmmoCharges());
-		compound.putFloat("barrelpitch", getShotPitch());
-		compound.putFloat("barrelyaw", getShotYaw());
-	}
-
-	@Override
-	protected void readAdditionalSaveData(CompoundTag compound) {
-		setArtilleryType(ArtilleryType.values()[compound.getInt("artillerytype")]);
-		setFiringState(AmmoFiringState.values()[compound.getInt("firingstate")]);
-		setLoadedAmmoProjectiles(compound.getCompound("ammoProjectiles"));
-		setLoadedAmmoCharges(compound.getCompound("ammoCharges"));
-		setBarrelPitch(compound.getFloat("barrelpitch"));
-		setBarrelYaw(compound.getFloat("barrelyaw"));
-	}
+//	@Override
+//	protected void addAdditionalSaveData(CompoundTag compound) {
+//		compound.putInt("artillerytype", getArtilleryType().ordinal());
+//		compound.putInt("firingstate", getFiringState().ordinal());
+//		compound.put("ammoProjectiles", getLoadedAmmoProjectiles());
+//		compound.put("ammoCharges", getLoadedAmmoCharges());
+//		compound.putFloat("barrelpitch", getShotPitch());
+//		compound.putFloat("barrelyaw", getShotYaw());
+//	}
+//
+//	@Override
+//	protected void readAdditionalSaveData(CompoundTag compound) {
+//		setArtilleryType(ArtilleryType.values()[compound.getInt("artillerytype")]);
+//		setFiringState(AmmoFiringState.values()[compound.getInt("firingstate")]);
+//		setLoadedAmmoProjectiles(compound.getCompound("ammoProjectiles"));
+//		setLoadedAmmoCharges(compound.getCompound("ammoCharges"));
+//		setBarrelPitch(compound.getFloat("barrelpitch"));
+//		setBarrelYaw(compound.getFloat("barrelyaw"));
+//	}
 
 	@Override
 	protected void checkFallDamage(double par, boolean falling, BlockState state, BlockPos blockpos) {
@@ -418,190 +417,190 @@ public class MoveableArtillery extends Entity implements IArtillery {
 	public static MoveableArtillery create(Level level, double x, double y, double z, ArtilleryType typeIn) {
 		switch (typeIn) {
 		case BOMBARD:
-			return new Bombard(level, x, y, z);
+			//return new Bombard(level, x, y, z);
 		default:
 			return null;
 		}
 	}
 
-	@Override
-	public void initArtilleryConfiguration() {}
-
-	@Override
-	public void setArtilleryType(ArtilleryType artilleryType) {
-		this.entityData.set(ARTILLERY_TYPE, Integer.valueOf(artilleryType.ordinal()));
-	}
-
-	@Override
-	public ArtilleryType getArtilleryType() {
-		return ArtilleryType.values()[this.entityData.get(ARTILLERY_TYPE)];
-	}
-
-	@Override
-	public void pushAmmoProjectile(ItemStack ammoStack) {
-		CompoundTag tag = getLoadedAmmoProjectiles();
-
-		ArtilleryNBTHelper.pushNBTTagAmmo(tag, ammoStack);
-	}
-
-	@Override
-	public void pushAmmoCharge(ItemStack chargeStack) {
-		CompoundTag tag = getLoadedAmmoCharges();
-
-		ArtilleryNBTHelper.pushNBTTagAmmo(tag, chargeStack);
-	}
-
-	@Override
-	public ItemStack popAmmoProjectile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ItemStack popAmmoCharge() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ItemStack peekAmmoProjectile() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ItemStack peekAmmoCharge() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setFiringState(AmmoFiringState firingState) {
-		this.entityData.set(FIRING_STATE, Integer.valueOf(firingState.ordinal()));
-	}
-
-	@Override
-	public AmmoFiringState getFiringState() {
-		return AmmoFiringState.values()[((Integer)this.entityData.get(FIRING_STATE)).intValue()];
-	}
-
-	@Override
-	public void setFiringCooldown(int cooldown) {
-		this.entityData.set(FIRING_COOLDOWN, Integer.valueOf(cooldown));
-	}
-
-	@Override
-	public int getFiringCooldown() {
-		return this.entityData.get(FIRING_COOLDOWN);
-	}
-
-	@Override
-	public void setLoadedAmmoProjectiles(CompoundTag tag) {
-		this.entityData.set(AMMO_PROJECTILE_TAG, tag);
-	}
-
-	@Override
-	public CompoundTag getLoadedAmmoProjectiles() {
-		return this.entityData.get(AMMO_PROJECTILE_TAG);
-	}
-
-	@Override
-	public void setLoadedAmmoCharges(CompoundTag tag) {
-		this.entityData.set(AMMO_CHARGE_TAG, tag);
-	}
-
-	@Override
-	public CompoundTag getLoadedAmmoCharges() {
-		return this.entityData.get(AMMO_CHARGE_TAG);
-	}
-
-	@Override
-	public void setBaseProjectileSpeed(double baseProjectileSpeed) {
-		this.baseProjectileSpeed = (float)baseProjectileSpeed;
-	}
-
-	@Override
-	public float getBaseProjectileSpeed() {
-		return this.baseProjectileSpeed;
-	}
-
-	@Override
-	public void setBaseProjectileDeviation(double baseDeviation) {
-		this.baseDeviation = (float)baseDeviation;
-	}
-
-	@Override
-	public float getBaseProjectileDeviation() {
-		return this.baseDeviation;
-	}
-
-	@Override
-	public void setDamageModifier(double damageModifier) {
-		this.damageModifier = (float)damageModifier;
-	}
-
-	@Override
-	public float getProjectileDamageModifier() {
-		return this.damageModifier;
-	}
-
-	@Override
-	public void setEffectiveRangeModifier(double effectiveRangeMOdifier) {
-		this.effectiveRangeModifier = (float)effectiveRangeMOdifier;
-	}
-
-	@Override
-	public float getEffectiveRangeModifier() {
-		return this.effectiveRangeModifier;
-	}
-
-	@Override
-	public float getShotHeight() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMinShotPitch() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxShotPitch() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMinShotYaw() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxShotYaw() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void setBarrelPitch(float pitch) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public float getShotPitch() {
-		// TODO Auto-generated method stub
-		return 10;
-	}
-
-	@Override
-	public void setBarrelYaw(float yaw) {
-		// TODO Auto-generated method stub
-
-	}
+//	@Override
+//	public void initArtilleryConfiguration() {}
+//
+//	@Override
+//	public void setArtilleryType(ArtilleryType artilleryType) {
+//		this.entityData.set(ARTILLERY_TYPE, Integer.valueOf(artilleryType.ordinal()));
+//	}
+//
+//	@Override
+//	public ArtilleryType getArtilleryType() {
+//		return ArtilleryType.values()[this.entityData.get(ARTILLERY_TYPE)];
+//	}
+//
+//	@Override
+//	public void pushAmmoProjectile(ItemStack ammoStack) {
+//		CompoundTag tag = getLoadedAmmoProjectiles();
+//
+//		ArtilleryNBTHelper.pushNBTTagAmmo(tag, ammoStack);
+//	}
+//
+//	@Override
+//	public void pushAmmoCharge(ItemStack chargeStack) {
+//		CompoundTag tag = getLoadedAmmoCharges();
+//
+//		ArtilleryNBTHelper.pushNBTTagAmmo(tag, chargeStack);
+//	}
+//
+//	@Override
+//	public ItemStack popAmmoProjectile() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ItemStack popAmmoCharge() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ItemStack peekAmmoProjectile() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public ItemStack peekAmmoCharge() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	@Override
+//	public void setFiringState(AmmoFiringState firingState) {
+//		this.entityData.set(FIRING_STATE, Integer.valueOf(firingState.ordinal()));
+//	}
+//
+//	@Override
+//	public AmmoFiringState getFiringState() {
+//		return AmmoFiringState.values()[((Integer)this.entityData.get(FIRING_STATE)).intValue()];
+//	}
+//
+//	@Override
+//	public void setFiringCooldown(int cooldown) {
+//		this.entityData.set(FIRING_COOLDOWN, Integer.valueOf(cooldown));
+//	}
+//
+//	@Override
+//	public int getFiringCooldown() {
+//		return this.entityData.get(FIRING_COOLDOWN);
+//	}
+//
+//	@Override
+//	public void setLoadedAmmoProjectiles(CompoundTag tag) {
+//		this.entityData.set(AMMO_PROJECTILE_TAG, tag);
+//	}
+//
+//	@Override
+//	public CompoundTag getLoadedAmmoProjectiles() {
+//		return this.entityData.get(AMMO_PROJECTILE_TAG);
+//	}
+//
+//	@Override
+//	public void setLoadedAmmoCharges(CompoundTag tag) {
+//		this.entityData.set(AMMO_CHARGE_TAG, tag);
+//	}
+//
+//	@Override
+//	public CompoundTag getLoadedAmmoCharges() {
+//		return this.entityData.get(AMMO_CHARGE_TAG);
+//	}
+//
+//	@Override
+//	public void setBaseProjectileSpeed(double baseProjectileSpeed) {
+//		this.baseProjectileSpeed = (float)baseProjectileSpeed;
+//	}
+//
+//	@Override
+//	public float getBaseProjectileSpeed() {
+//		return this.baseProjectileSpeed;
+//	}
+//
+//	@Override
+//	public void setBaseProjectileDeviation(double baseDeviation) {
+//		this.baseDeviation = (float)baseDeviation;
+//	}
+//
+//	@Override
+//	public float getBaseProjectileDeviation() {
+//		return this.baseDeviation;
+//	}
+//
+//	@Override
+//	public void setDamageModifier(double damageModifier) {
+//		this.damageModifier = (float)damageModifier;
+//	}
+//
+//	@Override
+//	public float getProjectileDamageModifier() {
+//		return this.damageModifier;
+//	}
+//
+//	@Override
+//	public void setEffectiveRangeModifier(double effectiveRangeMOdifier) {
+//		this.effectiveRangeModifier = (float)effectiveRangeMOdifier;
+//	}
+//
+//	@Override
+//	public float getEffectiveRangeModifier() {
+//		return this.effectiveRangeModifier;
+//	}
+//
+//	@Override
+//	public float getShotHeight() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public float getMinShotPitch() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public float getMaxShotPitch() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public float getMinShotYaw() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public float getMaxShotYaw() {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+//
+//	@Override
+//	public void setBarrelPitch(float pitch) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	@Override
+//	public float getShotPitch() {
+//		// TODO Auto-generated method stub
+//		return 10;
+//	}
+//
+//	@Override
+//	public void setBarrelYaw(float yaw) {
+//		// TODO Auto-generated method stub
+//
+//	}
 
 	@Override
 	public float getShotYaw() {

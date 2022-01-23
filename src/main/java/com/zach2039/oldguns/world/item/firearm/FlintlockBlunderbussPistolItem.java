@@ -61,7 +61,7 @@ public class FlintlockBlunderbussPistolItem extends FirearmItem implements IFire
 				shooter.xo, shooter.yo, shooter.zo, 1600d, shooter.level.dimension());
 		
 		
-		OldGuns.network.send(PacketDistributor.NEAR.with(() -> point), 
+		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
 				new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.SMALL_FIREARM_SHOOT, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 						shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 				);

@@ -15,21 +15,21 @@ public interface IArtillery {
 	
 	AmmoFiringState determineFiringStateOfSlot(int slot); 
 
-	void pushAmmoProjectile(int slot, ItemStack stackIn);
+	void putAmmoProjectile(int slot, ItemStack stackIn);
 	
-	void pushAmmoCharge(int slot, ItemStack stackIn);
+	void putAmmoCharge(int slot, ItemStack stackIn);
 
 	void ramAmmoProjectile(int slot);
 	
 	void ramAmmoCharge(int slot);
 	
-	IArtilleryAmmo popAmmoProjectile(int slot);
+	IArtilleryAmmo getAmmoProjectile(int slot);
 	
-	IArtilleryCharge popAmmoCharge(int slot);
+	IArtilleryCharge getAmmoCharge(int slot);
 	
-	ItemStack peekAmmoProjectile(int slot);
+	IArtilleryAmmo peekAmmoProjectile(int slot);
 	
-	ItemStack peekAmmoCharge(int slot);
+	IArtilleryCharge peekAmmoCharge(int slot);
 	
 	boolean isAmmoProjectileRammed(int slot);
 	

@@ -79,10 +79,16 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addBlock(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Medium-grade Black Powder");
 		
 		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium-grade Black Powder");
+		
+		addBlock(ModBlocks.NAVAL_CANNON, "Naval Cannon [WIP]");
 	}
 
 	private void addItems() {
-		addItem(ModItems.BOMBARD, "Bombard [WIP]");
+		addItem(ModItems.MEDIUM_IRON_CANNONBALL, "Medium Iron Cannonball");
+		
+		addItem(ModItems.SMALL_POWDER_CHARGE, "Small Powder Charge");
+		addItem(ModItems.MEDIUM_POWDER_CHARGE, "Medium Powder Charge");
+		addItem(ModItems.LARGE_POWDER_CHARGE, "Large Powder Charge");
 		
 		addItem(ModItems.MATCHLOCK_DERRINGER, "Matchlock Derringer");
 		addItem(ModItems.MATCHLOCK_PISTOL, "Matchlock Pistol");
@@ -220,6 +226,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
+		addItem(ModItems.GUNNERS_QUADRANT, "Gunner's Quadrant");
+		addItem(ModItems.LONG_MATCH, "Long Match");
+		addItem(ModItems.RAM_ROD, "Ram Rod");
+		
 		addItem(ModItems.DESIGN_NOTES, "Design Notes");
 		
 		add("item.oldguns.compendium", "Old Guns Compendium");
@@ -231,7 +241,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addEntities() {
 		addEntityType(ModEntities.BULLET_PROJECTILE, "Projectile");
-		addEntityType(ModEntities.BOMBARD, "Bombard");
+		//addEntityType(ModEntities.BOMBARD, "Bombard");
 	}
 
 	private void addPotions() {

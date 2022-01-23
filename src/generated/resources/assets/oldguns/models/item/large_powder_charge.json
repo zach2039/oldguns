@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "oldguns:item/bombard"
+    "layer0": "oldguns:item/large_powder_charge"
   }
 }

@@ -99,6 +99,8 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	private boolean fixedColor;
 	private int totalInGroundTime;
 	
+	// Set true when projectile is used to simulate trajectories on the client
+	public boolean isSimulated = false;
 	
 	public BulletProjectile(EntityType<? extends BulletProjectile> entityType, Level world) {
 		super(entityType, world);
@@ -118,6 +120,11 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.setOwner(shooter);
 	}
 	
+	public BulletProjectile(Level world, LivingEntity shooter, double x, double y, double z) {
+		this(world, x, y, z);		
+		this.setOwner(shooter);
+	}
+	
 	@Override
 	public EntityType<?> getType() {
 		return ModEntities.BULLET_PROJECTILE.get();
@@ -131,6 +138,11 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	@Override
 	protected ItemStack getPickupItem() {
 		return new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL.get());
+	}
+	
+	@Override
+	public boolean canHitEntity(Entity p_36743_) {
+		return super.canHitEntity(p_36743_) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(p_36743_.getId()));
 	}
 	
 	@Override
@@ -790,9 +802,9 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		
 		this.tickDespawn();
 				
-		if (this.totalInGroundTime >= 100 && ((this.life % (20 + this.random.nextInt(10) - 5)) == 0)) {
+		if (!this.isSimulated && this.totalInGroundTime >= 100 && ((this.life % (20 + this.random.nextInt(10) - 5)) == 0)) {
 			this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
-		} else if (this.totalInGroundTime == 0 && (this.life % 2) == 0) {
+		} else if (!this.isSimulated && this.totalInGroundTime == 0 && (this.life % 2) == 0) {
 			this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
 		}
 	}
