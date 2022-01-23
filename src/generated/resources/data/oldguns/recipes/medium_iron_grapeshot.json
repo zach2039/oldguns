@@ -1,0 +1,27 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_iron_artillery_ammo"
+    }
+  ],
+  "pattern": [
+    " L ",
+    "bbb",
+    " I "
+  ],
+  "key": {
+    "L": {
+      "tag": "forge:leather"
+    },
+    "b": {
+      "item": "oldguns:large_iron_musket_ball"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "oldguns:medium_iron_grapeshot"
+  }
+}

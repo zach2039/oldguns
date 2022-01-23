@@ -32,6 +32,7 @@ public class ModEntities {
 				.setUpdateInterval(1)
 				.setTrackingRange(500)
 				.clientTrackingRange(500)
+				.sized(0.1f, 0.1f)
 		);
 	
 //	public static final RegistryObject<EntityType<Bombard>> BOMBARD = registerEntityType("bombard",

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zach2039.oldguns.api.ammo.IAmmo;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmAmmoType;
+import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
 import net.minecraft.world.entity.LivingEntity;
@@ -16,7 +16,7 @@ public class FirearmAmmoItem extends Item implements IAmmo {
 	/**
 	 * Ammo type of this firearm ammo item instance.
 	 */
-	protected FirearmAmmoType ammoType = FirearmAmmoType.MUSKET_BALL;
+	protected ProjectileType ammoType = ProjectileType.MUSKET_BALL;
 	
 	/**
 	 * Damage of this firearm ammo item instance.
@@ -54,7 +54,7 @@ public class FirearmAmmoItem extends Item implements IAmmo {
 	}
 	
 	@Override
-	public FirearmAmmoType getAmmoType()
+	public ProjectileType getAmmoType()
 	{
 		return this.ammoType;
 	}
@@ -109,7 +109,7 @@ public class FirearmAmmoItem extends Item implements IAmmo {
 		/**
 		 * Ammo type of this firearm ammo item instance.
 		 */
-		FirearmAmmoType ammoType = FirearmAmmoType.MUSKET_BALL;
+		ProjectileType ammoType = ProjectileType.MUSKET_BALL;
 		
 		/**
 		 * Damage of this firearm ammo item instance.
@@ -136,7 +136,7 @@ public class FirearmAmmoItem extends Item implements IAmmo {
 		 */
 		float projectileEffectiveRange = 10.0f;
 		
-		public FirearmAmmoProperties ammoType(FirearmAmmoType ammoType) {
+		public FirearmAmmoProperties ammoType(ProjectileType ammoType) {
 			this.ammoType = ammoType;
 			return this;
 		}

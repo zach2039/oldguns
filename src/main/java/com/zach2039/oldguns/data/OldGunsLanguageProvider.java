@@ -85,6 +85,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addItems() {
 		addItem(ModItems.MEDIUM_IRON_CANNONBALL, "Medium Iron Cannonball");
+		addItem(ModItems.MEDIUM_IRON_GRAPESHOT, "Medium Iron Grapeshot");
 		
 		addItem(ModItems.SMALL_POWDER_CHARGE, "Small Powder Charge");
 		addItem(ModItems.MEDIUM_POWDER_CHARGE, "Medium Powder Charge");

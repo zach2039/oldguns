@@ -17,17 +17,6 @@ public class FirearmType {
 		BREECHLOADER
 	}
 	
-	public static enum FirearmAmmoType 
-	{
-		MUSKET_BALL,
-		MUSKET_CARTRIDGE,
-		NEEDLEFIRE_CARTRIDGE,
-		SHOT_AND_BALL,
-		BIRDSHOT,
-		BUCKSHOT,
-		FLAMESHOT
-	}
-	
 	public static enum FirearmSize
 	{
 		SMALL,

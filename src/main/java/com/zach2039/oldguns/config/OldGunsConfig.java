@@ -1299,6 +1299,9 @@ public class OldGunsConfig {
 		public final ArtilleryAmmoAttributes small_iron_cannonball;
 		public final ArtilleryAmmoAttributes medium_iron_cannonball;
 		public final ArtilleryAmmoAttributes large_iron_cannonball;
+		public final ArtilleryAmmoAttributes small_iron_grapeshot;
+		public final ArtilleryAmmoAttributes medium_iron_grapeshot;
+		public final ArtilleryAmmoAttributes large_iron_grapeshot;
 		
 		ArtilleryAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -1306,7 +1309,7 @@ public class OldGunsConfig {
 			// Iron ammo
 			small_iron_cannonball = new ArtilleryAmmoAttributes(
 					builder,
-					"Attributes of Small Stone Musket Ball Ammo",
+					"Attributes of Small Iron Cannonball ammo",
 					"small_iron_cannonball",
 					1,
 					1,
@@ -1320,8 +1323,8 @@ public class OldGunsConfig {
 			
 			medium_iron_cannonball = new ArtilleryAmmoAttributes(
 					builder,
-					"Attributes of Medium Stone Musket Ball Ammo",
-					"medium_stone_musket_ball",
+					"Attributes of Medium Iron Cannonball ammo",
+					"medium_iron_cannonball",
 					1,
 					1,
 					40.0f,
@@ -1334,14 +1337,56 @@ public class OldGunsConfig {
 			
 			large_iron_cannonball = new ArtilleryAmmoAttributes(
 					builder,
-					"Attributes of Large Stone Musket Ball Ammo",
-					"large_stone_musket_ball",
+					"Attributes of Large Iron Cannonball ammo",
+					"medium_iron_cannonball",
 					1,
 					1,
 					50.0f,
 					0.8f,
 					500.0f,
 					1.0f,
+					0,
+					0f
+					);
+		
+			small_iron_grapeshot = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Small Iron Grapeshot ammo",
+					"small_iron_grapeshot",
+					1,
+					7,
+					20.0f,
+					0.2f,
+					30.0f,
+					3.0f,
+					0,
+					0f
+					);
+			
+			medium_iron_grapeshot = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Grapeshot ammo",
+					"medium_iron_grapeshot",
+					1,
+					10,
+					20.0f,
+					0.2f,
+					20.0f,
+					3.0f,
+					0,
+					0f
+					);
+			
+			large_iron_grapeshot = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Large Iron Grapeshot ammo",
+					"large_iron_grapeshot",
+					1,
+					13,
+					20.0f,
+					0.2f,
+					20.0f,
+					3.0f,
 					0,
 					0f
 					);

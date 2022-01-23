@@ -3,8 +3,8 @@ package com.zach2039.oldguns.world.item.ammo.artillery;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
-import com.zach2039.oldguns.api.artillery.ArtilleryAmmoType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity;
 
@@ -17,7 +17,7 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 	/**
 	 * Ammo type of this firearm ammo item instance.
 	 */
-	protected ArtilleryAmmoType ammoType = ArtilleryAmmoType.CANNONBALL;
+	protected ProjectileType ammoType = ProjectileType.CANNONBALL;
 	
 	/**
 	 * Projectile effect length of this ammo item instance
@@ -67,7 +67,7 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 	}
 	
 	@Override
-	public ArtilleryAmmoType getAmmoType()
+	public ProjectileType getAmmoType()
 	{
 		return this.ammoType;
 	}
@@ -148,7 +148,7 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 		/**
 		 * Ammo type of this ammo item instance.
 		 */
-		ArtilleryAmmoType ammoType = ArtilleryAmmoType.CANNONBALL;
+		ProjectileType ammoType = ProjectileType.CANNONBALL;
 		
 		/**
 		 * Projectile effect length of this ammo item instance
@@ -185,7 +185,7 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 		 */
 		float projectileEffectiveRange = 10.0f;
 		
-		public ArtilleryAmmoProperties ammoType(ArtilleryAmmoType ammoType) {
+		public ArtilleryAmmoProperties ammoType(ProjectileType ammoType) {
 			this.ammoType = ammoType;
 			return this;
 		}

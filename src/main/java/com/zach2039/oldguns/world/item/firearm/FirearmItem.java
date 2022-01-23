@@ -244,7 +244,8 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 
 			int ticksUsed = this.getUseDuration(stackIn) - ticksRemaining;
 			ticksUsed = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stackIn, worldIn, entityplayer, ticksUsed, !ammoStack.isEmpty());
-			if (ticksUsed < 0) return;
+			if (ticksUsed < 0) 
+				return;
 
 			/* Check if this firearm is a breechloader and has a valid reloading recipe. */
 			//            BreechloadingReloadRecipe reloadRecipe = null;
@@ -315,7 +316,7 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			if (!ammoStack.isEmpty())
 			{
 
-				boolean flag1 = entityplayer.isCreative() || (ammoStack.getItem() instanceof ArrowItem && ((ArrowItem) ammoStack.getItem()).isInfinite(ammoStack, stackIn, entityplayer));
+				boolean flag1 = entityplayer.isCreative();
 
 				if (!worldIn.isClientSide())
 				{

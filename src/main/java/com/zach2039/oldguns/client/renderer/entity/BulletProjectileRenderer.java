@@ -4,6 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.mojang.math.Vector3f;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
@@ -33,10 +34,13 @@ public class BulletProjectileRenderer extends EntityRenderer<BulletProjectile> i
   
 		matrixStackIn.pushPose();	
 		
-		matrixStackIn.translate(0, -.5f, 0);
-		//matrixStackIn.mulPose(new Quaternion(0f, 1f, 0f, entity.yRotO));
-		//matrixStackIn.mulPose(new Quaternion(1f, 0f, 1f, entity.xRotO));
-		matrixStackIn.scale(entity.getProjectileSize(), entity.getProjectileSize(), entity.getProjectileSize());
+		
+		//matrixStackIn.mulPose(Vector3f.XP.rotationDegrees((float) entity.xRotO + entity.flyDist));
+		//matrixStackIn.mulPose(Vector3f.YP.rotationDegrees((float) entity.xRotO - entity.yRotO + entity.flyDist));
+		//matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees((float) entity.yRotO + entity.flyDist));
+		matrixStackIn.translate(0, -1.35f * entity.getProjectileSize(), 0);
+		matrixStackIn.scale(entity.getProjectileSize(), entity.getProjectileSize(), entity.getProjectileSize());		
+		
 		VertexConsumer vertexconsumer = bufferIn.getBuffer(RenderType.entitySolid(this.getTextureLocation(entity)));
 		model.renderToBuffer(matrixStackIn, vertexconsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f); 
 		

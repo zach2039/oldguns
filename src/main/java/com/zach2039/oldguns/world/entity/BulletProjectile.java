@@ -73,6 +73,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
 	private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
+	private static final EntityDataAccessor<Byte> PROJECTILE_TYPE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
 
 	@Nullable
 	private UUID ownerUUID;
@@ -199,6 +200,9 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		
 		/* Register CRITICAL flag for critical damage application. */
 		this.entityData.define(CRITICAL, (byte)0);
+		
+		/* Projectile Type. Used for effects like explosions and other things */
+		this.entityData.define(PROJECTILE_TYPE, (byte)0);
 	}
 	
 	@Override
@@ -919,6 +923,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	public void setProjectileSize(float size)
 	{
 		this.entityData.set(PROJECTILE_SIZE, size);
+		this.setBoundingBox(new AABB(-size,-size,-size,size,size,size));
 	}
 	
 	/**

@@ -758,6 +758,22 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_cannonball"));
 		}
+		
+		// Create medium iron grapeshot
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_GRAPESHOT.get())
+					.pattern(" L ")
+					.pattern("bbb")
+					.pattern(" I ")
+					.define('L', Tags.Items.LEATHER)
+					.define('b', ModItems.LARGE_IRON_MUSKET_BALL.get())
+					.define('I', Tags.Items.INGOTS_IRON)
+					.unlockedBy("has_leather", has(Tags.Items.LEATHER))
+					.unlockedBy("has_small_iron_musket_ball", has( ModItems.LARGE_IRON_MUSKET_BALL.get()))
+					.unlockedBy("has_iron_ingots", has(Tags.Items.NUGGETS_IRON))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_grapeshot"));
+		}
 				
 		// Create small powder charge
 		{
