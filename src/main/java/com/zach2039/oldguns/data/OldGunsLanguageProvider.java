@@ -80,7 +80,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium-grade Black Powder");
 		
-		addBlock(ModBlocks.NAVAL_CANNON, "Naval Cannon");
+		addBlock(ModBlocks.MEDIUM_NAVAL_CANNON, "Medium Naval Cannon");
 	}
 
 	private void addItems() {
@@ -280,6 +280,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
 		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
 		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart from artillery fire by %2$s.");
+		
+		add(OldGunsLang.MESSAGE_ARTILLERY_NAME, "This is a %1$s.");
+		add(OldGunsLang.MESSAGE_ARTILLERY_MAX_SLOTS, "Max ammo slot count is: %1$s");
+		add(OldGunsLang.MESSAGE_ARTILLERY_SLOT_STATE, "State of slot %1$s is: %2$s");
 	}
 
 	private void addKeyBindings() {
@@ -365,6 +369,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addMisc() {
 		add("itemGroup." + OldGuns.MODID, "Old Guns");
+		
+		add(OldGuns.MODID + ".medium_naval_cannon", "Medium Naval Cannon");
 	}
 
 	public void addEntityType(Supplier<? extends EntityType<?>> key, String name) {

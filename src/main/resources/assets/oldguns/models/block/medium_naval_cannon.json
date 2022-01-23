@@ -1,7 +1,7 @@
 {
 	"parent": "item/generated",
   	"textures": {
-		"layer0": "oldguns:item/naval_cannon",
+		"layer0": "oldguns:item/medium_naval_cannon",
 		"particle": "minecraft:block/anvil"
 	}
 }

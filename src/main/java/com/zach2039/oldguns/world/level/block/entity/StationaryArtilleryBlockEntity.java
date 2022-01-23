@@ -11,11 +11,12 @@ import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.api.artillery.IArtillery;
+import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
-import com.zach2039.oldguns.world.level.block.NavalCannonBlock;
+import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -23,6 +24,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -35,6 +37,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.network.PacketDistributor;
 
 public class StationaryArtilleryBlockEntity extends BlockEntity implements IArtillery {
@@ -123,15 +126,19 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
         writeToTag(nbt);
     }
 	
-	public static void tick(final Level level, final BlockPos pos, final BlockState state, final StationaryArtilleryBlockEntity blockEntity) {
+	public static void tick(final Level level, final BlockPos blockpos, final BlockState state, final StationaryArtilleryBlockEntity blockEntity) {
 		if (!blockEntity.hasLevel())
 			return;
 		
 		if (blockEntity.firingCooldown > 0) {
 			blockEntity.firingCooldown = blockEntity.firingCooldown - 1;
+		} else {
+			if (!level.isClientSide()) {
+				level.setBlock(blockpos, state.setValue(BlockStateProperties.LIT, false), 2);
+			}
 		}
 		
-		blockEntity.facing = state.getValue(NavalCannonBlock.HORIZONTAL_ROTATION);
+		blockEntity.facing = state.getValue(MediumNavalCannonBlock.HORIZONTAL_ROTATION);
 		
 		blockEntity.shotYaw = blockEntity.getYawFromFacing();
 	}
@@ -159,6 +166,8 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 					float finalEffectiveRange = projectileStack.getProjectileEffectiveRange() * this.effectiveRangeModifier;
 					float finalDeviation = this.baseProjectileDeviation * projectileStack.getProjectileDeviationModifier();
 					
+					setFiringCooldown(5);
+					
 					if (!level.isClientSide()){
 		            	List<BulletProjectile> entityProjectiles = projectileStack.createProjectiles(level, pX, pY, pZ, projectileStack, this, player);
 						
@@ -177,11 +186,9 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 		            	
 		            	doFiringEffect(level, player, pX, pY, pZ);
 		            	
-		            	// TODO: Add lighting effects here
+		            	level.setBlock(blockpos, state.setValue(BlockStateProperties.LIT, true), 2);
 					}
-					
-					setFiringCooldown(5);
-					
+
 					wasFired = true;			
 				}
 			}
@@ -261,6 +268,12 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 		
 		if (handItem == ItemStack.EMPTY && !level.isClientSide()) {
 			this.shotPitch = Mth.clamp(this.shotPitch + (!player.isCrouching() ? -2f : 2f), getMinShotPitch(), getMaxShotPitch());
+		} else if (handItem.getItem() == ModItems.GUNNERS_QUADRANT.get() && !level.isClientSide()) {
+			player.sendMessage(new TranslatableComponent("text.oldguns.artillery_name.message", new TranslatableComponent(getType().getRegistryName().toString().replace(':', '.'))), player.getUUID());
+			player.sendMessage(new TranslatableComponent("text.oldguns.artillery_max_slots.message", this.ammoSlots), player.getUUID());
+			for (int slot = 0; slot < this.ammoSlots; slot++) {
+				player.sendMessage(new TranslatableComponent("text.oldguns.artillery_slot_state.message", slot, determineFiringStateOfSlot(slot).name()), player.getUUID());
+			}
 		} else if (!player.isCrouching()) {
 			// Interaction behavior is determined by overall load state, player item, and slot load state
 			

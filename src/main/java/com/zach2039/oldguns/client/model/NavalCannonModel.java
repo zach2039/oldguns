@@ -3,7 +3,7 @@ package com.zach2039.oldguns.client.model;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.block.entity.NavalCannonBlockEntity;
+import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -77,7 +77,7 @@ public class NavalCannonModel extends Model {
 		base.render(poseStack, buffer, packedLight, packedOverlay);
 	}
 	
-	public void setupAnim(NavalCannonBlockEntity blockEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float yaw, float pitch) {
+	public void setupAnim(MediumNavalCannonBlockEntity blockEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float yaw, float pitch) {
 		float angleRads = (float) Math.toRadians(blockEntity.getShotPitch());
 		base.getChild("barrel").xRot = angleRads;
 		

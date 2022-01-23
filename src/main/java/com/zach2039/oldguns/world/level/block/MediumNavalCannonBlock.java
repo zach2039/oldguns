@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.util.ModVectorUtils;
-import com.zach2039.oldguns.world.level.block.entity.NavalCannonBlockEntity;
+import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -32,6 +32,8 @@ import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Material;
@@ -40,9 +42,10 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public class NavalCannonBlock extends HorizontalDirectionalBlock implements EntityBlock {
+public class MediumNavalCannonBlock extends HorizontalDirectionalBlock implements EntityBlock {
 
-	public static final Property<Direction> HORIZONTAL_ROTATION = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);;
+	public static final DirectionProperty HORIZONTAL_ROTATION = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
+	public static final BooleanProperty LIT = BlockStateProperties.LIT;
 
 	private static final Map<Direction, VoxelShape> SHAPES = new EnumMap<>(Direction.class);
 	private static final VoxelShape SHAPE = Shapes.or(
@@ -53,16 +56,22 @@ public class NavalCannonBlock extends HorizontalDirectionalBlock implements Enti
 			Block.box(0, 0, 0, 8, 16, 8).move(0.25, 0, 0.75)
 			);
 
-	public NavalCannonBlock() {
+	public MediumNavalCannonBlock() {
 		super(Block.Properties
 				.of(Material.METAL)
 				.sound(SoundType.METAL)
 				.strength(6.0F)
 				.dynamicShape()
 				.noOcclusion()
+				.lightLevel((e) -> {
+					if (e.getValue(LIT).booleanValue())
+						return 7;
+					
+					return 0;
+				})
 				);
 
-		registerDefaultState(getStateDefinition().any().setValue(HORIZONTAL_ROTATION, Direction.NORTH));
+		registerDefaultState(getStateDefinition().any().setValue(HORIZONTAL_ROTATION, Direction.NORTH).setValue(LIT, false));
 		processShapes(SHAPE);
 	}
 
@@ -75,6 +84,7 @@ public class NavalCannonBlock extends HorizontalDirectionalBlock implements Enti
 	@Override
 	protected void createBlockStateDefinition(final StateDefinition.Builder<Block, BlockState> builder) {
 		builder.add(HORIZONTAL_ROTATION);
+		builder.add(LIT);
 	}
 
 	@Override
@@ -99,8 +109,8 @@ public class NavalCannonBlock extends HorizontalDirectionalBlock implements Enti
 		BlockEntity blockEnt = level.getBlockEntity(blockpos);
 
 		if (blockEnt != null) {
-			if (blockEnt instanceof NavalCannonBlockEntity) {
-				NavalCannonBlockEntity cannonEnt = (NavalCannonBlockEntity) blockEnt;
+			if (blockEnt instanceof MediumNavalCannonBlockEntity) {
+				MediumNavalCannonBlockEntity cannonEnt = (MediumNavalCannonBlockEntity) blockEnt;
 
 				cannonEnt.processInteraction(level, blockpos, state, player, hand);
 
@@ -122,8 +132,8 @@ public class NavalCannonBlock extends HorizontalDirectionalBlock implements Enti
 
 		BlockEntity blockEnt = level.getBlockEntity(blockpos);
 		if (blockEnt != null) {
-			if (blockEnt instanceof NavalCannonBlockEntity) {
-				NavalCannonBlockEntity cannonEnt = (NavalCannonBlockEntity) blockEnt;
+			if (blockEnt instanceof MediumNavalCannonBlockEntity) {
+				MediumNavalCannonBlockEntity cannonEnt = (MediumNavalCannonBlockEntity) blockEnt;
 
 				cannonEnt.setFacing(livingEntity.getDirection());
 				cannonEnt.setShotPitch(-6f);
@@ -136,7 +146,7 @@ public class NavalCannonBlock extends HorizontalDirectionalBlock implements Enti
 	@Nullable
 	@Override
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(final Level level, final BlockState state, final BlockEntityType<T> blockEntityType) {
-		return createTickerHelper(blockEntityType, ModBlockEntities.MEDIUM_NAVAL_CANNON.get(), NavalCannonBlockEntity::tick);
+		return createTickerHelper(blockEntityType, ModBlockEntities.MEDIUM_NAVAL_CANNON.get(), MediumNavalCannonBlockEntity::tick);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -151,7 +161,7 @@ public class NavalCannonBlock extends HorizontalDirectionalBlock implements Enti
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(BlockPos blockpos, BlockState state) {
-		return new NavalCannonBlockEntity(blockpos, state);
+		return new MediumNavalCannonBlockEntity(blockpos, state);
 	}
 
 	@Override

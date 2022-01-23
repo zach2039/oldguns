@@ -644,14 +644,16 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			double zMotMod = 0.70f + (this.random.nextFloat() * 0.15f);
 			this.setDeltaMovement(this.getDeltaMovement().multiply(xMotMod, yMotMod, zMotMod));
 
-			for(int i = 0; i < 3; ++i) {
-				BlockParticleOption blockPart = new BlockParticleOption(ParticleTypes.BLOCK, blockstate);
-				this.level.addParticle(blockPart, 
-						this.xo - this.getDeltaMovement().x * 0.25D, this.yo - this.getDeltaMovement().y * 0.25, this.zo - this.getDeltaMovement().z * 0.25,
-						0, 0, 0);
+			if (!this.isSimulated) {
+				for(int i = 0; i < 3; ++i) {
+					BlockParticleOption blockPart = new BlockParticleOption(ParticleTypes.BLOCK, blockstate);
+					this.level.addParticle(blockPart, 
+							this.xo - this.getDeltaMovement().x * 0.25D, this.yo - this.getDeltaMovement().y * 0.25, this.zo - this.getDeltaMovement().z * 0.25,
+							0, 0, 0);
+				}
+	
+				this.playSound(ModSoundEvents.BULLET_RICOCHET.get(), 0.3F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
 			}
-
-			this.playSound(ModSoundEvents.BULLET_RICOCHET.get(), 0.3F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
 
 			// Add to totalInGroundTime to reduce damage after ricochet
 			++this.totalInGroundTime;
@@ -894,7 +896,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
 			float f = (this.isInsideEffectiveRange()) ? 1.0f : 0.98F;
 			//float f1 = 0.05F;
-			if (this.isInWater()) {
+			if (!this.isSimulated && this.isInWater()) {
 				for(int j = 0; j < 4; ++j) {
 					//float f2 = 0.25F;
 					this.level.addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);

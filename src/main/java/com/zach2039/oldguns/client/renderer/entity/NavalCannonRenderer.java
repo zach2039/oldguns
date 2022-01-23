@@ -11,7 +11,7 @@ import com.zach2039.oldguns.api.ammo.IArtilleryCharge;
 import com.zach2039.oldguns.client.model.NavalCannonModel;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
-import com.zach2039.oldguns.world.level.block.entity.NavalCannonBlockEntity;
+import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -26,7 +26,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
-public class NavalCannonRenderer implements BlockEntityRenderer<NavalCannonBlockEntity> {
+public class NavalCannonRenderer implements BlockEntityRenderer<MediumNavalCannonBlockEntity> {
 
 	private static final ResourceLocation TEXTURE = new ResourceLocation(OldGuns.MODID, "textures/block/entity/naval_cannon.png");
 	private final NavalCannonModel model;
@@ -37,7 +37,7 @@ public class NavalCannonRenderer implements BlockEntityRenderer<NavalCannonBlock
 	
 	@SuppressWarnings("resource")
 	@Override
-	public void render(NavalCannonBlockEntity blockEntity, float partialTicks, PoseStack stackIn,	MultiBufferSource buffer, int p_112311_, int p_112312_) {
+	public void render(MediumNavalCannonBlockEntity blockEntity, float partialTicks, PoseStack stackIn,	MultiBufferSource buffer, int p_112311_, int p_112312_) {
 		
 		stackIn.pushPose();
 		
@@ -57,7 +57,7 @@ public class NavalCannonRenderer implements BlockEntityRenderer<NavalCannonBlock
 		stackIn.popPose();
 	}
 	
-	private void renderTrajectory(NavalCannonBlockEntity blockEntity, PoseStack stackIn, MultiBufferSource buffer) {
+	private void renderTrajectory(MediumNavalCannonBlockEntity blockEntity, PoseStack stackIn, MultiBufferSource buffer) {
 		IArtilleryAmmo ammo = blockEntity.peekAmmoProjectile(0);
 		IArtilleryCharge charge = blockEntity.peekAmmoCharge(0);
 		Vec3 pos = new Vec3(blockEntity.getBlockPos().getX(), blockEntity.getBlockPos().getY(), blockEntity.getBlockPos().getZ());

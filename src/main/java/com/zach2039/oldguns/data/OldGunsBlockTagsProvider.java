@@ -27,7 +27,7 @@ public class OldGunsBlockTagsProvider extends BlockTagsProvider {
 	@Override
 	protected void addTags() {
 		tag(BlockTags.MINEABLE_WITH_PICKAXE)
-				.add(ModBlocks.NAVAL_CANNON.get())
+				.add(ModBlocks.MEDIUM_NAVAL_CANNON.get())
 				.add(ModBlocks.LIQUID_NITER_CAULDRON.get());
 		
 		tag(BlockTags.MINEABLE_WITH_AXE)

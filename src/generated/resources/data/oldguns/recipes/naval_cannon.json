@@ -1,6 +1,10 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_naval_cannon_artillery"
+    }
+  ],
   "pattern": [
     " B ",
     "WCW"
@@ -17,6 +21,6 @@
     }
   },
   "result": {
-    "item": "oldguns:naval_cannon"
+    "item": "oldguns:medium_naval_cannon"
   }
 }

@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.block.entity.NavalCannonBlockEntity;
+import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,9 +16,9 @@ public class ModBlockEntities {
 
 	private static boolean isInitialized;
 
-	public static final RegistryObject<BlockEntityType<NavalCannonBlockEntity>> MEDIUM_NAVAL_CANNON = registerBlockEntityType("medium_naval_cannon",
-			NavalCannonBlockEntity::new,
-			ModBlocks.NAVAL_CANNON
+	public static final RegistryObject<BlockEntityType<MediumNavalCannonBlockEntity>> MEDIUM_NAVAL_CANNON = registerBlockEntityType("medium_naval_cannon",
+			MediumNavalCannonBlockEntity::new,
+			ModBlocks.MEDIUM_NAVAL_CANNON
 	);
 
 

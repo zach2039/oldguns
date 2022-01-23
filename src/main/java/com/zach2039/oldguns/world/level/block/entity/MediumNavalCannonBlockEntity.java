@@ -16,11 +16,11 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
-public class NavalCannonBlockEntity extends StationaryArtilleryBlockEntity {
+public class MediumNavalCannonBlockEntity extends StationaryArtilleryBlockEntity {
 
 	private static final ArtilleryAttributes artilleryAttributes = OldGunsConfig.SERVER.artillerySettings.naval_cannon;
 	
-	public NavalCannonBlockEntity(BlockPos blockpos, BlockState state) {
+	public MediumNavalCannonBlockEntity(BlockPos blockpos, BlockState state) {
 		super(ModBlockEntities.MEDIUM_NAVAL_CANNON.get(), blockpos, state, new ArtilleryProperties()
 				.artilleryType(ArtilleryType.NAVAL_CANNON)
 				.ammoSlots(1)

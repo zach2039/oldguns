@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "oldguns:block/medium_naval_cannon"
+    },
+    "facing=south": {
+      "model": "oldguns:block/medium_naval_cannon",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "oldguns:block/medium_naval_cannon",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "oldguns:block/medium_naval_cannon",
+      "y": 90
+    }
+  }
+}

@@ -732,7 +732,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Artillery
 		// Create naval cannon
 		{
-			ShapedGunsmithsBenchRecipeBuilder.shaped(ModBlocks.NAVAL_CANNON.get())
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModBlocks.MEDIUM_NAVAL_CANNON.get())
 					.pattern(" B ")
 					.pattern("WCW")
 					.define('W', ModTags.Items.TINY_CARRIAGE_WHEEL)
@@ -741,6 +741,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.unlockedBy("has_tiny_carriage_wheel", has(ModTags.Items.TINY_CARRIAGE_WHEEL))
 					.unlockedBy("has_medium_naval_carriage", has(ModTags.Items.MEDIUM_NAVAL_CARRIAGE))
 					.unlockedBy("has_medium_metal_cannon_barrel", has(ModTags.Items.MEDIUM_METAL_CANNON_BARREL))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_naval_cannon_artillery"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "naval_cannon"));
 		}
 
@@ -778,11 +779,13 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Create medium iron canister shot
 		{
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_CANISTER_SHOT.get())
-					.pattern("ii")
+					.pattern("GG")
 					.pattern("bb")
 					.pattern("ii")
+					.define('G', ModTags.Items.ANY_GUNPOWDER)
 					.define('i', Tags.Items.NUGGETS_IRON)
 					.define('b', ModItems.LARGE_IRON_BUCKSHOT.get())
+					.unlockedBy("has_any_gunpowder", has(ModTags.Items.ANY_GUNPOWDER))
 					.unlockedBy("has_large_iron_buckshot", has( ModItems.LARGE_IRON_BUCKSHOT.get()))
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))

@@ -4,7 +4,7 @@
   "block.oldguns.high_grade_black_powder_cake": "High-grade Black Powder Cake",
   "block.oldguns.liquid_niter_cauldron": "Cauldron of Liquid Niter",
   "block.oldguns.medium_grade_black_powder_block": "Block of Medium-grade Black Powder",
-  "block.oldguns.naval_cannon": "Naval Cannon",
+  "block.oldguns.medium_naval_cannon": "Medium Naval Cannon",
   "block.oldguns.niter_bedding": "Niter Bedding",
   "block.oldguns.wet_high_grade_black_powder_block": "Block of Wet High-grade Black Powder",
   "block.oldguns.wet_high_grade_black_powder_cake": "Wet High-grade Black Powder Cake",
@@ -169,6 +169,7 @@
   "oldguns.lang.black_powder_production.crystalization": "Crystalization",
   "oldguns.lang.black_powder_production.high_grade_cake": "Black Powder Cake",
   "oldguns.lang.black_powder_production.pressing": "Corning Press",
+  "oldguns.medium_naval_cannon": "Medium Naval Cannon",
   "oldguns.page.basics.artillery0": "Artillery includes various gun and missle emplacements that are used to lay siege to fortifications or deal massive damage to groups of mobs or players.$(br)$(br)While more suited to medium to large-scale engagements, artillery pieces can still find use as home defense for the more adventurous artilleryman.",
   "oldguns.page.basics.black_powder0": "Black Powder is an important alchemical output used in $(l:basics/firearms)Firearms$(/l), $(l:basics/artillery)Artillery$(/l), and other explosive tools.$(br)$(br)Black Powder has grades of low, medium, and high. Normal gunpowder is low grade. Firearms and artillery can require certain grades.$(br)$(br)See $(l:black_powder_production/low_grade)Black Powder Production$(/l) for more details.",
   "oldguns.page.basics.design_notes0": "Certain recipes in the Gunsmith's Bench require Design Notes to craft. These notes can be found within dungeons or shipwrecks.$(br)$(br)Some parts like advanced mechanisms for firearms require notes to craft, but can also be found as loot.",
@@ -194,5 +195,8 @@
   "oldguns.page.firearms.general0": "Matchlock and Wheellock firearms are craftable from the outset of spawn, but more advanced types and exotic firearms require finding $(l:basics/design_notes)Design Notes$(/l) that can be used in the Gunsmith's Bench to enable crafting.",
   "oldguns.page.firearms.general1": "While most firearms are reloaded in the user's inventory, modifications can be applied to allow breechloading, which allows reloading in a manner similar to the crossbow.",
   "oldguns.page.firearms.general2": "Firearms are also limited to the type of propellant that can be used, depending on the type.$(br)$(br)Matchlock weapons can reload with low or medium grade black powder. $(br)Wheellock weapons can reload with medium or high grade black powder.",
-  "oldguns.page.firearms.general3": "Flintlock weapons can reload with medium or high grade black powder. $(br)Caplock weapons can reload with high grade black powder."
+  "oldguns.page.firearms.general3": "Flintlock weapons can reload with medium or high grade black powder. $(br)Caplock weapons can reload with high grade black powder.",
+  "text.oldguns.artillery_max_slots.message": "Max ammo slot count is: %1$s",
+  "text.oldguns.artillery_name.message": "This is a %1$s.",
+  "text.oldguns.artillery_slot_state.message": "State of slot %1$s is: %2$s"
 }

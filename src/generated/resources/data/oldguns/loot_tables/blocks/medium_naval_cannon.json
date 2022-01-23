@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "oldguns:naval_cannon"
+          "name": "oldguns:medium_naval_cannon"
         }
       ],
       "conditions": [

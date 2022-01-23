@@ -7,7 +7,7 @@ import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.world.level.block.MediumGradeBlackPowderBlock;
-import com.zach2039.oldguns.world.level.block.NavalCannonBlock;
+import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
@@ -69,8 +69,8 @@ public class ModBlocks {
 			() -> new MediumGradeBlackPowderBlock()
 	);
 	
-	public static final RegistryObject<NavalCannonBlock> NAVAL_CANNON = registerBlock("naval_cannon",
-			() -> new NavalCannonBlock()
+	public static final RegistryObject<MediumNavalCannonBlock> MEDIUM_NAVAL_CANNON = registerBlock("medium_naval_cannon",
+			() -> new MediumNavalCannonBlock()
 	);
 	
 	/**
