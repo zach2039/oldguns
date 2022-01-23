@@ -68,6 +68,10 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
+			
+			// Must use this if doing data-gen on CI or using gradle, or else
+			// run will grenade
+			forceExit false
 
             property 'forge.logging.markers', 'REGISTRIES'
 

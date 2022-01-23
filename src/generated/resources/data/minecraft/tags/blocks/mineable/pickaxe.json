@@ -1,6 +1,7 @@
 {
   "replace": false,
   "values": [
+    "oldguns:naval_cannon",
     "oldguns:liquid_niter_cauldron"
   ]
 }

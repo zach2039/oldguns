@@ -10,7 +10,13 @@ pipeline {
             steps {
                 echo 'Cleaning Project'
                 sh 'chmod +x gradlew'
-                sh './gradlew clean'
+                sh './gradlew clean --no-daemon'
+            }
+        }
+        stage('Generate Data') {
+            steps {
+                echo 'Generating Data for Project'
+                sh './gradlew runData --no-daemon'
             }
         }
         stage('Build and Deploy') {
@@ -20,7 +26,7 @@ pipeline {
             steps {
                 echo 'Building Project'
                 script {
-                    sh './gradlew build'
+                    sh './gradlew build --no-daemon'
                 }
             }
         }
