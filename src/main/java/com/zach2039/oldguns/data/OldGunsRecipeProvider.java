@@ -729,6 +729,220 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_doublebarrel_blunderbuss_birdshot_reload"));
 		}
 
+		// Artillery
+		// Create naval cannon
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModBlocks.NAVAL_CANNON.get())
+					.pattern(" B ")
+					.pattern("WCW")
+					.define('W', ModTags.Items.TINY_CARRIAGE_WHEEL)
+					.define('C', ModTags.Items.MEDIUM_NAVAL_CARRIAGE)
+					.define('B', ModTags.Items.MEDIUM_METAL_CANNON_BARREL)
+					.unlockedBy("has_tiny_carriage_wheel", has(ModTags.Items.TINY_CARRIAGE_WHEEL))
+					.unlockedBy("has_medium_naval_carriage", has(ModTags.Items.MEDIUM_NAVAL_CARRIAGE))
+					.unlockedBy("has_medium_metal_cannon_barrel", has(ModTags.Items.MEDIUM_METAL_CANNON_BARREL))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "naval_cannon"));
+		}
+
+		// Ammo
+		// Create medium iron cannonball
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_CANNONBALL.get())
+					.pattern(" i ")
+					.pattern("iBi")
+					.pattern(" i ")
+					.define('i', Tags.Items.NUGGETS_IRON)
+					.define('B', Tags.Items.STORAGE_BLOCKS_IRON)
+					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+					.unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_cannonball"));
+		}
+				
+		// Create small powder charge
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.SMALL_POWDER_CHARGE.get(), 1)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_any_gunpowder", has(ModTags.Items.ANY_GUNPOWDER))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_artillery_powder_charges"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_powder_charge"));
+		}
+		
+		// Create medium powder charge
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MEDIUM_POWDER_CHARGE.get(), 1)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_any_gunpowder", has(ModTags.Items.ANY_GUNPOWDER))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_artillery_powder_charges"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_powder_charge"));
+		}
+		
+		// Create large powder charge
+		{
+			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MEDIUM_POWDER_CHARGE.get(), 1)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(ModTags.Items.ANY_GUNPOWDER)
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.requires(Items.PAPER)
+					.unlockedBy("has_any_gunpowder", has(ModTags.Items.ANY_GUNPOWDER))
+					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_artillery_powder_charges"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_powder_charge"));
+		}
+		
+		// Parts
+		// Create small iron cannon barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_IRON_CANNON_BARREL.get())
+					.pattern("IIi")
+					.pattern("  I")
+					.pattern("IIi")
+					.define('i', Tags.Items.NUGGETS_IRON)
+					.define('I', Tags.Items.INGOTS_IRON)
+					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_iron_cannon_barrel"));
+		}
+		
+		// Create medium iron cannon barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_CANNON_BARREL.get())
+					.pattern("IIi")
+					.pattern("  R")
+					.pattern("IIi")
+					.define('i', Tags.Items.NUGGETS_IRON)
+					.define('I', Tags.Items.INGOTS_IRON)
+					.define('R', Tags.Items.STORAGE_BLOCKS_IRON)
+					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_cannon_barrel"));
+		}
+
+		// Create large iron cannon barrel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_IRON_CANNON_BARREL.get())
+					.pattern("IRI")
+					.pattern("  R")
+					.pattern("IRI")
+					.define('I', Tags.Items.INGOTS_IRON)
+					.define('R', Tags.Items.STORAGE_BLOCKS_IRON)
+					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_cannon_barrel"));
+		}
+		
+		// Create small wooden naval carriage
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_WOODEN_NAVAL_CARRIAGE.get())
+					.pattern("  S")
+					.pattern("SPL")
+					.define('P', ItemTags.PLANKS)
+					.define('L', ItemTags.LOGS)
+					.define('S', ItemTags.WOODEN_SLABS)
+					.unlockedBy("has_planks", has(ItemTags.PLANKS))
+					.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+					.unlockedBy("has_log", has(ItemTags.LOGS))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_wooden_naval_carriage"));
+		}
+		
+		// Create medium wooden naval carriage
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_WOODEN_NAVAL_CARRIAGE.get())
+					.pattern(" SS")
+					.pattern("PLL")
+					.define('P', ItemTags.PLANKS)
+					.define('L', ItemTags.LOGS)
+					.define('S', ItemTags.WOODEN_SLABS)
+					.unlockedBy("has_planks", has(ItemTags.PLANKS))
+					.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+					.unlockedBy("has_log", has(ItemTags.LOGS))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_wooden_naval_carriage"));
+		}
+		
+		// Create large wooden naval carriage
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_WOODEN_NAVAL_CARRIAGE.get())
+					.pattern("  S")
+					.pattern("SPP")
+					.pattern("LPL")
+					.define('P', ItemTags.PLANKS)
+					.define('L', ItemTags.LOGS)
+					.define('S', ItemTags.WOODEN_SLABS)
+					.unlockedBy("has_planks", has(ItemTags.PLANKS))
+					.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+					.unlockedBy("has_log", has(ItemTags.LOGS))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_wooden_naval_carriage"));
+		}
+		
+		// Create tiny wooden carriage wheel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.TINY_WOODEN_CARRIAGE_WHEEL.get())
+					.pattern(" s ")
+					.pattern("sbs")
+					.pattern(" s ")
+					.define('s', Tags.Items.RODS_WOODEN)
+					.define('b', Items.STONE_BUTTON)
+					.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+					.unlockedBy("has_stone_button", has(Items.STONE_BUTTON))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "tiny_wooden_carriage_wheel"));
+		}
+		
+		// Create small wooden carriage wheel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.SMALL_WOODEN_CARRIAGE_WHEEL.get())
+					.pattern(" S ")
+					.pattern("SbS")
+					.pattern(" S ")
+					.define('S', ItemTags.WOODEN_SLABS)
+					.define('b', Items.STONE_BUTTON)
+					.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+					.unlockedBy("has_stone_button", has(Items.STONE_BUTTON))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_wooden_carriage_wheel"));
+		}
+		
+		// Create medium wooden carriage wheel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_WOODEN_CARRIAGE_WHEEL.get())
+					.pattern(" P ")
+					.pattern("PBP")
+					.pattern(" P ")
+					.define('P', ItemTags.PLANKS)
+					.define('B', Items.STONE)
+					.unlockedBy("has_planks", has(ItemTags.PLANKS))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_wooden_carriage_wheel"));
+		}
+		
+		// Create large wooden carriage wheel
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LARGE_WOODEN_CARRIAGE_WHEEL.get())
+					.pattern("SPS")
+					.pattern("PBP")
+					.pattern("SPS")
+					.define('P', ItemTags.PLANKS)
+					.define('B', Items.STONE)
+					.define('S', ItemTags.WOODEN_SLABS)
+					.unlockedBy("has_planks", has(ItemTags.PLANKS))
+					.unlockedBy("has_wooden_slab", has(ItemTags.WOODEN_SLABS))
+					.unlockedBy("has_stone", has(Items.STONE))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_wooden_carriage_wheel"));
+		}
+				
 		// Firearms
 		// Matchlock
 		// Create matchlock derringer
@@ -1197,6 +1411,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.FLINT)					
 					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_flint", has(Items.FLINT))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_stone_musket_ball"));
 		}
 		
@@ -1208,6 +1423,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.FLINT)
 					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_flint", has(Items.FLINT))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_stone_musket_ball"));
 		}
 		
@@ -1220,6 +1436,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.FLINT)
 					.unlockedBy("has_stone", has(Items.STONE))
 					.unlockedBy("has_flint", has(Items.FLINT))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_stone_musket_ball"));
 		}
 				
@@ -1230,6 +1447,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)					
 					.unlockedBy("has_gravel", has(Tags.Items.GRAVEL))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_stone_birdshot"));
 		}
 		
@@ -1242,6 +1460,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_gravel", has(Tags.Items.GRAVEL))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_stone_birdshot"));
 		}
 		
@@ -1255,6 +1474,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_gravel", has(Tags.Items.GRAVEL))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_stone_birdshot"));
 		}
 		
@@ -1265,6 +1485,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("ii")
 					.define('i', Tags.Items.NUGGETS_IRON)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_iron_musket_ball"));
 		}
 		
@@ -1277,6 +1498,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('I', Tags.Items.INGOTS_IRON)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_musket_ball"));
 		}
 		
@@ -1287,6 +1509,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("II")
 					.define('I', Tags.Items.INGOTS_IRON)
 					.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_musket_ball"));
 		}
 		
@@ -1299,6 +1522,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_small_iron_musket_ball", has(ModItems.SMALL_IRON_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_iron_buckshot"));
 		}
 		
@@ -1313,6 +1537,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_small_iron_musket_ball", has(ModItems.SMALL_IRON_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_buckshot"));
 		}
 		
@@ -1328,6 +1553,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_small_iron_musket_ball", has(ModItems.SMALL_IRON_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_buckshot"));
 		}
 		
@@ -1340,6 +1566,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_iron_birdshot"));
 		}
 		
@@ -1354,6 +1581,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_birdshot"));
 		}
 		
@@ -1369,6 +1597,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_iron_birdshot"));
 		}
 		
@@ -1379,6 +1608,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("ll")
 					.define('l', ModTags.Items.NUGGETS_LEAD)
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_musket_ball"));
 		}
 		
@@ -1390,7 +1620,8 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('l', ModTags.Items.NUGGETS_LEAD)
 					.define('L', ModTags.Items.INGOTS_LEAD)						
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
-					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))					
+					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))		
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_lead_musket_ball"));
 		}
 		
@@ -1401,6 +1632,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.pattern("LL")
 					.define('L', ModTags.Items.INGOTS_LEAD)	
 					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_musket_ball"));
 		}
 		
@@ -1413,6 +1645,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_small_lead_musket_ball", has(ModItems.SMALL_LEAD_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_buckshot"));
 		}
 		
@@ -1427,6 +1660,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_small_lead_musket_ball", has(ModItems.SMALL_LEAD_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_lead_buckshot"));
 		}
 		
@@ -1442,6 +1676,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_small_lead_musket_ball", has(ModItems.SMALL_LEAD_MUSKET_BALL.get()))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_buckshot"));
 		}
 		
@@ -1454,6 +1689,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "small_lead_birdshot"));
 		}
 		
@@ -1468,6 +1704,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))					
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_lead_birdshot"));
 		}
 		
@@ -1483,6 +1720,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.requires(Items.PAPER)
 					.unlockedBy("has_lead_nugget", has(ModTags.Items.NUGGETS_LEAD))
 					.unlockedBy("has_paper", has(Items.PAPER))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_lead_birdshot"));
 		}
 		

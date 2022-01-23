@@ -1,5 +1,10 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_iron_firearm_ammo"
+    }
+  ],
   "ingredients": [
     {
       "item": "oldguns:small_iron_musket_ball"

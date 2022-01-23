@@ -29,7 +29,46 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 	@Override
 	protected void addTags() {
 		
+		// Artillery
+		// Pieces
+		
+		// Ammo
+		tag(ModTags.Items.SMALL_POWDER_CHARGE)
+			.add(ModItems.SMALL_POWDER_CHARGE.get());
+		
+		tag(ModTags.Items.MEDIUM_POWDER_CHARGE)
+			.add(ModItems.MEDIUM_POWDER_CHARGE.get());
+		
+		tag(ModTags.Items.LARGE_POWDER_CHARGE)
+			.add(ModItems.LARGE_POWDER_CHARGE.get());
+	
+		// Parts
+		tag(ModTags.Items.MEDIUM_METAL_CANNON_BARREL)
+			.add(ModItems.LARGE_IRON_CANNON_BARREL.get());
+		
+		tag(ModTags.Items.SMALL_NAVAL_CARRIAGE)
+			.add(ModItems.SMALL_WOODEN_NAVAL_CARRIAGE.get());
+		
+		tag(ModTags.Items.MEDIUM_NAVAL_CARRIAGE)
+			.add(ModItems.MEDIUM_WOODEN_NAVAL_CARRIAGE.get());
+		
+		tag(ModTags.Items.LARGE_NAVAL_CARRIAGE)
+			.add(ModItems.LARGE_WOODEN_NAVAL_CARRIAGE.get());
+		
+		tag(ModTags.Items.TINY_CARRIAGE_WHEEL)
+			.add(ModItems.TINY_WOODEN_CARRIAGE_WHEEL.get());
+		
+		tag(ModTags.Items.SMALL_CARRIAGE_WHEEL)
+			.add(ModItems.SMALL_WOODEN_CARRIAGE_WHEEL.get());
+		
+		tag(ModTags.Items.MEDIUM_CARRIAGE_WHEEL)
+			.add(ModItems.MEDIUM_WOODEN_CARRIAGE_WHEEL.get());
+		
+		tag(ModTags.Items.LARGE_CARRIAGE_WHEEL)
+			.add(ModItems.LARGE_WOODEN_CARRIAGE_WHEEL.get());
+		
 		// Firearms
+		// Weapons
 		tag(ModTags.Items.FIREARM)
 			.add(ModItems.MATCHLOCK_DERRINGER.get())
 			.add(ModItems.MATCHLOCK_PISTOL.get())

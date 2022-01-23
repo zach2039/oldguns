@@ -43,9 +43,9 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  * @author Choonster
  */
 public class EnhancedShapedRecipeBuilder<
-		RECIPE extends Recipe<?>,
-		BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
-		> extends ShapedRecipeBuilder {
+RECIPE extends Recipe<?>,
+BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
+> extends ShapedRecipeBuilder {
 	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapedRecipeBuilder.class, /* ensureValid */ "m_126143_", ResourceLocation.class);
 	private static final Field ADVANCEMENT = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* advancement */ "f_126110_");
 	private static final Field GROUP = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* group */ "f_126111_");
@@ -127,7 +127,7 @@ public class EnhancedShapedRecipeBuilder<
 	public BUILDER group(final String group) {
 		return (BUILDER) super.group(group);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public BUILDER condition(final ResourceLocation condition) {
 		this.conditions.add(condition);
@@ -239,84 +239,86 @@ public class EnhancedShapedRecipeBuilder<
 			}
 		}
 	}
-	
-	 public static class ConditionedResult implements FinishedRecipe {
-	      private final ResourceLocation id;
-	      private final Item result;
-	      private final int count;
-	      private final String group;
-	      private final List<String> pattern;
-	      private final Map<Character, Ingredient> key;
-	      private final Advancement.Builder advancement;
-	      private final ResourceLocation advancementId;
-	      private final List<ResourceLocation> conditions;
 
-	      public ConditionedResult(ResourceLocation p_176754_, Item p_176755_, int p_176756_, String p_176757_, List<String> p_176758_, Map<Character, Ingredient> p_176759_, Advancement.Builder p_176760_, ResourceLocation p_176761_, List<ResourceLocation> conditions) {
-	         this.id = p_176754_;
-	         this.result = p_176755_;
-	         this.count = p_176756_;
-	         this.group = p_176757_;
-	         this.pattern = p_176758_;
-	         this.key = p_176759_;
-	         this.advancement = p_176760_;
-	         this.advancementId = p_176761_;
-	         this.conditions = conditions;
-	      }
+	public static class ConditionedResult implements FinishedRecipe {
+		private final ResourceLocation id;
+		private final Item result;
+		private final int count;
+		private final String group;
+		private final List<String> pattern;
+		private final Map<Character, Ingredient> key;
+		private final Advancement.Builder advancement;
+		private final ResourceLocation advancementId;
+		private final List<ResourceLocation> conditions;
 
-	    @SuppressWarnings("deprecation")
+		public ConditionedResult(ResourceLocation p_176754_, Item p_176755_, int p_176756_, String p_176757_, List<String> p_176758_, Map<Character, Ingredient> p_176759_, Advancement.Builder p_176760_, ResourceLocation p_176761_, List<ResourceLocation> conditions) {
+			this.id = p_176754_;
+			this.result = p_176755_;
+			this.count = p_176756_;
+			this.group = p_176757_;
+			this.pattern = p_176758_;
+			this.key = p_176759_;
+			this.advancement = p_176760_;
+			this.advancementId = p_176761_;
+			this.conditions = conditions;
+		}
+
+		@SuppressWarnings("deprecation")
 		public void serializeRecipeData(JsonObject p_126167_) {
-	         if (!this.group.isEmpty()) {
-	            p_126167_.addProperty("group", this.group);
-	         }
-	         
-	         JsonArray condArray = new JsonArray();
-	         
-	         for(ResourceLocation l : this.conditions) {
-	        	 JsonObject typeObj = new JsonObject();
-	        	 typeObj.addProperty("type", l.toString());
-	        	 condArray.add(typeObj); 
-	         }
-	         
-	         p_126167_.add("conditions", condArray);
-	         JsonArray jsonarray = new JsonArray();
+			if (!this.group.isEmpty()) {
+				p_126167_.addProperty("group", this.group);
+			}
 
-	         for(String s : this.pattern) {
-	            jsonarray.add(s);
-	         }
+			JsonArray condArray = new JsonArray();
 
-	         p_126167_.add("pattern", jsonarray);
-	         JsonObject jsonobject = new JsonObject();
+			for(ResourceLocation l : this.conditions) {
+				JsonObject typeObj = new JsonObject();
+				typeObj.addProperty("type", l.toString());
+				condArray.add(typeObj); 
+			}
 
-	         for(Entry<Character, Ingredient> entry : this.key.entrySet()) {
-	            jsonobject.add(String.valueOf(entry.getKey()), entry.getValue().toJson());
-	         }
+			p_126167_.add("conditions", condArray);
+			JsonArray jsonarray = new JsonArray();
 
-	         p_126167_.add("key", jsonobject);
-	         JsonObject jsonobject1 = new JsonObject();
-	         jsonobject1.addProperty("item", Registry.ITEM.getKey(this.result).toString());
-	         if (this.count > 1) {
-	            jsonobject1.addProperty("count", this.count);
-	         }
+			for(String s : this.pattern) {
+				jsonarray.add(s);
+			}
 
-	         p_126167_.add("result", jsonobject1);
-	      }
+			p_126167_.add("pattern", jsonarray);
+			JsonObject jsonobject = new JsonObject();
 
-	      public RecipeSerializer<?> getType() {
-	         return RecipeSerializer.SHAPED_RECIPE;
-	      }
+			for(Entry<Character, Ingredient> entry : this.key.entrySet()) {
+				jsonobject.add(String.valueOf(entry.getKey()), entry.getValue().toJson());
+			}
 
-	      public ResourceLocation getId() {
-	         return this.id;
-	      }
+			p_126167_.add("key", jsonobject);
+			JsonObject jsonobject1 = new JsonObject();
+			jsonobject1.addProperty("item", Registry.ITEM.getKey(this.result).toString());
+			if (this.count > 1) {
+				jsonobject1.addProperty("count", this.count);
+			}
 
-	      @Nullable
-	      public JsonObject serializeAdvancement() {
-	         return this.advancement.serializeToJson();
-	      }
+			p_126167_.add("result", jsonobject1);
+		}
 
-	      @Nullable
-	      public ResourceLocation getAdvancementId() {
-	         return this.advancementId;
-	      }
-	   }
+		public RecipeSerializer<?> getType() {
+			return RecipeSerializer.SHAPED_RECIPE;
+		}
+
+		public ResourceLocation getId() {
+			return this.id;
+		}
+
+		@Nullable
+		public JsonObject serializeAdvancement() {
+			return this.advancement.serializeToJson();
+		}
+
+		@Nullable
+		public ResourceLocation getAdvancementId() {
+			return this.advancementId;
+		}
+	}
+
+
 }

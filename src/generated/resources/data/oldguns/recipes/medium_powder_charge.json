@@ -1,0 +1,31 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_artillery_powder_charges"
+    }
+  ],
+  "ingredients": [
+    {
+      "tag": "oldguns:any_gunpowder"
+    },
+    {
+      "tag": "oldguns:any_gunpowder"
+    },
+    {
+      "tag": "oldguns:any_gunpowder"
+    },
+    {
+      "tag": "oldguns:any_gunpowder"
+    },
+    {
+      "item": "minecraft:paper"
+    },
+    {
+      "item": "minecraft:paper"
+    }
+  ],
+  "result": {
+    "item": "oldguns:medium_powder_charge"
+  }
+}

@@ -113,6 +113,19 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_POWDER_CHARGE.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_POWDER_CHARGE.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_CANNON_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANNON_BARREL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_CANNON_BARREL.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_NAVAL_CARRIAGE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_NAVAL_CARRIAGE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_WOODEN_NAVAL_CARRIAGE.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.TINY_WOODEN_CARRIAGE_WHEEL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.SMALL_WOODEN_CARRIAGE_WHEEL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_WOODEN_CARRIAGE_WHEEL.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LARGE_WOODEN_CARRIAGE_WHEEL.get());
+		
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_DERRINGER.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_PISTOL.get());
 		firearmMuzzleloaderItem(ModItems.MATCHLOCK_ARQUEBUS.get());

@@ -77,6 +77,7 @@ import com.zach2039.oldguns.world.item.material.MediumGradeBlackPowderItem;
 import com.zach2039.oldguns.world.item.material.NiterItem;
 import com.zach2039.oldguns.world.item.material.NitrateSoilItem;
 import com.zach2039.oldguns.world.item.material.SulfurItem;
+import com.zach2039.oldguns.world.item.part.ArtilleryPartItem;
 import com.zach2039.oldguns.world.item.part.CaplockMechanismItem;
 import com.zach2039.oldguns.world.item.part.FirearmPartItem;
 import com.zach2039.oldguns.world.item.part.FlintlockMechanismItem;
@@ -87,32 +88,42 @@ import com.zach2039.oldguns.world.item.part.IronTriggerAssemblyItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronBarrelItem;
+import com.zach2039.oldguns.world.item.part.LargeIronCannonBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeIronFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.LargeStoneFlaredBarrelItem;
+import com.zach2039.oldguns.world.item.part.LargeWoodenCarriageWheelItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenHandleItem;
+import com.zach2039.oldguns.world.item.part.LargeWoodenNavalCarriageItem;
 import com.zach2039.oldguns.world.item.part.LargeWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.MatchCordItem;
 import com.zach2039.oldguns.world.item.part.MatchlockMechanismItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumIronBarrelItem;
+import com.zach2039.oldguns.world.item.part.MediumIronCannonBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumIronFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.MediumStoneFlaredBarrelItem;
+import com.zach2039.oldguns.world.item.part.MediumWoodenCarriageWheelItem;
 import com.zach2039.oldguns.world.item.part.MediumWoodenHandleItem;
+import com.zach2039.oldguns.world.item.part.MediumWoodenNavalCarriageItem;
 import com.zach2039.oldguns.world.item.part.MediumWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.SmallBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallBrassFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallIronBarrelItem;
+import com.zach2039.oldguns.world.item.part.SmallIronCannonBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallIronFlaredBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallStoneBarrelItem;
 import com.zach2039.oldguns.world.item.part.SmallStoneFlaredBarrelItem;
+import com.zach2039.oldguns.world.item.part.SmallWoodenCarriageWheelItem;
 import com.zach2039.oldguns.world.item.part.SmallWoodenHandleItem;
+import com.zach2039.oldguns.world.item.part.SmallWoodenNavalCarriageItem;
 import com.zach2039.oldguns.world.item.part.SmallWoodenStockItem;
 import com.zach2039.oldguns.world.item.part.TinyBrassBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyIronBarrelItem;
 import com.zach2039.oldguns.world.item.part.TinyStoneBarrelItem;
+import com.zach2039.oldguns.world.item.part.TinyWoodenCarriageWheelItem;
 import com.zach2039.oldguns.world.item.part.WheellockMechanismItem;
 import com.zach2039.oldguns.world.item.part.WoodGearSetItem;
 import com.zach2039.oldguns.world.item.part.WoodTriggerAssemblyItem;
@@ -145,13 +156,12 @@ public class ModItems {
 	private static boolean isInitialized;
 	
 	// Artillery	
-	
-	// Artillery ammo
+	// Pieces
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANNONBALL = ITEMS.register("medium_iron_cannonball",
 			() -> new MediumIronCannonball()
 		);
 	
-	// Artillery Charges
+	// Ammo
 	public static final RegistryObject<SmallPowderCharge> SMALL_POWDER_CHARGE = ITEMS.register("small_powder_charge",
 			() -> new SmallPowderCharge()
 		);
@@ -160,6 +170,40 @@ public class ModItems {
 		);
 	public static final RegistryObject<LargePowderCharge> LARGE_POWDER_CHARGE = ITEMS.register("large_powder_charge",
 			() -> new LargePowderCharge()
+		);
+	
+	// Parts
+	public static final RegistryObject<ArtilleryPartItem> SMALL_IRON_CANNON_BARREL = ITEMS.register("small_iron_cannon_barrel",
+			() -> new SmallIronCannonBarrelItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> MEDIUM_IRON_CANNON_BARREL = ITEMS.register("medium_iron_cannon_barrel",
+			() -> new MediumIronCannonBarrelItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> LARGE_IRON_CANNON_BARREL = ITEMS.register("large_iron_cannon_barrel",
+			() -> new LargeIronCannonBarrelItem()
+		);
+	
+	public static final RegistryObject<ArtilleryPartItem> SMALL_WOODEN_NAVAL_CARRIAGE = ITEMS.register("small_wooden_naval_carriage",
+			() -> new SmallWoodenNavalCarriageItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> MEDIUM_WOODEN_NAVAL_CARRIAGE = ITEMS.register("medium_wooden_naval_carriage",
+			() -> new MediumWoodenNavalCarriageItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> LARGE_WOODEN_NAVAL_CARRIAGE = ITEMS.register("large_wooden_naval_carriage",
+			() -> new LargeWoodenNavalCarriageItem()
+		);
+	
+	public static final RegistryObject<ArtilleryPartItem> TINY_WOODEN_CARRIAGE_WHEEL = ITEMS.register("tiny_wooden_carriage_wheel",
+			() -> new TinyWoodenCarriageWheelItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> SMALL_WOODEN_CARRIAGE_WHEEL = ITEMS.register("small_wooden_carriage_wheel",
+			() -> new SmallWoodenCarriageWheelItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> MEDIUM_WOODEN_CARRIAGE_WHEEL = ITEMS.register("medium_wooden_carriage_wheel",
+			() -> new MediumWoodenCarriageWheelItem()
+		);
+	public static final RegistryObject<ArtilleryPartItem> LARGE_WOODEN_CARRIAGE_WHEEL = ITEMS.register("large_wooden_carriage_wheel",
+			() -> new LargeWoodenCarriageWheelItem()
 		);
 	
 	// Firearms

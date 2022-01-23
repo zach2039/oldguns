@@ -1,6 +1,10 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_iron_firearm_ammo"
+    }
+  ],
   "pattern": [
     "II",
     "II"

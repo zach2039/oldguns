@@ -27,6 +27,31 @@ public class ModTags {
 	
 	public static class Items {
 		
+		// Artillery
+		// Ammo
+		public static final Tag.Named<Item> SMALL_POWDER_CHARGE = tag("small_powder_charge");
+		public static final Tag.Named<Item> MEDIUM_POWDER_CHARGE = tag("medium_powder_charge");
+		public static final Tag.Named<Item> LARGE_POWDER_CHARGE = tag("large_powder_charge");
+		
+		// Parts
+		public static final Tag.Named<Item> SMALL_ROCK_CANNON_BARREL = tag("small_rock_cannon_barrel");
+		public static final Tag.Named<Item> MEDIUM_ROCK_CANNON_BARREL = tag("medium_rock_cannon_barrel");
+		public static final Tag.Named<Item> LARGE_ROCK_CANNON_BARREL = tag("large_rock_cannon_barrel");
+		
+		public static final Tag.Named<Item> SMALL_METAL_CANNON_BARREL = tag("small_metal_cannon_barrel");
+		public static final Tag.Named<Item> MEDIUM_METAL_CANNON_BARREL = tag("medium_metal_cannon_barrel");
+		public static final Tag.Named<Item> LARGE_METAL_CANNON_BARREL = tag("large_metal_cannon_barrel");
+		
+		public static final Tag.Named<Item> SMALL_NAVAL_CARRIAGE = tag("small_naval_carriage");
+		public static final Tag.Named<Item> MEDIUM_NAVAL_CARRIAGE = tag("medium_naval_carriage");
+		public static final Tag.Named<Item> LARGE_NAVAL_CARRIAGE = tag("large_naval_carriage");
+		
+		public static final Tag.Named<Item> TINY_CARRIAGE_WHEEL = tag("tiny_carriage_wheel");
+		public static final Tag.Named<Item> SMALL_CARRIAGE_WHEEL = tag("small_carriage_wheel");
+		public static final Tag.Named<Item> MEDIUM_CARRIAGE_WHEEL = tag("medium_carriage_wheel");
+		public static final Tag.Named<Item> LARGE_CARRIAGE_WHEEL = tag("large_carriage_wheel");
+		
+		
 		// Firearms
 		public static final Tag.Named<Item> FIREARM = tag("firearm");
 		

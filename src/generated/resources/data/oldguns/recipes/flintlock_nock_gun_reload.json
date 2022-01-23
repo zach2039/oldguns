@@ -1,5 +1,6 @@
 {
   "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
   "ingredients": [
     {
       "item": "oldguns:flintlock_nock_gun"

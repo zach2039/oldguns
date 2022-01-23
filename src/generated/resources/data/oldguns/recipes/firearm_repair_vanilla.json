@@ -1,5 +1,6 @@
 {
   "type": "oldguns:firearm_repair_shapeless",
+  "conditions": [],
   "ingredients": [
     {
       "tag": "oldguns:firearm"

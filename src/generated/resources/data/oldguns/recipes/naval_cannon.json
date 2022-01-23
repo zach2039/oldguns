@@ -1,0 +1,22 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    " B ",
+    "WCW"
+  ],
+  "key": {
+    "W": {
+      "tag": "oldguns:tiny_carriage_wheel"
+    },
+    "C": {
+      "tag": "oldguns:medium_naval_carriage"
+    },
+    "B": {
+      "tag": "oldguns:medium_metal_cannon_barrel"
+    }
+  },
+  "result": {
+    "item": "oldguns:naval_cannon"
+  }
+}

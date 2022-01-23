@@ -1,5 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [],
   "ingredients": [
     {
       "item": "oldguns:lead_nugget"

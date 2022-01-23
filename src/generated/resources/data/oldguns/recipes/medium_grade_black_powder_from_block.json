@@ -1,5 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_mortar_and_pestle_shapeless",
+  "conditions": [],
   "ingredients": [
     {
       "item": "oldguns:medium_grade_black_powder_block"

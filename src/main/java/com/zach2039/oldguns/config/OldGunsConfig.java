@@ -187,6 +187,7 @@ public class OldGunsConfig {
 	
 	public static class ArtilleryRecipeSettings {
 		public final BooleanValue allowNavalCannonArtilleryCrafting;
+		public final BooleanValue allowArtilleryPowderChargesCrafting;
 		public final BooleanValue allowStoneArtilleryAmmoCrafting;
 		public final BooleanValue allowIronArtilleryAmmoCrafting;
 		public final BooleanValue allowLeadArtilleryAmmoCrafting;
@@ -197,6 +198,10 @@ public class OldGunsConfig {
 			allowNavalCannonArtilleryCrafting = builder
 					.comment("Enable/disable naval cannon artillery craft")
 					.define("allowNavalCannonCrafting", true);
+			
+			allowArtilleryPowderChargesCrafting = builder
+					.comment("Enable/disable powder charge crafts")
+					.define("allowArtilleryPowderChargeCrafting", true);
 			
 			allowStoneArtilleryAmmoCrafting = builder
 					.comment("Enable/disable stone artillery ammo crafts")

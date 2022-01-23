@@ -80,7 +80,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium-grade Black Powder");
 		
-		addBlock(ModBlocks.NAVAL_CANNON, "Naval Cannon [WIP]");
+		addBlock(ModBlocks.NAVAL_CANNON, "Naval Cannon");
 	}
 
 	private void addItems() {
@@ -89,6 +89,19 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.SMALL_POWDER_CHARGE, "Small Powder Charge");
 		addItem(ModItems.MEDIUM_POWDER_CHARGE, "Medium Powder Charge");
 		addItem(ModItems.LARGE_POWDER_CHARGE, "Large Powder Charge");
+		
+		addItem(ModItems.SMALL_IRON_CANNON_BARREL, "Small Iron Cannon Barrel");
+		addItem(ModItems.MEDIUM_IRON_CANNON_BARREL, "Medium Iron Cannon Barrel");
+		addItem(ModItems.LARGE_IRON_CANNON_BARREL, "Large Iron Cannon Barrel");
+		
+		addItem(ModItems.SMALL_WOODEN_NAVAL_CARRIAGE, "Small Wooden Naval Carriage");
+		addItem(ModItems.MEDIUM_WOODEN_NAVAL_CARRIAGE, "Medium Wooden Naval Carriage");
+		addItem(ModItems.LARGE_WOODEN_NAVAL_CARRIAGE, "Large Wooden Naval Carriage");
+		
+		addItem(ModItems.TINY_WOODEN_CARRIAGE_WHEEL, "Tiny Wooden Carriage Wheel");
+		addItem(ModItems.SMALL_WOODEN_CARRIAGE_WHEEL, "Small Wooden Carriage Wheel");
+		addItem(ModItems.MEDIUM_WOODEN_CARRIAGE_WHEEL, "Medium Wooden Carriage Wheel");
+		addItem(ModItems.LARGE_WOODEN_CARRIAGE_WHEEL, "Large Wooden Carriage Wheel");
 		
 		addItem(ModItems.MATCHLOCK_DERRINGER, "Matchlock Derringer");
 		addItem(ModItems.MATCHLOCK_PISTOL, "Matchlock Pistol");
