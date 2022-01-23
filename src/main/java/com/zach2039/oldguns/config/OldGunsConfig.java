@@ -1302,6 +1302,9 @@ public class OldGunsConfig {
 		public final ArtilleryAmmoAttributes small_iron_grapeshot;
 		public final ArtilleryAmmoAttributes medium_iron_grapeshot;
 		public final ArtilleryAmmoAttributes large_iron_grapeshot;
+		public final ArtilleryAmmoAttributes small_iron_canister_shot;
+		public final ArtilleryAmmoAttributes medium_iron_canister_shot;
+		public final ArtilleryAmmoAttributes large_iron_canister_shot;
 		
 		ArtilleryAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -1318,7 +1321,7 @@ public class OldGunsConfig {
 					100.0f,
 					1.0f,
 					0,
-					0f
+					2f
 					);
 			
 			medium_iron_cannonball = new ArtilleryAmmoAttributes(
@@ -1332,7 +1335,7 @@ public class OldGunsConfig {
 					300.0f,
 					1.0f,
 					0,
-					0f
+					3f
 					);
 			
 			large_iron_cannonball = new ArtilleryAmmoAttributes(
@@ -1346,7 +1349,7 @@ public class OldGunsConfig {
 					500.0f,
 					1.0f,
 					0,
-					0f
+					4f
 					);
 		
 			small_iron_grapeshot = new ArtilleryAmmoAttributes(
@@ -1358,7 +1361,7 @@ public class OldGunsConfig {
 					20.0f,
 					0.2f,
 					30.0f,
-					3.0f,
+					6.0f,
 					0,
 					0f
 					);
@@ -1372,7 +1375,7 @@ public class OldGunsConfig {
 					20.0f,
 					0.2f,
 					20.0f,
-					3.0f,
+					6.0f,
 					0,
 					0f
 					);
@@ -1386,11 +1389,53 @@ public class OldGunsConfig {
 					20.0f,
 					0.2f,
 					20.0f,
-					3.0f,
+					6.0f,
 					0,
 					0f
 					);
 	
+			small_iron_canister_shot = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Small Iron Canister Shot ammo",
+					"small_iron_canister_shot",
+					1,
+					1,
+					15.0f,
+					0.4f,
+					100.0f,
+					1.0f,
+					40,
+					10f
+					);
+			
+			medium_iron_canister_shot = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Canister Shot ammo",
+					"medium_iron_canister_shot",
+					1,
+					1,
+					15.0f,
+					0.6f,
+					100.0f,
+					1.0f,
+					40,
+					15f
+					);
+			
+			large_iron_canister_shot = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Large Iron Canister Shot ammo",
+					"large_iron_canister_shot",
+					1,
+					1,
+					15.0f,
+					0.8f,
+					100.0f,
+					1.0f,
+					40,
+					20f
+					);
+			
 			builder.pop();
 		}
 	}

@@ -138,6 +138,9 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 					worldIn, shooter);*/
 			entityBullet.setDamage(getProjectileDamage());
 			entityBullet.setProjectileSize(getProjectileSize());
+			entityBullet.setProjectileType(getAmmoType());
+			entityBullet.setEffectStrength(getEffectPotency());
+			entityBullet.setEffectTicks(getEffectTicks());
 			projectileEntityList.add(entityBullet);
 		}
 		

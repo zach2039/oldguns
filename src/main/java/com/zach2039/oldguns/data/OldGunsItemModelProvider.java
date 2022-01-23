@@ -109,6 +109,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	protected void registerModels() {		
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANNONBALL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_GRAPESHOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANISTER_SHOT.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_POWDER_CHARGE.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_POWDER_CHARGE.get());

@@ -2,6 +2,7 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
+import com.zach2039.oldguns.world.item.ammo.artillery.MediumIronCanisterShot;
 import com.zach2039.oldguns.world.item.ammo.artillery.MediumIronCannonball;
 import com.zach2039.oldguns.world.item.ammo.artillery.MediumIronGrapeshot;
 import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
@@ -165,6 +166,9 @@ public class ModItems {
 		);
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_GRAPESHOT = ITEMS.register("medium_iron_grapeshot",
 			() -> new MediumIronGrapeshot()
+		);
+	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANISTER_SHOT = ITEMS.register("medium_iron_canister_shot",
+			() -> new MediumIronCanisterShot()
 		);
 	
 	public static final RegistryObject<SmallPowderCharge> SMALL_POWDER_CHARGE = ITEMS.register("small_powder_charge",

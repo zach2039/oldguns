@@ -86,6 +86,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	private void addItems() {
 		addItem(ModItems.MEDIUM_IRON_CANNONBALL, "Medium Iron Cannonball");
 		addItem(ModItems.MEDIUM_IRON_GRAPESHOT, "Medium Iron Grapeshot");
+		addItem(ModItems.MEDIUM_IRON_CANISTER_SHOT, "Medium Iron Canister Shot");
 		
 		addItem(ModItems.SMALL_POWDER_CHARGE, "Small Powder Charge");
 		addItem(ModItems.MEDIUM_POWDER_CHARGE, "Medium Powder Charge");
@@ -278,7 +279,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
 		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
 		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart by artillery fire by %2$s.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart from artillery fire by %2$s.");
 	}
 
 	private void addKeyBindings() {
