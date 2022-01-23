@@ -114,13 +114,47 @@ public class OldGunsConfig {
 	}
 	
 	public static class RecipeSettings {
-		public final BooleanValue allowMatchlockWeaponsCrafting;
-		public final BooleanValue allowWheellockWeaponsCrafting;
-		public final BooleanValue allowFlintlockWeaponsCrafting;
+		public final FirearmRecipeSettings firearmRecipeSettings;
+		public final ArtilleryRecipeSettings artilleryRecipeSettings;
 		public final DesignNotesSettings designNotesSettings;
 		public final BlackPowderManufactureSettings blackPowderManufactureSettings;
 		
 		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			firearmRecipeSettings = new FirearmRecipeSettings(
+					builder,
+					"Firearm recipe settings",
+					"firearmRecipeSettings");
+			
+			artilleryRecipeSettings = new ArtilleryRecipeSettings(
+					builder,
+					"Artillery recipe settings",
+					"artilleryRecipeSettings");
+			
+			designNotesSettings = new DesignNotesSettings(
+					builder,
+					"Design notes settings",
+					"designNotesSettings");
+			
+			blackPowderManufactureSettings = new BlackPowderManufactureSettings(
+					builder,
+					"Black Powder manufacture settings",
+					"blackPowderManufactureSettings");
+			
+			builder.pop();
+		}
+	}
+	
+	public static class FirearmRecipeSettings {
+		public final BooleanValue allowMatchlockWeaponsCrafting;
+		public final BooleanValue allowWheellockWeaponsCrafting;
+		public final BooleanValue allowFlintlockWeaponsCrafting;
+		public final BooleanValue allowStoneFirearmAmmoCrafting;
+		public final BooleanValue allowIronFirearmAmmoCrafting;
+		public final BooleanValue allowLeadFirearmAmmoCrafting;
+		
+		FirearmRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowMatchlockWeaponsCrafting = builder
@@ -135,15 +169,46 @@ public class OldGunsConfig {
 					.comment("Enable/disable flintlock firearm crafts")
 					.define("allowFlintlockWeaponsCrafting", true);
 			
-			designNotesSettings = new DesignNotesSettings(
-					builder,
-					"Design notes settings",
-					"designNotesSettings");
+			allowStoneFirearmAmmoCrafting = builder
+					.comment("Enable/disable stone firearm ammo crafts")
+					.define("allowStoneFirearmAmmoCrafting", true);
 			
-			blackPowderManufactureSettings = new BlackPowderManufactureSettings(
-					builder,
-					"Black Powder manufacture settings",
-					"blackPowderManufactureSettings");
+			allowIronFirearmAmmoCrafting = builder
+					.comment("Enable/disable iron firearm ammo crafts")
+					.define("allowIronFirearmAmmoCrafting", true);
+			
+			allowLeadFirearmAmmoCrafting = builder
+					.comment("Enable/disable lead firearm ammo crafts")
+					.define("allowLeadFirearmAmmoCrafting", true);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class ArtilleryRecipeSettings {
+		public final BooleanValue allowNavalCannonArtilleryCrafting;
+		public final BooleanValue allowStoneArtilleryAmmoCrafting;
+		public final BooleanValue allowIronArtilleryAmmoCrafting;
+		public final BooleanValue allowLeadArtilleryAmmoCrafting;
+		
+		ArtilleryRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowNavalCannonArtilleryCrafting = builder
+					.comment("Enable/disable naval cannon artillery craft")
+					.define("allowNavalCannonCrafting", true);
+			
+			allowStoneArtilleryAmmoCrafting = builder
+					.comment("Enable/disable stone artillery ammo crafts")
+					.define("allowStoneFirearmAmmoCrafting", true);
+			
+			allowIronArtilleryAmmoCrafting = builder
+					.comment("Enable/disable iron artillery ammo crafts")
+					.define("allowIronFirearmAmmoCrafting", true);
+			
+			allowLeadArtilleryAmmoCrafting = builder
+					.comment("Enable/disable lead artillery ammo crafts")
+					.define("allowLeadFirearmAmmoCrafting", true);
 			
 			builder.pop();
 		}
