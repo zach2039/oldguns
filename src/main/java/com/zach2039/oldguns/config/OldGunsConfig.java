@@ -1404,7 +1404,7 @@ public class OldGunsConfig {
 					0.4f,
 					100.0f,
 					1.0f,
-					40,
+					20,
 					10f
 					);
 			
@@ -1418,7 +1418,7 @@ public class OldGunsConfig {
 					0.6f,
 					100.0f,
 					1.0f,
-					40,
+					20,
 					15f
 					);
 			
@@ -1432,7 +1432,7 @@ public class OldGunsConfig {
 					0.8f,
 					100.0f,
 					1.0f,
-					40,
+					20,
 					20f
 					);
 			

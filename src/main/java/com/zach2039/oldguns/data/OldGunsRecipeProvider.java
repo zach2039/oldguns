@@ -770,9 +770,23 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.define('I', Tags.Items.INGOTS_IRON)
 					.unlockedBy("has_leather", has(Tags.Items.LEATHER))
 					.unlockedBy("has_small_iron_musket_ball", has( ModItems.LARGE_IRON_MUSKET_BALL.get()))
-					.unlockedBy("has_iron_ingots", has(Tags.Items.NUGGETS_IRON))
+					.unlockedBy("has_iron_ingots", has(Tags.Items.INGOTS_IRON))
 					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_grapeshot"));
+		}
+		
+		// Create medium iron canister shot
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_CANISTER_SHOT.get())
+					.pattern("ii")
+					.pattern("bb")
+					.pattern("ii")
+					.define('i', Tags.Items.NUGGETS_IRON)
+					.define('b', ModItems.LARGE_IRON_BUCKSHOT.get())
+					.unlockedBy("has_large_iron_buckshot", has( ModItems.LARGE_IRON_BUCKSHOT.get()))
+					.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+					.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_canister_shot"));
 		}
 				
 		// Create small powder charge
@@ -959,6 +973,46 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "large_wooden_carriage_wheel"));
 		}
 				
+		// Tools
+		// Create ram rod
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.RAM_ROD.get())
+					.pattern("W  ")
+					.pattern(" S ")
+					.pattern("  S")
+					.define('W', ItemTags.WOOL)
+					.define('S', Tags.Items.RODS_WOODEN)
+					.unlockedBy("has_wool", has(ItemTags.WOOL))
+					.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "ram_rod"));
+		}
+		
+		// Create long match
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.LONG_MATCH.get())
+					.pattern("M  ")
+					.pattern(" S ")
+					.pattern("  S")
+					.define('M', ModItems.MATCH_CORD.get())
+					.define('S', Tags.Items.RODS_WOODEN)
+					.unlockedBy("has_match_cord", has(ModItems.MATCH_CORD.get()))
+					.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "long_match"));
+		}
+		
+		// Create gunners quadrant
+		{
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.GUNNERS_QUADRANT.get())
+					.pattern("SS ")
+					.pattern(" CS")
+					.pattern("  S")
+					.define('C', Items.COMPASS)
+					.define('S', Tags.Items.RODS_WOODEN)
+					.unlockedBy("has_compass", has(Items.COMPASS))
+					.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "gunners_quadrant"));
+		}
+		
 		// Firearms
 		// Matchlock
 		// Create matchlock derringer

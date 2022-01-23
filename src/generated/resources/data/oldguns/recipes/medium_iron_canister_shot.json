@@ -1,0 +1,24 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_iron_artillery_ammo"
+    }
+  ],
+  "pattern": [
+    "ii",
+    "bb",
+    "ii"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:nuggets/iron"
+    },
+    "b": {
+      "item": "oldguns:large_iron_buckshot"
+    }
+  },
+  "result": {
+    "item": "oldguns:medium_iron_canister_shot"
+  }
+}

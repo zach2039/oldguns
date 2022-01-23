@@ -688,7 +688,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 							entityBullet.setEffectiveRange(20f);
 							entityBullet.shoot(
 									xo, yo, zo, 
-									Mth.randomBetween(random, 0f, 360f), Mth.randomBetween(random, 0f, 360f), 
+									Mth.randomBetween(random, 0f, (this.inGround) ? 360f : 120f), Mth.randomBetween(random, 0f, 360f), 
 									0.0F, 3f, 5f);
 							
 							level.addFreshEntity(entityBullet);
