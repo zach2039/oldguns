@@ -39,7 +39,7 @@ pipeline {
 					title: "Old Guns", 
 					link: env.BUILD_URL,
 					result: currentBuild.currentResult,
-					webhookURL: '$discordWebhook'
+					webhookURL: "$discordWebhook"
 			}
         }
     }
