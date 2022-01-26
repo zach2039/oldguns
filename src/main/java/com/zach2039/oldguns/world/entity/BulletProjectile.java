@@ -417,7 +417,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		BlockPos current = blockPosition();
 
 		/* Get distance between launch and current position. */
-		double distance = current.distSqr(launch);
+		double distance = current.distManhattan(launch);
 
 		/* Return based on distance value. */
 		return (distance < effectiveRange) ? true : false;
