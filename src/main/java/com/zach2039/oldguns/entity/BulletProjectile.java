@@ -376,7 +376,7 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 		BlockPos current = blockPosition();
 
 		/* Get distance between launch and current position. */
-		double distance = current.distSqr(launch);
+		double distance = current.distManhattan(launch);
 
 		/* Return based on distance value. */
 		return (distance < effectiveRange) ? true : false;
@@ -741,7 +741,8 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 			this.xRot = (float)(MathHelper.atan2(d6, (double)d4) * (double)(180F / (float)Math.PI));
 			this.xRot = lerpRotation(this.xRotO, this.xRot);
 			this.yRot = lerpRotation(this.yRotO, this.yRot);
-			float f = (this.isInsideEffectiveRange()) ? 1.0f : 0.98F;
+			boolean noFriction = (this.isInsideEffectiveRange() && this.getDamageType() == DamageType.FIREARM);
+			float f = (noFriction) ? 1.0f : 0.98F;
 			//float f1 = 0.05F;
 			if (this.isInWater()) {
 				for(int j = 0; j < 4; ++j) {
@@ -755,7 +756,7 @@ public class BulletProjectile extends ArrowEntity implements IEntityAdditionalSp
 			this.setDeltaMovement(vector3d.scale((double)f));
 			if (!this.isNoGravity() && !flag) {
 				Vector3d vec34 = this.getDeltaMovement();
-				double gravityForce = (this.isInsideEffectiveRange() && this.totalInGroundTime == 0) ? 0.0d : 0.05d;
+				double gravityForce = (noFriction && this.totalInGroundTime == 0) ? 0.0d : 0.05d;
 				this.setDeltaMovement(vec34.x, vec34.y - gravityForce, vec34.z);
 			}
 

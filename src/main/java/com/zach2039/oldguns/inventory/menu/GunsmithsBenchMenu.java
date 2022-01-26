@@ -120,7 +120,7 @@ public class GunsmithsBenchMenu extends Container {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(slotIdx);
 		int playerTotalInvSize = player.inventory.getContainerSize();
-		int totalInvSize = (getSize() + playerTotalInvSize);
+		int menuSize = player.inventoryMenu.getSize();
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
@@ -128,24 +128,24 @@ public class GunsmithsBenchMenu extends Container {
 				this.access.execute((p_39378_, p_39379_) -> {
 					itemstack1.getItem().onCraftedBy(itemstack1, p_39378_, player);
 				});
-				if (!this.moveItemStackTo(itemstack1, getSize(), totalInvSize, true)) {
+				if (!this.moveItemStackTo(itemstack1, getSize(), playerTotalInvSize + menuSize, true)) {
 					return ItemStack.EMPTY;
 				}
 
 				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (slotIdx >= getSize() && slotIdx < (totalInvSize)) {
+			} else if (slotIdx >= getSize() && slotIdx < (playerTotalInvSize + menuSize)) {
 				if (!this.moveItemStackTo(itemstack1, getSize() - 1, getSize(), false)) {
 					if (!this.moveItemStackTo(itemstack1, 1, getSize(), false)) {
-						if (slotIdx < (totalInvSize - getSize())) {
-							if (!this.moveItemStackTo(itemstack1, (totalInvSize - getSize()), totalInvSize, false)) {
+						if (slotIdx < (playerTotalInvSize + menuSize - getSize())) {
+							if (!this.moveItemStackTo(itemstack1, (playerTotalInvSize + menuSize - getSize()), playerTotalInvSize + menuSize, false)) {
 								return ItemStack.EMPTY;
 							}
-						} else if (!this.moveItemStackTo(itemstack1, getSize(), (totalInvSize - getSize()), false)) {
+						} else if (!this.moveItemStackTo(itemstack1, getSize(), (playerTotalInvSize + menuSize - getSize()), false)) {
 							return ItemStack.EMPTY;
 						}
 					}
 				}
-			} else if (!this.moveItemStackTo(itemstack1, getSize(), totalInvSize, false)) {
+			} else if (!this.moveItemStackTo(itemstack1, getSize(), playerTotalInvSize + menuSize, false)) {
 				return ItemStack.EMPTY;
 			}
 
