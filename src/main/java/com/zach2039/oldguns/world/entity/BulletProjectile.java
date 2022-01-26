@@ -894,7 +894,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.setXRot((float)(Mth.atan2(d6, d4) * (double)(180F / (float)Math.PI)));
 			this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
 			this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
-			float f = (this.isInsideEffectiveRange()) ? 1.0f : 0.98F;
+			float f = (this.isInsideEffectiveRange() && this.getDamageType() == DamageType.FIREARM) ? 1.0f : 0.98F;
 			//float f1 = 0.05F;
 			if (!this.isSimulated && this.isInWater()) {
 				for(int j = 0; j < 4; ++j) {
