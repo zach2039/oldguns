@@ -2,6 +2,7 @@
 
 - Fix [#13](https://github.com/zach2039/oldguns/issues/13) causing crash when shift-clicking gun in crafting table during reload
 - Fix effective range for projectiles, using manhattan distance instead of sqr distance
+- Update Jenkinsfile and build.gradle
 
 #### v1.18.1-3.1.1-22
 
