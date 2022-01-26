@@ -1105,7 +1105,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	public void setProjectileSize(float size)
 	{
 		this.entityData.set(PROJECTILE_SIZE, size);
-		this.setBoundingBox(new AABB(-size,-size,-size,size,size,size));
 	}
 
 	/**
