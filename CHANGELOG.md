@@ -1,3 +1,9 @@
+#### v1.18.1-3.1.1-22
+
+- Make artillery projectiles ignore effective range when calculating gravity
+- Fix effective range for projectiles, using manhattan distance instead of sqr distance
+- Fix bounding box set on spawn that kept projectiles from hitting up close
+
 #### v1.18.1-3.1.0-21
 
 - Add gunners quadrant artillery info interact
