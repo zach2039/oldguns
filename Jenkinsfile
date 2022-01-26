@@ -10,7 +10,13 @@ pipeline {
             steps {
                 echo 'Cleaning Project'
                 sh 'chmod +x gradlew'
-                sh './gradlew clean'
+                sh './gradlew clean --no-daemon'
+            }
+        }
+        stage('Generate Data') {
+            steps {
+                echo 'Generating Data for Project'
+                sh './gradlew runData --no-daemon'
             }
         }
         stage('Build and Deploy') {
@@ -20,7 +26,7 @@ pipeline {
             steps {
                 echo 'Building Project'
                 script {
-                    sh './gradlew build'
+                    sh './gradlew build --no-daemon'
                 }
             }
         }
@@ -28,12 +34,12 @@ pipeline {
     post {
         always {
             archive 'build/libs/**.jar'
-			withCredentials([string(credentialsId: "oldguns-discord-webhook", variable: "discordWebhook")]) {
+			withCredentials([string(credentialsId: "oldguns-discord-webhook", variable: '$discordWebhookSecret')]) {
 				discordSend description: "**Status:** " + currentBuild.currentResult.toLowerCase() + "\n**Branch:** ${BRANCH_NAME}\n**Build:** ${BUILD_NUMBER}\n**Changes:** ${RUN_CHANGES_DISPLAY_URL}\n",
 					title: "Old Guns", 
 					link: env.BUILD_URL,
 					result: currentBuild.currentResult,
-					webhookURL: "https://discord.com/api/webhooks/933412044986798081/pK1G32ug5aQFfHbEIj1kZ-bYKgyX6KML7t0lcSKygv1ddMm49DUbntbnU25PDzfO8Wt6"
+					webhookURL: "$discordWebhook"
 			}
         }
     }
