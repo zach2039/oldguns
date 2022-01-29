@@ -28,7 +28,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class NavalCannonRenderer implements BlockEntityRenderer<MediumNavalCannonBlockEntity> {
 
-	private static final ResourceLocation TEXTURE = new ResourceLocation(OldGuns.MODID, "textures/block/entity/naval_cannon.png");
+	private static final ResourceLocation TEXTURE = new ResourceLocation(OldGuns.MODID, "textures/block/entity/ship_cannon.png");
 	private final NavalCannonModel model;
 	
 	public NavalCannonRenderer(BlockEntityRendererProvider.Context ctx) {
@@ -37,7 +37,7 @@ public class NavalCannonRenderer implements BlockEntityRenderer<MediumNavalCanno
 	
 	@SuppressWarnings("resource")
 	@Override
-	public void render(MediumNavalCannonBlockEntity blockEntity, float partialTicks, PoseStack stackIn,	MultiBufferSource buffer, int p_112311_, int p_112312_) {
+	public void render(MediumNavalCannonBlockEntity blockEntity, float partialTicks, PoseStack stackIn,	MultiBufferSource buffer, int packedLight, int packedOverlay) {
 		
 		stackIn.pushPose();
 		
@@ -45,15 +45,16 @@ public class NavalCannonRenderer implements BlockEntityRenderer<MediumNavalCanno
 			renderTrajectory(blockEntity, stackIn, buffer);
 		}
 		
-		stackIn.translate(0.5f, 3.1f, 0.5f);
+		stackIn.translate(0.5f, 2.25f, 0.5f);
 		model.setupAnim(blockEntity, 0, 0, 0, 0, 0);
 		stackIn.mulPose(Vector3f.YP.rotationDegrees(-blockEntity.getYawFromFacing()));
 		
-		stackIn.scale(-1.5f, -1.5f, -1.5f);	
+		stackIn.pushPose();
+		stackIn.scale(1.5f, -1.5f, -1.5f);	
+		VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.entitySolid(TEXTURE));
+		model.renderToBuffer(stackIn, vertexconsumer, packedLight, packedOverlay, 1f, 1f, 1f, 1f); 
+		stackIn.popPose();
 		
-		VertexConsumer vertexconsumer = buffer.getBuffer(RenderType.entityTranslucent(TEXTURE));
-		model.renderToBuffer(stackIn, vertexconsumer, p_112311_, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f); 
-				
 		stackIn.popPose();
 	}
 	

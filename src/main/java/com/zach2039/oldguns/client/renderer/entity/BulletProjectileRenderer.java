@@ -30,13 +30,10 @@ public class BulletProjectileRenderer extends EntityRenderer<BulletProjectile> i
 
 	@Override
 	public void render(BulletProjectile entity, float entityYaw, float partialTicks, @Nonnull PoseStack matrixStackIn, @Nonnull MultiBufferSource bufferIn, int packedLightIn) {
-  
+		super.render(entity, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
+		
 		matrixStackIn.pushPose();	
 		
-		
-		//matrixStackIn.mulPose(Vector3f.XP.rotationDegrees((float) entity.xRotO + entity.flyDist));
-		//matrixStackIn.mulPose(Vector3f.YP.rotationDegrees((float) entity.xRotO - entity.yRotO + entity.flyDist));
-		//matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees((float) entity.yRotO + entity.flyDist));
 		matrixStackIn.translate(0, -1.35f * entity.getProjectileSize(), 0);
 		matrixStackIn.scale(entity.getProjectileSize(), entity.getProjectileSize(), entity.getProjectileSize());		
 		
@@ -44,8 +41,6 @@ public class BulletProjectileRenderer extends EntityRenderer<BulletProjectile> i
 		model.renderToBuffer(matrixStackIn, vertexconsumer, packedLightIn, OverlayTexture.NO_OVERLAY, 1f, 1f, 1f, 1f); 
 		
 		matrixStackIn.popPose();
-		
-		super.render(entity, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
 	}
 	
 	@Override

@@ -17,74 +17,81 @@ import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.resources.ResourceLocation;
 
-//Made with Blockbench 4.1.1
-//Exported for Minecraft version 1.17 with Mojang mappings
-//Paste this class into your mod and generate all required imports
-
-
+/**
+ * Ship Cannon Model by
+ * @author xiraxis9
+ * 
+ * With minor edits by
+ * @author zach2039
+ * 
+ * Made with Blockbench 4.1.1
+ * Exported for Minecraft version 1.17 with Mojang mappings
+ */
 public class NavalCannonModel extends Model {
-	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(OldGuns.MODID, "naval_cannon"), "main");
-	private final ModelPart base;
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(OldGuns.MODID, "ship_cannon"), "main");
+
+	private final ModelPart carriage;
 
 	public NavalCannonModel(ModelPart root) {
 		super(RenderType::entityTranslucent);
-		this.base = root.getChild("base");
+		this.carriage = root.getChild("carriage");
 	}
 
 	public static LayerDefinition createBodyLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
-		PartDefinition base = partdefinition.addOrReplaceChild("base", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
+		PartDefinition carriage = partdefinition.addOrReplaceChild("carriage", CubeListBuilder.create().texOffs(0, 24).addBox(-3.0F, 0.9667F, 6.5333F, 6.0F, 1.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(35, 21).addBox(-7.5F, 3.9667F, -5.4667F, 15.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+		.texOffs(35, 19).addBox(-7.5F, 3.9667F, 7.5333F, 15.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 31).addBox(-5.0F, 1.9667F, -8.4667F, 10.0F, 2.0F, 20.0F, new CubeDeformation(0.0F))
+		.texOffs(40, 31).addBox(3.0F, -0.0333F, -7.4667F, 2.0F, 2.0F, 17.0F, new CubeDeformation(0.0F))
+		.texOffs(18, 54).addBox(3.0F, -1.0333F, -6.4667F, 2.0F, 1.0F, 14.0F, new CubeDeformation(0.0F))
+		.texOffs(61, 13).addBox(3.0F, -2.0333F, -6.4667F, 2.0F, 1.0F, 12.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 11).addBox(3.0F, -3.0333F, -6.4667F, 2.0F, 1.0F, 10.0F, new CubeDeformation(0.0F))
+		.texOffs(35, 10).addBox(3.0F, -4.0333F, -5.4667F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
+		.texOffs(35, 0).addBox(-5.0F, -0.0333F, -7.4667F, 2.0F, 2.0F, 17.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 53).addBox(-5.0F, -1.0333F, -6.4667F, 2.0F, 1.0F, 14.0F, new CubeDeformation(0.0F))
+		.texOffs(56, 0).addBox(-5.0F, -2.0333F, -6.4667F, 2.0F, 1.0F, 12.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 0).addBox(-5.0F, -3.0333F, -6.4667F, 2.0F, 1.0F, 10.0F, new CubeDeformation(0.0F))
+		.texOffs(35, 4).addBox(-5.0F, -4.0333F, -5.4667F, 2.0F, 1.0F, 5.0F, new CubeDeformation(0.0F))
+		.texOffs(35, 0).addBox(-3.0F, -0.0333F, -6.4667F, 6.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 18.0333F, 2.4667F));
 
-		PartDefinition barrel = base.addOrReplaceChild("barrel", CubeListBuilder.create().texOffs(0, 36).addBox(-4.0F, -1.0F, -1.0F, 8.0F, 2.0F, 2.0F, new CubeDeformation(0.0F)), PartPose.offset(-0.0167F, -0.2F, -0.0167F));
+		PartDefinition wheels = carriage.addOrReplaceChild("wheels", CubeListBuilder.create().texOffs(14, 16).addBox(5.0F, -3.0F, 4.5F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(14, 0).addBox(5.0F, -2.5F, 4.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 16).addBox(5.0F, -3.0F, 17.5F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 11).addBox(5.0F, -2.5F, 17.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+		.texOffs(14, 5).addBox(-7.0F, -3.0F, 4.5F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 5).addBox(-7.0F, -2.5F, 4.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F))
+		.texOffs(14, 11).addBox(-7.0F, -3.0F, 17.5F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 0).addBox(-7.0F, -2.5F, 17.0F, 2.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 5.9667F, -10.4667F));
 
-		PartDefinition BarrelMain = barrel.addOrReplaceChild("BarrelMain", CubeListBuilder.create().texOffs(0, 17).addBox(-2.5167F, 2.95F, -2.8167F, 5.0F, 5.0F, 11.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 0).addBox(-1.4667F, 3.75F, -15.4167F, 3.0F, 3.0F, 14.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0167F, -5.05F, 2.5167F));
+		PartDefinition cannon = carriage.addOrReplaceChild("cannon", CubeListBuilder.create().texOffs(0, 0).addBox(-2.0F, -2.1855F, -13.5357F, 4.0F, 4.0F, 27.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 31).addBox(-2.5F, -2.6855F, -12.5357F, 5.0F, 5.0F, 2.0F, new CubeDeformation(0.0F))
+		.texOffs(48, 50).addBox(-2.5F, -2.6855F, 0.4643F, 5.0F, 5.0F, 12.0F, new CubeDeformation(0.0F))
+		.texOffs(0, 22).addBox(-5.5F, -0.6855F, -0.5357F, 11.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
+		.texOffs(6, 16).addBox(-0.5F, -0.6855F, 13.4643F, 1.0F, 1.0F, 1.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, -2.8479F, -2.931F));
 
-		PartDefinition carriage = base.addOrReplaceChild("carriage", CubeListBuilder.create().texOffs(20, 0).addBox(-5.0208F, 0.8226F, -9.612F, 10.0F, 1.0F, 8.0F, new CubeDeformation(0.0F))
-		.texOffs(21, 17).addBox(-5.0208F, 0.8226F, 3.488F, 10.0F, 1.0F, 7.0F, new CubeDeformation(0.0F))
-		.texOffs(34, 13).addBox(-5.0208F, -0.5774F, -4.762F, 10.0F, 1.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(40, 40).addBox(3.0292F, -5.8274F, -2.912F, 2.0F, 8.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(19, 47).addBox(3.0292F, -5.8274F, -5.912F, 2.0F, 8.0F, 1.0F, new CubeDeformation(0.0F))
-		.texOffs(48, 25).addBox(3.0292F, -4.8274F, -4.912F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(47, 48).addBox(5.4292F, 0.5726F, -8.262F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(20, 9).addBox(-6.9708F, 1.6226F, -7.312F, 14.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
-		.texOffs(20, 11).addBox(-6.9708F, 1.6226F, 6.338F, 14.0F, 1.0F, 1.0F, new CubeDeformation(0.0F))
-		.texOffs(20, 0).addBox(-6.3708F, 0.5726F, 5.388F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(47, 36).addBox(-6.3708F, 0.5726F, -8.262F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(40, 25).addBox(5.4292F, 0.5726F, 5.388F, 1.0F, 3.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(28, 36).addBox(3.0292F, -2.8274F, 3.988F, 2.0F, 5.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(48, 17).addBox(3.0292F, -0.8274F, 7.938F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(48, 0).addBox(-5.0708F, -0.8274F, 7.938F, 2.0F, 3.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(16, 36).addBox(3.0292F, -4.8274F, 0.038F, 2.0F, 7.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 40).addBox(-5.0708F, -2.8274F, 3.988F, 2.0F, 5.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 0).addBox(-5.0708F, -4.8274F, 0.038F, 2.0F, 7.0F, 4.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 17).addBox(-5.0708F, -5.8274F, -2.912F, 2.0F, 8.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(35, 50).addBox(-5.0708F, -5.8274F, -5.912F, 2.0F, 8.0F, 1.0F, new CubeDeformation(0.0F))
-		.texOffs(0, 49).addBox(-5.0708F, -4.8274F, -4.912F, 2.0F, 7.0F, 2.0F, new CubeDeformation(0.0F))
-		.texOffs(9, 46).addBox(-5.0708F, -4.8274F, -8.962F, 2.0F, 7.0F, 3.0F, new CubeDeformation(0.0F))
-		.texOffs(25, 45).addBox(3.0292F, -4.8274F, -8.962F, 2.0F, 7.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offset(0.0F, 5.8149F, 3.7785F));
+		PartDefinition cannon_righthandle_r1 = cannon.addOrReplaceChild("cannon_righthandle_r1", CubeListBuilder.create().texOffs(11, 35).addBox(-1.5F, -4.5F, 5.5F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.1855F, -0.0357F, 0.0F, 0.0F, -0.3927F));
 
-		PartDefinition CarriageWedge_r1 = carriage.addOrReplaceChild("CarriageWedge_r1", CubeListBuilder.create().texOffs(24, 25).addBox(-1.887F, -2.1202F, -0.2497F, 4.0F, 1.0F, 8.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0661F, -0.4575F, -0.0082F, -0.3927F, 0.0F, 0.0F));
+		PartDefinition cannon_lefthandle_r1 = cannon.addOrReplaceChild("cannon_lefthandle_r1", CubeListBuilder.create().texOffs(0, 38).addBox(0.5F, -4.5F, 5.5F, 1.0F, 2.0F, 3.0F, new CubeDeformation(0.0F)), PartPose.offsetAndRotation(0.0F, -0.1855F, -0.0357F, 0.0F, 0.0F, 0.3927F));
 
-		return LayerDefinition.create(meshdefinition, 64, 64);
+		return LayerDefinition.create(meshdefinition, 128, 128);
 	}
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer buffer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-		base.render(poseStack, buffer, packedLight, packedOverlay);
+		carriage.render(poseStack, buffer, packedLight, packedOverlay, red, green, blue, alpha);
 	}
 	
 	public void setupAnim(MediumNavalCannonBlockEntity blockEntity, float limbSwing, float limbSwingAmount, float ageInTicks, float yaw, float pitch) {
 		float angleRads = (float) Math.toRadians(blockEntity.getShotPitch());
-		base.getChild("barrel").xRot = angleRads;
+		carriage.getChild("cannon").xRot = angleRads;
 		
 		if (blockEntity.getFiringCooldown() > 1) {
-			base.z = (0.1f * blockEntity.getFiringCooldown());
+			carriage.z = (0.1f * blockEntity.getFiringCooldown());
 		} else {
-			base.z = 0;
+			carriage.z = 0;
 		}
 	}
 }

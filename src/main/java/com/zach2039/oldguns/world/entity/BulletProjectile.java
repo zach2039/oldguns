@@ -678,7 +678,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			case CANISTER:
 				if (getEffectTicks() <= 0) {
 					if (getEffectStrength() > 0.0f && !level.isClientSide()) {
-						level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength(), Explosion.BlockInteraction.NONE);
+						level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Explosion.BlockInteraction.NONE);
 						for (int i = 0; i < Math.round(getEffectStrength()) + 1; i++) {
 							// Do canister shot explosion after ticks required
 							
