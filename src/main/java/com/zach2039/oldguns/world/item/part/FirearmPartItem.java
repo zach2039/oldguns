@@ -1,6 +1,6 @@
 package com.zach2039.oldguns.world.item.part;
 
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmPart;
+import com.zach2039.oldguns.api.firearm.FirearmPart;
 
 import net.minecraft.world.item.Item;
 

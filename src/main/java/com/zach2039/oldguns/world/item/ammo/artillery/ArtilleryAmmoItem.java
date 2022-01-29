@@ -3,8 +3,8 @@ package com.zach2039.oldguns.world.item.ammo.artillery;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity;
 

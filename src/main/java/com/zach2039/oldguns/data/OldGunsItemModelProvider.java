@@ -5,7 +5,6 @@ import java.util.function.Supplier;
 import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
-import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 
 import net.minecraft.data.DataGenerator;

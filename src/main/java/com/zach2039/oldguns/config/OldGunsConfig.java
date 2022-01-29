@@ -1197,6 +1197,47 @@ public class OldGunsConfig {
 		}
 	}
 	
+	public static class BreechloadingFirearmAttributes {
+		public final IntValue durability;
+		public final IntValue reloadTicks;
+		public final DoubleValue effectiveRangeModifier;
+		public final DoubleValue shotDamageModifier;
+		public final DoubleValue shotDeviationModifier;
+		public final DoubleValue projectileSpeed;
+		
+		BreechloadingFirearmAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+				final int defaultDurability, final int defaultReloadTicks, final float defaultProjectileSpeed, 
+				final float defaultEffectiveRangeModifier, final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
+			builder.comment(comment).push(path);
+			
+			durability = builder
+					.comment("How many uses before breaking")
+					.defineInRange("durability", defaultDurability, 1, Integer.MAX_VALUE);
+			
+			reloadTicks = builder
+					.comment("How long it takes to fully reload via breechloading in ticks")
+					.defineInRange("reloadTicks", defaultReloadTicks, 1, Integer.MAX_VALUE);
+			
+			effectiveRangeModifier = builder
+					.comment("How the firearm modifies the base range of ammo shot")
+					.defineInRange("effectiveRangeModifier", defaultEffectiveRangeModifier, 0.001f, Float.MAX_VALUE);
+			
+			shotDamageModifier = builder
+					.comment("How the firearm modifies the base damage of ammo shot")
+					.defineInRange("shotDamageModifier", defaultShotDamageModifier, 0.001f, Float.MAX_VALUE);
+			
+			shotDeviationModifier = builder
+					.comment("How the firearm modifies the base deviation of ammo shot")
+					.defineInRange("shotDeviaitionModifier", defaultShotDeviaitionModifier, 0.001f, Float.MAX_VALUE);
+			
+			projectileSpeed = builder
+					.comment("How fast projectiles shot from the firearm are")
+					.defineInRange("projectileSpeed", defaultProjectileSpeed, 0.001f, Float.MAX_VALUE);			
+			
+			builder.pop();
+		}
+	}
+	
 	public static class FirearmAmmoAttributes {
 		public final IntValue maxStackSize;
 		public final IntValue projectileCount;

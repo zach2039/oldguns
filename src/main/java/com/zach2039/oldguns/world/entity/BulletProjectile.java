@@ -1,6 +1,5 @@
 package com.zach2039.oldguns.world.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;

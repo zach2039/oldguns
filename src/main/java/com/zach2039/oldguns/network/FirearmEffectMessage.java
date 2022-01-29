@@ -2,7 +2,7 @@ package com.zach2039.oldguns.network;
 
 import java.util.function.Supplier;
 
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
+import com.zach2039.oldguns.api.firearm.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.util.FirearmEffectHelper;
 import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;

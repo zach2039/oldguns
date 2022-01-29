@@ -3,7 +3,7 @@ package com.zach2039.oldguns.api.firearm.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
+import com.zach2039.oldguns.api.firearm.FirearmCondition;
 
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;

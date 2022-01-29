@@ -11,11 +11,12 @@ import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.IAmmo;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmReloadType;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmSize;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmWaterResiliency;
+import com.zach2039.oldguns.api.firearm.FirearmCondition;
+import com.zach2039.oldguns.api.firearm.FirearmEffect;
+import com.zach2039.oldguns.api.firearm.FirearmReloadType;
+import com.zach2039.oldguns.api.firearm.FirearmSize;
+import com.zach2039.oldguns.api.firearm.FirearmType;
+import com.zach2039.oldguns.api.firearm.FirearmWaterResiliency;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmStackHelper;
@@ -48,7 +49,6 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ArrowItem;
 import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -61,8 +61,9 @@ import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
-public abstract class FirearmItem extends BowItem implements IFirearm {
+public class FirearmItem extends BowItem implements IFirearm {
 
 	private final Enchantment [] VALID_ENCHANTMENTS = {
 			Enchantments.PUNCH_ARROWS, Enchantments.PIERCING, 
@@ -85,6 +86,23 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		this.firearmWaterResiliency = builder.firearmWaterResiliency;
 		this.firesAllLoadedAmmoAtOnce = builder.firesAllLoadedAmmoAtOnce;
 		initAttributes();
+	}
+	
+	public FirearmItem(FirearmType.Muzzleloaders entry) {
+		super((FirearmProperties) new FirearmProperties()
+				.ammoCapacity(entry.getAmmoCapacity())
+				.firesAllLoadedAmmoAtOnce(entry.firesAllAtOnce())
+				.firearmSize(entry.getFirearmSize())
+				.firearmWaterResiliency(entry.getFirearmWaterResiliency())
+				.reloadType(entry.getFirearmReloadType())
+				.effectiveRangeModifier(entry.getAttributes().effectiveRangeModifier.get().floatValue())
+				.damageModifier(entry.getAttributes().shotDamageModifier.get().floatValue())
+				.deviationModifier(entry.getAttributes().shotDeviationModifier.get().floatValue())
+				.projectileSpeed(entry.getAttributes().projectileSpeed.get().floatValue())
+				.defaultDurability(entry.getAttributes().durability.get())
+				.setNoRepair()
+				.tab(OldGuns.CREATIVE_MODE_TAB)
+				);
 	}
 
 	@Override
@@ -535,6 +553,48 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 		return result;
 	}
 
+	@Override
+	public void initNBTTags(ItemStack stackIn)
+	{
+		FirearmNBTHelper.refreshFirearmCondition(stackIn);
+		
+		FirearmNBTHelper.peekNBTTagAmmo(stackIn);
+	}
+
+	@Override
+	public boolean canReload(ItemStack stackIn)
+	{
+		return (FirearmNBTHelper.peekNBTTagAmmoCount(stackIn) < this.getAmmoCapacity());
+	}
+
+	@Override
+	public void doFiringEffect(Level worldIn, Entity shooter, ItemStack stackIn)
+	{
+		TargetPoint point = new PacketDistributor.TargetPoint(
+				shooter.xo, shooter.yo, shooter.zo, 1600d, shooter.level.dimension());
+		
+		
+		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
+				new FirearmEffectMessage((LivingEntity)shooter, getFirearmEffectForSize(), shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
+						shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
+				);
+	}
+	
+	private FirearmEffect getFirearmEffectForSize() {
+		switch(this.firearmSize) {
+		case HUGE:
+			return FirearmEffect.LARGE_FIREARM_SHOOT;
+		case LARGE:
+			return FirearmEffect.LARGE_FIREARM_SHOOT;
+		case MEDIUM:
+			return FirearmEffect.MEDIUM_FIREARM_SHOOT;
+		case SMALL:
+			return FirearmEffect.SMALL_FIREARM_SHOOT;
+		default:
+			return FirearmEffect.SMALL_FIREARM_SHOOT;
+		}		
+	}
+	
 	/**
 	 * Does NBT stuff for firearm conditions, and will cause certain things to happen based on said conditions.
 	 * @param worldIn
@@ -801,8 +861,8 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			return this;
 		}
 
-		public FirearmProperties firesAllLoadedAmmoAtOnce() {
-			this.firesAllLoadedAmmoAtOnce = true;
+		public FirearmProperties firesAllLoadedAmmoAtOnce(boolean firesAllLoadedAmmoAtOnce) {
+			this.firesAllLoadedAmmoAtOnce = firesAllLoadedAmmoAtOnce;
 			return this;
 		}
 
@@ -821,12 +881,6 @@ public abstract class FirearmItem extends BowItem implements IFirearm {
 			return this;
 		}
 	}
-
-	public abstract void initNBTTags(ItemStack stackIn);
-
-	public abstract boolean canReload(ItemStack stackIn);
-
-	public abstract void doFiringEffect(Level worldIn, Entity entityShooter, ItemStack stackIn);
 
 	@Override
 	public int getAmmoCapacity() {

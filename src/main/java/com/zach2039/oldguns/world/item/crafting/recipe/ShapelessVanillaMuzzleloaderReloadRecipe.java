@@ -7,7 +7,7 @@ import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.api.ammo.IAmmo;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
+import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;

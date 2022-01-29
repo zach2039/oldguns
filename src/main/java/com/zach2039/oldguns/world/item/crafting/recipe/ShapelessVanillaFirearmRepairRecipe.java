@@ -1,6 +1,6 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmCondition;
+import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.IFirearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;

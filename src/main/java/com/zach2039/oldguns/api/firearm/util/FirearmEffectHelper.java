@@ -3,7 +3,7 @@ package com.zach2039.oldguns.api.firearm.util;
 import java.util.Random;
 
 import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
-import com.zach2039.oldguns.api.firearm.FirearmType.FirearmEffect;
+import com.zach2039.oldguns.api.firearm.FirearmEffect;
 import com.zach2039.oldguns.init.ModSoundEvents;
 
 import net.minecraft.core.particles.ParticleTypes;

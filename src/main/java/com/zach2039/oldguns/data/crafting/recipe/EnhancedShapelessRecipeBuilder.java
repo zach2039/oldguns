@@ -12,7 +12,6 @@ import javax.annotation.Nullable;
 import com.google.common.base.Preconditions;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.data.crafting.recipe.EnhancedShapedRecipeBuilder.ConditionedResult;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.advancements.Advancement;
