@@ -395,7 +395,9 @@ public class OldGunsConfig {
 		}
 	}
 	
-	public static class FirearmAmmoSettings {		
+	public static class FirearmAmmoSettings {	
+		public final BooleanValue allowArmorBypass;	
+		
 		public final FirearmAmmoAttributes small_stone_musket_ball;
 		public final FirearmAmmoAttributes medium_stone_musket_ball;
 		public final FirearmAmmoAttributes large_stone_musket_ball;
@@ -431,6 +433,10 @@ public class OldGunsConfig {
 		FirearmAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
+			allowArmorBypass = builder
+					.comment("Allow firearm projectiles to bypass a percentage of armor as defined in their attributes")
+					.define("allowArmorBypass", true);
+			
 			// Stone ammo
 			small_stone_musket_ball = new FirearmAmmoAttributes(
 					builder,
@@ -441,7 +447,8 @@ public class OldGunsConfig {
 					10.0f,
 					0.3f,
 					15.0f,
-					1.0f
+					1.0f,
+					0.10f
 					);
 			
 			medium_stone_musket_ball = new FirearmAmmoAttributes(
@@ -453,7 +460,8 @@ public class OldGunsConfig {
 					13.0f,
 					0.4f,
 					30.0f,
-					1.0f
+					1.0f,
+					0.12f
 					);
 			
 			large_stone_musket_ball = new FirearmAmmoAttributes(
@@ -465,7 +473,8 @@ public class OldGunsConfig {
 					16.0f,
 					0.5f,
 					55.0f,
-					1.0f
+					1.0f,
+					0.14f
 					);
 			
 			small_stone_birdshot = new FirearmAmmoAttributes(
@@ -477,7 +486,8 @@ public class OldGunsConfig {
 					2.0f,
 					0.1f,
 					5.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			medium_stone_birdshot = new FirearmAmmoAttributes(
@@ -489,7 +499,8 @@ public class OldGunsConfig {
 					2.0f,
 					0.1f,
 					5.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			large_stone_birdshot = new FirearmAmmoAttributes(
@@ -501,7 +512,8 @@ public class OldGunsConfig {
 					2.0f,
 					0.1f,
 					5.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			// Iron ammo
@@ -514,7 +526,8 @@ public class OldGunsConfig {
 					20.0f,
 					0.3f,
 					25.0f,
-					1.0f
+					1.0f,
+					0.16f
 					);
 			
 			medium_iron_musket_ball = new FirearmAmmoAttributes(
@@ -526,7 +539,8 @@ public class OldGunsConfig {
 					23.0f,
 					0.4f,
 					50.0f,
-					1.0f
+					1.0f,
+					0.18f
 					);
 			
 			large_iron_musket_ball = new FirearmAmmoAttributes(
@@ -538,7 +552,8 @@ public class OldGunsConfig {
 					26.0f,
 					0.5f,
 					75.0f,
-					1.0f
+					1.0f,
+					0.20f
 					);
 			
 			small_iron_buckshot = new FirearmAmmoAttributes(
@@ -550,7 +565,8 @@ public class OldGunsConfig {
 					15.0f,
 					0.3f,
 					30.0f,
-					1.5f
+					1.5f,
+					0.10f
 					);
 			
 			medium_iron_buckshot = new FirearmAmmoAttributes(
@@ -562,7 +578,8 @@ public class OldGunsConfig {
 					15.0f,
 					0.3f,
 					30.0f,
-					1.5f
+					1.5f,
+					0.10f
 					);
 			
 			large_iron_buckshot = new FirearmAmmoAttributes(
@@ -574,7 +591,8 @@ public class OldGunsConfig {
 					15.0f,
 					0.3f,
 					30.0f,
-					1.5f
+					1.5f,
+					0.10f
 					);
 			
 			small_iron_birdshot = new FirearmAmmoAttributes(
@@ -586,7 +604,8 @@ public class OldGunsConfig {
 					3.0f,
 					0.2f,
 					7.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			medium_iron_birdshot = new FirearmAmmoAttributes(
@@ -598,7 +617,8 @@ public class OldGunsConfig {
 					3.0f,
 					0.2f,
 					7.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			large_iron_birdshot = new FirearmAmmoAttributes(
@@ -610,7 +630,8 @@ public class OldGunsConfig {
 					3.0f,
 					0.2f,
 					7.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			small_lead_musket_ball = new FirearmAmmoAttributes(
@@ -622,7 +643,8 @@ public class OldGunsConfig {
 					20.0f,
 					0.3f,
 					25.0f,
-					1.0f
+					1.0f,
+					0.16f
 					);
 			
 			medium_lead_musket_ball = new FirearmAmmoAttributes(
@@ -634,7 +656,8 @@ public class OldGunsConfig {
 					23.0f,
 					0.4f,
 					50.0f,
-					1.0f
+					1.0f,
+					0.18f
 					);
 			
 			large_lead_musket_ball = new FirearmAmmoAttributes(
@@ -646,7 +669,8 @@ public class OldGunsConfig {
 					26.0f,
 					0.5f,
 					75.0f,
-					1.0f
+					1.0f,
+					0.20f
 					);
 			
 			small_lead_buckshot = new FirearmAmmoAttributes(
@@ -658,7 +682,8 @@ public class OldGunsConfig {
 					15.0f,
 					0.3f,
 					30.0f,
-					1.5f
+					1.5f,
+					0.10f
 					);
 			
 			medium_lead_buckshot = new FirearmAmmoAttributes(
@@ -670,7 +695,8 @@ public class OldGunsConfig {
 					15.0f,
 					0.3f,
 					30.0f,
-					1.5f
+					1.5f,
+					0.10f
 					);
 			
 			large_lead_buckshot = new FirearmAmmoAttributes(
@@ -682,7 +708,8 @@ public class OldGunsConfig {
 					15.0f,
 					0.3f,
 					30.0f,
-					1.5f
+					1.5f,
+					0.10f
 					);
 			
 			small_lead_birdshot = new FirearmAmmoAttributes(
@@ -694,7 +721,8 @@ public class OldGunsConfig {
 					3.0f,
 					0.2f,
 					7.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			medium_lead_birdshot = new FirearmAmmoAttributes(
@@ -706,7 +734,8 @@ public class OldGunsConfig {
 					3.0f,
 					0.2f,
 					7.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			large_lead_birdshot = new FirearmAmmoAttributes(
@@ -718,7 +747,8 @@ public class OldGunsConfig {
 					3.0f,
 					0.2f,
 					7.0f,
-					3.0f
+					3.0f,
+					0.0f
 					);
 			
 			builder.pop();
@@ -1245,10 +1275,12 @@ public class OldGunsConfig {
 		public final DoubleValue projectileSize;		
 		public final DoubleValue projectileEffectiveRange;
 		public final DoubleValue projectileDeviationModifier;
+		public final DoubleValue projectileArmorBypassPercentage;
 		
 		FirearmAmmoAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
-				final int defaultMaxStackSize, final int defaultProjectileCount, final float defaultProjectileDamage, final float defaultProjectileSize, final float defaultProjectileEffectiveRange,
-				final float defaultProjectileDeviationModifier) {
+				final int defaultMaxStackSize, final int defaultProjectileCount, final float defaultProjectileDamage,
+				final float defaultProjectileSize, final float defaultProjectileEffectiveRange,
+				final float defaultProjectileDeviationModifier, final float deafultProjectileArmorBypassPercentage) {
 			builder.comment(comment).push(path);
 			
 			maxStackSize = builder
@@ -1273,7 +1305,11 @@ public class OldGunsConfig {
 			
 			projectileDeviationModifier = builder
 					.comment("How the ammo modifies the base deviation of the firearm")
-					.defineInRange("projectileDeviationModifier", defaultProjectileDeviationModifier, 0.001f, Float.MAX_VALUE);			
+					.defineInRange("projectileDeviationModifier", defaultProjectileDeviationModifier, 0.001f, Float.MAX_VALUE);
+
+			projectileArmorBypassPercentage = builder
+					.comment("How much damage done by each projectile bypasses armor")
+					.defineInRange("projectileArmorBypassPercentage", deafultProjectileArmorBypassPercentage, 0.0f, 1.0f);
 			
 			builder.pop();
 		}
@@ -1337,6 +1373,7 @@ public class OldGunsConfig {
 	}
 	
 	public static class ArtilleryAmmoSettings {		
+		public final BooleanValue allowArmorBypass;
 		public final ArtilleryAmmoAttributes small_iron_cannonball;
 		public final ArtilleryAmmoAttributes medium_iron_cannonball;
 		public final ArtilleryAmmoAttributes large_iron_cannonball;
@@ -1350,6 +1387,10 @@ public class OldGunsConfig {
 		ArtilleryAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
+			allowArmorBypass = builder
+					.comment("Allow artillery projectiles to bypass a percentage of armor as defined in their attributes")
+					.define("allowArmorBypass", true);
+			
 			// Iron ammo
 			small_iron_cannonball = new ArtilleryAmmoAttributes(
 					builder,
@@ -1361,6 +1402,7 @@ public class OldGunsConfig {
 					0.4f,
 					100.0f,
 					1.0f,
+					0.7f,
 					0,
 					2f
 					);
@@ -1375,6 +1417,7 @@ public class OldGunsConfig {
 					0.6f,
 					300.0f,
 					1.0f,
+					0.8f,
 					0,
 					3f
 					);
@@ -1389,6 +1432,7 @@ public class OldGunsConfig {
 					0.8f,
 					500.0f,
 					1.0f,
+					0.9f,
 					0,
 					4f
 					);
@@ -1403,6 +1447,7 @@ public class OldGunsConfig {
 					0.2f,
 					30.0f,
 					6.0f,
+					0.6f,
 					0,
 					0f
 					);
@@ -1417,6 +1462,7 @@ public class OldGunsConfig {
 					0.2f,
 					20.0f,
 					6.0f,
+					0.6f,
 					0,
 					0f
 					);
@@ -1431,6 +1477,7 @@ public class OldGunsConfig {
 					0.2f,
 					20.0f,
 					6.0f,
+					0.6f,
 					0,
 					0f
 					);
@@ -1445,6 +1492,7 @@ public class OldGunsConfig {
 					0.4f,
 					100.0f,
 					1.0f,
+					0.2f,
 					20,
 					10f
 					);
@@ -1459,6 +1507,7 @@ public class OldGunsConfig {
 					0.6f,
 					100.0f,
 					1.0f,
+					0.2f,
 					20,
 					15f
 					);
@@ -1473,6 +1522,7 @@ public class OldGunsConfig {
 					0.8f,
 					100.0f,
 					1.0f,
+					0.2f,
 					20,
 					20f
 					);
@@ -1488,13 +1538,15 @@ public class OldGunsConfig {
 		public final DoubleValue projectileSize;		
 		public final DoubleValue projectileEffectiveRange;
 		public final DoubleValue projectileDeviationModifier;
+		public final DoubleValue projectileArmorBypassPercentage;
 		public final IntValue effectTicks;
 		public final DoubleValue effectPotency;
 		
 		ArtilleryAmmoAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
 				final int defaultMaxStackSize, final int defaultProjectileCount, final float defaultProjectileDamage,
 				final float defaultProjectileSize, final float defaultProjectileEffectiveRange, 
-				final float defaultProjectileDeviationModifier, final int defaultEffectTicks, final float defaultEffectPotency) {
+				final float defaultProjectileDeviationModifier, final float defaultProjectileArmorBypassPercentage, 
+				final int defaultEffectTicks, final float defaultEffectPotency) {
 			builder.comment(comment).push(path);
 			
 			maxStackSize = builder
@@ -1520,6 +1572,10 @@ public class OldGunsConfig {
 			projectileDeviationModifier = builder
 					.comment("How the ammo modifies the base deviation of the firearm")
 					.defineInRange("projectileDeviationModifier", defaultProjectileDeviationModifier, 0.001f, Float.MAX_VALUE);			
+			
+			projectileArmorBypassPercentage = builder
+					.comment("How much damage done by the projectile bypasses armor")
+					.defineInRange("projectileArmorBypassPercentage", defaultProjectileDeviationModifier, 0.0f, 1.0f);		
 			
 			effectTicks = builder
 					.comment("How long do any effects from this projectile last in ticks")

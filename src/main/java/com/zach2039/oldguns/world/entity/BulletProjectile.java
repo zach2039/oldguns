@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModSoundEvents;
@@ -42,6 +43,7 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -72,6 +74,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	private static final EntityDataAccessor<Float> EFFECTIVE_RANGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
 	private static final EntityDataAccessor<CompoundTag> SHOOTING_ENTITY = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.COMPOUND_TAG);
 	private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
+	private static final EntityDataAccessor<Float> BYPASS_ARMOR_PERCENTAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
 	private static final EntityDataAccessor<Byte> CRITICAL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
 	private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
@@ -92,7 +95,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	private BlockState lastState;
 	public AbstractArrow.Pickup pickup = AbstractArrow.Pickup.DISALLOWED;
 	private int life;
-	private double baseDamage = 2.0D;
 	private int knockback;
 	private SoundEvent soundEvent = ModSoundEvents.BULLET_HIT_BLOCK.get();
 	@Nullable
@@ -200,6 +202,9 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 
 		/* Register storage for damage. */
 		this.entityData.define(DAMAGE, 0.0f);
+		
+		/* Register storage for percentage of damage that bypasses armor. */
+		this.entityData.define(BYPASS_ARMOR_PERCENTAGE, 0.0f);
 
 		/* Register projectile size for rendering. */
 		this.entityData.define(PROJECTILE_SIZE, 1f);
@@ -310,7 +315,8 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		compound.putBoolean("inGround", this.inGround);
 		compound.putInt("totalInGroundTime", this.totalInGroundTime);
 		compound.putByte("pickup", (byte)this.pickup.ordinal());
-		compound.putDouble("damage", this.baseDamage);
+		compound.putDouble("damage", this.getDamage());
+		compound.putFloat("bypassArmorPercentage", this.getBypassArmorPercentage());
 		compound.putBoolean("crit", this.isCritArrow());
 		compound.putByte("PierceLevel", this.getPierceLevel());
 		compound.putString("SoundEvent", Registry.SOUND_EVENT.getKey(this.soundEvent).toString());
@@ -353,7 +359,10 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.inGround = compound.getBoolean("inGround");
 		this.totalInGroundTime = compound.getInt("totalInGroundTime");
 		if (compound.contains("damage", Tag.TAG_DOUBLE)) {
-			this.baseDamage = compound.getDouble("damage");
+			this.setDamage(compound.getDouble("damage"));
+		}
+		if (compound.contains("bypassArmorPercentage", Tag.TAG_FLOAT)) {
+			this.setBypassArmorPercentage(compound.getFloat("bypassArmorPercentage"));
 		}
 
 		this.pickup = AbstractArrow.Pickup.byOrdinal(compound.getByte("pickup"));
@@ -441,7 +450,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	protected void onHitEntity(EntityHitResult result) {
 		Entity entity = result.getEntity();
 
-		int i = Mth.ceil(this.baseDamage);
+		int i = Mth.ceil(this.getDamage());
 
 		/* Cut damage in half if outside effective range or low speed. */
 		if ((this.getVelocityMagnitude() < 0.5f) || (this.totalInGroundTime > 0))
@@ -478,28 +487,26 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		Entity entity1 = this.getOwner();
 		DamageSource damagesource;
 		if (entity1 == null) {
-			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, null);
+			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, null, this.getBypassArmorPercentage());
 		} else {
-			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, entity1);
+			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, entity1, this.getBypassArmorPercentage());
+			
 			if (entity1 instanceof LivingEntity) {
 				((LivingEntity)entity1).setLastHurtMob(entity);
 			}
 		}
-
+		
 		boolean isEnderman = entity.getType() == EntityType.ENDERMAN;
 		int k = entity.getRemainingFireTicks();
 		if (this.isOnFire() && !isEnderman) {
 			entity.setSecondsOnFire(5);
-		}
-
-
-		double velMag = this.getVelocityMagnitude();
-		OldGuns.LOGGER.info("velMag: " + velMag);
+		}		
+	
 		if (entity.hurt(damagesource, (float)i)) {
-			if (isEnderman && velMag < 4f) {
+			if (isEnderman) {
 				return;
 			}
-
+			
 			if (entity instanceof LivingEntity) {
 				LivingEntity livingentity = (LivingEntity)entity;
 				if (!this.level.isClientSide && this.getPierceLevel() <= 0) {
@@ -967,7 +974,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.xRotO = this.getXRot();
 		this.inGroundTime = 0;
 		this.life = 0;
-		this.baseDamage = this.entityData.get(DAMAGE);
 	}
 
 	public void shoot(Entity shooter, float pitch, float yaw, float p_184547_4_, float velocity, float inaccuracy)
@@ -1006,6 +1012,16 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		return this.entityData.get(DAMAGE);
 	}
 
+	public void setBypassArmorPercentage(float bypassArmorPercentage)
+	{
+		this.entityData.set(BYPASS_ARMOR_PERCENTAGE, (float) bypassArmorPercentage);
+	}
+
+	public float getBypassArmorPercentage()
+	{
+		return this.entityData.get(BYPASS_ARMOR_PERCENTAGE);
+	}
+	
 	/**
 	 * Set the start location for this entity. Will be used to calculate damage falloff.
 	 * @param x
