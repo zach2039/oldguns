@@ -218,8 +218,8 @@ public class ModItems {
 	public static final RegistryObject<FirearmItem> FLINTLOCK_CALIVER = ITEMS.register("flintlock_caliver", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_CALIVER));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_MUSKETOON = ITEMS.register("flintlock_musketoon", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_MUSKETOON));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_MUSKET = ITEMS.register("flintlock_musket", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_MUSKET));
+	public static final RegistryObject<FirearmItem> FLINTLOCK_LONG_MUSKET = ITEMS.register("flintlock_long_musket", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_LONG_MUSKET));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_NOCK_GUN = ITEMS.register("flintlock_nock_gun", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_NOCK_GUN));
-	public static final RegistryObject<FirearmItem> FLINTLOCK_LONG_MUSKET = ITEMS.register("flintlock_long_musket", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_ARQUEBUS));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_BLUNDERBUSS = ITEMS.register("flintlock_blunderbuss", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_BLUNDERBUSS));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS = ITEMS.register("flintlock_doublebarrel_blunderbuss", () -> new FirearmItem(FirearmType.Muzzleloaders.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS));
 	

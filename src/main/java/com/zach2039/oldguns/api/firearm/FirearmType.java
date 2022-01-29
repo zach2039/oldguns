@@ -23,7 +23,7 @@ public class FirearmType {
 		// Wheellocks
 		WHEELLOCK_DERRINGER(1, false, FirearmSize.SMALL, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_derringer),
 		WHEELLOCK_PISTOL(1, false, FirearmSize.SMALL, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_pistol),
-		WHEELLOCK_DOUBLEBARREL_PISTOL(1, false, FirearmSize.SMALL, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_doublebarrel_pistol),
+		WHEELLOCK_DOUBLEBARREL_PISTOL(2, false, FirearmSize.SMALL, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_doublebarrel_pistol),
 		WHEELLOCK_BLUNDERBUSS_PISTOL(1, false, FirearmSize.SMALL, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_blunderbuss_pistol),
 		WHEELLOCK_ARQUEBUS(1, false, FirearmSize.SMALL, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_arquebus),
 		WHEELLOCK_CALIVER(1, false, FirearmSize.MEDIUM, FirearmWaterResiliency.FAIR, FIREARM_SETTINGS.wheellockSettings.wheellock_caliver),

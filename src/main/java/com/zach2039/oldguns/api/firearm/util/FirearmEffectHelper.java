@@ -36,7 +36,7 @@ public class FirearmEffectHelper {
 		Random rand = new Random();
 		
 		/* Calculate offset from player hand size, passed in parameter. */
-		float offset = (rightSide) ? -23f : 23f;
+		float offset = (rightSide) ? -8f : 8f;
 		
 		/* Change number of particles based on effect. */
 		int numParticles = 0;
@@ -61,27 +61,35 @@ public class FirearmEffectHelper {
 		for (int i = 0; i < numParticles; i++)
 		{
 			// Calculate the next distance for the particles to propagate to.
-			float range = 1.0f * (1.2f * (i + 1));
+			float range = 1.2f * (0.8f * (i + 1));
 			
 			// Get the position of the player's hand using trig.
 			float handX = -Mth.sin((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
-			float handY = -Mth.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F;
+			float handY = -Mth.sin((float) (((rotationPitch / 180F) * 3.141593F)) * range) - 0.1F;
 			float handZ = Mth.cos((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
 			
 			// Calculate the actual position of the particles.
-			double particleX = posX + handX;
-			double particleY = posY + handY;
-			double particleZ = posZ + handZ;
+			double particleX = posX + handX + (float)(rand.nextFloat() / 16f);
+			double particleY = posY + handY + (float)(rand.nextFloat() / 16f);
+			double particleZ = posZ + handZ + (float)(rand.nextFloat() / 16f);
 			
-			world.addParticle(ParticleTypes.SMOKE,
-					particleX + (float)(rand.nextFloat() / 16f),
-					particleY + (float)(rand.nextFloat() / 16f),
-					particleZ + (float)(rand.nextFloat() / 16f),
+			if (i < 1) {
+				world.addParticle(ParticleTypes.FLAME,
+						particleX + (float)(rand.nextFloat() / 16f),
+						particleY + (float)(rand.nextFloat() / 16f),
+						particleZ + (float)(rand.nextFloat() / 16f),
+						0d, 0d, 0d);
+			}
+			
+			world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
+					particleX + (float)(rand.nextFloat() / 8f),
+					particleY + (float)(rand.nextFloat() / 2f),
+					particleZ + (float)(rand.nextFloat() / 8f),
 					0d, 0d, 0d);
-			world.addParticle(ParticleTypes.LARGE_SMOKE,
-					particleX + (float)(rand.nextFloat() / 16f),
-					particleY + (float)(rand.nextFloat() / 16f),
-					particleZ + (float)(rand.nextFloat() / 16f),
+			world.addParticle(ParticleTypes.POOF,
+					particleX + (float)(rand.nextFloat() / 8f),
+					particleY + (float)(rand.nextFloat() / 2f),
+					particleZ + (float)(rand.nextFloat() / 8f),
 					0d, 0d, 0d);
 		}
 		

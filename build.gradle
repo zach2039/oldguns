@@ -13,6 +13,7 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
+
 		//classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
 		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
@@ -21,6 +22,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
+
 //apply plugin: 'com.diffplug.eclipse.apt'
 
 group = "com.zach2039.oldguns" 
@@ -160,7 +162,7 @@ String buildVersionString() {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.9'
+    minecraft 'net.minecraftforge:forge:1.18.1-39.0.63'
 		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.1-65-SNAPSHOT:api")
@@ -201,6 +203,7 @@ mixin {
 eclipse {
     afterEvaluate {
         //synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
-        synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
+        
+		synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
     }
 }

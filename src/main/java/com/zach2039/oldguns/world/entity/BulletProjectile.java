@@ -893,7 +893,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.setXRot((float)(Mth.atan2(d6, d4) * (double)(180F / (float)Math.PI)));
 			this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
 			this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
-			boolean noFriction = (this.isInsideEffectiveRange() && this.getDamageType() == DamageType.FIREARM);
+			boolean noFriction = (this.isInsideEffectiveRange() && this.getDamageType() == DamageType.FIREARM && !this.isInWater());
 			float f = (noFriction) ? 1.0f : 0.98F;
 			//float f1 = 0.05F;
 			if (!this.isSimulated && this.isInWater()) {
@@ -908,7 +908,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.setDeltaMovement(vec3.scale((double)f));
 			if (!this.isNoGravity() && !flag) {
 				Vec3 vec34 = this.getDeltaMovement();
-				double gravityForce = (noFriction && this.totalInGroundTime == 0) ? 0.0d : 0.05d;
+				double gravityForce = (noFriction && this.totalInGroundTime == 0) ? 0.0D : 0.05D;
 				this.setDeltaMovement(vec34.x, vec34.y - gravityForce, vec34.z);
 			}
 

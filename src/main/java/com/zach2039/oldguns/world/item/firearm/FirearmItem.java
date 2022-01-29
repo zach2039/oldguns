@@ -70,10 +70,10 @@ public class FirearmItem extends BowItem implements IFirearm {
 			Enchantments.UNBREAKING, Enchantments.MENDING
 	};
 
-	private ImmutableMultimap<Attribute, AttributeModifier> mainhandModifiers;
-	private ImmutableMultimap<Attribute, AttributeModifier> offhandModifiers;
+	private Multimap<Attribute, AttributeModifier> mainhandModifiers;
+	private Multimap<Attribute, AttributeModifier> offhandModifiers;
 
-	public FirearmItem(FirearmProperties builder) {
+	private FirearmItem(FirearmProperties builder) {
 		super((Properties) builder);
 		this.ammoCapacity = builder.ammoCapacity;
 		this.projectileSpeed = builder.projectileSpeed;
@@ -89,7 +89,7 @@ public class FirearmItem extends BowItem implements IFirearm {
 	}
 	
 	public FirearmItem(FirearmType.Muzzleloaders entry) {
-		super((FirearmProperties) new FirearmProperties()
+		this((FirearmProperties) new FirearmProperties()
 				.ammoCapacity(entry.getAmmoCapacity())
 				.firesAllLoadedAmmoAtOnce(entry.firesAllAtOnce())
 				.firearmSize(entry.getFirearmSize())
@@ -182,6 +182,7 @@ public class FirearmItem extends BowItem implements IFirearm {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
 		switch(slot) {
