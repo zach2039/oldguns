@@ -65,31 +65,31 @@ public class FirearmEffectHelper {
 			
 			// Get the position of the player's hand using trig.
 			float handX = -Mth.sin((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
-			float handY = -Mth.sin((float) (((rotationPitch / 180F) * 3.141593F)) * range) - 0.1F;
+			float handY = -Mth.sin((float) ((rotationPitch / 180F) * 3.141593F)) * range - 0.1F;
 			float handZ = Mth.cos((float) (((rotationYaw + offset / 1.5F) / 180F) * 3.141593F)) * Mth.cos((float) ((rotationPitch / 180F) * 3.141593F)) * range;
 			
 			// Calculate the actual position of the particles.
-			double particleX = posX + handX + (float)(rand.nextFloat() / 16f);
-			double particleY = posY + handY + (float)(rand.nextFloat() / 16f);
-			double particleZ = posZ + handZ + (float)(rand.nextFloat() / 16f);
+			double particleX = posX + handX;
+			double particleY = posY + handY;
+			double particleZ = posZ + handZ;
 			
 			if (i < 1) {
 				world.addParticle(ParticleTypes.FLAME,
-						particleX + (float)(rand.nextFloat() / 16f),
-						particleY + (float)(rand.nextFloat() / 16f),
-						particleZ + (float)(rand.nextFloat() / 16f),
+						particleX,
+						particleY,
+						particleZ,
 						0d, 0d, 0d);
 			}
 			
 			world.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE,
-					particleX + (float)(rand.nextFloat() / 8f),
-					particleY + (float)(rand.nextFloat() / 2f),
-					particleZ + (float)(rand.nextFloat() / 8f),
+					particleX + (float)(0.5f - rand.nextFloat()),
+					particleY + (float)(0.5f - rand.nextFloat()),
+					particleZ + (float)(0.5f - rand.nextFloat()),
 					0d, 0d, 0d);
 			world.addParticle(ParticleTypes.POOF,
-					particleX + (float)(rand.nextFloat() / 8f),
-					particleY + (float)(rand.nextFloat() / 2f),
-					particleZ + (float)(rand.nextFloat() / 8f),
+					particleX + (float)(0.5f - rand.nextFloat()),
+					particleY + (float)(0.5f - rand.nextFloat()),
+					particleZ + (float)(0.5f - rand.nextFloat()),
 					0d, 0d, 0d);
 		}
 		

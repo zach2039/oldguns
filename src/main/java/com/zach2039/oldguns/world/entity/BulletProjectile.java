@@ -10,11 +10,11 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
-import com.zach2039.oldguns.init.ModDamageSources;
-import com.zach2039.oldguns.init.ModDamageSources.DamageType;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModSoundEvents;
+import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource;
+import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource.DamageType;
 
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
@@ -478,23 +478,25 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		Entity entity1 = this.getOwner();
 		DamageSource damagesource;
 		if (entity1 == null) {
-			damagesource = ModDamageSources.causeBulletDamage(getDamageType(), this, this);
+			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, null);
 		} else {
-			damagesource = ModDamageSources.causeBulletDamage(getDamageType(), this, entity1);
+			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, entity1);
 			if (entity1 instanceof LivingEntity) {
 				((LivingEntity)entity1).setLastHurtMob(entity);
 			}
 		}
 
-		boolean flag = entity.getType() == EntityType.ENDERMAN;
+		boolean isEnderman = entity.getType() == EntityType.ENDERMAN;
 		int k = entity.getRemainingFireTicks();
-		if (this.isOnFire() && !flag) {
+		if (this.isOnFire() && !isEnderman) {
 			entity.setSecondsOnFire(5);
 		}
 
 
+		double velMag = this.getVelocityMagnitude();
+		OldGuns.LOGGER.info("velMag: " + velMag);
 		if (entity.hurt(damagesource, (float)i)) {
-			if (flag) {
+			if (isEnderman && velMag < 4f) {
 				return;
 			}
 
