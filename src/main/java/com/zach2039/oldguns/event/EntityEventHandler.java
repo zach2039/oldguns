@@ -4,16 +4,18 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.config.OldGunsConfig;
-import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource;
+import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.damagesource.OldGunsDamageSourceIndirectEntity;
 
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.IndirectEntityDamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Skeleton;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
+import net.minecraftforge.event.entity.living.LivingPackSizeEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
@@ -49,6 +51,5 @@ public class EntityEventHandler {
 				}
 			}
 		}
-	}
-	
+	}	
 }

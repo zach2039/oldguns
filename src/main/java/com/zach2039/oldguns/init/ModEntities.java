@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.entity.monster.MusketeerSkeleton;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -27,6 +28,7 @@ public class ModEntities {
 	
 	private static boolean isInitialized;
 	
+	// Artillery
 	public static final RegistryObject<EntityType<BulletProjectile>> BULLET_PROJECTILE = registerEntityType("bullet_projectile",
 			() -> EntityType.Builder.<BulletProjectile>of((BulletProjectile::new), MobCategory.MISC)
 				.setUpdateInterval(1)
@@ -35,10 +37,11 @@ public class ModEntities {
 				.sized(0.1f, 0.1f)
 		);
 	
-//	public static final RegistryObject<EntityType<Bombard>> BOMBARD = registerEntityType("bombard",
-//			() -> EntityType.Builder.<Bombard>of((Bombard::new), MobCategory.MISC)
-//				.clientTrackingRange(10)
-//		);
+	// Mobs
+	public static final RegistryObject<EntityType<MusketeerSkeleton>> MUSKETEER_SKELETON = registerEntityType("musketeer_skeleton",
+			() -> EntityType.Builder.of(MusketeerSkeleton::new, MobCategory.MONSTER)
+				.sized(0.6F, 1.99F).clientTrackingRange(8)
+		);
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.

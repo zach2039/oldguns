@@ -2,6 +2,7 @@ package com.zach2039.oldguns.client.model;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
+import com.zach2039.oldguns.OldGuns;
 
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
@@ -17,7 +18,7 @@ import net.minecraft.world.entity.Entity;
 
 public class BulletProjectileModel<T extends Entity> extends EntityModel<T> {
 	// This layer location should be baked with EntityRendererProvider.Context in the entity renderer and passed into this model's constructor
-	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation("oldguns", "bullet_projectile"), "main");
+	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(new ResourceLocation(OldGuns.MODID, "bullet_projectile"), "main");
 	private final ModelPart base;
 
 	public BulletProjectileModel(ModelPart root) {

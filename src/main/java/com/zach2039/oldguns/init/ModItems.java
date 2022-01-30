@@ -34,6 +34,7 @@ import com.zach2039.oldguns.world.item.ammo.firearm.SmallStoneMusketBallItem;
 import com.zach2039.oldguns.world.item.artillery.LargePowderCharge;
 import com.zach2039.oldguns.world.item.artillery.MediumPowderCharge;
 import com.zach2039.oldguns.world.item.artillery.SmallPowderCharge;
+import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.material.BrassIngotItem;
 import com.zach2039.oldguns.world.item.material.BrassNuggetItem;
@@ -104,6 +105,7 @@ import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
+import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraftforge.client.event.ColorHandlerEvent.Item;
@@ -495,7 +497,8 @@ public class ModItems {
 			() -> new GunnersQuadrantItem()
 		);
 	
-	
+	// Equipment 
+	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_helmet",	() -> new MusketeerHatItem());
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.

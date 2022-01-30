@@ -140,7 +140,7 @@ public class FirearmEffectHelper {
 		Random rand = new Random();
 		
 		/* Calculate offset from player hand size, passed in parameter. */
-		float offset = (rightSide) ? 23f : -23f;
+		float offset = (rightSide) ? -8f : 8f;
 		
 		/* Change number of particles based on effect. */
 		int numParticles = 2 + rand.nextInt(3);

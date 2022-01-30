@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
+import com.zach2039.oldguns.world.item.crafting.recipe.GunsmithsBenchDualArmorDyeRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
@@ -87,6 +88,10 @@ public class ModCrafting {
 		
 		public static final RegistryObject<ShapedGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPED = RECIPE_SERIALIZERS.register("gunsmiths_bench_shaped",
 				ShapedGunsmithsBenchRecipe.Serializer::new
+		);
+		
+		public static final RegistryObject<GunsmithsBenchDualArmorDyeRecipe.Serializer> GUNSMITHS_BENCH_DUAL_ARMOR_DYE = RECIPE_SERIALIZERS.register("gunsmiths_bench_dual_armor_dye",
+				GunsmithsBenchDualArmorDyeRecipe.Serializer::new
 		);
 		
 		/**
