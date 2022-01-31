@@ -12,7 +12,7 @@ import net.minecraft.server.level.ServerPlayer;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class FirearmEmptyContainerListener extends CapabilityContainerListener<IFirearmEmpty> {
 

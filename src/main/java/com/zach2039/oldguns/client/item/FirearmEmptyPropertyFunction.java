@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class FirearmEmptyPropertyFunction {
 

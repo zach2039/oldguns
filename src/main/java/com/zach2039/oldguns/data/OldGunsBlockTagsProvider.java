@@ -16,7 +16,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsBlockTagsProvider extends BlockTagsProvider {
 	

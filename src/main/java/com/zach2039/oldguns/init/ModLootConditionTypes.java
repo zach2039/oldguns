@@ -17,7 +17,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModLootConditionTypes {
 	public static final LootItemConditionType ALLOW_DESIGN_NOTES_LOOT = register("can_spawn_design_notes_in_loot", new LootSpawnDesignNotesLootCondition.ConditionSerializer());

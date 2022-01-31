@@ -18,7 +18,7 @@ import net.minecraftforge.network.NetworkEvent;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class UpdateMenuFirearmEmptyMessage extends UpdateMenuCapabilityMessage<IFirearmEmpty, Boolean> {
 	public UpdateMenuFirearmEmptyMessage(

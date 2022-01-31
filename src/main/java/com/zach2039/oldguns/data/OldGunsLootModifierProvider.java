@@ -22,7 +22,7 @@ import net.minecraftforge.common.loot.LootTableIdCondition;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 

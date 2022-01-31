@@ -37,7 +37,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModItems {
 	private static final DeferredRegister<net.minecraft.world.item.Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OldGuns.MODID);
@@ -52,7 +52,7 @@ public class ModItems {
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANNONBALL = ITEMS.register("medium_iron_cannonball", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_CANNONBALL));
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_GRAPESHOT = ITEMS.register("medium_iron_grapeshot", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_GRAPESHOT));
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANISTER_SHOT = ITEMS.register("medium_iron_canister_shot", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_CANISTER_SHOT));
-	
+	// Charges
 	public static final RegistryObject<SmallPowderCharge> SMALL_POWDER_CHARGE = ITEMS.register("small_powder_charge", () -> new SmallPowderCharge());
 	public static final RegistryObject<MediumPowderCharge> MEDIUM_POWDER_CHARGE = ITEMS.register("medium_powder_charge", () -> new MediumPowderCharge());
 	public static final RegistryObject<LargePowderCharge> LARGE_POWDER_CHARGE = ITEMS.register("large_powder_charge", () -> new LargePowderCharge());

@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.INBTSerializable;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class FirearmEmpty implements IFirearmEmpty, INBTSerializable<ByteTag> {
 	private boolean isEmpty;

@@ -15,7 +15,7 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModLootTables {
 	public static final ResourceLocation LOOT_TABLE_MECHANISM = RegistrationHandler.register("loot_table_mechanism");

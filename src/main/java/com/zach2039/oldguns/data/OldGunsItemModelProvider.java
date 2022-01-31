@@ -25,7 +25,7 @@ import net.minecraftforge.common.util.Lazy;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsItemModelProvider extends ItemModelProvider {
 	private static final String LAYER_0 = "layer0";

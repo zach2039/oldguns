@@ -23,7 +23,7 @@ import net.minecraftforge.forge.event.lifecycle.GatherDataEvent;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 @Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 public class ModDataProviders {

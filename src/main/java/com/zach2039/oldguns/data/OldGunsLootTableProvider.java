@@ -31,7 +31,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsLootTableProvider extends LootTableProvider {
 	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> lootTableGenerators = ImmutableList.of(

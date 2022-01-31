@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModMenuTypes {
 	private static final DeferredRegister<MenuType<?>> MENU_TYPES = DeferredRegister.create(ForgeRegistries.CONTAINERS, OldGuns.MODID);

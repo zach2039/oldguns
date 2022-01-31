@@ -24,7 +24,7 @@ import net.minecraftforge.fml.common.Mod;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public final class FirearmEmptyCapability {
 	public static final Capability<IFirearmEmpty> FIREARM_EMPTY_CAPABILITY = CapabilityManager.get(new CapabilityToken<>() {});

@@ -20,7 +20,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModPotions {
 	private static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, OldGuns.MODID);

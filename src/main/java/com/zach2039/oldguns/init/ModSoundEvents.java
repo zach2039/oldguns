@@ -15,7 +15,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModSoundEvents {
 	private static final DeferredRegister<SoundEvent> SOUND_EVENTS = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, OldGuns.MODID);

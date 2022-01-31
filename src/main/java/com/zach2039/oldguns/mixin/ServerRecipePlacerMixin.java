@@ -2,7 +2,7 @@
  * Taken from RandomPatches to deal with firearm reload recipes not working with vanilla recipe book.
  * 
  * @author TheRandomLabs
- * @author grilled-salmon
+ * @author zach2039
  * 
  * The MIT License (MIT)
  *

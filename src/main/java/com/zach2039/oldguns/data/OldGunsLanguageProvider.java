@@ -29,7 +29,7 @@ import net.minecraftforge.common.data.LanguageProvider;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsLanguageProvider extends LanguageProvider {
 	private final Map<EntityType<?>, String> ENTITY_TYPE_NAMES = new HashMap<>();

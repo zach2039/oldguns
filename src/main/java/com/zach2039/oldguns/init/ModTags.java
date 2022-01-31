@@ -16,7 +16,7 @@ import net.minecraftforge.versions.forge.ForgeVersion;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class ModTags {
 	public static class Blocks {

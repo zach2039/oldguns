@@ -38,7 +38,7 @@ import net.minecraftforge.common.util.Lazy;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsBlockStateProvider extends BlockStateProvider {
 	private static final int DEFAULT_ANGLE_OFFSET = 180;

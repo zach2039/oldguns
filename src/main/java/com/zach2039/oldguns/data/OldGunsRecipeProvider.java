@@ -31,7 +31,7 @@ import net.minecraftforge.common.Tags;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 public class OldGunsRecipeProvider extends RecipeProvider {
 	

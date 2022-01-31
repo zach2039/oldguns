@@ -10,7 +10,7 @@ import net.minecraft.network.FriendlyByteBuf;
  * @author Choonster
  *
  * With additions by:
- * @author grilled-salmon
+ * @author zach2039
  */
 class FirearmEmptyFunctions {
 	static boolean convertFirearmEmptyToFirearmEmptyValue(final IFirearmEmpty firearmEmpty) {
