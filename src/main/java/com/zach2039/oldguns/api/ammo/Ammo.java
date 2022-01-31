@@ -22,4 +22,6 @@ public interface Ammo {
 	public float getProjectileDeviationModifier();
 	
 	public float getProjectileEffectiveRange();
+	
+	public float getProjectileArmorBypass();
 }

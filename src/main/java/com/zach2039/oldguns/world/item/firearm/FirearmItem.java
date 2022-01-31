@@ -19,8 +19,8 @@ import com.zach2039.oldguns.api.firearm.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmWaterResiliency;
-import com.zach2039.oldguns.api.firearm.Firearms;
-import com.zach2039.oldguns.api.firearm.Firearms.MechanismType;
+import com.zach2039.oldguns.api.firearm.FirearmTypes;
+import com.zach2039.oldguns.api.firearm.FirearmTypes.MechanismType;
 import com.zach2039.oldguns.api.firearm.util.FirearmItemHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmStackHelper;
@@ -94,7 +94,7 @@ public class FirearmItem extends BowItem implements Firearm {
 		initAttributes();
 	}
 	
-	public FirearmItem(Firearms.Muzzleloaders entry) {
+	public FirearmItem(FirearmTypes.Muzzleloaders entry) {
 		this((FirearmProperties) new FirearmProperties()
 				.ammoCapacity(entry.getAmmoCapacity())
 				.firesAllLoadedAmmoAtOnce(entry.firesAllAtOnce())
@@ -1003,37 +1003,37 @@ public class FirearmItem extends BowItem implements Firearm {
 	/**
 	 * Ammo capacity of this firearm item instance.
 	 */
-	private int ammoCapacity = 1;
+	int ammoCapacity = 1;
 
 	/**
 	 * Projectile speed of this firearm item instance.
 	 */
-	private float projectileSpeed = 2.5f;
+	float projectileSpeed = 2.5f;
 
 	/**
 	 * Effective range of this firearm item instance.
 	 */
-	private float effectiveRangeModifier = 10f;
+	float effectiveRangeModifier = 10f;
 
 	/**
 	 * Deviation modifier of this firearm item instance.
 	 */
-	private float deviationModifier = 1f;
+	float deviationModifier = 1f;
 
 	/**
 	 * Damage modifier of this firearm item instance.
 	 */
-	private float damageModifier = 1f;
+	float damageModifier = 1f;
 
 	/**
 	 * Required reload ticks of this firearm item instance.
 	 */
-	private int requiredReloadTicks = 80;
+	int requiredReloadTicks = 80;
 
 	/**
 	 * Whether the firearm fires all loaded ammo at once. Used for nockguns and duckfoot firearms.
 	 */
-	private boolean firesAllLoadedAmmoAtOnce = false;
+	boolean firesAllLoadedAmmoAtOnce = false;
 
 	/**
 	 * Mechanism type of firearm
@@ -1048,16 +1048,16 @@ public class FirearmItem extends BowItem implements Firearm {
 	/**
 	 * Reload type of the firearm.
 	 */
-	private FirearmReloadType reloadType = FirearmReloadType.MUZZLELOADER;
+	FirearmReloadType reloadType = FirearmReloadType.MUZZLELOADER;
 
 	/**
 	 * Size of the firearm.
 	 */
-	private FirearmSize firearmSize = FirearmSize.MEDIUM;
+	FirearmSize firearmSize = FirearmSize.MEDIUM;
 
 	/**
 	 * Water resiliency of the firearm.
 	 */
-	private FirearmWaterResiliency firearmWaterResiliency = FirearmWaterResiliency.FAIR;
+	FirearmWaterResiliency firearmWaterResiliency = FirearmWaterResiliency.FAIR;
 
 }

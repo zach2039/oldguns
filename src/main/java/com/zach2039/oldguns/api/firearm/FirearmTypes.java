@@ -6,7 +6,7 @@ import com.zach2039.oldguns.config.OldGunsConfig.BreechloadingFirearmAttributes;
 import com.zach2039.oldguns.config.OldGunsConfig.FirearmSettings;
 import com.zach2039.oldguns.config.OldGunsConfig.MuzzleloadingFirearmAttributes;
 
-public class Firearms {
+public class FirearmTypes {
 	
 	private static final FirearmSettings FIREARM_SETTINGS = OldGunsConfig.SERVER.firearmSettings;
 	

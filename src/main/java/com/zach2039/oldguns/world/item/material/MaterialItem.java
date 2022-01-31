@@ -1,11 +1,21 @@
 package com.zach2039.oldguns.world.item.material;
 
+import com.zach2039.oldguns.OldGuns;
+
 import net.minecraft.world.item.Item;
 
-public abstract class MaterialItem extends Item {
+public class MaterialItem extends Item {
 	
-	public MaterialItem(Properties builder) {
-		super(builder);
+	public MaterialItem(int maxStackSize) {
+		super(new Properties()
+				.stacksTo(maxStackSize)
+				.tab(OldGuns.CREATIVE_MODE_TAB));
+	}
+	
+	public MaterialItem() {
+		super(new Properties()
+				.stacksTo(64)
+				.tab(OldGuns.CREATIVE_MODE_TAB));
 	}
 
 }

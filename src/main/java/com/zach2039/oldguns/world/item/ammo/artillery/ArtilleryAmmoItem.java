@@ -3,7 +3,9 @@ package com.zach2039.oldguns.world.item.ammo.artillery;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
+import com.zach2039.oldguns.api.ammo.AmmoTypes;
 import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
@@ -16,47 +18,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
 public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
-	/**
-	 * Ammo type of this firearm ammo item instance.
-	 */
-	protected ProjectileType ammoType = ProjectileType.CANNONBALL;
 	
-	/**
-	 * Projectile effect length of this ammo item instance
-	 */
-	int effectTicks = 0;
-	
-	/**
-	 * Projectile effect potency of this ammo item instance
-	 */
-	float effectPotency = 0;
-	
-	/**
-	 * Damage of this firearm ammo item instance.
-	 */
-	protected double projectileDamage = 10.0f;
-	
-	/**
-	 * Projectile size of this firearm ammo item instance.
-	 */
-	protected float projectileSize = 1.0f;
-	
-	/**
-	 * Projectile count of this firearm ammo item instance.
-	 */
-	protected int projectileCount = 1;
-	
-	/**
-	 * Projectile deviation of this firearm ammo item instance.
-	 */
-	protected float projectileDeviationModifier = 1.0f;
-	
-	/**
-	 * Projectile range of this firearm ammo item instance.
-	 */
-	protected float projectileEffectiveRange = 10.0f;
-	
-	public ArtilleryAmmoItem(ArtilleryAmmoProperties builder) {
+	private ArtilleryAmmoItem(ArtilleryAmmoProperties builder) {
 		super((Properties) builder);
 		this.ammoType = builder.ammoType;
 		this.effectTicks = builder.effectTicks;
@@ -66,54 +29,23 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 		this.projectileCount = builder.projectileCount;
 		this.projectileDeviationModifier = builder.projectileDeviationModifier;
 		this.projectileEffectiveRange = builder.projectileEffectiveRange;
+		this.projectileBypassArmorPercentage = builder.projectileBypassArmorPercentage;
 	}
 	
-	@Override
-	public ProjectileType getAmmoType()
-	{
-		return this.ammoType;
-	}
-
-	@Override
-	public int getEffectTicks()
-	{
-		return this.effectTicks;
-	}
-	
-	@Override
-	public float getEffectPotency()
-	{
-		return this.effectPotency;
-	}
-	
-	@Override
-	public double getProjectileDamage()
-	{
-		return this.projectileDamage;
-	}
-	
-	@Override
-	public float getProjectileSize()
-	{
-		return this.projectileSize;
-	}
-	
-	@Override
-	public float getProjectileCount()
-	{
-		return this.projectileCount;
-	}
-	
-	@Override
-	public float getProjectileDeviationModifier()
-	{
-		return this.projectileDeviationModifier;
-	}
-	
-	@Override
-	public float getProjectileEffectiveRange()
-	{
-		return this.projectileEffectiveRange;
+	public ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo entry) {
+		this((ArtilleryAmmoProperties) new ArtilleryAmmoProperties()
+				.projectileCount(entry.getAttributes().projectileCount.get())
+				.effectTicks(entry.getAttributes().effectTicks.get())
+				.effectPotency(entry.getAttributes().effectPotency.get().floatValue())
+				.projectileDamage(entry.getAttributes().projectileDamage.get().floatValue())
+				.projectileSize(entry.getAttributes().projectileSize.get().floatValue())
+				.projectileEffectiveRange(entry.getAttributes().projectileEffectiveRange.get().floatValue())
+				.projectileDeviationModifier(entry.getAttributes().projectileDeviationModifier.get().floatValue())
+				.projectileBypassArmorPercentage(entry.getAttributes().projectileArmorBypassPercentage.get().floatValue())
+				.ammoType(entry.getProjectileType())
+				.stacksTo(entry.getAttributes().maxStackSize.get())				
+				.tab(OldGuns.CREATIVE_MODE_TAB)
+				);
 	}
 	
 	@Override
@@ -169,6 +101,51 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 		return projectileEntityList;
 	}
 	
+	@Override
+	public ProjectileType getAmmoType() {
+		return this.ammoType;
+	}
+
+	@Override
+	public int getEffectTicks() {
+		return this.effectTicks;
+	}
+	
+	@Override
+	public float getEffectPotency() {
+		return this.effectPotency;
+	}
+	
+	@Override
+	public double getProjectileDamage() {
+		return this.projectileDamage;
+	}
+	
+	@Override
+	public float getProjectileSize() {
+		return this.projectileSize;
+	}
+	
+	@Override
+	public float getProjectileCount() {
+		return this.projectileCount;
+	}
+	
+	@Override
+	public float getProjectileDeviationModifier() {
+		return this.projectileDeviationModifier;
+	}
+	
+	@Override
+	public float getProjectileEffectiveRange() {
+		return this.projectileEffectiveRange;
+	}
+	
+	@Override
+	public float getProjectileArmorBypass() {
+		return this.projectileBypassArmorPercentage;
+	}
+	
 	public static class ArtilleryAmmoProperties extends Properties {
 		/**
 		 * Ammo type of this ammo item instance.
@@ -210,6 +187,11 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 		 */
 		float projectileEffectiveRange = 10.0f;
 		
+		/**
+		 * Projectile armor bypass percentage of this ammo
+		 */
+		protected float projectileBypassArmorPercentage = 0.0f;
+		
 		public ArtilleryAmmoProperties ammoType(ProjectileType ammoType) {
 			this.ammoType = ammoType;
 			return this;
@@ -249,5 +231,55 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 			this.projectileEffectiveRange = projectileEffectiveRange;
 			return this;
 		}
+		
+		public ArtilleryAmmoProperties projectileBypassArmorPercentage(float projectileBypassArmorPercentage) {
+			this.projectileBypassArmorPercentage = projectileBypassArmorPercentage;
+			return this;
+		}
 	}
+
+	/**
+	 * Ammo type of this firearm ammo item instance.
+	 */
+	ProjectileType ammoType = ProjectileType.CANNONBALL;
+	
+	/**
+	 * Projectile effect length of this ammo item instance
+	 */
+	int effectTicks = 0;
+	
+	/**
+	 * Projectile effect potency of this ammo item instance
+	 */
+	float effectPotency = 0;
+	
+	/**
+	 * Damage of this firearm ammo item instance.
+	 */
+	double projectileDamage = 10.0f;
+	
+	/**
+	 * Projectile size of this firearm ammo item instance.
+	 */
+	float projectileSize = 1.0f;
+	
+	/**
+	 * Projectile count of this firearm ammo item instance.
+	 */
+	int projectileCount = 1;
+	
+	/**
+	 * Projectile deviation of this firearm ammo item instance.
+	 */
+	float projectileDeviationModifier = 1.0f;
+	
+	/**
+	 * Projectile range of this firearm ammo item instance.
+	 */
+	float projectileEffectiveRange = 10.0f;
+	
+	/**
+	 * Projectile armor bypass percentage of this ammo
+	 */
+	float projectileBypassArmorPercentage = 0.0f;
 }

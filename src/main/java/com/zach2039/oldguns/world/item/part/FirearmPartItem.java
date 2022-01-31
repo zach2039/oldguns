@@ -1,17 +1,22 @@
 package com.zach2039.oldguns.world.item.part;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.FirearmPart;
 
 import net.minecraft.world.item.Item;
 
-public abstract class FirearmPartItem extends Item {
+public class FirearmPartItem extends Item {
 
-	private FirearmPart partType = FirearmPart.SMALL_HANDLE;
-	
-	public FirearmPartItem(FirearmPartProperties builder) {
+	private FirearmPartItem(FirearmPartProperties builder) {
 		super((Properties) builder);
 		this.partType = builder.partType;
 	}
+	
+	public FirearmPartItem(FirearmPart part) {
+		this((FirearmPartProperties) new FirearmPartProperties()				
+				.partType(part)
+				.tab(OldGuns.CREATIVE_MODE_TAB));
+	}	
 	
 	public FirearmPart getPartType() {
 		return this.partType;
@@ -28,4 +33,6 @@ public abstract class FirearmPartItem extends Item {
 			return this;
 		}
 	}
+	
+	FirearmPart partType = FirearmPart.SMALL_HANDLE;
 }

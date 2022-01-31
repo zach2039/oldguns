@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.api.firearm;
 
 import com.zach2039.oldguns.api.ammo.ProjectileType;
-import com.zach2039.oldguns.api.firearm.Firearms.MechanismType;
+import com.zach2039.oldguns.api.firearm.FirearmTypes.MechanismType;
 
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.Item;
