@@ -3,7 +3,8 @@ package com.zach2039.oldguns.world.item.ammo.firearm;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zach2039.oldguns.api.ammo.IAmmo;
+import com.zach2039.oldguns.api.ammo.Ammo;
+import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
@@ -12,7 +13,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class FirearmAmmoItem extends Item implements IAmmo {
+public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 	/**
 	 * Ammo type of this firearm ammo item instance.
 	 */

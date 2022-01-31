@@ -58,16 +58,16 @@ public class FirearmNBTHelper {
 		setNBTTagMagazineStack(stackIn, new ArrayList<ItemStack>());
 	}
 	
-	public static void pushNBTTagAmmo(ItemStack stackIn, ItemStack ammoStack)
+	public static void pushNBTTagAmmo(ItemStack firearmStack, ItemStack ammoStack)
 	{
 		/* Get ammo list from stack. */
-		List<ItemStack> ammoStackList = getNBTTagMagazineStack(stackIn);
+		List<ItemStack> ammoStackList = getNBTTagMagazineStack(firearmStack);
 		
 		/* Add item to list. */
 		ammoStackList.add(ammoStack);
 		
 		/* Set ammo list on itemstack. */
-		setNBTTagMagazineStack(stackIn, ammoStackList);
+		setNBTTagMagazineStack(firearmStack, ammoStackList);
 	}
 	
 	public static ItemStack peekNBTTagAmmo(ItemStack stackIn)

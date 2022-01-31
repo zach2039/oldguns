@@ -2,12 +2,11 @@ package com.zach2039.oldguns.world.damagesource;
 
 import javax.annotation.Nullable;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource.DamageType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.IndirectEntityDamageSource;
 import net.minecraft.world.entity.Entity;
 
 public class OldGunsDamageSource extends DamageSource {	
@@ -27,11 +26,11 @@ public class OldGunsDamageSource extends DamageSource {
 	}
 	
 	public static DamageSource firearm(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
-		return new OldGunsDamageSourceIndirectEntity("firearm", projectile, shooter, percentBypassArmor).setProjectile();
+		return new OldGunsDamageSourceIndirectEntity(OldGuns.MODID + ".firearm", projectile, shooter, percentBypassArmor).setProjectile();
 	}
 	
 	public static DamageSource artillery(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
-		return new OldGunsDamageSourceIndirectEntity("artillery", projectile, shooter, percentBypassArmor).setProjectile();
+		return new OldGunsDamageSourceIndirectEntity(OldGuns.MODID + ".artillery", projectile, shooter, percentBypassArmor).setProjectile();
 	}
 	
 	public enum DamageType {

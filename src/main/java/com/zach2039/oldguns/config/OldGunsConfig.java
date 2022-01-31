@@ -58,6 +58,7 @@ public class OldGunsConfig {
 		public final LootSettings lootSettings;
 		public final FirearmSettings firearmSettings;
 		public final ArtillerySettings artillerySettings;
+		public final MobSettings mobSettings;
 		
 		Server(final ForgeConfigSpec.Builder builder) {
 			builder.comment("Server config settings")
@@ -82,6 +83,11 @@ public class OldGunsConfig {
 					builder,
 					"Attributes of artillery",
 					"artillerySettings");
+			
+			mobSettings = new MobSettings(
+					builder,
+					"Attributes of mobs",
+					"mobSettings");
 			
 			builder.pop();
 		}
@@ -1584,6 +1590,66 @@ public class OldGunsConfig {
 			effectPotency = builder
 					.comment("How potent are any effects from this projectile")
 					.defineInRange("effectPotency", defaultEffectPotency, 0f, Float.MAX_VALUE);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class MobSettings {
+		public final GenericMobSettings musketeerSkeleton;
+		
+		MobSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			musketeerSkeleton = new GenericMobSettings(builder, "Musketeer Skeletons", "musketeerSkeleton",
+					true,
+					3,
+					1,
+					2,
+					Arrays.asList(new String[] { "UNDERGROUND", "FOREST" }),
+					Arrays.asList(new String[] {})
+					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class GenericMobSettings {
+		public final BooleanValue canSpawn;
+		public final IntValue spawnWeight;
+		public final IntValue minCount;
+		public final IntValue maxCount;
+		public final ConfigValue<List<String>> validBiomeCategories;
+		public final ConfigValue<List<String>> validBiomes;
+		
+		GenericMobSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+				final boolean defaultCanSpawn, final int defaultSpawnWeight, final int defaultMinCount, final int defaultMaxCount,
+				final List<String> defaultValidBiomeCategories, final List<String> defaultValidBiomes) {
+			builder.comment(comment).push(path);
+			
+			canSpawn = builder
+					.comment("Whether this mob is allowed to spawn")
+					.define("canSpawn", true);
+			
+			spawnWeight = builder
+					.comment("The spawn chance of this mob in relation to other mobs")
+					.defineInRange("spawnWeight", defaultSpawnWeight, 0, Integer.MAX_VALUE);
+			
+			minCount = builder
+					.comment("The minimum amount of this mob to spawn")
+					.defineInRange("minCount", defaultMinCount, 0, Integer.MAX_VALUE);
+			
+			maxCount = builder
+					.comment("The maximum amount of this mob to spawn")
+					.defineInRange("maxCount", defaultMaxCount, 0, Integer.MAX_VALUE);
+			
+			validBiomeCategories = builder
+					.comment("A list of valid biome categories that this mob can spawn in")
+					.define("validBiomeCategories", defaultValidBiomeCategories);
+			
+			validBiomes = builder
+					.comment("A list of valid biomes that this mob can spawn in")
+					.define("validBiomes", defaultValidBiomes);
 			
 			builder.pop();
 		}

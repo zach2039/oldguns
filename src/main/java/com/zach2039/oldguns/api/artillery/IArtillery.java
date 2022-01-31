@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.api.artillery;
 
-import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
-import com.zach2039.oldguns.api.ammo.IArtilleryCharge;
+import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
 
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -23,13 +23,13 @@ public interface IArtillery {
 	
 	void ramAmmoCharge(int slot);
 	
-	IArtilleryAmmo getAmmoProjectile(int slot);
+	ArtilleryAmmo getAmmoProjectile(int slot);
 	
-	IArtilleryCharge getAmmoCharge(int slot);
+	ArtilleryCharge getAmmoCharge(int slot);
 	
-	IArtilleryAmmo peekAmmoProjectile(int slot);
+	ArtilleryAmmo peekAmmoProjectile(int slot);
 	
-	IArtilleryCharge peekAmmoCharge(int slot);
+	ArtilleryCharge peekAmmoCharge(int slot);
 	
 	boolean isAmmoProjectileRammed(int slot);
 	

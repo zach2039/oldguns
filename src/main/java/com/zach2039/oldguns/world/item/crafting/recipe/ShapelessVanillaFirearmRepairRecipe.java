@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
 import com.zach2039.oldguns.api.firearm.FirearmCondition;
-import com.zach2039.oldguns.api.firearm.IFirearm;
+import com.zach2039.oldguns.api.firearm.Firearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.DamageableToolRecipe;
@@ -29,7 +29,7 @@ public class ShapelessVanillaFirearmRepairRecipe extends ShapelessRecipe impleme
 		for (int i = 0; i < inv.getContainerSize(); i++) {
 			ItemStack stack = inv.getItem(i);
 			
-			if (stack.getItem() instanceof IFirearm) {				
+			if (stack.getItem() instanceof Firearm) {				
 				if (stack.isDamaged()) {
 					firearmStack = stack.copy();
 				}
@@ -52,7 +52,7 @@ public class ShapelessVanillaFirearmRepairRecipe extends ShapelessRecipe impleme
 			if (FirearmNBTHelper.getNBTTagCondition(firearmStack) == FirearmCondition.BROKEN) {
 				FirearmNBTHelper.setNBTTagCondition(firearmStack, FirearmCondition.VERY_POOR);
 			}
-			((IFirearm)firearmStack.getItem()).initNBTTags(firearmStack);
+			((Firearm)firearmStack.getItem()).initNBTTags(firearmStack);
 			
 			return firearmStack;
 		}

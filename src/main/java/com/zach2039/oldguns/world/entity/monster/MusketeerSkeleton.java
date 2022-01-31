@@ -2,15 +2,20 @@ package com.zach2039.oldguns.world.entity.monster;
 
 import javax.annotation.Nullable;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.monster.Monster;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 
 public class MusketeerSkeleton extends AbstractFirearmSkeleton {
@@ -19,10 +24,32 @@ public class MusketeerSkeleton extends AbstractFirearmSkeleton {
 		super(ModEntities.MUSKETEER_SKELETON.get(), level);
 	}
 
+	public static AttributeSupplier.Builder registerAttributes() {
+		return Skeleton.createAttributes();
+	}
+	
 	@Override
 	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
-		super.populateDefaultEquipmentSlots(difficulty);
-		this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.MATCHLOCK_CALIVER.get()));
+		 if (this.random.nextFloat() < 0.15F * difficulty.getSpecialMultiplier()) {
+	         int i = this.random.nextInt(2);
+	         float f = this.level.getDifficulty() == Difficulty.HARD ? 0.1F : 0.25F;
+	         if (this.random.nextFloat() < 0.095F) {
+	            ++i;
+	         }
+
+	         if (this.random.nextFloat() < 0.095F) {
+	            ++i;
+	         }
+
+	         if (this.random.nextFloat() < 0.095F) {
+	            ++i;
+	         }
+	         
+	         this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(MusketeerSkeleton.getEquipmentForSlot(EquipmentSlot.MAINHAND, i)));
+		 } else {
+			 this.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(ModItems.MATCHLOCK_DERRINGER.get()));
+		 }
+		
 		this.setItemSlot(EquipmentSlot.HEAD, new ItemStack(ModItems.MUSKETEER_HAT.get()));
 	}
 
@@ -41,6 +68,7 @@ public class MusketeerSkeleton extends AbstractFirearmSkeleton {
 			} else if (difficultyFactor == 4) {
 				return ModItems.MATCHLOCK_BLUNDERBUSS.get();
 			}
+			return ModItems.MATCHLOCK_DERRINGER.get();
 		default:
 			return null;
 		}

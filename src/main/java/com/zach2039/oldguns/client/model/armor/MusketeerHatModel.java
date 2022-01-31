@@ -42,7 +42,7 @@ public class MusketeerHatModel<A extends LivingEntity> extends AbstractArmorMode
 
 		PartDefinition hat = partdefinition.addOrReplaceChild("hat", CubeListBuilder.create(), PartPose.offset(0.0F, 24.0F, 0.0F));
 
-		PartDefinition cap = hat.addOrReplaceChild("cap", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -9F, 0.0F, 0.0F, 0.2618F, -0.1309F));
+		PartDefinition cap = hat.addOrReplaceChild("cap", CubeListBuilder.create(), PartPose.offsetAndRotation(0.0F, -9.1F, 0.0F, 0.0F, 0.2618F, -0.1309F));
 
 		PartDefinition rim = cap.addOrReplaceChild("rim", CubeListBuilder.create().texOffs(0, 0).addBox(-3.0F, 1.5F, -8.0F, 6.0F, 1.0F, 16.0F, new CubeDeformation(0.0F))
 		.texOffs(20, 18).addBox(-5.0F, 1.5F, -7.0F, 2.0F, 1.0F, 14.0F, new CubeDeformation(0.0F))

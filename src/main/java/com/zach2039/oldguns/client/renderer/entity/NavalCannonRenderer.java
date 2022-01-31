@@ -6,11 +6,12 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Vector3f;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
-import com.zach2039.oldguns.api.ammo.IArtilleryCharge;
+import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
 import com.zach2039.oldguns.client.model.NavalCannonModel;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.client.Minecraft;
@@ -59,8 +60,8 @@ public class NavalCannonRenderer implements BlockEntityRenderer<MediumNavalCanno
 	}
 	
 	private void renderTrajectory(MediumNavalCannonBlockEntity blockEntity, PoseStack stackIn, MultiBufferSource buffer) {
-		IArtilleryAmmo ammo = blockEntity.peekAmmoProjectile(0);
-		IArtilleryCharge charge = blockEntity.peekAmmoCharge(0);
+		ArtilleryAmmoItem ammo = (ArtilleryAmmoItem) blockEntity.peekAmmoProjectile(0);
+		ArtilleryCharge charge = blockEntity.peekAmmoCharge(0);
 		Vec3 pos = new Vec3(blockEntity.getBlockPos().getX(), blockEntity.getBlockPos().getY(), blockEntity.getBlockPos().getZ());
 		if (ammo == null ||	charge == null || (Minecraft.getInstance().player.distanceToSqr(pos) > 32f))
 			return;

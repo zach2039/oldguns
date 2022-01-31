@@ -6,9 +6,9 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.api.ammo.IAmmo;
+import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmCondition;
-import com.zach2039.oldguns.api.firearm.IFirearm;
+import com.zach2039.oldguns.api.firearm.Firearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.init.ModCrafting;
@@ -50,7 +50,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 			ItemStack itemstack = p_44262_.getItem(j);
 			// Check if items are valid, but check status of firearms as well, since we don't want to try and reload a broken firearm
 			if (!itemstack.isEmpty()) {
-				if (!(itemstack.getItem() instanceof IFirearm)) {
+				if (!(itemstack.getItem() instanceof Firearm)) {
 					++i;
 		            if (isSimple)
 		            stackedcontents.accountStack(itemstack, 1);
@@ -58,7 +58,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 				} else {
 					if (
 							FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN && 
-							FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) < ((IFirearm)itemstack.getItem()).getAmmoCapacity()
+							FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) < ((Firearm)itemstack.getItem()).getAmmoCapacity()
 						)
 					{
 						++i;
@@ -86,9 +86,9 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 			ItemStack stack = inv.getItem(i);
 			
 			/* If item is a firearm instance and can reload, set output stack and break. */
-			if (stack.getItem() instanceof IFirearm)
+			if (stack.getItem() instanceof Firearm)
 			{
-				IFirearm firearmItem = (IFirearm) stack.getItem();
+				Firearm firearmItem = (Firearm) stack.getItem();
 				
 				if (firearmItem.canReload(stack) && FirearmNBTHelper.getNBTTagCondition(stack) != FirearmCondition.BROKEN)
 				{
@@ -104,7 +104,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 			ItemStack stack = inv.getItem(i);
 			
 			/* If item is a ammo instance, set input ammo stack and break. */
-			if (stack.getItem() instanceof IAmmo)
+			if (stack.getItem() instanceof FirearmAmmo)
 			{
 				ammoStack = stack.copy();
 				break;

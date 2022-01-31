@@ -3,7 +3,8 @@ package com.zach2039.oldguns.world.item.ammo.artillery;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.Ammo;
+import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity;
@@ -11,9 +12,10 @@ import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEnt
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
+public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 	/**
 	 * Ammo type of this firearm ammo item instance.
 	 */
@@ -115,7 +117,7 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 	}
 	
 	@Override
-	public List<BulletProjectile> createProjectiles(Level worldIn, double x, double y, double z, IArtilleryAmmo stack,
+	public List<BulletProjectile> createProjectiles(Level worldIn, double x, double y, double z, ArtilleryAmmo stack,
 			StationaryArtilleryBlockEntity stationaryArtilleryEntity, LivingEntity shooter) {
 		// Create list to hold all projectile entities that this bullet makes when fired
 		List<BulletProjectile> projectileEntityList = new ArrayList<BulletProjectile>();
@@ -136,6 +138,26 @@ public class ArtilleryAmmoItem extends Item implements IArtilleryAmmo {
 					z + barrelZ);
 			/*BulletProjectile entityBullet = new BulletProjectile(
 					worldIn, shooter);*/
+			entityBullet.setDamage(getProjectileDamage());
+			entityBullet.setProjectileSize(getProjectileSize());
+			entityBullet.setProjectileType(getAmmoType());
+			entityBullet.setEffectStrength(getEffectPotency());
+			entityBullet.setEffectTicks(getEffectTicks());
+			projectileEntityList.add(entityBullet);
+		}
+		
+		return projectileEntityList;
+	}
+	
+	@Override
+	public List<BulletProjectile> createProjectiles(Level worldIn, ItemStack stackIn, LivingEntity shooter)
+	{
+		/* Create list to hold all projectile entities that this bullet makes when fired. */
+		List<BulletProjectile> projectileEntityList = new ArrayList<BulletProjectile>();
+		
+		for (int i = 0; i < getProjectileCount(); i++) 
+		{
+			BulletProjectile entityBullet = new BulletProjectile(worldIn, shooter);
 			entityBullet.setDamage(getProjectileDamage());
 			entityBullet.setProjectileSize(getProjectileSize());
 			entityBullet.setProjectileType(getAmmoType());

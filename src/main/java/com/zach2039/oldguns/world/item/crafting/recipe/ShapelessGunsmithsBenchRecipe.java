@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
-import com.zach2039.oldguns.api.firearm.IFirearm;
+import com.zach2039.oldguns.api.firearm.Firearm;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
@@ -74,8 +74,8 @@ public class ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 				return ItemStack.EMPTY;
 		}
 		
-		if (resultStack.getItem() instanceof IFirearm)
-			((IFirearm)this.result.getItem()).initNBTTags(resultStack);
+		if (resultStack.getItem() instanceof Firearm)
+			((Firearm)this.result.getItem()).initNBTTags(resultStack);
 		
 		return resultStack;
 	}
@@ -101,8 +101,8 @@ public class ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 	{
 		ItemStack outputStack = this.result;
 		
-		if (outputStack.getItem() instanceof IFirearm)
-			((IFirearm)outputStack.getItem()).initNBTTags(outputStack);
+		if (outputStack.getItem() instanceof Firearm)
+			((Firearm)outputStack.getItem()).initNBTTags(outputStack);
 		
 		return outputStack;
 	}

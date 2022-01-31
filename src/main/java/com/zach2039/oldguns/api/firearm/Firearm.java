@@ -1,10 +1,14 @@
 package com.zach2039.oldguns.api.firearm;
 
+import com.zach2039.oldguns.api.ammo.ProjectileType;
+import com.zach2039.oldguns.api.firearm.Firearms.MechanismType;
+
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public interface IFirearm {
+public interface Firearm {
 	
 	void initNBTTags(ItemStack stackIn);
 	
@@ -26,12 +30,18 @@ public interface IFirearm {
 	
 	boolean firesAllLoadedAmmoAtOnce();
 	
+	ProjectileType getDefaultProjectileType();
+
+	MechanismType getMechanismType();
+	
 	FirearmReloadType getReloadType();
 	
 	FirearmSize getFirearmSize();
 	
 	FirearmWaterResiliency getFirearmWaterResiliency();
 
+	ItemStack getDefaultProjectileForFirearm();
 
+	Item getDefaultAmmoItem();
 }
 

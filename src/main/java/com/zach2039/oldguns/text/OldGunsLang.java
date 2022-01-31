@@ -32,9 +32,7 @@ import net.minecraft.resources.ResourceLocation;
  */
 public enum OldGunsLang {
 	MESSAGE_DEATH_FIREARM("death.attack.oldguns.firearm"),
-	MESSAGE_DEATH_FIREARM_PLAYER("death.attack.oldguns.firearm.player"),
 	MESSAGE_DEATH_ARTILLERY("death.attack.oldguns.artillery"),
-	MESSAGE_DEATH_ARTILLERY_PLAYER("death.attack.oldguns.artillery.player"),
 	MESSAGE_ARTILLERY_NAME("text.oldguns.artillery_name.message"),
 	MESSAGE_ARTILLERY_MAX_SLOTS("text.oldguns.artillery_max_slots.message"),
 	MESSAGE_ARTILLERY_SLOT_STATE("text.oldguns.artillery_slot_state.message")

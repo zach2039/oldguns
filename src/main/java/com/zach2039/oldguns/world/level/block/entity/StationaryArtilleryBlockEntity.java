@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.ammo.IArtilleryAmmo;
-import com.zach2039.oldguns.api.ammo.IArtilleryCharge;
+import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
@@ -14,6 +14,7 @@ import com.zach2039.oldguns.api.artillery.IArtillery;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
 import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
@@ -154,8 +155,8 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 					player.swing(hand);
 					
 					// Get slot charge and projectile
-					IArtilleryCharge chargeStack = getAmmoCharge(slot);
-					IArtilleryAmmo projectileStack = getAmmoProjectile(slot);
+					ArtilleryCharge chargeStack = getAmmoCharge(slot);
+					ArtilleryAmmoItem projectileStack = (ArtilleryAmmoItem) getAmmoProjectile(slot);
 					
 					// Need to offset spawn location of projectiles, since block pos will end up aligned to block edge
 	        		double pX = blockpos.getX() + 0.5D;
@@ -218,7 +219,7 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 					}
 					break;
 				case POWDER_RAMMED:
-					if (handItem.getItem() instanceof IArtilleryAmmo) {
+					if (handItem.getItem() instanceof ArtilleryAmmo) {
 						if (!level.isClientSide()) {
 							player.swing(hand);
 							putAmmoProjectile(slot, handItem.copy());
@@ -241,7 +242,7 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 					}
 					break;
 				case UNLOADED:
-					if (handItem.getItem() instanceof IArtilleryCharge) {
+					if (handItem.getItem() instanceof ArtilleryCharge) {
 						if (!level.isClientSide()) {
 							player.swing(hand);
 							putAmmoCharge(slot, handItem.copy());
@@ -398,8 +399,8 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 	}
 
 	@Override
-	public IArtilleryAmmo getAmmoProjectile(int slot) {
-		IArtilleryAmmo projectileItem = (IArtilleryAmmo) ammoProjectiles.get(slot).getItem();
+	public ArtilleryAmmo getAmmoProjectile(int slot) {
+		ArtilleryAmmo projectileItem = (ArtilleryAmmo) ammoProjectiles.get(slot).getItem();
 		
 		ammoProjectiles.remove(slot);
 		projectileRamStatus[slot] = 0;
@@ -408,8 +409,8 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 	}
 
 	@Override
-	public IArtilleryCharge getAmmoCharge(int slot) {
-		IArtilleryCharge chargeItem = (IArtilleryCharge) ammoCharges.get(slot).getItem();
+	public ArtilleryCharge getAmmoCharge(int slot) {
+		ArtilleryCharge chargeItem = (ArtilleryCharge) ammoCharges.get(slot).getItem();
 		
 		ammoCharges.remove(slot);
 		chargeRamStatus[slot] = 0;
@@ -418,21 +419,21 @@ public class StationaryArtilleryBlockEntity extends BlockEntity implements IArti
 	}
 
 	@Override
-	public IArtilleryAmmo peekAmmoProjectile(int slot) {
+	public ArtilleryAmmo peekAmmoProjectile(int slot) {
 		if (ammoProjectiles.isEmpty())
 			return null;
 		
-		IArtilleryAmmo projectileItem = (IArtilleryAmmo) ammoProjectiles.get(slot).getItem();
+		ArtilleryAmmo projectileItem = (ArtilleryAmmo) ammoProjectiles.get(slot).getItem();
 		
 		return projectileItem;
 	}
 
 	@Override
-	public IArtilleryCharge peekAmmoCharge(int slot) {
+	public ArtilleryCharge peekAmmoCharge(int slot) {
 		if (ammoCharges.isEmpty())
 			return null;
 		
-		IArtilleryCharge chargeItem = (IArtilleryCharge) ammoCharges.get(slot).getItem();
+		ArtilleryCharge chargeItem = (ArtilleryCharge) ammoCharges.get(slot).getItem();
 		
 		return chargeItem;
 	}

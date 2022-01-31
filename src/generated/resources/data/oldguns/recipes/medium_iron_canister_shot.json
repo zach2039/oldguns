@@ -6,11 +6,14 @@
     }
   ],
   "pattern": [
-    "ii",
+    "GG",
     "bb",
     "ii"
   ],
   "key": {
+    "G": {
+      "tag": "oldguns:any_gunpowder"
+    },
     "i": {
       "tag": "forge:nuggets/iron"
     },

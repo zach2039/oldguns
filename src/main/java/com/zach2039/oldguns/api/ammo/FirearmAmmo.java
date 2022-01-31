@@ -8,18 +8,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public interface IAmmo {
+public interface FirearmAmmo {
 	List<BulletProjectile> createProjectiles(Level worldIn, ItemStack stack, LivingEntity shooter);
-	
-	ProjectileType getAmmoType();
-	
-	float getProjectileSize();
-	
-	float getProjectileCount();
-
-	double getProjectileDamage();
-
-	public float getProjectileDeviationModifier();
-	
-	public float getProjectileEffectiveRange();
 }

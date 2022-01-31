@@ -555,15 +555,9 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			}
 		} else {
 			entity.setRemainingFireTicks(k);
-			this.setDeltaMovement(this.getDeltaMovement().scale(-0.1D));
-			this.setYRot(this.getYRot() + 180.0F);
-			this.yRotO += 180.0F;
-			if (!this.level.isClientSide && this.getDeltaMovement().lengthSqr() < 1.0E-7D) {
-				if (this.pickup == AbstractArrow.Pickup.ALLOWED) {
-					spawnAtLocation(this.getPickupItem(), 0.1F);
-				}
-
-				discard();
+			
+			if (!this.level.isClientSide) {
+				this.discard();
 			}
 		}
 	}

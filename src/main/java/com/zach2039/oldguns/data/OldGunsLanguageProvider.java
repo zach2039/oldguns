@@ -256,7 +256,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addEntities() {
 		addEntityType(ModEntities.BULLET_PROJECTILE, "Projectile");
-		//addEntityType(ModEntities.BOMBARD, "Bombard");
+		addEntityType(ModEntities.MUSKETEER_SKELETON, "Musketeer Skeleton");
 	}
 
 	private void addPotions() {
@@ -276,10 +276,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addChatMessages() {
-		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death.");
-		add(OldGunsLang.MESSAGE_DEATH_FIREARM_PLAYER, "%1$s was shot to death by %2$s.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart by artillery fire.");
-		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY_PLAYER, "%1$s was blown apart from artillery fire by %2$s.");
+		add(OldGunsLang.MESSAGE_DEATH_FIREARM, "%1$s was shot to death by %2$s.");
+		add(OldGunsLang.MESSAGE_DEATH_ARTILLERY, "%1$s was blown apart from artillery fire by %2$s.");
 		
 		add(OldGunsLang.MESSAGE_ARTILLERY_NAME, "This is a %1$s.");
 		add(OldGunsLang.MESSAGE_ARTILLERY_MAX_SLOTS, "Max ammo slot count is: %1$s");

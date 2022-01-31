@@ -1,12 +1,12 @@
 package com.zach2039.oldguns.world.item.ammo.firearm;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.ammo.IAmmo;
+import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.FirearmAmmoAttributes;
 
-public class MediumLeadBirdshotItem extends FirearmAmmoItem implements IAmmo {
+public class MediumLeadBirdshotItem extends FirearmAmmoItem implements FirearmAmmo {
 
 	private static final FirearmAmmoAttributes ammoAttributes = OldGunsConfig.SERVER.firearmSettings.ammoSettings.medium_lead_birdshot;
 	
