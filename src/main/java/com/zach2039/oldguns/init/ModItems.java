@@ -498,7 +498,7 @@ public class ModItems {
 		);
 	
 	// Equipment 
-	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_helmet",	() -> new MusketeerHatItem());
+	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_hat", () -> new MusketeerHatItem());
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.

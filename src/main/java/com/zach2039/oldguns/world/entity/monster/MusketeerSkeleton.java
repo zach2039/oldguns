@@ -2,7 +2,6 @@ package com.zach2039.oldguns.world.entity.monster;
 
 import javax.annotation.Nullable;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 
@@ -11,8 +10,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -30,9 +27,10 @@ public class MusketeerSkeleton extends AbstractFirearmSkeleton {
 	
 	@Override
 	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
-		 if (this.random.nextFloat() < 0.15F * difficulty.getSpecialMultiplier()) {
+		float diff = (difficulty.getEffectiveDifficulty() / 4.0F);
+		 if (this.random.nextFloat() < 0.15F + diff) {
 	         int i = this.random.nextInt(2);
-	         float f = this.level.getDifficulty() == Difficulty.HARD ? 0.1F : 0.25F;
+	         
 	         if (this.random.nextFloat() < 0.095F) {
 	            ++i;
 	         }

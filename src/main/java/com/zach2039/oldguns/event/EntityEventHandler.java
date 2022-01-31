@@ -43,9 +43,9 @@ public class EntityEventHandler {
 				} catch (final IllegalAccessException | InvocationTargetException e) {
 					OldGuns.LOGGER.error("Failed to damage entity " + target, e);
 				} finally {
-					OldGuns.LOGGER.debug("totalDamage: " + (totalDamage));
-					OldGuns.LOGGER.debug("damage: " + damage);
-					OldGuns.LOGGER.debug("damageBypassingArmor: " + damageBypassingArmor);
+					OldGuns.LOGGER.info("totalDamage: " + (totalDamage));
+					OldGuns.LOGGER.info("damage: " + damage);
+					OldGuns.LOGGER.info("damageBypassingArmor: " + damageBypassingArmor);
 					
 					event.setAmount(0.0f);
 				}

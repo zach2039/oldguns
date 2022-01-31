@@ -269,6 +269,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		
 		withGeneratedParentAndDefaultTexture(ModItems.DESIGN_NOTES.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.MUSKETEER_HAT.get());
 		//withGeneratedParentAndDefaultTexture(ModBlocks.NAVAL_CANNON.get());
 	}
 

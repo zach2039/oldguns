@@ -247,6 +247,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.DESIGN_NOTES, "Design Notes");
 		
+		addItem(ModItems.MUSKETEER_HAT, "Musketeer Hat");
+		
 		add("item.oldguns.compendium", "Old Guns Compendium");
 	}
 
