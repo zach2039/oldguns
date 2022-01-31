@@ -10,12 +10,12 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
-import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModSoundEvents;
 import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource;
 import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource.DamageType;
+import com.zach2039.oldguns.world.damagesource.OldGunsDamageSourceIndirectEntity;
 
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
@@ -38,12 +38,10 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.Arrow;
@@ -485,7 +483,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 
 		Entity entity1 = this.getOwner();
-		DamageSource damagesource;
+		OldGunsDamageSourceIndirectEntity damagesource;
 		if (entity1 == null) {
 			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, null, this.getBypassArmorPercentage());
 		} else {
@@ -502,7 +500,11 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			entity.setSecondsOnFire(5);
 		}		
 	
-		if (entity.hurt(damagesource, (float)i)) {
+		float armorBypassPercent = damagesource.getPercentBypassArmor(); 
+		int damageNoBypass = Mth.ceil(i * (float)(1 - armorBypassPercent));
+		int damageBypass = Mth.ceil(i * (float)(armorBypassPercent));
+		
+		if (entity.hurt(damagesource, (float)damageNoBypass)) {
 			if (isEnderman) {
 				return;
 			}
@@ -545,6 +547,11 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 
 				// Reset inv time to allow multiple pellets to damage entities
 				entity.invulnerableTime = 0;
+				
+				// Try to apply bypass armor damage as well
+				if (damageBypass > 0 && entity.hurt(damagesource.bypassArmor(), (float)damageBypass)) {
+					entity.invulnerableTime = 0;
+				}
 			}
 
 			doEffectOnEntityHit(entity);

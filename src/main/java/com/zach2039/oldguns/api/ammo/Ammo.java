@@ -23,5 +23,5 @@ public interface Ammo {
 	
 	public float getProjectileEffectiveRange();
 	
-	public float getProjectileArmorBypass();
+	public float getProjectileArmorBypassPercentage();
 }

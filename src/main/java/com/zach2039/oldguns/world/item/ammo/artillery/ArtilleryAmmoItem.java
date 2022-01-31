@@ -29,7 +29,7 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 		this.projectileCount = builder.projectileCount;
 		this.projectileDeviationModifier = builder.projectileDeviationModifier;
 		this.projectileEffectiveRange = builder.projectileEffectiveRange;
-		this.projectileBypassArmorPercentage = builder.projectileBypassArmorPercentage;
+		this.projectileArmorBypassPercentage = builder.projectileArmorBypassPercentage;
 	}
 	
 	public ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo entry) {
@@ -41,7 +41,7 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 				.projectileSize(entry.getAttributes().projectileSize.get().floatValue())
 				.projectileEffectiveRange(entry.getAttributes().projectileEffectiveRange.get().floatValue())
 				.projectileDeviationModifier(entry.getAttributes().projectileDeviationModifier.get().floatValue())
-				.projectileBypassArmorPercentage(entry.getAttributes().projectileArmorBypassPercentage.get().floatValue())
+				.projectileArmorBypassPercentage(entry.getAttributes().projectileArmorBypassPercentage.get().floatValue())
 				.ammoType(entry.getProjectileType())
 				.stacksTo(entry.getAttributes().maxStackSize.get())				
 				.tab(OldGuns.CREATIVE_MODE_TAB)
@@ -73,6 +73,7 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 			entityBullet.setDamage(getProjectileDamage());
 			entityBullet.setProjectileSize(getProjectileSize());
 			entityBullet.setProjectileType(getAmmoType());
+			entityBullet.setBypassArmorPercentage(getProjectileArmorBypassPercentage());
 			entityBullet.setEffectStrength(getEffectPotency());
 			entityBullet.setEffectTicks(getEffectTicks());
 			projectileEntityList.add(entityBullet);
@@ -93,6 +94,7 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 			entityBullet.setDamage(getProjectileDamage());
 			entityBullet.setProjectileSize(getProjectileSize());
 			entityBullet.setProjectileType(getAmmoType());
+			entityBullet.setBypassArmorPercentage(getProjectileArmorBypassPercentage());
 			entityBullet.setEffectStrength(getEffectPotency());
 			entityBullet.setEffectTicks(getEffectTicks());
 			projectileEntityList.add(entityBullet);
@@ -142,8 +144,8 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 	}
 	
 	@Override
-	public float getProjectileArmorBypass() {
-		return this.projectileBypassArmorPercentage;
+	public float getProjectileArmorBypassPercentage() {
+		return this.projectileArmorBypassPercentage;
 	}
 	
 	public static class ArtilleryAmmoProperties extends Properties {
@@ -190,7 +192,7 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 		/**
 		 * Projectile armor bypass percentage of this ammo
 		 */
-		protected float projectileBypassArmorPercentage = 0.0f;
+		protected float projectileArmorBypassPercentage = 0.0f;
 		
 		public ArtilleryAmmoProperties ammoType(ProjectileType ammoType) {
 			this.ammoType = ammoType;
@@ -232,8 +234,8 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 			return this;
 		}
 		
-		public ArtilleryAmmoProperties projectileBypassArmorPercentage(float projectileBypassArmorPercentage) {
-			this.projectileBypassArmorPercentage = projectileBypassArmorPercentage;
+		public ArtilleryAmmoProperties projectileArmorBypassPercentage(float projectileArmorBypassPercentage) {
+			this.projectileArmorBypassPercentage = projectileArmorBypassPercentage;
 			return this;
 		}
 	}
@@ -281,5 +283,5 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 	/**
 	 * Projectile armor bypass percentage of this ammo
 	 */
-	float projectileBypassArmorPercentage = 0.0f;
+	float projectileArmorBypassPercentage = 0.0f;
 }

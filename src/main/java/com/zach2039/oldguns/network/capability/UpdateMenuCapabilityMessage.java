@@ -220,8 +220,8 @@ public abstract class UpdateMenuCapabilityMessage<HANDLER, DATA> {
 
 			CapabilityMenuUpdateMessageUtils.applyCapabilityDataToMenuSlot(
 					container,
-					message.slotNumber,
 					message.stateID,
+					message.slotNumber,
 					message.capability,
 					message.facing,
 					message.capabilityData,

@@ -25,7 +25,7 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 		this.projectileCount = builder.projectileCount;
 		this.projectileDeviationModifier = builder.projectileDeviationModifier;
 		this.projectileEffectiveRange = builder.projectileEffectiveRange;
-		this.projectileBypassArmorPercentage = builder.projectileBypassArmorPercentage;
+		this.projectileArmorBypassPercentage = builder.projectileArmorBypassPercentage;
 	}
 	
 	public FirearmAmmoItem(AmmoTypes.FirearmAmmo entry) {
@@ -35,7 +35,7 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 				.projectileSize(entry.getAttributes().projectileSize.get().floatValue())
 				.projectileEffectiveRange(entry.getAttributes().projectileEffectiveRange.get().floatValue())
 				.projectileDeviationModifier(entry.getAttributes().projectileDeviationModifier.get().floatValue())
-				.projectileDeviationModifier(entry.getAttributes().projectileArmorBypassPercentage.get().floatValue())
+				.projectileArmorBypassPercentage(entry.getAttributes().projectileArmorBypassPercentage.get().floatValue())
 				.ammoType(entry.getProjectileType())
 				.stacksTo(entry.getAttributes().maxStackSize.get())				
 				.tab(OldGuns.CREATIVE_MODE_TAB)
@@ -73,8 +73,8 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 	}
 	
 	@Override
-	public float getProjectileArmorBypass() {
-		return this.projectileBypassArmorPercentage;
+	public float getProjectileArmorBypassPercentage() {
+		return this.projectileArmorBypassPercentage;
 	}
 	
 	public List<BulletProjectile> createProjectiles(Level worldIn, ItemStack stackIn, LivingEntity shooter)
@@ -87,6 +87,8 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 			BulletProjectile entityBullet = new BulletProjectile(worldIn, shooter);
 			entityBullet.setDamage(getProjectileDamage());
 			entityBullet.setProjectileSize(getProjectileSize());
+			entityBullet.setProjectileType(getAmmoType());
+			entityBullet.setBypassArmorPercentage(getProjectileArmorBypassPercentage());
 			projectileEntityList.add(entityBullet);
 		}
 		
@@ -127,7 +129,7 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 		/**
 		 * Projectile armor bypass percentage of this ammo
 		 */
-		float projectileBypassArmorPercentage = 0.0f;
+		float projectileArmorBypassPercentage = 0.0f;
 		
 		public FirearmAmmoProperties ammoType(ProjectileType ammoType) {
 			this.ammoType = ammoType;
@@ -159,8 +161,8 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 			return this;
 		}
 		
-		public FirearmAmmoProperties projectileBypassArmorPercentage(float projectileBypassArmorPercentage) {
-			this.projectileBypassArmorPercentage = projectileBypassArmorPercentage;
+		public FirearmAmmoProperties projectileArmorBypassPercentage(float projectileArmorBypassPercentage) {
+			this.projectileArmorBypassPercentage = projectileArmorBypassPercentage;
 			return this;
 		}
 	}
@@ -198,5 +200,5 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 	/**
 	 * Projectile armor bypass percentage of this ammo
 	 */
-	protected float projectileBypassArmorPercentage = 0.0f;
+	protected float projectileArmorBypassPercentage = 0.0f;
 }

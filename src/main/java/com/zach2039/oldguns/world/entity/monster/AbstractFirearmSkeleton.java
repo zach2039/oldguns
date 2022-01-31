@@ -10,7 +10,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 import net.minecraft.world.entity.ai.goal.FleeSunGoal;
@@ -61,6 +60,26 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 	}
 
 	@Override
+	protected SoundEvent getSwimSound() {
+		return SoundEvents.HOSTILE_SWIM;
+	}
+
+	@Override
+	protected SoundEvent getSwimSplashSound() {
+		return SoundEvents.HOSTILE_SPLASH;
+	}
+
+	@Override
+	protected SoundEvent getHurtSound(DamageSource damagesource) {
+		return SoundEvents.SKELETON_HURT;
+	}
+
+	@Override
+	protected SoundEvent getDeathSound() {
+		return SoundEvents.SKELETON_DEATH;
+	}
+
+	@Override
 	public boolean hurt(DamageSource damagesource, float amount) {
 
 		// Make firearm skeletons reset shot time when hit
@@ -77,7 +96,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 			ItemStack firearmStack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem));
 			if (firearmStack.getItem() instanceof FirearmItem) {
 				FirearmItem firearmItem = (FirearmItem)firearmStack.getItem();
-				
+
 				// Load the firearm while mob is using
 				if (this.useItem != ItemStack.EMPTY) {
 					if (FirearmNBTHelper.peekNBTTagAmmo(firearmStack) == ItemStack.EMPTY)
@@ -87,16 +106,16 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 				}
 			}
 		}
-		
+
 		super.aiStep();
 	}
-	
+
 	@Override
 	protected void registerGoals() {
 		this.goalSelector.addGoal(2, new RestrictSunGoal(this));
 		this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Wolf.class, 6.0F, 1.0D, 1.2D));
-		this.goalSelector.addGoal(3, new TryAvoidWaterGoal(this, 16.0D));
+		//this.goalSelector.addGoal(3, new TryAvoidWaterGoal(this, 16.0D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));

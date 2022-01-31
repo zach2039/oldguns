@@ -14,7 +14,7 @@ public class OldGunsDamageSource extends DamageSource {
 		super(tag);
 	}
 	
-	public static DamageSource projectile(DamageType damageType, BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
+	public static OldGunsDamageSourceIndirectEntity projectile(DamageType damageType, BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
 		boolean allowArmorBypass = (damageType == DamageType.FIREARM) ? OldGunsConfig.SERVER.firearmSettings.ammoSettings.allowArmorBypass.get() : OldGunsConfig.SERVER.artillerySettings.artilleryAmmoSettings.allowArmorBypass.get();
 		float percentBypassArmorActual = allowArmorBypass ? percentBypassArmor : 0.0f;
 		
@@ -25,12 +25,12 @@ public class OldGunsDamageSource extends DamageSource {
 		return artillery(projectile, shooter, percentBypassArmorActual);
 	}
 	
-	public static DamageSource firearm(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
-		return new OldGunsDamageSourceIndirectEntity(OldGuns.MODID + ".firearm", projectile, shooter, percentBypassArmor).setProjectile();
+	public static OldGunsDamageSourceIndirectEntity firearm(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
+		return new OldGunsDamageSourceIndirectEntity(OldGuns.MODID + ".firearm", projectile, shooter, percentBypassArmor);
 	}
 	
-	public static DamageSource artillery(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
-		return new OldGunsDamageSourceIndirectEntity(OldGuns.MODID + ".artillery", projectile, shooter, percentBypassArmor).setProjectile();
+	public static OldGunsDamageSourceIndirectEntity artillery(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
+		return new OldGunsDamageSourceIndirectEntity(OldGuns.MODID + ".artillery", projectile, shooter, percentBypassArmor);
 	}
 	
 	public enum DamageType {
