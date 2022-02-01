@@ -63,7 +63,7 @@ public class MusketeerSkeleton extends AbstractFirearmSkeleton {
 			} else if (difficultyFactor == 3) {
 				return ModItems.MATCHLOCK_MUSKET.get();
 			} else if (difficultyFactor == 4) {
-				return ModItems.MATCHLOCK_BLUNDERBUSS.get();
+				return ModItems.MATCHLOCK_LONG_MUSKET.get();
 			}
 			return ModItems.MATCHLOCK_DERRINGER.get();
 		default:

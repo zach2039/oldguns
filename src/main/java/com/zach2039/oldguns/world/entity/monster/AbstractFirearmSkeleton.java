@@ -1,8 +1,8 @@
 package com.zach2039.oldguns.world.entity.monster;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.world.entity.ai.goal.RangedFirearmAttackGoal;
-import com.zach2039.oldguns.world.entity.ai.goal.TryAvoidWaterGoal;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import net.minecraft.sounds.SoundEvent;
@@ -32,16 +32,51 @@ import net.minecraft.world.level.Level;
 
 public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 
-	private final RangedFirearmAttackGoal<AbstractSkeleton> firearmAttackGoal = new RangedFirearmAttackGoal<>(this, 0.05D, 140, 40.0F);
-	private final MeleeAttackGoal meleeAttackGoal = new MeleeAttackGoal(this, 1.2D, false) {
+	private static final double meleeRadius = 3D;
+	
+	private final RangedFirearmAttackGoal<AbstractSkeleton> firearmAttackGoal = new RangedFirearmAttackGoal<>(this, 0.05D, 140, 40.0F) {
+		@Override
+		public boolean canUse() {
+			if (this.mob.getTarget() == null)
+				return false;
+			
+			if ( this.mob.distanceToSqr(this.mob.getTarget()) <= (double)(meleeRadius * meleeRadius))
+				return false;
+			
+			ItemStack firearmStack = this.mob.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this.mob, item -> item instanceof FirearmItem));
+			if (firearmStack.getDamageValue() >= firearmStack.getMaxDamage())
+				return false;
+			
+			return super.canUse();
+		}
+	};
+	
+	private final MeleeAttackGoal meleeAttackGoal = new MeleeAttackGoal(this, 1.0D, false) {
+		@Override
 		public void stop() {
 			super.stop();
 			AbstractFirearmSkeleton.this.setAggressive(false);
 		}
 
+		@Override
 		public void start() {
 			super.start();
 			AbstractFirearmSkeleton.this.setAggressive(true);
+		}
+		
+		@Override
+		public boolean canUse() {
+			if (this.mob.getTarget() == null)
+				return false;
+					
+			ItemStack firearmStack = this.mob.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this.mob, item -> item instanceof FirearmItem));
+			if (firearmStack.getDamageValue() >= firearmStack.getMaxDamage())
+				return super.canUse();
+			
+			if (this.mob.distanceToSqr(this.mob.getTarget()) > (double)(meleeRadius * meleeRadius))
+				return false;
+			
+			return super.canUse();
 		}
 	};
 
@@ -131,7 +166,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 			this.goalSelector.removeGoal(this.meleeAttackGoal);
 			this.goalSelector.removeGoal(this.firearmAttackGoal);
 			ItemStack itemstack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem));
-			if (itemstack.getItem() instanceof FirearmItem) {
+			if ((itemstack.getItem() instanceof FirearmItem) && (itemstack.getMaxDamage() != itemstack.getDamageValue())) {
 				int i = 140;
 				if (this.level.getDifficulty() != Difficulty.HARD) {
 					i = 100;
@@ -140,6 +175,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 				this.firearmAttackGoal.setMinAttackInterval(i);
 				this.firearmAttackGoal.interruptFiring();
 				this.goalSelector.addGoal(4, this.firearmAttackGoal);
+				this.goalSelector.addGoal(4, this.meleeAttackGoal);
 			}
 		}
 	}
@@ -174,6 +210,6 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 
 	@Override
 	public boolean canFireProjectileWeapon(ProjectileWeaponItem projectileWeapon) {
-		return projectileWeapon instanceof FirearmItem;
+		return (projectileWeapon instanceof FirearmItem);
 	}
 }

@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.init.ModAttributes;
 import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
@@ -50,7 +51,7 @@ public class OldGuns
     	OldGunsConfig.register(ModLoadingContext.get());
 
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
-
+		
 		ModBlocks.initialize(modEventBus);
 		ModItems.initialize(modEventBus);
 		ModMenuTypes.initialize(modEventBus);
@@ -86,4 +87,12 @@ public class OldGuns
 			return new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
 		}
 	};
+	
+	public static void printDebug(String message) {
+		if (OldGunsConfig.COMMON.printDebugMessages.get()) {
+			OldGuns.LOGGER.info(message);
+		} else {
+			OldGuns.LOGGER.debug(message);
+		}
+	}
 }

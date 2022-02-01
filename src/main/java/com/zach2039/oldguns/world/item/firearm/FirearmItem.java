@@ -87,6 +87,8 @@ public class FirearmItem extends BowItem implements Firearm {
 		this.deviationModifier = builder.deviationModifier;
 		this.damageModifier = builder.damageModifier;
 		this.requiredReloadTicks = builder.requiredReloadTicks;
+		this.mechanismType = builder.mechanismType;
+		this.defaultProjectileType = builder.defaultProjectileType;
 		this.reloadType = builder.reloadType;
 		this.firearmSize = builder.firearmSize;
 		this.firearmWaterResiliency = builder.firearmWaterResiliency;
@@ -129,9 +131,12 @@ public class FirearmItem extends BowItem implements Firearm {
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
 		if (this.allowdedIn(tab)) {
-			ItemStack stackIn = new ItemStack(this);
-			initNBTTags(stackIn);
-			stackList.add(stackIn);
+			ItemStack firearmStack = new ItemStack(this);
+			initNBTTags(firearmStack);
+			for (int i = 0; i < this.ammoCapacity; i++) {
+				FirearmNBTHelper.pushNBTTagAmmo(firearmStack, getDefaultProjectileForFirearm());
+			}
+			stackList.add(firearmStack);
 		}
 	}
 
@@ -259,7 +264,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			player.addEffect(new MobEffectInstance(effect, 20 * 3, amplifier));
 		}
 	}
-
+	
 	/**
 	 * Used by both mobs and player to launch projectiles from the firearm
 	 * @param level
@@ -269,10 +274,11 @@ public class FirearmItem extends BowItem implements Firearm {
 	 * @param snapshotDevMulti
 	 */
 	public void fireProjectiles(Level level, LivingEntity livingEntity, ItemStack firearmStack, ItemStack ammoStack, float snapshotDevMulti) {
+				
 		int maxShots = (firesAllLoadedAmmoAtOnce() && !ammoStack.isEmpty()) ? FirearmNBTHelper.peekNBTTagAmmoCount(firearmStack) : 1; 
 		for (int i = 0; i < maxShots; i++) {
 			ammoStack = FirearmNBTHelper.peekNBTTagAmmo(firearmStack);
-			Ammo itemFirearmAmmo = (FirearmAmmoItem)(ammoStack.getItem() instanceof FirearmAmmoItem ? ammoStack.getItem() : this.getDefaultAmmoItem());
+			Ammo itemFirearmAmmo = (Ammo)(ammoStack.getItem() instanceof Ammo ? ammoStack.getItem() : this.getDefaultAmmoItem());
 			List<BulletProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(level, ammoStack, livingEntity);
 
 			/* Fire all projectiles from ammo item. */
@@ -280,20 +286,16 @@ public class FirearmItem extends BowItem implements Firearm {
 			float finalEffectiveRange = itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier();
 			float finalDeviation = getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier();
 
-			if (OldGunsConfig.COMMON.printDebugMessages.get())
-			{
-				OldGuns.LOGGER.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
-				OldGuns.LOGGER.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
-				OldGuns.LOGGER.info("FinalEffectiveRange : " + finalEffectiveRange);
+			OldGuns.printDebug(this + "AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
+			OldGuns.printDebug(this + "FirearmEffectiveMod : " + getEffectiveRangeModifier());
+			OldGuns.printDebug(this + "FinalEffectiveRange : " + finalEffectiveRange);
+            
+			OldGuns.printDebug(this + "FirearmDeviation   : " + getFirearmDeviation());
+			OldGuns.printDebug(this + "AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
+			OldGuns.printDebug(this + "AimingDeviationMod : " + snapshotDevMulti);
+			OldGuns.printDebug(this + "FinalDeviation     : " + finalDeviation);
 
-				OldGuns.LOGGER.info("FirearmDeviation   : " + getFirearmDeviation());
-				OldGuns.LOGGER.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
-				OldGuns.LOGGER.info("AimingDeviationMod : " + snapshotDevMulti);
-				OldGuns.LOGGER.info("FinalDeviation     : " + finalDeviation);
-			}
-
-			entityProjectiles.forEach((t) ->
-			{
+			entityProjectiles.forEach((t) -> {
 				/* Set location-based data. */
 				t.setEffectiveRange(finalEffectiveRange);
 				t.setLaunchLocation(t.blockPosition());
@@ -325,19 +327,21 @@ public class FirearmItem extends BowItem implements Firearm {
 
 			/* Do firing effects. */
 			doFiringEffect(level, livingEntity, firearmStack);        
-			
+
 			if (livingEntity instanceof Player) {
 				Player player = (Player)livingEntity;
-				
+
 				if (!player.isCreative()) {
 					firearmStack.hurt(1, level.random, (ServerPlayer) player);
-					
-					if (firearmStack != null ) {
+					if (firearmStack != null)
 						FirearmNBTHelper.popNBTTagAmmo(firearmStack);
-					}
 				}
+			} else {
+				firearmStack.hurt(1, level.random, null);
 			}
 		}
+		
+		FirearmNBTHelper.refreshFirearmCondition(firearmStack);
 	}
 	
 	@SuppressWarnings("unused")
@@ -451,8 +455,7 @@ public class FirearmItem extends BowItem implements Firearm {
 					fireProjectiles(worldIn, entityplayer, stackIn, ammoStack, snapshotDevMulti);
 				}
 
-				/* Refresh condition. */
-				FirearmNBTHelper.refreshFirearmCondition(stackIn);
+				
 
 				entityplayer.awardStat(Stats.ITEM_USED.get(this));
 			}
@@ -494,8 +497,9 @@ public class FirearmItem extends BowItem implements Firearm {
 
 			if (playerIn.getUseItem() == stackIn && isLoading)
 			{
-				OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
-				OldGuns.LOGGER.debug("isLoading : " + isLoading);
+				OldGuns.printDebug(this + "hasAmmoLoaded : " + hasAmmoLoaded);
+				OldGuns.printDebug(this + "isLoading : " + isLoading);
+				
 				float progress = FirearmStackHelper.getReloadProgress(playerIn, currentUseTicks, getRequiredReloadTicks());
 
 				if (progress > 0.09f && progress < 0.11f)
@@ -740,7 +744,7 @@ public class FirearmItem extends BowItem implements Firearm {
 
 			OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
-							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
+							shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 					);
 		}
 		else if (this.getFirearmWaterResiliency() != FirearmWaterResiliency.VERY_GOOD)

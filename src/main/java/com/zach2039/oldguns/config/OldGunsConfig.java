@@ -59,6 +59,7 @@ public class OldGunsConfig {
 		public final FirearmSettings firearmSettings;
 		public final ArtillerySettings artillerySettings;
 		public final MobSettings mobSettings;
+		public final EquipmentSettings equipmentSettings;
 		
 		Server(final ForgeConfigSpec.Builder builder) {
 			builder.comment("Server config settings")
@@ -76,18 +77,23 @@ public class OldGunsConfig {
 			
 			firearmSettings = new FirearmSettings(
 					builder,
-					"Attributes of firearms",
+					"Attributes of firearms and firearm ammo",
 					"firearmSettings");
 			
 			artillerySettings = new ArtillerySettings(
 					builder,
-					"Attributes of artillery",
+					"Attributes of artillery and artillery ammo",
 					"artillerySettings");
 			
 			mobSettings = new MobSettings(
 					builder,
-					"Attributes of mobs",
+					"Settings for mob spawns",
 					"mobSettings");
+			
+			equipmentSettings = new EquipmentSettings(
+					builder,
+					"Equipment effects and other settings",
+					"equipmentSettings");
 			
 			builder.pop();
 		}
@@ -1650,6 +1656,46 @@ public class OldGunsConfig {
 			validBiomes = builder
 					.comment("A list of valid biomes that this mob can spawn in")
 					.define("validBiomes", defaultValidBiomes);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class EquipmentSettings {
+		public final BooleanValue allowEquipmentEffects;
+		public final MusketeerHatSettings musketeerHatSettings;
+		
+		EquipmentSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowEquipmentEffects = builder
+					.comment("Allow equipment to impart special effects")
+					.define("allowEquipmentEffects", true);
+			
+			musketeerHatSettings = new MusketeerHatSettings(builder, "Musketeer Hats", "musketeerHatSettings",
+					true,
+					0.1D
+					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class MusketeerHatSettings {
+		public final BooleanValue allowEffects;
+		public final DoubleValue percentArmorBypassIncrease;
+		
+		MusketeerHatSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+				final boolean defaultAllowEffects, final double defaultPercentArmorBypassIncrease) {
+			builder.comment(comment).push(path);
+			
+			allowEffects = builder
+					.comment("Allow Musketeer Hat to increase armor bypass percentage for damage when worn")
+					.define("allowEffects", defaultAllowEffects);
+
+			percentArmorBypassIncrease = builder
+					.comment("The additional percentage of armor bypass that wearing a musketeer hat gives to firearm projectiles")
+					.defineInRange("percentArmorBypassIncrease", defaultPercentArmorBypassIncrease, 0.0D, 1.0D);
 			
 			builder.pop();
 		}

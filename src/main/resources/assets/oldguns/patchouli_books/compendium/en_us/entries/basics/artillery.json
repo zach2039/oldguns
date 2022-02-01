@@ -1,7 +1,7 @@
 {
 	"name": "oldguns.entry.basics.artillery",
 	"category": "oldguns:basics",
-	"icon": "oldguns:matchlock_derringer",
+	"icon": "oldguns:medium_naval_cannon",
 	"sortnum": 5,
 	"pages": [
 		{
@@ -10,7 +10,7 @@
 		},
 		{
 			"type": "spotlight",
-			"item": "oldguns:matchlock_derringer"
+			"item": "oldguns:medium_naval_cannon"
 		}
 	]
 }

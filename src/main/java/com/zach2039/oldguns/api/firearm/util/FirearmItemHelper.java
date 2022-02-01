@@ -42,7 +42,7 @@ public class FirearmItemHelper {
 					ammoItem = ModItems.LARGE_IRON_MUSKET_BALL.get();
 					break;
 				case CANNONBALL:
-					ammoItem = ModItems.MEDIUM_IRON_CANNONBALL.get();
+					ammoItem = ModItems.MEDIUM_IRON_CANISTER_SHOT.get();
 					break;
 				default:
 					break;

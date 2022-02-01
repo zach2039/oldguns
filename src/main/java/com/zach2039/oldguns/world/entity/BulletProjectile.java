@@ -10,6 +10,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModSoundEvents;
@@ -746,8 +747,10 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 				if (getEffectStrength() > 0.0f) {
 					BlockState hitBlock = level.getBlockState(blockpos);
 					float hitBlockHardness = hitBlock.getDestroySpeed(level, blockpos);
-					if (!level.isClientSide()) OldGuns.LOGGER.debug("target hardness : " + hitBlockHardness);
-					if (!level.isClientSide()) OldGuns.LOGGER.debug("effect before : " + getEffectStrength());
+					
+					OldGuns.printDebug(this + " target hardness : " + hitBlockHardness);
+					OldGuns.printDebug(this + " effect before : " + getEffectStrength());
+					
 					if (hitBlockHardness < getEffectStrength() && 
 							hitBlock.canEntityDestroy(level, blockpos, getOwner()) &&
 							hitBlock.getBlock() != Blocks.BEDROCK
@@ -759,12 +762,12 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 						float effectModifier = (!this.isInWater()) ? 0.70f : 0.45f;
 						setEffectStrength(Math.max(0.1f, getEffectStrength() * effectModifier));
 	
-						if (!level.isClientSide()) OldGuns.LOGGER.debug("broke : " + hitBlock.toString());
+						OldGuns.printDebug(this + " broke : " + hitBlock.toString());
 					} else {
 						setEffectStrength(0.0f);
-						if (!level.isClientSide()) OldGuns.LOGGER.debug("stopped by, inWater : " + hitBlock.toString() + ", " + this.isInWater());
+						OldGuns.printDebug(this + " stopped by, inWater : " + hitBlock.toString() + ", " + this.isInWater());
 					}
-					if (!level.isClientSide()) OldGuns.LOGGER.debug("effect after : " + getEffectStrength());
+					OldGuns.printDebug(this + " effect after : " + getEffectStrength());
 				}
 				break;
 			default:

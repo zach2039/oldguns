@@ -16,7 +16,7 @@ public class OldGunsDamageSource extends DamageSource {
 	
 	public static OldGunsDamageSourceIndirectEntity projectile(DamageType damageType, BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
 		boolean allowArmorBypass = (damageType == DamageType.FIREARM) ? OldGunsConfig.SERVER.firearmSettings.ammoSettings.allowArmorBypass.get() : OldGunsConfig.SERVER.artillerySettings.artilleryAmmoSettings.allowArmorBypass.get();
-		float percentBypassArmorActual = allowArmorBypass ? percentBypassArmor : 0.0f;
+		float percentBypassArmorActual = allowArmorBypass ? Math.min(1.0F, percentBypassArmor) : 0.0f;
 		
 		if (damageType == DamageType.FIREARM) {
 			return firearm(projectile, shooter, percentBypassArmorActual);

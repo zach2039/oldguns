@@ -371,6 +371,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		add("itemGroup." + OldGuns.MODID, "Old Guns");
 		
 		add(OldGuns.MODID + ".medium_naval_cannon", "Medium Naval Cannon");
+		
+		add("attribute.name." + OldGuns.MODID + ".generic.bullet_armor_pierce", "Bullet Armor Pierce");
 	}
 
 	public void addEntityType(Supplier<? extends EntityType<?>> key, String name) {

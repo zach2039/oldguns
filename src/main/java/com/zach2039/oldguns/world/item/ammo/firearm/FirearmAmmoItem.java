@@ -8,9 +8,12 @@ import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.AmmoTypes;
 import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -81,6 +84,19 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 	{
 		/* Create list to hold all projectile entities that this bullet makes when fired. */
 		List<BulletProjectile> projectileEntityList = new ArrayList<BulletProjectile>();
+	
+		// Do special handling of shooter equipment
+		float armorBypassPercentage = getProjectileArmorBypassPercentage();
+		
+		if (OldGunsConfig.SERVER.equipmentSettings.allowEquipmentEffects.get()) {
+			for (ItemStack armorStack : shooter.getArmorSlots()) {
+				if (OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.allowEffects.get()) {
+					if (armorStack.getItem() instanceof MusketeerHatItem) {
+						armorBypassPercentage += OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.percentArmorBypassIncrease.get().floatValue();
+					}
+				}
+			}
+		}
 		
 		for (int i = 0; i < getProjectileCount(); i++) 
 		{
@@ -88,7 +104,7 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 			entityBullet.setDamage(getProjectileDamage());
 			entityBullet.setProjectileSize(getProjectileSize());
 			entityBullet.setProjectileType(getAmmoType());
-			entityBullet.setBypassArmorPercentage(getProjectileArmorBypassPercentage());
+			entityBullet.setBypassArmorPercentage(armorBypassPercentage);
 			projectileEntityList.add(entityBullet);
 		}
 		

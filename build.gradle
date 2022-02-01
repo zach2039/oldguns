@@ -60,7 +60,6 @@ minecraft {
             
             arg '-nogui'
             arg "-mixin.config=oldguns.mixins.json"
-            
             mods {
                 oldguns {
                     source sourceSets.main

@@ -14,15 +14,15 @@ import net.minecraft.world.item.ItemStack;
 
 public class RangedFirearmAttackGoal<T extends net.minecraft.world.entity.Mob & RangedAttackMob> extends Goal {
 
-	private final T mob;
-	private final double speedModifier;
-	private int attackIntervalMin;
-	private final float attackRadiusSqr;
-	private int attackTime = -1;
-	private int seeTime;
-	private boolean strafingClockwise;
-	private boolean strafingBackwards;
-	private int strafingTime = -1;
+	protected final T mob;
+	protected final double speedModifier;
+	protected int attackIntervalMin;
+	protected final float attackRadiusSqr;
+	protected int attackTime = -1;
+	protected int seeTime;
+	protected boolean strafingClockwise;
+	protected boolean strafingBackwards;
+	protected int strafingTime = -1;
 
 	@SuppressWarnings("unchecked")
 	public <M extends Monster & RangedAttackMob> RangedFirearmAttackGoal(M mob, double speedModifier, int attackIntervalMin, float attackRadius) {
