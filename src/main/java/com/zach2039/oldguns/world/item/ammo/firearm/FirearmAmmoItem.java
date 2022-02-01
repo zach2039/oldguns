@@ -9,11 +9,12 @@ import com.zach2039.oldguns.api.ammo.AmmoTypes;
 import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.init.ModAttributes;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -92,12 +93,16 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 			for (ItemStack armorStack : shooter.getArmorSlots()) {
 				if (OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.allowEffects.get()) {
 					if (armorStack.getItem() instanceof MusketeerHatItem) {
-						armorBypassPercentage += OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.percentArmorBypassIncrease.get().floatValue();
+						MusketeerHatItem hatItem = (MusketeerHatItem)armorStack.getItem();
+						for (AttributeModifier modifier  : hatItem.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(armorStack), armorStack).get(ModAttributes.ARMOR_PIERCE)) {
+							armorBypassPercentage += (float) modifier.getAmount();
+						}
 					}
 				}
 			}
 		}
 		
+		OldGuns.LOGGER.info(armorBypassPercentage);
 		for (int i = 0; i < getProjectileCount(); i++) 
 		{
 			BulletProjectile entityBullet = new BulletProjectile(worldIn, shooter);

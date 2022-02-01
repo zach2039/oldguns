@@ -6,6 +6,7 @@ import java.util.List;
 import javax.annotation.Nonnull;
 
 import com.google.gson.JsonObject;
+import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.Firearm;
@@ -135,7 +136,16 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 			
 			List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
 			
-			dummyAmmoStackList.add(firearmItem.getDefaultProjectileForFirearm());
+			this.getIngredients().forEach((ing) -> {
+				if (ing.getItems()[0].getItem() instanceof Ammo) {
+					dummyAmmoStackList.add(ing.getItems()[0]);
+					return;
+				}
+			});
+			
+			if (dummyAmmoStackList.isEmpty()) {
+				dummyAmmoStackList.add(firearmItem.getDefaultProjectileForFirearm());
+			}
 	
 			FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
 	

@@ -1024,7 +1024,7 @@ public class OldGunsConfig {
 					"Attributes of Wheellock Hand Mortars",
 					"wheellock_hand_mortar",
 					18,
-					2.5f,
+					1.5f,
 					1.0f,
 					7.0f,
 					1.0f
