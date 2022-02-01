@@ -1,3 +1,18 @@
+#### v1.18.1-3.2.0-24
+
+- Refactor tooltips and AI
+- Fix double death message for armor bypass damage
+- Fix author names
+- Refactor items
+- Add musketeer hat textures
+- Refactor ammo items for artillery ammo use in handheld weapons
+- Add Musketeer Hat and start Musketeer Skeleton entity
+- Add projectile armor bypass percentage and config options
+- Refactor damage sources
+- Replace naval cannon model with ship cannon model from xiraxis9
+- Change firearm effect to use campfire smoke
+- Refactor firearm registration and files
+
 #### v1.16.5-3.0.6-23
 
 - Fix [#13](https://github.com/zach2039/oldguns/issues/13) causing crash when shift-clicking gun in crafting table during reload
