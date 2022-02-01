@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
-import com.zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
+import com.zach2039.oldguns.compat.jei.category.GunsmithsBenchRecipeCategory;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
@@ -61,8 +61,8 @@ public class OldGunsJeiPlugin implements IModPlugin {
 	public void registerCategories(IRecipeCategoryRegistration registration) {
 		IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
 		registration.addRecipeCategories(
-					new GunsmithsBenchRecipeCategory(guiHelper)
-				);
+				new GunsmithsBenchRecipeCategory(guiHelper)
+			);
 	}
 
 	@Override

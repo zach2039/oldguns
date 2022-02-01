@@ -125,19 +125,25 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 	}
 
 	@Override
-    @Nonnull
-    public ItemStack getResultItem()
+	@Nonnull
+	public ItemStack getResultItem()
 	{
 		ItemStack outputStack = super.getResultItem().copy();
-		List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
-		dummyAmmoStackList.add(new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL.get()));
 		
-		FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
-		
-		((FirearmItem)outputStack.getItem()).initNBTTags(outputStack);
-		
-		FirearmEmptyCapability.updateFirearmEmpty(outputStack);
-		
+		if (outputStack.getItem() instanceof FirearmItem) {
+			FirearmItem firearmItem = (FirearmItem)outputStack.getItem();
+			
+			List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
+			
+			dummyAmmoStackList.add(firearmItem.getDefaultProjectileForFirearm());
+	
+			FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
+	
+			((FirearmItem)outputStack.getItem()).initNBTTags(outputStack);
+	
+			FirearmEmptyCapability.updateFirearmEmpty(outputStack);
+		}
+
 		return outputStack;
 	}
 	

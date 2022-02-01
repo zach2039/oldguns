@@ -1,4 +1,5 @@
 buildscript {
+
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
@@ -14,8 +15,11 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
 
-		//classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		if (System.getenv("CI") == "true") {
+			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		} else {
+			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		}
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
@@ -23,7 +27,9 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
 
-//apply plugin: 'com.diffplug.eclipse.apt'
+if (System.getenv("CI") != "true") {
+	apply plugin: 'com.diffplug.eclipse.apt'
+}
 
 group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
@@ -121,8 +127,7 @@ repositories {
 // Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
 String buildVersionString() {
     String mod_output_version = "${mod_version}-${mod_buildnumber}"
-    boolean jenkins_build = System.getenv("add_git_rev") != null
-    if (jenkins_build) {
+	if (System.getenv("CI") == "true") {
         File changelog = new File("CHANGELOG.md")
         if (!changelog.exists()) {
             // Get the current minor/patch number and bump it
@@ -164,10 +169,12 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.18.1-39.0.63'
 		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.1-65-SNAPSHOT:api")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
 
 	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.18.1-${patchouli_version}")
+    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
+    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
 
 	// Create to test structure interaction with block artillery and the like
 	//runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
@@ -201,8 +208,10 @@ mixin {
 
 eclipse {
     afterEvaluate {
-        //synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
-        
-		synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
+		if (System.getenv("CI") == "true") {
+			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
+		} else {
+        	synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+		}
     }
 }
