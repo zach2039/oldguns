@@ -26,6 +26,7 @@ import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item.Properties;
 import net.minecraftforge.client.event.ColorHandlerEvent.Item;
+import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -234,6 +235,9 @@ public class ModItems {
 	
 	// Equipment 
 	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_hat", () -> new MusketeerHatItem());
+	
+	// Spawn Eggs
+	public static final RegistryObject<ForgeSpawnEggItem> MUSKETEER_SKELETON_SPAWN_EGG = ITEMS.register("musketeer_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MUSKETEER_SKELETON, 0x636566, 0, defaultItemProperties()));
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.

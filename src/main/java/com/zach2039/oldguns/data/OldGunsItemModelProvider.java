@@ -271,6 +271,8 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		
 		withGeneratedParentAndDefaultTexture(ModItems.MUSKETEER_HAT.get());
 		//withGeneratedParentAndDefaultTexture(ModBlocks.NAVAL_CANNON.get());
+		
+		spawnEggItem(ModItems.MUSKETEER_SKELETON_SPAWN_EGG.get());
 	}
 
 

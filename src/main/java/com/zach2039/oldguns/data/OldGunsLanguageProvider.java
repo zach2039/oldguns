@@ -249,6 +249,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.MUSKETEER_HAT, "Musketeer Hat");
 		
+		addItem(ModItems.MUSKETEER_SKELETON_SPAWN_EGG, "Musketeer Skeleton Spawn Egg");
+		
 		add("item.oldguns.compendium", "Old Guns Compendium");
 	}
 

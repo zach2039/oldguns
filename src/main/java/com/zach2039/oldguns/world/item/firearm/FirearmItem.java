@@ -271,9 +271,9 @@ public class FirearmItem extends BowItem implements Firearm {
 	 * @param livingEntity
 	 * @param firearmStack
 	 * @param ammoStack
-	 * @param snapshotDevMulti
+	 * @param deviationMultiplier
 	 */
-	public void fireProjectiles(Level level, LivingEntity livingEntity, ItemStack firearmStack, ItemStack ammoStack, float snapshotDevMulti) {
+	public void fireProjectiles(Level level, LivingEntity livingEntity, ItemStack firearmStack, ItemStack ammoStack, float deviationMultiplier) {
 				
 		int maxShots = (firesAllLoadedAmmoAtOnce() && !ammoStack.isEmpty()) ? FirearmNBTHelper.peekNBTTagAmmoCount(firearmStack) : 1; 
 		for (int i = 0; i < maxShots; i++) {
@@ -284,7 +284,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			/* Fire all projectiles from ammo item. */
 			float finalVelocity = getProjectileSpeed();
 			float finalEffectiveRange = itemFirearmAmmo.getProjectileEffectiveRange() * getEffectiveRangeModifier();
-			float finalDeviation = getFirearmDeviation() * snapshotDevMulti * itemFirearmAmmo.getProjectileDeviationModifier();
+			float finalDeviation = getFirearmDeviation() * deviationMultiplier * itemFirearmAmmo.getProjectileDeviationModifier();
 
 			OldGuns.printDebug(this + "AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
 			OldGuns.printDebug(this + "FirearmEffectiveMod : " + getEffectiveRangeModifier());
@@ -292,7 +292,7 @@ public class FirearmItem extends BowItem implements Firearm {
             
 			OldGuns.printDebug(this + "FirearmDeviation   : " + getFirearmDeviation());
 			OldGuns.printDebug(this + "AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
-			OldGuns.printDebug(this + "AimingDeviationMod : " + snapshotDevMulti);
+			OldGuns.printDebug(this + "AimingDeviationMod : " + deviationMultiplier);
 			OldGuns.printDebug(this + "FinalDeviation     : " + finalDeviation);
 
 			entityProjectiles.forEach((t) -> {
@@ -423,6 +423,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			}
 
 			float snapshotDevMulti = getSnapshotDeviationMultiplier(ticksUsed);
+			float mountedDevMulti = getMountedDeviationMultiplier(livingEntityIn);
 
 			if (!ammoStack.isEmpty())
 			{
@@ -452,7 +453,7 @@ public class FirearmItem extends BowItem implements Firearm {
 						return;
 					}
 
-					fireProjectiles(worldIn, entityplayer, stackIn, ammoStack, snapshotDevMulti);
+					fireProjectiles(worldIn, entityplayer, stackIn, ammoStack, snapshotDevMulti * mountedDevMulti);
 				}
 
 				
@@ -784,10 +785,15 @@ public class FirearmItem extends BowItem implements Firearm {
 		return failure;
 	}
 
-	public static float getSnapshotDeviationMultiplier(int ticksInUse)
-	{
-		float devMulti = (ticksInUse < 5) ? 3.0f : ((ticksInUse < 10) ? 2.0f : 1.0f); 
-		return devMulti; 
+	public static float getSnapshotDeviationMultiplier(int ticksInUse) {
+		return (ticksInUse < 5) ? 3.0f : ((ticksInUse < 10) ? 2.0f : 1.0f);  
+	}
+	
+	public static float getMountedDeviationMultiplier(LivingEntity livingEntity) {
+		if (livingEntity == null)
+			return 1.0F;
+		
+		return (livingEntity.isPassenger()) ? 3.0F : 1.0F;  
 	}
 
 	private boolean isCarryingSizableFirearmInOtherHand(Level worldIn, Player playerIn, InteractionHand handIn)
