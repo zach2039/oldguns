@@ -95,14 +95,13 @@ public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 					if (armorStack.getItem() instanceof MusketeerHatItem) {
 						MusketeerHatItem hatItem = (MusketeerHatItem)armorStack.getItem();
 						for (AttributeModifier modifier  : hatItem.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(armorStack), armorStack).get(ModAttributes.ARMOR_PIERCE)) {
-							armorBypassPercentage += (float) modifier.getAmount();
+							armorBypassPercentage *= (float) modifier.getAmount();
 						}
 					}
 				}
 			}
 		}
 		
-		OldGuns.LOGGER.info(armorBypassPercentage);
 		for (int i = 0; i < getProjectileCount(); i++) 
 		{
 			BulletProjectile entityBullet = new BulletProjectile(worldIn, shooter);

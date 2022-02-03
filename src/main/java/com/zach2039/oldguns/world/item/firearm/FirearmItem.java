@@ -29,10 +29,13 @@ import com.zach2039.oldguns.capability.SerializableCapabilityProvider;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.init.ModAttributes;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
+import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
+import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -242,11 +245,11 @@ public class FirearmItem extends BowItem implements Firearm {
 	public void inventoryTick(ItemStack stackIn, Level levelIn, Entity entityIn, int slot, boolean par5) {
 
 		if (OldGunsConfig.SERVER.firearmSettings.hugeFirearmDebuffs.get()) {
-			// Apply huge firearm debuffs for balancing reasons
+			// Apply huge firearm debuffs for balancing reasons, unless mounted or creative
 			if (entityIn instanceof Player)
 			{
 				Player player = (Player) entityIn;
-				if (player.isCreative())
+				if (player.isCreative() || player.isPassenger())
 					return;
 				if (ItemStack.isSame(player.getMainHandItem(), stackIn) || ItemStack.isSame(player.getOffhandItem (), stackIn)) {
 					if (getFirearmSize() == FirearmSize.HUGE) {
@@ -435,7 +438,8 @@ public class FirearmItem extends BowItem implements Firearm {
 					/* Calculate stuff based on firearm condition. */
 					boolean failure = checkConditionForEffect(worldIn, entityplayer, stackIn);
 
-					//OldGuns.logger.info(String.format("Failure: %d", failure ? 1 : 0));
+					OldGuns.LOGGER.info(snapshotDevMulti);
+					OldGuns.LOGGER.info(mountedDevMulti);
 
 					/* If firearm broke or misfired, do nothing. */
 					if (failure)
@@ -793,7 +797,24 @@ public class FirearmItem extends BowItem implements Firearm {
 		if (livingEntity == null)
 			return 1.0F;
 		
-		return (livingEntity.isPassenger()) ? 3.0F : 1.0F;  
+		float accuracyModifier = 0.0F;
+		if (OldGunsConfig.SERVER.equipmentSettings.allowEquipmentEffects.get()) {
+			for (ItemStack armorStack : livingEntity.getArmorSlots()) {
+				if (OldGunsConfig.SERVER.equipmentSettings.horsemansPotHelmSettings.allowEffects.get()) {
+					if (armorStack.getItem() instanceof HorsemansPotHelmItem) {
+						HorsemansPotHelmItem hatItem = (HorsemansPotHelmItem)armorStack.getItem();
+						for (AttributeModifier modifier  : hatItem.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(armorStack), armorStack).get(ModAttributes.MOUNTED_ACCURACY)) {
+							accuracyModifier += (float) modifier.getAmount();
+						}
+					}
+				}
+			}
+		}
+		
+		float baseDevMulti = 3.0F;
+		float mountedDevMulti = (accuracyModifier > 0.0F) ? (baseDevMulti / (baseDevMulti * accuracyModifier)) : baseDevMulti;
+		
+		return (livingEntity.isPassenger()) ? mountedDevMulti : 1.0F;  
 	}
 
 	private boolean isCarryingSizableFirearmInOtherHand(Level worldIn, Player playerIn, InteractionHand handIn)

@@ -38,17 +38,17 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
 import net.minecraftforge.common.ForgeMod;
 
-public class MusketeerHatItem extends ArmorItem {
+public class HorsemansPotHelmItem extends ArmorItem {
 	
 	private static final UUID[] ARMOR_MODIFIER_UUID_PER_SLOT = new UUID[]{UUID.fromString("845DB27C-C624-495F-8C9F-6020A9A58B6B"), UUID.fromString("D8499B04-0E66-4726-AB29-64469D734E0D"), UUID.fromString("9F3D476D-C118-4544-8365-64846904B48E"), UUID.fromString("2AD3F246-FEE1-4E67-B886-69FD380BB150")};
 	
-	private static final String DEFAULT_ARMOR_TEXTURE_LOCATION = OldGuns.MODID + ":textures/model/armor/musketeer_hat.png";
+	private static final String DEFAULT_ARMOR_TEXTURE_LOCATION = OldGuns.MODID + ":textures/model/armor/horsemans_pot_helm.png";
 	
 	private Multimap<Attribute, AttributeModifier> defaultModifiers;
 	
-	public MusketeerHatItem() {
-		super(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new Properties()
-				.durability(128)
+	public HorsemansPotHelmItem() {
+		super(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Properties()
+				.durability(275)
 				.tab(OldGuns.CREATIVE_MODE_TAB));
 		
 		initAttributes();
@@ -64,9 +64,9 @@ public class MusketeerHatItem extends ArmorItem {
 		}
 		
 		if (OldGunsConfig.SERVER.equipmentSettings.allowEquipmentEffects.get()) {
-			if (OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.allowEffects.get()) {
-				double pierceAmount = OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.percentArmorBypassIncrease.get();
-				builder.put(ModAttributes.ARMOR_PIERCE, new AttributeModifier(uuid, "Bullet armor pierce", pierceAmount, AttributeModifier.Operation.MULTIPLY_BASE));
+			if (OldGunsConfig.SERVER.equipmentSettings.horsemansPotHelmSettings.allowEffects.get()) {
+				double debuffDecreaseAmount = OldGunsConfig.SERVER.equipmentSettings.horsemansPotHelmSettings.percentMountedFirearmAccuracyIncrease.get();
+				builder.put(ModAttributes.MOUNTED_ACCURACY, new AttributeModifier(uuid, "Mounted firearm accuracy", debuffDecreaseAmount, AttributeModifier.Operation.MULTIPLY_BASE));
 			}
 		}
 		
@@ -86,7 +86,7 @@ public class MusketeerHatItem extends ArmorItem {
 			@Override
 			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 
-				MusketeerHatModel<LivingEntity> model = new MusketeerHatModel<>(ModLayerDefinitions.MUSKETEER_HAT.bakeRoot());
+				MusketeerHatModel<LivingEntity> model = new MusketeerHatModel<>(ModLayerDefinitions.HORSEMANS_POT_HELM.bakeRoot());
 				
 				model.crouching = _default.crouching;
 				model.riding = _default.riding;

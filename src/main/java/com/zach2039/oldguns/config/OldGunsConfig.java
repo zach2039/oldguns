@@ -1664,6 +1664,7 @@ public class OldGunsConfig {
 	public static class EquipmentSettings {
 		public final BooleanValue allowEquipmentEffects;
 		public final MusketeerHatSettings musketeerHatSettings;
+		public final HorsemansPotHelmSettings horsemansPotHelmSettings;
 		
 		EquipmentSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -1675,6 +1676,11 @@ public class OldGunsConfig {
 			musketeerHatSettings = new MusketeerHatSettings(builder, "Musketeer Hats", "musketeerHatSettings",
 					true,
 					0.1D
+					);
+			
+			horsemansPotHelmSettings = new HorsemansPotHelmSettings(builder, "Horseman's Pot Helms", "horsemansPotHelmSettings",
+					true,
+					1.0D
 					);
 			
 			builder.pop();
@@ -1695,7 +1701,27 @@ public class OldGunsConfig {
 
 			percentArmorBypassIncrease = builder
 					.comment("The additional percentage of armor bypass that wearing a musketeer hat gives to firearm projectiles")
-					.defineInRange("percentArmorBypassIncrease", defaultPercentArmorBypassIncrease, 0.0D, 1.0D);
+					.defineInRange("percentArmorBypassIncrease", defaultPercentArmorBypassIncrease, 0.0D, 10.0D);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class HorsemansPotHelmSettings {
+		public final BooleanValue allowEffects;
+		public final DoubleValue percentMountedFirearmAccuracyIncrease;
+		
+		HorsemansPotHelmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+				final boolean defaultAllowEffects, final double defaultPercentMountedFirearmAccuracyIncrease) {
+			builder.comment(comment).push(path);
+			
+			allowEffects = builder
+					.comment("Allow Horseman's Pot Helm to decrease accuracy debuff for firearms while mounted")
+					.define("allowEffects", defaultAllowEffects);
+
+			percentMountedFirearmAccuracyIncrease = builder
+					.comment("The percentage of accuracy increase to firearm projectiles while mounted while wearing a horseman's pot helm")
+					.defineInRange("percentMountedInaccuracyDecrease", defaultPercentMountedFirearmAccuracyIncrease, 0.0D, 10.0D);
 			
 			builder.pop();
 		}

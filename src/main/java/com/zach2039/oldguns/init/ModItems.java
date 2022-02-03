@@ -10,6 +10,7 @@ import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
 import com.zach2039.oldguns.world.item.artillery.LargePowderCharge;
 import com.zach2039.oldguns.world.item.artillery.MediumPowderCharge;
 import com.zach2039.oldguns.world.item.artillery.SmallPowderCharge;
+import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
 import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.material.MaterialItem;
@@ -235,6 +236,7 @@ public class ModItems {
 	
 	// Equipment 
 	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_hat", () -> new MusketeerHatItem());
+	public static final RegistryObject<ArmorItem> HORSEMANS_POT_HELM = ITEMS.register("horsemans_pot_helm", () -> new HorsemansPotHelmItem());
 	
 	// Spawn Eggs
 	public static final RegistryObject<ForgeSpawnEggItem> MUSKETEER_SKELETON_SPAWN_EGG = ITEMS.register("musketeer_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MUSKETEER_SKELETON, 0x636566, 0, defaultItemProperties()));
