@@ -2,11 +2,13 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.AmmoTypes;
+import com.zach2039.oldguns.api.ammo.ProjectilePowderType;
 import com.zach2039.oldguns.api.artillery.ArtilleryPart;
 import com.zach2039.oldguns.api.firearm.FirearmPart;
 import com.zach2039.oldguns.api.firearm.FirearmTypes;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
+import com.zach2039.oldguns.world.item.ammo.firearm.FirearmPaperCartridgeItem;
 import com.zach2039.oldguns.world.item.artillery.LargePowderCharge;
 import com.zach2039.oldguns.world.item.artillery.MediumPowderCharge;
 import com.zach2039.oldguns.world.item.artillery.SmallPowderCharge;
@@ -120,16 +122,28 @@ public class ModItems {
 	// Ammo
 	// Stone
 	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_MUSKET_BALL = ITEMS.register("small_stone_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_STONE_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_stone_musket_ball_low_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_STONE_MUSKET_BALL, ProjectilePowderType.LOW_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_stone_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_STONE_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_MUSKET_BALL = ITEMS.register("medium_stone_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_STONE_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE = ITEMS.register("medium_stone_musket_ball_low_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.MEDIUM_STONE_MUSKET_BALL, ProjectilePowderType.LOW_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("medium_stone_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.MEDIUM_STONE_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_MUSKET_BALL = ITEMS.register("large_stone_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_STONE_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE = ITEMS.register("large_stone_musket_ball_low_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.LARGE_STONE_MUSKET_BALL, ProjectilePowderType.LOW_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("large_stone_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.LARGE_STONE_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_BIRDSHOT = ITEMS.register("small_stone_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_STONE_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_BIRDSHOT = ITEMS.register("medium_stone_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_STONE_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_BIRDSHOT = ITEMS.register("large_stone_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_STONE_BIRDSHOT));
 	
 	// Iron
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL = ITEMS.register("small_iron_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_IRON_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_iron_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_IRON_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_iron_musket_ball_high_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_IRON_MUSKET_BALL, ProjectilePowderType.HIGH_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_MUSKET_BALL = ITEMS.register("medium_iron_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_IRON_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("medium_iron_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.MEDIUM_IRON_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE = ITEMS.register("medium_iron_musket_ball_high_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.MEDIUM_IRON_MUSKET_BALL, ProjectilePowderType.HIGH_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_MUSKET_BALL = ITEMS.register("large_iron_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_IRON_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("large_iron_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.LARGE_IRON_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE = ITEMS.register("large_iron_musket_ball_high_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.LARGE_IRON_MUSKET_BALL, ProjectilePowderType.HIGH_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_BUCKSHOT = ITEMS.register("small_iron_buckshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_IRON_BUCKSHOT));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_BUCKSHOT = ITEMS.register("medium_iron_buckshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_IRON_BUCKSHOT));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_BUCKSHOT = ITEMS.register("large_iron_buckshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_IRON_BUCKSHOT));
@@ -139,8 +153,14 @@ public class ModItems {
 	
 	// Lead
 	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL = ITEMS.register("small_lead_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_lead_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_lead_musket_ball_high_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_MUSKET_BALL, ProjectilePowderType.HIGH_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_MUSKET_BALL = ITEMS.register("medium_lead_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_LEAD_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("medium_lead_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.MEDIUM_LEAD_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE = ITEMS.register("medium_lead_musket_ball_high_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.MEDIUM_LEAD_MUSKET_BALL, ProjectilePowderType.HIGH_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_MUSKET_BALL = ITEMS.register("large_lead_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_LEAD_MUSKET_BALL));
+	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("large_lead_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.LARGE_LEAD_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
+	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE = ITEMS.register("large_lead_musket_ball_high_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.LARGE_LEAD_MUSKET_BALL, ProjectilePowderType.HIGH_GRADE));
 	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_BUCKSHOT = ITEMS.register("small_lead_buckshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_BUCKSHOT));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_BUCKSHOT = ITEMS.register("medium_lead_buckshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_LEAD_BUCKSHOT));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_BUCKSHOT = ITEMS.register("large_lead_buckshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_LEAD_BUCKSHOT));
@@ -220,6 +240,8 @@ public class ModItems {
 	// Black Powder
 	public static final RegistryObject<MaterialItem> MEDIUM_GRADE_BLACK_POWDER = ITEMS.register("medium_grade_black_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> HIGH_GRADE_BLACK_POWDER = ITEMS.register("high_grade_black_powder", () -> new MaterialItem());
+	// Ammo Crafting
+	public static final RegistryObject<MaterialItem> WAXED_PAPER = ITEMS.register("waxed_paper", () -> new MaterialItem());
 	
 	// Tools
 	public static final RegistryObject<RepairKitItem> REPAIR_KIT = ITEMS.register("repair_kit", () -> new RepairKitItem());

@@ -1,0 +1,18 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:flintlock_pistol"
+    },
+    {
+      "tag": "oldguns:small_flintlock_suitable_metal_musket_ball_cartridge"
+    }
+  ],
+  "result": {
+    "item": "oldguns:flintlock_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

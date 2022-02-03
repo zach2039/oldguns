@@ -15,6 +15,9 @@ import java.util.List;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
+import com.zach2039.oldguns.api.firearm.Firearm;
+import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
+import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
 import com.zach2039.oldguns.compat.jei.util.JEIIngredientStackListBuilder;
 import com.zach2039.oldguns.compat.jei.util.OldGunsCraftingGridHelper;
@@ -85,7 +88,7 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 			guiItemStacks.set(GunsmithsBenchMenu.NOTES_SLOT+1, designNotes);
 			recipeLayout.setShapeless();
 		}
-		
+	
 		guiItemStacks.set(0, outputs.get(0));
 	}
 	

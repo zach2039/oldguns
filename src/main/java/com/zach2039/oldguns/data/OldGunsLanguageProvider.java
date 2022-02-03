@@ -142,16 +142,28 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS, "Flintlock Doublebarrel Blunderbuss");
 	
 		addItem(ModItems.SMALL_STONE_MUSKET_BALL, "Small Stone Musket Ball");
+		addItem(ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE, "Small Stone Musket Ball Paper Cartridge");
+		addItem(ModItems.SMALL_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Small Stone Musket Ball Paper Cartridge");
 		addItem(ModItems.MEDIUM_STONE_MUSKET_BALL, "Medium Stone Musket Ball");
+		addItem(ModItems.MEDIUM_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE, "Medium Stone Musket Ball Paper Cartridge");
+		addItem(ModItems.MEDIUM_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Medium Stone Musket Ball Paper Cartridge");
 		addItem(ModItems.LARGE_STONE_MUSKET_BALL, "Large Stone Musket Ball");
+		addItem(ModItems.LARGE_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE, "Large Stone Musket Ball Paper Cartridge");
+		addItem(ModItems.LARGE_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Large Stone Musket Ball Paper Cartridge");
 		
 		addItem(ModItems.SMALL_STONE_BIRDSHOT, "Small Stone Birdshot");
 		addItem(ModItems.MEDIUM_STONE_BIRDSHOT, "Medium Stone Birdshot");
 		addItem(ModItems.LARGE_STONE_BIRDSHOT, "Large Stone Birdshot");
 		
 		addItem(ModItems.SMALL_IRON_MUSKET_BALL, "Small Iron Musket Ball");
+		addItem(ModItems.SMALL_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Small Iron Musket Ball Paper Cartridge");
+		addItem(ModItems.SMALL_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE, "Small Iron Musket Ball Paper Cartridge");
 		addItem(ModItems.MEDIUM_IRON_MUSKET_BALL, "Medium Iron Musket Ball");
+		addItem(ModItems.MEDIUM_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Medium Iron Musket Ball Paper Cartridge");
+		addItem(ModItems.MEDIUM_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE, "Medium Iron Musket Ball Paper Cartridge");
 		addItem(ModItems.LARGE_IRON_MUSKET_BALL, "Large Iron Musket Ball");
+		addItem(ModItems.LARGE_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Large Iron Musket Ball Paper Cartridge");
+		addItem(ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE, "Large Iron Musket Ball Paper Cartridge");
 		
 		addItem(ModItems.SMALL_IRON_BUCKSHOT, "Small Iron Buckshot");
 		addItem(ModItems.MEDIUM_IRON_BUCKSHOT, "Medium Iron Buckshot");
@@ -162,8 +174,14 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.LARGE_IRON_BIRDSHOT, "Large Iron Birdshot");
 		
 		addItem(ModItems.SMALL_LEAD_MUSKET_BALL, "Small Lead Musket Ball");
+		addItem(ModItems.SMALL_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Small Lead Musket Ball Paper Cartridge");
+		addItem(ModItems.SMALL_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE, "Small Lead Musket Ball Paper Cartridge");
 		addItem(ModItems.MEDIUM_LEAD_MUSKET_BALL, "Medium Lead Musket Ball");
+		addItem(ModItems.MEDIUM_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Medium Lead Musket Ball Paper Cartridge");
+		addItem(ModItems.MEDIUM_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE, "Medium Lead Musket Ball Paper Cartridge");
 		addItem(ModItems.LARGE_LEAD_MUSKET_BALL, "Large Lead Musket Ball");
+		addItem(ModItems.LARGE_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE, "Large Lead Musket Ball Paper Cartridge");
+		addItem(ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE, "Large Lead Musket Ball Paper Cartridge");
 		
 		addItem(ModItems.SMALL_LEAD_BUCKSHOT, "Small Lead Buckshot");
 		addItem(ModItems.MEDIUM_LEAD_BUCKSHOT, "Medium Lead Buckshot");
@@ -236,8 +254,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.LIQUID_NITER, "Bottle of Liquid Niter");
 		addItem(ModItems.NITER, "Niter");
 		addItem(ModItems.SULFUR, "Sulfur");
+		add("item.oldguns.low_grade_black_powder", "Low-grade Black Powder");
 		addItem(ModItems.MEDIUM_GRADE_BLACK_POWDER, "Medium-grade Black Powder");
 		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High-grade Black Powder");
+		addItem(ModItems.WAXED_PAPER, "Waxed Paper");
 		
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");

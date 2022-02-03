@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:matchlock_pistol_small_matchlock_suitable_metal_musket_ball_cartridge_reload"
+    ]
+  },
+  "criteria": {
+    "has_firearm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:matchlock_pistol"
+            ]
+          }
+        ]
+      }
+    },
+    "has_cartridge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_matchlock_suitable_metal_musket_ball_cartridge"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:matchlock_pistol_small_matchlock_suitable_metal_musket_ball_cartridge_reload"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_cartridge",
+      "has_the_recipe"
+    ]
+  ]
+}

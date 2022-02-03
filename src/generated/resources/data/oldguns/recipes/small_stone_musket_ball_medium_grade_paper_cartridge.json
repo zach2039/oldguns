@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_stone_firearm_ammo"
+    },
+    {
+      "type": "oldguns:can_craft_paper_cartridges"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "oldguns:small_stone_musket_ball"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "item": "oldguns:waxed_paper"
+    },
+    {
+      "tag": "oldguns:medium_grade_black_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:small_stone_musket_ball_medium_grade_paper_cartridge"
+  }
+}

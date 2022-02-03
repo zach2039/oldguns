@@ -162,6 +162,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowMatchlockWeaponsCrafting;
 		public final BooleanValue allowWheellockWeaponsCrafting;
 		public final BooleanValue allowFlintlockWeaponsCrafting;
+		public final BooleanValue allowPaperCartridgeCrafting;
 		public final BooleanValue allowStoneFirearmAmmoCrafting;
 		public final BooleanValue allowIronFirearmAmmoCrafting;
 		public final BooleanValue allowLeadFirearmAmmoCrafting;
@@ -180,6 +181,10 @@ public class OldGunsConfig {
 			allowFlintlockWeaponsCrafting = builder
 					.comment("Enable/disable flintlock firearm crafts")
 					.define("allowFlintlockWeaponsCrafting", true);
+			
+			allowPaperCartridgeCrafting = builder
+					.comment("Enable/disable paper cartridge ammo crafts")
+					.define("allowPaperCartridgeCrafting", true);
 			
 			allowStoneFirearmAmmoCrafting = builder
 					.comment("Enable/disable stone firearm ammo crafts")

@@ -1,0 +1,69 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:small_lead_musket_ball_medium_grade_paper_cartridge"
+    ]
+  },
+  "criteria": {
+    "has_ammo": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:small_lead_musket_ball"
+            ]
+          }
+        ]
+      }
+    },
+    "has_string": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:string"
+          }
+        ]
+      }
+    },
+    "has_waxed_paper": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:waxed_paper"
+            ]
+          }
+        ]
+      }
+    },
+    "has_black_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:medium_grade_black_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:small_lead_musket_ball_medium_grade_paper_cartridge"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_ammo",
+      "has_string",
+      "has_waxed_paper",
+      "has_black_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

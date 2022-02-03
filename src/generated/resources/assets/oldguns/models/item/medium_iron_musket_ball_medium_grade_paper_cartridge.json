@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "oldguns:item/medium_iron_musket_ball_paper_cartridge"
+  }
+}

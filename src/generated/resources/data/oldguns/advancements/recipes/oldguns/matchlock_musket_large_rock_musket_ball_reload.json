@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:matchlock_musket_large_rock_musket_ball_reload"
+    ]
+  },
+  "criteria": {
+    "has_firearm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:matchlock_musket"
+            ]
+          }
+        ]
+      }
+    },
+    "has_ammo": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_rock_musket_ball"
+          }
+        ]
+      }
+    },
+    "has_powder": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:matchlock_suitable_powder"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:matchlock_musket_large_rock_musket_ball_reload"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_ammo",
+      "has_powder",
+      "has_the_recipe"
+    ]
+  ]
+}

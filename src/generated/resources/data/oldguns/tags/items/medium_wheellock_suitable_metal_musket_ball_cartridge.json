@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "oldguns:medium_iron_musket_ball_medium_grade_paper_cartridge",
+    "oldguns:medium_iron_musket_ball_high_grade_paper_cartridge",
+    "oldguns:medium_lead_musket_ball_medium_grade_paper_cartridge",
+    "oldguns:medium_lead_musket_ball_high_grade_paper_cartridge"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_musketoon"
+    },
+    {
+      "tag": "oldguns:medium_wheellock_suitable_metal_musket_ball_cartridge"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_musketoon",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

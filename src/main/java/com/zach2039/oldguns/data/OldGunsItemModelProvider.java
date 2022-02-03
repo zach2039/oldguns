@@ -164,16 +164,28 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_stone_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.SMALL_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_stone_musket_ball_paper_cartridge"));
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_STONE_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.MEDIUM_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/medium_stone_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.MEDIUM_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/medium_stone_musket_ball_paper_cartridge"));
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.LARGE_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/large_stone_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.LARGE_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/large_stone_musket_ball_paper_cartridge"));
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_BIRDSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_STONE_BIRDSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_STONE_BIRDSHOT.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.SMALL_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_iron_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.SMALL_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_iron_musket_ball_paper_cartridge"));
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.MEDIUM_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/medium_iron_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.MEDIUM_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/medium_iron_musket_ball_paper_cartridge"));
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.LARGE_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/large_iron_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/large_iron_musket_ball_paper_cartridge"));
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_IRON_BUCKSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_BUCKSHOT.get());
@@ -184,8 +196,14 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_IRON_BIRDSHOT.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_LEAD_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.SMALL_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_lead_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.SMALL_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_lead_musket_ball_paper_cartridge"));
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.MEDIUM_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/medium_lead_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.MEDIUM_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/medium_lead_musket_ball_paper_cartridge"));
 		withGeneratedParentAndDefaultTexture(ModItems.LARGE_LEAD_MUSKET_BALL.get());
+		withGeneratedParent(ModItems.LARGE_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/large_lead_musket_ball_paper_cartridge"));
+		withGeneratedParent(ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/large_lead_musket_ball_paper_cartridge"));
 		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_LEAD_BUCKSHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_LEAD_BUCKSHOT.get());
@@ -260,6 +278,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.SULFUR.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.HIGH_GRADE_BLACK_POWDER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.WAXED_PAPER.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MORTAR_AND_PESTLE.get());
@@ -298,6 +317,11 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 				.texture(LAYER_0, itemTexture(item));
 	}
 
+	private ItemModelBuilder withGeneratedParent(final Item item, final ResourceLocation texture) {
+		return withGeneratedParent(name(item))
+				.texture(LAYER_0, texture);
+	}
+	
 	private ItemModelBuilder withGeneratedParent(final String name) {
 		return withExistingParent(name, mcLoc("generated"));
 	}

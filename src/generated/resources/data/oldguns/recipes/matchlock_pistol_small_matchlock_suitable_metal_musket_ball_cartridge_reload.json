@@ -1,0 +1,18 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:matchlock_pistol"
+    },
+    {
+      "tag": "oldguns:small_matchlock_suitable_metal_musket_ball_cartridge"
+    }
+  ],
+  "result": {
+    "item": "oldguns:matchlock_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

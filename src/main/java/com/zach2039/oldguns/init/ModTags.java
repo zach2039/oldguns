@@ -76,9 +76,23 @@ public class ModTags {
 		public static final Tag.Named<Item> MEDIUM_METAL_BIRDSHOT = tag("medium_metal_birdshot");
 		public static final Tag.Named<Item> LARGE_METAL_BIRDSHOT = tag("large_metal_birdshot");
 		
+		// Cartridge
+		public static final Tag.Named<Item> SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_matchlock_suitable_metal_musket_ball_cartridge");
+		public static final Tag.Named<Item> MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_matchlock_suitable_metal_musket_ball_cartridge");
+		public static final Tag.Named<Item> LARGE_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("large_matchlock_suitable_metal_musket_ball_cartridge");
+		
+		public static final Tag.Named<Item> SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_wheellock_suitable_metal_musket_ball_cartridge");
+		public static final Tag.Named<Item> MEDIUM_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_wheellock_suitable_metal_musket_ball_cartridge");
+		public static final Tag.Named<Item> LARGE_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("large_wheellock_suitable_metal_musket_ball_cartridge");
+		
+		public static final Tag.Named<Item> SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_flintlock_suitable_metal_musket_ball_cartridge");
+		public static final Tag.Named<Item> MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_flintlock_suitable_metal_musket_ball_cartridge");
+		public static final Tag.Named<Item> LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("large_flintlock_suitable_metal_musket_ball_cartridge");
+		
 		// Powder
 		public static final Tag.Named<Item> ANY_GUNPOWDER = tag("any_gunpowder");
 		public static final Tag.Named<Item> ANY_BLACK_POWDER = tag("any_black_powder");
+		public static final Tag.Named<Item> LOW_GRADE_BLACK_POWDER = tag("low_grade_black_powder");
 		public static final Tag.Named<Item> MEDIUM_GRADE_BLACK_POWDER = tag("medium_grade_black_powder");
 		public static final Tag.Named<Item> HIGH_GRADE_BLACK_POWDER = tag("high_grade_black_powder");
 		public static final Tag.Named<Item> MATCHLOCK_SUITABLE_POWDER = tag("matchlock_suitable_powder");

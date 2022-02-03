@@ -95,6 +95,11 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 	public BUILDER requires(final Tag<Item> tagIn) {
 		return (BUILDER) super.requires(tagIn);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public BUILDER requires(final Tag<Item> tagIn, final int quantity) {
+		return (BUILDER) super.requires(Ingredient.of(tagIn), quantity);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

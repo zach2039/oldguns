@@ -9,6 +9,7 @@ import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftLeadArtillery
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftLeadFirearmAmmoCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftMatchlockWeaponsCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftNavalCannonArtilleryCondition;
+import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftPaperCartridgesCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftStoneArtilleryAmmoCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftStoneFirearmAmmoCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftWheellockWeaponsCondition;
@@ -27,6 +28,8 @@ public class ModConditions {
 		CraftingHelper.register(CanCraftMatchlockWeaponsCondition.Serializer.INSTANCE);
 		CraftingHelper.register(CanCraftWheellockWeaponsCondition.Serializer.INSTANCE);
 		CraftingHelper.register(CanCraftFlintlockWeaponsCondition.Serializer.INSTANCE);
+		
+		CraftingHelper.register(CanCraftPaperCartridgesCondition.Serializer.INSTANCE);
 		
 		CraftingHelper.register(CanCraftIronFirearmAmmoCondition.Serializer.INSTANCE);
 		CraftingHelper.register(CanCraftLeadFirearmAmmoCondition.Serializer.INSTANCE);

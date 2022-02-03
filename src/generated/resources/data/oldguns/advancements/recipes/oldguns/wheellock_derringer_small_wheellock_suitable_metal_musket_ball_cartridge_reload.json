@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:wheellock_derringer_small_wheellock_suitable_metal_musket_ball_cartridge_reload"
+    ]
+  },
+  "criteria": {
+    "has_firearm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:wheellock_derringer"
+            ]
+          }
+        ]
+      }
+    },
+    "has_cartridge": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_wheellock_suitable_metal_musket_ball_cartridge"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:wheellock_derringer_small_wheellock_suitable_metal_musket_ball_cartridge_reload"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_cartridge",
+      "has_the_recipe"
+    ]
+  ]
+}
