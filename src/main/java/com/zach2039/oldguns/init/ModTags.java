@@ -55,6 +55,23 @@ public class ModTags {
 		// Firearms
 		public static final Tag.Named<Item> FIREARM = tag("firearm");
 		
+		public static final Tag.Named<Item> MATCHLOCK_FIREARM = tag("matchlock_firearm");
+		public static final Tag.Named<Item> SMALL_MATCHLOCK_FIREARM = tag("small_matchlock_firearm");
+		public static final Tag.Named<Item> MEDIUM_MATCHLOCK_FIREARM = tag("medium_matchlock_firearm");
+		public static final Tag.Named<Item> LARGE_MATCHLOCK_FIREARM = tag("large_matchlock_firearm");
+		
+		public static final Tag.Named<Item> WHEELLOCK_FIREARM = tag("wheellock_firearm");
+		public static final Tag.Named<Item> SMALL_WHEELLOCK_FIREARM = tag("small_wheellock_firearm");
+		public static final Tag.Named<Item> MEDIUM_WHEELLOCK_FIREARM = tag("medium_wheellock_firearm");
+		public static final Tag.Named<Item> LARGE_WHEELLOCK_FIREARM = tag("large_wheellock_firearm");
+		public static final Tag.Named<Item> HUGE_WHEELLOCK_FIREARM = tag("huge_wheellock_firearm");
+		
+		public static final Tag.Named<Item> FLINTLOCK_FIREARM = tag("flintlock_firearm");
+		public static final Tag.Named<Item> SMALL_FLINTLOCK_FIREARM = tag("small_flintlock_firearm");
+		public static final Tag.Named<Item> MEDIUM_FLINTLOCK_FIREARM = tag("medium_flintlock_firearm");
+		public static final Tag.Named<Item> LARGE_FLINTLOCK_FIREARM = tag("large_flintlock_firearm");
+		public static final Tag.Named<Item> HUGE_FLINTLOCK_FIREARM = tag("huge_flintlock_firearm");
+		
 		// Ammo
 		public static final Tag.Named<Item> SMALL_ROCK_MUSKET_BALL = tag("small_rock_musket_ball");
 		public static final Tag.Named<Item> MEDIUM_ROCK_MUSKET_BALL = tag("medium_rock_musket_ball");

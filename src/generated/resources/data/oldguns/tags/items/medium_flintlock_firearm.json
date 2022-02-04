@@ -1,0 +1,8 @@
+{
+  "replace": false,
+  "values": [
+    "oldguns:flintlock_arquebus",
+    "oldguns:flintlock_caliver",
+    "oldguns:flintlock_musketoon"
+  ]
+}

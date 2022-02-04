@@ -280,15 +280,21 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.HIGH_GRADE_BLACK_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.WAXED_PAPER.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.MATCHLOCK_REPAIR_PARTS.get());
+		withGeneratedParentAndDefaultTexture(ModItems.WHEELLOCK_REPAIR_PARTS.get());
+		withGeneratedParentAndDefaultTexture(ModItems.FLINTLOCK_REPAIR_PARTS.get());
+		withGeneratedParentAndDefaultTexture(ModItems.CAPLOCK_REPAIR_PARTS.get());
 		withGeneratedParentAndDefaultTexture(ModItems.REPAIR_KIT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MORTAR_AND_PESTLE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.HACKSAW.get());
+		withGeneratedParentAndDefaultTexture(ModItems.DESIGN_NOTES.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.GUNNERS_QUADRANT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.RAM_ROD.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LONG_MATCH.get());
 		
-		withGeneratedParentAndDefaultTexture(ModItems.DESIGN_NOTES.get());
-		
 		withGeneratedParentAndDefaultTexture(ModItems.MUSKETEER_HAT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.HORSEMANS_POT_HELM.get());
 		//withGeneratedParentAndDefaultTexture(ModBlocks.NAVAL_CANNON.get());
 		
 		spawnEggItem(ModItems.MUSKETEER_SKELETON_SPAWN_EGG.get());

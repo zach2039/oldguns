@@ -259,13 +259,19 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High-grade Black Powder");
 		addItem(ModItems.WAXED_PAPER, "Waxed Paper");
 		
+		addItem(ModItems.MATCHLOCK_REPAIR_PARTS, "Matchlock Repair Parts");
+		addItem(ModItems.WHEELLOCK_REPAIR_PARTS, "Wheellock Repair Parts");
+		addItem(ModItems.FLINTLOCK_REPAIR_PARTS, "Flintlock Repair Parts");
+		addItem(ModItems.CAPLOCK_REPAIR_PARTS, "Caplock Repair Parts");
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
+		addItem(ModItems.HACKSAW, "Hacksaw");
+		addItem(ModItems.DESIGN_NOTES, "Design Notes");
+		
+		
 		addItem(ModItems.GUNNERS_QUADRANT, "Gunner's Quadrant");
 		addItem(ModItems.LONG_MATCH, "Long Match");
 		addItem(ModItems.RAM_ROD, "Ram Rod");
-		
-		addItem(ModItems.DESIGN_NOTES, "Design Notes");
 		
 		addItem(ModItems.MUSKETEER_HAT, "Musketeer Hat");
 		addItem(ModItems.HORSEMANS_POT_HELM, "Horseman's Pot Helm");

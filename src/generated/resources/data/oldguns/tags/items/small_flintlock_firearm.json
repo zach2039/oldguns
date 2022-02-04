@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "oldguns:flintlock_derringer",
+    "oldguns:flintlock_duckfoot_derringer",
+    "oldguns:flintlock_pistol",
+    "oldguns:flintlock_pepperbox_pistol",
+    "oldguns:flintlock_blunderbuss_pistol"
+  ]
+}

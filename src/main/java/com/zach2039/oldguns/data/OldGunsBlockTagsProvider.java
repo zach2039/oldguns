@@ -34,6 +34,10 @@ public class OldGunsBlockTagsProvider extends BlockTagsProvider {
 				.add(ModBlocks.GUNSMITHS_BENCH.get());
 
 		tag(BlockTags.MINEABLE_WITH_SHOVEL)
+				.add(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
+				.add(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
+				.add(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
+				.add(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.add(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
 				.add(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE.get())
 				.add(ModBlocks.NITER_BEDDING.get());

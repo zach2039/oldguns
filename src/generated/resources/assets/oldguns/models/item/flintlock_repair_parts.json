@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "oldguns:item/flintlock_repair_parts"
+  }
+}

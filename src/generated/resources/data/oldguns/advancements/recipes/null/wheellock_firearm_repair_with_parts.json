@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "oldguns:firearm_repair"
+      "oldguns:wheellock_firearm_repair_with_parts"
     ]
   },
   "criteria": {
@@ -16,13 +16,13 @@
         ]
       }
     },
-    "has_repair_kit": {
+    "has_parts": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "oldguns:repair_kit"
+              "oldguns:wheellock_repair_parts"
             ]
           }
         ]
@@ -31,14 +31,14 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "oldguns:firearm_repair"
+        "recipe": "oldguns:wheellock_firearm_repair_with_parts"
       }
     }
   },
   "requirements": [
     [
       "has_firearm",
-      "has_repair_kit",
+      "has_parts",
       "has_the_recipe"
     ]
   ]

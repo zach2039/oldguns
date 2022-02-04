@@ -1,0 +1,16 @@
+{
+  "replace": false,
+  "values": [
+    "oldguns:wheellock_derringer",
+    "oldguns:wheellock_pistol",
+    "oldguns:wheellock_doublebarrel_pistol",
+    "oldguns:wheellock_blunderbuss_pistol",
+    "oldguns:wheellock_arquebus",
+    "oldguns:wheellock_caliver",
+    "oldguns:wheellock_musketoon",
+    "oldguns:wheellock_musket",
+    "oldguns:wheellock_long_musket",
+    "oldguns:wheellock_blunderbuss",
+    "oldguns:wheellock_hand_mortar"
+  ]
+}

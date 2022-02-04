@@ -2,7 +2,7 @@
   "parent": "minecraft:recipes/root",
   "rewards": {
     "recipes": [
-      "oldguns:firearm_repair_vanilla"
+      "oldguns:medium_flintlock_firearm_salvage"
     ]
   },
   "criteria": {
@@ -11,18 +11,18 @@
       "conditions": {
         "items": [
           {
-            "tag": "oldguns:firearm"
+            "tag": "oldguns:medium_flintlock_firearm"
           }
         ]
       }
     },
-    "has_repair_kit": {
+    "has_hacksaw": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "oldguns:repair_kit"
+              "oldguns:hacksaw"
             ]
           }
         ]
@@ -31,14 +31,14 @@
     "has_the_recipe": {
       "trigger": "minecraft:recipe_unlocked",
       "conditions": {
-        "recipe": "oldguns:firearm_repair_vanilla"
+        "recipe": "oldguns:medium_flintlock_firearm_salvage"
       }
     }
   },
   "requirements": [
     [
       "has_firearm",
-      "has_repair_kit",
+      "has_hacksaw",
       "has_the_recipe"
     ]
   ]

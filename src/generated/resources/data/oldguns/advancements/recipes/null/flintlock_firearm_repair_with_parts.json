@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_firearm_repair_with_parts"
+    ]
+  },
+  "criteria": {
+    "has_firearm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:firearm"
+          }
+        ]
+      }
+    },
+    "has_parts": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:flintlock_repair_parts"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:flintlock_firearm_repair_with_parts"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_parts",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "type": "oldguns:gunsmiths_bench_hacksaw_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "oldguns:small_matchlock_firearm"
+    },
+    {
+      "item": "oldguns:hacksaw"
+    }
+  ],
+  "result": {
+    "item": "oldguns:matchlock_repair_parts",
+    "count": 2
+  }
+}

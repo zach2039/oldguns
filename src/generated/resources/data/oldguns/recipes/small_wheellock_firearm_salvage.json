@@ -1,0 +1,16 @@
+{
+  "type": "oldguns:gunsmiths_bench_hacksaw_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "oldguns:small_wheellock_firearm"
+    },
+    {
+      "item": "oldguns:hacksaw"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_repair_parts",
+    "count": 2
+  }
+}

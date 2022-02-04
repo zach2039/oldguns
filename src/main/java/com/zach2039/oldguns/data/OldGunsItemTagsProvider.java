@@ -104,7 +104,116 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.FLINTLOCK_LONG_MUSKET.get())
 			.add(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
 			.add(ModItems.FLINTLOCK_BLUNDERBUSS.get())
-			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
+			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
+			;
+		
+		tag(ModTags.Items.MATCHLOCK_FIREARM)
+			.add(ModItems.MATCHLOCK_DERRINGER.get())
+			.add(ModItems.MATCHLOCK_PISTOL.get())
+			.add(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.MATCHLOCK_ARQUEBUS.get())
+			.add(ModItems.MATCHLOCK_CALIVER.get())
+			.add(ModItems.MATCHLOCK_MUSKETOON.get())
+			.add(ModItems.MATCHLOCK_MUSKET.get())
+			.add(ModItems.MATCHLOCK_LONG_MUSKET.get())
+			.add(ModItems.MATCHLOCK_BLUNDERBUSS.get())
+			;
+		
+		tag(ModTags.Items.SMALL_MATCHLOCK_FIREARM)
+			.add(ModItems.MATCHLOCK_DERRINGER.get())
+			.add(ModItems.MATCHLOCK_PISTOL.get())
+			.add(ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.MATCHLOCK_ARQUEBUS.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_MATCHLOCK_FIREARM)
+			.add(ModItems.MATCHLOCK_CALIVER.get())
+			.add(ModItems.MATCHLOCK_MUSKETOON.get())
+			;
+		
+		tag(ModTags.Items.LARGE_MATCHLOCK_FIREARM)
+			.add(ModItems.MATCHLOCK_MUSKET.get())
+			.add(ModItems.MATCHLOCK_LONG_MUSKET.get())
+			.add(ModItems.MATCHLOCK_BLUNDERBUSS.get())
+			;
+			
+		tag(ModTags.Items.WHEELLOCK_FIREARM)
+			.add(ModItems.WHEELLOCK_DERRINGER.get())
+			.add(ModItems.WHEELLOCK_PISTOL.get())
+			.add(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
+			.add(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.WHEELLOCK_ARQUEBUS.get())
+			.add(ModItems.WHEELLOCK_CALIVER.get())
+			.add(ModItems.WHEELLOCK_MUSKETOON.get())
+			.add(ModItems.WHEELLOCK_MUSKET.get())
+			.add(ModItems.WHEELLOCK_LONG_MUSKET.get())
+			.add(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+			.add(ModItems.WHEELLOCK_HAND_MORTAR.get())
+			;
+		
+		tag(ModTags.Items.SMALL_WHEELLOCK_FIREARM)
+			.add(ModItems.WHEELLOCK_DERRINGER.get())
+			.add(ModItems.WHEELLOCK_PISTOL.get())
+			.add(ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get())
+			.add(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.WHEELLOCK_ARQUEBUS.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_WHEELLOCK_FIREARM)
+			.add(ModItems.WHEELLOCK_CALIVER.get())
+			.add(ModItems.WHEELLOCK_MUSKETOON.get())
+			;
+			
+		tag(ModTags.Items.LARGE_WHEELLOCK_FIREARM)
+			.add(ModItems.WHEELLOCK_MUSKET.get())
+			.add(ModItems.WHEELLOCK_LONG_MUSKET.get())
+			.add(ModItems.WHEELLOCK_BLUNDERBUSS.get())
+			;
+		
+		tag(ModTags.Items.HUGE_WHEELLOCK_FIREARM)
+			.add(ModItems.WHEELLOCK_HAND_MORTAR.get())
+			;
+			
+		tag(ModTags.Items.FLINTLOCK_FIREARM)	
+			.add(ModItems.FLINTLOCK_DERRINGER.get())
+			.add(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
+			.add(ModItems.FLINTLOCK_PISTOL.get())
+			.add(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
+			.add(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.FLINTLOCK_ARQUEBUS.get())
+			.add(ModItems.FLINTLOCK_CALIVER.get())
+			.add(ModItems.FLINTLOCK_MUSKETOON.get())
+			.add(ModItems.FLINTLOCK_MUSKET.get())
+			.add(ModItems.FLINTLOCK_LONG_MUSKET.get())
+			.add(ModItems.FLINTLOCK_BLUNDERBUSS.get())
+			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
+			.add(ModItems.FLINTLOCK_NOCK_GUN.get())
+			;
+		
+		tag(ModTags.Items.SMALL_FLINTLOCK_FIREARM)	
+			.add(ModItems.FLINTLOCK_DERRINGER.get())
+			.add(ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get())
+			.add(ModItems.FLINTLOCK_PISTOL.get())
+			.add(ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get())
+			.add(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_FLINTLOCK_FIREARM)
+			.add(ModItems.FLINTLOCK_ARQUEBUS.get())
+			.add(ModItems.FLINTLOCK_CALIVER.get())
+			.add(ModItems.FLINTLOCK_MUSKETOON.get())
+			;
+		
+		tag(ModTags.Items.LARGE_FLINTLOCK_FIREARM)
+			.add(ModItems.FLINTLOCK_MUSKET.get())
+			.add(ModItems.FLINTLOCK_LONG_MUSKET.get())
+			.add(ModItems.FLINTLOCK_BLUNDERBUSS.get())
+			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
+			;
+		
+		tag(ModTags.Items.HUGE_FLINTLOCK_FIREARM)
+			.add(ModItems.FLINTLOCK_NOCK_GUN.get())
+			;
 			
 		// Ammo
 		tag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)

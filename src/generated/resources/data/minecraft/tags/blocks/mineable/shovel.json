@@ -1,6 +1,10 @@
 {
   "replace": false,
   "values": [
+    "oldguns:medium_grade_black_powder_block",
+    "oldguns:wet_medium_grade_black_powder_block",
+    "oldguns:high_grade_black_powder_block",
+    "oldguns:wet_high_grade_black_powder_block",
     "oldguns:high_grade_black_powder_cake",
     "oldguns:wet_high_grade_black_powder_cake",
     "oldguns:niter_bedding"

@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:small_wheellock_firearm_salvage"
+    ]
+  },
+  "criteria": {
+    "has_firearm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_wheellock_firearm"
+          }
+        ]
+      }
+    },
+    "has_hacksaw": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:hacksaw"
+            ]
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:small_wheellock_firearm_salvage"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_hacksaw",
+      "has_the_recipe"
+    ]
+  ]
+}

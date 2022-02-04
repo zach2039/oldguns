@@ -30,7 +30,7 @@ public class ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 	final String group;
 	final ItemStack result;
 	final NonNullList<Ingredient> ingredients;
-	private final boolean isSimple;
+	protected final boolean isSimple;
 
 	public ShapelessGunsmithsBenchRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
 		this.id = id;

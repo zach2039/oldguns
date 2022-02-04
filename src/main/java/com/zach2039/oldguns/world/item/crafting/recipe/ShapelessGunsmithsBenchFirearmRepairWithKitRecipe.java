@@ -25,9 +25,9 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.registries.ForgeRegistryEntry;
 
-public class ShapelessGunsmithsBenchFirearmRepairRecipe extends ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
+public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 
-	public ShapelessGunsmithsBenchFirearmRepairRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
+	public ShapelessGunsmithsBenchFirearmRepairWithKitRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
 		super(id, group, result, ingredients);
 	}
 
@@ -99,21 +99,21 @@ public class ShapelessGunsmithsBenchFirearmRepairRecipe extends ShapelessGunsmit
 		return stack;
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchFirearmRepairRecipe> {
+	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchFirearmRepairWithKitRecipe> {
 		
 		@Override
-		public ShapelessGunsmithsBenchFirearmRepairRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
+		public ShapelessGunsmithsBenchFirearmRepairWithKitRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");
 			final NonNullList<Ingredient> ingredients = ModRecipeUtil.parseShapeless(json);
 			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 
-			ShapelessGunsmithsBenchFirearmRepairRecipe recipeFromJson = new ShapelessGunsmithsBenchFirearmRepairRecipe(recipeID, group, result, ingredients);
+			ShapelessGunsmithsBenchFirearmRepairWithKitRecipe recipeFromJson = new ShapelessGunsmithsBenchFirearmRepairWithKitRecipe(recipeID, group, result, ingredients);
 			
 			return recipeFromJson;
 		}
 
 		@Override
-		public ShapelessGunsmithsBenchFirearmRepairRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
+		public ShapelessGunsmithsBenchFirearmRepairWithKitRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
 			final String group = buffer.readUtf(Short.MAX_VALUE);
 			final int numIngredients = buffer.readVarInt();
 			final NonNullList<Ingredient> ingredients = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
@@ -124,11 +124,11 @@ public class ShapelessGunsmithsBenchFirearmRepairRecipe extends ShapelessGunsmit
 
 			final ItemStack result = buffer.readItem();
 
-			return new ShapelessGunsmithsBenchFirearmRepairRecipe(recipeID, group, result, ingredients);
+			return new ShapelessGunsmithsBenchFirearmRepairWithKitRecipe(recipeID, group, result, ingredients);
 		}
 
 		@Override
-		public void toNetwork(final FriendlyByteBuf buffer, final ShapelessGunsmithsBenchFirearmRepairRecipe recipe) {
+		public void toNetwork(final FriendlyByteBuf buffer, final ShapelessGunsmithsBenchFirearmRepairWithKitRecipe recipe) {
 			buffer.writeUtf(recipe.getGroup());
 			buffer.writeVarInt(recipe.getIngredients().size());
 
@@ -142,6 +142,6 @@ public class ShapelessGunsmithsBenchFirearmRepairRecipe extends ShapelessGunsmit
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModCrafting.Recipes.GUNSMITHS_BENCH_FIREARM_REPAIR_SHAPELESS.get();
+		return ModCrafting.Recipes.GUNSMITHS_BENCH_FIREARM_REPAIR_WITH_KIT_SHAPELESS.get();
 	}
 }

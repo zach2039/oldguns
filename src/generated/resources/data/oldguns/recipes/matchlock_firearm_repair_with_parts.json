@@ -1,0 +1,15 @@
+{
+  "type": "oldguns:gunsmiths_bench_firearm_repair_with_parts_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "oldguns:matchlock_firearm"
+    },
+    {
+      "item": "oldguns:matchlock_repair_parts"
+    }
+  ],
+  "result": {
+    "item": "minecraft:air"
+  }
+}

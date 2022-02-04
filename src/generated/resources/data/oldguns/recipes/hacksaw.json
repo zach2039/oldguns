@@ -1,0 +1,22 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "pattern": [
+    "SS ",
+    "IIS"
+  ],
+  "key": {
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "I": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "oldguns:hacksaw",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

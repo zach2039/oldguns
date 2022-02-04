@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "oldguns:wheellock_derringer",
+    "oldguns:wheellock_pistol",
+    "oldguns:wheellock_doublebarrel_pistol",
+    "oldguns:wheellock_blunderbuss_pistol",
+    "oldguns:wheellock_arquebus"
+  ]
+}

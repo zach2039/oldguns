@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "oldguns:matchlock_derringer",
+    "oldguns:matchlock_pistol",
+    "oldguns:matchlock_blunderbuss_pistol",
+    "oldguns:matchlock_arquebus"
+  ]
+}

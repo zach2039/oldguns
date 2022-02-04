@@ -16,10 +16,12 @@ import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
 import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.material.MaterialItem;
+import com.zach2039.oldguns.world.item.material.RepairPartItem;
 import com.zach2039.oldguns.world.item.part.ArtilleryPartItem;
 import com.zach2039.oldguns.world.item.part.FirearmPartItem;
 import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
 import com.zach2039.oldguns.world.item.tools.GunnersQuadrantItem;
+import com.zach2039.oldguns.world.item.tools.HacksawItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
@@ -242,18 +244,21 @@ public class ModItems {
 	public static final RegistryObject<MaterialItem> HIGH_GRADE_BLACK_POWDER = ITEMS.register("high_grade_black_powder", () -> new MaterialItem());
 	// Ammo Crafting
 	public static final RegistryObject<MaterialItem> WAXED_PAPER = ITEMS.register("waxed_paper", () -> new MaterialItem());
+	// Repair
+	public static final RegistryObject<RepairPartItem> MATCHLOCK_REPAIR_PARTS = ITEMS.register("matchlock_repair_parts", () -> new RepairPartItem());
+	public static final RegistryObject<RepairPartItem> WHEELLOCK_REPAIR_PARTS = ITEMS.register("wheellock_repair_parts", () -> new RepairPartItem());
+	public static final RegistryObject<RepairPartItem> FLINTLOCK_REPAIR_PARTS = ITEMS.register("flintlock_repair_parts", () -> new RepairPartItem());
+	public static final RegistryObject<RepairPartItem> CAPLOCK_REPAIR_PARTS = ITEMS.register("caplock_repair_parts", () -> new RepairPartItem());
 	
-	// Tools
+	// Crafting Tools
 	public static final RegistryObject<RepairKitItem> REPAIR_KIT = ITEMS.register("repair_kit", () -> new RepairKitItem());
-	
 	public static final RegistryObject<MortarAndPestleItem> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle", () -> new MortarAndPestleItem());
-	
+	public static final RegistryObject<HacksawItem> HACKSAW = ITEMS.register("hacksaw", () -> new HacksawItem());
 	public static final RegistryObject<DesignNotesItem> DESIGN_NOTES = ITEMS.register("design_notes", () -> new DesignNotesItem());
 	
+	// Artillery Tools
 	public static final RegistryObject<RamRodItem> RAM_ROD = ITEMS.register("ram_rod", () -> new RamRodItem());
-	
 	public static final RegistryObject<LongMatchItem> LONG_MATCH = ITEMS.register("long_match", () -> new LongMatchItem());
-	
 	public static final RegistryObject<GunnersQuadrantItem> GUNNERS_QUADRANT = ITEMS.register("gunners_quadrant", () -> new GunnersQuadrantItem());
 	
 	// Equipment 

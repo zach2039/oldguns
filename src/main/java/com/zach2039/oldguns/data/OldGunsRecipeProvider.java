@@ -5,8 +5,9 @@ import java.util.function.Consumer;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
-import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmRepairRecipeBuilder;
-import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairWithKitRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairWithPartsRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchHacksawRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaMortarAndPestleRecipeBuilder;
@@ -182,64 +183,60 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		}
 		
 		// High grade black powder from cake of high grade black powder
-		{
-			ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
-					.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
-					.requires(ModItems.MORTAR_AND_PESTLE.get())
-					.unlockedBy("has_high_grade_black_powder_cake", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get()))
-					.unlockedBy("has_mortar_and_pestle", has(ModItems.MORTAR_AND_PESTLE.get()))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_cake_vanilla"));
+		ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
+				.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
+				.requires(ModItems.MORTAR_AND_PESTLE.get())
+				.unlockedBy("has_high_grade_black_powder_cake", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get()))
+				.unlockedBy("has_mortar_and_pestle", has(ModItems.MORTAR_AND_PESTLE.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_cake_vanilla"));
 
-			ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
-					.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
-					.requires(ModItems.MORTAR_AND_PESTLE.get())
-					.unlockedBy("has_high_grade_black_powder_cake", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get()))
-					.unlockedBy("has_mortar_and_pestle", has(ModItems.MORTAR_AND_PESTLE.get()))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_cake"));
-		}
+		ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
+				.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
+				.requires(ModItems.MORTAR_AND_PESTLE.get())
+				.unlockedBy("has_high_grade_black_powder_cake", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get()))
+				.unlockedBy("has_mortar_and_pestle", has(ModItems.MORTAR_AND_PESTLE.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_cake"));
 		
 		// High grade black powder from block of high grade black powder
-		{
-			ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
-					.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
-					.unlockedBy("has_high_grade_black_powder_block", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_block_vanilla"));
+		ShapelessRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
+				.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
+				.unlockedBy("has_high_grade_black_powder_block", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_block_vanilla"));
 
-			ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
-					.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
-					.unlockedBy("has_high_grade_black_powder_block", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_block"));
-		}
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
+				.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
+				.unlockedBy("has_high_grade_black_powder_block", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_block"));
 		
 		// Medium grade black powder from block of medium grade black powder
-		ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
+		ShapelessRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.requires(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
 				.unlockedBy("has_medium_grade_black_powder_cake", has(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_from_block_vanilla"));
 
-		ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.requires(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
 				.unlockedBy("has_medium_grade_black_powder_cake", has(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_from_block"));
 		
 		// High grade black powder block from high grade black powder
-		ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessRecipeBuilder.shapeless(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_high_grade_black_powder", has(ModItems.HIGH_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_block_vanilla"));
 
-		ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_high_grade_black_powder", has(ModItems.HIGH_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_block"));
 		
 		// Medium grade black powder block from high grade black powder
-		ShapelessVanillaMortarAndPestleRecipeBuilder.shapeless(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessRecipeBuilder.shapeless(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_medium_grade_black_powder", has(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_block_vanilla"));
 
-		ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder.shapeless(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_medium_grade_black_powder", has(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_block"));
@@ -255,6 +252,52 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "waxed_paper"));
 		
+		// Create matchlock repair parts
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_MATCHLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_MATCHLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_MATCHLOCK_FIREARM);
+		// Create wheellock repair parts
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_WHEELLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_WHEELLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_WHEELLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_WHEELLOCK_FIREARM);
+		// Create flintlock repair parts
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_FLINTLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_FLINTLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_FLINTLOCK_FIREARM);
+		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_FLINTLOCK_FIREARM);
+		
+		// Firearm Repair
+		// With repair kit		
+		ShapelessGunsmithsBenchFirearmRepairWithKitRecipeBuilder.shapeless()
+				.requires(ModTags.Items.FIREARM)
+				.requires(ModItems.REPAIR_KIT.get())						
+				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+				.unlockedBy("has_repair_kit", has(ModItems.REPAIR_KIT.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "firearm_repair_with_kit"));
+		
+		// With repair parts
+		ShapelessGunsmithsBenchFirearmRepairWithPartsRecipeBuilder.shapeless()
+				.requires(ModTags.Items.MATCHLOCK_FIREARM)
+				.requires(ModItems.MATCHLOCK_REPAIR_PARTS.get())						
+				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+				.unlockedBy("has_parts", has(ModItems.MATCHLOCK_REPAIR_PARTS.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "matchlock_firearm_repair_with_parts"));
+		
+		ShapelessGunsmithsBenchFirearmRepairWithPartsRecipeBuilder.shapeless()
+				.requires(ModTags.Items.WHEELLOCK_FIREARM)
+				.requires(ModItems.WHEELLOCK_REPAIR_PARTS.get())						
+				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+				.unlockedBy("has_parts", has(ModItems.WHEELLOCK_REPAIR_PARTS.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "wheellock_firearm_repair_with_parts"));
+			
+		ShapelessGunsmithsBenchFirearmRepairWithPartsRecipeBuilder.shapeless()
+				.requires(ModTags.Items.FLINTLOCK_FIREARM)
+				.requires(ModItems.FLINTLOCK_REPAIR_PARTS.get())						
+				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+				.unlockedBy("has_parts", has(ModItems.FLINTLOCK_REPAIR_PARTS.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_firearm_repair_with_parts"));
+		
 		// Workshops 
 		// Create gunsmiths bench
 		ShapedRecipeBuilder.shaped(ModBlocks.GUNSMITHS_BENCH.get())
@@ -266,21 +309,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.define('G', ModTags.Items.ANY_GUNPOWDER)	
 				.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "gunsmiths_bench"));
-			
-		// Firearm Repair
-		ShapelessFirearmRepairRecipeBuilder.shapeless()
-				.requires(ModTags.Items.FIREARM)
-				.requires(ModItems.REPAIR_KIT.get())						
-				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
-				.unlockedBy("has_repair_kit", has(ModItems.REPAIR_KIT.get()))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "firearm_repair_vanilla"));
-		
-		ShapelessGunsmithsBenchFirearmRepairRecipeBuilder.shapeless()
-				.requires(ModTags.Items.FIREARM)
-				.requires(ModItems.REPAIR_KIT.get())						
-				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
-				.unlockedBy("has_repair_kit", has(ModItems.REPAIR_KIT.get()))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "firearm_repair"));
 		
 		// Firearm Reloading
 		// Matchlocks
@@ -1969,67 +1997,81 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		
 		// Tools
 		// Create repair kit
-		{
-			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.REPAIR_KIT.get())
-					.requires(Tags.Items.SLIMEBALLS)
-					.requires(ItemTags.WOOL)
-					.requires(Tags.Items.RODS_WOODEN)
-					.requires(Tags.Items.LEATHER)
-					.requires(ItemTags.LOGS)
-					.requires(Items.LEVER)
-					.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "repair_kit"));
-		}
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.REPAIR_KIT.get())
+				.requires(Tags.Items.SLIMEBALLS)
+				.requires(ItemTags.WOOL)
+				.requires(Tags.Items.RODS_WOODEN)
+				.requires(Tags.Items.LEATHER)
+				.requires(ItemTags.LOGS)
+				.requires(Items.LEVER)
+				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "repair_kit"));
 		
 		// Create mortar and pestle
-		{
-			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MORTAR_AND_PESTLE.get())
-					.pattern(" L ")
-					.pattern("G G")
-					.pattern(" G ")
-					.define('L', Items.LEVER)
-					.define('G', Items.POLISHED_GRANITE)
-					.unlockedBy("has_lever", has(Items.LEVER))
-					.unlockedBy("has_polished_granite", has(Items.POLISHED_GRANITE))
-					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "mortar_and_pestle"));
-		}
+		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MORTAR_AND_PESTLE.get())
+				.pattern(" L ")
+				.pattern("G G")
+				.pattern(" G ")
+				.define('L', Items.LEVER)
+				.define('G', Items.POLISHED_GRANITE)
+				.unlockedBy("has_lever", has(Items.LEVER))
+				.unlockedBy("has_polished_granite", has(Items.POLISHED_GRANITE))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "mortar_and_pestle"));
+		
+		// Create hacksaw
+		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.HACKSAW.get())
+				.pattern("SS ")
+				.pattern("IIS")
+				.define('S', Tags.Items.RODS_WOODEN)
+				.define('I', Tags.Items.INGOTS_IRON)
+				.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+				.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))				
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "hacksaw"));
 		
 	}
 	
 	private static void shapelessMuzzleloaderSingleReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, Tag<Item> inputAmmo, Tag<Item> inputPowder, int powderAmount) {
 		ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm)
-			.requires(firearm)
-			.requires(inputAmmo)
-			.requires(inputPowder, powderAmount)
-			.unlockedBy("has_firearm", has(firearm))
-			.unlockedBy("has_ammo", has(inputAmmo))
-			.unlockedBy("has_powder", has(inputPowder))
-			.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputAmmo.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.requires(firearm)
+				.requires(inputAmmo)
+				.requires(inputPowder, powderAmount)
+				.unlockedBy("has_firearm", has(firearm))
+				.unlockedBy("has_ammo", has(inputAmmo))
+				.unlockedBy("has_powder", has(inputPowder))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputAmmo.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+	}
+	
+	private static void shapelessFirearmSalvageRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputPart, int partAmount, Tag<Item> inputFirearm) {
+		ShapelessGunsmithsBenchHacksawRecipeBuilder.shapeless(outputPart, partAmount)
+				.requires(inputFirearm)
+				.requires(ModItems.HACKSAW.get())
+				.unlockedBy("has_firearm", has(inputFirearm))
+				.unlockedBy("has_hacksaw", has(ModItems.HACKSAW.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, inputFirearm.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_salvage"));
 	}
 	
 	private static void shapelessMuzzleloaderSingleCartridgeReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, Tag<Item> inputCartridge) {
 		ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm)
-			.requires(firearm)
-			.requires(inputCartridge)
-			.unlockedBy("has_firearm", has(firearm))
-			.unlockedBy("has_cartridge", has(inputCartridge))
-			.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputCartridge.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.requires(firearm)
+				.requires(inputCartridge)
+				.unlockedBy("has_firearm", has(firearm))
+				.unlockedBy("has_cartridge", has(inputCartridge))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputCartridge.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 	}
-	
 	
 	private static void shapelessPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, Tag<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
 		ShapelessGunsmithsBenchRecipeBuilder.shapeless(outputCartridge)
-			.requires(inputAmmo)		
-			.requires(Tags.Items.STRING)
-			.requires(ModItems.WAXED_PAPER.get())
-			.requires(inputPowder, powderAmount)					
-			.unlockedBy("has_ammo", has(inputAmmo))
-			.unlockedBy("has_string", has(Tags.Items.STRING))
-			.unlockedBy("has_waxed_paper", has(ModItems.WAXED_PAPER.get()))
-			.unlockedBy("has_black_powder", has(inputPowder))
-			.condition(ammoCraftCondition)
-			.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))
-			.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, outputCartridge.getRegistryName().getPath()));
+				.requires(inputAmmo)		
+				.requires(Tags.Items.STRING)
+				.requires(ModItems.WAXED_PAPER.get())
+				.requires(inputPowder, powderAmount)					
+				.unlockedBy("has_ammo", has(inputAmmo))
+				.unlockedBy("has_string", has(Tags.Items.STRING))
+				.unlockedBy("has_waxed_paper", has(ModItems.WAXED_PAPER.get()))
+				.unlockedBy("has_black_powder", has(inputPowder))
+				.condition(ammoCraftCondition)
+				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, outputCartridge.getRegistryName().getPath()));
 	}
 	
 	@Override
