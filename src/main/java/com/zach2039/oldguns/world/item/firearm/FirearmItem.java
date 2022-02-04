@@ -350,8 +350,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	@SuppressWarnings("unused")
 	@Override
 	public void releaseUsing(ItemStack stackIn, Level worldIn, LivingEntity livingEntityIn, int ticksRemaining) {
-		if (livingEntityIn instanceof Player)
-		{
+		if (livingEntityIn instanceof Player) {
 			Player entityplayer = (Player)livingEntityIn;
 			//boolean flag = entityplayer.capabilities.isCreativeMode || EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0;
 			ItemStack ammoStack = FirearmNBTHelper.peekNBTTagAmmo(stackIn);
@@ -428,26 +427,22 @@ public class FirearmItem extends BowItem implements Firearm {
 			float snapshotDevMulti = getSnapshotDeviationMultiplier(ticksUsed);
 			float mountedDevMulti = getMountedDeviationMultiplier(livingEntityIn);
 
-			if (!ammoStack.isEmpty())
-			{
+			if (!ammoStack.isEmpty()) {
 
 				boolean flag1 = entityplayer.isCreative();
 
-				if (!worldIn.isClientSide())
-				{
+				if (!worldIn.isClientSide()) {
 					/* Calculate stuff based on firearm condition. */
 					boolean failure = checkConditionForEffect(worldIn, entityplayer, stackIn);
 
-					OldGuns.LOGGER.info(snapshotDevMulti);
-					OldGuns.LOGGER.info(mountedDevMulti);
+					OldGuns.printDebug("snapshotDevMulti: " + snapshotDevMulti);
+					OldGuns.printDebug("mountedDevMulti: " + mountedDevMulti);
 
 					/* If firearm broke or misfired, do nothing. */
-					if (failure)
-					{
+					if (failure) {
 						/* Refresh condition. */
 						FirearmNBTHelper.refreshFirearmCondition(stackIn);
-						if (!worldIn.isClientSide())
-						{
+						if (!worldIn.isClientSide()) {
 							ServerPlayer playerMP = (ServerPlayer) entityplayer;
 							List<Pair<EquipmentSlot, ItemStack>> slots = new ArrayList<Pair<EquipmentSlot, ItemStack>>();
 							slots.add(new Pair<EquipmentSlot, ItemStack>((entityplayer.getUsedItemHand() == InteractionHand.MAIN_HAND) ? EquipmentSlot.MAINHAND : EquipmentSlot.OFFHAND, stackIn));
@@ -459,8 +454,6 @@ public class FirearmItem extends BowItem implements Firearm {
 
 					fireProjectiles(worldIn, entityplayer, stackIn, ammoStack, snapshotDevMulti * mountedDevMulti);
 				}
-
-				
 
 				entityplayer.awardStat(Stats.ITEM_USED.get(this));
 			}

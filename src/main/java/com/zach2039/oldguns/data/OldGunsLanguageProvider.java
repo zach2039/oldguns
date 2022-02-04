@@ -367,6 +367,12 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addPatchouliBookPage("firearms.general2", OldGunsCompendiumLang.Firearms.General.PAGE2);
 		addPatchouliBookPage("firearms.general3", OldGunsCompendiumLang.Firearms.General.PAGE3);
 		
+		addPatchouliBookEntry("firearms.paper_cartridges", OldGunsCompendiumLang.Firearms.PaperCartridges.ENTRY);
+		addPatchouliBookPage("firearms.paper_cartridges0", OldGunsCompendiumLang.Firearms.PaperCartridges.PAGE0);
+		addPatchouliBookLang("firearms.stone_paper_cartridge", OldGunsCompendiumLang.Firearms.PaperCartridges.STONE_PAPER_CARTRIDGE);
+		addPatchouliBookLang("firearms.iron_paper_cartridge", OldGunsCompendiumLang.Firearms.PaperCartridges.IRON_PAPER_CARTRIDGE);
+		addPatchouliBookLang("firearms.lead_paper_cartridge", OldGunsCompendiumLang.Firearms.PaperCartridges.LEAD_PAPER_CARTRIDGE);
+		
 		addPatchouliBookEntry("black_powder_production.low_grade", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.ENTRY);
 		addPatchouliBookPage("black_powder_production.low_grade0", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.PAGE0);
 		addPatchouliBookPage("black_powder_production.low_grade1", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.PAGE1);

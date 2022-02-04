@@ -104,8 +104,19 @@ public class OldGunsCompendiumLang {
 					+ "black powder.";
 			
 			public static final String PAGE3 = "Flintlock weapons can reload with medium or high grade black powder. $(br)Caplock weapons can reload with high grade "
-					+ "black powder.";
+					+ "black powder.$(br)$(br)$(l:firearms/paper_cartridges)Paper Cartridges$(/l) can also be used instead of loose powder and shot.";
+		}
+		
+		public static class PaperCartridges {
 			
+			public static final String ENTRY = "Paper Cartridges";
+			
+			public static final String STONE_PAPER_CARTRIDGE = "Stone Paper Cartridge";
+			public static final String IRON_PAPER_CARTRIDGE = "Iron Paper Cartridge";
+			public static final String LEAD_PAPER_CARTRIDGE = "Lead Paper Cartridge";
+			
+			public static final String PAGE0 = "Paper Cartridges are prepared shot and powder enclosed within a waxed paper casing. Using paper cartridges "
+					+ "allows more efficient ammo storage and faster reloading of muzzleloaders.";
 		}
 		
 		public static class Recipes {
