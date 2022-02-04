@@ -1,0 +1,6 @@
+{
+	"name": "oldguns.category.artillery",
+	"description": "oldguns.description.artillery",
+	"icon": "oldguns:medium_naval_cannon",
+	"sortnum": 2
+}

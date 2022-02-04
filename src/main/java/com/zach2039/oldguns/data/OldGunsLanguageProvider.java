@@ -336,6 +336,9 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addPatchouliBookCategory("firearms", OldGunsCompendiumLang.Firearms.NAME);
 		addPatchouliBookCategoryDescription("firearms", OldGunsCompendiumLang.Firearms.DESCRIPTION);
 		
+		addPatchouliBookCategory("artillery", OldGunsCompendiumLang.Artillery.NAME);
+		addPatchouliBookCategoryDescription("artillery", OldGunsCompendiumLang.Artillery.DESCRIPTION);
+		
 		addPatchouliBookCategory("black_powder_production", OldGunsCompendiumLang.BlackPowderProduction.NAME);
 		addPatchouliBookCategoryDescription("black_powder_production", OldGunsCompendiumLang.BlackPowderProduction.DESCRIPTION);
 		
@@ -372,6 +375,29 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addPatchouliBookLang("firearms.stone_paper_cartridge", OldGunsCompendiumLang.Firearms.PaperCartridges.STONE_PAPER_CARTRIDGE);
 		addPatchouliBookLang("firearms.iron_paper_cartridge", OldGunsCompendiumLang.Firearms.PaperCartridges.IRON_PAPER_CARTRIDGE);
 		addPatchouliBookLang("firearms.lead_paper_cartridge", OldGunsCompendiumLang.Firearms.PaperCartridges.LEAD_PAPER_CARTRIDGE);
+		
+		addPatchouliBookEntry("artillery.general", OldGunsCompendiumLang.Artillery.General.ENTRY);
+		addPatchouliBookPage("artillery.general0", OldGunsCompendiumLang.Artillery.General.PAGE0);
+		
+		addPatchouliBookEntry("artillery.artillery_tools", OldGunsCompendiumLang.Artillery.ArtilleryTools.ENTRY);
+		addPatchouliBookLang("artillery.powder_charge", OldGunsCompendiumLang.Artillery.ArtilleryTools.POWDER_CHARGE);
+		addPatchouliBookPage("artillery.artillery_tools0", OldGunsCompendiumLang.Artillery.ArtilleryTools.PAGE0);
+		addPatchouliBookPage("artillery.artillery_tools1", OldGunsCompendiumLang.Artillery.ArtilleryTools.PAGE1);
+		addPatchouliBookPage("artillery.artillery_tools2", OldGunsCompendiumLang.Artillery.ArtilleryTools.PAGE2);
+		addPatchouliBookPage("artillery.artillery_tools3", OldGunsCompendiumLang.Artillery.ArtilleryTools.PAGE3);
+		addPatchouliBookPage("artillery.artillery_tools4", OldGunsCompendiumLang.Artillery.ArtilleryTools.PAGE4);
+		
+		addPatchouliBookEntry("artillery.loading_and_firing", OldGunsCompendiumLang.Artillery.LoadingAndFiring.ENTRY);
+		addPatchouliBookPage("artillery.loading_and_firing0", OldGunsCompendiumLang.Artillery.LoadingAndFiring.PAGE0);
+		
+		addPatchouliBookEntry("artillery.ammo_types", OldGunsCompendiumLang.Artillery.AmmoTypes.ENTRY);
+		addPatchouliBookLang("artillery.cannonball", OldGunsCompendiumLang.Artillery.AmmoTypes.CANNONBALL);
+		addPatchouliBookLang("artillery.grapeshot", OldGunsCompendiumLang.Artillery.AmmoTypes.GRAPESHOT);
+		addPatchouliBookLang("artillery.canister_shot", OldGunsCompendiumLang.Artillery.AmmoTypes.CANISTER_SHOT);
+		addPatchouliBookPage("artillery.ammo_types0", OldGunsCompendiumLang.Artillery.AmmoTypes.PAGE0);
+		addPatchouliBookPage("artillery.ammo_types1", OldGunsCompendiumLang.Artillery.AmmoTypes.PAGE1);
+		addPatchouliBookPage("artillery.ammo_types2", OldGunsCompendiumLang.Artillery.AmmoTypes.PAGE2);
+		addPatchouliBookPage("artillery.ammo_types3", OldGunsCompendiumLang.Artillery.AmmoTypes.PAGE3);
 		
 		addPatchouliBookEntry("black_powder_production.low_grade", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.ENTRY);
 		addPatchouliBookPage("black_powder_production.low_grade0", OldGunsCompendiumLang.BlackPowderProduction.LowGrade.PAGE0);

@@ -1,0 +1,12 @@
+{
+	"name": "oldguns.entry.artillery.general",
+	"category": "oldguns:artillery",
+	"icon": "oldguns:medium_naval_cannon",
+	"sortnum": 1,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.artillery.general0"
+		}
+	]
+}

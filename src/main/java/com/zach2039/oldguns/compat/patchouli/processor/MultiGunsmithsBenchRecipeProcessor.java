@@ -103,6 +103,8 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 					if (recipes instanceof ShapedGunsmithsBenchRecipe shaped) {
 						if (shaped.getWidth() < shapedX + 1) {
 							ingredients.add(Ingredient.EMPTY);
+						} else if (shaped.getHeight() < shapedY + 1) {
+							ingredients.add(Ingredient.EMPTY);
 						} else {
 							int realIndex = index - (shapedY * (3 - shaped.getWidth()));
 							NonNullList<Ingredient> list = recipe.getIngredients();

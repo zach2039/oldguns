@@ -1,0 +1,12 @@
+{
+	"name": "oldguns.entry.artillery.loading_and_firing",
+	"category": "oldguns:artillery",
+	"icon": "oldguns:ram_rod",
+	"sortnum": 3,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.artillery.loading_and_firing0"
+		}
+	]
+}

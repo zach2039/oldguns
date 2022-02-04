@@ -1,0 +1,36 @@
+{
+	"name": "oldguns.entry.artillery.ammo_types",
+	"category": "oldguns:artillery",
+	"icon": "oldguns:medium_iron_cannonball",
+	"sortnum": 4,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.artillery.ammo_types0"
+		},
+		{
+			"type": "oldguns:multi_gunsmiths_bench",
+			"recipes": [
+				"oldguns:medium_iron_cannonball"
+			],
+			"heading": "oldguns.lang.artillery.cannonball",
+			"text": "oldguns.page.artillery.ammo_types1"
+		},
+		{
+			"type": "oldguns:multi_gunsmiths_bench",
+			"recipes": [
+				"oldguns:medium_iron_grapeshot"
+			],
+			"heading": "oldguns.lang.artillery.grapeshot",
+			"text": "oldguns.page.artillery.ammo_types2"
+		},
+		{
+			"type": "oldguns:multi_gunsmiths_bench",
+			"recipes": [
+				"oldguns:medium_iron_canister_shot"
+			],
+			"heading": "oldguns.lang.artillery.canister_shot",
+			"text": "oldguns.page.artillery.ammo_types3"
+		}
+	]
+}

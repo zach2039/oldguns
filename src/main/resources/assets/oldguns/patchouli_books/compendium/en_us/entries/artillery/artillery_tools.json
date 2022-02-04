@@ -1,0 +1,37 @@
+{
+	"name": "oldguns.entry.artillery.artillery_tools",
+	"category": "oldguns:artillery",
+	"icon": "oldguns:gunners_quadrant",
+	"sortnum": 2,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.artillery.artillery_tools0"
+		},
+		{
+			"type": "oldguns:multi_gunsmiths_bench",
+			"recipes": [
+				"oldguns:small_powder_charge",
+				"oldguns:medium_powder_charge",
+				"oldguns:large_powder_charge"
+			],
+			"heading": "oldguns.lang.artillery.powder_charge",
+			"text": "oldguns.page.artillery.artillery_tools1"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:ram_rod",
+			"text": "oldguns.page.artillery.artillery_tools2"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:long_match",
+			"text": "oldguns.page.artillery.artillery_tools3"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:gunners_quadrant",
+			"text": "oldguns.page.artillery.artillery_tools4"
+		}
+	]
+}

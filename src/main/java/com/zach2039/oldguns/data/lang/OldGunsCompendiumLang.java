@@ -126,6 +126,84 @@ public class OldGunsCompendiumLang {
 		}
 	}
 	
+
+	public static class Artillery {
+
+		public static final String NAME = "Artillery";
+		
+		public static final String DESCRIPTION = "Details on siege weapons that launch destructive projectiles.";
+		
+		public static class General {
+			
+			public static final String ENTRY = "General Information";
+			
+			public static final String PAGE0 = "Artillery pieces, whether they be cannons, field guns, rockets, or other types, are used to do "
+					+ "strong damage to structures and mobs.$(br)$(br)"
+					+ "Artillery is normally expensive to create and load when compared to firearms, but provide more utility in terms of projectile, like "
+					+ "Canister Shot, Grapeshot, and other types.";
+		}
+		
+		public static class ArtilleryTools {
+			
+			public static final String ENTRY = "Artillery Tools";
+			
+			public static final String POWDER_CHARGE = "Powder Charge";
+			
+			public static final String PAGE0 = "Operating artillery requires various tools to prep ammo and charges during loading.";
+			
+			public static final String PAGE1 = "The Powder Charge contains propellant used to launch any loaded ammunition.$(br)$(br)"
+					+ "Using smaller or larger charges will decrease or increase the launch velocity of projectiles, respectively.";
+			
+			public static final String PAGE2 = "The Ram Rod is used to push charges or ammunition down the barrel of an artillery piece "
+					+ "after it has been placed inside.";
+			
+			public static final String PAGE3 = "The Long Match is used to fire an artillery piece after both the charge and ammuntion has been "
+					+ "loaded and rammed.";
+			
+			public static final String PAGE4 = "The Gunner's Quadrant can be used via right-clicking the artillery piece to display "
+					+ "information about contents and loading state.$(br)"
+					+ "When a artillery piece is loaded, the Gunner's Quadrant can also give a trajectory preview when held.";
+		}
+		
+		public static class LoadingAndFiring {
+			
+			public static final String ENTRY = "Loading and Firing";
+			
+			public static final String PAGE0 = "To load a conventional artillery piece, like a cannon:$(br)$(br)"
+					+ "1) Right-click with a Powder Charge.$(br)$(br)"
+					+ "2) Right-click with a Ram Rod.$(br)$(br)"
+					+ "3) Right-click with a projectile, like a cannonball.$(br)$(br)"
+					+ "4) Right-click with a Long Match to fire.$(br)$(br)";
+			
+		}
+		
+		public static class AmmoTypes {
+			
+			public static final String ENTRY = "Ammo Types";
+			
+			public static final String CANNONBALL = "Cannonball";
+			public static final String GRAPESHOT = "Grapeshot";
+			public static final String CANISTER_SHOT = "Canister Shot";
+			
+			public static final String PAGE0 = "Artillery can be loaded with varying types of ammo, providing different projectile effects.$(br)$(br)"
+					+ "Some types available are listed in the following pages.";
+			
+			public static final String PAGE1 = "Cannonballs are the most simple of projectiles. It breaks blocks on impact and does major damage "
+					+ "to any mobs hit.";
+			
+			public static final String PAGE2 = "Grapeshot functions as a short-range anti-personnel shot, similar to a blunderbuss blast.";
+			
+			public static final String PAGE3 = "Canister Shot is a fused explosive shot that bursts after a short time, showering the battlefield with "
+					+ "small projectiles.";
+		}
+		
+		public static class Recipes {
+			
+			public static final String ENTRY = "Recipes";
+			
+		}
+	}
+	
 	public static class BlackPowderProduction {
 
 		public static final String NAME = "Black Powder Production";
