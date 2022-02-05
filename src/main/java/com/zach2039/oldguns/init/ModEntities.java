@@ -7,6 +7,7 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.GenericMobSettings;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.entity.monster.HarquebusierSkeleton;
 import com.zach2039.oldguns.world.entity.monster.MusketeerSkeleton;
 
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +15,10 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraft.world.entity.SpawnPlacements;
+import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.biome.MobSpawnSettings;
+import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -51,6 +55,11 @@ public class ModEntities {
 	// Mobs
 	public static final RegistryObject<EntityType<MusketeerSkeleton>> MUSKETEER_SKELETON = registerEntityType("musketeer_skeleton",
 			() -> EntityType.Builder.of(MusketeerSkeleton::new, MobCategory.MONSTER)
+			.sized(0.6F, 1.99F).clientTrackingRange(8)
+			);
+	
+	public static final RegistryObject<EntityType<HarquebusierSkeleton>> HARQUEBUSIER_SKELETON = registerEntityType("harquebusier_skeleton",
+			() -> EntityType.Builder.of(HarquebusierSkeleton::new, MobCategory.MONSTER)
 			.sized(0.6F, 1.99F).clientTrackingRange(8)
 			);
 
@@ -91,6 +100,7 @@ public class ModEntities {
 		@SubscribeEvent
 		public static void registerAttributes(final EntityAttributeCreationEvent event) {
 			event.put(MUSKETEER_SKELETON.get(), MusketeerSkeleton.registerAttributes().build());
+			event.put(HARQUEBUSIER_SKELETON.get(), HarquebusierSkeleton.registerAttributes().build());
 		}
 	}
 
@@ -98,6 +108,7 @@ public class ModEntities {
 	public static class SpawnHandler {
 		
 		private static final OldGunsConfig.GenericMobSettings musketeerSkeletonSettings = OldGunsConfig.SERVER.mobSettings.musketeerSkeleton;
+		private static final OldGunsConfig.GenericMobSettings harquebusierSkeletonSettings = OldGunsConfig.SERVER.mobSettings.harquebusierSkeleton;
 		
 		@SubscribeEvent(priority = EventPriority.LOW)
 		public static void registerEntitySpawns(final BiomeLoadingEvent event) {
@@ -112,6 +123,15 @@ public class ModEntities {
 						musketeerSkeletonSettings.maxCount.get(),
 						MobCategory.MONSTER);
 			}
+			
+			if (SpawnHandler.canSpawnInBiomeOrBiomeCategory(harquebusierSkeletonSettings, event)) {
+				addSpawn(event, HARQUEBUSIER_SKELETON.get(), 
+						harquebusierSkeletonSettings.spawnWeight.get(),
+						harquebusierSkeletonSettings.minCount.get(), 
+						harquebusierSkeletonSettings.maxCount.get(),
+						MobCategory.MONSTER);
+			}
+			
 		}
 
 		public static boolean canSpawnInBiomeOrBiomeCategory(GenericMobSettings settings, BiomeLoadingEvent event) {

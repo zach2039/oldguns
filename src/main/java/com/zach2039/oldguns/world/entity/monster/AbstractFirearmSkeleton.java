@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.world.entity.monster;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.entity.ai.goal.RangedFirearmAttackGoal;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
@@ -31,18 +31,10 @@ import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
 
 public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
-
-	private static final double meleeRadius = 3D;
 	
-	private final RangedFirearmAttackGoal<AbstractSkeleton> firearmAttackGoal = new RangedFirearmAttackGoal<>(this, 0.05D, 140, 40.0F) {
+	private final RangedFirearmAttackGoal<AbstractSkeleton> firearmAttackGoal = new RangedFirearmAttackGoal<>(this, 1.0D, OldGunsConfig.SERVER.mobSettings.firearmSkeletonShotTime.get(), 15.0F) {
 		@Override
-		public boolean canUse() {
-			if (this.mob.getTarget() == null)
-				return false;
-			
-			if ( this.mob.distanceToSqr(this.mob.getTarget()) <= (double)(meleeRadius * meleeRadius))
-				return false;
-			
+		public boolean canUse() {			
 			ItemStack firearmStack = this.mob.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this.mob, item -> item instanceof FirearmItem));
 			if (firearmStack.getDamageValue() >= firearmStack.getMaxDamage())
 				return false;
@@ -63,25 +55,11 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 			super.start();
 			AbstractFirearmSkeleton.this.setAggressive(true);
 		}
-		
-		@Override
-		public boolean canUse() {
-			if (this.mob.getTarget() == null)
-				return false;
-					
-			ItemStack firearmStack = this.mob.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this.mob, item -> item instanceof FirearmItem));
-			if (firearmStack.getDamageValue() >= firearmStack.getMaxDamage())
-				return super.canUse();
-			
-			if (this.mob.distanceToSqr(this.mob.getTarget()) > (double)(meleeRadius * meleeRadius))
-				return false;
-			
-			return super.canUse();
-		}
 	};
 
 	protected AbstractFirearmSkeleton(EntityType<? extends AbstractFirearmSkeleton> type, Level level) {
 		super(type, level);
+		this.xpReward = 7;
 	}
 
 	@Override
@@ -118,7 +96,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 	public boolean hurt(DamageSource damagesource, float amount) {
 
 		// Make firearm skeletons reset shot time when hit
-		if (this.level != null && !this.level.isClientSide) {
+		if (this.level != null && !this.level.isClientSide && OldGunsConfig.SERVER.mobSettings.resetFirearmSkeletonShotTimerOnHit.get()) {
 			this.firearmAttackGoal.interruptFiring();
 		}
 
@@ -150,7 +128,6 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 		this.goalSelector.addGoal(2, new RestrictSunGoal(this));
 		this.goalSelector.addGoal(3, new FleeSunGoal(this, 1.0D));
 		this.goalSelector.addGoal(3, new AvoidEntityGoal<>(this, Wolf.class, 6.0F, 1.0D, 1.2D));
-		//this.goalSelector.addGoal(3, new TryAvoidWaterGoal(this, 16.0D));
 		this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
 		this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
 		this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
@@ -167,15 +144,16 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 			this.goalSelector.removeGoal(this.firearmAttackGoal);
 			ItemStack itemstack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem));
 			if ((itemstack.getItem() instanceof FirearmItem) && (itemstack.getMaxDamage() != itemstack.getDamageValue())) {
-				int i = 140;
+				int i = OldGunsConfig.SERVER.mobSettings.firearmSkeletonShotTime.get();
 				if (this.level.getDifficulty() != Difficulty.HARD) {
-					i = 100;
+					i = OldGunsConfig.SERVER.mobSettings.firearmSkeletonShotTimeHard.get();
 				}
 
 				this.firearmAttackGoal.setMinAttackInterval(i);
 				this.firearmAttackGoal.interruptFiring();
 				this.goalSelector.addGoal(4, this.firearmAttackGoal);
-				this.goalSelector.addGoal(4, this.meleeAttackGoal);
+			} else {
+				super.reassessWeaponGoal();
 			}
 		}
 	}
@@ -194,7 +172,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 				return;
 			}
 
-			firearmItem.fireProjectiles(this.level, this, firearmStack, ammoStack, 3.0f);
+			firearmItem.fireProjectiles(this.level, this, firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmSkeletonBaseProjectileDeviation.get().floatValue());
 		}
 	}
 

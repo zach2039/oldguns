@@ -19,6 +19,7 @@ import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
 import com.zach2039.oldguns.init.ModPotions;
 import com.zach2039.oldguns.init.ModSoundEvents;
+import com.zach2039.oldguns.init.ModSpawnPlacements;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -70,6 +71,7 @@ public class OldGuns
 			ModCrafting.Brewing.register();
 			ModLootTables.registerLootTables();
 			ModLootConditionTypes.register();
+			ModSpawnPlacements.register();
 		});
 	}
 

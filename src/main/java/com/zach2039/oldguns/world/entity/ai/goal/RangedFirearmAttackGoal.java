@@ -97,7 +97,7 @@ public class RangedFirearmAttackGoal<T extends net.minecraft.world.entity.Mob & 
 				this.mob.getNavigation().stop();
 				++this.strafingTime;
 			} else {
-				this.mob.getNavigation().moveTo(livingentity, this.speedModifier);
+				this.mob.getNavigation().moveTo(livingentity, (this.mob.isPassenger()) ? this.speedModifier * 2: this.speedModifier);
 				this.strafingTime = -1;
 			}
 

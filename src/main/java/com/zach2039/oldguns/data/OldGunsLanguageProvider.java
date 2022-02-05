@@ -277,6 +277,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.HORSEMANS_POT_HELM, "Horseman's Pot Helm");
 		
 		addItem(ModItems.MUSKETEER_SKELETON_SPAWN_EGG, "Musketeer Skeleton Spawn Egg");
+		addItem(ModItems.HARQUEBUSIER_SKELETON_SPAWN_EGG, "Harquebusier Skeleton Spawn Egg");
 		
 		add("item.oldguns.compendium", "Old Guns Compendium");
 	}
@@ -288,6 +289,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	private void addEntities() {
 		addEntityType(ModEntities.BULLET_PROJECTILE, "Projectile");
 		addEntityType(ModEntities.MUSKETEER_SKELETON, "Musketeer Skeleton");
+		addEntityType(ModEntities.HARQUEBUSIER_SKELETON, "Harquebusier Skeleton");
 	}
 
 	private void addPotions() {

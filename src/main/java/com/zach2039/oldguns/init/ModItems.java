@@ -267,6 +267,7 @@ public class ModItems {
 	
 	// Spawn Eggs
 	public static final RegistryObject<ForgeSpawnEggItem> MUSKETEER_SKELETON_SPAWN_EGG = ITEMS.register("musketeer_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MUSKETEER_SKELETON, 0x636566, 0, defaultItemProperties()));
+	public static final RegistryObject<ForgeSpawnEggItem> HARQUEBUSIER_SKELETON_SPAWN_EGG = ITEMS.register("harquebusier_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HARQUEBUSIER_SKELETON, 0x282931, 0, defaultItemProperties()));
 	
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.
