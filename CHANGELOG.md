@@ -1,5 +1,18 @@
 #### v1.18.1-3.2.0-24
 
+- Fix harquebusier skeleton spawning underground
+- Edit firearm skeleton goals
+- Add guidebook entries for artillery
+- Fix gunsmiths bench gui texture
+- Add guide book pages for paper cartridges
+- Add and edit horsemans pot helm texture
+- Add repair parts and firearm salvage
+- Add paper cartridges and refactor recipe generation
+- Fix lead ingot dupe recipe
+- Fix lead nuggets recipe and add Horseman's Pot Helm
+- Add debuff to accuracy while mounted
+- Fix attribute applying to projectiles from equipment
+- Add crafttweaker to build.gradle
 - Refactor tooltips and AI
 - Fix double death message for armor bypass damage
 - Fix author names
