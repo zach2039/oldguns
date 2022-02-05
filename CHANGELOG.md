@@ -1,3 +1,7 @@
+#### v1.18.1-3.2.1-25
+
+- Fix #14: Mortar and Pestle consumed when crafting in vanilla crafting bench
+
 #### v1.18.1-3.2.0-24
 
 - Fix harquebusier skeleton spawning underground
