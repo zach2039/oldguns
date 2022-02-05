@@ -106,6 +106,6 @@ public class ShapelessGunsmithsBenchHacksawRecipe extends ShapelessGunsmithsBenc
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModCrafting.Recipes.GUNSMITHS_BENCH_MORTAR_AND_PESTLE_SHAPELESS.get();
+		return ModCrafting.Recipes.GUNSMITHS_BENCH_HACKSAW_SHAPELESS.get();
 	}
 }
