@@ -1,5 +1,6 @@
 package com.zach2039.oldguns.world.entity.monster;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.entity.ai.goal.RangedFirearmAttackGoal;
@@ -119,7 +120,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 				}
 			}
 		}
-
+		
 		super.aiStep();
 	}
 
@@ -138,7 +139,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 	}
 
 	@Override
-	public void reassessWeaponGoal() {
+	public void reassessWeaponGoal() {		
 		if (this.level != null && !this.level.isClientSide) {
 			this.goalSelector.removeGoal(this.meleeAttackGoal);
 			this.goalSelector.removeGoal(this.firearmAttackGoal);

@@ -2,6 +2,7 @@ package com.zach2039.oldguns.world.entity.monster;
 
 import javax.annotation.Nullable;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 
