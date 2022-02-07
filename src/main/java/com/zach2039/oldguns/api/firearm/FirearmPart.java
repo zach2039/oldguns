@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.api.firearm;
 
 public enum FirearmPart {
-	MATCH_CORD,
 	WOOD_GEAR_SET,
 	IRON_GEAR_SET,
 	GOLD_GEAR_SET,

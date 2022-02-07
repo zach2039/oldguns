@@ -3,6 +3,7 @@ package com.zach2039.oldguns.init;
 import java.util.Map;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.config.OldGunsConfig;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
@@ -100,6 +101,7 @@ public class ModCauldronInteractions {
 
 				return InteractionResult.sidedSuccess(level.isClientSide);
 			});
+			
 			LIQUID_NITER.put(ModItems.LIQUID_NITER.get(), (state, level, blockpos, player, hand, stack) -> {
 				if (state.getValue(LayeredCauldronBlock.LEVEL) != 3) {
 					if (!level.isClientSide) {
@@ -116,6 +118,22 @@ public class ModCauldronInteractions {
 					return InteractionResult.PASS;
 				}
 			});
+			
+			if (OldGunsConfig.SERVER.recipeSettings.miscRecipeSettings.allowMatchCordFromStringAtNiterCauldronCrafting.get()) {
+				LIQUID_NITER.put(Items.STRING, (state, level, blockpos, player, hand, stack) -> {
+					if (!level.isClientSide) {
+						Item item = stack.getItem();
+						int amount = player.getItemInHand(hand).getCount();
+						player.setItemInHand(hand, new ItemStack(ModItems.MATCH_CORD.get(), amount));
+						player.awardStat(Stats.USE_CAULDRON);
+						player.awardStat(Stats.ITEM_USED.get(item));
+						LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
+						level.playSound((Player)null, blockpos, SoundEvents.GENERIC_SPLASH, SoundSource.BLOCKS, 1.0F, 1.0F);
+					}
+	
+					return InteractionResult.sidedSuccess(level.isClientSide);
+				});
+			}
 		}
 
 		static InteractionResult emptyBucket(Level level, BlockPos blockpos, Player player, InteractionHand hand, ItemStack stack, BlockState state, SoundEvent soundEvent) {

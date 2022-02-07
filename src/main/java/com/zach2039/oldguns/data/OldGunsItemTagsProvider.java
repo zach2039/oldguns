@@ -356,7 +356,7 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		tag(ModTags.Items.CAPLOCK_SUITABLE_POWDER)
 			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get());
 		
-		tag(ModTags.Items.NEEDLEFIRE_SUITABLE_POWDER)
+		tag(ModTags.Items.RIMFIRE_SUITABLE_POWDER)
 			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get());
 		
 		// Parts

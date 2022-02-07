@@ -126,13 +126,22 @@ public class OldGunsConfig {
 	}
 	
 	public static class RecipeSettings {
+		public final WorldInteractionSettings worldInteractionSettings;
 		public final FirearmRecipeSettings firearmRecipeSettings;
 		public final ArtilleryRecipeSettings artilleryRecipeSettings;
 		public final DesignNotesSettings designNotesSettings;
 		public final BlackPowderManufactureSettings blackPowderManufactureSettings;
+		public final EquipmentRecipeSettings equipmentRecipeSettings;
+		public final VanillaAlternativeRecipeSettings vanillaAlternativeRecipeSettings;
+		public final MiscRecipeSettings miscRecipeSettings;
 		
 		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
+			
+			worldInteractionSettings = new WorldInteractionSettings(
+					builder,
+					"World interaction and recipe settings",
+					"worldInteractionSettings");
 			
 			firearmRecipeSettings = new FirearmRecipeSettings(
 					builder,
@@ -153,6 +162,87 @@ public class OldGunsConfig {
 					builder,
 					"Black Powder manufacture settings",
 					"blackPowderManufactureSettings");
+			
+			equipmentRecipeSettings = new EquipmentRecipeSettings(
+					builder,
+					"Equipment recipe settings",
+					"equipmentRecipeSettings");
+			
+			vanillaAlternativeRecipeSettings = new VanillaAlternativeRecipeSettings(
+					builder,
+					"Vanilla alternative recipe settings",
+					"vanillaAlternativeRecipeSettings");
+			
+			miscRecipeSettings = new MiscRecipeSettings(
+					builder,
+					"Miscellaneous recipe settings",
+					"miscRecipeSettings");
+			
+			builder.pop();
+		}
+	}
+	
+	public static class MiscRecipeSettings {
+		public final BooleanValue allowMatchCordFromBarkStrandsCrafting;
+		public final BooleanValue allowMatchCordFromStringAtNiterCauldronCrafting;
+		
+		MiscRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowMatchCordFromBarkStrandsCrafting = builder
+					.comment("Enable/disable crafting match cords from bark strands")
+					.define("allowMatchCordFromBarkStrandsCrafting", true);
+			
+			allowMatchCordFromStringAtNiterCauldronCrafting = builder
+					.comment("Enable/disable crafting match cords from string via right-clicking a liquid niter cauldron")
+					.define("allowMatchCordFromStringAtNiterCauldronCrafting", true);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class VanillaAlternativeRecipeSettings {
+		public final BooleanValue allowTntFromBlastingPowderSticksCrafting;
+		
+		VanillaAlternativeRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowTntFromBlastingPowderSticksCrafting = builder
+					.comment("Enable/disable crafting vanilla TNT from blasting powder sticks")
+					.define("allowTntFromBlastingPowderSticksCrafting", true);
+			
+			builder.pop();
+		}
+	}
+			
+	public static class EquipmentRecipeSettings {
+		public final BooleanValue allowBlastingPowderStickCrafting;
+		
+		EquipmentRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowBlastingPowderStickCrafting = builder
+					.comment("Enable/disable crafting blasting powder sticks")
+					.define("allowBlastingPowderStickCrafting", true);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class WorldInteractionSettings {
+		public final BooleanValue allowShearsToStripBark;
+		public final IntValue barkStrandHarvestAmount;
+		
+		WorldInteractionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowShearsToStripBark = builder
+					.comment("Enable/disable shears stripping bark from trees")
+					.define("allowShearsToStripBark", true);
+			
+			barkStrandHarvestAmount = builder
+					.comment("The amount of bark strands gained from right-clicking an unstripped log with shears")
+					.defineInRange("barkStrandHarvestAmount", 3, 1, 64);
 			
 			builder.pop();
 		}

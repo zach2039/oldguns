@@ -261,7 +261,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_TRIGGER_ASSEMBLY.get());
 		withGeneratedParentAndDefaultTexture(ModItems.GOLD_TRIGGER_ASSEMBLY.get());
 		
-		withGeneratedParentAndDefaultTexture(ModItems.MATCH_CORD.get());
+		
 		
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
 		
@@ -276,9 +276,18 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.LIQUID_NITER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.NITER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.SULFUR.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.ROCKET_POWDER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.BLASTING_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.HIGH_GRADE_BLACK_POWDER.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.FUSE.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MATCH_CORD.get());
+				
 		withGeneratedParentAndDefaultTexture(ModItems.WAXED_PAPER.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.BARK_STRANDS.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.MATCHLOCK_REPAIR_PARTS.get());
 		withGeneratedParentAndDefaultTexture(ModItems.WHEELLOCK_REPAIR_PARTS.get());
@@ -293,6 +302,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.RAM_ROD.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LONG_MATCH.get());
 		
+		withGeneratedParent(ModItems.BLASTING_POWDER_STICK.get(), new ResourceLocation(OldGuns.MODID, "block/blasting_powder_stick"));
 		withGeneratedParentAndDefaultTexture(ModItems.MUSKETEER_HAT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.HORSEMANS_POT_HELM.get());
 		

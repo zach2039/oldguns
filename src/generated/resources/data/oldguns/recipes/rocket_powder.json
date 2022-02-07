@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_mortar_and_pestle_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "forge:dust/saltpeter"
+    },
+    {
+      "tag": "forge:dust/saltpeter"
+    },
+    {
+      "tag": "forge:dust/sulfur"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "oldguns:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "item": "oldguns:rocket_powder",
+    "count": 2
+  }
+}

@@ -33,6 +33,9 @@ public class OldGunsBlockLootTables extends BlockLoot {
 		dropSelf(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get());
 		
 		dropSelf(ModBlocks.MEDIUM_NAVAL_CANNON.get());
+		
+		dropOther(ModBlocks.BLASTING_POWDER_STICK_BLOCK.get(), ModItems.BLASTING_POWDER_STICK.get());
+		dropOther(ModBlocks.WALL_BLASTING_POWDER_STICK_BLOCK.get(), ModItems.BLASTING_POWDER_STICK.get());
 	}
 
 	@Override

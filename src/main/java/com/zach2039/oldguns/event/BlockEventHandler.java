@@ -1,22 +1,34 @@
 package com.zach2039.oldguns.event;
 
+import java.util.Optional;
 import java.util.Random;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.config.OldGunsConfig.WorldInteractionSettings;
 import com.zach2039.oldguns.init.ModBlocks;
+import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent.BlockToolInteractEvent;
 import net.minecraftforge.event.world.PistonEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -24,12 +36,14 @@ import net.minecraftforge.fml.common.Mod;
 @Mod.EventBusSubscriber(modid = OldGuns.MODID)
 public class BlockEventHandler {
 
+	
+
 	@SubscribeEvent
 	public static void onPistonEventPost(final PistonEvent.Pre event) {
 		processBlackPowderCake(event);
 	}
 
-	private static void processBlackPowderCake(PistonEvent.Pre event) {
+	private static void processBlackPowderCake(final PistonEvent.Pre event) {
 		final LevelAccessor level = event.getWorld();
 		final Random rand = level.getRandom();
 		if (event.getPistonMoveType().isExtend) {

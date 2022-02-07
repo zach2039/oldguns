@@ -116,7 +116,7 @@ public class ModTags {
 		public static final Tag.Named<Item> WHEELLOCK_SUITABLE_POWDER = tag("wheellock_suitable_powder");
 		public static final Tag.Named<Item> FLINTLOCK_SUITABLE_POWDER = tag("flintlock_suitable_powder");
 		public static final Tag.Named<Item> CAPLOCK_SUITABLE_POWDER = tag("caplock_suitable_powder");
-		public static final Tag.Named<Item> NEEDLEFIRE_SUITABLE_POWDER = tag("needlefire_suitable_powder");
+		public static final Tag.Named<Item> RIMFIRE_SUITABLE_POWDER = tag("rimfire_suitable_powder");
 		
 		// Parts
 		public static final Tag.Named<Item> MATCHLOCK_MECHANISM = tag("matchlock_mechanism");

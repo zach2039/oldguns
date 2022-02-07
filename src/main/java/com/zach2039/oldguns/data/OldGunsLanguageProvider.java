@@ -239,8 +239,6 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.IRON_TRIGGER_ASSEMBLY, "Iron Trigger Assembly");
 		addItem(ModItems.GOLD_TRIGGER_ASSEMBLY, "Gold Trigger Assembly");
 		
-		addItem(ModItems.MATCH_CORD, "Match Cord");
-		
 		addItem(ModItems.IRON_BITS, "Iron Bits");
 		
 		addItem(ModItems.LEAD_INGOT, "Lead Ingot");
@@ -254,9 +252,18 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.LIQUID_NITER, "Bottle of Liquid Niter");
 		addItem(ModItems.NITER, "Niter");
 		addItem(ModItems.SULFUR, "Sulfur");
+		
+		addItem(ModItems.BLASTING_POWDER, "Blasting Powder");
+		addItem(ModItems.ROCKET_POWDER, "Rocket Powder");
 		add("item.oldguns.low_grade_black_powder", "Low-grade Black Powder");
 		addItem(ModItems.MEDIUM_GRADE_BLACK_POWDER, "Medium-grade Black Powder");
 		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High-grade Black Powder");
+		
+		addItem(ModItems.MATCH_CORD, "Match Cord");
+		addItem(ModItems.FUSE, "Fuse");
+		
+		addItem(ModItems.BARK_STRANDS, "Bark Strands");
+		
 		addItem(ModItems.WAXED_PAPER, "Waxed Paper");
 		
 		addItem(ModItems.MATCHLOCK_REPAIR_PARTS, "Matchlock Repair Parts");
@@ -273,6 +280,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.LONG_MATCH, "Long Match");
 		addItem(ModItems.RAM_ROD, "Ram Rod");
 		
+		addItem(ModItems.BLASTING_POWDER_STICK, "Blasting Powder Stick");
 		addItem(ModItems.MUSKETEER_HAT, "Musketeer Hat");
 		addItem(ModItems.HORSEMANS_POT_HELM, "Horseman's Pot Helm");
 		

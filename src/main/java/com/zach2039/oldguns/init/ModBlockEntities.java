@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.level.block.entity.BlastingPowderStickBlockEntity;
 import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.world.level.block.Block;
@@ -12,6 +13,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockEntities {
+	
+	private static Block[] getBlastingPowderStickBlockEntityValidBlocks() {
+		return new Block[] { ModBlocks.BLASTING_POWDER_STICK_BLOCK.get(), ModBlocks.WALL_BLASTING_POWDER_STICK_BLOCK.get() };
+	}
+	
 	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, OldGuns.MODID);
 
 	private static boolean isInitialized;
@@ -20,6 +26,9 @@ public class ModBlockEntities {
 			MediumNavalCannonBlockEntity::new,
 			ModBlocks.MEDIUM_NAVAL_CANNON
 	);
+	
+	// Equipment
+	public static final RegistryObject<BlockEntityType<BlastingPowderStickBlockEntity>> BLASTING_POWDER_STICK = BLOCK_ENTITY_TYPES.register("blasting_powder_stick", () -> BlockEntityType.Builder.of(BlastingPowderStickBlockEntity::new, getBlastingPowderStickBlockEntityValidBlocks()).build(null));
 
 
 	/**
@@ -31,7 +40,7 @@ public class ModBlockEntities {
 	 */
 	public static void initialize(final IEventBus modEventBus) {
 		if (isInitialized) {
-			throw new IllegalStateException("Already initialised");
+			throw new IllegalStateException("Already initialized");
 		}
 
 		BLOCK_ENTITY_TYPES.register(modEventBus);

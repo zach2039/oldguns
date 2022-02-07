@@ -2,6 +2,8 @@ package com.zach2039.oldguns.init;
 
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.item.equipment.BlastingPowderStickBlockItem;
+import com.zach2039.oldguns.world.level.block.BlastingPowderStickBlock;
 import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
@@ -9,6 +11,7 @@ import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.world.level.block.MediumGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
+import com.zach2039.oldguns.world.level.block.WallBlastingPowderStickBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
 import com.zach2039.oldguns.world.level.block.WetMediumGradeBlackPowderBlock;
@@ -69,9 +72,12 @@ public class ModBlocks {
 			() -> new MediumGradeBlackPowderBlock()
 	);
 	
-	public static final RegistryObject<MediumNavalCannonBlock> MEDIUM_NAVAL_CANNON = registerBlock("medium_naval_cannon",
-			() -> new MediumNavalCannonBlock()
-	);
+	// Artillery
+	public static final RegistryObject<MediumNavalCannonBlock> MEDIUM_NAVAL_CANNON = registerBlock("medium_naval_cannon", () -> new MediumNavalCannonBlock());
+	
+	// Equipment
+	public static final RegistryObject<BlastingPowderStickBlock> BLASTING_POWDER_STICK_BLOCK = registerItemlessBlock("blasting_powder_stick_block", () -> new BlastingPowderStickBlock());
+	public static final RegistryObject<WallBlastingPowderStickBlock> WALL_BLASTING_POWDER_STICK_BLOCK = registerItemlessBlock("wall_blasting_powder_stick_block", () -> new WallBlastingPowderStickBlock());
 	
 	/**
 	 * Registers the {@link DeferredRegister} instances with the mod event bus.
@@ -116,6 +122,21 @@ public class ModBlocks {
 		final RegistryObject<BLOCK> block = BLOCKS.register(name, blockFactory);
 
 		ITEMS.register(name, () -> itemFactory.create(block.get()));
+
+		return block;
+	}
+	
+	/**
+	 * Registers a block without a blockItem.
+	 *
+	 * @param name         The registry name of the block
+	 * @param blockFactory The factory used to create the block
+	 * @param itemFactory  The factory used to create the block item
+	 * @param <BLOCK>      The block type
+	 * @return A RegistryObject reference to the block
+	 */
+	private static <BLOCK extends Block> RegistryObject<BLOCK> registerItemlessBlock(final String name, final Supplier<BLOCK> blockFactory) {
+		final RegistryObject<BLOCK> block = BLOCKS.register(name, blockFactory);
 
 		return block;
 	}

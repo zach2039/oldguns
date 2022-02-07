@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_blasting_powder_stick"
+    }
+  ],
+  "ingredients": [
+    {
+      "item": "oldguns:waxed_paper"
+    },
+    {
+      "item": "oldguns:waxed_paper"
+    },
+    {
+      "item": "oldguns:blasting_powder"
+    },
+    {
+      "item": "oldguns:blasting_powder"
+    },
+    {
+      "item": "oldguns:fuse"
+    }
+  ],
+  "result": {
+    "item": "oldguns:blasting_powder_stick"
+  }
+}

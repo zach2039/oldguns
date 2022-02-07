@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "oldguns:match_cord_from_bark_strands"
+    ]
+  },
+  "criteria": {
+    "has_bark_strands": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:bark_strands"
+            ]
+          }
+        ]
+      }
+    },
+    "has_string": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:string"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "oldguns:match_cord_from_bark_strands"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "has_bark_strands",
+      "has_string",
+      "has_the_recipe"
+    ]
+  ]
+}

@@ -12,9 +12,11 @@ import com.zach2039.oldguns.world.item.ammo.firearm.FirearmPaperCartridgeItem;
 import com.zach2039.oldguns.world.item.artillery.LargePowderCharge;
 import com.zach2039.oldguns.world.item.artillery.MediumPowderCharge;
 import com.zach2039.oldguns.world.item.artillery.SmallPowderCharge;
+import com.zach2039.oldguns.world.item.equipment.BlastingPowderStickBlockItem;
 import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
 import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.world.item.material.BurnableMaterialItem;
 import com.zach2039.oldguns.world.item.material.MaterialItem;
 import com.zach2039.oldguns.world.item.material.RepairPartItem;
 import com.zach2039.oldguns.world.item.part.ArtilleryPartItem;
@@ -220,30 +222,43 @@ public class ModItems {
 	public static final RegistryObject<FirearmPartItem> WOOD_TRIGGER_ASSEMBLY = ITEMS.register("wood_trigger_assembly", () -> new FirearmPartItem(FirearmPart.WOOD_TRIGGER_ASSEMBLY));
 	public static final RegistryObject<FirearmPartItem> IRON_TRIGGER_ASSEMBLY = ITEMS.register("iron_trigger_assembly", () -> new FirearmPartItem(FirearmPart.IRON_TRIGGER_ASSEMBLY));
 	public static final RegistryObject<FirearmPartItem> GOLD_TRIGGER_ASSEMBLY = ITEMS.register("gold_trigger_assembly", () -> new FirearmPartItem(FirearmPart.GOLD_TRIGGER_ASSEMBLY));
-	// Misc
-	public static final RegistryObject<FirearmPartItem> MATCH_CORD = ITEMS.register("match_cord", () -> new FirearmPartItem(FirearmPart.MATCH_CORD));
+
 	
 	// Materials
 	// Iron
 	public static final RegistryObject<MaterialItem> IRON_BITS = ITEMS.register("iron_bits", () -> new MaterialItem());
+	
 	// Lead
 	public static final RegistryObject<MaterialItem> LEAD_INGOT = ITEMS.register("lead_ingot", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> LEAD_NUGGET = ITEMS.register("lead_nugget", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> LEAD_BITS = ITEMS.register("lead_bits", () -> new MaterialItem());
+	
 	// Brass
 	public static final RegistryObject<MaterialItem> BRASS_INGOT = ITEMS.register("brass_ingot", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> BRASS_NUGGET = ITEMS.register("brass_nugget", () -> new MaterialItem());
+	
 	// Niter
 	public static final RegistryObject<MaterialItem> NITRATE_SOIL = ITEMS.register("nitrate_soil", () -> new MaterialItem());	
 	public static final RegistryObject<MaterialItem> LIQUID_NITER = ITEMS.register("liquid_niter", () -> new MaterialItem(1));
 	public static final RegistryObject<MaterialItem> NITER = ITEMS.register("niter", () -> new MaterialItem());
+	
 	// Sulfur
 	public static final RegistryObject<MaterialItem> SULFUR = ITEMS.register("sulfur", () -> new MaterialItem());
+	
 	// Black Powder
+	public static final RegistryObject<MaterialItem> BLASTING_POWDER = ITEMS.register("blasting_powder", () -> new MaterialItem());
+	public static final RegistryObject<MaterialItem> ROCKET_POWDER = ITEMS.register("rocket_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> MEDIUM_GRADE_BLACK_POWDER = ITEMS.register("medium_grade_black_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> HIGH_GRADE_BLACK_POWDER = ITEMS.register("high_grade_black_powder", () -> new MaterialItem());
+	
+	// Fuses
+	public static final RegistryObject<MaterialItem> BARK_STRANDS = ITEMS.register("bark_strands", () -> new BurnableMaterialItem());
+	public static final RegistryObject<MaterialItem> MATCH_CORD = ITEMS.register("match_cord", () -> new MaterialItem());
+	public static final RegistryObject<MaterialItem> FUSE = ITEMS.register("fuse", () -> new MaterialItem());
+	
 	// Ammo Crafting
 	public static final RegistryObject<MaterialItem> WAXED_PAPER = ITEMS.register("waxed_paper", () -> new MaterialItem());
+	
 	// Repair
 	public static final RegistryObject<RepairPartItem> MATCHLOCK_REPAIR_PARTS = ITEMS.register("matchlock_repair_parts", () -> new RepairPartItem());
 	public static final RegistryObject<RepairPartItem> WHEELLOCK_REPAIR_PARTS = ITEMS.register("wheellock_repair_parts", () -> new RepairPartItem());
@@ -261,7 +276,8 @@ public class ModItems {
 	public static final RegistryObject<LongMatchItem> LONG_MATCH = ITEMS.register("long_match", () -> new LongMatchItem());
 	public static final RegistryObject<GunnersQuadrantItem> GUNNERS_QUADRANT = ITEMS.register("gunners_quadrant", () -> new GunnersQuadrantItem());
 	
-	// Equipment 
+	// Equipment
+	public static final RegistryObject<BlastingPowderStickBlockItem> BLASTING_POWDER_STICK = ITEMS.register("blasting_powder_stick", () -> new BlastingPowderStickBlockItem());
 	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_hat", () -> new MusketeerHatItem());
 	public static final RegistryObject<ArmorItem> HORSEMANS_POT_HELM = ITEMS.register("horsemans_pot_helm", () -> new HorsemansPotHelmItem());
 	
