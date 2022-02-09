@@ -7,7 +7,7 @@
 		"3": "minecraft:block/oak_log",
 		"4": "minecraft:block/oak_planks",
 		"6": "minecraft:block/tnt_top",
-		"particle": "minecraft:block/anvil"
+		"particle": "minecraft:block/oak_planks"
 	},
 	"elements": [
 		{

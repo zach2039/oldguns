@@ -2,7 +2,9 @@ package com.zach2039.oldguns.client.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
+import com.zach2039.oldguns.client.model.CongreveRocketStandModel;
 import com.zach2039.oldguns.client.model.NavalCannonModel;
+import com.zach2039.oldguns.client.model.RocketProjectileModel;
 import com.zach2039.oldguns.client.model.armor.HorsemansPotHelmModel;
 import com.zach2039.oldguns.client.model.armor.MusketeerHatModel;
 
@@ -24,9 +26,11 @@ public class ModLayerDefinitions {
 	public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
 		// Entities
 		event.registerLayerDefinition(BulletProjectileModel.LAYER_LOCATION, BulletProjectileModel::createBodyLayer);
+		event.registerLayerDefinition(RocketProjectileModel.LAYER_LOCATION, RocketProjectileModel::createBodyLayer);
 		
 		// Tile Entities
 		event.registerLayerDefinition(NavalCannonModel.LAYER_LOCATION, NavalCannonModel::createBodyLayer);
+		event.registerLayerDefinition(CongreveRocketStandModel.LAYER_LOCATION, CongreveRocketStandModel::createBodyLayer);
 		
 		// Armor
 		event.registerLayerDefinition(MusketeerHatModel.LAYER_LOCATION, MusketeerHatModel::createBodyLayer);

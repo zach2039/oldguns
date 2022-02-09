@@ -8,9 +8,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public interface Ammo {
-	List<BulletProjectile> createProjectiles(Level worldIn, ItemStack stack, LivingEntity shooter);
-	
+public interface Ammo {	
 	ProjectileType getAmmoType();
 	
 	float getProjectileSize();

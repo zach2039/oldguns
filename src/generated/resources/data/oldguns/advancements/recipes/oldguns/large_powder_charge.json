@@ -16,13 +16,13 @@
         ]
       }
     },
-    "has_paper": {
+    "has_waxed_paper": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:paper"
+              "oldguns:waxed_paper"
             ]
           }
         ]
@@ -38,7 +38,7 @@
   "requirements": [
     [
       "has_any_gunpowder",
-      "has_paper",
+      "has_waxed_paper",
       "has_the_recipe"
     ]
   ]

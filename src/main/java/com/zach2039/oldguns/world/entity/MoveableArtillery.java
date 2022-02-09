@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
-import com.zach2039.oldguns.api.artillery.IArtillery;
+import com.zach2039.oldguns.api.artillery.Artillery;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -37,7 +37,7 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
-public abstract class MoveableArtillery extends Entity implements IArtillery {
+public abstract class MoveableArtillery extends Entity implements Artillery {
 
 	private static final EntityDataAccessor<Integer> TIME_SINCE_HIT = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> FORWARD_DIRECTION = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);

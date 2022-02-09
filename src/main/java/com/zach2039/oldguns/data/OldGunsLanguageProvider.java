@@ -80,10 +80,14 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium-grade Black Powder");
 		
+		addBlock(ModBlocks.CONGREVE_ROCKET_STAND, "Congreve Rocket Stand");
+		
 		addBlock(ModBlocks.MEDIUM_NAVAL_CANNON, "Medium Naval Cannon");
 	}
 
 	private void addItems() {
+		addItem(ModItems.MEDIUM_IRON_EXPLOSIVE_ROCKET, "Medium Iron Explosive Rocket");
+		
 		addItem(ModItems.MEDIUM_IRON_CANNONBALL, "Medium Iron Cannonball");
 		addItem(ModItems.MEDIUM_IRON_GRAPESHOT, "Medium Iron Grapeshot");
 		addItem(ModItems.MEDIUM_IRON_CANISTER_SHOT, "Medium Iron Canister Shot");
@@ -275,7 +279,6 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.HACKSAW, "Hacksaw");
 		addItem(ModItems.DESIGN_NOTES, "Design Notes");
 		
-		
 		addItem(ModItems.GUNNERS_QUADRANT, "Gunner's Quadrant");
 		addItem(ModItems.LONG_MATCH, "Long Match");
 		addItem(ModItems.RAM_ROD, "Ram Rod");
@@ -323,6 +326,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		add(OldGunsLang.MESSAGE_ARTILLERY_NAME, "This is a %1$s.");
 		add(OldGunsLang.MESSAGE_ARTILLERY_MAX_SLOTS, "Max ammo slot count is: %1$s");
 		add(OldGunsLang.MESSAGE_ARTILLERY_SLOT_STATE, "State of slot %1$s is: %2$s");
+		
+		add(OldGunsLang.MESSAGE_ARTILLERY_NOT_READY, "This artillery piece is not ready to fire.");
 	}
 
 	private void addKeyBindings() {

@@ -10,5 +10,5 @@ public enum ProjectileType {
 	GRAPESHOT, 
 	EXPLOSIVE_SHELL,
 	CARCASS,
-	CANISTER	
+	CANISTER
 }

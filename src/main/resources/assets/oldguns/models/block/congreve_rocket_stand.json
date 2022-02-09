@@ -1,0 +1,7 @@
+{
+	"parent": "item/generated",
+  	"textures": {
+		"layer0": "oldguns:item/congreve_rocket_stand",
+		"particle": "minecraft:block/oak_planks"
+	}
+}

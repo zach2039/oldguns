@@ -12,15 +12,17 @@ import com.google.common.collect.Multimap;
 import com.mojang.datafixers.util.Pair;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
+import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
+import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.api.firearm.Firearm;
 import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.FirearmEffect;
 import com.zach2039.oldguns.api.firearm.FirearmReloadType;
 import com.zach2039.oldguns.api.firearm.FirearmSize;
-import com.zach2039.oldguns.api.firearm.FirearmWaterResiliency;
 import com.zach2039.oldguns.api.firearm.FirearmTypes;
 import com.zach2039.oldguns.api.firearm.FirearmTypes.MechanismType;
+import com.zach2039.oldguns.api.firearm.FirearmWaterResiliency;
 import com.zach2039.oldguns.api.firearm.util.FirearmItemHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.api.firearm.util.FirearmStackHelper;
@@ -30,12 +32,9 @@ import com.zach2039.oldguns.capability.firearmempty.FirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModAttributes;
-import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
-import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
 import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
-import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
@@ -281,8 +280,18 @@ public class FirearmItem extends BowItem implements Firearm {
 		int maxShots = (firesAllLoadedAmmoAtOnce() && !ammoStack.isEmpty()) ? FirearmNBTHelper.peekNBTTagAmmoCount(firearmStack) : 1; 
 		for (int i = 0; i < maxShots; i++) {
 			ammoStack = FirearmNBTHelper.peekNBTTagAmmo(firearmStack);
-			Ammo itemFirearmAmmo = (Ammo)(ammoStack.getItem() instanceof Ammo ? ammoStack.getItem() : this.getDefaultAmmoItem());
-			List<BulletProjectile> entityProjectiles = itemFirearmAmmo.createProjectiles(level, ammoStack, livingEntity);
+			Item ammoItem = ammoStack.getItem();
+			Ammo itemFirearmAmmo = (Ammo)(ammoItem instanceof Ammo ? ammoItem : this.getDefaultAmmoItem());
+			
+			List<BulletProjectile> entityProjectiles;
+			if (ammoItem instanceof FirearmAmmo) {
+				entityProjectiles = ((FirearmAmmo)ammoItem).createProjectiles(level, ammoStack, livingEntity);
+			} else if (ammoItem instanceof ArtilleryAmmo) {
+				entityProjectiles = ((ArtilleryAmmo)ammoItem).createProjectiles(level, ammoStack, livingEntity);
+			} else {
+				OldGuns.LOGGER.error("Ammo item not instance of FirearmAmmo or ArtilleryAmmo: " + ammoItem);
+				entityProjectiles = new ArrayList<BulletProjectile>();
+			}
 
 			/* Fire all projectiles from ammo item. */
 			float finalVelocity = getProjectileSpeed();

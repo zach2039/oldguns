@@ -68,44 +68,44 @@ import net.minecraftforge.network.NetworkHooks;
 
 public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnData {
 
-	private static final EntityDataAccessor<Float> PROJECTILE_SIZE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
-	private static final EntityDataAccessor<BlockPos> START_POS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BLOCK_POS);
-	private static final EntityDataAccessor<Float> EFFECTIVE_RANGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
-	private static final EntityDataAccessor<CompoundTag> SHOOTING_ENTITY = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.COMPOUND_TAG);
-	private static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
-	private static final EntityDataAccessor<Float> BYPASS_ARMOR_PERCENTAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
-	private static final EntityDataAccessor<Byte> CRITICAL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
-	private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
-	private static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
+	protected static final EntityDataAccessor<Float> PROJECTILE_SIZE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
+	protected static final EntityDataAccessor<BlockPos> START_POS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BLOCK_POS);
+	protected static final EntityDataAccessor<Float> EFFECTIVE_RANGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
+	protected static final EntityDataAccessor<CompoundTag> SHOOTING_ENTITY = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.COMPOUND_TAG);
+	protected static final EntityDataAccessor<Float> DAMAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
+	protected static final EntityDataAccessor<Float> BYPASS_ARMOR_PERCENTAGE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
+	protected static final EntityDataAccessor<Byte> CRITICAL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
+	protected static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Byte> ID_FLAGS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
+	protected static final EntityDataAccessor<Byte> PIERCE_LEVEL = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BYTE);
 
-	private static final EntityDataAccessor<Integer> PROJECTILE_TYPE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<Float> EFFECT_STRENGTH = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
-	private static final EntityDataAccessor<Integer> EFFECT_TICKS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
-
-	@Nullable
-	private UUID ownerUUID;
-	@Nullable
-	private Entity cachedOwner;
-	private boolean leftOwner;
-	private boolean hasBeenShot;
+	protected static final EntityDataAccessor<Integer> PROJECTILE_TYPE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
+	protected static final EntityDataAccessor<Float> EFFECT_STRENGTH = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
+	protected static final EntityDataAccessor<Integer> EFFECT_TICKS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.INT);
 
 	@Nullable
-	private BlockState lastState;
+	protected UUID ownerUUID;
+	@Nullable
+	protected Entity cachedOwner;
+	protected boolean leftOwner;
+	protected boolean hasBeenShot;
+
+	@Nullable
+	protected BlockState lastState;
 	public AbstractArrow.Pickup pickup = AbstractArrow.Pickup.DISALLOWED;
-	private int life;
-	private int knockback;
-	private SoundEvent soundEvent = ModSoundEvents.BULLET_HIT_BLOCK.get();
+	protected int life;
+	protected int knockback;
+	protected SoundEvent soundEvent = ModSoundEvents.BULLET_HIT_BLOCK.get();
 	@Nullable
-	private IntOpenHashSet piercingIgnoreEntityIds;
+	protected IntOpenHashSet piercingIgnoreEntityIds;
 	@Nullable
-	private List<Entity> piercedAndKilledEntities;
+	protected List<Entity> piercedAndKilledEntities;
 
 	//private static final byte EVENT_POTION_PUFF = 0;
-	private Potion potion = Potions.EMPTY;
-	private final Set<MobEffectInstance> effects = Sets.newHashSet();
-	private boolean fixedColor;
-	private int totalInGroundTime;
+	protected Potion potion = Potions.EMPTY;
+	protected final Set<MobEffectInstance> effects = Sets.newHashSet();
+	protected boolean fixedColor;
+	protected int totalInGroundTime;
 
 	// Set true when projectile is used to simulate trajectories on the client
 	public boolean isSimulated = false;
@@ -380,7 +380,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		setEffectTicks(compound.getInt("effectTicks"));
 	}
 
-	private boolean checkLeftOwner() {
+	protected boolean checkLeftOwner() {
 		Entity entity = this.getOwner();
 		if (entity != null) {
 			for(Entity entity1 : this.level.getEntities(this, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), (ent) -> {
@@ -395,11 +395,11 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		return true;
 	}
 
-	private boolean shouldFall() {
+	protected boolean shouldFall() {
 		return this.inGround && this.level.noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
 	}
 
-	private void startFalling() {
+	protected void startFalling() {
 		this.inGround = false;
 		Vec3 vec3 = this.getDeltaMovement();
 		this.setDeltaMovement(vec3.multiply((double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F), (double)(this.random.nextFloat() * 0.2F)));
@@ -757,6 +757,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	protected void doEffectOnBlockHit(BlockPos blockpos) {
 		switch (getProjectileType()) {
 			case EXPLOSIVE_SHELL:
+				OldGuns.LOGGER.info(this.getEffectStrength());
 				if (getEffectStrength() > 0.0f) {
 					if (!level.isClientSide()) {
 						level.explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Explosion.BlockInteraction.BREAK);
@@ -977,7 +978,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 	}
 
-	private void makeParticle(int particleCount) {
+	protected void makeParticle(int particleCount) {
 		int i = this.getColor();
 		if (i != -1 && particleCount > 0) {
 			double d0 = (double)(i >> 16 & 255) / 255.0D;
@@ -1112,6 +1113,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	 */
 	public void setEffectStrength(float effectStrength)
 	{
+		OldGuns.LOGGER.info("set " + effectStrength);
 		this.entityData.set(EFFECT_STRENGTH, effectStrength);
 	}
 

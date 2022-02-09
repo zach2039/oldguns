@@ -7,6 +7,7 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.GenericMobSettings;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.entity.RocketProjectile;
 import com.zach2039.oldguns.world.entity.monster.HarquebusierSkeleton;
 import com.zach2039.oldguns.world.entity.monster.MusketeerSkeleton;
 
@@ -15,10 +16,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraft.world.entity.SpawnPlacements;
-import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.level.biome.MobSpawnSettings;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -46,6 +44,14 @@ public class ModEntities {
 	// Artillery
 	public static final RegistryObject<EntityType<BulletProjectile>> BULLET_PROJECTILE = registerEntityType("bullet_projectile",
 			() -> EntityType.Builder.<BulletProjectile>of((BulletProjectile::new), MobCategory.MISC)
+			.setUpdateInterval(1)
+			.setTrackingRange(500)
+			.clientTrackingRange(500)
+			.sized(0.1f, 0.1f)
+			);
+	
+	public static final RegistryObject<EntityType<RocketProjectile>> ROCKET_PROJECTILE = registerEntityType("rocket_projectile",
+			() -> EntityType.Builder.<RocketProjectile>of((RocketProjectile::new), MobCategory.MISC)
 			.setUpdateInterval(1)
 			.setTrackingRange(500)
 			.clientTrackingRange(500)

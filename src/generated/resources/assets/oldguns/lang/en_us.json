@@ -2,6 +2,7 @@
   "attribute.name.oldguns.generic.bullet_armor_pierce": "Bullet Armor Pierce",
   "attribute.name.oldguns.generic.mounted_firearm_accuracy": "Mounted Firearm Accuracy",
   "block.oldguns.blasting_powder_stick_block": "Blasting Powder Stick",
+  "block.oldguns.congreve_rocket_stand": "Congreve Rocket Stand",
   "block.oldguns.gunsmiths_bench": "Gunsmith's Bench",
   "block.oldguns.high_grade_black_powder_block": "Block of High-grade Black Powder",
   "block.oldguns.high_grade_black_powder_cake": "High-grade Black Powder Cake",
@@ -105,6 +106,7 @@
   "item.oldguns.medium_iron_canister_shot": "Medium Iron Canister Shot",
   "item.oldguns.medium_iron_cannon_barrel": "Medium Iron Cannon Barrel",
   "item.oldguns.medium_iron_cannonball": "Medium Iron Cannonball",
+  "item.oldguns.medium_iron_explosive_rocket": "Medium Iron Explosive Rocket",
   "item.oldguns.medium_iron_flared_barrel": "Medium Iron Flared Barrel",
   "item.oldguns.medium_iron_grapeshot": "Medium Iron Grapeshot",
   "item.oldguns.medium_iron_musket_ball": "Medium Iron Musket Ball",
@@ -260,5 +262,6 @@
   "oldguns.page.firearms.paper_cartridges0": "Paper Cartridges are prepared shot and powder enclosed within a waxed paper casing. Using paper cartridges allows more efficient ammo storage and faster reloading of muzzleloaders.",
   "text.oldguns.artillery_max_slots.message": "Max ammo slot count is: %1$s",
   "text.oldguns.artillery_name.message": "This is a %1$s.",
+  "text.oldguns.artillery_not_ready.message": "This artillery piece is not ready to fire.",
   "text.oldguns.artillery_slot_state.message": "State of slot %1$s is: %2$s"
 }

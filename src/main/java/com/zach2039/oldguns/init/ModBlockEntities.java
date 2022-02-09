@@ -2,6 +2,7 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.level.block.entity.BlastingPowderStickBlockEntity;
+import com.zach2039.oldguns.world.level.block.entity.CongreveRocketStandBlockEntity;
 import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
 
 import net.minecraft.world.level.block.Block;
@@ -22,9 +23,15 @@ public class ModBlockEntities {
 
 	private static boolean isInitialized;
 
+	// Artillery
 	public static final RegistryObject<BlockEntityType<MediumNavalCannonBlockEntity>> MEDIUM_NAVAL_CANNON = registerBlockEntityType("medium_naval_cannon",
 			MediumNavalCannonBlockEntity::new,
 			ModBlocks.MEDIUM_NAVAL_CANNON
+	);
+	
+	public static final RegistryObject<BlockEntityType<CongreveRocketStandBlockEntity>> CONGREVE_ROCKET_STAND = registerBlockEntityType("congreve_rocket_stand",
+			CongreveRocketStandBlockEntity::new,
+			ModBlocks.CONGREVE_ROCKET_STAND
 	);
 	
 	// Equipment

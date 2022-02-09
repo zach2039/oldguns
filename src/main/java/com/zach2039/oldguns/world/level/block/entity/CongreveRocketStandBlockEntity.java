@@ -5,6 +5,7 @@ import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.CannonArtilleryAttributes;
+import com.zach2039.oldguns.config.OldGunsConfig.RocketArtilleryAttributes;
 import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 
@@ -16,18 +17,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
-public class MediumNavalCannonBlockEntity extends StationaryCannonBlockEntity {
+public class CongreveRocketStandBlockEntity extends StationaryRocketBlockEntity {
 
-	private static final CannonArtilleryAttributes artilleryAttributes = OldGunsConfig.SERVER.artillerySettings.medium_naval_cannon;
+	private static final RocketArtilleryAttributes artilleryAttributes = OldGunsConfig.SERVER.artillerySettings.congreve_rocket_stand;
 	
-	public MediumNavalCannonBlockEntity(BlockPos blockpos, BlockState state) {
-		super(ModBlockEntities.MEDIUM_NAVAL_CANNON.get(), blockpos, state, new ArtilleryProperties()
-				.artilleryType(ArtilleryType.NAVAL_CANNON)
+	public CongreveRocketStandBlockEntity(BlockPos blockpos, BlockState state) {
+		super(ModBlockEntities.CONGREVE_ROCKET_STAND.get(), blockpos, state, new ArtilleryProperties()
+				.artilleryType(ArtilleryType.ROCKET)
 				.ammoSlots(1)
-				.baseProjectileDeviation(artilleryAttributes.projectileDeviation.get().floatValue())
-				.baseProjectileSpeed(artilleryAttributes.projectileSpeed.get().floatValue())
-				.effectiveRangeModifier(artilleryAttributes.effectiveRangeModifier.get().floatValue())
-				.projectileDamageModifier(artilleryAttributes.damageModifier.get().floatValue())
+				.baseProjectileDeviation(artilleryAttributes.rocketDeviation.get().floatValue())
 				);
 	}
 	
@@ -38,7 +36,7 @@ public class MediumNavalCannonBlockEntity extends StationaryCannonBlockEntity {
 				posX, posY, posZ, 1600d, player.level.dimension());
 		
 		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
-				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.CANNON_SHOT, 
+				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.ROCKET_LAUNCH, 
 						posX, posY + getShotHeight(), posZ,
 						getShotPitch(), getShotYaw(), 0)
 				);

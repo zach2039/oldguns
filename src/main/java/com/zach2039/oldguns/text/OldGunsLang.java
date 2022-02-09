@@ -35,7 +35,8 @@ public enum OldGunsLang {
 	MESSAGE_DEATH_ARTILLERY("death.attack.oldguns.artillery"),
 	MESSAGE_ARTILLERY_NAME("text.oldguns.artillery_name.message"),
 	MESSAGE_ARTILLERY_MAX_SLOTS("text.oldguns.artillery_max_slots.message"),
-	MESSAGE_ARTILLERY_SLOT_STATE("text.oldguns.artillery_slot_state.message")
+	MESSAGE_ARTILLERY_SLOT_STATE("text.oldguns.artillery_slot_state.message"),
+	MESSAGE_ARTILLERY_NOT_READY("text.oldguns.artillery_not_ready.message")
 	;
 
 	private final String key;

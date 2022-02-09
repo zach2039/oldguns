@@ -6,12 +6,14 @@
     ]
   },
   "criteria": {
-    "has_any_gunpowder": {
+    "has_blasting_powder": {
       "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
-            "tag": "oldguns:any_gunpowder"
+            "items": [
+              "oldguns:blasting_powder"
+            ]
           }
         ]
       }
@@ -47,7 +49,7 @@
   },
   "requirements": [
     [
-      "has_any_gunpowder",
+      "has_blasting_powder",
       "has_large_iron_buckshot",
       "has_iron_nugget",
       "has_the_recipe"

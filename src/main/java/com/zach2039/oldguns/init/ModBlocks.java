@@ -2,8 +2,8 @@ package com.zach2039.oldguns.init;
 
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.item.equipment.BlastingPowderStickBlockItem;
 import com.zach2039.oldguns.world.level.block.BlastingPowderStickBlock;
+import com.zach2039.oldguns.world.level.block.CongreveRocketStandBlock;
 import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
@@ -74,6 +74,7 @@ public class ModBlocks {
 	
 	// Artillery
 	public static final RegistryObject<MediumNavalCannonBlock> MEDIUM_NAVAL_CANNON = registerBlock("medium_naval_cannon", () -> new MediumNavalCannonBlock());
+	public static final RegistryObject<CongreveRocketStandBlock> CONGREVE_ROCKET_STAND = registerBlock("congreve_rocket_stand", () -> new CongreveRocketStandBlock());
 	
 	// Equipment
 	public static final RegistryObject<BlastingPowderStickBlock> BLASTING_POWDER_STICK_BLOCK = registerItemlessBlock("blasting_powder_stick_block", () -> new BlastingPowderStickBlock());

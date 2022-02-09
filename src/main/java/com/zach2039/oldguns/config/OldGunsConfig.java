@@ -1423,13 +1423,19 @@ public class OldGunsConfig {
 	}
 	
 	public static class ArtillerySettings {
-		public final ArtilleryAttributes naval_cannon;
+		public final CannonArtilleryAttributes medium_naval_cannon;
+		public final RocketArtilleryAttributes congreve_rocket_stand;
 		public final ArtilleryAmmoSettings artilleryAmmoSettings;
 		
 		ArtillerySettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
-			naval_cannon = new ArtilleryAttributes(
+			artilleryAmmoSettings = new ArtilleryAmmoSettings(
+					builder,
+					"Artillery ammo settings",
+					"artilleryAmmoSettings");
+			
+			medium_naval_cannon = new CannonArtilleryAttributes(
 					builder,
 					"Attributes of Naval Cannons",
 					"naval_cannon",
@@ -1439,22 +1445,39 @@ public class OldGunsConfig {
 					0.8f
 					);
 			
-			artilleryAmmoSettings = new ArtilleryAmmoSettings(
+			congreve_rocket_stand = new RocketArtilleryAttributes(
 					builder,
-					"Artillery ammo settings",
-					"artilleryAmmoSettings");
+					"Attributes of Congreve Rocket Stands",
+					"congreve_rocket_stand",
+					4.0f
+					);
+		
+			builder.pop();
+		}
+	}
+	
+	public static class RocketArtilleryAttributes {
+		public final DoubleValue rocketDeviation;
+		
+		RocketArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+				final float defaultRocketDeviation) {
+			builder.comment(comment).push(path);
+			
+			rocketDeviation = builder
+					.comment("How much deviation rockets have when shot from this artillery")
+					.defineInRange("rocketDeviation", defaultRocketDeviation, 0.001f, Float.MAX_VALUE);	
 			
 			builder.pop();
 		}
 	}
 	
-	public static class ArtilleryAttributes {
+	public static class CannonArtilleryAttributes {
 		public final DoubleValue effectiveRangeModifier;
 		public final DoubleValue damageModifier;
 		public final DoubleValue projectileDeviation;
 		public final DoubleValue projectileSpeed;
 		
-		ArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+		CannonArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
 				final float defaultProjectileSpeed, final float defaultEffectiveRangeModifier, 
 				final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
 			builder.comment(comment).push(path);
@@ -1481,6 +1504,7 @@ public class OldGunsConfig {
 	
 	public static class ArtilleryAmmoSettings {		
 		public final BooleanValue allowArmorBypass;
+		public final ArtilleryAmmoAttributes medium_iron_explosive_rocket;
 		public final ArtilleryAmmoAttributes small_iron_cannonball;
 		public final ArtilleryAmmoAttributes medium_iron_cannonball;
 		public final ArtilleryAmmoAttributes large_iron_cannonball;
@@ -1497,6 +1521,21 @@ public class OldGunsConfig {
 			allowArmorBypass = builder
 					.comment("Allow artillery projectiles to bypass a percentage of armor as defined in their attributes")
 					.define("allowArmorBypass", true);
+			
+			medium_iron_explosive_rocket = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Explosive Rocket ammo",
+					"medium_iron_explosive_rocket",
+					1,
+					1,
+					15.0f,
+					0.6f,
+					100.0f,
+					1.0f,
+					0.2f,
+					0,
+					3f
+					);
 			
 			// Iron ammo
 			small_iron_cannonball = new ArtilleryAmmoAttributes(

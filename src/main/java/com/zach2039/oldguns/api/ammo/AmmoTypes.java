@@ -60,6 +60,10 @@ public class AmmoTypes {
 	}
 	
 	public enum ArtilleryAmmo {
+		// Rocket
+		// Iron
+		MEDIUM_IRON_EXPLOSIVE_ROCKET(ProjectileType.EXPLOSIVE_SHELL, ARTILLERY_AMMO_SETTINGS.medium_iron_explosive_rocket),
+		// Shot
 		// Stone
 		// Iron
 		SMALL_IRON_CANNONBALL(ProjectileType.CANNONBALL, ARTILLERY_AMMO_SETTINGS.small_iron_cannonball),

@@ -105,7 +105,9 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	}
 	
 	@Override
-	protected void registerModels() {		
+	protected void registerModels() {
+		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_EXPLOSIVE_ROCKET.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANNONBALL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_GRAPESHOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANISTER_SHOT.get());

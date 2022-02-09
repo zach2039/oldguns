@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "oldguns:block/congreve_rocket_stand"
+    },
+    "facing=south": {
+      "model": "oldguns:block/congreve_rocket_stand",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "oldguns:block/congreve_rocket_stand",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "oldguns:block/congreve_rocket_stand",
+      "y": 90
+    }
+  }
+}
