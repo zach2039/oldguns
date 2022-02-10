@@ -2,6 +2,7 @@ package com.zach2039.oldguns.world.level.block;
 
 import java.util.Random;
 
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.NiterProductionSettings;
 import com.zach2039.oldguns.init.ModCauldronInteractions.LiquidNiterInteraction;
@@ -51,14 +52,16 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	}
 
 	private static boolean canBoil(Level level, BlockPos blockpos) {
-		Block blockBelow = level.getBlockState(blockpos.below()).getBlock();
+		BlockState stateBelow = level.getBlockState(blockpos.below());
 		
-		if (
-				blockBelow == Blocks.FIRE || blockBelow == Blocks.LAVA ||
-				(blockBelow == Blocks.CAMPFIRE && level.getBlockState(blockpos.below()).getValue(CampfireBlock.LIT)) ||
-				(blockBelow == Blocks.SOUL_CAMPFIRE && level.getBlockState(blockpos.below()).getValue(CampfireBlock.LIT))
-			) {
+		if (NITER_PRODUCTION_SETTINGS.niterCauldronValidHeatSources.get().contains(stateBelow.getBlock().getRegistryName().toString())) {
+			if (stateBelow.hasProperty(BlockStateProperties.LIT)) {
+				if (stateBelow.getValue(BlockStateProperties.LIT)) {
+					return true;
+				}
+			} else {
 				return true;
+			}
 		}
 		
 		return false;			
@@ -102,7 +105,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 		boolean canCrystalize = (fluidLevel > 0) && canBoil(level, blockpos);
 		
 		if (canCrystalize) {
-			float difficulty = (float) Math.min(NITER_PRODUCTION_SETTINGS.niterCrystalizationDifficulty.get(), Float.MAX_VALUE);
+			float difficulty = (float) Math.min(NITER_PRODUCTION_SETTINGS.niterCrystallizationDifficulty.get(), Float.MAX_VALUE);
 			int crystalizeRoll = rand.nextInt((int)(Math.round(difficulty)) + 1);
 			boolean allowCrystalization = (crystalizeRoll == 0);
 			
@@ -119,8 +122,8 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	
 	public static void dropNiter(Level level, BlockPos blockpos) {
 		int harvestAmt = Math.min(64, Math.max(1, level.random.nextInt(
-				NITER_PRODUCTION_SETTINGS.niterCrystalizationAmountMin.get(),
-				NITER_PRODUCTION_SETTINGS.niterCrystalizationAmountMax.get())
+				NITER_PRODUCTION_SETTINGS.niterCrystallizationAmountMin.get(),
+				NITER_PRODUCTION_SETTINGS.niterCrystallizationAmountMax.get())
 				));
 		popResource(level, blockpos.above(), new ItemStack(ModItems.NITER.get(), harvestAmt));
 	}

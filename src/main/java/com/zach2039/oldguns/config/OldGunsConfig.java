@@ -397,9 +397,10 @@ public class OldGunsConfig {
 	}
 	
 	public static class NiterProductionSettings {
-		public final IntValue niterCrystalizationAmountMin;
-		public final IntValue niterCrystalizationAmountMax;
-		public final DoubleValue niterCrystalizationDifficulty;
+		public final IntValue niterCrystallizationAmountMin;
+		public final IntValue niterCrystallizationAmountMax;
+		public final DoubleValue niterCrystallizationDifficulty;
+		public final ConfigValue<List<String>> niterCauldronValidHeatSources;
 		public final IntValue niterBeddingAnimalRadius;
 		public final IntValue niterBeddingHarvestAmount;
 		public final DoubleValue niterBeddingDripstoneGenerationDifficulty;
@@ -412,18 +413,22 @@ public class OldGunsConfig {
 		NiterProductionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
-			niterCrystalizationAmountMin = builder
-					.comment("The min amount of Niter gained from crystalization of liquid niter")
-					.defineInRange("niterCrystalizationAmountMin", 8, 1, 64);
+			niterCrystallizationAmountMin = builder
+					.comment("The min amount of Niter gained from crystallization of liquid niter")
+					.defineInRange("niterCrystallizationAmountMin", 8, 1, 64);
 			
-			niterCrystalizationAmountMax = builder
-					.comment("The max amount of Niter gained from crystalization of liquid niter")
-					.defineInRange("niterCrystalizationAmountMax", 16, 1, 64);
+			niterCrystallizationAmountMax = builder
+					.comment("The max amount of Niter gained from crystallization of liquid niter")
+					.defineInRange("niterCrystallizationAmountMax", 16, 1, 64);
 			
-			niterCrystalizationDifficulty = builder
-					.comment("How difficult it is for niter to crystalize from a boiling cauldron of liquid niter")
+			niterCrystallizationDifficulty = builder
+					.comment("How difficult it is for niter to crystallize from a boiling cauldron of liquid niter")
 					.comment("The chance for crystalization is 1 in (difficulty+1)*2, calculated when the block randomly ticks")
-					.defineInRange("niterCrystalizationDifficulty", 3f, 0f, Float.MAX_VALUE);
+					.defineInRange("niterCrystallizationDifficulty", 3f, 0f, Float.MAX_VALUE);
+			
+			niterCauldronValidHeatSources = builder
+					.comment("A list of blocks that can be used as heat sources for niter crystallization")
+					.define("niterCauldronValidHeatSources", Arrays.asList(new String[] { "minecraft:fire", "minecraft:lava", "minecraft:campfire", "minecraft:soul_campfire" }));
 			
 			niterBeddingDripstoneGenerationDifficulty = builder
 					.comment("How difficult it is for niter bedding to advance through its 10 refuse levels when under dripping water dripstone")
