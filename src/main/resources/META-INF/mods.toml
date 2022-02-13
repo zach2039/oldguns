@@ -9,7 +9,7 @@ displayName="Old Guns Mod" #mandatory
 updateJSONURL="https://www.zach2039.com/mods/oldguns/update.json" #optional
 displayURL="https://www.curseforge.com/minecraft/mc-mods/old-guns-mod" #optional
 logoFile="oldguns.png" #optional
-credits="Friends who helped test" #optional
+credits="Contributors, artists, and those who helped test!" #optional
 authors="Zach2039" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
