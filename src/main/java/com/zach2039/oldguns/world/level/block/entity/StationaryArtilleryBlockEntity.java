@@ -59,6 +59,7 @@ public abstract class StationaryArtilleryBlockEntity extends BlockEntity impleme
 	public CompoundTag writeToTag(CompoundTag tag) {
 		tag.putInt("artilleryType", this.artilleryType.ordinal());
 		tag.putFloat("shotPitch", this.shotPitch);
+		tag.putFloat("shotYaw", this.shotYaw);
 		tag.putInt("firingCooldown", this.firingCooldown);
 		
 		return tag;
@@ -67,6 +68,7 @@ public abstract class StationaryArtilleryBlockEntity extends BlockEntity impleme
 	public void readFromTag(CompoundTag tag) {
 		this.artilleryType = ArtilleryType.values()[tag.getInt("artilleryType")];
 		this.shotPitch = tag.getFloat("shotPitch");
+		this.shotYaw = tag.getFloat("shotYaw");
 		this.firingCooldown = tag.getInt("firingCooldown");
 	}
 	

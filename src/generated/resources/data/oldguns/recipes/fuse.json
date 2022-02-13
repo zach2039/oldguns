@@ -15,11 +15,23 @@
       "tag": "forge:string"
     },
     {
+      "tag": "forge:string"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
+      "tag": "forge:string"
+    },
+    {
       "item": "minecraft:honeycomb"
     }
   ],
   "result": {
     "item": "oldguns:fuse",
-    "count": 3
+    "count": 7
   }
 }

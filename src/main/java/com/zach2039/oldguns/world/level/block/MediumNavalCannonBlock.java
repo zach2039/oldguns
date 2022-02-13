@@ -20,7 +20,9 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
@@ -48,11 +50,9 @@ public class MediumNavalCannonBlock extends HorizontalDirectionalBlock implement
 
 	private static final Map<Direction, VoxelShape> SHAPES = new EnumMap<>(Direction.class);
 	private static final VoxelShape SHAPE = Shapes.or(
-			Block.box(0, 0, 0, 8, 16, 8).move(0.25, 0, -0.25),
-			Block.box(0, 0, 0, 8, 16, 8).move(0.25, 0, 0.0),
-			Block.box(0, 0, 0, 8, 16, 8).move(0.25, 0, 0.25),
-			Block.box(0, 0, 0, 8, 16, 8).move(0.25, 0, 0.5),
-			Block.box(0, 0, 0, 8, 16, 8).move(0.25, 0, 0.75)
+			Block.box(0, 0, 0, 8, 15, 16).move(0.25, 0, 0),
+			Block.box(0, 0, 0, 8, 15, 16).move(0.25, 0, -1),
+			Block.box(0, 0, 0, 8, 15, 8).move(0.25, 0, 1)
 			);
 
 	public MediumNavalCannonBlock() {
@@ -86,6 +86,16 @@ public class MediumNavalCannonBlock extends HorizontalDirectionalBlock implement
 		builder.add(LIT);
 	}
 
+	@Override
+	public boolean canSurvive(BlockState state, LevelReader level, BlockPos blockpos) {
+		return canSupportCenter(level, blockpos.below(), Direction.UP);
+	}
+
+	@Override
+	public BlockState updateShape(BlockState state, Direction direction, BlockState stateAlt, LevelAccessor level, BlockPos blockpos, BlockPos blockposAlt) {
+		return direction == Direction.DOWN && !state.canSurvive(level, blockpos) ? Blocks.AIR.defaultBlockState() : super.updateShape(state, direction, stateAlt, level, blockpos, blockposAlt);
+	}
+	
 	@Override
 	public BlockState rotate(final BlockState state, final LevelAccessor level, final BlockPos pos, final Rotation direction) {
 		return state.setValue(HORIZONTAL_ROTATION, direction.rotate(state.getValue(HORIZONTAL_ROTATION)));

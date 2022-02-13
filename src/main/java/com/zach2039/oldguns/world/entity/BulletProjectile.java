@@ -607,13 +607,12 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 
 	@Override
 	protected void onHitBlock(BlockHitResult result) {
-
 		this.lastState = this.level.getBlockState(result.getBlockPos());
 		BlockState blockstate = this.level.getBlockState(result.getBlockPos());
 		Vec3i hitNormal = result.getDirection().getNormal();
 		boolean isShallowAngle = Mth.abs((float) this.getDeltaMovement().normalize().dot(new Vec3(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())) < 0.4;
 		boolean ricochet = result.getDirection().getAxis().isVertical() && (isShallowAngle) && (this.getVelocityMagnitude() > 1f);
-
+		
 		// Allow ricochet for projectiles
 		//		OldGuns.LOGGER.info("ricochet: " + ricochet);
 		//		OldGuns.LOGGER.info("vertical: " + result.getDirection().getAxis().isVertical());

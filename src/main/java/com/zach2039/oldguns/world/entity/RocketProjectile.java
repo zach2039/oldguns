@@ -24,6 +24,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -36,7 +37,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 	protected static final EntityDataAccessor<Byte> TRAJECTORY_BIAS_X = SynchedEntityData.defineId(RocketProjectile.class, EntityDataSerializers.BYTE);
 	protected static final EntityDataAccessor<Byte> TRAJECTORY_BIAS_Y = SynchedEntityData.defineId(RocketProjectile.class, EntityDataSerializers.BYTE);
 	
-	private static double[] thrust = new double[] { -0.01, 0.02, -0.03, 0.04, -0.05, 0.06, -0.07, 0.08, -0.09 };
+	private static double[] thrust = new double[] { 0.01, -0.02, -0.03, -0.04, 0.05, -0.06, 0.07, -0.08, 0.09 };
 	
 	public RocketProjectile(EntityType<? extends RocketProjectile> entityType, Level world) {
 		super(entityType, world);
@@ -75,6 +76,14 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 		setTrajectoryBiasY(compound.getByte("trajectoryBiasY"));
 	}
 
+	@Override
+	protected boolean canCollideWithBlockState(BlockState blockstate) {
+		if (!blockstate.isAir())
+			return true;
+
+		return false;
+	}
+	
 	@Override
 	public void tick() {
 		if (!this.hasBeenShot) {
@@ -149,6 +158,10 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 		if (this.isInWaterOrRain() || blockstate.is(Blocks.POWDER_SNOW)) {	         
 			this.clearFire();
 		}
+		
+		if (this.isInWater()) {
+			doEffectOnBlockHit(this.blockPosition());
+		}
 
 		if (this.inGround && !flag) {
 			if (this.lastState != blockstate && this.shouldFall()) {
@@ -184,7 +197,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 				if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
 					this.onHit(hitresult);
 					this.hasImpulse = true;
-				}
+				}				
 
 				if (entityhitresult == null || this.getPierceLevel() <= 0) {
 					break;

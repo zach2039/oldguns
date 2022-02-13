@@ -207,7 +207,7 @@ public abstract class StationaryRocketBlockEntity extends StationaryArtilleryBlo
 		
 		blockEntity.facing = state.getValue(CongreveRocketStandBlock.HORIZONTAL_ROTATION);
 		
-		blockEntity.shotYaw = blockEntity.getYawFromFacing();
+		//blockEntity.shotYaw = blockEntity.getYawFromFacing();
 	}
 	
 	public void setFacing(Direction facing) {

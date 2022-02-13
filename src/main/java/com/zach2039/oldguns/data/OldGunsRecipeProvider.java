@@ -1967,11 +1967,9 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "match_cord_from_bark_strands"));
 		
 		// Create fuse
-		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.FUSE.get(), 3)
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.FUSE.get(), 7)
 				.requires(ModTags.Items.ANY_GUNPOWDER)
-				.requires(Tags.Items.STRING)
-				.requires(Tags.Items.STRING)
-				.requires(Tags.Items.STRING)
+				.requires(Tags.Items.STRING, 7)
 				.requires(Items.HONEYCOMB)
 				.unlockedBy("has_any_gunpowder", has(ModTags.Items.ANY_GUNPOWDER))
 				.unlockedBy("has_string", has(Tags.Items.STRING))

@@ -38,7 +38,7 @@ public class CongreveRocketStandRenderer implements BlockEntityRenderer<Congreve
 		stackIn.translate(0.5f, 2.25f, 0.5f);
 		model.setupAnim(blockEntity, 0, 0, 0, 0, 0);
 		modelRocket.setupAnim(blockEntity, 0, 0, 0, 0, 0);
-		stackIn.mulPose(Vector3f.YP.rotationDegrees(-blockEntity.getYawFromFacing()));
+		stackIn.mulPose(Vector3f.YP.rotationDegrees(-blockEntity.getShotYaw()));
 		
 		stackIn.pushPose();
 		stackIn.scale(1.5f, -1.5f, -1.5f);	

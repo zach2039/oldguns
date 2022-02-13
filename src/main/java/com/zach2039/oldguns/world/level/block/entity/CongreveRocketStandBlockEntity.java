@@ -10,9 +10,13 @@ import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.PacketDistributor.TargetPoint;
@@ -41,5 +45,4 @@ public class CongreveRocketStandBlockEntity extends StationaryRocketBlockEntity 
 						getShotPitch(), getShotYaw(), 0)
 				);
 	}
-
 }
