@@ -970,7 +970,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get())
 					.pattern("BMH")
 					.define('B', ModTags.Items.SMALL_METAL_FLARED_BARREL)
-					.define('M', ModTags.Items.MATCHLOCK_MECHANISM)
+					.define('M', ModTags.Items.WHEELLOCK_MECHANISM)
 					.define('H', ModTags.Items.MEDIUM_HANDLE)
 					.unlockedBy("has_small_metal_flared_barrel", has(ModTags.Items.SMALL_METAL_FLARED_BARREL))
 					.unlockedBy("has_wheellock_mechanism", has(ModTags.Items.WHEELLOCK_MECHANISM))
