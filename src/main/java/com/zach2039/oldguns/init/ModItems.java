@@ -243,7 +243,7 @@ public class ModItems {
 	
 	// Niter
 	public static final RegistryObject<MaterialItem> NITRATE_SOIL = ITEMS.register("nitrate_soil", () -> new MaterialItem());	
-	public static final RegistryObject<MaterialItem> LIQUID_NITER = ITEMS.register("liquid_niter", () -> new MaterialItem(1));
+	public static final RegistryObject<MaterialItem> LIQUID_NITER_BOTTLE = ITEMS.register("liquid_niter_bottle", () -> new MaterialItem(3));
 	public static final RegistryObject<MaterialItem> NITER = ITEMS.register("niter", () -> new MaterialItem());
 	
 	// Sulfur

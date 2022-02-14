@@ -5,11 +5,15 @@ import java.util.function.Supplier;
 import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
+import com.zach2039.oldguns.fluid.group.FluidGroup;
+import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
@@ -264,7 +268,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_TRIGGER_ASSEMBLY.get());
 		withGeneratedParentAndDefaultTexture(ModItems.GOLD_TRIGGER_ASSEMBLY.get());
 		
-		
+		bucketItem(ModFluids.LIQUID_NITER);
 		
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_BITS.get());
 		
@@ -276,7 +280,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.BRASS_NUGGET.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.NITRATE_SOIL.get());
-		withGeneratedParentAndDefaultTexture(ModItems.LIQUID_NITER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.LIQUID_NITER_BOTTLE.get());
 		withGeneratedParentAndDefaultTexture(ModItems.NITER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.SULFUR.get());
 		
@@ -397,17 +401,17 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withExistingParent(name(item), mcLoc("template_spawn_egg"));
 	}
 
-//	private void bucketItem(final FluidGroup<?, ?, ?, ?> fluidGroup) {
-//		final Item item = fluidGroup.getBucket().get();
-//		final Fluid fluid = item instanceof BucketItem ? ((BucketItem) item).getFluid() : Fluids.EMPTY;
-//
-//		getBuilder(name(item))
-//				.parent(getExistingFile(new ResourceLocation("forge", "bucket")))
-//				.customLoader(DynamicBucketModelBuilder::begin)
-//				.fluid(fluid)
-//				.flipGas(true)
-//				.end();
-//	}
+	private void bucketItem(final FluidGroup<?, ?, ?, ?> fluidGroup) {
+		final Item item = fluidGroup.getBucket().get();
+		final Fluid fluid = item instanceof BucketItem ? ((BucketItem) item).getFluid() : Fluids.EMPTY;
+
+		getBuilder(name(item))
+				.parent(getExistingFile(new ResourceLocation("forge", "bucket")))
+				.customLoader(DynamicBucketModelBuilder::begin)
+				.fluid(fluid)
+				.flipGas(true)
+				.end();
+	}
 
 	private void bucketItem(final Item item) {
 		getBuilder(name(item))

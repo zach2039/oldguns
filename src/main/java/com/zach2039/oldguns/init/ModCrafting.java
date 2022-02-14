@@ -48,7 +48,7 @@ public class ModCrafting {
 			BrewingRecipeRegistry.addRecipe(
 					Ingredient.of(Items.POTION.getDefaultInstance()),
 					Ingredient.of(ModItems.NITRATE_SOIL.get().getDefaultInstance()),
-					ModItems.LIQUID_NITER.get().getDefaultInstance()
+					ModItems.LIQUID_NITER_BOTTLE.get().getDefaultInstance()
 					);	
 		}
 	}

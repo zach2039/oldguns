@@ -22,7 +22,7 @@ public class LiquidNiterRecipe implements IBrewingRecipe {
 	@Override
 	public ItemStack getOutput(ItemStack input, ItemStack ingredient) {
 		if (isInput(input) && isIngredient(ingredient))
-            return new ItemStack(ModItems.LIQUID_NITER.get());
+            return new ItemStack(ModItems.LIQUID_NITER_BOTTLE.get());
 		
         return ItemStack.EMPTY;
 	}

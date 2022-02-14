@@ -13,6 +13,7 @@ import com.google.common.collect.ImmutableMap;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModBlocks;
+import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.util.EnumFaceRotation;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
@@ -225,7 +226,9 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 		);
 		
 		simpleBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
-		simpleBlockItem(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);		
+		simpleBlockItem(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
+		
+		fluidBlock(ModFluids.LIQUID_NITER);
 	}
 
 	private void blockstateError(final Block block, final String fmt, final Object... args) {

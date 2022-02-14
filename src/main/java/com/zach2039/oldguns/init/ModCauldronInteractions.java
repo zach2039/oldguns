@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import java.util.Map;
+import java.util.function.Predicate;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
@@ -20,8 +21,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -34,19 +37,18 @@ public class ModCauldronInteractions {
 	public static class LiquidNiterInteraction implements CauldronInteraction {
 		public static Map<Item, CauldronInteraction> LIQUID_NITER = CauldronInteraction.newInteractionMap();
 
-		CauldronInteraction FILL_LIQUID_NITER = (state, level, blockpos, player, hand, stack) -> {
-			return emptyBucket(level, blockpos, player, hand, stack, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3)), SoundEvents.BUCKET_EMPTY);
-		};;
+//		CauldronInteraction FILL_LIQUID_NITER = (state, level, blockpos, player, hand, stack) -> {
+//			return emptyBucket(level, blockpos, player, hand, stack, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3)), SoundEvents.BUCKET_EMPTY);
+//		};;
 
 		@Override
 		public InteractionResult interact(BlockState state, Level level, BlockPos blockpos, Player player,
 				InteractionHand hand, ItemStack stack) {
-			// TODO Auto-generated method stub
 			return null;
 		}
 
 		static void bootstrap() {
-			CauldronInteraction.EMPTY.put(ModItems.LIQUID_NITER.get(), (state, level, blockpos, player, hand, stack) -> {
+			CauldronInteraction.EMPTY.put(ModItems.LIQUID_NITER_BOTTLE.get(), (state, level, blockpos, player, hand, stack) -> {
 				if (!level.isClientSide) {
 					Item item = stack.getItem();
 					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
@@ -58,6 +60,10 @@ public class ModCauldronInteractions {
 				}
 
 				return InteractionResult.sidedSuccess(level.isClientSide);
+			});
+			
+			CauldronInteraction.EMPTY.put(ModFluids.LIQUID_NITER.getBucket().get(), (state, level, blockpos, player, hand, stack) -> {
+				return emptyBucket(level, blockpos, player, hand, stack, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3)), SoundEvents.BUCKET_EMPTY);
 			});
 			
 			CauldronInteraction.WATER.put(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().asItem(), (state, level, blockpos, player, hand, stack) -> {
@@ -91,7 +97,7 @@ public class ModCauldronInteractions {
 			LIQUID_NITER.put(Items.GLASS_BOTTLE, (state, level, blockpos, player, hand, stack) -> {
 				if (!level.isClientSide) {
 					Item item = stack.getItem();
-					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.LIQUID_NITER.get())));
+					player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(ModItems.LIQUID_NITER_BOTTLE.get())));
 					player.awardStat(Stats.USE_CAULDRON);
 					player.awardStat(Stats.ITEM_USED.get(item));
 					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);
@@ -102,7 +108,17 @@ public class ModCauldronInteractions {
 				return InteractionResult.sidedSuccess(level.isClientSide);
 			});
 			
-			LIQUID_NITER.put(ModItems.LIQUID_NITER.get(), (state, level, blockpos, player, hand, stack) -> {
+			LIQUID_NITER.put(ModFluids.LIQUID_NITER.getBucket().get(), (state, level, blockpos, player, hand, stack) -> {
+				return emptyBucket(level, blockpos, player, hand, stack, ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3)), SoundEvents.BUCKET_EMPTY);
+			});
+			
+			LIQUID_NITER.put(Items.BUCKET, (state, level, blockpos, player, hand, stack) -> {
+		         return fillBucket(state, level, blockpos, player, hand, stack, new ItemStack(ModFluids.LIQUID_NITER.getBucket().get()), (cauldronState) -> {
+		            return cauldronState.getValue(LayeredCauldronBlock.LEVEL) == 3;
+		         }, SoundEvents.BUCKET_FILL);
+		      });
+			
+			LIQUID_NITER.put(ModItems.LIQUID_NITER_BOTTLE.get(), (state, level, blockpos, player, hand, stack) -> {
 				if (state.getValue(LayeredCauldronBlock.LEVEL) != 3) {
 					if (!level.isClientSide) {
 						player.setItemInHand(hand, ItemUtils.createFilledResult(stack, player, new ItemStack(Items.GLASS_BOTTLE)));
@@ -149,6 +165,24 @@ public class ModCauldronInteractions {
 
 			return InteractionResult.sidedSuccess(level.isClientSide);
 		}
+		
+		static InteractionResult fillBucket(BlockState state, Level level, BlockPos blockpos, Player player, InteractionHand hand, ItemStack inputStack, ItemStack outputStack, Predicate<BlockState> canFill, SoundEvent sound) {
+		      if (!canFill.test(state)) {
+		         return InteractionResult.PASS;
+		      } else {
+		         if (!level.isClientSide) {
+		            Item item = outputStack.getItem();
+		            player.setItemInHand(hand, ItemUtils.createFilledResult(inputStack, player, outputStack));
+		            player.awardStat(Stats.USE_CAULDRON);
+		            player.awardStat(Stats.ITEM_USED.get(item));
+		            level.setBlockAndUpdate(blockpos, Blocks.CAULDRON.defaultBlockState());
+		            level.playSound((Player)null, blockpos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
+		            level.gameEvent((Entity)null, GameEvent.FLUID_PICKUP, blockpos);
+		         }
+
+		         return InteractionResult.sidedSuccess(level.isClientSide);
+		      }
+		   }
 	}
 
 	/**
@@ -157,7 +191,7 @@ public class ModCauldronInteractions {
 	 * @param event The common setup event
 	 */
 	@SubscribeEvent
-	public static void registerBrewingRecipes(final FMLCommonSetupEvent event) {
+	public static void registerCauldronInteractions(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			LiquidNiterInteraction.bootstrap();
 		});

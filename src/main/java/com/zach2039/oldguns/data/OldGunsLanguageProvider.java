@@ -6,8 +6,10 @@ import java.util.Map;
 import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.data.lang.OldGunsCompendiumLang;
+import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModEntities;
+import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.text.OldGunsLang;
 import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
@@ -21,6 +23,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.data.LanguageProvider;
 
 /**
@@ -254,7 +258,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.BRASS_NUGGET, "Brass Nugget");
 		
 		addItem(ModItems.NITRATE_SOIL, "Nitrate Soil");
-		addItem(ModItems.LIQUID_NITER, "Bottle of Liquid Niter");
+		addItem(ModItems.LIQUID_NITER_BOTTLE, "Liquid Niter Bottle");
 		addItem(ModItems.NITER, "Niter");
 		addItem(ModItems.SULFUR, "Sulfur");
 		
@@ -295,7 +299,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	}
 
 	private void addFluids() {
-		
+		addFluidGroup(ModFluids.LIQUID_NITER, "Liquid Niter");
 	}
 
 	private void addEntities() {
@@ -465,6 +469,18 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void add(final OldGunsLang lang, final String value) {
 		add(lang.getTranslationKey(), value);
+	}
+	
+	private <
+	STILL extends Fluid, FLOWING extends Fluid,
+	BLOCK extends LiquidBlock, BUCKET extends Item,
+	GROUP extends FluidGroup<STILL, FLOWING, BLOCK, BUCKET>
+	>
+	void addFluidGroup(final GROUP group, final String name) {
+		add(group.getStill().get().getAttributes().getTranslationKey(), name);
+		add(group.getFlowing().get().getAttributes().getTranslationKey(), String.format("Flowing %s", name));
+		addBlock(group.getBlock(), name);
+		addItem(group.getBucket(), String.format("%s Bucket", name));
 	}
 	
 	private void addPatchouliBookPage(final String key, final String value) {		
