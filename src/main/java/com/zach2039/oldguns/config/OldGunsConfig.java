@@ -293,6 +293,7 @@ public class OldGunsConfig {
 	}
 	
 	public static class ArtilleryRecipeSettings {
+		public final BooleanValue allowCongreveRocketStandArtilleryCrafting;
 		public final BooleanValue allowNavalCannonArtilleryCrafting;
 		public final BooleanValue allowArtilleryPowderChargesCrafting;
 		public final BooleanValue allowStoneArtilleryAmmoCrafting;
@@ -301,6 +302,10 @@ public class OldGunsConfig {
 		
 		ArtilleryRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
+			
+			allowCongreveRocketStandArtilleryCrafting = builder
+					.comment("Enable/disable congreve rocket stand artillery craft")
+					.define("allowCongreveRocketStandArtilleryCrafting", true);
 			
 			allowNavalCannonArtilleryCrafting = builder
 					.comment("Enable/disable naval cannon artillery craft")
@@ -1513,6 +1518,9 @@ public class OldGunsConfig {
 		public final ArtilleryAmmoAttributes small_iron_cannonball;
 		public final ArtilleryAmmoAttributes medium_iron_cannonball;
 		public final ArtilleryAmmoAttributes large_iron_cannonball;
+		public final ArtilleryAmmoAttributes small_iron_explosive_shell;
+		public final ArtilleryAmmoAttributes medium_iron_explosive_shell;
+		public final ArtilleryAmmoAttributes large_iron_explosive_shell;
 		public final ArtilleryAmmoAttributes small_iron_grapeshot;
 		public final ArtilleryAmmoAttributes medium_iron_grapeshot;
 		public final ArtilleryAmmoAttributes large_iron_grapeshot;
@@ -1588,6 +1596,51 @@ public class OldGunsConfig {
 					4f
 					);
 		
+			small_iron_explosive_shell = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Small Iron Explosive Shell ammo",
+					"small_iron_explosive_shell",
+					1,
+					1,
+					15.0f,
+					0.4f,
+					100.0f,
+					1.0f,
+					0.2f,
+					0,
+					2f
+					);
+			
+			medium_iron_explosive_shell = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Medium Iron Explosive Shell ammo",
+					"medium_iron_explosive_shell",
+					1,
+					1,
+					15.0f,
+					0.6f,
+					100.0f,
+					1.0f,
+					0.2f,
+					20,
+					3f
+					);
+			
+			large_iron_explosive_shell = new ArtilleryAmmoAttributes(
+					builder,
+					"Attributes of Large Iron Explosive Shell ammo",
+					"large_iron_explosive_shell",
+					1,
+					1,
+					15.0f,
+					0.8f,
+					100.0f,
+					1.0f,
+					0.2f,
+					0,
+					4f
+					);
+			
 			small_iron_grapeshot = new ArtilleryAmmoAttributes(
 					builder,
 					"Attributes of Small Iron Grapeshot ammo",

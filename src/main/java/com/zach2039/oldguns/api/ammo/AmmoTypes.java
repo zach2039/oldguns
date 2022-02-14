@@ -75,6 +75,9 @@ public class AmmoTypes {
 		SMALL_IRON_GRAPESHOT(ProjectileType.GRAPESHOT, ARTILLERY_AMMO_SETTINGS.small_iron_grapeshot),
 		MEDIUM_IRON_GRAPESHOT(ProjectileType.GRAPESHOT, ARTILLERY_AMMO_SETTINGS.medium_iron_grapeshot),
 		LARGE_IRON_GRAPESHOT(ProjectileType.GRAPESHOT, ARTILLERY_AMMO_SETTINGS.large_iron_grapeshot),
+		SMALL_IRON_EXPLOSIVE_SHELL(ProjectileType.EXPLOSIVE_SHELL, ARTILLERY_AMMO_SETTINGS.small_iron_explosive_shell),
+		MEDIUM_IRON_EXPLOSIVE_SHELL(ProjectileType.EXPLOSIVE_SHELL, ARTILLERY_AMMO_SETTINGS.medium_iron_explosive_shell),
+		LARGE_IRON_EXPLOSIVE_SHELL(ProjectileType.EXPLOSIVE_SHELL, ARTILLERY_AMMO_SETTINGS.large_iron_explosive_shell),
 		// Lead
 		;
 		

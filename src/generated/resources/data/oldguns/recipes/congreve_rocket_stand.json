@@ -1,0 +1,27 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_congreve_rocket_stand_artillery"
+    }
+  ],
+  "pattern": [
+    "  S",
+    " SW",
+    "P P"
+  ],
+  "key": {
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "W": {
+      "tag": "oldguns:wood_gear_set"
+    }
+  },
+  "result": {
+    "item": "oldguns:congreve_rocket_stand"
+  }
+}

@@ -3,6 +3,7 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftArtilleryPowderChargesCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftBlastingPowderSticksCondition;
+import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftCongreveRocketStandArtilleryCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftFlintlockWeaponsCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftIronArtilleryAmmoCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftIronFirearmAmmoCondition;
@@ -39,6 +40,7 @@ public class ModConditions {
 		CraftingHelper.register(CanCraftStoneFirearmAmmoCondition.Serializer.INSTANCE);
 		
 		CraftingHelper.register(CanCraftNavalCannonArtilleryCondition.Serializer.INSTANCE);
+		CraftingHelper.register(CanCraftCongreveRocketStandArtilleryCondition.Serializer.INSTANCE);
 		
 		CraftingHelper.register(CanCraftArtilleryPowderChargesCondition.Serializer.INSTANCE);
 		

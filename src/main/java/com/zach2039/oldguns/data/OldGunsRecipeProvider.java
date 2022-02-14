@@ -452,6 +452,20 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
 
 		// Artillery
+		// Create rocket stand
+		ShapedGunsmithsBenchRecipeBuilder.shaped(ModBlocks.CONGREVE_ROCKET_STAND.get())
+				.pattern("  S")
+				.pattern(" SW")
+				.pattern("P P")
+				.define('S', ItemTags.WOODEN_SLABS)
+				.define('P', ItemTags.PLANKS)
+				.define('W', ModTags.Items.WOOD_GEAR_SET)
+				.unlockedBy("has_wooden_slabs", has(ItemTags.WOODEN_SLABS))
+				.unlockedBy("has_planks", has(ItemTags.PLANKS))
+				.unlockedBy("has_wood_gear_set", has(ModTags.Items.WOOD_GEAR_SET))
+				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_congreve_rocket_stand_artillery"))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "congreve_rocket_stand"));
+				
 		// Create naval cannon
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModBlocks.MEDIUM_NAVAL_CANNON.get())
 				.pattern(" B ")
@@ -464,7 +478,24 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_medium_metal_cannon_barrel", has(ModTags.Items.MEDIUM_METAL_CANNON_BARREL))
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_naval_cannon_artillery"))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "naval_cannon"));
+		
 		// Ammo
+		// Create medium iron explosive rocket
+		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_EXPLOSIVE_ROCKET.get())
+				.pattern("bIb")
+				.pattern("IrI")
+				.pattern("Sr ")
+				.define('I', Tags.Items.INGOTS_IRON)
+				.define('S', Tags.Items.RODS_WOODEN)
+				.define('b', ModItems.BLASTING_POWDER.get())
+				.define('r', ModItems.ROCKET_POWDER.get())
+				.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))
+				.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
+				.unlockedBy("has_blasting_powder", has(ModItems.BLASTING_POWDER.get()))
+				.unlockedBy("has_rocket_powder", has(ModItems.ROCKET_POWDER.get()))
+				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_explosive_rocket"));
+		
 		// Create medium iron cannonball
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_CANNONBALL.get())
 				.pattern(" i ")
@@ -476,6 +507,20 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON))
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_cannonball"));
+		
+		// Create medium iron explosive shell
+		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_EXPLOSIVE_SHELL.get())
+				.pattern("bib")
+				.pattern("iBi")
+				.pattern("bib")
+				.define('i', Tags.Items.NUGGETS_IRON)
+				.define('B', Tags.Items.STORAGE_BLOCKS_IRON)
+				.define('b', ModItems.BLASTING_POWDER.get())
+				.unlockedBy("has_iron_nugget", has(Tags.Items.NUGGETS_IRON))
+				.unlockedBy("has_iron_block", has(Tags.Items.STORAGE_BLOCKS_IRON))
+				.unlockedBy("has_blasting_powder", has(ModItems.BLASTING_POWDER.get()))
+				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_iron_artillery_ammo"))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_iron_explosive_shell"));
 			
 		// Create medium iron grapeshot
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.MEDIUM_IRON_GRAPESHOT.get())

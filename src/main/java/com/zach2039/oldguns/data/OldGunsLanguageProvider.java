@@ -89,6 +89,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MEDIUM_IRON_EXPLOSIVE_ROCKET, "Medium Iron Explosive Rocket");
 		
 		addItem(ModItems.MEDIUM_IRON_CANNONBALL, "Medium Iron Cannonball");
+		addItem(ModItems.MEDIUM_IRON_EXPLOSIVE_SHELL, "Medium Iron Explosive Shell");
 		addItem(ModItems.MEDIUM_IRON_GRAPESHOT, "Medium Iron Grapeshot");
 		addItem(ModItems.MEDIUM_IRON_CANISTER_SHOT, "Medium Iron Canister Shot");
 		

@@ -1,0 +1,30 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_iron_artillery_ammo"
+    }
+  ],
+  "pattern": [
+    "bIb",
+    "IrI",
+    "Sr "
+  ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    },
+    "b": {
+      "item": "oldguns:blasting_powder"
+    },
+    "r": {
+      "item": "oldguns:rocket_powder"
+    }
+  },
+  "result": {
+    "item": "oldguns:medium_iron_explosive_rocket"
+  }
+}

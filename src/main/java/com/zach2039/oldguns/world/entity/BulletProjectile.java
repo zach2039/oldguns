@@ -722,7 +722,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 				if (getEffectStrength() > 0.0f)
 				{
 					if (!level.isClientSide()) {
-						level.explode(this, entity.getX(), entity.getY(), entity.getZ(), getEffectStrength(), Explosion.BlockInteraction.BREAK);
+						level.explode(this, entity.getX(), entity.getY(), entity.getZ(), getEffectStrength(), Explosion.BlockInteraction.DESTROY);
 					}
 					discard();
 				}
@@ -756,10 +756,9 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	protected void doEffectOnBlockHit(BlockPos blockpos) {
 		switch (getProjectileType()) {
 			case EXPLOSIVE_SHELL:
-				OldGuns.LOGGER.info(this.getEffectStrength());
 				if (getEffectStrength() > 0.0f) {
 					if (!level.isClientSide()) {
-						level.explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Explosion.BlockInteraction.BREAK);
+						level.explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Explosion.BlockInteraction.DESTROY);
 					}
 					discard();
 				}
@@ -1112,7 +1111,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	 */
 	public void setEffectStrength(float effectStrength)
 	{
-		OldGuns.LOGGER.info("set " + effectStrength);
 		this.entityData.set(EFFECT_STRENGTH, effectStrength);
 	}
 

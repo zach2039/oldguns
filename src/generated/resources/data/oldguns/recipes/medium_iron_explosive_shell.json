@@ -1,0 +1,27 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_iron_artillery_ammo"
+    }
+  ],
+  "pattern": [
+    "bib",
+    "iBi",
+    "bib"
+  ],
+  "key": {
+    "i": {
+      "tag": "forge:nuggets/iron"
+    },
+    "B": {
+      "tag": "forge:storage_blocks/iron"
+    },
+    "b": {
+      "item": "oldguns:blasting_powder"
+    }
+  },
+  "result": {
+    "item": "oldguns:medium_iron_cannonball"
+  }
+}

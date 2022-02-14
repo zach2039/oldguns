@@ -61,6 +61,7 @@ public class ModItems {
 	public static final RegistryObject<ArtilleryRocketAmmoItem> MEDIUM_IRON_EXPLOSIVE_ROCKET = ITEMS.register("medium_iron_explosive_rocket", () -> new ArtilleryRocketAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_EXPLOSIVE_ROCKET));
 	// Iron
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANNONBALL = ITEMS.register("medium_iron_cannonball", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_CANNONBALL));
+	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_EXPLOSIVE_SHELL = ITEMS.register("medium_iron_explosive_shell", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_EXPLOSIVE_SHELL));
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_GRAPESHOT = ITEMS.register("medium_iron_grapeshot", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_GRAPESHOT));
 	public static final RegistryObject<ArtilleryAmmoItem> MEDIUM_IRON_CANISTER_SHOT = ITEMS.register("medium_iron_canister_shot", () -> new ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_CANISTER_SHOT));
 	// Charges
