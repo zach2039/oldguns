@@ -23,7 +23,7 @@ Antique weapons for that colonial feel.
     side="BOTH"
 [[dependencies.oldguns]]
     modId="patchouli"
-    mandatory=false
+    mandatory=true
     versionRange="[1.18.1-61,)"
     ordering="NONE"
     side="CLIENT"
