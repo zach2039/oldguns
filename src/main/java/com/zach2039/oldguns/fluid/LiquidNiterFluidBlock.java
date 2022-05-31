@@ -5,13 +5,13 @@ import java.util.Random;
 
 import javax.annotation.Nonnull;
 
+import com.google.common.collect.ImmutableList;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -20,7 +20,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
@@ -58,9 +57,15 @@ public class LiquidNiterFluidBlock extends LiquidBlock {
 		if (this.shouldSpreadLiquid(level, pos, state)) {
 			level.scheduleTick(pos, state.getFluidState().getType(), this.getFluid().getTickDelay(level));
 		}
-
 	}
 
+	@Override
+	public void onPlace(BlockState state, Level level, BlockPos pos, BlockState stateAlt, boolean parm) {
+		if (this.shouldSpreadLiquid(level, pos, state)) {
+			level.scheduleTick(pos, state.getFluidState().getType(), this.getFluid().getTickDelay(level));
+		}		
+   }
+	
 	private boolean shouldSpreadLiquid(Level level, BlockPos pos, BlockState state) {
 		if (!level.isClientSide()) {
 			oxidizeCopper((ServerLevel)level, pos);
@@ -75,19 +80,18 @@ public class LiquidNiterFluidBlock extends LiquidBlock {
 	}
 	
 	private void oxidizeCopper(ServerLevel level, BlockPos pos) {
-		for(Direction direction : POSSIBLE_FLOW_DIRECTIONS) {
+		for (Direction direction : ImmutableList.of(Direction.DOWN, Direction.SOUTH, Direction.NORTH, Direction.EAST, Direction.WEST, Direction.UP, Direction.DOWN)) {
 			BlockPos blockpos = pos.relative(direction);
 			BlockState blockstate = level.getBlockState(blockpos);
 			if (blockstate.getBlock() instanceof WeatheringCopper) {
 				for (int i = 0; i < 3; i++) {
 					Optional<BlockState> optionalBlockState = ((WeatheringCopper)blockstate.getBlock()).getNext(blockstate);
-					
 					if (optionalBlockState.isPresent()) {
 						level.setBlock(blockpos, ((WeatheringCopper)blockstate.getBlock()).getNext(blockstate).get(), 2);
 						blockstate = level.getBlockState(blockpos);
+						this.fizz(level, blockpos);
 					}
 				}
-				this.fizz(level, blockpos);
 			}
 		}
 	}
