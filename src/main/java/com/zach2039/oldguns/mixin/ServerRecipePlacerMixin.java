@@ -41,10 +41,10 @@ import net.minecraft.world.item.ItemStack;
 @Mixin(ServerPlaceRecipe.class)
 public final class ServerRecipePlacerMixin {
 	@Redirect(
-			method = "moveItemToGrid",
+			method = "m_135438_",
 			at = @At(
 					value = "INVOKE",
-					target = "net/minecraft/world/entity/player/Inventory.findSlotMatchingUnusedItem(Lnet/minecraft/world/item/ItemStack;)I"
+					target = "net/minecraft/world/entity/player/Inventory.m_36043_(Lnet/minecraft/world/item/ItemStack;)I"
 			)
 	)
 	private int getSlotWithUnusedStack(Inventory inventory, ItemStack stack) {

@@ -166,7 +166,7 @@ String buildVersionString() {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.1-39.0.63'
+    minecraft 'net.minecraftforge:forge:1.18.2-40.1.19'
 		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
