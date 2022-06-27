@@ -1,3 +1,26 @@
+### v1.18.2-3.3.0-26
+
+ - Fix players not taking damage from artillery
+ - Port to 1.18.2
+ - Update build and mixins
+ - Update forge to 1.18.2
+ - Fix invisible pixels on ram_rod.png and long_match.png
+ - Fix liquid niter fluid interaction with copper
+ - Remove swap files
+ - Add liquid niter fluid and more liquid niter cauldron interactions
+ - Add recipes for rockets, rocket stands, and explosive shells
+ - Make Patchouli mandatory dependency
+ - Update issue templates
+ - Merge branch '1.18.1' of github.com:zach2039/oldguns into 1.18.1
+ - Update issue templates
+ - Swap logo with one from Xiraxis9
+ - Adjust mod.toml credits to include contributors and artists
+ - Fix wrong mechanism used in wheellock blunderbuss pistol
+ - Allow rocket artillery stand to be rotated in any direction
+ - Add config option for cauldron heat sources
+ - Add rocket artillery (WIP)
+ - Add blasting powder, rocket powder, and mining charges
+
 #### v1.18.1-3.2.1-25
 
 - Fix #14: Mortar and Pestle consumed when crafting in vanilla crafting bench
