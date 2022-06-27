@@ -3,13 +3,14 @@ buildscript {
     repositories {
         // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://maven.minecraftforge.net' }
-        mavenCentral()
         maven { url = 'https://plugins.gradle.org/m2/'}
+        mavenCentral()
         maven {
 			url = 'https://repo.spongepowered.org/repository/maven-public/'
 			content { includeGroup "org.spongepowered" }
 		}
-        mavenLocal()
+		maven { url 'https://maven.parchmentmc.org' }
+		mavenLocal()
     }
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
@@ -19,12 +20,15 @@ buildscript {
 			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
 		} else {
 			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		}
+		}	
+
+		classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
+apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
 if (System.getenv("CI") != "true") {
@@ -40,6 +44,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
     mappings channel: 'official', version: '1.18.2'
+	//mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
     runs {
         client {
             workingDirectory project.file('run')
@@ -101,7 +106,6 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	mavenCentral()
 	maven { // JEI & Tinkers
         name 'DVS1 Maven FS'
         url 'https://dvs1.progwml6.com/files/maven'
@@ -180,9 +184,7 @@ dependencies {
 	//runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
 	//runtimeOnly fg.deobf("curse.maven:flywheel-486392:3600401")
 
-	if (System.getProperty("idea.sync.active") != "true") {
-        annotationProcessor "org.spongepowered:mixin:0.8.5:processor"
-    }
+	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {

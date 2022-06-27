@@ -24,6 +24,7 @@ import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -92,12 +93,12 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public BUILDER requires(final Tag<Item> tagIn) {
+	public BUILDER requires(final TagKey<Item> tagIn) {
 		return (BUILDER) super.requires(tagIn);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public BUILDER requires(final Tag<Item> tagIn, final int quantity) {
+	public BUILDER requires(final TagKey<Item> tagIn, final int quantity) {
 		return (BUILDER) super.requires(Ingredient.of(tagIn), quantity);
 	}
 

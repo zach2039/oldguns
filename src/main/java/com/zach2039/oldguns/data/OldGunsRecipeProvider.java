@@ -23,6 +23,7 @@ import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.Tag;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
@@ -2132,7 +2133,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		
 	}
 	
-	private static void shapelessMuzzleloaderSingleReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, Tag<Item> inputAmmo, Tag<Item> inputPowder, int powderAmount) {
+	private static void shapelessMuzzleloaderSingleReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, TagKey<Item> inputAmmo, TagKey<Item> inputPowder, int powderAmount) {
 		ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm)
 				.requires(firearm)
 				.requires(inputAmmo)
@@ -2140,28 +2141,28 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_firearm", has(firearm))
 				.unlockedBy("has_ammo", has(inputAmmo))
 				.unlockedBy("has_powder", has(inputPowder))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputAmmo.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 	}
 	
-	private static void shapelessFirearmSalvageRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputPart, int partAmount, Tag<Item> inputFirearm) {
+	private static void shapelessFirearmSalvageRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputPart, int partAmount, TagKey<Item> inputFirearm) {
 		ShapelessGunsmithsBenchHacksawRecipeBuilder.shapeless(outputPart, partAmount)
 				.requires(inputFirearm)
 				.requires(ModItems.HACKSAW.get())
 				.unlockedBy("has_firearm", has(inputFirearm))
 				.unlockedBy("has_hacksaw", has(ModItems.HACKSAW.get()))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, inputFirearm.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_salvage"));
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, inputFirearm.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_salvage"));
 	}
 	
-	private static void shapelessMuzzleloaderSingleCartridgeReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, Tag<Item> inputCartridge) {
+	private static void shapelessMuzzleloaderSingleCartridgeReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, TagKey<Item> inputCartridge) {
 		ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm)
 				.requires(firearm)
 				.requires(inputCartridge)
 				.unlockedBy("has_firearm", has(firearm))
 				.unlockedBy("has_cartridge", has(inputCartridge))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputCartridge.toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputCartridge.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 	}
 	
-	private static void shapelessPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, Tag<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
+	private static void shapelessPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, TagKey<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
 		ShapelessGunsmithsBenchRecipeBuilder.shapeless(outputCartridge)
 				.requires(inputAmmo)		
 				.requires(Tags.Items.STRING)

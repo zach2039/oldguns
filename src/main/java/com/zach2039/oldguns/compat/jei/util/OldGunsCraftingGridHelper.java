@@ -2,8 +2,13 @@ package com.zach2039.oldguns.compat.jei.util;
 
 import java.util.List;
 
+import org.jetbrains.annotations.Nullable;
+
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.gui.ingredient.IGuiIngredientGroup;
+import mezz.jei.api.ingredients.IIngredientType;
 
 public class OldGunsCraftingGridHelper implements ICraftingGridHelper {
 	private final int craftInputSlot1;
@@ -39,7 +44,7 @@ public class OldGunsCraftingGridHelper implements ICraftingGridHelper {
 	public <T> void setInput(IGuiIngredientGroup<T> guiIngredients, int inputIndex, List<T> input) {
 		guiIngredients.set(craftInputSlot1 + inputIndex, input);
 	}
-
+	
 	private static int getCraftingIndex(int i, int width, int height) {
 		int index;
 		if (width == 1) {
@@ -68,4 +73,24 @@ public class OldGunsCraftingGridHelper implements ICraftingGridHelper {
 		return index;
 	}
 
+	@Override
+	public <T> void setInputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType,
+			List<@Nullable List<@Nullable T>> inputs, int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T> void setInputs(List<IRecipeSlotBuilder> slotBuilders, IIngredientType<T> ingredientType,
+			List<@Nullable List<@Nullable T>> inputs, int width, int height) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public <T> void setOutputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType,
+			@Nullable List<@Nullable T> outputs) {
+		// TODO Auto-generated method stub
+		
+	}
 }

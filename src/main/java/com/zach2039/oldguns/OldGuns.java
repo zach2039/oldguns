@@ -18,6 +18,7 @@ import com.zach2039.oldguns.init.ModLootTables;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
 import com.zach2039.oldguns.init.ModPotions;
+import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.init.ModSoundEvents;
 import com.zach2039.oldguns.init.ModSpawnPlacements;
 
@@ -68,6 +69,7 @@ public class OldGuns
     @SubscribeEvent
 	public static void commonSetup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
+			ModRecipeTypes.register();
 			ModCrafting.Ingredients.register();
 			ModCrafting.Brewing.register();
 			ModLootTables.registerLootTables();

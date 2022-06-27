@@ -17,6 +17,8 @@ public interface ModRecipeTypes<T extends Recipe<?>> {
 	RecipeType<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench");
 	RecipeType<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft");
 
+	public static void register() {}
+	
 	static <T extends Recipe<?>> RecipeType<T> register(final String name) {
 		return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(OldGuns.MODID, name), new RecipeType<T>() {
 			public String toString() {
