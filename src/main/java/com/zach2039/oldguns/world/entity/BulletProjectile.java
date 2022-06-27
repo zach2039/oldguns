@@ -149,8 +149,18 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	}
 
 	@Override
-	public boolean canHitEntity(Entity p_36743_) {
-		return super.canHitEntity(p_36743_) && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(p_36743_.getId()));
+	public boolean canHitEntity(Entity ent) {
+		boolean canHit = false;
+		if (!ent.isSpectator() && ent.isAlive() && ent.isPickable()) {
+			Entity entity = this.getOwner();
+			if (this.getDamageType() == DamageType.ARTILLERY) {
+				canHit = true;
+			} else {
+				canHit = entity == null || this.leftOwner || !entity.isPassengerOfSameVehicle(ent);
+			}
+		}
+		
+		return canHit && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(ent.getId()));
 	}
 
 	@Override
@@ -505,7 +515,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		int damageNoBypass = Mth.ceil(i * (float)(1 - armorBypassPercent));
 		int damageBypass = Mth.ceil(i * (float)(armorBypassPercent));
 		
-		if (entity.hurt(damagesource, (float)damageNoBypass)) {
+		if (entity.hurt(damagesource, (float)damageNoBypass) || entity.hurt(damagesource.bypassArmor(), (float)damageBypass)) {
 			if (isEnderman) {
 				return;
 			}
@@ -548,11 +558,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 
 				// Reset inv time to allow multiple pellets to damage entities
 				entity.invulnerableTime = 0;
-				
-				// Try to apply bypass armor damage as well
-				if (damageBypass > 0 && entity.hurt(damagesource.bypassArmor(), (float)damageBypass)) {
-					entity.invulnerableTime = 0;
-				}
 			}
 
 			doEffectOnEntityHit(entity);
