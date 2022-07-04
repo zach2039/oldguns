@@ -8,12 +8,11 @@ import javax.annotation.Nonnull;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.FirearmAmmo;
-import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.Firearm;
+import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
@@ -30,7 +29,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 {
@@ -162,7 +160,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 		return ModCrafting.Recipes.FIREARM_MUZZLELOADER_RELOAD_SHAPELESS.get();
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessVanillaMuzzleloaderReloadRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapelessVanillaMuzzleloaderReloadRecipe> {
 		@Override
 		public ShapelessVanillaMuzzleloaderReloadRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");

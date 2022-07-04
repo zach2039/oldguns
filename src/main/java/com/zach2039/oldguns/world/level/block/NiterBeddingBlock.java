@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.animal.Animal;
@@ -49,14 +50,14 @@ public class NiterBeddingBlock extends Block {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, RandomSource rand) {
 		double locallyGeneratedRefuse = getNearbyAnimalRefuseAmount(level, blockpos);	
 		
 		tryNitrateLevelIncrease(state, level, blockpos, rand, (NITER_PRODUCTION_SETTINGS.niterBeddingRefuseGenerationDifficulty.get() / (locallyGeneratedRefuse + 1)));
 	}
 
 	@Override
-	public void tick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void tick(BlockState state, ServerLevel level, BlockPos blockpos, RandomSource rand) {
 		BlockPos posAbove = PointedDripstoneBlock.findStalactiteTipAboveCauldron(level, blockpos);
 		if (posAbove != null) {
 			Fluid fluid = PointedDripstoneBlock.getCauldronFillFluidType(level, posAbove);
@@ -75,7 +76,7 @@ public class NiterBeddingBlock extends Block {
 		tryNitrateLevelIncrease(state, level, blockpos, level.getRandom(), (NITER_PRODUCTION_SETTINGS.niterBeddingDripstoneGenerationDifficulty.get()));
 	}
 	
-	private void tryNitrateLevelIncrease(BlockState state, Level level, BlockPos blockpos, Random rand, double difficulty) {
+	private void tryNitrateLevelIncrease(BlockState state, Level level, BlockPos blockpos, RandomSource rand, double difficulty) {
 		int refuseAmount = state.getValue(REFUSE_AMOUNT);
 		boolean isNirateSoilReady = (refuseAmount == MAX_REFUSE_AMOUNT);
 		

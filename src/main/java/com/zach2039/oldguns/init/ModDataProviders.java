@@ -33,22 +33,22 @@ public class ModDataProviders {
 		final ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
 		if (event.includeClient()) {
-			dataGenerator.addProvider(new OldGunsLanguageProvider(dataGenerator));
+			dataGenerator.addProvider(true, new OldGunsLanguageProvider(dataGenerator));
 			
 			final OldGunsItemModelProvider itemModelProvider = new OldGunsItemModelProvider(dataGenerator, existingFileHelper);
-			dataGenerator.addProvider(itemModelProvider);
+			dataGenerator.addProvider(true, itemModelProvider);
 			
-			dataGenerator.addProvider(new OldGunsBlockStateProvider(dataGenerator, itemModelProvider.existingFileHelper));
+			dataGenerator.addProvider(true, new OldGunsBlockStateProvider(dataGenerator, itemModelProvider.existingFileHelper));
 		}
 
 		if (event.includeServer()) {
-			dataGenerator.addProvider(new OldGunsRecipeProvider(dataGenerator));
-			dataGenerator.addProvider(new OldGunsLootTableProvider(dataGenerator));
-			dataGenerator.addProvider(new OldGunsLootModifierProvider(dataGenerator));
+			dataGenerator.addProvider(true, new OldGunsRecipeProvider(dataGenerator));
+			dataGenerator.addProvider(true, new OldGunsLootTableProvider(dataGenerator));
+			dataGenerator.addProvider(true, new OldGunsLootModifierProvider(dataGenerator));
 			
 			final OldGunsBlockTagsProvider blockTagsProvider = new OldGunsBlockTagsProvider(dataGenerator, existingFileHelper);
-			dataGenerator.addProvider(blockTagsProvider);
-			dataGenerator.addProvider(new OldGunsItemTagsProvider(dataGenerator, blockTagsProvider, existingFileHelper));
+			dataGenerator.addProvider(true, blockTagsProvider);
+			dataGenerator.addProvider(true, new OldGunsItemTagsProvider(dataGenerator, blockTagsProvider, existingFileHelper));
 		}
 	}
 }

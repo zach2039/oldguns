@@ -7,12 +7,14 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.NiterProductionSettings;
 import com.zach2039.oldguns.init.ModCauldronInteractions.LiquidNiterInteraction;
 import com.zach2039.oldguns.init.ModItems;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -44,7 +46,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	}
 	
 	@Override
-	public void animateTick(BlockState state, Level level, BlockPos blockpos, Random rand) {
+	public void animateTick(BlockState state, Level level, BlockPos blockpos, RandomSource rand) {
 		
 		if (canBoil(level, blockpos)) {
 			addParticlesAndSound(level, state, new Vec3(blockpos.getX(), blockpos.getY(), blockpos.getZ()), rand);
@@ -54,7 +56,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	private static boolean canBoil(Level level, BlockPos blockpos) {
 		BlockState stateBelow = level.getBlockState(blockpos.below());
 		
-		if (NITER_PRODUCTION_SETTINGS.niterCauldronValidHeatSources.get().contains(stateBelow.getBlock().getRegistryName().toString())) {
+		if (NITER_PRODUCTION_SETTINGS.niterCauldronValidHeatSources.get().contains(ModRegistryUtil.getKey(stateBelow.getBlock()).toString())) {
 			if (stateBelow.hasProperty(BlockStateProperties.LIT)) {
 				if (stateBelow.getValue(BlockStateProperties.LIT)) {
 					return true;
@@ -67,7 +69,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 		return false;			
 	}
 	
-	private static void addParticlesAndSound(Level level, BlockState state, Vec3 vec, Random rand) {
+	private static void addParticlesAndSound(Level level, BlockState state, Vec3 vec, RandomSource rand) {
 		float f = rand.nextFloat();
 		int i = state.getValue(LEVEL);
 		
@@ -100,7 +102,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, RandomSource rand) {
 		int fluidLevel = state.getValue(LEVEL);
 		boolean canCrystalize = (fluidLevel > 0) && canBoil(level, blockpos);
 		

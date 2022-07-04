@@ -6,6 +6,7 @@ import com.zach2039.oldguns.init.ModItems;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public interface IDesignNotes {
 	static String getDesign(ItemStack stack) {
@@ -16,12 +17,12 @@ public interface IDesignNotes {
 	}
 	
 	static ItemStack setDesignTagOnItem(ItemStack notes, Item item) {
-		notes.getOrCreateTag().putString("item", item.getRegistryName().toString());
+		notes.getOrCreateTag().putString("item", ForgeRegistries.ITEMS.getKey(item).toString());
 		return notes.copy();
 	}
 	
 	static CompoundTag setDesignOnTag(CompoundTag tag, Item item) {
-		tag.putString("item", item.getRegistryName().toString());
+		tag.putString("item", ForgeRegistries.ITEMS.getKey(item).toString());
 		return tag;
 	}
 	
@@ -31,7 +32,7 @@ public interface IDesignNotes {
 	}	
 	
 	static boolean hasDesignNotes(Item item) {
-		return OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(item.asItem().getRegistryName().toString());
+		return OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(ForgeRegistries.ITEMS.getKey(item.asItem()).toString());
 	}
 	
 	static ItemStack getDesignNotesForItem(Item item) {

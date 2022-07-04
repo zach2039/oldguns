@@ -13,6 +13,7 @@ import com.zach2039.oldguns.world.level.block.entity.BlastingPowderStickBlockEnt
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -89,7 +90,7 @@ public class WallBlastingPowderStickBlock extends BlastingPowderStickBlock {
 	}
 
 	@Override
-	public void animateTick(BlockState state, Level level, BlockPos blockpos, Random rand) {
+	public void animateTick(BlockState state, Level level, BlockPos blockpos, RandomSource rand) {
 		BlockEntity be = level.getBlockEntity(blockpos);
 
 		if (be.getType() == ModBlockEntities.BLASTING_POWDER_STICK.get()) {

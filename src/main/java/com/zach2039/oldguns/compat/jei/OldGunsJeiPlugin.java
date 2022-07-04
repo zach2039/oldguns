@@ -13,6 +13,7 @@ import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.registration.IAdvancedRegistration;
@@ -42,14 +43,12 @@ public class OldGunsJeiPlugin implements IModPlugin {
 	
 	@Override
 	public void registerItemSubtypes(ISubtypeRegistration registration) {
-		registration.registerSubtypeInterpreter(ModItems.DESIGN_NOTES.get(), (stack, ctx) -> {
-			return (IDesignNotes.getDesign(stack) != "") ? IDesignNotes.getDesign(stack) : IIngredientSubtypeInterpreter.NONE;
-		});
-	}
-
-	@Override
-	public void registerFluidSubtypes(ISubtypeRegistration registration) {
-
+		registration.registerSubtypeInterpreter(
+				VanillaTypes.ITEM_STACK,
+				ModItems.DESIGN_NOTES.get(),
+				(stack, ctx) -> {
+					return (IDesignNotes.getDesign(stack) != "") ? IDesignNotes.getDesign(stack) : IIngredientSubtypeInterpreter.NONE;
+					});
 	}
 
 	@Override

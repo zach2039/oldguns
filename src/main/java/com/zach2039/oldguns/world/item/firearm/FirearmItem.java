@@ -132,7 +132,7 @@ public class FirearmItem extends BowItem implements Firearm {
 
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-		if (this.allowdedIn(tab)) {
+		if (this.allowedIn(tab)) {
 			ItemStack firearmStack = new ItemStack(this);
 			initNBTTags(firearmStack);
 			for (int i = 0; i < this.ammoCapacity; i++) {
@@ -805,7 +805,7 @@ public class FirearmItem extends BowItem implements Firearm {
 				if (OldGunsConfig.SERVER.equipmentSettings.horsemansPotHelmSettings.allowEffects.get()) {
 					if (armorStack.getItem() instanceof HorsemansPotHelmItem) {
 						HorsemansPotHelmItem hatItem = (HorsemansPotHelmItem)armorStack.getItem();
-						for (AttributeModifier modifier  : hatItem.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(armorStack), armorStack).get(ModAttributes.MOUNTED_ACCURACY)) {
+						for (AttributeModifier modifier  : hatItem.getAttributeModifiers(LivingEntity.getEquipmentSlotForItem(armorStack), armorStack).get(ModAttributes.MOUNTED_ACCURACY.get())) {
 							accuracyModifier += (float) modifier.getAmount();
 						}
 					}

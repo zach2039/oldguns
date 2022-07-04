@@ -17,7 +17,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class GunsmithsBenchDualArmorDyeRecipe implements GunsmithsBenchRecipe {
 
@@ -118,7 +117,7 @@ public class GunsmithsBenchDualArmorDyeRecipe implements GunsmithsBenchRecipe {
 		return ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPELESS.get();
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<GunsmithsBenchDualArmorDyeRecipe> {
+	public static class Serializer implements RecipeSerializer<GunsmithsBenchDualArmorDyeRecipe> {
 
 		public GunsmithsBenchDualArmorDyeRecipe fromJson(ResourceLocation id, JsonObject jsonObj) {
 			return new GunsmithsBenchDualArmorDyeRecipe(id);

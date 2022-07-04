@@ -2,35 +2,17 @@ package com.zach2039.oldguns.world.level.block.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
-import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
-import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
-import com.zach2039.oldguns.api.artillery.AmmoFiringState;
-import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
-import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.api.artillery.Artillery;
-import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
-import com.zach2039.oldguns.world.entity.BulletProjectile;
-import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
-import com.zach2039.oldguns.world.item.tools.LongMatchItem;
-import com.zach2039.oldguns.world.item.tools.RamRodItem;
+import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
 import net.minecraft.network.Connection;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
@@ -40,7 +22,6 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.network.PacketDistributor;
 
 public abstract class StationaryArtilleryBlockEntity extends BlockEntity implements Artillery {
 

@@ -1,7 +1,5 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.Random;
-
 import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.init.ModBlockEntities;
@@ -14,6 +12,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
@@ -81,7 +80,7 @@ public class BlastingPowderStickBlock extends BaseEntityBlock implements EntityB
 	}
 
 	@Override
-	public void animateTick(BlockState state, Level level, BlockPos blockpos, Random rand) {
+	public void animateTick(BlockState state, Level level, BlockPos blockpos, RandomSource rand) {
 		BlockEntity be = level.getBlockEntity(blockpos);
 
 		if (be.getType() == ModBlockEntities.BLASTING_POWDER_STICK.get()) {

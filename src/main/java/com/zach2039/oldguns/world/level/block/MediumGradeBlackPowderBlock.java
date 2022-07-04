@@ -11,6 +11,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -30,7 +31,7 @@ public class MediumGradeBlackPowderBlock extends FallingBlock {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, RandomSource rand) {
 		boolean canGetWet = level.isRainingAt(blockpos);
 		
 		if (canGetWet) {

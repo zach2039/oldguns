@@ -7,6 +7,7 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.crafting.conditions.ICondition;
 import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
+import net.minecraftforge.common.crafting.conditions.ICondition.IContext;
 
 public class CanCraftPaperCartridgesCondition implements ICondition
 {
@@ -22,7 +23,7 @@ public class CanCraftPaperCartridgesCondition implements ICondition
     }
 
     @Override
-    public boolean test()
+    public boolean test(IContext context)
     {
         return OldGunsConfig.SERVER.recipeSettings.firearmRecipeSettings.allowPaperCartridgeCrafting.get();
     }

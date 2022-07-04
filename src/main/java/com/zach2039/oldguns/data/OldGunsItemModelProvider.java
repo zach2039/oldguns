@@ -8,7 +8,9 @@ import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 
+import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.BucketItem;
@@ -38,25 +40,25 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 			withGeneratedParent("simple_model")
 					.transforms()
 
-					.transform(Perspective.THIRDPERSON_RIGHT)
+					.transform(TransformType.THIRD_PERSON_RIGHT_HAND)
 					.rotation(-80, 260, -40)
 					.translation(-1, -2, 2.5f)
 					.scale(0.9f, 0.9f, 0.9f)
 					.end()
 
-					.transform(Perspective.THIRDPERSON_LEFT)
+					.transform(TransformType.THIRD_PERSON_LEFT_HAND)
 					.rotation(-80, -280, 40)
 					.translation(-1, -2, 2.5f)
 					.scale(0.9f, 0.9f, 0.9f)
 					.end()
 
-					.transform(Perspective.FIRSTPERSON_RIGHT)
+					.transform(TransformType.FIRST_PERSON_RIGHT_HAND)
 					.rotation(0, -90, 25)
 					.translation(1.13f, 3.2f, 1.13f)
 					.scale(0.68f, 0.68f, 0.68f)
 					.end()
 
-					.transform(Perspective.FIRSTPERSON_LEFT)
+					.transform(TransformType.FIRST_PERSON_LEFT_HAND)
 					.rotation(0, 90, -25)
 					.translation(1.13f, 3.2f, 1.13f)
 					.scale(0.68f, 0.68f, 0.68f)
@@ -69,25 +71,25 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 			withGeneratedParent("simple_model")
 					.transforms()
 
-					.transform(Perspective.THIRDPERSON_RIGHT)
+					.transform(TransformType.THIRD_PERSON_RIGHT_HAND)
 					.rotation(-80, 260, -40)
 					.translation(-1, 1, 0f)
 					.scale(0.9f, 0.9f, 0.9f)
 					.end()
 
-					.transform(Perspective.THIRDPERSON_LEFT)
+					.transform(TransformType.THIRD_PERSON_LEFT_HAND)
 					.rotation(-80, -280, 40)
 					.translation(-1, 1, 0f)
 					.scale(0.9f, 0.9f, 0.9f)
 					.end()
 
-					.transform(Perspective.FIRSTPERSON_RIGHT)
+					.transform(TransformType.FIRST_PERSON_RIGHT_HAND)
 					.rotation(0, -90, 25)
 					.translation(1.13f, 3.2f, 1.13f)
 					.scale(0.68f, 0.68f, 0.68f)
 					.end()
 
-					.transform(Perspective.FIRSTPERSON_LEFT)
+					.transform(TransformType.FIRST_PERSON_LEFT_HAND)
 					.rotation(0, 90, -25)
 					.translation(1.13f, 3.2f, 1.13f)
 					.scale(0.68f, 0.68f, 0.68f)
@@ -319,7 +321,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 
 
 	private ResourceLocation registryName(final Item item) {
-		return Preconditions.checkNotNull(item.getRegistryName(), "Item %s has a null registry name", item);
+		return Preconditions.checkNotNull(ModRegistryUtil.getKey(item), "Item %s has a null registry name", item);
 	}
 
 	private String name(final Item item) {
@@ -401,7 +403,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withExistingParent(name(item), mcLoc("template_spawn_egg"));
 	}
 
-	private void bucketItem(final FluidGroup<?, ?, ?, ?> fluidGroup) {
+	private void bucketItem(final FluidGroup<?, ?, ?, ?, ?> fluidGroup) {
 		final Item item = fluidGroup.getBucket().get();
 		final Fluid fluid = item instanceof BucketItem ? ((BucketItem) item).getFluid() : Fluids.EMPTY;
 

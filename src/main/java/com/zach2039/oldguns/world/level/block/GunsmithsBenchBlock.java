@@ -5,7 +5,6 @@ import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,7 +28,7 @@ import net.minecraft.world.level.material.Material;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class GunsmithsBenchBlock extends Block {
-	public static final Component CONTAINER_TITLE = new TranslatableComponent("container.gunsmiths_bench");
+	public static final Component CONTAINER_TITLE = Component.translatable("container.gunsmiths_bench");
 	public static final Property<Direction> FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);;
 	
 	public GunsmithsBenchBlock() {

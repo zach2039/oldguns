@@ -12,6 +12,7 @@ import com.zach2039.oldguns.init.ModMaterials;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -75,7 +76,7 @@ public class LiquidNiterFluidBlock extends LiquidBlock {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
 		oxidizeCopper(level, pos);
 	}
 	

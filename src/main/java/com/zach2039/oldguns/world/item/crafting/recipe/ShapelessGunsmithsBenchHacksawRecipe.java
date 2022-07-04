@@ -1,16 +1,11 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.api.firearm.Firearm;
-import com.zach2039.oldguns.api.firearm.FirearmCondition;
-import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.tools.HacksawItem;
-import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
-import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
@@ -18,7 +13,6 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -26,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessGunsmithsBenchHacksawRecipe extends ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 
@@ -63,7 +56,7 @@ public class ShapelessGunsmithsBenchHacksawRecipe extends ShapelessGunsmithsBenc
 		return stack;
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchHacksawRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapelessGunsmithsBenchHacksawRecipe> {
 
 		@Override
 		public ShapelessGunsmithsBenchHacksawRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {

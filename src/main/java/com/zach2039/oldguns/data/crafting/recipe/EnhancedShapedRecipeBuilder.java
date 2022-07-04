@@ -25,7 +25,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -140,7 +139,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	 */
 	@Override
 	public void save(final Consumer<FinishedRecipe> consumer) {
-		save(consumer, ModRegistryUtil.getRequiredRegistryName(result.getItem()));
+		save(consumer, ModRegistryUtil.getKey(result.getItem()));
 	}
 
 	/**
@@ -149,7 +148,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	 */
 	@Override
 	public void save(final Consumer<FinishedRecipe> consumer, final String save) {
-		final ResourceLocation registryName = result.getItem().getRegistryName();
+		final ResourceLocation registryName = ModRegistryUtil.getKey(result.getItem());
 		if (new ResourceLocation(save).equals(registryName)) {
 			throw new IllegalStateException("Shaped Recipe " + save + " should remove its 'save' argument");
 		} else {

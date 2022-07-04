@@ -8,6 +8,7 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
@@ -35,7 +36,7 @@ public abstract class LiquidNiterFluid extends ForgeFlowingFluid {
 	}
 
 	@Override
-	public void animateTick(Level level, BlockPos blockpos, FluidState state, Random rand) {
+	protected void animateTick(Level level, BlockPos blockpos, FluidState state, RandomSource rand) {
 		if (!state.isSource() && !state.getValue(FALLING)) {
 			if (rand.nextInt(64) == 0) {
 				level.playLocalSound((double)blockpos.getX() + 0.5D, (double)blockpos.getY() + 0.5D, (double)blockpos.getZ() + 0.5D, SoundEvents.WATER_AMBIENT, SoundSource.BLOCKS, rand.nextFloat() * 0.25F + 0.75F, rand.nextFloat() + 0.5F, false);

@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 
@@ -57,7 +56,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 		return stack;
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchMortarAndPestleRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapelessGunsmithsBenchMortarAndPestleRecipe> {
 
 		@Override
 		public ShapelessGunsmithsBenchMortarAndPestleRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {

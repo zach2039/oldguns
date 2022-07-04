@@ -17,6 +17,7 @@ import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.api.firearm.Firearm;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModRecipeTypes;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
@@ -36,7 +37,6 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCraftingContainer>, GunsmithsBenchRecipe {
 	
@@ -142,7 +142,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 				return ItemStack.EMPTY;
 			
 			String designName = IDesignNotes.getDesign(item);
-			String resultName = resultStack.getItem().getRegistryName().toString();
+			String resultName = ModRegistryUtil.getKey(resultStack.getItem()).toString();
 			if (!designName.equals(resultName))
 				return ItemStack.EMPTY;
 		}
@@ -319,7 +319,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 		return ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPED.get();
 	}
 
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapedGunsmithsBenchRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapedGunsmithsBenchRecipe> {
 		
 		@Override
 		public ShapedGunsmithsBenchRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {

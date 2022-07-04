@@ -151,7 +151,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 			this.setHurtTime(10);
 			this.setDamage(this.getDamage() + (amount * 10.0F) * dmgMod);
 			this.markHurt();
-			this.gameEvent(GameEvent.ENTITY_DAMAGED, source.getEntity());
+			this.gameEvent(GameEvent.ENTITY_DAMAGE, source.getEntity());
 			boolean flag = source.getEntity() instanceof Player && ((Player)source.getEntity()).getAbilities().instabuild;
 			if (flag || this.getDamage() > 40.0F) {
 				if (!flag && this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
@@ -290,7 +290,9 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	private void tickLerp() {
 		if (this.isControlledByLocalInstance()) {
 			this.lerpSteps = 0;
-			this.setPacketCoordinates(this.getX(), this.getY(), this.getZ());
+			this.move(MoverType.SELF, this.getDeltaMovement());
+		} else {
+			this.setDeltaMovement(Vec3.ZERO);
 		}
 
 		if (this.lerpSteps > 0) {

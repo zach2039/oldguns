@@ -9,8 +9,6 @@ import com.zach2039.oldguns.api.ammo.ProjectilePowderType;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
@@ -30,13 +28,13 @@ public class FirearmPaperCartridgeItem extends FirearmAmmoItem {
 	public void appendHoverText(ItemStack stackIn, @Nullable Level level, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stackIn, level, tooltip, flagIn);
 
-		tooltip.add(new TextComponent(""));
-		tooltip.add(new TextComponent("Loaded with:").withStyle(ChatFormatting.GRAY));
+		tooltip.add(Component.literal(""));
+		tooltip.add(Component.literal("Loaded with:").withStyle(ChatFormatting.GRAY));
 		
-		Component projectileMsg = new TranslatableComponent("item.oldguns." + this.ammoEntry.name().toLowerCase()).withStyle(ChatFormatting.DARK_GRAY);
-		tooltip.add(new TextComponent("⁍ ").withStyle(ChatFormatting.GRAY).append(projectileMsg));
+		Component projectileMsg = Component.translatable("item.oldguns." + this.ammoEntry.name().toLowerCase()).withStyle(ChatFormatting.DARK_GRAY);
+		tooltip.add(Component.translatable("⁍ ").withStyle(ChatFormatting.GRAY).append(projectileMsg));
 		
-		Component powderMsg = new TranslatableComponent("item.oldguns." + this.powderType.name().toLowerCase() + "_black_powder").withStyle(ChatFormatting.DARK_GRAY);
-		tooltip.add(new TextComponent("☼ ").withStyle(ChatFormatting.GRAY).append(powderMsg));
+		Component powderMsg = Component.translatable("item.oldguns." + this.powderType.name().toLowerCase() + "_black_powder").withStyle(ChatFormatting.DARK_GRAY);
+		tooltip.add(Component.literal("☼ ").withStyle(ChatFormatting.GRAY).append(powderMsg));
 	}
 }

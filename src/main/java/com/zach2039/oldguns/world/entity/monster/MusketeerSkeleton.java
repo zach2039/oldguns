@@ -6,6 +6,7 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModItems;
 
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -26,20 +27,20 @@ public class MusketeerSkeleton extends AbstractFirearmSkeleton {
 	}
 	
 	@Override
-	protected void populateDefaultEquipmentSlots(DifficultyInstance difficulty) {
+	protected void populateDefaultEquipmentSlots(RandomSource rand, DifficultyInstance difficulty) {
 		float diff = (difficulty.getEffectiveDifficulty() / 4.0F);
-		 if (this.random.nextFloat() < 0.15F + diff) {
-	         int i = this.random.nextInt(2);
+		 if (rand.nextFloat() < 0.15F + diff) {
+	         int i = rand.nextInt(2);
 	         
-	         if (this.random.nextFloat() < 0.095F) {
+	         if (rand.nextFloat() < 0.095F) {
 	            ++i;
 	         }
 
-	         if (this.random.nextFloat() < 0.095F) {
+	         if (rand.nextFloat() < 0.095F) {
 	            ++i;
 	         }
 
-	         if (this.random.nextFloat() < 0.095F) {
+	         if (rand.nextFloat() < 0.095F) {
 	            ++i;
 	         }
 	         

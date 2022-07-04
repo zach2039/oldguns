@@ -6,6 +6,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.crafting.IIngredientSerializer;
+import net.minecraftforge.common.crafting.conditions.ICondition;
 
 /**
  * An ingredient serializer that produces another {@link Ingredient} type, but only if the
@@ -25,9 +26,12 @@ import net.minecraftforge.common.crafting.IIngredientSerializer;
  * @author Choonster
  */
 public class ConditionalIngredientSerializer implements IIngredientSerializer<Ingredient> {
+	
+	private static ICondition.IContext context = ICondition.IContext.EMPTY;
+	
 	@Override
 	public Ingredient parse(final JsonObject json) {
-		if (CraftingHelper.processConditions(json, "conditions")) {
+		if (CraftingHelper.processConditions(json, "conditions", context)) {
 			return CraftingHelper.getIngredient(json.get("ingredient"));
 		}
 

@@ -10,6 +10,7 @@ import com.zach2039.oldguns.init.ModMaterials;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LightLayer;
 import net.minecraft.world.level.block.Block;
@@ -31,7 +32,7 @@ public class WetHighGradeBlackPowderBlock extends Block {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, RandomSource rand) {
 		boolean canDry = canDry(state, level, blockpos);
 		
 		if (canDry) {

@@ -1,7 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.world.level.storage.loot.LootTableLootModifier;
+import com.zach2039.oldguns.world.level.storage.loot.modifiers.LootTableLootModifier;
 
 import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;

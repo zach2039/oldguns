@@ -20,7 +20,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessVanillaMortarAndPestleRecipe extends ShapelessRecipe {
 	
@@ -58,7 +57,7 @@ public class ShapelessVanillaMortarAndPestleRecipe extends ShapelessRecipe {
 		return stack;
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessVanillaMortarAndPestleRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapelessVanillaMortarAndPestleRecipe> {
 
 		@Override
 		public ShapelessVanillaMortarAndPestleRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {

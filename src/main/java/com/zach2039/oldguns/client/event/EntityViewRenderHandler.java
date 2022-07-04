@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class EntityViewRenderHandler {
 	
 	@SubscribeEvent
-	public static void getFogDensity(EntityViewRenderEvent.FogDensity event) {
+	public static void getFogDensity(EntityViewRenderEvent.RenderFogEvent event) {
 		Camera info = event.getCamera();
 		Level level = Minecraft.getInstance().level;
 		BlockPos blockPos = info.getBlockPosition();
@@ -36,7 +36,8 @@ public class EntityViewRenderHandler {
 		Fluid fluid = fluidstate.getType();
 
 		if (fluid.isSame(ModFluids.LIQUID_NITER.getFlowing().get()) || fluid.isSame(ModFluids.LIQUID_NITER.getStill().get())) {
-			event.setDensity(10f);
+			event.setNearPlaneDistance(1f);
+			event.setFarPlaneDistance(2f);
 			event.setCanceled(true);
 			return;
 		}

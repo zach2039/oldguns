@@ -10,7 +10,6 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -29,7 +28,7 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 	
 	@Override
 	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-		if (this.allowdedIn(tab)) {
+		if (this.allowedIn(tab)) {
 
 			ItemStack stackBase = new ItemStack(this);
 			OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
@@ -44,7 +43,7 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 		super.appendHoverText(stack, level, tooltip, flagIn);
 
 		if (IDesignNotes.getDesign(stack) != "") {
-			tooltip.add(new TranslatableComponent("item." + IDesignNotes.getDesign(stack).replace(':', '.')));
+			tooltip.add(Component.translatable("item." + IDesignNotes.getDesign(stack).replace(':', '.')));
 		}
 	}
 	

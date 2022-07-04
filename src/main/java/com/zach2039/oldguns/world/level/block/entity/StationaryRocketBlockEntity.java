@@ -11,11 +11,11 @@ import com.zach2039.oldguns.api.artillery.RocketArtillery;
 import com.zach2039.oldguns.api.artillery.RocketFiringState;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.entity.RocketProjectile;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryRocketAmmoItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.level.block.CongreveRocketStandBlock;
-import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
@@ -23,7 +23,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -70,7 +70,7 @@ public abstract class StationaryRocketBlockEntity extends StationaryArtilleryBlo
 		if (handItem.getItem() instanceof LongMatchItem) {
 			if (getFiringCooldown() > 0) {
 				if (!level.isClientSide()) {
-					player.sendMessage(new TranslatableComponent("text.oldguns.artillery_not_ready.message").withStyle(ChatFormatting.RED), player.getUUID());
+					player.sendSystemMessage(Component.translatable("text.oldguns.artillery_not_ready.message").withStyle(ChatFormatting.RED));
 				}
 				return false;
 			}
@@ -166,10 +166,10 @@ public abstract class StationaryRocketBlockEntity extends StationaryArtilleryBlo
 			}
 			level.playSound(player, blockpos, SoundEvents.WOOD_PLACE, SoundSource.PLAYERS, 0.5f, 0.5f);
 		} else if (handItem.getItem() == ModItems.GUNNERS_QUADRANT.get() && !level.isClientSide()) {
-			player.sendMessage(new TranslatableComponent("text.oldguns.artillery_name.message", new TranslatableComponent(getType().getRegistryName().toString().replace(':', '.'))), player.getUUID());
-			player.sendMessage(new TranslatableComponent("text.oldguns.artillery_max_slots.message", this.ammoSlots), player.getUUID());
+			player.sendSystemMessage(Component.translatable("text.oldguns.artillery_name.message", Component.translatable(ModRegistryUtil.getKey(getType()).toString().replace(':', '.'))));
+			player.sendSystemMessage(Component.translatable("text.oldguns.artillery_max_slots.message", this.ammoSlots));
 			for (int slot = 0; slot < this.ammoSlots; slot++) {
-				player.sendMessage(new TranslatableComponent("text.oldguns.artillery_slot_state.message", slot, determineFiringStateOfSlot(slot).name()), player.getUUID());
+				player.sendSystemMessage(Component.translatable("text.oldguns.artillery_slot_state.message", slot, determineFiringStateOfSlot(slot).name()));
 			}
 		} else if (!player.isCrouching()) {
 			// Interaction behavior is determined by overall load state, player item, and slot load state

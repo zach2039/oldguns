@@ -7,7 +7,6 @@ import com.google.gson.JsonObject;
 import com.zach2039.oldguns.api.firearm.Firearm;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
@@ -24,7 +23,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe extends ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 
@@ -100,7 +98,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe extends Shapele
 		return i == this.ingredients.size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.ingredients) != null);
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe> {
 		
 		@Override
 		public ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {

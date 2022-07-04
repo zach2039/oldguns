@@ -1,42 +1,32 @@
 package com.zach2039.oldguns.world.item.equipment;
 
-import java.util.List;
 import java.util.UUID;
 import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
+import com.google.common.collect.Multimap;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.firearm.util.FirearmTooltipHelper;
 import com.zach2039.oldguns.client.init.ModLayerDefinitions;
 import com.zach2039.oldguns.client.model.armor.MusketeerHatModel;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModAttributes;
 
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.model.HumanoidModel;
-import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.IItemRenderProperties;
-import net.minecraftforge.common.ForgeMod;
 
 public class MusketeerHatItem extends ArmorItem {
 	
@@ -66,7 +56,7 @@ public class MusketeerHatItem extends ArmorItem {
 		if (OldGunsConfig.SERVER.equipmentSettings.allowEquipmentEffects.get()) {
 			if (OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.allowEffects.get()) {
 				double pierceAmount = OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.percentArmorBypassIncrease.get();
-				builder.put(ModAttributes.ARMOR_PIERCE, new AttributeModifier(uuid, "Bullet armor pierce", pierceAmount, AttributeModifier.Operation.MULTIPLY_BASE));
+				builder.put(ModAttributes.ARMOR_PIERCE.get(), new AttributeModifier(uuid, "Bullet armor pierce", pierceAmount, AttributeModifier.Operation.MULTIPLY_BASE));
 			}
 		}
 		

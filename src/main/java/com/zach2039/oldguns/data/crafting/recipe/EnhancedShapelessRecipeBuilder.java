@@ -23,7 +23,6 @@ import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
@@ -151,7 +150,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 	 */
 	@Override
 	public void save(final Consumer<FinishedRecipe> consumer) {
-		save(consumer, ModRegistryUtil.getRequiredRegistryName(result.getItem()));
+		save(consumer, ModRegistryUtil.getKey(result.getItem()));
 	}
 
 	/**
@@ -163,7 +162,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 	 */
 	@Override
 	public void save(final Consumer<FinishedRecipe> consumer, final String save) {
-		final ResourceLocation resourcelocation = result.getItem().getRegistryName();
+		final ResourceLocation resourcelocation = ModRegistryUtil.getKey(result.getItem());
 		if (new ResourceLocation(save).equals(resourcelocation)) {
 			throw new IllegalStateException("Enhanced Shapeless Recipe " + save + " should remove its 'save' argument");
 		} else {

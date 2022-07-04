@@ -14,6 +14,7 @@ import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
 import com.zach2039.oldguns.api.artillery.CannonArtillery;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
@@ -24,7 +25,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
@@ -211,10 +212,10 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		if (handItem == ItemStack.EMPTY && !level.isClientSide()) {
 			this.shotPitch = Mth.clamp(this.shotPitch + (!player.isCrouching() ? -2f : 2f), getMinShotPitch(), getMaxShotPitch());
 		} else if (handItem.getItem() == ModItems.GUNNERS_QUADRANT.get() && !level.isClientSide()) {
-			player.sendMessage(new TranslatableComponent("text.oldguns.artillery_name.message", new TranslatableComponent(getType().getRegistryName().toString().replace(':', '.'))), player.getUUID());
-			player.sendMessage(new TranslatableComponent("text.oldguns.artillery_max_slots.message", this.ammoSlots), player.getUUID());
+			player.sendSystemMessage(Component.translatable("text.oldguns.artillery_name.message", Component.translatable(ModRegistryUtil.getKey(getType()).toString().replace(':', '.'))));
+			player.sendSystemMessage(Component.translatable("text.oldguns.artillery_max_slots.message", this.ammoSlots));
 			for (int slot = 0; slot < this.ammoSlots; slot++) {
-				player.sendMessage(new TranslatableComponent("text.oldguns.artillery_slot_state.message", slot, determineFiringStateOfSlot(slot).name()), player.getUUID());
+				player.sendSystemMessage(Component.translatable("text.oldguns.artillery_slot_state.message", slot, determineFiringStateOfSlot(slot).name()));
 			}
 		} else if (!player.isCrouching()) {
 			// Interaction behavior is determined by overall load state, player item, and slot load state

@@ -1,7 +1,5 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.Random;
-
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
@@ -11,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.FluidTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
@@ -30,7 +29,7 @@ public class HighGradeBlackPowderBlock extends FallingBlock {
 	}
 	
 	@Override
-	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, Random rand) {
+	public void randomTick(BlockState state, ServerLevel level, BlockPos blockpos, RandomSource rand) {
 		boolean canGetWet = level.isRainingAt(blockpos.above());
 		
 		if (canGetWet) {

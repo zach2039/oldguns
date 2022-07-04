@@ -11,11 +11,13 @@ import java.util.function.Supplier;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.fluid.BasicFluidType;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.util.EnumFaceRotation;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
 
@@ -26,6 +28,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraftforge.client.IFluidTypeRenderProperties;
 import net.minecraftforge.client.model.generators.BlockModelBuilder;
 import net.minecraftforge.client.model.generators.BlockStateProvider;
 import net.minecraftforge.client.model.generators.ConfiguredModel;
@@ -236,11 +239,11 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 	}
 
 	private ResourceLocation registryName(final Block block) {
-		return Preconditions.checkNotNull(block.getRegistryName(), "Block %s has a null registry name", block);
+		return Preconditions.checkNotNull(ModRegistryUtil.getKey(block), "Block %s has a null registry name", block);
 	}
 
 	private ResourceLocation registryName(final Item item) {
-		return Preconditions.checkNotNull(item.getRegistryName(), "Item %s has a null registry name", item);
+		return Preconditions.checkNotNull(ModRegistryUtil.getKey(item), "Item %s has a null registry name", item);
 	}
 
 	private String name(final Block block) {
@@ -321,10 +324,16 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				});
 	}
 
-	private void fluidBlock(final FluidGroup<?, ?, ?, ?> fluidGroup) {
+	private void fluidBlock(final FluidGroup<?, ?, ?, ?, ?> fluidGroup) {
+		// We can't use the RenderProperties for the fluid type as they're not initialised in datagen
+		if (!(fluidGroup.getType().get() instanceof BasicFluidType basicFluidType)) {
+			throw new IllegalArgumentException("Fluid type must extend BasicFluidType");
+		}
+
 		final var block = fluidGroup.getBlock().get();
+
 		final var model = models().getBuilder(name(block))
-				.texture("particle", fluidGroup.getStill().get().getAttributes().getStillTexture());
+				.texture("particle", basicFluidType.getStillTexture());
 
 		simpleBlock(block, model);
 	}

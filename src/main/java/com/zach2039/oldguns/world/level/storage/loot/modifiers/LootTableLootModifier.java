@@ -1,9 +1,12 @@
-package com.zach2039.oldguns.world.level.storage.loot;
+package com.zach2039.oldguns.world.level.storage.loot.modifiers;
 
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.google.gson.JsonObject;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
@@ -27,7 +30,7 @@ public class LootTableLootModifier extends LootModifier {
 	}
 
 	@Override
-	protected List<ItemStack> doApply(final List<ItemStack> generatedLoot, final LootContext context) {
+	protected @NotNull ObjectArrayList<ItemStack> doApply(final ObjectArrayList<ItemStack> generatedLoot, final LootContext context) {
 		final LootTable lootTable = context.getLootTable(lootTableID);
 
 		// Generate additional loot without applying loot modifiers, otherwise each modifier would run multiple times
@@ -51,5 +54,7 @@ public class LootTableLootModifier extends LootModifier {
 			return object;
 		}
 	}
+
+	
 }
 

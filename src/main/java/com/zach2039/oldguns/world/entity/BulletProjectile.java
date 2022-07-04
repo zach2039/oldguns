@@ -826,7 +826,7 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	@Override
 	public void tick() {
 		if (!this.hasBeenShot) {
-			this.gameEvent(GameEvent.PROJECTILE_SHOOT, this.getOwner(), this.blockPosition());
+			this.gameEvent(GameEvent.PROJECTILE_SHOOT, this.getOwner());
 			this.hasBeenShot = true;
 		}
 

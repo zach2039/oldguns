@@ -20,7 +20,6 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -38,7 +37,7 @@ public abstract class OldGunsRecipeCategory<T> implements IRecipeCategory<T>
 		this.recipeClass = recipeClass;
 		this.guiHelper = guiHelper;
 		this.uid = uid;
-		this.title = new TranslatableComponent(localKey);
+		this.title = Component.translatable(localKey);
 	}
 
 	@Override
@@ -70,20 +69,8 @@ public abstract class OldGunsRecipeCategory<T> implements IRecipeCategory<T>
 	}
 
 	@Override
-	public ResourceLocation getUid()
-	{
-		return this.uid;
-	}
-
-	@Override
 	public Component getTitle()
 	{
 		return this.title;
-	}
-
-	@Override
-	public Class<? extends T> getRecipeClass()
-	{
-		return this.recipeClass;
 	}
 }

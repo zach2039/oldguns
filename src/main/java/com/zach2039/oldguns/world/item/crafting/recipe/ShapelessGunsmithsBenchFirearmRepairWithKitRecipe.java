@@ -1,8 +1,8 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.Firearm;
+import com.zach2039.oldguns.api.firearm.FirearmCondition;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
@@ -23,7 +23,6 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.registries.ForgeRegistryEntry;
 
 public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends ShapelessGunsmithsBenchRecipe implements GunsmithsBenchRecipe {
 
@@ -99,7 +98,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends Shapeless
 		return stack;
 	}
 	
-	public static class Serializer extends ForgeRegistryEntry<RecipeSerializer<?>> implements RecipeSerializer<ShapelessGunsmithsBenchFirearmRepairWithKitRecipe> {
+	public static class Serializer implements RecipeSerializer<ShapelessGunsmithsBenchFirearmRepairWithKitRecipe> {
 		
 		@Override
 		public ShapelessGunsmithsBenchFirearmRepairWithKitRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {

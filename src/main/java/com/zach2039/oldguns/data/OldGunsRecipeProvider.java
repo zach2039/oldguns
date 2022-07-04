@@ -14,6 +14,7 @@ import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaMortarAndPestle
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
@@ -22,7 +23,6 @@ import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.tags.Tag;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
@@ -2141,7 +2141,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_firearm", has(firearm))
 				.unlockedBy("has_ammo", has(inputAmmo))
 				.unlockedBy("has_powder", has(inputPowder))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 	}
 	
 	private static void shapelessFirearmSalvageRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputPart, int partAmount, TagKey<Item> inputFirearm) {
@@ -2159,7 +2159,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.requires(inputCartridge)
 				.unlockedBy("has_firearm", has(firearm))
 				.unlockedBy("has_cartridge", has(inputCartridge))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, firearm.getRegistryName().getPath() + "_" + inputCartridge.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputCartridge.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 	}
 	
 	private static void shapelessPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, TagKey<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
@@ -2174,7 +2174,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_black_powder", has(inputPowder))
 				.condition(ammoCraftCondition)
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, outputCartridge.getRegistryName().getPath()));
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(outputCartridge).getPath()));
 	}
 	
 	@Override

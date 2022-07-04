@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.init.ModAttributes;
 import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
@@ -58,6 +59,7 @@ public class OldGuns
 		ModBlocks.initialize(modEventBus);
 		ModItems.initialize(modEventBus);
 		ModMenuTypes.initialize(modEventBus);
+		ModAttributes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
 		ModLootModifierSerializers.initialize(modEventBus);
 		ModPotions.initialize(modEventBus);
