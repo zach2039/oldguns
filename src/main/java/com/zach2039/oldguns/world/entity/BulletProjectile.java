@@ -515,10 +515,15 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		int damageNoBypass = Mth.ceil(i * (float)(1 - armorBypassPercent));
 		int damageBypass = Mth.ceil(i * (float)(armorBypassPercent));
 		
-		if (entity.hurt(damagesource, (float)damageNoBypass) || entity.hurt(damagesource.bypassArmor(), (float)damageBypass)) {
+		// What the heck is going on here
+		if (entity.hurt(damagesource, (float)damageNoBypass) || (damageBypass > 0f)) {
 			if (isEnderman) {
 				return;
 			}
+			
+			// Reset hurt timer for some double damage type trickery
+			entity.invulnerableTime = 0;
+			entity.hurt(damagesource.bypassArmor(), (float)damageBypass);		
 			
 			if (entity instanceof LivingEntity) {
 				LivingEntity livingentity = (LivingEntity)entity;
