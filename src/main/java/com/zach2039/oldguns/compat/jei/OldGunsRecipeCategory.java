@@ -14,6 +14,7 @@ package com.zach2039.oldguns.compat.jei;
 
 import javax.annotation.Nullable;
 
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -60,7 +61,7 @@ public abstract class OldGunsRecipeCategory<T> implements IRecipeCategory<T>
 
 	protected void setIcon(ItemStack stack)
 	{
-		this.setIcon(this.guiHelper.createDrawableIngredient(stack));
+		this.setIcon(this.guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, stack));
 	}
 
 	protected void setIcon(IDrawable icon)

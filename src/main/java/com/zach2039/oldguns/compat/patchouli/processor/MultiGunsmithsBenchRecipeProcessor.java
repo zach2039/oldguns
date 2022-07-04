@@ -33,7 +33,7 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 		List<String> names = variables.get("recipes").asStream().map(IVariable::asString).collect(Collectors.toList());
 		this.recipes = new ArrayList<>();
 		for (String name : names) {
-			GunsmithsBenchRecipe recipe = PatchouliUtils.getRecipe(ModRecipeTypes.GUNSMITHS_BENCH, new ResourceLocation(name));
+			GunsmithsBenchRecipe recipe = PatchouliUtils.getRecipe(ModRecipeTypes.GUNSMITHS_BENCH.get(), new ResourceLocation(name));
 			if (recipe != null) {
 				recipes.add(recipe);
 				if (shapeless) {
@@ -54,7 +54,7 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 			List<String> names2 = variables.get("recipes2").asStream().map(IVariable::asString).collect(Collectors.toList());
 			this.recipes2 = new ArrayList<>();
 			for (String name : names2) {
-				GunsmithsBenchRecipe recipe = PatchouliUtils.getRecipe(ModRecipeTypes.GUNSMITHS_BENCH, new ResourceLocation(name));
+				GunsmithsBenchRecipe recipe = PatchouliUtils.getRecipe(ModRecipeTypes.GUNSMITHS_BENCH.get(), new ResourceLocation(name));
 				if (recipe != null) {
 					recipes2.add(recipe);
 					if (shapeless2) {

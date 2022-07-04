@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
 import net.minecraft.world.inventory.MenuType;

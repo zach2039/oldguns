@@ -21,6 +21,7 @@ import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
 
+import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.ResourceLocation;
@@ -85,7 +86,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 
 							.transforms()
 
-							.transform(ModelBuilder.Perspective.FIRSTPERSON_RIGHT)
+							.transform(TransformType.FIRST_PERSON_RIGHT_HAND)
 							.rotation(0, 135, 0)
 							.scale(0.40f)
 							.end()

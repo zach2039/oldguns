@@ -57,7 +57,7 @@ public class OldGunsResultSlot extends Slot {
 	   public void onTake(Player player, ItemStack p_150639_) {
 	      this.checkTakeAchievements(p_150639_);
 	      net.minecraftforge.common.ForgeHooks.setCraftingPlayer(player);
-	      NonNullList<ItemStack> nonnulllist = player.level.getRecipeManager().getRemainingItemsFor(ModRecipeTypes.GUNSMITHS_BENCH, this.craftSlots, player.level);
+	      NonNullList<ItemStack> nonnulllist = player.level.getRecipeManager().getRemainingItemsFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), this.craftSlots, player.level);
 	      net.minecraftforge.common.ForgeHooks.setCraftingPlayer(null);
 	      for(int i = 0; i < nonnulllist.size(); ++i) {
 	         ItemStack itemstack = this.craftSlots.getItem(i);

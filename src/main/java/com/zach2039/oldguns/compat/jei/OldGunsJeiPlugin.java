@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.compat.jei;
 
-import java.util.stream.Collectors;
+import java.util.List;
+import java.util.function.Predicate;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
@@ -9,11 +10,13 @@ import com.zach2039.oldguns.compat.jei.category.GunsmithsBenchRecipeCategory;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
+import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.registration.IAdvancedRegistration;
@@ -38,6 +41,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 public class OldGunsJeiPlugin implements IModPlugin {
 
 	private static final ResourceLocation UID = new ResourceLocation(OldGuns.MODID, "plugin/main");
+
+	public static IDrawableStatic slotDrawable;
 	
 	public static final ItemStack POTION = new ItemStack(Items.POTION);
 	
@@ -59,16 +64,24 @@ public class OldGunsJeiPlugin implements IModPlugin {
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registration) {
 		IGuiHelper guiHelper = registration.getJeiHelpers().getGuiHelper();
+		
 		registration.addRecipeCategories(
 				new GunsmithsBenchRecipeCategory(guiHelper)
 			);
+		
+		slotDrawable = guiHelper.getSlotDrawable();
 	}
 
 	@Override
 	public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
 
 	}
-
+		
+	@SuppressWarnings("unchecked")
+	private <T extends Recipe<?>> List<T> getFiltered(RecipeManager recipeManager, Predicate<? super Recipe<?>> include) {		
+		return (List<T>) recipeManager.getRecipes().stream().filter(include).toList();
+	}
+	
 	@SuppressWarnings("resource")
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
@@ -76,25 +89,23 @@ public class OldGunsJeiPlugin implements IModPlugin {
 		if (Minecraft.getInstance().level != null) {
 			RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 			
-			registration.addRecipes(recipeManager.getRecipes().stream()
-					.filter(OldGunsJeiPlugin::isGunsmithsBenchRecipe)
-					.collect(Collectors.toList()), GunsmithsBenchRecipeCategory.UID);
+			registration.addRecipes(JEIRecipeTypes.GUNSMITHS_BENCH, getFiltered(recipeManager, OldGunsJeiPlugin::isGunsmithsBenchRecipe));
 		}	
 	}
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, GunsmithsBenchRecipeCategory.UID, 1, 10, 11, 36);
+		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, ModMenuTypes.GUNSMITHS_BENCH.get(), JEIRecipeTypes.GUNSMITHS_BENCH, 1, 10, 11, 36);
 	}
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
-		registration.addRecipeCatalyst(new ItemStack(ModBlocks.GUNSMITHS_BENCH.get()), GunsmithsBenchRecipeCategory.UID);
+		registration.addRecipeCatalyst(new ItemStack(ModBlocks.GUNSMITHS_BENCH.get()), JEIRecipeTypes.GUNSMITHS_BENCH);
 	}
 
 	@Override
 	public void registerGuiHandlers(IGuiHandlerRegistration registration) {
-		registration.addRecipeClickArea(GunsmithsBenchScreen.class, 88, 31, 28, 23, GunsmithsBenchRecipeCategory.UID);
+		registration.addRecipeClickArea(GunsmithsBenchScreen.class, 88, 31, 28, 23, JEIRecipeTypes.GUNSMITHS_BENCH);
 	}
 
 	@Override

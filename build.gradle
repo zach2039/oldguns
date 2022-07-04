@@ -43,8 +43,9 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.19'
-	//mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
+    //mappings channel: 'official', version: '1.19'
+	mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
+
     runs {
         client {
             workingDirectory project.file('run')
@@ -176,18 +177,19 @@ dependencies {
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
+    //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
-	//runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
     //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
+    //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
 	// Create to test structure interaction with block artillery and the like
 	//runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
 	//runtimeOnly fg.deobf("curse.maven:flywheel-486392:3600401")
 
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+	//annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
@@ -211,12 +213,12 @@ mixin {
     add sourceSets.main, "oldguns.refmap.json"
 }
 
-eclipse {
-    afterEvaluate {
-		if (System.getenv("CI") == "true") {
-			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
-		} else {
-        	synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
-		}
-    }
-}
+//eclipse {
+//    afterEvaluate {
+//		if (System.getenv("CI") == "true") {
+//			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
+//		} else {
+//        	synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+//		}
+//    }
+//}

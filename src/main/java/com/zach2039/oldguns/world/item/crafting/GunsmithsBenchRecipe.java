@@ -14,7 +14,7 @@ import net.minecraftforge.common.ForgeHooks;
 
 public interface GunsmithsBenchRecipe extends Recipe<GunsmithsBenchCraftingContainer> {
 	default RecipeType<?> getType() {
-		return ModRecipeTypes.GUNSMITHS_BENCH;
+		return ModRecipeTypes.GUNSMITHS_BENCH.get();
 	}
 	
 	default boolean requiresDesignNotes(Item item) {

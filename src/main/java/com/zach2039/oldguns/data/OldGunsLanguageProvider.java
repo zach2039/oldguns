@@ -2,8 +2,8 @@ package com.zach2039.oldguns.data;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
-import com.google.common.base.Supplier;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.data.lang.OldGunsCompendiumLang;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
@@ -305,8 +305,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 
 	private void addEntities() {
 		addEntityType(ModEntities.BULLET_PROJECTILE, "Projectile");
-		addEntityType(ModEntities.MUSKETEER_SKELETON, "Musketeer Skeleton");
-		addEntityType(ModEntities.HARQUEBUSIER_SKELETON, "Harquebusier Skeleton");
+		//addEntityType(ModEntities.MUSKETEER_SKELETON, "Musketeer Skeleton");
+		//addEntityType(ModEntities.HARQUEBUSIER_SKELETON, "Harquebusier Skeleton");
 	}
 
 	private void addPotions() {
@@ -458,7 +458,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		add("attribute.name." + OldGuns.MODID + ".generic.mounted_firearm_accuracy", "Mounted Firearm Accuracy");
 	}
 
-	public void addEntityType(Supplier<? extends EntityType<?>> key, String name) {
+	@Override
+	public void addEntityType(final Supplier<? extends EntityType<?>> key, final String name) {
 		super.addEntityType(key, name);
 		ENTITY_TYPE_NAMES.put(key.get(), name);
 	}
@@ -511,7 +512,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 	private void add(final OldGunsLang prefix, final StringRepresentable enumValue, final String name) {
 		add(prefix.getTranslationKey() + "." + enumValue.getSerializedName(), name);
 	}
-
+	
 	private String translate(final DyeColor colour) {
 		return translate("color.minecraft." + colour.getName());
 	}

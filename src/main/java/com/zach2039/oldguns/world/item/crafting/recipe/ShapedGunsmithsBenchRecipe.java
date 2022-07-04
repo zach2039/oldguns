@@ -365,6 +365,6 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 
 	@Override
 	public RecipeType<?> getType() {
-		return ModRecipeTypes.GUNSMITHS_BENCH;
+		return ModRecipeTypes.GUNSMITHS_BENCH.get();
 	}
 }

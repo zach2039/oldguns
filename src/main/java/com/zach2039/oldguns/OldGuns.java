@@ -40,8 +40,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 @Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 public class OldGuns
 {
-	// Directly reference a log4j logger.
-    public static Logger LOGGER;
+    public static Logger LOGGER = LogManager.getLogger(OldGuns.MODID);
 	
 	public static final String MODID = "oldguns";
 	public static final String NAME = "Old Guns Mod";
@@ -49,8 +48,6 @@ public class OldGuns
 	public static final SimpleChannel NETWORK = ModNetwork.getNetworkChannel();
 
     public OldGuns() {
-    	LOGGER = LogManager.getLogger(OldGuns.MODID);
-    			 
     	OldGunsConfig.register(ModLoadingContext.get());
 
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
@@ -58,6 +55,7 @@ public class OldGuns
 		ModFluids.initialize(modEventBus);
 		ModBlocks.initialize(modEventBus);
 		ModItems.initialize(modEventBus);
+		ModRecipeTypes.initialize(modEventBus);
 		ModMenuTypes.initialize(modEventBus);
 		ModAttributes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
@@ -71,7 +69,6 @@ public class OldGuns
     @SubscribeEvent
 	public static void commonSetup(final FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
-			ModRecipeTypes.register();
 			ModCrafting.Ingredients.register();
 			ModCrafting.Brewing.register();
 			ModLootTables.registerLootTables();

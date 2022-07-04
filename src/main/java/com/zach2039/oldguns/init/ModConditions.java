@@ -23,36 +23,40 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegisterEvent;
 
 @Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 public class ModConditions {
-	//public static void registerConditions(final RegistryEvent.Register<RecipeSerializer<?>> event) {
 	
 	@SubscribeEvent
-	public static void registerConditions(final RecipesUpdatedEvent event) {
-		CraftingHelper.register(CanCraftMatchlockWeaponsCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftWheellockWeaponsCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftFlintlockWeaponsCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftPaperCartridgesCondition.Serializer.INSTANCE);
+	public static void registerConditions(final RegisterEvent event) {
+		if (event.getRegistryKey().equals(ForgeRegistries.Keys.RECIPE_SERIALIZERS))
+        {
+			CraftingHelper.register(CanCraftMatchlockWeaponsCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftWheellockWeaponsCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftFlintlockWeaponsCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftPaperCartridgesCondition.Serializer.INSTANCE);
 
-		CraftingHelper.register(CanCraftIronFirearmAmmoCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftLeadFirearmAmmoCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftStoneFirearmAmmoCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftNavalCannonArtilleryCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftCongreveRocketStandArtilleryCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftArtilleryPowderChargesCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftIronArtilleryAmmoCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftLeadArtilleryAmmoCondition.Serializer.INSTANCE);
-		CraftingHelper.register(CanCraftStoneArtilleryAmmoCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftBlastingPowderSticksCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftTntFromBlastingPowderSticksCondition.Serializer.INSTANCE);
-		
-		CraftingHelper.register(CanCraftMatchCordFromBarkStrandsCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftIronFirearmAmmoCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftLeadFirearmAmmoCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftStoneFirearmAmmoCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftNavalCannonArtilleryCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftCongreveRocketStandArtilleryCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftArtilleryPowderChargesCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftIronArtilleryAmmoCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftLeadArtilleryAmmoCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftStoneArtilleryAmmoCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftBlastingPowderSticksCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftTntFromBlastingPowderSticksCondition.Serializer.INSTANCE);
+			
+			CraftingHelper.register(CanCraftMatchCordFromBarkStrandsCondition.Serializer.INSTANCE);
+        }
 	}
 }

@@ -1,33 +1,57 @@
 package com.zach2039.oldguns.init;
 
 import java.util.Optional;
+import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 
 import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
-public interface ModRecipeTypes<T extends Recipe<?>> {
+public class ModRecipeTypes {
+	public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, OldGuns.MODID);
 	
-	RecipeType<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench");
-	RecipeType<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft");
+	public static final TypeWithClass<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench", GunsmithsBenchRecipe.class);
+	public static final TypeWithClass<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft", GunsmithsBenchRecipe.class);
 
-	public static void register() {}
+	private static boolean isInitialized;
 	
-	static <T extends Recipe<?>> RecipeType<T> register(final String name) {
-		return Registry.register(Registry.RECIPE_TYPE, new ResourceLocation(OldGuns.MODID, name), new RecipeType<T>() {
-			public String toString() {
-				return name;
-			}
-		});
+	/**
+	 * Registers the {@link DeferredRegister} instance with the mod event bus.
+	 * <p>
+	 * This should be called during mod construction.
+	 *
+	 * @param modEventBus The mod event bus
+	 */
+	public static void initialize(final IEventBus modEventBus) {
+		if (isInitialized) {
+			throw new IllegalStateException("Already initialized");
+		}
+
+		RECIPES.register(modEventBus);
+
+		isInitialized = true;
+	}
+	
+	static <T extends Recipe<?>> TypeWithClass<T> register(String name, Class<T> type) {
+		RegistryObject<RecipeType<T>> regObj = RECIPES.register(name, () -> new RecipeType<T>() {});
+		return new TypeWithClass<>(regObj, type);
 	}
 
-	default <C extends Container> Optional<T> tryMatch(Recipe<C> p_44116_, Level p_44117_, C p_44118_) {
-		return p_44116_.matches(p_44118_, p_44117_) ? Optional.of((T)p_44116_) : Optional.empty();
+	public <C extends Container, T extends Recipe<?>> Optional<T> tryMatch(Recipe<C> recipe, Level level, C c) {
+		return recipe.matches(c, level) ? Optional.of((T)recipe) : Optional.empty();
+	}
+	
+	public record TypeWithClass<T extends Recipe<?>>(RegistryObject<RecipeType<T>> type, Class<T> recipeClass) implements Supplier<RecipeType<T>> {
+		public RecipeType<T> get() {
+			return type.get();
+		}
 	}
 }

@@ -70,7 +70,7 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 		if (!level.isClientSide) {
 			ServerPlayer serverplayer = (ServerPlayer)player;
 			ItemStack itemstack = ItemStack.EMPTY;
-			Optional<GunsmithsBenchRecipe> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH, containerCrafting, level);
+			Optional<GunsmithsBenchRecipe> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), containerCrafting, level);
 			if (optional.isPresent()) {
 				GunsmithsBenchRecipe craftingrecipe = optional.get();
 				if (containerResult.setRecipeUsed(level, serverplayer, craftingrecipe)) {
