@@ -1,6 +1,6 @@
-### v1.19-3.3.1-27
+### v1.18.2-3.3.1-27
 
- - Port to 1.19
+ - Fix players and entities not taking damage from artillery
 
 ### v1.18.2-3.3.0-26
 

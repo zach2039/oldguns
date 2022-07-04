@@ -43,7 +43,7 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
+    mappings channel: 'official', version: '1.19'
 	//mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
     runs {
         client {
@@ -170,15 +170,18 @@ String buildVersionString() {
 }
 
 dependencies {
-    minecraft 'net.minecraftforge:forge:1.18.2-40.1.19'
+    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
 		
-	compileOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}:api")
+	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
-    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
-	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}:${jei_version}")
+	//runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
-    runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
 	// Create to test structure interaction with block artillery and the like
 	//runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
