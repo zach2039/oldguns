@@ -28,58 +28,48 @@
 
 package com.zach2039.oldguns.mixin.coremods;
 
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Redirect;
-
-import com.zach2039.oldguns.config.OldGunsConfig;
-
-import net.minecraft.recipebook.ServerPlaceRecipe;
-import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.item.ItemStack;
-
-@Mixin(ServerPlaceRecipe.class)
-public final class ServerRecipePlacerMixin {
-	@Redirect(
-			method = "moveItemToGrid",
-			at = @At(
-					value = "INVOKE",
-					target = "net/minecraft/world/entity/player/Inventory.findSlotMatchingUnusedItem(Lnet/minecraft/world/item/ItemStack;)I"
-			)
-	)
-	private int getSlotWithUnusedStack(Inventory inventory, ItemStack stack) {
-		if (OldGunsConfig.COMMON.patchRecipeBook.get()) {
-			for (int i = 0; i < inventory.items.size(); i++) {
-				final ItemStack itemstack = inventory.items.get(i);
-				
-				if (
-						!inventory.items.get(i).isEmpty() && 
-						itemstack.getItem() == stack.getItem() &&
-						!inventory.items.get(i).isDamaged() && 
-						!itemstack.isEnchanted() && 
-						!itemstack.hasCustomHoverName()
-					) {
-					return i;
-				}
-			}
-
-			return -1;
-		}
-
-		for(int i = 0; i < inventory.items.size(); ++i) {
-			ItemStack itemstack = inventory.items.get(i);
-
-			if (
-					!inventory.items.get(i).isEmpty() && 
-					ItemStack.isSameItemSameTags(stack, inventory.items.get(i)) &&
-					!inventory.items.get(i).isDamaged() && 
-					!itemstack.isEnchanted() && 
-					!itemstack.hasCustomHoverName()
-				) {
-				return i;
-			}
-		}
-
-		return -1;
-	}
-}
+//@Mixin(ServerPlaceRecipe.class)
+//public final class ServerRecipePlacerMixin {
+//	@Redirect(
+//			method = "moveItemToGrid",
+//			at = @At(
+//					value = "INVOKE",
+//					target = "net/minecraft/world/entity/player/Inventory.findSlotMatchingUnusedItem(Lnet/minecraft/world/item/ItemStack;)I"
+//			)
+//	)
+//	private int getSlotWithUnusedStack(Inventory inventory, ItemStack stack) {
+//		if (OldGunsConfig.COMMON.patchRecipeBook.get()) {
+//			for (int i = 0; i < inventory.items.size(); i++) {
+//				final ItemStack itemstack = inventory.items.get(i);
+//				
+//				if (
+//						!inventory.items.get(i).isEmpty() && 
+//						itemstack.getItem() == stack.getItem() &&
+//						!inventory.items.get(i).isDamaged() && 
+//						!itemstack.isEnchanted() && 
+//						!itemstack.hasCustomHoverName()
+//					) {
+//					return i;
+//				}
+//			}
+//
+//			return -1;
+//		}
+//
+//		for(int i = 0; i < inventory.items.size(); ++i) {
+//			ItemStack itemstack = inventory.items.get(i);
+//
+//			if (
+//					!inventory.items.get(i).isEmpty() && 
+//					ItemStack.isSameItemSameTags(stack, inventory.items.get(i)) &&
+//					!inventory.items.get(i).isDamaged() && 
+//					!itemstack.isEnchanted() && 
+//					!itemstack.hasCustomHoverName()
+//				) {
+//				return i;
+//			}
+//		}
+//
+//		return -1;
+//	}
+//}
