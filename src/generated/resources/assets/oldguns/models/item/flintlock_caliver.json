@@ -1,14 +1,14 @@
 {
   "parent": "oldguns:item/simple_model",
-  "textures": {
-    "layer0": "oldguns:item/flintlock_caliver"
-  },
   "overrides": [
     {
+      "model": "oldguns:item/flintlock_caliver_empty",
       "predicate": {
         "oldguns:firearm_empty": 1.0
-      },
-      "model": "oldguns:item/flintlock_caliver_empty"
+      }
     }
-  ]
+  ],
+  "textures": {
+    "layer0": "oldguns:item/flintlock_caliver"
+  }
 }

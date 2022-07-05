@@ -22,3 +22,6 @@ build
 eclipse
 run
 log
+
+# data gen
+src/generated/resources/\.cache/

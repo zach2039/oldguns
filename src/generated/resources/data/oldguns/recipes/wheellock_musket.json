@@ -5,20 +5,20 @@
       "type": "oldguns:can_craft_wheellock_weapons"
     }
   ],
-  "pattern": [
-    "BMH"
-  ],
   "key": {
     "B": {
       "tag": "oldguns:large_metal_barrel"
     },
-    "M": {
-      "tag": "oldguns:wheellock_mechanism"
-    },
     "H": {
       "tag": "oldguns:medium_stock"
+    },
+    "M": {
+      "tag": "oldguns:wheellock_mechanism"
     }
   },
+  "pattern": [
+    "BMH"
+  ],
   "result": {
     "item": "oldguns:wheellock_musket",
     "nbt": {

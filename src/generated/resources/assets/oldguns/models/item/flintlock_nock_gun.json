@@ -1,14 +1,14 @@
 {
   "parent": "oldguns:item/simple_model",
-  "textures": {
-    "layer0": "oldguns:item/flintlock_nock_gun"
-  },
   "overrides": [
     {
+      "model": "oldguns:item/flintlock_nock_gun_empty",
       "predicate": {
         "oldguns:firearm_empty": 1.0
-      },
-      "model": "oldguns:item/flintlock_nock_gun_empty"
+      }
     }
-  ]
+  ],
+  "textures": {
+    "layer0": "oldguns:item/flintlock_nock_gun"
+  }
 }

@@ -5,22 +5,22 @@
       "type": "oldguns:can_craft_iron_artillery_ammo"
     }
   ],
-  "pattern": [
-    " L ",
-    "bbb",
-    " I "
-  ],
   "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
     "L": {
       "tag": "forge:leather"
     },
     "b": {
       "item": "oldguns:large_iron_musket_ball"
-    },
-    "I": {
-      "tag": "forge:ingots/iron"
     }
   },
+  "pattern": [
+    " L ",
+    "bbb",
+    " I "
+  ],
   "result": {
     "item": "oldguns:medium_iron_grapeshot"
   }

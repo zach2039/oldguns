@@ -1,33 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:medium_grade_black_powder_vanilla"
-    ]
-  },
   "criteria": {
-    "has_saltpeter": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:dust/saltpeter"
-          }
-        ]
-      }
-    },
-    "has_sulfur": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:dust/sulfur"
-          }
-        ]
-      }
-    },
     "has_charcoal": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -36,10 +10,10 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_mortar_and_pestle": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -48,13 +22,34 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_saltpeter": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dust/saltpeter"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_sulfur": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:dust/sulfur"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:medium_grade_black_powder_vanilla"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -65,5 +60,10 @@
       "has_mortar_and_pestle",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:medium_grade_black_powder_vanilla"
+    ]
+  }
 }

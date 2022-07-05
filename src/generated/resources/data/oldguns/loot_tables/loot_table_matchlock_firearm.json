@@ -1,185 +1,185 @@
 {
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_derringer"
+          "name": "oldguns:matchlock_derringer",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_pistol"
+          "name": "oldguns:matchlock_pistol",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_arquebus"
+          "name": "oldguns:matchlock_arquebus",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_caliver"
+          "name": "oldguns:matchlock_caliver",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_musket"
+          "name": "oldguns:matchlock_musket",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_long_musket"
+          "name": "oldguns:matchlock_long_musket",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
-              "function": "minecraft:set_damage",
+              "add": false,
               "damage": {
                 "type": "minecraft:uniform",
-                "min": 0.15,
-                "max": 0.7
+                "max": 0.7,
+                "min": 0.15
               },
-              "add": false
+              "function": "minecraft:set_damage"
             }
           ],
-          "name": "oldguns:matchlock_blunderbuss"
+          "name": "oldguns:matchlock_blunderbuss",
+          "weight": 25
         }
-      ]
+      ],
+      "rolls": 1.0
     }
   ]
 }

@@ -25,7 +25,7 @@ public class CanCraftFlintlockWeaponsCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.firearmRecipeSettings.allowFlintlockWeaponsCrafting.get();
+    	return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.firearmRecipeSettings.allowFlintlockWeaponsCrafting);
     }
 
     @Override

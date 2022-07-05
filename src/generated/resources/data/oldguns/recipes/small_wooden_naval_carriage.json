@@ -1,21 +1,21 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "  S",
-    "SPL"
-  ],
   "key": {
-    "P": {
-      "tag": "minecraft:planks"
-    },
     "L": {
       "tag": "minecraft:logs"
+    },
+    "P": {
+      "tag": "minecraft:planks"
     },
     "S": {
       "tag": "minecraft:wooden_slabs"
     }
   },
+  "pattern": [
+    "  S",
+    "SPL"
+  ],
   "result": {
     "item": "oldguns:small_wooden_naval_carriage"
   }

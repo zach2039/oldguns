@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:medium_iron_canister_shot"
-    ]
-  },
   "criteria": {
     "has_blasting_powder": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -16,10 +10,20 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_nugget": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:nuggets/iron"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_large_iron_buckshot": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -28,23 +32,14 @@
             ]
           }
         ]
-      }
-    },
-    "has_iron_nugget": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:nuggets/iron"
-          }
-        ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:medium_iron_canister_shot"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -54,5 +49,10 @@
       "has_iron_nugget",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:medium_iron_canister_shot"
+    ]
+  }
 }

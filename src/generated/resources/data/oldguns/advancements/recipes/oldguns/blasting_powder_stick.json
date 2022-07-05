@@ -1,25 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:blasting_powder_stick"
-    ]
-  },
   "criteria": {
-    "has_waxed_paper": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "oldguns:waxed_paper"
-            ]
-          }
-        ]
-      }
-    },
     "has_blasting_powder": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -28,10 +10,10 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_fuse": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -40,13 +22,26 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:blasting_powder_stick"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_waxed_paper": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:waxed_paper"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -56,5 +51,10 @@
       "has_fuse",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:blasting_powder_stick"
+    ]
+  }
 }

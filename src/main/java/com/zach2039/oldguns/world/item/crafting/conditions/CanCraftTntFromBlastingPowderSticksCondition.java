@@ -25,7 +25,7 @@ public class CanCraftTntFromBlastingPowderSticksCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.vanillaAlternativeRecipeSettings.allowTntFromBlastingPowderSticksCrafting.get();
+    	return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.vanillaAlternativeRecipeSettings.allowTntFromBlastingPowderSticksCrafting);
     }
 
     @Override

@@ -1,17 +1,17 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "R": {
+      "tag": "forge:rods/wooden"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
   "pattern": [
     "SR"
   ],
-  "key": {
-    "S": {
-      "tag": "minecraft:wooden_slabs"
-    },
-    "R": {
-      "tag": "forge:rods/wooden"
-    }
-  },
   "result": {
     "item": "oldguns:small_wooden_handle"
   }

@@ -1,17 +1,17 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
   "pattern": [
     "SL"
   ],
-  "key": {
-    "S": {
-      "tag": "minecraft:wooden_slabs"
-    },
-    "L": {
-      "tag": "minecraft:logs"
-    }
-  },
   "result": {
     "item": "oldguns:small_wooden_stock"
   }

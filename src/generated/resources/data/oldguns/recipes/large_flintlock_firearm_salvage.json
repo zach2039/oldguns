@@ -10,7 +10,7 @@
     }
   ],
   "result": {
-    "item": "oldguns:flintlock_repair_parts",
-    "count": 6
+    "count": 6,
+    "item": "oldguns:flintlock_repair_parts"
   }
 }

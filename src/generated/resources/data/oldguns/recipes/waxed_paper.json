@@ -1,21 +1,21 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "H": {
+      "item": "minecraft:honeycomb"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    }
+  },
   "pattern": [
     "PPP",
     "PHP",
     "PPP"
   ],
-  "key": {
-    "P": {
-      "item": "minecraft:paper"
-    },
-    "H": {
-      "item": "minecraft:honeycomb"
-    }
-  },
   "result": {
-    "item": "oldguns:waxed_paper",
-    "count": 8
+    "count": 8,
+    "item": "oldguns:waxed_paper"
   }
 }

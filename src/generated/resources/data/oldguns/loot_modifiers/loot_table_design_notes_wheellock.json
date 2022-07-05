@@ -1,11 +1,12 @@
 {
+  "type": "oldguns:loot_table",
   "conditions": [
     {
       "condition": "oldguns:can_spawn_design_notes_in_loot"
     },
     {
-      "condition": "minecraft:random_chance",
-      "chance": 0.3
+      "chance": 0.3,
+      "condition": "minecraft:random_chance"
     },
     {
       "condition": "minecraft:alternative",
@@ -25,6 +26,5 @@
       ]
     }
   ],
-  "loot_table": "oldguns:loot_table_design_notes_wheellock",
-  "type": "oldguns:loot_table"
+  "loot_table": "oldguns:loot_table_design_notes_wheellock"
 }

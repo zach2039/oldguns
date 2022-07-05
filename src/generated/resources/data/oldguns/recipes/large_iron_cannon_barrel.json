@@ -1,11 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "IRI",
-    "  R",
-    "IRI"
-  ],
   "key": {
     "I": {
       "tag": "forge:ingots/iron"
@@ -14,6 +9,11 @@
       "tag": "forge:storage_blocks/iron"
     }
   },
+  "pattern": [
+    "IRI",
+    "  R",
+    "IRI"
+  ],
   "result": {
     "item": "oldguns:large_iron_cannon_barrel"
   }

@@ -1,46 +1,41 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:flintlock_pistol"
-    ]
-  },
   "criteria": {
-    "has_small_barrel": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:small_metal_barrel"
-          }
-        ]
-      }
-    },
     "has_flintlock_mechanism": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "oldguns:flintlock_mechanism"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_medium_handle": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "oldguns:medium_handle"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_small_barrel": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:small_metal_barrel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:flintlock_pistol"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -50,5 +45,10 @@
       "has_medium_handle",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_pistol"
+    ]
+  }
 }

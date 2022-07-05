@@ -5,22 +5,22 @@
       "type": "oldguns:can_craft_iron_artillery_ammo"
     }
   ],
-  "pattern": [
-    "bib",
-    "iBi",
-    "bib"
-  ],
   "key": {
-    "i": {
-      "tag": "forge:nuggets/iron"
-    },
     "B": {
       "tag": "forge:storage_blocks/iron"
     },
     "b": {
       "item": "oldguns:blasting_powder"
+    },
+    "i": {
+      "tag": "forge:nuggets/iron"
     }
   },
+  "pattern": [
+    "bib",
+    "iBi",
+    "bib"
+  ],
   "result": {
     "item": "oldguns:medium_iron_explosive_shell"
   }

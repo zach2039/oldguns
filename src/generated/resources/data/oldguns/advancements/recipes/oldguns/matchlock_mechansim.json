@@ -1,23 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:matchlock_mechansim"
-    ]
-  },
   "criteria": {
     "has_match_cord": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "oldguns:match_cord"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_stone": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,33 +20,34 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
-    "has_wood_trigger_assembly": {
-      "trigger": "minecraft:inventory_changed",
+    "has_the_recipe": {
       "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:wood_trigger_assembly"
-          }
-        ]
-      }
+        "recipe": "oldguns:matchlock_mechansim"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     },
     "has_wood_gear_set": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "oldguns:wood_gear_set"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
+    "has_wood_trigger_assembly": {
       "conditions": {
-        "recipe": "oldguns:matchlock_mechansim"
-      }
+        "items": [
+          {
+            "tag": "oldguns:wood_trigger_assembly"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -63,5 +58,10 @@
       "has_wood_gear_set",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:matchlock_mechansim"
+    ]
+  }
 }

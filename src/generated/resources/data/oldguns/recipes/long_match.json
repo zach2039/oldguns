@@ -1,11 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "M  ",
-    " S ",
-    "  S"
-  ],
   "key": {
     "M": {
       "item": "oldguns:match_cord"
@@ -14,6 +9,11 @@
       "tag": "forge:rods/wooden"
     }
   },
+  "pattern": [
+    "M  ",
+    " S ",
+    "  S"
+  ],
   "result": {
     "item": "oldguns:long_match"
   }

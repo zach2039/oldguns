@@ -5,17 +5,17 @@
       "type": "oldguns:can_craft_lead_firearm_ammo"
     }
   ],
-  "pattern": [
-    "LL",
-    "LL"
-  ],
   "key": {
     "L": {
       "tag": "forge:ingots/lead"
     }
   },
+  "pattern": [
+    "LL",
+    "LL"
+  ],
   "result": {
-    "item": "oldguns:large_lead_musket_ball",
-    "count": 2
+    "count": 2,
+    "item": "oldguns:large_lead_musket_ball"
   }
 }

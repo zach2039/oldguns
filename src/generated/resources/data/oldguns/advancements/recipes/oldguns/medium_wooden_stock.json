@@ -1,36 +1,31 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:medium_wooden_stock"
-    ]
-  },
   "criteria": {
-    "has_wooden_slab": {
-      "trigger": "minecraft:inventory_changed",
+    "has_the_recipe": {
       "conditions": {
-        "items": [
-          {
-            "tag": "minecraft:wooden_slabs"
-          }
-        ]
-      }
+        "recipe": "oldguns:medium_wooden_stock"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     },
     "has_wooden_log": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "minecraft:logs"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
+    "has_wooden_slab": {
       "conditions": {
-        "recipe": "oldguns:medium_wooden_stock"
-      }
+        "items": [
+          {
+            "tag": "minecraft:wooden_slabs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -39,5 +34,10 @@
       "has_wooden_log",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:medium_wooden_stock"
+    ]
+  }
 }

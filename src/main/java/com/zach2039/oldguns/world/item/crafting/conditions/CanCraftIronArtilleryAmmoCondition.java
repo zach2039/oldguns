@@ -25,7 +25,7 @@ public class CanCraftIronArtilleryAmmoCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowIronArtilleryAmmoCrafting.get();
+    	return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowIronArtilleryAmmoCrafting);
     }
 
     @Override

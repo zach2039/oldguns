@@ -5,20 +5,20 @@
       "type": "oldguns:can_craft_iron_firearm_ammo"
     }
   ],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "i": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
   "pattern": [
     "Ii",
     "iI"
   ],
-  "key": {
-    "i": {
-      "tag": "forge:nuggets/iron"
-    },
-    "I": {
-      "tag": "forge:ingots/iron"
-    }
-  },
   "result": {
-    "item": "oldguns:medium_iron_musket_ball",
-    "count": 2
+    "count": 2,
+    "item": "oldguns:medium_iron_musket_ball"
   }
 }

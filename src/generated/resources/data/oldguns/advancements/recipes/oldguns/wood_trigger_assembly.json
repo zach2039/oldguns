@@ -1,43 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:wood_trigger_assembly"
-    ]
-  },
   "criteria": {
-    "has_wood_gear_set": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:wood_gear_set"
-          }
-        ]
-      }
-    },
-    "has_plank": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "minecraft:planks"
-          }
-        ]
-      }
-    },
-    "has_stick": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:rods/wooden"
-          }
-        ]
-      }
-    },
     "has_lever": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -46,13 +10,44 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_plank": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:planks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_stick": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:rods/wooden"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:wood_trigger_assembly"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wood_gear_set": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:wood_gear_set"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -63,5 +58,10 @@
       "has_lever",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:wood_trigger_assembly"
+    ]
+  }
 }

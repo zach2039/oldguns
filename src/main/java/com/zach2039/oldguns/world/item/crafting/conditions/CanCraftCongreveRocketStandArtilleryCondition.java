@@ -25,7 +25,7 @@ public class CanCraftCongreveRocketStandArtilleryCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowCongreveRocketStandArtilleryCrafting.get();
+        return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowCongreveRocketStandArtilleryCrafting);
     }
 
     @Override

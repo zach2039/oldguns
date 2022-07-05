@@ -1,21 +1,21 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "P": {
+      "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
+    }
+  },
   "pattern": [
     " S ",
     "SPS",
     " S "
   ],
-  "key": {
-    "S": {
-      "tag": "minecraft:wooden_slabs"
-    },
-    "P": {
-      "tag": "minecraft:planks"
-    }
-  },
   "result": {
-    "item": "oldguns:wood_gear_set",
-    "count": 2
+    "count": 2,
+    "item": "oldguns:wood_gear_set"
   }
 }

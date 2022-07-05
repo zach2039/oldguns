@@ -1,36 +1,31 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:wood_gear_set"
-    ]
-  },
   "criteria": {
-    "has_wooden_slab": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "minecraft:wooden_slabs"
-          }
-        ]
-      }
-    },
     "has_plank": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "minecraft:planks"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:wood_gear_set"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_wooden_slab": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "minecraft:wooden_slabs"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -39,5 +34,10 @@
       "has_plank",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:wood_gear_set"
+    ]
+  }
 }

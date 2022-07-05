@@ -1,70 +1,70 @@
 {
   "pools": [
     {
-      "rolls": 1.0,
       "bonus_rolls": 0.0,
       "entries": [
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
               "function": "minecraft:set_nbt",
               "tag": "{item:\"oldguns:wheellock_doublebarrel_pistol\"}"
             }
           ],
-          "name": "oldguns:design_notes"
+          "name": "oldguns:design_notes",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
               "function": "minecraft:set_nbt",
               "tag": "{item:\"oldguns:wheellock_musketoon\"}"
             }
           ],
-          "name": "oldguns:design_notes"
+          "name": "oldguns:design_notes",
+          "weight": 25
         },
         {
           "type": "minecraft:item",
-          "weight": 25,
           "functions": [
             {
-              "function": "minecraft:set_count",
+              "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "min": 1.0,
-                "max": 1.0
+                "max": 1.0,
+                "min": 1.0
               },
-              "add": false
+              "function": "minecraft:set_count"
             },
             {
               "function": "minecraft:set_nbt",
               "tag": "{item:\"oldguns:wheellock_blunderbuss_pistol\"}"
             }
           ],
-          "name": "oldguns:design_notes"
+          "name": "oldguns:design_notes",
+          "weight": 25
         }
-      ]
+      ],
+      "rolls": 1.0
     }
   ]
 }

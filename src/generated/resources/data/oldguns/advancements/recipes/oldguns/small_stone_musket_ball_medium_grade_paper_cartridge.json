@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:small_stone_musket_ball_medium_grade_paper_cartridge"
-    ]
-  },
   "criteria": {
     "has_ammo": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -16,20 +10,36 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_black_powder": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:medium_grade_black_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_string": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "forge:string"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldguns:small_stone_musket_ball_medium_grade_paper_cartridge"
+      },
+      "trigger": "minecraft:recipe_unlocked"
     },
     "has_waxed_paper": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -38,23 +48,8 @@
             ]
           }
         ]
-      }
-    },
-    "has_black_powder": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:medium_grade_black_powder"
-          }
-        ]
-      }
-    },
-    "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
-      "conditions": {
-        "recipe": "oldguns:small_stone_musket_ball_medium_grade_paper_cartridge"
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -65,5 +60,10 @@
       "has_black_powder",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:small_stone_musket_ball_medium_grade_paper_cartridge"
+    ]
+  }
 }

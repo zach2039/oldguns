@@ -1,19 +1,19 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "B": {
+      "item": "minecraft:stone"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
   "pattern": [
     " P ",
     "PBP",
     " P "
   ],
-  "key": {
-    "P": {
-      "tag": "minecraft:planks"
-    },
-    "B": {
-      "item": "minecraft:stone"
-    }
-  },
   "result": {
     "item": "oldguns:medium_wooden_carriage_wheel"
   }

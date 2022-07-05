@@ -5,22 +5,22 @@
       "type": "oldguns:can_craft_congreve_rocket_stand_artillery"
     }
   ],
-  "pattern": [
-    "  S",
-    " SW",
-    "P P"
-  ],
   "key": {
-    "S": {
-      "tag": "minecraft:wooden_slabs"
-    },
     "P": {
       "tag": "minecraft:planks"
+    },
+    "S": {
+      "tag": "minecraft:wooden_slabs"
     },
     "W": {
       "tag": "oldguns:wood_gear_set"
     }
   },
+  "pattern": [
+    "  S",
+    " SW",
+    "P P"
+  ],
   "result": {
     "item": "oldguns:congreve_rocket_stand"
   }

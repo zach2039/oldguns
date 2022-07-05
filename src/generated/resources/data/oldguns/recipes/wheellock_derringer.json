@@ -5,20 +5,20 @@
       "type": "oldguns:can_craft_wheellock_weapons"
     }
   ],
-  "pattern": [
-    "BMH"
-  ],
   "key": {
     "B": {
       "tag": "oldguns:tiny_metal_barrel"
     },
-    "M": {
-      "tag": "oldguns:wheellock_mechanism"
-    },
     "H": {
       "tag": "oldguns:small_handle"
+    },
+    "M": {
+      "tag": "oldguns:wheellock_mechanism"
     }
   },
+  "pattern": [
+    "BMH"
+  ],
   "result": {
     "item": "oldguns:wheellock_derringer",
     "nbt": {

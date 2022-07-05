@@ -5,22 +5,22 @@
       "type": "oldguns:can_craft_iron_artillery_ammo"
     }
   ],
+  "key": {
+    "B": {
+      "item": "oldguns:blasting_powder"
+    },
+    "b": {
+      "item": "oldguns:large_iron_buckshot"
+    },
+    "i": {
+      "tag": "forge:nuggets/iron"
+    }
+  },
   "pattern": [
     "BB",
     "bb",
     "ii"
   ],
-  "key": {
-    "B": {
-      "item": "oldguns:blasting_powder"
-    },
-    "i": {
-      "tag": "forge:nuggets/iron"
-    },
-    "b": {
-      "item": "oldguns:large_iron_buckshot"
-    }
-  },
   "result": {
     "item": "oldguns:medium_iron_canister_shot"
   }

@@ -8,6 +8,7 @@ import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.AmmoTypes;
 import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
+import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity;
 
@@ -34,16 +35,16 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 	
 	public ArtilleryAmmoItem(AmmoTypes.ArtilleryAmmo entry) {
 		this((ArtilleryAmmoProperties) new ArtilleryAmmoProperties()
-				.projectileCount(entry.getAttributes().projectileCount.get())
-				.effectTicks(entry.getAttributes().effectTicks.get())
-				.effectPotency(entry.getAttributes().effectPotency.get().floatValue())
-				.projectileDamage(entry.getAttributes().projectileDamage.get().floatValue())
-				.projectileSize(entry.getAttributes().projectileSize.get().floatValue())
-				.projectileEffectiveRange(entry.getAttributes().projectileEffectiveRange.get().floatValue())
-				.projectileDeviationModifier(entry.getAttributes().projectileDeviationModifier.get().floatValue())
-				.projectileArmorBypassPercentage(entry.getAttributes().projectileArmorBypassPercentage.get().floatValue())
+				.projectileCount((int) OldGunsConfig.getServer(entry.getAttributes().projectileCount))
+				.effectTicks((int) OldGunsConfig.getServer(entry.getAttributes().effectTicks))
+				.effectPotency(((Double) OldGunsConfig.getServer(entry.getAttributes().effectPotency)).floatValue())
+				.projectileDamage(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileDamage)).floatValue())
+				.projectileSize(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileSize)).floatValue())
+				.projectileEffectiveRange(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileEffectiveRange)).floatValue())
+				.projectileDeviationModifier(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileDeviationModifier)).floatValue())
+				.projectileArmorBypassPercentage(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileArmorBypassPercentage)).floatValue())
 				.ammoType(entry.getProjectileType())
-				.stacksTo(entry.getAttributes().maxStackSize.get())				
+				.stacksTo((int) OldGunsConfig.getServer(entry.getAttributes().maxStackSize))				
 				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}

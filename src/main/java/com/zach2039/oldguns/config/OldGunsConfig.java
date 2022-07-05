@@ -1982,4 +1982,19 @@ public class OldGunsConfig {
 		context.registerConfig(ModConfig.Type.COMMON, commonSpec);
 		context.registerConfig(ModConfig.Type.CLIENT, clientSpec);
 	}
+	
+	public static Object getClient(ConfigValue<?> value)
+	{
+		return clientSpec.isLoaded() ? value.get(): value.getDefault();
+	}
+	
+	public static Object getCommon(ConfigValue<?> value)
+	{
+		return commonSpec.isLoaded() ? value.get(): value.getDefault();
+	}
+	
+	public static Object getServer(ConfigValue<?> value)
+	{
+		return serverSpec.isLoaded() ? value.get(): value.getDefault();
+	}
 }

@@ -1,14 +1,14 @@
 {
   "parent": "oldguns:item/simple_model",
-  "textures": {
-    "layer0": "oldguns:item/wheellock_musketoon"
-  },
   "overrides": [
     {
+      "model": "oldguns:item/wheellock_musketoon_empty",
       "predicate": {
         "oldguns:firearm_empty": 1.0
-      },
-      "model": "oldguns:item/wheellock_musketoon_empty"
+      }
     }
-  ]
+  ],
+  "textures": {
+    "layer0": "oldguns:item/wheellock_musketoon"
+  }
 }

@@ -25,7 +25,7 @@ public class CanCraftBlastingPowderSticksCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.equipmentRecipeSettings.allowBlastingPowderStickCrafting.get();
+        return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.equipmentRecipeSettings.allowBlastingPowderStickCrafting);
     }
 
     @Override

@@ -1,9 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "IIi"
-  ],
   "key": {
     "I": {
       "tag": "forge:ingots/iron"
@@ -12,6 +9,9 @@
       "tag": "forge:nuggets/iron"
     }
   },
+  "pattern": [
+    "IIi"
+  ],
   "result": {
     "item": "oldguns:small_iron_barrel"
   }

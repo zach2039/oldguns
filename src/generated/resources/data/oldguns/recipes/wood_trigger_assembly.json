@@ -1,25 +1,25 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    " S ",
-    "PEP",
-    "  L"
-  ],
   "key": {
     "E": {
       "tag": "oldguns:wood_gear_set"
+    },
+    "L": {
+      "item": "minecraft:lever"
     },
     "P": {
       "tag": "minecraft:planks"
     },
     "S": {
       "tag": "forge:rods/wooden"
-    },
-    "L": {
-      "item": "minecraft:lever"
     }
   },
+  "pattern": [
+    " S ",
+    "PEP",
+    "  L"
+  ],
   "result": {
     "item": "oldguns:wood_trigger_assembly"
   }

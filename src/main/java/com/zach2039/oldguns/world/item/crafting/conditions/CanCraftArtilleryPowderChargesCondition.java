@@ -24,7 +24,7 @@ public class CanCraftArtilleryPowderChargesCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowArtilleryPowderChargesCrafting.get();
+        return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowArtilleryPowderChargesCrafting);
     }
 
     @Override

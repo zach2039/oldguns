@@ -1,18 +1,18 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "I": {
+      "tag": "forge:ingots/iron"
+    },
+    "S": {
+      "tag": "forge:rods/wooden"
+    }
+  },
   "pattern": [
     "SS ",
     "IIS"
   ],
-  "key": {
-    "S": {
-      "tag": "forge:rods/wooden"
-    },
-    "I": {
-      "tag": "forge:ingots/iron"
-    }
-  },
   "result": {
     "item": "oldguns:hacksaw",
     "nbt": {

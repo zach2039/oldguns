@@ -2,6 +2,8 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.fluid.BasicFluidType;
+import com.zach2039.oldguns.fluid.LiquidNiterFluid;
+import com.zach2039.oldguns.fluid.LiquidNiterFluidBlock;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.fluid.group.StandardFluidGroup;
 
@@ -34,18 +36,21 @@ public class ModFluids {
 
 	private static boolean isInitialized = false;
 
-	public static final FluidGroup<FluidType, FlowingFluid, FlowingFluid, LiquidBlock, Item> LIQUID_NITER = standardGroup("normal")
+	public static final FluidGroup<FluidType, FlowingFluid, FlowingFluid, LiquidBlock, Item> LIQUID_NITER = standardGroup("liquid_niter")
 			.typeFactory(() -> new BasicFluidType(
-					new ResourceLocation(OldGuns.MODID, "block/liquid_niter_still"),
-					new ResourceLocation(OldGuns.MODID, "block/liquid_niter_flow"),
+					new ResourceLocation(OldGuns.MODID, "block/fluid_liquid_niter_still"),
+					new ResourceLocation(OldGuns.MODID, "block/fluid_liquid_niter_flow"),
 					FluidType.Properties.create()
-						.lightLevel(1)
-						.density(1000)
-						.viscosity(1500)
+						.lightLevel(10)
+						.density(500)
+						.viscosity(800)
 						.sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
 						.sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
 						.sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)
 					))
+				.stillFactory(LiquidNiterFluid.Source::new)
+				.flowingFactory(LiquidNiterFluid.Flowing::new)
+				.blockFactory(LiquidNiterFluidBlock::new)
 				.blockMaterial(ModMaterials.LIQUID_NITER)
 				.build();			
 			

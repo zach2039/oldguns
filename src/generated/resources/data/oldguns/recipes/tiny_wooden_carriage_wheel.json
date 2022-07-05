@@ -1,19 +1,19 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
+  "key": {
+    "b": {
+      "item": "minecraft:stone_button"
+    },
+    "s": {
+      "tag": "forge:rods/wooden"
+    }
+  },
   "pattern": [
     " s ",
     "sbs",
     " s "
   ],
-  "key": {
-    "s": {
-      "tag": "forge:rods/wooden"
-    },
-    "b": {
-      "item": "minecraft:stone_button"
-    }
-  },
   "result": {
     "item": "oldguns:tiny_wooden_carriage_wheel"
   }

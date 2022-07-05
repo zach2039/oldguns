@@ -1,11 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    " S ",
-    "SbS",
-    " S "
-  ],
   "key": {
     "S": {
       "tag": "minecraft:wooden_slabs"
@@ -14,6 +9,11 @@
       "item": "minecraft:stone_button"
     }
   },
+  "pattern": [
+    " S ",
+    "SbS",
+    " S "
+  ],
   "result": {
     "item": "oldguns:small_wooden_carriage_wheel"
   }

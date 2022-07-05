@@ -12,6 +12,7 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.init.ModLayerDefinitions;
 import com.zach2039.oldguns.client.model.armor.MusketeerHatModel;
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.config.OldGunsConfig.EquipmentSettings;
 import com.zach2039.oldguns.init.ModAttributes;
 
 import net.minecraft.client.model.HumanoidModel;
@@ -53,9 +54,10 @@ public class MusketeerHatItem extends ArmorItem {
 			builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", (double)this.knockbackResistance, AttributeModifier.Operation.ADDITION));
 		}
 		
-		if (OldGunsConfig.SERVER.equipmentSettings.allowEquipmentEffects.get()) {
-			if (OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.allowEffects.get()) {
-				double pierceAmount = OldGunsConfig.SERVER.equipmentSettings.musketeerHatSettings.percentArmorBypassIncrease.get();
+		EquipmentSettings equipSettings = OldGunsConfig.SERVER.equipmentSettings;
+		if ((boolean) OldGunsConfig.getServer(equipSettings.allowEquipmentEffects)) {
+			if ((boolean) OldGunsConfig.getServer(equipSettings.musketeerHatSettings.allowEffects)) {
+				double pierceAmount = (Double) OldGunsConfig.getServer(equipSettings.musketeerHatSettings.percentArmorBypassIncrease);
 				builder.put(ModAttributes.ARMOR_PIERCE.get(), new AttributeModifier(uuid, "Bullet armor pierce", pierceAmount, AttributeModifier.Operation.MULTIPLY_BASE));
 			}
 		}

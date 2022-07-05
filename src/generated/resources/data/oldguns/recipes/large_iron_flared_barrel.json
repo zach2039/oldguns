@@ -1,22 +1,22 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "Ii ",
-    "  X",
-    "Ii "
-  ],
   "key": {
-    "X": {
-      "item": "oldguns:large_iron_barrel"
-    },
     "I": {
       "tag": "forge:ingots/iron"
+    },
+    "X": {
+      "item": "oldguns:large_iron_barrel"
     },
     "i": {
       "tag": "forge:nuggets/iron"
     }
   },
+  "pattern": [
+    "Ii ",
+    "  X",
+    "Ii "
+  ],
   "result": {
     "item": "oldguns:large_iron_flared_barrel"
   }

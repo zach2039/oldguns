@@ -25,7 +25,7 @@ public class CanCraftNavalCannonArtilleryCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowNavalCannonArtilleryCrafting.get();
+    	return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.artilleryRecipeSettings.allowNavalCannonArtilleryCrafting);
     }
 
     @Override

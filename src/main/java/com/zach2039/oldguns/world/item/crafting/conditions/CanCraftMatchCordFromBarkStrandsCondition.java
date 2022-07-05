@@ -25,7 +25,7 @@ public class CanCraftMatchCordFromBarkStrandsCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.miscRecipeSettings.allowMatchCordFromBarkStrandsCrafting.get();
+    	return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.miscRecipeSettings.allowMatchCordFromBarkStrandsCrafting);
     }
 
     @Override

@@ -1,33 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:fuse"
-    ]
-  },
   "criteria": {
     "has_any_gunpowder": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "oldguns:any_gunpowder"
           }
         ]
-      }
-    },
-    "has_string": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:string"
-          }
-        ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_honeycomb": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -36,13 +20,24 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_string": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:string"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:fuse"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -52,5 +47,10 @@
       "has_honeycomb",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:fuse"
+    ]
+  }
 }

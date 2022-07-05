@@ -1,14 +1,14 @@
 {
   "parent": "oldguns:item/simple_model",
-  "textures": {
-    "layer0": "oldguns:item/flintlock_doublebarrel_blunderbuss"
-  },
   "overrides": [
     {
+      "model": "oldguns:item/flintlock_doublebarrel_blunderbuss_empty",
       "predicate": {
         "oldguns:firearm_empty": 1.0
-      },
-      "model": "oldguns:item/flintlock_doublebarrel_blunderbuss_empty"
+      }
     }
-  ]
+  ],
+  "textures": {
+    "layer0": "oldguns:item/flintlock_doublebarrel_blunderbuss"
+  }
 }

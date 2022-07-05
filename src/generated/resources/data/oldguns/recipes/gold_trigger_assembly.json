@@ -1,11 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    " T ",
-    "GEG",
-    "  L"
-  ],
   "key": {
     "E": {
       "tag": "oldguns:gold_gear_set"
@@ -20,6 +15,11 @@
       "item": "minecraft:tripwire_hook"
     }
   },
+  "pattern": [
+    " T ",
+    "GEG",
+    "  L"
+  ],
   "result": {
     "item": "oldguns:gold_trigger_assembly"
   }

@@ -1,11 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "SS ",
-    " CS",
-    "  S"
-  ],
   "key": {
     "C": {
       "item": "minecraft:compass"
@@ -14,6 +9,11 @@
       "tag": "forge:rods/wooden"
     }
   },
+  "pattern": [
+    "SS ",
+    " CS",
+    "  S"
+  ],
   "result": {
     "item": "oldguns:gunners_quadrant"
   }

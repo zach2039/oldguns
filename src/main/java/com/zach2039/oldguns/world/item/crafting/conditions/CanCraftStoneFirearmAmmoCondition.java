@@ -25,7 +25,7 @@ public class CanCraftStoneFirearmAmmoCondition implements ICondition
     @Override
     public boolean test(IContext context)
     {
-        return OldGunsConfig.SERVER.recipeSettings.firearmRecipeSettings.allowStoneFirearmAmmoCrafting.get();
+    	return (boolean) OldGunsConfig.getServer(OldGunsConfig.SERVER.recipeSettings.firearmRecipeSettings.allowStoneFirearmAmmoCrafting);
     }
 
     @Override

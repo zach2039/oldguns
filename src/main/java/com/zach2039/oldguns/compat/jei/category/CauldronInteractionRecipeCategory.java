@@ -21,6 +21,7 @@ import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -47,24 +48,24 @@ public class CauldronInteractionRecipeCategory extends OldGunsRecipeCategory<Gun
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
 				int index = 1 + x + (y * 3);
-				builder.addSlot(RecipeIngredientRole.INPUT, 24 + (x * 18), 3 + (y * 18))
-					.addIngredients(recipe.getIngredients().get(index))
-					.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
+				builder.addSlot(RecipeIngredientRole.INPUT, 25 + (x * 18), 4 + (y * 18))
+					.addIngredients(recipe.getIngredients().get(index - 1));
+					//.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
 			}
 		}
 		
-		builder.addSlot(RecipeIngredientRole.CATALYST, 2, 21)
-			.addItemStack(designNotes)
-			.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
+		builder.addSlot(RecipeIngredientRole.CATALYST, 3, 22)
+			.addItemStack(designNotes);
+			//.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
 		
 		if (recipe instanceof ShapedGunsmithsBenchRecipe) {
 		} else if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
 			builder.setShapeless();
 		}
 	
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 21)
-			.addItemStack(recipe.getResultItem())
-			.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22)
+			.addIngredient(VanillaTypes.ITEM_STACK, recipe.getResultItem());
+			//.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
 	}
 	
 	private ItemStack getNotesForRecipe(ItemStack output) {

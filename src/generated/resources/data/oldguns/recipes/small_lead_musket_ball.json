@@ -5,17 +5,17 @@
       "type": "oldguns:can_craft_lead_firearm_ammo"
     }
   ],
-  "pattern": [
-    "ll",
-    "ll"
-  ],
   "key": {
     "l": {
       "tag": "forge:nuggets/lead"
     }
   },
+  "pattern": [
+    "ll",
+    "ll"
+  ],
   "result": {
-    "item": "oldguns:small_lead_musket_ball",
-    "count": 2
+    "count": 2,
+    "item": "oldguns:small_lead_musket_ball"
   }
 }

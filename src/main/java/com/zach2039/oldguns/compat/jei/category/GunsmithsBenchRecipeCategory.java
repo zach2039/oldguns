@@ -10,17 +10,18 @@
  */
 package com.zach2039.oldguns.compat.jei.category;
 
+import java.util.Arrays;
+
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.compat.jei.JEIRecipeTypes;
-import com.zach2039.oldguns.compat.jei.OldGunsJeiPlugin;
 import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
@@ -43,28 +44,26 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, GunsmithsBenchRecipe recipe, IFocusGroup focuses) {		
 		ItemStack designNotes = getNotesForRecipe(recipe.getResultItem());
-
+			
 		for (int y = 0; y < 3; ++y) {
 			for (int x = 0; x < 3; ++x) {
-				int index = 1 + x + (y * 3);
-				builder.addSlot(RecipeIngredientRole.INPUT, 24 + (x * 18), 3 + (y * 18))
-					.addIngredients(recipe.getIngredients().get(index))
-					.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
+				int index = x + (y * 3);
+				if (index < recipe.getIngredients().size()) {
+					builder.addSlot(RecipeIngredientRole.INPUT, 25 + (x * 18), 4 + (y * 18))
+						.addItemStacks(Arrays.asList(recipe.getIngredients().get(index).getItems()));
+				}
 			}
 		}
 		
-		builder.addSlot(RecipeIngredientRole.CATALYST, 2, 21)
-			.addItemStack(designNotes)
-			.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
+		builder.addSlot(RecipeIngredientRole.CATALYST, 3, 22)
+			.addItemStack(designNotes);
 		
-		if (recipe instanceof ShapedGunsmithsBenchRecipe) {
-		} else if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
+		if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
 			builder.setShapeless();
 		}
 	
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 118, 21)
-			.addItemStack(recipe.getResultItem())
-			.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22)
+			.addIngredient(VanillaTypes.ITEM_STACK, recipe.getResultItem());
 	}
 	
 	private ItemStack getNotesForRecipe(ItemStack output) {

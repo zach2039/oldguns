@@ -41,20 +41,24 @@ import net.minecraft.world.item.ItemStack;
 @Mixin(ServerPlaceRecipe.class)
 public final class ServerRecipePlacerMixin {
 	@Redirect(
-			method = "m_135438_",
+			method = "moveItemToGrid",
 			at = @At(
 					value = "INVOKE",
-					target = "net/minecraft/world/entity/player/Inventory.m_36043_(Lnet/minecraft/world/item/ItemStack;)I"
+					target = "net/minecraft/world/entity/player/Inventory.findSlotMatchingUnusedItem(Lnet/minecraft/world/item/ItemStack;)I"
 			)
 	)
 	private int getSlotWithUnusedStack(Inventory inventory, ItemStack stack) {
 		if (OldGunsConfig.COMMON.patchRecipeBook.get()) {
 			for (int i = 0; i < inventory.items.size(); i++) {
-				final ItemStack toMatch = inventory.items.get(i);
-
-				if (!toMatch.isEmpty() && toMatch.getItem() == stack.getItem() &&
-						!toMatch.isDamaged() && !toMatch.isEnchanted() &&
-						!toMatch.hasCustomHoverName()) {
+				final ItemStack itemstack = inventory.items.get(i);
+				
+				if (
+						!inventory.items.get(i).isEmpty() && 
+						itemstack.getItem() == stack.getItem() &&
+						!inventory.items.get(i).isDamaged() && 
+						!itemstack.isEnchanted() && 
+						!itemstack.hasCustomHoverName()
+					) {
 					return i;
 				}
 			}
@@ -62,12 +66,16 @@ public final class ServerRecipePlacerMixin {
 			return -1;
 		}
 
-		for (int i = 0; i < inventory.items.size(); i++) {
-			final ItemStack toMatch = inventory.items.get(i);
+		for(int i = 0; i < inventory.items.size(); ++i) {
+			ItemStack itemstack = inventory.items.get(i);
 
-			if (!toMatch.isEmpty() && toMatch.getItem() == stack.getItem() &&
-					ItemStack.isSameItemSameTags(toMatch, stack) &&
-					!toMatch.isDamaged() && !toMatch.isEnchanted() && !toMatch.hasCustomHoverName()) {
+			if (
+					!inventory.items.get(i).isEmpty() && 
+					ItemStack.isSameItemSameTags(stack, inventory.items.get(i)) &&
+					!inventory.items.get(i).isDamaged() && 
+					!itemstack.isEnchanted() && 
+					!itemstack.hasCustomHoverName()
+				) {
 				return i;
 			}
 		}

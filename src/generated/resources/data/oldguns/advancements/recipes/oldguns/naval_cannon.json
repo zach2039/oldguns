@@ -1,46 +1,41 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:naval_cannon"
-    ]
-  },
   "criteria": {
-    "has_tiny_carriage_wheel": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:tiny_carriage_wheel"
-          }
-        ]
-      }
-    },
-    "has_medium_naval_carriage": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:medium_naval_carriage"
-          }
-        ]
-      }
-    },
     "has_medium_metal_cannon_barrel": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
             "tag": "oldguns:medium_metal_cannon_barrel"
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_medium_naval_carriage": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:medium_naval_carriage"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:naval_cannon"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_tiny_carriage_wheel": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:tiny_carriage_wheel"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     }
   },
   "requirements": [
@@ -50,5 +45,10 @@
       "has_medium_metal_cannon_barrel",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:naval_cannon"
+    ]
+  }
 }

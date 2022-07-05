@@ -1,13 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:flintlock_mechansim"
-    ]
-  },
   "criteria": {
     "has_flint": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -16,10 +10,40 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gold_gear_set": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:gold_gear_set"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gold_ingot": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:ingots/gold"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_gold_trigger_assembly": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:gold_trigger_assembly"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_lever": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -28,43 +52,14 @@
             ]
           }
         ]
-      }
-    },
-    "has_gold_ingot": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:ingots/gold"
-          }
-        ]
-      }
-    },
-    "has_gold_trigger_assembly": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:gold_trigger_assembly"
-          }
-        ]
-      }
-    },
-    "has_gold_gear_set": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "oldguns:gold_gear_set"
-          }
-        ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:flintlock_mechansim"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -76,5 +71,10 @@
       "has_gold_gear_set",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:flintlock_mechansim"
+    ]
+  }
 }

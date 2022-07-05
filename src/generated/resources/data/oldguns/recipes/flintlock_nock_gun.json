@@ -5,22 +5,22 @@
       "type": "oldguns:can_craft_flintlock_weapons"
     }
   ],
+  "key": {
+    "B": {
+      "tag": "oldguns:large_metal_barrel"
+    },
+    "H": {
+      "tag": "oldguns:large_stock"
+    },
+    "M": {
+      "tag": "oldguns:flintlock_mechanism"
+    }
+  },
   "pattern": [
     "BB ",
     "BMH",
     "BB "
   ],
-  "key": {
-    "B": {
-      "tag": "oldguns:large_metal_barrel"
-    },
-    "M": {
-      "tag": "oldguns:flintlock_mechanism"
-    },
-    "H": {
-      "tag": "oldguns:large_stock"
-    }
-  },
   "result": {
     "item": "oldguns:flintlock_nock_gun",
     "nbt": {

@@ -21,7 +21,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
- * A group consisting of a still and flowing fluid, a fluid block and a bucket item.
+ * A group consisting of a fluid type, a still and flowing fluid, a fluid block and a bucket item.
  *
  * @author Choonster
  */
@@ -49,7 +49,6 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 		return type;
 	}
 
-	
 	/**
 	 * Gets the still fluid.
 	 *

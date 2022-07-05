@@ -1,23 +1,23 @@
 {
   "type": "minecraft:crafting_shaped",
+  "key": {
+    "C": {
+      "tag": "forge:cobblestone"
+    },
+    "G": {
+      "tag": "oldguns:any_gunpowder"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
   "pattern": [
     "LLC",
     "PGP"
   ],
-  "key": {
-    "L": {
-      "tag": "minecraft:logs"
-    },
-    "C": {
-      "tag": "forge:cobblestone"
-    },
-    "P": {
-      "tag": "minecraft:planks"
-    },
-    "G": {
-      "tag": "oldguns:any_gunpowder"
-    }
-  },
   "result": {
     "item": "oldguns:gunsmiths_bench"
   }

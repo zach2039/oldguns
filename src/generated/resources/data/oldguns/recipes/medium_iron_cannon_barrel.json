@@ -1,22 +1,22 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "IIi",
-    "  R",
-    "IIi"
-  ],
   "key": {
-    "i": {
-      "tag": "forge:nuggets/iron"
-    },
     "I": {
       "tag": "forge:ingots/iron"
     },
     "R": {
       "tag": "forge:storage_blocks/iron"
+    },
+    "i": {
+      "tag": "forge:nuggets/iron"
     }
   },
+  "pattern": [
+    "IIi",
+    "  R",
+    "IIi"
+  ],
   "result": {
     "item": "oldguns:medium_iron_cannon_barrel"
   }

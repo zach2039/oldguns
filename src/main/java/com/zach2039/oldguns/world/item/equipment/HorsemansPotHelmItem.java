@@ -12,6 +12,7 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.init.ModLayerDefinitions;
 import com.zach2039.oldguns.client.model.armor.MusketeerHatModel;
 import com.zach2039.oldguns.config.OldGunsConfig;
+import com.zach2039.oldguns.config.OldGunsConfig.EquipmentSettings;
 import com.zach2039.oldguns.init.ModAttributes;
 
 import net.minecraft.client.model.HumanoidModel;
@@ -53,9 +54,10 @@ public class HorsemansPotHelmItem extends ArmorItem {
 			builder.put(Attributes.KNOCKBACK_RESISTANCE, new AttributeModifier(uuid, "Armor knockback resistance", (double)this.knockbackResistance, AttributeModifier.Operation.ADDITION));
 		}
 		
-		if (OldGunsConfig.SERVER.equipmentSettings.allowEquipmentEffects.get()) {
-			if (OldGunsConfig.SERVER.equipmentSettings.horsemansPotHelmSettings.allowEffects.get()) {
-				double debuffDecreaseAmount = OldGunsConfig.SERVER.equipmentSettings.horsemansPotHelmSettings.percentMountedFirearmAccuracyIncrease.get();
+		EquipmentSettings equipSettings = OldGunsConfig.SERVER.equipmentSettings;
+		if ((boolean) OldGunsConfig.getServer(equipSettings.allowEquipmentEffects)) {
+			if ((boolean) OldGunsConfig.getServer(equipSettings.horsemansPotHelmSettings.allowEffects)) {
+				double debuffDecreaseAmount = (Double) OldGunsConfig.getServer(equipSettings.horsemansPotHelmSettings.percentMountedFirearmAccuracyIncrease);
 				builder.put(ModAttributes.MOUNTED_ACCURACY.get(), new AttributeModifier(uuid, "Mounted firearm accuracy", debuffDecreaseAmount, AttributeModifier.Operation.MULTIPLY_BASE));
 			}
 		}

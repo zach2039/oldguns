@@ -1,23 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:sulfur_from_netherrack_vanilla"
-    ]
-  },
   "criteria": {
-    "has_netherrack": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:netherrack"
-          }
-        ]
-      }
-    },
     "has_mortar_and_pestle": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,13 +10,24 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_netherrack": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:netherrack"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:sulfur_from_netherrack_vanilla"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -41,5 +36,10 @@
       "has_mortar_and_pestle",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:sulfur_from_netherrack_vanilla"
+    ]
+  }
 }

@@ -1,15 +1,15 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
   "conditions": [],
-  "pattern": [
-    "sss",
-    " ss"
-  ],
   "key": {
     "s": {
       "item": "minecraft:stone_slab"
     }
   },
+  "pattern": [
+    "sss",
+    " ss"
+  ],
   "result": {
     "item": "oldguns:tiny_stone_barrel"
   }

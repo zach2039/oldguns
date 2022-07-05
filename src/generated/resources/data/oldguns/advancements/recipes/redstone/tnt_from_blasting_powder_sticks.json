@@ -1,23 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
-  "rewards": {
-    "recipes": [
-      "oldguns:tnt_from_blasting_powder_sticks"
-    ]
-  },
   "criteria": {
-    "has_sand": {
-      "trigger": "minecraft:inventory_changed",
-      "conditions": {
-        "items": [
-          {
-            "tag": "forge:sand"
-          }
-        ]
-      }
-    },
     "has_blasting_powder_sticks": {
-      "trigger": "minecraft:inventory_changed",
       "conditions": {
         "items": [
           {
@@ -26,13 +10,24 @@
             ]
           }
         ]
-      }
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_sand": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:sand"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
     },
     "has_the_recipe": {
-      "trigger": "minecraft:recipe_unlocked",
       "conditions": {
         "recipe": "oldguns:tnt_from_blasting_powder_sticks"
-      }
+      },
+      "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
@@ -41,5 +36,10 @@
       "has_blasting_powder_sticks",
       "has_the_recipe"
     ]
-  ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:tnt_from_blasting_powder_sticks"
+    ]
+  }
 }
