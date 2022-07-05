@@ -18,7 +18,7 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
  */
 public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
 	@Override
-	public <T> void setInputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<@Nullable List<@Nullable T>> inputs, int width, int height) {
+	public <T> void setInputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<List<T>> inputs, int width, int height) {
 		if (width <= 0 || height <= 0) {
 			builder.setShapeless();
 		}
@@ -35,7 +35,7 @@ public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
 	}
 
 	@Override
-	public <T> void setInputs(List<IRecipeSlotBuilder> slotBuilders, IIngredientType<T> ingredientType, List<@Nullable List<@Nullable T>> inputs, int width, int height) {
+	public <T> void setInputs(List<IRecipeSlotBuilder> slotBuilders, IIngredientType<T> ingredientType, List<List<T>> inputs, int width, int height) {
 		if (width <= 0 || height <= 0) {
 			width = height = getShapelessSize(inputs.size());
 		}
@@ -47,7 +47,7 @@ public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
 			int index = getCraftingIndex(i, width, height);
 			IRecipeSlotBuilder slot = slotBuilders.get(index);
 
-			@Nullable List<@Nullable T> ingredients = inputs.get(i);
+			List<T> ingredients = inputs.get(i);
 			if (ingredients != null) {
 				slot.addIngredients(ingredientType, ingredients);
 			}
@@ -55,7 +55,7 @@ public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
 	}
 
 	@Override
-	public <T> void setOutputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, @Nullable List<@Nullable T> outputs) {
+	public <T> void setOutputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<T> outputs) {
 		IRecipeSlotBuilder outputSlot = builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22);
 		if (outputs != null) {
 			outputSlot.addIngredients(ingredientType, outputs);

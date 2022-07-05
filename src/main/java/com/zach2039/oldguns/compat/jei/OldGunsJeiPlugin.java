@@ -11,10 +11,12 @@ import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModMenuTypes;
+import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
+import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -29,6 +31,8 @@ import mezz.jei.api.registration.IRecipeTransferRegistration;
 import mezz.jei.api.registration.ISubtypeRegistration;
 import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import mezz.jei.api.runtime.IJeiRuntime;
+import mezz.jei.common.plugins.vanilla.VanillaRecipeFactory;
+import mezz.jei.common.plugins.vanilla.crafting.VanillaRecipes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -95,7 +99,13 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, ModMenuTypes.GUNSMITHS_BENCH.get(), JEIRecipeTypes.GUNSMITHS_BENCH, 1, 10, 11, 36);
+		//registration.addRecipeTransferHandler(
+		//		GunsmithsBenchMenu.class, 
+		//		ModMenuTypes.GUNSMITHS_BENCH.get(), 
+		//		JEIRecipeTypes.GUNSMITHS_BENCH, 
+		//		1, 10, 11, 36);
+		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class,	ModMenuTypes.GUNSMITHS_BENCH.get(), 
+				RecipeTypes.CRAFTING, 1, 10, 11, 36);
 	}
 
 	@Override
