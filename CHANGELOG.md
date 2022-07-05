@@ -1,3 +1,11 @@
+### v1.19-3.4.0-28
+
+ - Port to 1.19
+ - Remove custom entity spawning for now
+ - Update JEI compat and mods.toml dependencies
+ - Migrate to 1.19 methods and fields
+ - Pull update from 1.18.2
+
 ### v1.18.2-3.3.1-27
 
  - Fix players and entities not taking damage from artillery
