@@ -127,6 +127,7 @@ repositories {
 			includeGroup "curse.maven"
 		}
 	}
+	maven { url "https://maven.shedaniel.me" }
 }
 
 // Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
@@ -179,8 +180,9 @@ dependencies {
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
-	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+	//runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+	//runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+	runtimeOnly	fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
     runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
     //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
@@ -197,7 +199,7 @@ jar {
         attributes([
                 "Specification-Title"     : "oldgunsmod",
                 "Specification-Vendor"    : "zach2039",
-                "Specification-Version"   : "${mc_version}-${mod_version}", // We are version 1 of ourselves
+                "Specification-Version"   : "${mc_version}-${mod_version}", 
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : archiveVersion.get(),
                 "Implementation-Vendor"   : "zach2039",

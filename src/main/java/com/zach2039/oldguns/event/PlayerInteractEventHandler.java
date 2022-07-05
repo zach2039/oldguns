@@ -38,6 +38,7 @@ public class PlayerInteractEventHandler {
 		
 		// Create bark strands when shears are used on a log, if enabled
 		if (OldGunsConfig.SERVER.recipeSettings.worldInteractionSettings.allowShearsToStripBark.get()) {
+			
 			ItemStack toolStack = event.getItemStack();
 			Level level = (Level) event.getWorld();
 			Player player = event.getPlayer();
@@ -45,11 +46,12 @@ public class PlayerInteractEventHandler {
 			BlockPos blockpos = event.getPos();
 			BlockState preState = level.getBlockState(blockpos);
 			BlockHitResult blockHit = event.getHitVec();
-			UseOnContext ctx = new UseOnContext(level, player, hand, toolStack, blockHit);
+			UseOnContext ctx = new UseOnContext(level, player, hand, new ItemStack(Items.IRON_AXE), blockHit);
 
-			Optional<@Nullable BlockState> optional = Optional.ofNullable(preState.getToolModifiedState(ctx, net.minecraftforge.common.ToolActions.AXE_STRIP, false));
-
+			Optional<BlockState> optional = Optional.ofNullable(preState.getToolModifiedState(ctx, net.minecraftforge.common.ToolActions.AXE_STRIP, false));
+			
 			if (optional.isPresent() && toolStack.getItem() == Items.SHEARS) {
+				
 				if (player instanceof ServerPlayer) {
 					CriteriaTriggers.ITEM_USED_ON_BLOCK.trigger((ServerPlayer)player, blockpos, toolStack);
 				}
@@ -61,8 +63,8 @@ public class PlayerInteractEventHandler {
 				
 				if (player != null) {
 					player.swing(player.getUsedItemHand());
-					toolStack.hurtAndBreak(1, player, (p_150686_) -> {
-						p_150686_.broadcastBreakEvent(LivingEntity.getEquipmentSlotForItem(toolStack));
+					toolStack.hurtAndBreak(1, player, (p) -> {
+						p.broadcastBreakEvent(LivingEntity.getEquipmentSlotForItem(toolStack));
 					});
 				}
 			}
