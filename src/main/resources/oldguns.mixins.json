@@ -3,13 +3,8 @@
 	"package": "com.zach2039.oldguns.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"refmap": "oldguns.refmap.json",
-	"injectors": {
-		"defaultRequire": 1
-	},
 	"minVersion": "0.8",
 	"mixins": [
 		"coremods.ServerRecipePlacerMixin"
-	],
-	"client": [],
-	"server": []
+	]
 }

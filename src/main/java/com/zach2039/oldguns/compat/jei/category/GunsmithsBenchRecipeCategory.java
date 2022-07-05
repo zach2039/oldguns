@@ -11,18 +11,23 @@
 package com.zach2039.oldguns.compat.jei.category;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.compat.jei.JEIRecipeTypes;
 import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
+import com.zach2039.oldguns.compat.jei.util.GunsmithsBenchCraftingGridHelper;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
@@ -31,39 +36,40 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
 public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<GunsmithsBenchRecipe> {
-
 	public static final ResourceLocation UID = new ResourceLocation(OldGuns.MODID, "gunsmiths_bench");
+	private final ICraftingGridHelper craftingGridHelper;
 	
 	public GunsmithsBenchRecipeCategory(IGuiHelper guiHelper) {
 		super(GunsmithsBenchRecipe.class, guiHelper, UID, "block.oldguns.gunsmiths_bench");
 		ResourceLocation background = new ResourceLocation(OldGuns.MODID, "textures/gui/container/gunsmiths_bench.png");
 		setBackground(guiHelper.createDrawable(background, 5, 13, 142, 60));
 		setIcon(new ItemStack(ModBlocks.GUNSMITHS_BENCH.get()));
+		
+		craftingGridHelper = new GunsmithsBenchCraftingGridHelper();
 	}
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, GunsmithsBenchRecipe recipe, IFocusGroup focuses) {		
 		ItemStack designNotes = getNotesForRecipe(recipe.getResultItem());
-			
-		for (int y = 0; y < 3; ++y) {
-			for (int x = 0; x < 3; ++x) {
-				int index = x + (y * 3);
-				if (index < recipe.getIngredients().size()) {
-					builder.addSlot(RecipeIngredientRole.INPUT, 25 + (x * 18), 4 + (y * 18))
-						.addItemStacks(Arrays.asList(recipe.getIngredients().get(index).getItems()));
-				}
-			}
-		}
+		ItemStack resultItem = recipe.getResultItem();
+		
+		List<List<ItemStack>> inputs = recipe.getIngredients().stream()
+				.map(ingredient -> List.of(ingredient.getItems()))
+				.toList();
 		
 		builder.addSlot(RecipeIngredientRole.CATALYST, 3, 22)
 			.addItemStack(designNotes);
 		
-		if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
+		if (recipe instanceof ShapedGunsmithsBenchRecipe) {
+			int width = ((ShapedGunsmithsBenchRecipe)recipe).getWidth();
+			int height = ((ShapedGunsmithsBenchRecipe)recipe).getHeight();
+			craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
+			craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, inputs, width, height);
+		} else if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
+			craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
+			craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, inputs, 0, 0);
 			builder.setShapeless();
 		}
-	
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22)
-			.addIngredient(VanillaTypes.ITEM_STACK, recipe.getResultItem());
 	}
 	
 	private ItemStack getNotesForRecipe(ItemStack output) {
