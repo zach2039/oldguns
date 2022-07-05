@@ -16,7 +16,6 @@ import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -99,13 +98,7 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerRecipeTransferHandlers(IRecipeTransferRegistration registration) {
-		//registration.addRecipeTransferHandler(
-		//		GunsmithsBenchMenu.class, 
-		//		ModMenuTypes.GUNSMITHS_BENCH.get(), 
-		//		JEIRecipeTypes.GUNSMITHS_BENCH, 
-		//		1, 10, 11, 36);
-		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class,	ModMenuTypes.GUNSMITHS_BENCH.get(), 
-				RecipeTypes.CRAFTING, 1, 10, 11, 36);
+		registration.addRecipeTransferHandler(GunsmithsBenchMenu.class, ModMenuTypes.GUNSMITHS_BENCH.get(), JEIRecipeTypes.GUNSMITHS_BENCH,	1, 10, 11, 36);
 	}
 
 	@Override

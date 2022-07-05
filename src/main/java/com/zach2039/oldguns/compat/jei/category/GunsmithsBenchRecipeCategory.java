@@ -10,9 +10,7 @@
  */
 package com.zach2039.oldguns.compat.jei.category;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;

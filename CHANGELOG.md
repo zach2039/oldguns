@@ -1,3 +1,7 @@
+### v1.19-3.4.1-29
+
+ - Edit mixin info and fix issue with some JEI recipes
+
 ### v1.19-3.4.0-28
 
  - Port to 1.19
