@@ -2,17 +2,16 @@ package com.zach2039.oldguns.world.entity.ai.goal;
 
 import java.util.EnumSet;
 
-import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.goal.RangedBowAttackGoal;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.RangedAttackMob;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
 
-public class RangedFirearmAttackGoal<T extends net.minecraft.world.entity.Mob & RangedAttackMob> extends Goal {
+public class RangedFirearmAttackGoal<T extends net.minecraft.world.entity.Mob & RangedAttackMob> extends RangedBowAttackGoal<T> {
 
 	protected final T mob;
 	protected final double speedModifier;
@@ -30,6 +29,7 @@ public class RangedFirearmAttackGoal<T extends net.minecraft.world.entity.Mob & 
 	}
 
 	public RangedFirearmAttackGoal(T mob, double speedModifier, int attackIntervalMin, float attackRadius) {
+		super(mob, speedModifier, attackIntervalMin, attackRadius);
 		this.mob = mob;
 		this.speedModifier = speedModifier;
 		this.attackIntervalMin = attackIntervalMin;
@@ -134,6 +134,7 @@ public class RangedFirearmAttackGoal<T extends net.minecraft.world.entity.Mob & 
 					if (i >= 20) {
 						this.mob.stopUsingItem();
 						this.mob.performRangedAttack(livingentity, 1.0f);
+						//EntityFirearmHelper.performRangedAttack(this.mob, livingentity, 1.0f);
 						this.attackTime = this.attackIntervalMin;
 					}
 				}

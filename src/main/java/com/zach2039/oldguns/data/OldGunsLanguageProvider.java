@@ -293,8 +293,8 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.MUSKETEER_HAT, "Musketeer Hat");
 		addItem(ModItems.HORSEMANS_POT_HELM, "Horseman's Pot Helm");
 		
-		addItem(ModItems.MUSKETEER_SKELETON_SPAWN_EGG, "Musketeer Skeleton Spawn Egg");
-		addItem(ModItems.HARQUEBUSIER_SKELETON_SPAWN_EGG, "Harquebusier Skeleton Spawn Egg");
+		//addItem(ModItems.MUSKETEER_SKELETON_SPAWN_EGG, "Musketeer Skeleton Spawn Egg");
+		//addItem(ModItems.HARQUEBUSIER_SKELETON_SPAWN_EGG, "Harquebusier Skeleton Spawn Egg");
 		
 		add("item.oldguns.compendium", "Old Guns Compendium");
 	}

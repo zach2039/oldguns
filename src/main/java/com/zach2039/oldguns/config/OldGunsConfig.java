@@ -1794,49 +1794,39 @@ public class OldGunsConfig {
 	}
 	
 	public static class MobSettings {
-		public final BooleanValue resetFirearmSkeletonShotTimerOnHit;
-		public final IntValue firearmSkeletonShotTime;
-		public final IntValue firearmSkeletonShotTimeHard;
-		public final DoubleValue firearmSkeletonBaseProjectileDeviation;
-		public final GenericMobSettings musketeerSkeleton;
-		public final GenericMobSettings harquebusierSkeleton;
+		public final DoubleValue mobFirearmEquipChance;
+		public final DoubleValue mobArmorEquipChance;
+		public final BooleanValue resetMobShotTimerOnHit;
+		public final IntValue firearmMobShotTime;
+		public final IntValue firearmMobShotTimeHard;
+		public final DoubleValue firearmMobBaseProjectileDeviation;
 		
 		MobSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
-			resetFirearmSkeletonShotTimerOnHit = builder
-					.comment("Whether firearm skeletons have their shot timer reset when struck")
-					.define("resetFirearmSkeletonShotTimerOnHit", false);
+			mobFirearmEquipChance = builder
+					.comment("The chance mobs that can use firearms will spawn with firearms. Set 0.0 to disable")
+					.defineInRange("mobFirearmEquipChance", 0.05f, 0.0f, 1.0f);
 			
-			firearmSkeletonShotTime = builder
-					.comment("How long of an interval in ticks firearm skeletons shoot their weapons")
-					.defineInRange("firearmSkeletonShotTime", 140, 1, Integer.MAX_VALUE);
+			mobArmorEquipChance = builder
+					.comment("The chance mobs that can use firearms will spawn with armor, after being equiped with a firearm. Set 0.0 to disable")
+					.defineInRange("mobArmorEquipChance", 0.8f, 0.0f, 1.0f);
 			
-			firearmSkeletonShotTimeHard = builder
-					.comment("How long of an interval in ticks firearm skeletons shoot their weapons on Hard difficulty")
-					.defineInRange("firearmSkeletonShotTimeHard", 100, 1, Integer.MAX_VALUE);
+			resetMobShotTimerOnHit = builder
+					.comment("Whether mobs have their shot timer reset when struck")
+					.define("resetMobShotTimerOnHit", false);
 			
-			firearmSkeletonBaseProjectileDeviation = builder
-					.comment("The base projectile deviation of firearm skeletons when shooting their weapon")
-					.defineInRange("firearmSkeletonBaseProjectileDeviation", 3.0D, 0.1D, Float.MAX_VALUE);
+			firearmMobShotTime = builder
+					.comment("How long of an interval in ticks mobs shoot their weapons")
+					.defineInRange("firearmMobShotTime", 140, 1, Integer.MAX_VALUE);
 			
-			musketeerSkeleton = new GenericMobSettings(builder, "Musketeer Skeletons", "musketeerSkeleton",
-					true,
-					3,
-					1,
-					2,
-					Arrays.asList(new String[] { "UNDERGROUND", "FOREST" }),
-					Arrays.asList(new String[] {})
-					);
+			firearmMobShotTimeHard = builder
+					.comment("How long of an interval in ticks mobs shoot their weapons on Hard difficulty")
+					.defineInRange("firearmMobShotTimeHard", 100, 1, Integer.MAX_VALUE);
 			
-			harquebusierSkeleton = new GenericMobSettings(builder, "Harquebusier Skeletons", "harquebusierSkeleton",
-					true,
-					3,
-					1,
-					2,
-					Arrays.asList(new String[] { "PLAINS" }),
-					Arrays.asList(new String[] {})
-					);
+			firearmMobBaseProjectileDeviation = builder
+					.comment("The base projectile deviation of mobs when shooting their weapon")
+					.defineInRange("firearmMobBaseProjectileDeviation", 3.0f, 0.1f, Float.MAX_VALUE);
 			
 			builder.pop();
 		}

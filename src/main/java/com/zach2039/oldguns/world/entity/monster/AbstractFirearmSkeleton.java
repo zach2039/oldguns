@@ -33,7 +33,7 @@ import net.minecraft.world.level.Level;
 
 public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 	
-	private final RangedFirearmAttackGoal<AbstractSkeleton> firearmAttackGoal = new RangedFirearmAttackGoal<>(this, 1.0D, OldGunsConfig.SERVER.mobSettings.firearmSkeletonShotTime.get(), 15.0F) {
+	private final RangedFirearmAttackGoal<AbstractSkeleton> firearmAttackGoal = new RangedFirearmAttackGoal<>(this, 1.0D, OldGunsConfig.SERVER.mobSettings.firearmMobShotTime.get(), 15.0F) {
 		@Override
 		public boolean canUse() {			
 			ItemStack firearmStack = this.mob.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this.mob, item -> item instanceof FirearmItem));
@@ -97,7 +97,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 	public boolean hurt(DamageSource damagesource, float amount) {
 
 		// Make firearm skeletons reset shot time when hit
-		if (this.level != null && !this.level.isClientSide && OldGunsConfig.SERVER.mobSettings.resetFirearmSkeletonShotTimerOnHit.get()) {
+		if (this.level != null && !this.level.isClientSide && OldGunsConfig.SERVER.mobSettings.resetMobShotTimerOnHit.get()) {
 			this.firearmAttackGoal.interruptFiring();
 		}
 
@@ -145,9 +145,9 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 			this.goalSelector.removeGoal(this.firearmAttackGoal);
 			ItemStack itemstack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem));
 			if ((itemstack.getItem() instanceof FirearmItem) && (itemstack.getMaxDamage() != itemstack.getDamageValue())) {
-				int i = OldGunsConfig.SERVER.mobSettings.firearmSkeletonShotTime.get();
+				int i = OldGunsConfig.SERVER.mobSettings.firearmMobShotTime.get();
 				if (this.level.getDifficulty() != Difficulty.HARD) {
-					i = OldGunsConfig.SERVER.mobSettings.firearmSkeletonShotTimeHard.get();
+					i = OldGunsConfig.SERVER.mobSettings.firearmMobShotTimeHard.get();
 				}
 
 				this.firearmAttackGoal.setMinAttackInterval(i);
@@ -173,7 +173,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 				return;
 			}
 
-			firearmItem.fireProjectiles(this.level, this, firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmSkeletonBaseProjectileDeviation.get().floatValue());
+			firearmItem.fireProjectiles(this.level, this, firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmMobBaseProjectileDeviation.get().floatValue());
 		}
 	}
 

@@ -5,8 +5,6 @@ import java.util.function.Supplier;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.entity.RocketProjectile;
-import com.zach2039.oldguns.world.entity.monster.HarquebusierSkeleton;
-import com.zach2039.oldguns.world.entity.monster.MusketeerSkeleton;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
@@ -52,15 +50,15 @@ public class ModEntities {
 			);
 
 	// Mobs
-	public static final RegistryObject<EntityType<MusketeerSkeleton>> MUSKETEER_SKELETON = registerEntityType("musketeer_skeleton",
-			() -> EntityType.Builder.of(MusketeerSkeleton::new, MobCategory.MONSTER)
-			.sized(0.6F, 1.99F).clientTrackingRange(8)
-			);
-	
-	public static final RegistryObject<EntityType<HarquebusierSkeleton>> HARQUEBUSIER_SKELETON = registerEntityType("harquebusier_skeleton",
-			() -> EntityType.Builder.of(HarquebusierSkeleton::new, MobCategory.MONSTER)
-			.sized(0.6F, 1.99F).clientTrackingRange(8)
-			);
+//	public static final RegistryObject<EntityType<MusketeerSkeleton>> MUSKETEER_SKELETON = registerEntityType("musketeer_skeleton",
+//			() -> EntityType.Builder.of(MusketeerSkeleton::new, MobCategory.MONSTER)
+//			.sized(0.6F, 1.99F).clientTrackingRange(8)
+//			);
+//	
+//	public static final RegistryObject<EntityType<HarquebusierSkeleton>> HARQUEBUSIER_SKELETON = registerEntityType("harquebusier_skeleton",
+//			() -> EntityType.Builder.of(HarquebusierSkeleton::new, MobCategory.MONSTER)
+//			.sized(0.6F, 1.99F).clientTrackingRange(8)
+//			);
 
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.
@@ -98,8 +96,8 @@ public class ModEntities {
 	public static class RegistrationHandler {
 		@SubscribeEvent
 		public static void registerAttributes(final EntityAttributeCreationEvent event) {
-			event.put(MUSKETEER_SKELETON.get(), MusketeerSkeleton.registerAttributes().build());
-			event.put(HARQUEBUSIER_SKELETON.get(), HarquebusierSkeleton.registerAttributes().build());
+			//event.put(MUSKETEER_SKELETON.get(), MusketeerSkeleton.registerAttributes().build());
+			//event.put(HARQUEBUSIER_SKELETON.get(), HarquebusierSkeleton.registerAttributes().build());
 		}
 	}
 

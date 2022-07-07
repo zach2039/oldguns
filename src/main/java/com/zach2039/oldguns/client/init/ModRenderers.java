@@ -22,8 +22,8 @@ public class ModRenderers {
 		event.registerEntityRenderer(ModEntities.BULLET_PROJECTILE.get(), ctx -> new BulletProjectileRenderer(ctx));	
 		event.registerEntityRenderer(ModEntities.ROCKET_PROJECTILE.get(), ctx -> new RocketProjectileRenderer(ctx));	
 		
-		event.registerEntityRenderer(ModEntities.MUSKETEER_SKELETON.get(), SkeletonRenderer::new);
-		event.registerEntityRenderer(ModEntities.HARQUEBUSIER_SKELETON.get(), SkeletonRenderer::new);
+		//event.registerEntityRenderer(ModEntities.MUSKETEER_SKELETON.get(), SkeletonRenderer::new);
+		//event.registerEntityRenderer(ModEntities.HARQUEBUSIER_SKELETON.get(), SkeletonRenderer::new);
 		
 		event.registerBlockEntityRenderer(ModBlockEntities.MEDIUM_NAVAL_CANNON.get(), ctx -> new NavalCannonRenderer(ctx));
 		event.registerBlockEntityRenderer(ModBlockEntities.CONGREVE_ROCKET_STAND.get(), ctx -> new CongreveRocketStandRenderer(ctx));
