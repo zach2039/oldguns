@@ -1,6 +1,7 @@
 ### v1.19-3.4.2-30
 
  - Remove old entities and inject code into Skeleton to use firearms
+ - Increase stack size of niter bottle and allow interaction on copper blocks
 
 ### v1.19-3.4.1-29
 

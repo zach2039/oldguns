@@ -1,5 +1,8 @@
 package com.zach2039.oldguns.init;
 
+import java.util.List;
+import java.util.Optional;
+
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.AmmoTypes;
 import com.zach2039.oldguns.api.ammo.ProjectilePowderType;
@@ -30,9 +33,39 @@ import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.stats.Stats;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.AreaEffectCloud;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.boss.enderdragon.EnderDragon;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Item.Properties;
+import net.minecraft.world.item.alchemy.PotionUtils;
+import net.minecraft.world.item.alchemy.Potions;
+import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.WeatheringCopper;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.client.event.ColorHandlerEvent.Item;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -243,7 +276,37 @@ public class ModItems {
 	
 	// Niter
 	public static final RegistryObject<MaterialItem> NITRATE_SOIL = ITEMS.register("nitrate_soil", () -> new MaterialItem());	
-	public static final RegistryObject<MaterialItem> LIQUID_NITER_BOTTLE = ITEMS.register("liquid_niter_bottle", () -> new MaterialItem(3));
+	public static final RegistryObject<MaterialItem> LIQUID_NITER_BOTTLE = ITEMS.register("liquid_niter_bottle", () -> new MaterialItem(16) {
+		/**
+	    * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
+	    * {@link #onItemUse}.
+	    */
+		@Override
+		public InteractionResult useOn(UseOnContext ctx) {
+			Level level = ctx.getLevel();
+			BlockPos blockpos = ctx.getClickedPos();
+			Player player = ctx.getPlayer();
+			ItemStack itemstack = ctx.getItemInHand();
+			BlockState blockstate = level.getBlockState(blockpos);
+			if (ctx.getClickedFace() != Direction.DOWN && blockstate.getBlock() instanceof WeatheringCopper) {
+				Optional<BlockState> optionalBlockState = ((WeatheringCopper)blockstate.getBlock()).getNext(blockstate);
+				if (optionalBlockState.isPresent()) {
+					
+					player.setItemInHand(ctx.getHand(), ItemUtils.createFilledResult(itemstack, player, new ItemStack(Items.GLASS_BOTTLE)));
+					player.awardStat(Stats.ITEM_USED.get(itemstack.getItem()));
+					
+					level.playSound((Player)null, blockpos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
+					level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
+					level.setBlockAndUpdate(blockpos, ((WeatheringCopper)blockstate.getBlock()).getNext(blockstate).get());
+					
+					//this.fizz(level, blockpos);
+					level.levelEvent(1501, blockpos, 0);
+					return InteractionResult.sidedSuccess(level.isClientSide);
+				}
+			}
+			return InteractionResult.PASS;
+		}
+	});
 	public static final RegistryObject<MaterialItem> NITER = ITEMS.register("niter", () -> new MaterialItem());
 	
 	// Sulfur
