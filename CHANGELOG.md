@@ -1,3 +1,7 @@
+### v1.19-3.4.2-30
+
+ - Remove old entities and inject code into Skeleton to use firearms
+
 ### v1.19-3.4.1-29
 
  - Edit mixin info and fix issue with some JEI recipes
