@@ -182,7 +182,7 @@ dependencies {
 
 	//runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 	//runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
-	runtimeOnly	fg.deobf("me.shedaniel:architectury-forge:${architectury_version}")
+	runtimeOnly	fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 	runtimeOnly	fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
 	runtimeOnly	fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 	runtimeOnly	fg.deobf("me.shedaniel:RoughlyEnoughItems-plugin-compatibilities-forge:${rei_compat_version}")
