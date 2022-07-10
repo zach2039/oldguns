@@ -1,6 +1,6 @@
 {
   "parent": "forge:item/bucket",
-  "flipGas": true,
+  "flip_gas": true,
   "fluid": "oldguns:liquid_niter",
-  "loader": "forge:bucket"
+  "loader": "forge:fluid_container"
 }
