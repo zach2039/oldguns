@@ -1,11 +1,11 @@
 {
-  "type": "oldguns:loot_table",
+  "type": "oldguns:modifier_matchlock",
   "conditions": [
     {
-      "condition": "oldguns:can_spawn_design_notes_in_loot"
+      "condition": "oldguns:can_spawn_firearms_in_loot"
     },
     {
-      "chance": 0.4,
+      "chance": 0.5,
       "condition": "minecraft:random_chance"
     },
     {
@@ -26,5 +26,5 @@
       ]
     }
   ],
-  "loot_table": "oldguns:loot_table_design_notes_matchlock"
+  "loot_table": "oldguns:loot_table_matchlock_firearm"
 }

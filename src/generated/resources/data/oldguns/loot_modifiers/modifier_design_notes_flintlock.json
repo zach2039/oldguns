@@ -1,11 +1,11 @@
 {
-  "type": "oldguns:loot_table",
+  "type": "oldguns:modifier_design_notes_flintlock",
   "conditions": [
     {
       "condition": "oldguns:can_spawn_design_notes_in_loot"
     },
     {
-      "chance": 0.3,
+      "chance": 0.2,
       "condition": "minecraft:random_chance"
     },
     {
@@ -26,5 +26,5 @@
       ]
     }
   ],
-  "loot_table": "oldguns:loot_table_design_notes_wheellock"
+  "loot_table": "oldguns:loot_table_design_notes_flintlock"
 }

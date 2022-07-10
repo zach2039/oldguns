@@ -1,11 +1,11 @@
 {
   "entries": [
-    "oldguns:loot_table_mechanism",
-    "oldguns:loot_table_matchlock_firearm",
-    "oldguns:loot_table_design_notes_matchlock",
-    "oldguns:loot_table_design_notes_wheellock",
-    "oldguns:loot_table_design_notes_flintlock",
-    "oldguns:loot_table_design_notes_mechanism"
+    "oldguns:modifier_design_notes_matchlock",
+    "oldguns:modifier_matchlock",
+    "oldguns:modifier_design_notes_mechanism",
+    "oldguns:modifier_mechanism",
+    "oldguns:modifier_design_notes_wheellock",
+    "oldguns:modifier_design_notes_flintlock"
   ],
   "replace": false
 }

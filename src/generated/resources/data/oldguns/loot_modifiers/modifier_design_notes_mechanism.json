@@ -1,5 +1,5 @@
 {
-  "type": "oldguns:loot_table",
+  "type": "oldguns:modifier_design_notes_mechansim",
   "conditions": [
     {
       "condition": "oldguns:can_spawn_design_notes_in_loot"

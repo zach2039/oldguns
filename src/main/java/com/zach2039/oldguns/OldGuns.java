@@ -14,7 +14,7 @@ import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModLootConditionTypes;
-import com.zach2039.oldguns.init.ModLootModifierSerializers;
+import com.zach2039.oldguns.init.ModLootModifierCodecs;
 import com.zach2039.oldguns.init.ModLootTables;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModNetwork;
@@ -59,7 +59,7 @@ public class OldGuns
 		ModMenuTypes.initialize(modEventBus);
 		ModAttributes.initialize(modEventBus);
 		ModEntities.initialize(modEventBus);
-		ModLootModifierSerializers.initialize(modEventBus);
+		ModLootModifierCodecs.initialize(modEventBus);
 		ModPotions.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
 		ModSoundEvents.initialize(modEventBus);
