@@ -33,7 +33,7 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 	@Override
 	protected void start() {
 		
-		add("loot_table_matchlock_firearm", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
+		add("loot_table_matchlock_firearm", new LootTableLootModifier(
 				new LootItemCondition[]{
 						LootSpawnFirearmsLootCondition.builder().build(),
 						LootItemRandomChanceCondition.randomChance(0.5f).build(),
@@ -46,7 +46,7 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		));
 		
 		
-		add("loot_table_mechanism", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
+		add("loot_table_mechanism", new LootTableLootModifier(
 				new LootItemCondition[]{
 						LootSpawnMechanismsLootCondition.builder().build(),
 						LootItemRandomChanceCondition.randomChance(0.5f).build(),
@@ -59,7 +59,7 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		));
 		
 		
-		add("loot_table_design_notes_mechanism", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
+		add("loot_table_design_notes_mechanism", new LootTableLootModifier(
 				new LootItemCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
 						LootItemRandomChanceCondition.randomChance(0.5f).build(),
@@ -73,7 +73,7 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		));
 		
 		
-		add("loot_table_design_notes_matchlock", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
+		add("loot_table_design_notes_matchlock", new LootTableLootModifier(
 				new LootItemCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
 						LootItemRandomChanceCondition.randomChance(0.4f).build(),
@@ -86,7 +86,7 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		));
 		
 		
-		add("loot_table_design_notes_wheellock", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
+		add("loot_table_design_notes_wheellock", new LootTableLootModifier(
 				new LootItemCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
 						LootItemRandomChanceCondition.randomChance(0.3f).build(),
@@ -99,7 +99,7 @@ public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 		));
 		
 		
-		add("loot_table_design_notes_flintlock", ModLootModifierSerializers.LOOT_TABLE.get(), new LootTableLootModifier(
+		add("loot_table_design_notes_flintlock", new LootTableLootModifier(
 				new LootItemCondition[]{
 						LootSpawnDesignNotesLootCondition.builder().build(),
 						LootItemRandomChanceCondition.randomChance(0.2f).build(),

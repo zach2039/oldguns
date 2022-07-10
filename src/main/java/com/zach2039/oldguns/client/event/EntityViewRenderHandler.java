@@ -9,7 +9,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityViewRenderEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
@@ -25,7 +24,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public class EntityViewRenderHandler {
 	
 	@SubscribeEvent
-	public static void getFogDensity(EntityViewRenderEvent.RenderFogEvent event) {
+	public static void getFogDensity(final net.minecraftforge.client.event.ViewportEvent.RenderFog event) {
 		Camera info = event.getCamera();
 		Level level = Minecraft.getInstance().level;
 		BlockPos blockPos = info.getBlockPosition();
@@ -44,7 +43,7 @@ public class EntityViewRenderHandler {
 	}
 	
 	@SubscribeEvent
-	public static void getFogColor(EntityViewRenderEvent.FogColors event) {
+	public static void getFogColor(final net.minecraftforge.client.event.ViewportEvent.ComputeFogColor event) {
 		Camera info = event.getCamera();
 		Level level = Minecraft.getInstance().level;
 		BlockPos blockPos = info.getBlockPosition();

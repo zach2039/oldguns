@@ -1,9 +1,10 @@
 package com.zach2039.oldguns.init;
 
+import com.mojang.serialization.Codec;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.level.storage.loot.modifiers.LootTableLootModifier;
 
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -18,13 +19,13 @@ import net.minecraftforge.registries.RegistryObject;
  * @author zach2039
  */
 public class ModLootModifierSerializers {
-	private static final DeferredRegister<GlobalLootModifierSerializer<?>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, OldGuns.MODID);
+	private static final DeferredRegister<Codec<? extends IGlobalLootModifier>> SERIALIZERS = DeferredRegister.create(ForgeRegistries.Keys.LOOT_MODIFIER_SERIALIZERS, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
-	public static final RegistryObject<LootTableLootModifier.Serializer> LOOT_TABLE = SERIALIZERS.register(
+	public static final RegistryObject<Codec<LootTableLootModifier>> LOOT_TABLE = SERIALIZERS.register(
 			"loot_table",
-			LootTableLootModifier.Serializer::new
+			LootTableLootModifier.CODEC
 	);
 
 	/**

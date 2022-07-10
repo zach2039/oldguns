@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.world.item.equipment;
 
 import java.util.UUID;
-import java.util.function.Consumer;
 
 import javax.annotation.Nullable;
 
@@ -27,7 +26,7 @@ import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.client.IItemRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 
 public class MusketeerHatItem extends ArmorItem {
 	
@@ -72,11 +71,11 @@ public class MusketeerHatItem extends ArmorItem {
 	
 	@Override
 	@OnlyIn(Dist.CLIENT)
-	public void initializeClient(Consumer<net.minecraftforge.client.IItemRenderProperties> consumer) {
-		consumer.accept(new IItemRenderProperties() {
+	public void initializeClient(java.util.function.Consumer<net.minecraftforge.client.extensions.common.IClientItemExtensions> consumer) {
+		consumer.accept(new IClientItemExtensions() {
 			@Nullable
 			@Override
-			public HumanoidModel<?> getArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
+			public HumanoidModel<?> getHumanoidArmorModel(LivingEntity entityLiving, ItemStack itemStack, EquipmentSlot armorSlot, HumanoidModel<?> _default) {
 
 				MusketeerHatModel<LivingEntity> model = new MusketeerHatModel<>(ModLayerDefinitions.MUSKETEER_HAT.bakeRoot());
 				

@@ -29,7 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 
 public class GunsmithsBenchBlock extends Block {
 	public static final Component CONTAINER_TITLE = Component.translatable("container.gunsmiths_bench");
-	public static final Property<Direction> FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);;
+	public static final Property<Direction> FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 	
 	public GunsmithsBenchBlock() {
 		super(Block.Properties

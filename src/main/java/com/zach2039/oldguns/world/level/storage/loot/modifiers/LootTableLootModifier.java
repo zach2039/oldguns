@@ -1,19 +1,20 @@
 package com.zach2039.oldguns.world.level.storage.loot.modifiers;
 
-import java.util.List;
+import java.util.function.Supplier;
 
 import org.jetbrains.annotations.NotNull;
 
-import com.google.gson.JsonObject;
+import com.google.common.base.Suppliers;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
-import net.minecraftforge.common.loot.GlobalLootModifierSerializer;
+import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.common.loot.LootModifier;
 
 /**
@@ -23,7 +24,18 @@ import net.minecraftforge.common.loot.LootModifier;
  */
 public class LootTableLootModifier extends LootModifier {
 	private final ResourceLocation lootTableID;
-
+	public static final Supplier<Codec<LootTableLootModifier>> CODEC = Suppliers.memoize(() ->
+		RecordCodecBuilder.create(inst ->
+				codecStart(inst)
+						.and(
+								ResourceLocation.CODEC
+										.fieldOf("loot_table")
+										.forGetter(m -> m.lootTableID)
+						)
+						.apply(inst, LootTableLootModifier::new)
+		)
+	);
+	
 	public LootTableLootModifier(final LootItemCondition[] conditions, final ResourceLocation lootTableID) {
 		super(conditions);
 		this.lootTableID = lootTableID;
@@ -40,21 +52,9 @@ public class LootTableLootModifier extends LootModifier {
 		return generatedLoot;
 	}
 
-	public static class Serializer extends GlobalLootModifierSerializer<LootTableLootModifier> {
-		@Override
-		public LootTableLootModifier read(final ResourceLocation location, final JsonObject object, final LootItemCondition[] lootConditions) {
-			final ResourceLocation lootTableID = new ResourceLocation(GsonHelper.getAsString(object, "loot_table"));
-			return new LootTableLootModifier(lootConditions, lootTableID);
-		}
-
-		@Override
-		public JsonObject write(final LootTableLootModifier instance) {
-			final JsonObject object = makeConditions(instance.conditions);
-			object.addProperty("loot_table", instance.lootTableID.toString());
-			return object;
-		}
+	@Override
+	public Codec<? extends IGlobalLootModifier> codec() {
+		return CODEC.get();
 	}
-
-	
 }
 

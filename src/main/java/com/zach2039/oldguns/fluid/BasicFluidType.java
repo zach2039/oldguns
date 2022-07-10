@@ -3,9 +3,8 @@ package com.zach2039.oldguns.fluid;
 import java.util.function.Consumer;
 
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.client.IFluidTypeRenderProperties;
+import net.minecraftforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.FluidType.Properties;
 
 /**
  * Basic implementation of {@link FluidType} that supports specifying still and flowing textures in the constructor.
@@ -31,8 +30,8 @@ public class BasicFluidType extends FluidType {
 	}
 
 	@Override
-	public void initializeClient(final Consumer<IFluidTypeRenderProperties> consumer) {
-		consumer.accept(new IFluidTypeRenderProperties() {
+	public void initializeClient(final Consumer<IClientFluidTypeExtensions> consumer) {
+		consumer.accept(new IClientFluidTypeExtensions() {
 			@Override
 			public ResourceLocation getStillTexture() {
 				return stillTexture;

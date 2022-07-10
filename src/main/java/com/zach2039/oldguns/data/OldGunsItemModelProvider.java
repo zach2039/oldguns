@@ -19,9 +19,8 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
-import net.minecraftforge.client.model.generators.ModelBuilder.Perspective;
 import net.minecraftforge.client.model.generators.ModelFile;
-import net.minecraftforge.client.model.generators.loaders.DynamicBucketModelBuilder;
+import net.minecraftforge.client.model.generators.loaders.DynamicFluidContainerModelBuilder;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.Lazy;
 
@@ -409,7 +408,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 
 		getBuilder(name(item))
 				.parent(getExistingFile(new ResourceLocation("forge", "bucket")))
-				.customLoader(DynamicBucketModelBuilder::begin)
+				.customLoader(DynamicFluidContainerModelBuilder::begin)
 				.fluid(fluid)
 				.flipGas(true)
 				.end();
@@ -419,7 +418,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		getBuilder(name(item))
 				.parent(getExistingFile(new ResourceLocation("forge", "bucket")))
 				.texture("base", itemTexture(item) + "_base")
-				.customLoader(DynamicBucketModelBuilder::begin)
+				.customLoader(DynamicFluidContainerModelBuilder::begin)
 				.fluid(Fluids.EMPTY)
 				.flipGas(true)
 				.end();
