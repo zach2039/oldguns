@@ -1,9 +1,5 @@
 package com.zach2039.oldguns.world.item.crafting.cauldron;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 import javax.annotation.Nonnull;
 
 import org.jetbrains.annotations.NotNull;
@@ -11,27 +7,28 @@ import org.jetbrains.annotations.NotNull;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.init.ModCrafting;
 
-import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CustomRecipe;
-import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public class CauldronRecipe extends CustomRecipe implements ICauldronRecipe {
 	
 	@NotNull private final ItemStack input;
     @NotNull private final ItemStack output;
+    @NotNull private final Fluid fluid;
 
-    public CauldronRecipe(ResourceLocation id, @NotNull ItemStack input, ItemStack output)
+    public CauldronRecipe(ResourceLocation id, @NotNull ItemStack input, ItemStack output, Fluid fluid)
     {
     	super(id);
         this.input = input;
         this.output = output;
+        this.fluid = fluid;
     }
 
 	@Override
@@ -58,7 +55,7 @@ public class CauldronRecipe extends CustomRecipe implements ICauldronRecipe {
 
 	@Override
 	public boolean matches(CraftingContainer pContainer, Level pLevel) {
-		return false;
+		return true;
 	}
 
 	@Override
@@ -87,5 +84,10 @@ public class CauldronRecipe extends CustomRecipe implements ICauldronRecipe {
 		}
 
 		public void toNetwork(FriendlyByteBuf buf, CauldronRecipe recipe) {}
+	}
+
+	@Override
+	public Fluid getFluid() {
+		return fluid;
 	}
 }

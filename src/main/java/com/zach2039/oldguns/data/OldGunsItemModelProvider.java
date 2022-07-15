@@ -6,6 +6,7 @@ import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.item.FirearmEmptyPropertyFunction;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
+import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.util.ModRegistryUtil;
@@ -111,6 +112,8 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 	
 	@Override
 	protected void registerModels() {
+		withGeneratedParentAndDefaultTexture(ModBlocks.LIQUID_NITER_CAULDRON.get().asItem());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_EXPLOSIVE_ROCKET.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_IRON_CANNONBALL.get());
@@ -315,6 +318,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MATCH_CORD.get());
 				
 		withGeneratedParentAndDefaultTexture(ModItems.WAXED_PAPER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.PERCUSSION_CAP.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.BARK_STRANDS.get());
 		
@@ -326,6 +330,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.MORTAR_AND_PESTLE.get());
 		withGeneratedParentAndDefaultTexture(ModItems.HACKSAW.get());
 		withGeneratedParentAndDefaultTexture(ModItems.DESIGN_NOTES.get());
+		withGeneratedParentAndDefaultTexture(ModItems.POWDER_HORN.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.GUNNERS_QUADRANT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.RAM_ROD.get());

@@ -31,6 +31,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 
 public class ModCauldronInteractions {
@@ -52,35 +54,41 @@ public class ModCauldronInteractions {
 			addCauldronBottleFillRecipe(
 					new ResourceLocation(OldGuns.MODID, "fill_cauldron_from_niter_bottle"),
 					CauldronInteraction.EMPTY,
+					Fluids.EMPTY,
 					ModItems.LIQUID_NITER_BOTTLE.get(),
 					ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState()
 					);
 			addCauldronBucketFillRecipe(
 					new ResourceLocation(OldGuns.MODID, "fill_cauldron_from_niter_bucket"),
 					CauldronInteraction.EMPTY,
+					Fluids.EMPTY,
 					ModFluids.LIQUID_NITER.getBucket().get(),
 					ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3))
 					);
 			addCauldronBottleFillRecipe(
 					new ResourceLocation(OldGuns.MODID, "fill_niter_cauldron_from_niter_bottle"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					ModItems.LIQUID_NITER_BOTTLE.get(),
 					ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState()
 					);
 			addCauldronBucketFillRecipe(
 					new ResourceLocation(OldGuns.MODID, "fill_niter_cauldron_from_niter_bucket"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					ModFluids.LIQUID_NITER.getBucket().get(),
 					ModBlocks.LIQUID_NITER_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, Integer.valueOf(3))
 					);
 			addCauldronBottleEmptyRecipe(
 					new ResourceLocation(OldGuns.MODID, "empty_niter_cauldron_to_niter_bottle"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					new ItemStack(ModItems.LIQUID_NITER_BOTTLE.get())
 					);
 			addCauldronBucketEmptyRecipe(
 					new ResourceLocation(OldGuns.MODID, "empty_niter_cauldron_to_niter_bucket"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					new ItemStack(ModFluids.LIQUID_NITER.getBucket().get())
 					);
 			
@@ -88,6 +96,7 @@ public class ModCauldronInteractions {
 			addCauldronWettingRecipe(
 					new ResourceLocation(OldGuns.MODID, "wet_high_grade_black_powder"),
 					CauldronInteraction.WATER,
+					Fluids.WATER,
 					ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get().asItem(), 
 					new ItemStack(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get()), 
 					true,
@@ -96,6 +105,7 @@ public class ModCauldronInteractions {
 			addCauldronWettingRecipe(
 					new ResourceLocation(OldGuns.MODID, "wet_medium_grade_black_powder"),
 					CauldronInteraction.WATER,
+					Fluids.WATER,
 					ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().asItem(), 
 					new ItemStack(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()), 
 					true,
@@ -106,6 +116,7 @@ public class ModCauldronInteractions {
 			addCauldronConvertRecipe(
 					new ResourceLocation(OldGuns.MODID, "convert_string_to_match_cord_niter_cauldron"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					Items.STRING, 
 					new ItemStack(ModItems.MATCH_CORD.get()), 
 					1,
@@ -117,8 +128,9 @@ public class ModCauldronInteractions {
 			addCauldronConvertRecipe(
 					new ResourceLocation(OldGuns.MODID, "convert_raw_gold_to_mercury_nugget_niter_cauldron"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					Items.RAW_GOLD, 
-					new ItemStack(ModItems.MERCURY_NUGGET.get()),
+					new ItemStack(ModItems.MERCURY_NUGGET.get(), 3),
 					3,
 					true,
 					OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.mercuryProductionSettings.allowMercuryFromGoldAtNiterCauldronCrafting
@@ -126,8 +138,9 @@ public class ModCauldronInteractions {
 			addCauldronConvertRecipe(
 					new ResourceLocation(OldGuns.MODID, "convert_raw_gold_block_to_mercury_nugget_niter_cauldron"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					Blocks.RAW_GOLD_BLOCK.asItem(), 
-					new ItemStack(ModItems.MERCURY_NUGGET.get()),
+					new ItemStack(ModItems.MERCURY_NUGGET.get(), 27),
 					27,
 					true,
 					OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.mercuryProductionSettings.allowMercuryFromGoldAtNiterCauldronCrafting
@@ -137,6 +150,7 @@ public class ModCauldronInteractions {
 			addCauldronConvertRecipe(
 					new ResourceLocation(OldGuns.MODID, "convert_redstone_to_mercury_nugget_niter_cauldron"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					Items.REDSTONE, 
 					new ItemStack(ModItems.MERCURY_NUGGET.get()),
 					1,
@@ -146,15 +160,16 @@ public class ModCauldronInteractions {
 			addCauldronConvertRecipe(
 					new ResourceLocation(OldGuns.MODID, "convert_redstone_block_to_mercury_nugget_niter_cauldron"),
 					LIQUID_NITER,
+					ModFluids.LIQUID_NITER.getStill().get(),
 					Blocks.REDSTONE_BLOCK.asItem(), 
-					new ItemStack(ModItems.MERCURY_NUGGET.get()),
+					new ItemStack(ModItems.MERCURY_NUGGET.get(), 9),
 					9,
 					true,
 					OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.mercuryProductionSettings.allowMercuryFromRedstoneAtNiterCauldronCrafting
 					);
 		}
 		
-		public static boolean addCauldronBottleFillRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Item input, BlockState postBlockState)
+		public static boolean addCauldronBottleFillRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item input, BlockState postBlockState)
 	    {
 			var output = new ItemStack(Items.GLASS_BOTTLE);
 			
@@ -164,10 +179,10 @@ public class ModCauldronInteractions {
 	        		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output));
+	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output, fluid));
 	    }
 		
-		public static boolean addCauldronBucketFillRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Item input, BlockState postBlockState)
+		public static boolean addCauldronBucketFillRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item input, BlockState postBlockState)
 	    {
 			var output = new ItemStack(Items.BUCKET);
 			
@@ -177,10 +192,10 @@ public class ModCauldronInteractions {
 	        		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output));
+	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output, fluid));
 	    }
 		
-		public static boolean addCauldronBucketEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, ItemStack output)
+		public static boolean addCauldronBucketEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, ItemStack output)
 	    {
 			var input = new ItemStack(Items.BUCKET);
 			
@@ -190,10 +205,10 @@ public class ModCauldronInteractions {
 		    		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, input, output));
+	        return addRecipe(new CauldronRecipe(id, input, output, fluid));
 	    }
 		
-		public static boolean addCauldronBottleEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, ItemStack output)
+		public static boolean addCauldronBottleEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, ItemStack output)
 	    {		
 			var input = new ItemStack(Items.GLASS_BOTTLE);
 			
@@ -203,10 +218,10 @@ public class ModCauldronInteractions {
 	        		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, input, output));
+	        return addRecipe(new CauldronRecipe(id, input, output, fluid));
 	    }
 		
-		public static boolean addCauldronConvertRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Item input, ItemStack output, int multiplier, boolean lowerFillLevel, Supplier<Boolean> allowed)
+		public static boolean addCauldronConvertRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item input, ItemStack output, int multiplier, boolean lowerFillLevel, Supplier<Boolean> allowed)
 	    {
 			targetMap.put(input,
 					(state, level, blockpos, player, hand, stack) -> {
@@ -214,10 +229,10 @@ public class ModCauldronInteractions {
 	        		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output));
+	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output, fluid));
 	    }
 		
-		public static boolean addCauldronWettingRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Item input, ItemStack output, boolean lowerFillLevel, Supplier<Boolean> allowed)
+		public static boolean addCauldronWettingRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item input, ItemStack output, boolean lowerFillLevel, Supplier<Boolean> allowed)
 	    {
 			targetMap.put(input,
 					(state, level, blockpos, player, hand, stack) -> {
@@ -225,7 +240,7 @@ public class ModCauldronInteractions {
 	        		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output));
+	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output, fluid));
 	    }
 		
 		public static boolean addRecipe(CauldronRecipe recipe)

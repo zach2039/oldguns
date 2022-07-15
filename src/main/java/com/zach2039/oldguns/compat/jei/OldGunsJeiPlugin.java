@@ -1,29 +1,22 @@
 package com.zach2039.oldguns.compat.jei;
 
-import java.util.IdentityHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
-import java.util.stream.Stream;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.category.CauldronInteractionRecipeCategory;
 import com.zach2039.oldguns.compat.jei.category.GunsmithsBenchRecipeCategory;
-import com.zach2039.oldguns.compat.jei.crafting.replacers.CauldronRecipeMaker;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModCauldronInteractions;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
-import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
-import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -44,7 +37,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.crafting.CraftingRecipe;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -108,11 +100,8 @@ public class OldGunsJeiPlugin implements IModPlugin {
 			RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 			
 			registration.addRecipes(JEIRecipeTypes.GUNSMITHS_BENCH, getFiltered(recipeManager, OldGunsJeiPlugin::isGunsmithsBenchRecipe));
-			
-			List<CraftingRecipe> cauldronRecipes = ModCauldronInteractions.OldGunsCauldronInteraction.RECIPES.stream().map((e) -> (CraftingRecipe)e).toList();
-			
-			List<CraftingRecipe> specialCraftingRecipes = replaceSpecialCraftingRecipes(cauldronRecipes, stackHelper);
-			registration.addRecipes(RecipeTypes.CRAFTING, specialCraftingRecipes);
+
+			registration.addRecipes(JEIRecipeTypes.CAULDRON, ModCauldronInteractions.OldGunsCauldronInteraction.RECIPES);
 		}	
 	}
 
@@ -162,29 +151,5 @@ public class OldGunsJeiPlugin implements IModPlugin {
 		return (
 				(serializer == ModCrafting.Recipes.CAULDRON.get())
 				);
-	}
-	
-	private static List<CraftingRecipe> replaceSpecialCraftingRecipes(List<CraftingRecipe> unhandledCraftingRecipes, IStackHelper stackHelper) {
-		Map<Class<? extends CraftingRecipe>, Supplier<List<CraftingRecipe>>> replacers = new IdentityHashMap<>();
-		
-		replacers.put(CauldronRecipe.class, () -> CauldronRecipeMaker.createRecipes());
-		
-		return unhandledCraftingRecipes.stream()
-			.map(CraftingRecipe::getClass)
-			.distinct()
-			.filter(replacers::containsKey)
-			// distinct + this limit will ensure we stop iterating early if we find all the recipes we're looking for.
-			.limit(replacers.size())
-			.flatMap(recipeClass -> {
-				Supplier<List<CraftingRecipe>> supplier = replacers.get(recipeClass);
-				try {
-					List<CraftingRecipe> results = supplier.get();
-					return results.stream();
-				} catch (RuntimeException e) {
-					OldGuns.LOGGER.error("Failed to create JEI recipes for {}", recipeClass, e);
-					return Stream.of();
-				}
-			})
-			.toList();
 	}
 }

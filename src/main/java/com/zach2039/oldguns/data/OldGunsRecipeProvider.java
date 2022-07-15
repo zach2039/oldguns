@@ -278,7 +278,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_medium_grade_black_powder", has(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_block"));
 
-		// Create waxed paper
+		// Waxed Paper
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WAXED_PAPER.get(), 8)
 				.pattern("PPP")
 				.pattern("PHP")
@@ -288,6 +288,16 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_paper", has(Items.PAPER))
 				.unlockedBy("has_honeycomb", has(Items.HONEYCOMB))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "waxed_paper"));
+		
+		// Percussion Cap
+		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.PERCUSSION_CAP.get(), 2)
+				.pattern("npn")
+				.pattern(" n ")
+				.define('n', Tags.Items.NUGGETS_GOLD)
+				.define('p', ModItems.PERCUSSION_POWDER.get())
+				.unlockedBy("has_gold_nugget", has(Tags.Items.NUGGETS_GOLD))
+				.unlockedBy("has_percussion_cap", has(ModItems.PERCUSSION_POWDER.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "percussion_cap"));
 		
 		// Create matchlock repair parts
 		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_MATCHLOCK_FIREARM);
@@ -2468,6 +2478,23 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_ammo", has(inputAmmo))
 				.unlockedBy("has_string", has(Tags.Items.STRING))
 				.unlockedBy("has_waxed_paper", has(ModItems.WAXED_PAPER.get()))
+				.unlockedBy("has_black_powder", has(inputPowder))
+				.condition(ammoCraftCondition)
+				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(outputCartridge).getPath()));
+	}
+	
+	private static void shapelessCaplockPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, TagKey<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(outputCartridge)
+				.requires(inputAmmo)		
+				.requires(Tags.Items.STRING)
+				.requires(ModItems.WAXED_PAPER.get())
+				.requires(ModItems.PERCUSSION_CAP.get())
+				.requires(inputPowder, powderAmount)					
+				.unlockedBy("has_ammo", has(inputAmmo))
+				.unlockedBy("has_string", has(Tags.Items.STRING))
+				.unlockedBy("has_waxed_paper", has(ModItems.WAXED_PAPER.get()))
+				.unlockedBy("has_percussion_cap", has(ModItems.PERCUSSION_CAP.get()))
 				.unlockedBy("has_black_powder", has(inputPowder))
 				.condition(ammoCraftCondition)
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))

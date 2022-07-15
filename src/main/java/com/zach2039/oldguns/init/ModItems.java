@@ -29,6 +29,7 @@ import com.zach2039.oldguns.world.item.tools.GunnersQuadrantItem;
 import com.zach2039.oldguns.world.item.tools.HacksawItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
+import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
@@ -261,7 +262,6 @@ public class ModItems {
 	public static final RegistryObject<FirearmPartItem> DIAMOND_TRIGGER_ASSEMBLY = ITEMS.register("diamond_trigger_assembly", () -> new FirearmPartItem(FirearmPart.DIAMOND_TRIGGER_ASSEMBLY));
 	// Percussion Cap Cone
 	public static final RegistryObject<FirearmPartItem> PERCUSSION_CAP_CONE = ITEMS.register("percussion_cap_cone", () -> new FirearmPartItem(FirearmPart.PERCUSSION_CAP_CONE));
-
 	
 	// Materials
 	// Iron
@@ -332,6 +332,7 @@ public class ModItems {
 	
 	// Ammo Crafting
 	public static final RegistryObject<MaterialItem> WAXED_PAPER = ITEMS.register("waxed_paper", () -> new MaterialItem());
+	public static final RegistryObject<MaterialItem> PERCUSSION_CAP = ITEMS.register("percussion_cap", () -> new MaterialItem(32));
 	
 	// Repair
 	public static final RegistryObject<RepairPartItem> MATCHLOCK_REPAIR_PARTS = ITEMS.register("matchlock_repair_parts", () -> new RepairPartItem());
@@ -344,6 +345,9 @@ public class ModItems {
 	public static final RegistryObject<MortarAndPestleItem> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle", () -> new MortarAndPestleItem());
 	public static final RegistryObject<HacksawItem> HACKSAW = ITEMS.register("hacksaw", () -> new HacksawItem());
 	public static final RegistryObject<DesignNotesItem> DESIGN_NOTES = ITEMS.register("design_notes", () -> new DesignNotesItem());
+	
+	// Reloading
+	public static final RegistryObject<PowderHornItem> POWDER_HORN = ITEMS.register("powder_horn", () -> new PowderHornItem());
 	
 	// Artillery Tools
 	public static final RegistryObject<RamRodItem> RAM_ROD = ITEMS.register("ram_rod", () -> new RamRodItem());

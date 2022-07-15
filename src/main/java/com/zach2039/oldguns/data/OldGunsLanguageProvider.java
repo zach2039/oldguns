@@ -296,6 +296,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.BARK_STRANDS, "Bark Strands");
 		
 		addItem(ModItems.WAXED_PAPER, "Waxed Paper");
+		addItem(ModItems.PERCUSSION_CAP, "Percussion Cap");
 		
 		addItem(ModItems.MATCHLOCK_REPAIR_PARTS, "Matchlock Repair Parts");
 		addItem(ModItems.WHEELLOCK_REPAIR_PARTS, "Wheellock Repair Parts");
@@ -304,6 +305,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.REPAIR_KIT, "Firearm Repair Kit");
 		addItem(ModItems.MORTAR_AND_PESTLE, "Mortar and Pestle");
 		addItem(ModItems.HACKSAW, "Hacksaw");
+		addItem(ModItems.POWDER_HORN, "Powder Horn");
 		addItem(ModItems.DESIGN_NOTES, "Design Notes");
 		
 		addItem(ModItems.GUNNERS_QUADRANT, "Gunner's Quadrant");

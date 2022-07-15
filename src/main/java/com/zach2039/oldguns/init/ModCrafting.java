@@ -15,6 +15,7 @@ import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchHa
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMortarAndPestleRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
 
 import net.minecraft.resources.ResourceLocation;
@@ -67,6 +68,8 @@ public class ModCrafting {
 		private static boolean isInitialized;
 
 		public static final RegistryObject<ShapelessVanillaMuzzleloaderReloadRecipe.Serializer> FIREARM_MUZZLELOADER_RELOAD_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_muzzleloader_reload_shapeless", ShapelessVanillaMuzzleloaderReloadRecipe.Serializer::new);
+		
+		public static final RegistryObject<ShapelessVanillaMuzzleloaderPowderHornReloadRecipe.Serializer> FIREARM_MUZZLELOADER_POWDER_HORN_RELOAD_SHAPELESS = RECIPE_SERIALIZERS.register("firearm_muzzleloader_powder_horn_reload_shapeless", ShapelessVanillaMuzzleloaderPowderHornReloadRecipe.Serializer::new);
 		
 		public static final RegistryObject<ShapelessVanillaMortarAndPestleRecipe.Serializer> MORTAR_AND_PESTLE_SHAPELESS = RECIPE_SERIALIZERS.register("mortar_and_pestle_shapeless", ShapelessVanillaMortarAndPestleRecipe.Serializer::new);
 		

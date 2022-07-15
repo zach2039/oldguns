@@ -17,11 +17,19 @@ public class FirearmPaperCartridgeItem extends FirearmAmmoItem {
 
 	private final FirearmAmmo ammoEntry;
 	private final ProjectilePowderType powderType;
+	private boolean hasPercussionCap = false;
 	
 	public FirearmPaperCartridgeItem(FirearmAmmo ammoEntry, ProjectilePowderType powderType) {
 		super(ammoEntry);
 		this.ammoEntry = ammoEntry;
 		this.powderType = powderType;
+	}
+	
+	public FirearmPaperCartridgeItem(FirearmAmmo ammoEntry, ProjectilePowderType powderType, boolean hasPercussionCap) {
+		super(ammoEntry);
+		this.ammoEntry = ammoEntry;
+		this.powderType = powderType;
+		this.hasPercussionCap = hasPercussionCap;
 	}
 
 	@Override
@@ -36,5 +44,10 @@ public class FirearmPaperCartridgeItem extends FirearmAmmoItem {
 		
 		Component powderMsg = Component.translatable("item.oldguns." + this.powderType.name().toLowerCase() + "_black_powder").withStyle(ChatFormatting.DARK_GRAY);
 		tooltip.add(Component.literal("☼ ").withStyle(ChatFormatting.GRAY).append(powderMsg));
+		
+		if (hasPercussionCap) {
+			Component capMsg = Component.translatable("item.oldguns.percussion_cap").withStyle(ChatFormatting.DARK_GRAY);
+			tooltip.add(Component.literal("· ").withStyle(ChatFormatting.GRAY).append(powderMsg));
+		}
 	}
 }

@@ -151,10 +151,6 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 			}
 		}
 
-		if (this.shakeTime > 0) {
-			--this.shakeTime;
-		}
-
 		if (this.isInWaterOrRain() || blockstate.is(Blocks.POWDER_SNOW)) {	         
 			this.clearFire();
 		}

@@ -7,6 +7,8 @@
  - Update guidebook with fuse info
  - Fix some texture color profile issues (don't use Kolourpaint ever again...)
  - Refactor cauldron interaction code to be more addition-friendly 
+ - Change BulletProjectile to inherit from Projectile and not Arrow
+ - Add JEI cauldron recipe support
 
 ### v1.19-3.5.0-31
 

@@ -6,6 +6,8 @@ import java.util.Map;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 public interface ICauldronRecipe {
 
@@ -14,4 +16,6 @@ public interface ICauldronRecipe {
     ItemStack getOutput(ItemStack input);
 
 	ItemStack getOutput();
+	
+	Fluid getFluid();
 }

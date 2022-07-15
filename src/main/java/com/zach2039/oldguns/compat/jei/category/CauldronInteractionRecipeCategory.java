@@ -23,18 +23,25 @@ import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 
 import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.gui.GuiComponent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.material.Fluids;
+import net.minecraftforge.fluids.FluidStack;
 
 public class CauldronInteractionRecipeCategory implements IRecipeCategory<CauldronRecipe> {
 	public static final ResourceLocation UID = new ResourceLocation(OldGuns.MODID, "cauldron_interaction");
@@ -45,14 +52,11 @@ public class CauldronInteractionRecipeCategory implements IRecipeCategory<Cauldr
 	private final IDrawable background;
 	private final IDrawable icon;
 	private final Component localizedName;
-	private final ICraftingGridHelper craftingGridHelper;
 	
 	public CauldronInteractionRecipeCategory(IGuiHelper guiHelper) {
-		ResourceLocation location = new ResourceLocation(ModIds.JEI_ID, "textures/gui/gui_vanilla.png");
-		background = guiHelper.createDrawable(location, 0, 220, width, height);
+		background = guiHelper.createBlankDrawable(82, 34);
 		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.CAULDRON));
-		localizedName = Component.translatable("block.factorymade.industrial_shaper");
-		craftingGridHelper = guiHelper.createCraftingGridHelper();
+		localizedName = Component.translatable("block.minecraft.cauldron");
 	}
 
 	@Override
@@ -69,23 +73,51 @@ public class CauldronInteractionRecipeCategory implements IRecipeCategory<Cauldr
 	public IDrawable getIcon() {
 		return icon;
 	}
-
-	@Override
-	public void draw(CauldronRecipe recipe, @Nonnull IRecipeSlotsView slotsView, @Nonnull PoseStack ms, double mouseX, double mouseY) {
-		RenderSystem.enableBlend();
-		background.draw(ms, 0, 4);	
-		RenderSystem.disableBlend();
+	
+	private void drawSlot(PoseStack transform, int x, int y, int w, int h, int dark, int main, int light)
+	{
+		final int minX = x + 8 - w / 2;
+		final int minY = y + 8 - h / 2;
+		final int maxX = minX + w;
+		final int maxY = minY + h;
+		GuiComponent.fill(transform, minX, minY - 1, maxX, minY, dark);
+		GuiComponent.fill(transform, minX - 1, minY - 1, minX, maxY, dark);
+		GuiComponent.fill(transform, minX, minY, maxX, maxY, main);
+		GuiComponent.fill(transform, minX, maxY, maxX + 1, maxY + 1, light);
+		GuiComponent.fill(transform, maxX, minY, maxX + 1, maxY, light);
 	}
-
+	
+	@Override
+	public void draw(CauldronRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack transform, double mouseX, double mouseY)
+	{
+		drawSlot(transform, 31, 9, 16, 16, (0xff<<24)|0x373737, (0xff<<24)|0x8b8b8b, (0xff<<24)|0xffffff);
+	}
 	
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, CauldronRecipe recipe, IFocusGroup focuses) {
-		ItemStack resultItem = recipe.getResultItem();
+		ItemStack resultItem = recipe.getOutput();
+		ItemStack inputItem = recipe.getInput();
+
+		builder.addSlot(RecipeIngredientRole.INPUT, 1, 9)
+			.addItemStack(inputItem)
+			;
 		
-		List<ItemStack> inputs = Arrays.asList(recipe.getInput());
+		if (recipe.getFluid() == Fluids.EMPTY) {
+			builder.addSlot(RecipeIngredientRole.INPUT, 31, 9)
+				.addItemStack(new ItemStack(Blocks.CAULDRON))
+				;
+		} else {
+			builder.addSlot(RecipeIngredientRole.INPUT, 31, 9)
+				.setFluidRenderer(1000, true, 16, 16)
+				.addIngredient(ForgeTypes.FLUID_STACK, new FluidStack(recipe.getFluid(), 333))
+				.setOverlay(background, width, height)
+				;	
+		}
 		
-		craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
-		craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, Arrays.asList(inputs), 0, 0);
+		
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 61, 9)
+			.addItemStack(resultItem)
+			;
 	}
 
 	@Override

@@ -196,7 +196,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.modelFile(liquidNiterCauldronFull)
 				.addModel();
 
-		simpleBlockItem(ModBlocks.LIQUID_NITER_CAULDRON.get(), liquidNiterCauldronFull);
+		//simpleBlockItem(ModBlocks.LIQUID_NITER_CAULDRON.get(), liquidNiterCauldronFull);
 		
 		final ModelFile mediumGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()),

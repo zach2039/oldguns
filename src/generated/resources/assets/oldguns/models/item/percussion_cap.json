@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "oldguns:item/liquid_niter_cauldron"
+    "layer0": "oldguns:item/percussion_cap"
   }
 }
