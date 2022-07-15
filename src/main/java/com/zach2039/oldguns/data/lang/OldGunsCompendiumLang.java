@@ -284,6 +284,17 @@ public class OldGunsCompendiumLang {
 			
 		}
 		
+		public static class Fuses {
+			
+			public static final String ENTRY = "Fuses";
+			
+			public static final String PAGE0 = "Fuses and Match Cords are used in explosives and firearm construction, respectively; $(br)$(br)"
+					+ "Fuses are obtained by using a Match Cord on a Cauldron of Liquid Niter.";
+			
+			public static final String PAGE1 = "Bark Strands are used in the production of Match Cords, and are obtained by stripping a log "
+					+ "with shears, similar to stripping a log with an axe.";
+		}
+		
 		public static class Recipes {
 			
 			public static final String ENTRY = "Recipes";

@@ -2,31 +2,31 @@
   "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     }
   ],
   "result": {

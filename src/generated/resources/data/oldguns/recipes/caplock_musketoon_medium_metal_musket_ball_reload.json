@@ -1,0 +1,24 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:caplock_musketoon"
+    },
+    {
+      "tag": "oldguns:medium_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:caplock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:caplock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:caplock_musketoon",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

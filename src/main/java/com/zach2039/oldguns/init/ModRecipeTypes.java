@@ -5,6 +5,7 @@ import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
+import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.Container;
@@ -19,7 +20,10 @@ public class ModRecipeTypes {
 	public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, OldGuns.MODID);
 	
 	public static final TypeWithClass<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench", GunsmithsBenchRecipe.class);
+	
 	public static final TypeWithClass<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft", GunsmithsBenchRecipe.class);
+	
+	public static final TypeWithClass<CauldronRecipe> CAULDRON = register("cauldron", CauldronRecipe.class);
 
 	private static boolean isInitialized;
 	

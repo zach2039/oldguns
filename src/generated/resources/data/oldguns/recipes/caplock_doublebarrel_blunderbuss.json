@@ -1,0 +1,29 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_caplock_weapons"
+    }
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:large_metal_flared_barrel"
+    },
+    "H": {
+      "tag": "oldguns:large_stock"
+    },
+    "M": {
+      "tag": "oldguns:caplock_mechanism"
+    }
+  },
+  "pattern": [
+    "B  ",
+    "BMH"
+  ],
+  "result": {
+    "item": "oldguns:caplock_doublebarrel_blunderbuss",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

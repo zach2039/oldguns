@@ -29,10 +29,12 @@ public class OldGunsBlockTagsProvider extends BlockTagsProvider {
 		
 		tag(BlockTags.MINEABLE_WITH_PICKAXE)
 				.add(ModBlocks.MEDIUM_NAVAL_CANNON.get())
-				.add(ModBlocks.LIQUID_NITER_CAULDRON.get());
+				.add(ModBlocks.LIQUID_NITER_CAULDRON.get())
+				;
 		
 		tag(BlockTags.MINEABLE_WITH_AXE)
-				.add(ModBlocks.GUNSMITHS_BENCH.get());
+				.add(ModBlocks.GUNSMITHS_BENCH.get())
+				;
 
 		tag(BlockTags.MINEABLE_WITH_SHOVEL)
 				.add(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
@@ -41,7 +43,8 @@ public class OldGunsBlockTagsProvider extends BlockTagsProvider {
 				.add(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.add(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get())
 				.add(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE.get())
-				.add(ModBlocks.NITER_BEDDING.get());
+				.add(ModBlocks.NITER_BEDDING.get())
+				;
 		
 	}
 }

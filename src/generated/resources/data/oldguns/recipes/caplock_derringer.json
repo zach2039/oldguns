@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_caplock_weapons"
+    }
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:tiny_metal_barrel"
+    },
+    "H": {
+      "tag": "oldguns:small_handle"
+    },
+    "M": {
+      "tag": "oldguns:caplock_mechanism"
+    }
+  },
+  "pattern": [
+    "BMH"
+  ],
+  "result": {
+    "item": "oldguns:caplock_derringer",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

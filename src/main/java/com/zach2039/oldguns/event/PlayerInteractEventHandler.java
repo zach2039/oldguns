@@ -40,8 +40,8 @@ public class PlayerInteractEventHandler {
 		if (OldGunsConfig.SERVER.recipeSettings.worldInteractionSettings.allowShearsToStripBark.get()) {
 			
 			ItemStack toolStack = event.getItemStack();
-			Level level = (Level) event.getWorld();
-			Player player = event.getPlayer();
+			Level level = (Level) event.getLevel();
+			Player player = event.getEntity();
 			InteractionHand hand = event.getHand();
 			BlockPos blockpos = event.getPos();
 			BlockState preState = level.getBlockState(blockpos);

@@ -150,6 +150,19 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL, "Flintlock Blunderbuss Pistol");
 		addItem(ModItems.FLINTLOCK_BLUNDERBUSS, "Flintlock Blunderbuss");
 		addItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS, "Flintlock Doublebarrel Blunderbuss");
+		
+		addItem(ModItems.CAPLOCK_DERRINGER, "Caplock Derringer");
+		addItem(ModItems.CAPLOCK_DUCKFOOT_DERRINGER, "Caplock Duckfoot Derringer");
+		addItem(ModItems.CAPLOCK_PISTOL, "Caplock Pistol");
+		addItem(ModItems.CAPLOCK_PEPPERBOX_PISTOL, "Caplock Pepperbox Pistol");
+		addItem(ModItems.CAPLOCK_ARQUEBUS, "Caplock Arquebus");
+		addItem(ModItems.CAPLOCK_CALIVER, "Caplock Caliver");
+		addItem(ModItems.CAPLOCK_MUSKETOON, "Caplock Musketoon");
+		addItem(ModItems.CAPLOCK_MUSKET, "Caplock Musket");
+		addItem(ModItems.CAPLOCK_LONG_MUSKET, "Caplock Long Musket");
+		addItem(ModItems.CAPLOCK_BLUNDERBUSS_PISTOL, "Caplock Blunderbuss Pistol");
+		addItem(ModItems.CAPLOCK_BLUNDERBUSS, "Caplock Blunderbuss");
+		addItem(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS, "Caplock Doublebarrel Blunderbuss");
 	
 		addItem(ModItems.SMALL_STONE_MUSKET_BALL, "Small Stone Musket Ball");
 		addItem(ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE, "Small Stone Musket Ball Paper Cartridge");
@@ -244,10 +257,14 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.WOOD_GEAR_SET, "Wood Gear Set");
 		addItem(ModItems.IRON_GEAR_SET, "Iron Gear Set");
 		addItem(ModItems.GOLD_GEAR_SET, "Gold Gear Set");
+		addItem(ModItems.DIAMOND_GEAR_SET, "Diamond Gear Set");
 		
 		addItem(ModItems.WOOD_TRIGGER_ASSEMBLY, "Wood Trigger Assembly");
 		addItem(ModItems.IRON_TRIGGER_ASSEMBLY, "Iron Trigger Assembly");
 		addItem(ModItems.GOLD_TRIGGER_ASSEMBLY, "Gold Trigger Assembly");
+		addItem(ModItems.DIAMOND_TRIGGER_ASSEMBLY, "Diamond Trigger Assembly");
+		
+		addItem(ModItems.PERCUSSION_CAP_CONE, "Percussion Cap Cone");
 		
 		addItem(ModItems.IRON_BITS, "Iron Bits");
 		
@@ -258,6 +275,9 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addItem(ModItems.BRASS_INGOT, "Brass Ingot");
 		addItem(ModItems.BRASS_NUGGET, "Brass Nugget");
 		
+		addItem(ModItems.MERCURY_INGOT, "Mercury Orb");
+		addItem(ModItems.MERCURY_NUGGET, "Tiny Mercury Orb");
+		
 		addItem(ModItems.NITRATE_SOIL, "Nitrate Soil");
 		addItem(ModItems.LIQUID_NITER_BOTTLE, "Liquid Niter Bottle");
 		addItem(ModItems.NITER, "Niter");
@@ -265,6 +285,7 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addItem(ModItems.BLASTING_POWDER, "Blasting Powder");
 		addItem(ModItems.ROCKET_POWDER, "Rocket Powder");
+		addItem(ModItems.PERCUSSION_POWDER, "Percussion Powder");
 		add("item.oldguns.low_grade_black_powder", "Low-grade Black Powder");
 		addItem(ModItems.MEDIUM_GRADE_BLACK_POWDER, "Medium-grade Black Powder");
 		addItem(ModItems.HIGH_GRADE_BLACK_POWDER, "High-grade Black Powder");
@@ -447,6 +468,9 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		addPatchouliBookPage("black_powder_production.sulfur0", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.PAGE0);
 		addPatchouliBookPage("black_powder_production.sulfur1", OldGunsCompendiumLang.BlackPowderProduction.Sulfur.PAGE1);
 		
+		addPatchouliBookEntry("black_powder_production.fuses", OldGunsCompendiumLang.BlackPowderProduction.Fuses.ENTRY);
+		addPatchouliBookPage("black_powder_production.fuses0", OldGunsCompendiumLang.BlackPowderProduction.Fuses.PAGE0);
+		addPatchouliBookPage("black_powder_production.fuses1", OldGunsCompendiumLang.BlackPowderProduction.Fuses.PAGE1);
 	}
 
 	private void addMisc() {

@@ -3,6 +3,7 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftArtilleryPowderChargesCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftBlastingPowderSticksCondition;
+import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftCaplockWeaponsCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftCongreveRocketStandArtilleryCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftFlintlockWeaponsCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftIronArtilleryAmmoCondition;
@@ -18,7 +19,6 @@ import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftStoneFirearmA
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftTntFromBlastingPowderSticksCondition;
 import com.zach2039.oldguns.world.item.crafting.conditions.CanCraftWheellockWeaponsCondition;
 
-import net.minecraftforge.client.event.RecipesUpdatedEvent;
 import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -36,6 +36,7 @@ public class ModConditions {
 			CraftingHelper.register(CanCraftMatchlockWeaponsCondition.Serializer.INSTANCE);
 			CraftingHelper.register(CanCraftWheellockWeaponsCondition.Serializer.INSTANCE);
 			CraftingHelper.register(CanCraftFlintlockWeaponsCondition.Serializer.INSTANCE);
+			CraftingHelper.register(CanCraftCaplockWeaponsCondition.Serializer.INSTANCE);
 			
 			CraftingHelper.register(CanCraftPaperCartridgesCondition.Serializer.INSTANCE);
 

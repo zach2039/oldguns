@@ -37,7 +37,7 @@ public class ShapelessGunsmithsBenchHacksawRecipe extends ShapelessGunsmithsBenc
 			if (!itemstack.isEmpty() && (itemstack.getItem() instanceof HacksawItem)) {
 				remainingItems.set(i, damageItem(itemstack.copy()));
 			} else {
-				remainingItems.set(i, ForgeHooks.getContainerItem(itemstack));
+				remainingItems.set(i, ForgeHooks.getCraftingRemainingItem(itemstack));
 			}
 		}
 

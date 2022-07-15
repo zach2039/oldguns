@@ -72,6 +72,12 @@ public class ModTags {
 		public static final TagKey<Item> LARGE_FLINTLOCK_FIREARM = tag("large_flintlock_firearm");
 		public static final TagKey<Item> HUGE_FLINTLOCK_FIREARM = tag("huge_flintlock_firearm");
 
+		public static final TagKey<Item> CAPLOCK_FIREARM = tag("caplock_firearm");
+		public static final TagKey<Item> SMALL_CAPLOCK_FIREARM = tag("small_caplock_firearm");
+		public static final TagKey<Item> MEDIUM_CAPLOCK_FIREARM = tag("medium_caplock_firearm");
+		public static final TagKey<Item> LARGE_CAPLOCK_FIREARM = tag("large_caplock_firearm");
+		public static final TagKey<Item> HUGE_CAPLOCK_FIREARM = tag("huge_caplock_firearm");
+		
 		// Ammo
 		public static final TagKey<Item> SMALL_ROCK_MUSKET_BALL = tag("small_rock_musket_ball");
 		public static final TagKey<Item> MEDIUM_ROCK_MUSKET_BALL = tag("medium_rock_musket_ball");
@@ -93,6 +99,10 @@ public class ModTags {
 		public static final TagKey<Item> MEDIUM_METAL_BIRDSHOT = tag("medium_metal_birdshot");
 		public static final TagKey<Item> LARGE_METAL_BIRDSHOT = tag("large_metal_birdshot");
 
+		public static final TagKey<Item> SMALL_METAL_CANNONBALL = tag("small_metal_cannonball");
+		public static final TagKey<Item> MEDIUM_METAL_CANNONBALL = tag("medium_metal_cannonball");
+		public static final TagKey<Item> LARGE_METAL_CANNONBALL = tag("large_metal_cannonball");
+		
 		// Cartridge
 		public static final TagKey<Item> SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_matchlock_suitable_metal_musket_ball_cartridge");
 		public static final TagKey<Item> MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_matchlock_suitable_metal_musket_ball_cartridge");
@@ -106,6 +116,10 @@ public class ModTags {
 		public static final TagKey<Item> MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_flintlock_suitable_metal_musket_ball_cartridge");
 		public static final TagKey<Item> LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("large_flintlock_suitable_metal_musket_ball_cartridge");
 
+		public static final TagKey<Item> SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_caplock_suitable_metal_musket_ball_cartridge");
+		public static final TagKey<Item> MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_caplock_suitable_metal_musket_ball_cartridge");
+		public static final TagKey<Item> LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("large_caplock_suitable_metal_musket_ball_cartridge");
+		
 		// Powder
 		public static final TagKey<Item> ANY_GUNPOWDER = tag("any_gunpowder");
 		public static final TagKey<Item> ANY_BLACK_POWDER = tag("any_black_powder");
@@ -153,10 +167,14 @@ public class ModTags {
 		public static final TagKey<Item> WOOD_GEAR_SET = tag("wood_gear_set");
 		public static final TagKey<Item> IRON_GEAR_SET = tag("iron_gear_set");
 		public static final TagKey<Item> GOLD_GEAR_SET = tag("gold_gear_set");
+		public static final TagKey<Item> DIAMOND_GEAR_SET = tag("diamond_gear_set");
 
 		public static final TagKey<Item> WOOD_TRIGGER_ASSEMBLY = tag("wood_trigger_assembly");
 		public static final TagKey<Item> IRON_TRIGGER_ASSEMBLY = tag("iron_trigger_assembly");
 		public static final TagKey<Item> GOLD_TRIGGER_ASSEMBLY = tag("gold_trigger_assembly");
+		public static final TagKey<Item> DIAMOND_TRIGGER_ASSEMBLY = tag("diamond_trigger_assembly");
+		
+		public static final TagKey<Item> PERCUSSION_CAP_CONE = tag("percussion_cap_cone");
 
 		public static final TagKey<Item> MATCH_CORD = tag("match_cord");
 
@@ -165,6 +183,10 @@ public class ModTags {
 		public static final TagKey<Item> INGOTS_LEAD = forgeTag("ingots/lead");
 		public static final TagKey<Item> NUGGETS_BRASS = forgeTag("nuggets/brass");
 		public static final TagKey<Item> INGOTS_BRASS = forgeTag("ingots/brass");
+		public static final TagKey<Item> INGOTS_MERCURY = forgeTag("ingots/mercury");
+		public static final TagKey<Item> NUGGETS_MERCURY = forgeTag("nuggets/mercury");
+		public static final TagKey<Item> INGOTS_QUICKSILVER = forgeTag("ingots/quicksilver");
+		public static final TagKey<Item> NUGGETS_QUICKSILVER = forgeTag("nuggets/quicksilver");
 		public static final TagKey<Item> DUST_NITER = forgeTag("dust/niter");
 		public static final TagKey<Item> DUST_NITRE = forgeTag("dust/nitre");
 		public static final TagKey<Item> DUST_SALTPETER = forgeTag("dust/saltpeter");

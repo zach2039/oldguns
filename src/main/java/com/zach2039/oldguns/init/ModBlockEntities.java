@@ -19,7 +19,7 @@ public class ModBlockEntities {
 		return new Block[] { ModBlocks.BLASTING_POWDER_STICK_BLOCK.get(), ModBlocks.WALL_BLASTING_POWDER_STICK_BLOCK.get() };
 	}
 	
-	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITIES, OldGuns.MODID);
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, OldGuns.MODID);
 
 	private static boolean isInitialized;
 

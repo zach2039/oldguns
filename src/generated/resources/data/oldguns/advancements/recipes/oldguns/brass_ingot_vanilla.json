@@ -1,23 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_brass_nugget": {
+    "has_nuggets/brass": {
       "conditions": {
         "items": [
           {
             "tag": "forge:nuggets/brass"
-          }
-        ]
-      },
-      "trigger": "minecraft:inventory_changed"
-    },
-    "has_crafting_table": {
-      "conditions": {
-        "items": [
-          {
-            "items": [
-              "minecraft:crafting_table"
-            ]
           }
         ]
       },
@@ -32,8 +20,7 @@
   },
   "requirements": [
     [
-      "has_crafting_table",
-      "has_brass_nugget",
+      "has_nuggets/brass",
       "has_the_recipe"
     ]
   ],

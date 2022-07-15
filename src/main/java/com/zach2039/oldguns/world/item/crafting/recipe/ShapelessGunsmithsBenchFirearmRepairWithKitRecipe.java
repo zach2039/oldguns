@@ -79,7 +79,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends Shapeless
 			if (!itemstack.isEmpty() && (itemstack.getItem() instanceof RepairKitItem)) {
 				remainingItems.set(i, damageItem(itemstack.copy()));
 			} else {
-				remainingItems.set(i, ForgeHooks.getContainerItem(itemstack));
+				remainingItems.set(i, ForgeHooks.getCraftingRemainingItem(itemstack));
 			}
 		}
 

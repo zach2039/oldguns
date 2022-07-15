@@ -16,7 +16,7 @@ public class LootSpawnDesignNotesLootCondition implements LootItemCondition {
 	
 	@Override
 	public LootItemConditionType getType() {
-		return ModLootConditionTypes.ALLOW_DESIGN_NOTES_LOOT;
+		return ModLootConditionTypes.ALLOW_DESIGN_NOTES_LOOT.get();
 	}
 	
 	@Override

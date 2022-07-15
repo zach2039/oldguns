@@ -1,0 +1,30 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_caplock_weapons"
+    }
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_metal_barrel"
+    },
+    "H": {
+      "tag": "oldguns:medium_handle"
+    },
+    "M": {
+      "tag": "oldguns:caplock_mechanism"
+    }
+  },
+  "pattern": [
+    "BB ",
+    "BMH",
+    "B  "
+  ],
+  "result": {
+    "item": "oldguns:caplock_pepperbox_pistol",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "type": "oldguns:mortar_and_pestle_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "forge:dust/saltpeter"
+    },
+    {
+      "tag": "forge:dust/sulfur"
+    },
+    {
+      "tag": "forge:ingots/mercury"
+    },
+    {
+      "item": "minecraft:charcoal"
+    },
+    {
+      "item": "oldguns:mortar_and_pestle"
+    }
+  ],
+  "result": {
+    "item": "oldguns:percussion_powder"
+  }
+}

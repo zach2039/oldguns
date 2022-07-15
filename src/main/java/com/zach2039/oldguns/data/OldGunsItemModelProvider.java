@@ -171,6 +171,19 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
 		firearmMuzzleloaderItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
 		
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_DERRINGER.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_PEPPERBOX_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_ARQUEBUS.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_CALIVER.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_MUSKETOON.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_LONG_MUSKET.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_BLUNDERBUSS.get());
+		firearmMuzzleloaderItem(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.SMALL_STONE_MUSKET_BALL.get());
 		withGeneratedParent(ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_stone_musket_ball_paper_cartridge"));
 		withGeneratedParent(ModItems.SMALL_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), new ResourceLocation(OldGuns.MODID, "item/small_stone_musket_ball_paper_cartridge"));
@@ -264,10 +277,14 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.WOOD_GEAR_SET.get());
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_GEAR_SET.get());
 		withGeneratedParentAndDefaultTexture(ModItems.GOLD_GEAR_SET.get());
+		withGeneratedParentAndDefaultTexture(ModItems.DIAMOND_GEAR_SET.get());
 		
 		withGeneratedParentAndDefaultTexture(ModItems.WOOD_TRIGGER_ASSEMBLY.get());
 		withGeneratedParentAndDefaultTexture(ModItems.IRON_TRIGGER_ASSEMBLY.get());
 		withGeneratedParentAndDefaultTexture(ModItems.GOLD_TRIGGER_ASSEMBLY.get());
+		withGeneratedParentAndDefaultTexture(ModItems.DIAMOND_TRIGGER_ASSEMBLY.get());
+		
+		withGeneratedParentAndDefaultTexture(ModItems.PERCUSSION_CAP_CONE.get());
 		
 		bucketItem(ModFluids.LIQUID_NITER);
 		
@@ -280,6 +297,9 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		withGeneratedParentAndDefaultTexture(ModItems.BRASS_INGOT.get());
 		withGeneratedParentAndDefaultTexture(ModItems.BRASS_NUGGET.get());
 		
+		withGeneratedParentAndDefaultTexture(ModItems.MERCURY_INGOT.get());
+		withGeneratedParentAndDefaultTexture(ModItems.MERCURY_NUGGET.get());
+		
 		withGeneratedParentAndDefaultTexture(ModItems.NITRATE_SOIL.get());
 		withGeneratedParentAndDefaultTexture(ModItems.LIQUID_NITER_BOTTLE.get());
 		withGeneratedParentAndDefaultTexture(ModItems.NITER.get());
@@ -287,6 +307,7 @@ public class OldGunsItemModelProvider extends ItemModelProvider {
 		
 		withGeneratedParentAndDefaultTexture(ModItems.ROCKET_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.BLASTING_POWDER.get());
+		withGeneratedParentAndDefaultTexture(ModItems.PERCUSSION_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
 		withGeneratedParentAndDefaultTexture(ModItems.HIGH_GRADE_BLACK_POWDER.get());
 		

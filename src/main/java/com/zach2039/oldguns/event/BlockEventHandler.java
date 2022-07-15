@@ -16,7 +16,7 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.world.PistonEvent;
+import net.minecraftforge.event.level.PistonEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
@@ -31,7 +31,7 @@ public class BlockEventHandler {
 	}
 
 	private static void processBlackPowderCake(final PistonEvent.Pre event) {
-		final LevelAccessor level = event.getWorld();
+		final LevelAccessor level = event.getLevel();
 		final RandomSource rand = level.getRandom();
 		if (event.getPistonMoveType().isExtend) {
 			BlockPos pos = event.getFaceOffsetPos();
@@ -42,7 +42,7 @@ public class BlockEventHandler {
 			if (hasWetBlackPowderReady) {
 				boolean hasObsidianBase = level.getBlockState(event.getFaceOffsetPos().relative(event.getDirection())) == Blocks.OBSIDIAN.defaultBlockState();
 				if (hasObsidianBase) {
-					if (!event.getWorld().isClientSide()) {
+					if (!event.getLevel().isClientSide()) {
 						ServerLevel serverLevel = (ServerLevel) level;
 						serverLevel.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
 						serverLevel.addFreshEntity(new ItemEntity(serverLevel, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE.get())));

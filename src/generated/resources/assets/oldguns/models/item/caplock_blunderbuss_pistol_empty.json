@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/caplock_blunderbuss_pistol",
+  "textures": {
+    "layer0": "oldguns:item/caplock_blunderbuss_pistol_empty"
+  }
+}

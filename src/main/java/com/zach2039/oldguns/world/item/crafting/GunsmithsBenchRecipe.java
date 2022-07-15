@@ -27,7 +27,7 @@ public interface GunsmithsBenchRecipe extends Recipe<GunsmithsBenchCraftingConta
 		for (int i = 0; i < remainingItems.size(); ++i) {
 			final ItemStack itemstack = inv.getItem(i);
 
-			remainingItems.set(i, ForgeHooks.getContainerItem(itemstack));
+			remainingItems.set(i, ForgeHooks.getCraftingRemainingItem(itemstack));
 		}
 
 		return remainingItems;

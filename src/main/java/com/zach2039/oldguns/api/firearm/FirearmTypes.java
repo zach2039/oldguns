@@ -47,6 +47,19 @@ public class FirearmTypes {
 		FLINTLOCK_NOCK_GUN(5, true, MechanismType.FLINTLOCK, ProjectileType.MUSKET_BALL, FirearmSize.HUGE, FirearmWaterResiliency.POOR, FIREARM_SETTINGS.flintlockSettings.flintlock_nock_gun),
 		FLINTLOCK_BLUNDERBUSS(1, false, MechanismType.FLINTLOCK, ProjectileType.BIRDSHOT, FirearmSize.LARGE, FirearmWaterResiliency.POOR, FIREARM_SETTINGS.flintlockSettings.flintlock_blunderbuss),
 		FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS(2, false, MechanismType.FLINTLOCK, ProjectileType.BIRDSHOT, FirearmSize.LARGE, FirearmWaterResiliency.POOR, FIREARM_SETTINGS.flintlockSettings.flintlock_doublebarrel_blunderbuss),
+		// Caplocks
+		CAPLOCK_DERRINGER(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.SMALL, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_derringer),
+		CAPLOCK_DUCKFOOT_DERRINGER(3, true, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.SMALL, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_duckfoot_derringer),
+		CAPLOCK_PISTOL(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.SMALL, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_pistol),
+		CAPLOCK_PEPPERBOX_PISTOL(4, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.SMALL, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_pepperbox_pistol),
+		CAPLOCK_BLUNDERBUSS_PISTOL(1, false, MechanismType.CAPLOCK, ProjectileType.BIRDSHOT, FirearmSize.SMALL, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_blunderbuss_pistol),
+		CAPLOCK_ARQUEBUS(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.SMALL, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_arquebus),
+		CAPLOCK_CALIVER(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.MEDIUM, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_caliver),
+		CAPLOCK_MUSKETOON(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.MEDIUM, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_musketoon),
+		CAPLOCK_MUSKET(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.LARGE, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_musket),
+		CAPLOCK_LONG_MUSKET(1, false, MechanismType.CAPLOCK, ProjectileType.MUSKET_BALL, FirearmSize.LARGE, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_long_musket),
+		CAPLOCK_BLUNDERBUSS(1, false, MechanismType.CAPLOCK, ProjectileType.BIRDSHOT, FirearmSize.LARGE, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_blunderbuss),
+		CAPLOCK_DOUBLEBARREL_BLUNDERBUSS(2, false, MechanismType.CAPLOCK, ProjectileType.BIRDSHOT, FirearmSize.LARGE, FirearmWaterResiliency.GOOD, FIREARM_SETTINGS.flintlockSettings.flintlock_doublebarrel_blunderbuss),		
 		;
 		
 		Muzzleloaders(int ammoCapacity, boolean firesAllAtOnce, MechanismType mechanismType, ProjectileType defaultProjectileType, FirearmSize firearmSize, 

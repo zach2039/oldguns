@@ -1,0 +1,21 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "key": {
+    "G": {
+      "tag": "forge:gems/diamond"
+    },
+    "g": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "pattern": [
+    " g ",
+    "gGg",
+    " g "
+  ],
+  "result": {
+    "count": 2,
+    "item": "oldguns:diamond_gear_set"
+  }
+}

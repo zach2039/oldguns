@@ -48,13 +48,13 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 	}
 	
 	@Override
-    public boolean hasContainerItem(ItemStack stack) {
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
         return true;
         
     }
     
     @Override
-    public ItemStack getContainerItem(ItemStack itemstack) {
+    public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
         final ItemStack copy = itemstack.copy();
        
         return copy;

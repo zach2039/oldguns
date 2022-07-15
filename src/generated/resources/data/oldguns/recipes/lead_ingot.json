@@ -3,31 +3,31 @@
   "conditions": [],
   "ingredients": [
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     },
     {
-      "item": "oldguns:lead_nugget"
+      "tag": "forge:nuggets/lead"
     }
   ],
   "result": {

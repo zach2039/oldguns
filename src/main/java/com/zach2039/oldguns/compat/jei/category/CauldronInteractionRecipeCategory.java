@@ -10,78 +10,86 @@
  */
 package com.zach2039.oldguns.compat.jei.category;
 
-import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.api.crafting.IDesignNotes;
-import com.zach2039.oldguns.compat.jei.JEIRecipeTypes;
-import com.zach2039.oldguns.compat.jei.OldGunsJeiPlugin;
-import com.zach2039.oldguns.compat.jei.OldGunsRecipeCategory;
-import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
-import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRecipe;
+import java.util.Arrays;
+import java.util.List;
 
+import javax.annotation.Nonnull;
+
+import com.mojang.blaze3d.systems.RenderSystem;
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.compat.jei.JEIRecipeTypes;
+import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
+
+import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
-import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Blocks;
 
-public class CauldronInteractionRecipeCategory extends OldGunsRecipeCategory<GunsmithsBenchRecipe> {
-
+public class CauldronInteractionRecipeCategory implements IRecipeCategory<CauldronRecipe> {
 	public static final ResourceLocation UID = new ResourceLocation(OldGuns.MODID, "cauldron_interaction");
 	
+	public static final int width = 82;
+	public static final int height = 34;
+
+	private final IDrawable background;
+	private final IDrawable icon;
+	private final Component localizedName;
+	private final ICraftingGridHelper craftingGridHelper;
+	
 	public CauldronInteractionRecipeCategory(IGuiHelper guiHelper) {
-		super(GunsmithsBenchRecipe.class, guiHelper, UID, "block.minecraft.cauldron");
-		ResourceLocation background = new ResourceLocation(OldGuns.MODID, "textures/gui/container/gunsmiths_bench.png");
-		setBackground(guiHelper.createDrawable(background, 5, 13, 142, 60));
-		setIcon(new ItemStack(ModBlocks.GUNSMITHS_BENCH.get()));
+		ResourceLocation location = new ResourceLocation(ModIds.JEI_ID, "textures/gui/gui_vanilla.png");
+		background = guiHelper.createDrawable(location, 0, 220, width, height);
+		icon = guiHelper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(Blocks.CAULDRON));
+		localizedName = Component.translatable("block.factorymade.industrial_shaper");
+		craftingGridHelper = guiHelper.createCraftingGridHelper();
 	}
 
 	@Override
-	public void setRecipe(IRecipeLayoutBuilder builder, GunsmithsBenchRecipe recipe, IFocusGroup focuses) {		
-		ItemStack designNotes = getNotesForRecipe(recipe.getResultItem());
-
-		for (int y = 0; y < 3; ++y) {
-			for (int x = 0; x < 3; ++x) {
-				int index = 1 + x + (y * 3);
-				builder.addSlot(RecipeIngredientRole.INPUT, 25 + (x * 18), 4 + (y * 18))
-					.addIngredients(recipe.getIngredients().get(index - 1));
-					//.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
-			}
-		}
-		
-		builder.addSlot(RecipeIngredientRole.CATALYST, 3, 22)
-			.addItemStack(designNotes);
-			//.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
-		
-		if (recipe instanceof ShapedGunsmithsBenchRecipe) {
-		} else if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
-			builder.setShapeless();
-		}
-	
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22)
-			.addIngredient(VanillaTypes.ITEM_STACK, recipe.getResultItem());
-			//.setBackground(OldGunsJeiPlugin.slotDrawable, -1, -1);
-	}
-	
-	private ItemStack getNotesForRecipe(ItemStack output) {
-		ItemStack designNotesStack = ItemStack.EMPTY;
-		
-		boolean hasDesign = IDesignNotes.hasDesignNotes(output.getItem());
-		if (hasDesign) {
-			ItemStack designItem = IDesignNotes.setDesignTagOnItem(new ItemStack(ModItems.DESIGN_NOTES.get()), output.getItem());
-			designNotesStack = designItem;
-		}
-		
-		return designNotesStack;
+	public Component getTitle() {
+		return localizedName;
 	}
 
 	@Override
-	public RecipeType<GunsmithsBenchRecipe> getRecipeType() {
-		return JEIRecipeTypes.GUNSMITHS_BENCH;
+	public IDrawable getBackground() {
+		return background;
+	}
+
+	@Override
+	public IDrawable getIcon() {
+		return icon;
+	}
+
+	@Override
+	public void draw(CauldronRecipe recipe, @Nonnull IRecipeSlotsView slotsView, @Nonnull PoseStack ms, double mouseX, double mouseY) {
+		RenderSystem.enableBlend();
+		background.draw(ms, 0, 4);	
+		RenderSystem.disableBlend();
+	}
+
+	
+	@Override
+	public void setRecipe(IRecipeLayoutBuilder builder, CauldronRecipe recipe, IFocusGroup focuses) {
+		ItemStack resultItem = recipe.getResultItem();
+		
+		List<ItemStack> inputs = Arrays.asList(recipe.getInput());
+		
+		craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
+		craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, Arrays.asList(inputs), 0, 0);
+	}
+
+	@Override
+	public RecipeType<CauldronRecipe> getRecipeType() {
+		return JEIRecipeTypes.CAULDRON;
 	}
 }

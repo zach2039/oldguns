@@ -1,0 +1,29 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "key": {
+    "C": {
+      "tag": "oldguns:percussion_cap_cone"
+    },
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "E": {
+      "tag": "oldguns:diamond_gear_set"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "T": {
+      "tag": "oldguns:diamond_trigger_assembly"
+    }
+  },
+  "pattern": [
+    " CL",
+    "DTD",
+    " E "
+  ],
+  "result": {
+    "item": "oldguns:caplock_mechanism"
+  }
+}

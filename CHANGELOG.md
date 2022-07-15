@@ -1,3 +1,13 @@
+### v1.19-3.5.1-32
+
+ - Add Caplock weapons
+ - Add Mercury
+ - Add Percussion Powder
+ - Add Wheellock Hand Mortar reload recipe
+ - Update guidebook with fuse info
+ - Fix some texture color profile issues (don't use Kolourpaint ever again...)
+ - Refactor cauldron interaction code to be more addition-friendly 
+
 ### v1.19-3.5.0-31
 
  - Update to forge 41.0.85 

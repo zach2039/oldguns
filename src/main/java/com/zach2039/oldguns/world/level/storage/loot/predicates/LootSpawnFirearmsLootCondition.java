@@ -16,7 +16,7 @@ public class LootSpawnFirearmsLootCondition implements LootItemCondition {
 	
 	@Override
 	public LootItemConditionType getType() {
-		return ModLootConditionTypes.ALLOW_FIREARMS_LOOT;
+		return ModLootConditionTypes.ALLOW_FIREARMS_LOOT.get();
 	}
 	
 	@Override

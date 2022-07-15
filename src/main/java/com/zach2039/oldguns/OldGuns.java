@@ -1,5 +1,7 @@
 package com.zach2039.oldguns;
 
+import java.util.UUID;
+
 import javax.annotation.Nonnull;
 
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +24,7 @@ import com.zach2039.oldguns.init.ModPotions;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.init.ModSoundEvents;
 import com.zach2039.oldguns.init.ModSpawnPlacements;
+import com.zach2039.oldguns.init.ModCauldronInteractions.OldGunsCauldronInteraction;
 
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -37,7 +40,6 @@ import net.minecraftforge.network.simple.SimpleChannel;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(OldGuns.MODID)
-@Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Bus.MOD)
 public class OldGuns
 {
     public static Logger LOGGER = LogManager.getLogger(OldGuns.MODID);
@@ -51,6 +53,8 @@ public class OldGuns
     	OldGunsConfig.register(ModLoadingContext.get());
 
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+
+		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
 		
 		ModFluids.initialize(modEventBus);
 		ModBlocks.initialize(modEventBus);
@@ -64,16 +68,20 @@ public class OldGuns
 		ModCrafting.Recipes.initialize(modEventBus);
 		ModSoundEvents.initialize(modEventBus);
 		ModBlockEntities.initialize(modEventBus);
+		ModLootConditionTypes.initialize(modEventBus);
     }
 
-    @SubscribeEvent
-	public static void commonSetup(final FMLCommonSetupEvent event) {
+	private void onCommonSetup(final FMLCommonSetupEvent event) {
+    	LOGGER.warn("****************************************");
+		LOGGER.warn("Random UUID: {}", UUID.randomUUID());
+		LOGGER.warn("****************************************");
+
 		event.enqueueWork(() -> {
 			ModCrafting.Ingredients.register();
 			ModCrafting.Brewing.register();
 			ModLootTables.registerLootTables();
-			ModLootConditionTypes.register();
 			ModSpawnPlacements.register();
+			OldGunsCauldronInteraction.bootStrap();
 		});
 	}
 

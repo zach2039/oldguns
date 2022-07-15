@@ -252,6 +252,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowMatchlockWeaponsCrafting;
 		public final BooleanValue allowWheellockWeaponsCrafting;
 		public final BooleanValue allowFlintlockWeaponsCrafting;
+		public final BooleanValue allowCaplockWeaponsCrafting;
 		public final BooleanValue allowPaperCartridgeCrafting;
 		public final BooleanValue allowStoneFirearmAmmoCrafting;
 		public final BooleanValue allowIronFirearmAmmoCrafting;
@@ -271,6 +272,10 @@ public class OldGunsConfig {
 			allowFlintlockWeaponsCrafting = builder
 					.comment("Enable/disable flintlock firearm crafts")
 					.define("allowFlintlockWeaponsCrafting", true);
+			
+			allowCaplockWeaponsCrafting = builder
+					.comment("Enable/disable caplock firearm crafts")
+					.define("allowCaplockWeaponsCrafting", true);
 			
 			allowPaperCartridgeCrafting = builder
 					.comment("Enable/disable paper cartridge ammo crafts")
@@ -362,6 +367,7 @@ public class OldGunsConfig {
 	public static class BlackPowderManufactureSettings {
 		public final NiterProductionSettings niterProductionSettings;
 		public final CorningProcessSettings corningProcessSettings;
+		public final MercuryProductionSettings mercuryProductionSettings;
 		
 		BlackPowderManufactureSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -375,6 +381,11 @@ public class OldGunsConfig {
 					builder,
 					"Corning process settings",
 					"corningProcessSettings");
+			
+			mercuryProductionSettings = new MercuryProductionSettings(
+					builder,
+					"Mercury process settings",
+					"mercuryProductionSettings");
 			
 			builder.pop();
 		}
@@ -474,12 +485,32 @@ public class OldGunsConfig {
 		}
 	}
 	
+	public static class MercuryProductionSettings {
+		public final BooleanValue allowMercuryFromGoldAtNiterCauldronCrafting;
+		public final BooleanValue allowMercuryFromRedstoneAtNiterCauldronCrafting;
+		
+		MercuryProductionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			allowMercuryFromGoldAtNiterCauldronCrafting = builder
+					.comment("Enable/disable creating mercury from gold ore via a liquid niter cauldron")
+					.define("allowMercuryFromGoldAtNiterCauldronCrafting", true);
+			
+			allowMercuryFromRedstoneAtNiterCauldronCrafting = builder
+					.comment("Enable/disable creating mercury from redstone dust via a liquid niter cauldron")
+					.define("allowMercuryFromRedstoneAtNiterCauldronCrafting", true);
+
+			builder.pop();
+		}
+	}
+	
 	public static class FirearmSettings {
 		public final BooleanValue hugeFirearmDebuffs;	
 		public final FirearmAmmoSettings ammoSettings;
 		public final MatchlockSettings matchlockSettings;
 		public final WheellockSettings wheellockSettings;
 		public final FlintlockSettings flintlockSettings;
+		public final CaplockSettings caplockSettings;
 		
 		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -507,6 +538,11 @@ public class OldGunsConfig {
 					builder,
 					"Flintlock firearm settings",
 					"flintlockSettings");
+			
+			caplockSettings = new CaplockSettings(
+					builder,
+					"Caplock firearm settings",
+					"caplockSettings");
 			
 			builder.pop();
 		}
@@ -1300,6 +1336,163 @@ public class OldGunsConfig {
 					40,
 					3.5f,
 					0.8f,
+					1.7f,
+					0.8f
+					);
+			
+			builder.pop();
+		}
+	}
+	
+	public static class CaplockSettings {		
+		public final MuzzleloadingFirearmAttributes caplock_derringer;
+		public final MuzzleloadingFirearmAttributes caplock_duckfoot_derringer;
+		public final MuzzleloadingFirearmAttributes caplock_pistol;
+		public final MuzzleloadingFirearmAttributes caplock_pepperbox_pistol;
+		public final MuzzleloadingFirearmAttributes caplock_arquebus;
+		                                            
+		public final MuzzleloadingFirearmAttributes caplock_caliver;
+		public final MuzzleloadingFirearmAttributes caplock_musketoon;
+		                                            
+		public final MuzzleloadingFirearmAttributes caplock_musket;
+		public final MuzzleloadingFirearmAttributes caplock_long_musket;		
+		                                            
+		public final MuzzleloadingFirearmAttributes caplock_blunderbuss_pistol;
+		public final MuzzleloadingFirearmAttributes caplock_blunderbuss;
+		public final MuzzleloadingFirearmAttributes caplock_doublebarrel_blunderbuss;	
+		
+		CaplockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+			builder.comment(comment).push(path);
+			
+			// Caplock
+			caplock_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Derringers",
+					"caplock_derringer",
+					40,
+					3.375f,
+					0.6f,
+					5.0f,
+					1.0f
+					);
+			
+			caplock_duckfoot_derringer = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Duckfoot Derringers",
+					"caplock_duckfoot_derringer",
+					36,
+					3.125f,
+					0.4f,
+					10.0f,
+					0.8f
+					);
+			
+			caplock_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Pistols",
+					"caplock_pistol",
+					44,
+					3.625f,
+					1.1f,
+					2.0f,
+					1.0f
+					);
+			
+			caplock_pepperbox_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Pepperbox Pistols",
+					"caplock_pepperbox_pistol",
+					40,
+					3.525f,
+					0.9f,
+					3.0f,
+					0.8f
+					);
+			
+			caplock_arquebus = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Arquebus",
+					"caplock_arquebus",
+					48,
+					3.875f,
+					1.3f,
+					1.8f,
+					1.0f
+					);
+			
+			caplock_caliver = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Calivers",
+					"caplock_caliver",
+					52,
+					4.125f,
+					1.3f,
+					1.6f,
+					1.0f
+					);
+			
+			caplock_musketoon = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Musketoons",
+					"caplock_musketoon",
+					44,
+					4.125f,
+					0.9f,
+					1.5f,
+					1.0f
+					);
+			
+			caplock_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Muskets",
+					"caplock_musket",
+					56,
+					4.375f,
+					1.1f,
+					1.4f,
+					1.0f
+					);
+			
+			caplock_long_musket = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Long Muskets",
+					"caplock_long_musket",
+					60,
+					4.625f,
+					1.3f,
+					1.2f,
+					1.0f
+					);
+			
+			caplock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Blunderbuss Pistols",
+					"caplock_blunderbuss_pistol",
+					40,
+					3.125f,
+					0.5f,
+					3.5f,
+					1.0f
+					);
+			
+			caplock_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Blunderbusses",
+					"caplock_blunderbuss",
+					56,
+					3.625f,
+					1.1f,
+					1.7f,
+					1.0f
+					);
+			
+			caplock_doublebarrel_blunderbuss = new MuzzleloadingFirearmAttributes(
+					builder,
+					"Attributes of Caplock Doublebarrel Blunderbusses",
+					"caplock_doublebarrel_blunderbuss",
+					52,
+					3.625f,
+					0.9f,
 					1.7f,
 					0.8f
 					);

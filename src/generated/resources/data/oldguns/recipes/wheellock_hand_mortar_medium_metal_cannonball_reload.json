@@ -1,0 +1,24 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_hand_mortar"
+    },
+    {
+      "tag": "oldguns:medium_metal_cannonball"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:wheellock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_hand_mortar",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

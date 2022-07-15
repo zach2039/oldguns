@@ -69,7 +69,7 @@ public final class FirearmEmptyCapability {
 			final ItemStack itemStack = event.getItemStack();
 
 			getFirearmEmpty(itemStack).ifPresent(firearmEmpty -> {
-				updateFirearmEmpty(event.getPlayer(), itemStack);
+				updateFirearmEmpty(event.getEntity(), itemStack);
 			});
 		}
 	}

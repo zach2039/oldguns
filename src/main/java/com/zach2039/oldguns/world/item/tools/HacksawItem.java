@@ -15,7 +15,15 @@ public class HacksawItem extends Item {
 	}
 	
 	@Override
-	public ItemStack getContainerItem(ItemStack stack) {
-		return new ItemStack(this);
-	}
+    public boolean hasCraftingRemainingItem(ItemStack stack) {
+        return true;
+        
+    }
+    
+    @Override
+    public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
+        final ItemStack copy = itemstack.copy();
+       
+        return copy;
+    }
 }

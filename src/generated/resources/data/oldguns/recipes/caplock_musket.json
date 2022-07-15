@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_caplock_weapons"
+    }
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:large_metal_barrel"
+    },
+    "H": {
+      "tag": "oldguns:medium_stock"
+    },
+    "M": {
+      "tag": "oldguns:caplock_mechanism"
+    }
+  },
+  "pattern": [
+    "BMH"
+  ],
+  "result": {
+    "item": "oldguns:caplock_musket",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

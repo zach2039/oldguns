@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_ammo": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:large_metal_birdshot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_firearm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:caplock_doublebarrel_blunderbuss"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_powder": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:caplock_suitable_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldguns:caplock_doublebarrel_blunderbuss_large_metal_birdshot_reload"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_ammo",
+      "has_powder",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:caplock_doublebarrel_blunderbuss_large_metal_birdshot_reload"
+    ]
+  }
+}

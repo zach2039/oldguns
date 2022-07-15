@@ -1,11 +1,9 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.Random;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.NiterProductionSettings;
-import com.zach2039.oldguns.init.ModCauldronInteractions.LiquidNiterInteraction;
+import com.zach2039.oldguns.init.ModCauldronInteractions;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
@@ -22,9 +20,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.CampfireBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -41,7 +37,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	public static final IntegerProperty LEVEL = BlockStateProperties.LEVEL_CAULDRON;
 
 	public LiquidNiterCauldronBlock() {
-		super(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(), null, LiquidNiterInteraction.LIQUID_NITER);
+		super(BlockBehaviour.Properties.copy(Blocks.CAULDRON).randomTicks(), null, ModCauldronInteractions.OldGunsCauldronInteraction.LIQUID_NITER);
 		this.registerDefaultState(this.stateDefinition.any().setValue(LEVEL, Integer.valueOf(1)));
 	}
 	
@@ -140,6 +136,9 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 					((LivingEntity)entity).addEffect(new MobEffectInstance(MobEffects.POISON, 900, 0));
 				}
 			}
+			
+			OldGuns.LOGGER.debug("Recipes:");
+			ModCauldronInteractions.OldGunsCauldronInteraction.LIQUID_NITER.forEach((j, k) -> OldGuns.LOGGER.debug(j + " " + k));
 		}
 	}
 	

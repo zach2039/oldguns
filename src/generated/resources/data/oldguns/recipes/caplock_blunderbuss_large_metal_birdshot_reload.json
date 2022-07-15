@@ -1,0 +1,24 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:caplock_blunderbuss"
+    },
+    {
+      "tag": "oldguns:large_metal_birdshot"
+    },
+    {
+      "tag": "oldguns:caplock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:caplock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:caplock_blunderbuss",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

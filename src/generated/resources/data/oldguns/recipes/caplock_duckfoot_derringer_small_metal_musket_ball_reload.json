@@ -1,0 +1,21 @@
+{
+  "type": "oldguns:firearm_muzzleloader_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:caplock_duckfoot_derringer"
+    },
+    {
+      "tag": "oldguns:small_metal_musket_ball"
+    },
+    {
+      "tag": "oldguns:caplock_suitable_powder"
+    }
+  ],
+  "result": {
+    "item": "oldguns:caplock_duckfoot_derringer",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

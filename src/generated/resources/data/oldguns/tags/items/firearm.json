@@ -32,6 +32,18 @@
     "oldguns:flintlock_long_musket",
     "oldguns:flintlock_blunderbuss_pistol",
     "oldguns:flintlock_blunderbuss",
-    "oldguns:flintlock_doublebarrel_blunderbuss"
+    "oldguns:flintlock_doublebarrel_blunderbuss",
+    "oldguns:caplock_derringer",
+    "oldguns:caplock_duckfoot_derringer",
+    "oldguns:caplock_pistol",
+    "oldguns:caplock_pepperbox_pistol",
+    "oldguns:caplock_arquebus",
+    "oldguns:caplock_caliver",
+    "oldguns:caplock_musketoon",
+    "oldguns:caplock_musket",
+    "oldguns:caplock_long_musket",
+    "oldguns:caplock_blunderbuss_pistol",
+    "oldguns:caplock_blunderbuss",
+    "oldguns:caplock_doublebarrel_blunderbuss"
   ]
 }

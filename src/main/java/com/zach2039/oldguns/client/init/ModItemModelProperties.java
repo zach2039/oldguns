@@ -50,6 +50,19 @@ public class ModItemModelProperties {
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_BLUNDERBUSS.get());
 			FirearmEmptyPropertyFunction.registerForItem(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
+			
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_DERRINGER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_PEPPERBOX_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_ARQUEBUS.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_CALIVER.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_MUSKETOON.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_LONG_MUSKET.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_BLUNDERBUSS.get());
+			FirearmEmptyPropertyFunction.registerForItem(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get());
 		});
 	}
 }

@@ -11,7 +11,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,12 +26,12 @@ public class EntityEventHandler {
 	}	
 	
 	@SubscribeEvent
-	public static void onEntityEvent(final EntityJoinWorldEvent event) {
+	public static void onEntityEvent(final EntityJoinLevelEvent event) {
 		if (event != null) {
-			if (!event.getWorld().isClientSide()) {
+			if (!event.getLevel().isClientSide()) {
 				Entity entity = event.getEntity();
-				RandomSource rand = event.getWorld().getRandom();
-				Difficulty diff = event.getWorld().getDifficulty();
+				RandomSource rand = event.getLevel().getRandom();
+				Difficulty diff = event.getLevel().getDifficulty();
 				
 				float firearmEquipChance = OldGunsConfig.SERVER.mobSettings.mobFirearmEquipChance.get().floatValue();
 				float armorEquipChance = OldGunsConfig.SERVER.mobSettings.mobArmorEquipChance.get().floatValue();

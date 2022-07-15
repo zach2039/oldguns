@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "key": {
+    "D": {
+      "tag": "forge:gems/diamond"
+    },
+    "E": {
+      "tag": "oldguns:diamond_gear_set"
+    },
+    "L": {
+      "item": "minecraft:lever"
+    },
+    "T": {
+      "item": "minecraft:tripwire_hook"
+    }
+  },
+  "pattern": [
+    " T ",
+    "DED",
+    "  L"
+  ],
+  "result": {
+    "item": "oldguns:diamond_trigger_assembly"
+  }
+}

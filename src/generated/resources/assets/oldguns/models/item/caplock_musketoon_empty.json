@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/caplock_musketoon",
+  "textures": {
+    "layer0": "oldguns:item/caplock_musketoon_empty"
+  }
+}

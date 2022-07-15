@@ -16,7 +16,7 @@ public class LootSpawnMechanismsLootCondition implements LootItemCondition {
 	
 	@Override
 	public LootItemConditionType getType() {
-		return ModLootConditionTypes.ALLOW_MECHANISMS_LOOT;
+		return ModLootConditionTypes.ALLOW_MECHANISMS_LOOT.get();
 	}
 	
 	@Override

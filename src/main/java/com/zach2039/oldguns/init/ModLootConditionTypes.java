@@ -1,6 +1,21 @@
 package com.zach2039.oldguns.init;
 
+import java.util.function.Supplier;
+
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.level.block.BlastingPowderStickBlock;
+import com.zach2039.oldguns.world.level.block.CongreveRocketStandBlock;
+import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
+import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
+import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
+import com.zach2039.oldguns.world.level.block.MediumGradeBlackPowderBlock;
+import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
+import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
+import com.zach2039.oldguns.world.level.block.WallBlastingPowderStickBlock;
+import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
+import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.world.level.block.WetMediumGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnDesignNotesLootCondition;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnFirearmsLootCondition;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnMechanismsLootCondition;
@@ -10,6 +25,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -20,15 +38,32 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
  * @author zach2039
  */
 public class ModLootConditionTypes {
-	public static final LootItemConditionType ALLOW_DESIGN_NOTES_LOOT = register("can_spawn_design_notes_in_loot", new LootSpawnDesignNotesLootCondition.ConditionSerializer());
-	public static final LootItemConditionType ALLOW_MECHANISMS_LOOT = register("can_spawn_mechansims_in_loot", new LootSpawnMechanismsLootCondition.ConditionSerializer());
-	public static final LootItemConditionType ALLOW_FIREARMS_LOOT = register("can_spawn_firearms_in_loot", new LootSpawnFirearmsLootCondition.ConditionSerializer());
+	private static final DeferredRegister<LootItemConditionType> LOOT_ITEM_CONDITION_TYPES = DeferredRegister.create(Registry.LOOT_ITEM_REGISTRY, OldGuns.MODID);
+	
+	public static final RegistryObject<LootItemConditionType>ALLOW_DESIGN_NOTES_LOOT = register("can_spawn_design_notes_in_loot", LootSpawnDesignNotesLootCondition.ConditionSerializer::new);
+	public static final RegistryObject<LootItemConditionType> ALLOW_MECHANISMS_LOOT = register("can_spawn_mechansims_in_loot", LootSpawnMechanismsLootCondition.ConditionSerializer::new);
+	public static final RegistryObject<LootItemConditionType> ALLOW_FIREARMS_LOOT = register("can_spawn_firearms_in_loot", LootSpawnFirearmsLootCondition.ConditionSerializer::new);
 
-	public static void register() {
-		// No-op method to ensure that this class is loaded and its static initialisers are run
+	private static boolean isInitialized = false;
+
+	/**
+	 * Registers the {@link DeferredRegister} instances with the mod event bus.
+	 * <p>
+	 * This should be called during mod construction.
+	 *
+	 * @param modEventBus The mod event bus
+	 */
+	public static void initialize(final IEventBus modEventBus) {
+		if (isInitialized) {
+			throw new IllegalStateException("Already initialized");
+		}
+
+		LOOT_ITEM_CONDITION_TYPES.register(modEventBus);
+
+		isInitialized = true;
 	}
-
-	private static LootItemConditionType register(final String name, final Serializer<? extends LootItemCondition> serializer) {
-		return Registry.register(Registry.LOOT_CONDITION_TYPE, new ResourceLocation(OldGuns.MODID, name), new LootItemConditionType(serializer));
+	
+	private static RegistryObject<LootItemConditionType> register(final String name, final Supplier<Serializer<? extends LootItemCondition>> serializerFactory) {
+		return LOOT_ITEM_CONDITION_TYPES.register(name, () -> new LootItemConditionType(serializerFactory.get()));
 	}
 }

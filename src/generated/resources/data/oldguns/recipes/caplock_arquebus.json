@@ -1,0 +1,28 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [
+    {
+      "type": "oldguns:can_craft_caplock_weapons"
+    }
+  ],
+  "key": {
+    "B": {
+      "tag": "oldguns:small_metal_barrel"
+    },
+    "H": {
+      "tag": "oldguns:large_handle"
+    },
+    "M": {
+      "tag": "oldguns:caplock_mechanism"
+    }
+  },
+  "pattern": [
+    "BMH"
+  ],
+  "result": {
+    "item": "oldguns:caplock_arquebus",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

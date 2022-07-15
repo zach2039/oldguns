@@ -37,7 +37,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 			if (!itemstack.isEmpty() && (itemstack.getItem() instanceof MortarAndPestleItem)) {
 				remainingItems.set(i, damageItem(itemstack.copy()));
 			} else {
-				remainingItems.set(i, ForgeHooks.getContainerItem(itemstack));
+				remainingItems.set(i, ForgeHooks.getCraftingRemainingItem(itemstack));
 			}
 		}
 

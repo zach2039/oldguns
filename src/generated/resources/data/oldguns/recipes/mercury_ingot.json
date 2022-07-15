@@ -1,0 +1,36 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    },
+    {
+      "tag": "forge:nuggets/mercury"
+    }
+  ],
+  "result": {
+    "item": "oldguns:mercury_ingot"
+  }
+}

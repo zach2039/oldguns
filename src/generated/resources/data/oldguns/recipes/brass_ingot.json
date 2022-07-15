@@ -3,31 +3,31 @@
   "conditions": [],
   "ingredients": [
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     },
     {
-      "item": "oldguns:brass_nugget"
+      "tag": "forge:nuggets/brass"
     }
   ],
   "result": {

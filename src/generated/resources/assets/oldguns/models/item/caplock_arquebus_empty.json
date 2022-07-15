@@ -1,0 +1,6 @@
+{
+  "parent": "oldguns:item/caplock_arquebus",
+  "textures": {
+    "layer0": "oldguns:item/caplock_arquebus_empty"
+  }
+}

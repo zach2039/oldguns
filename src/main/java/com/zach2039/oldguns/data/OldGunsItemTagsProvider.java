@@ -105,6 +105,19 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get())
 			.add(ModItems.FLINTLOCK_BLUNDERBUSS.get())
 			.add(ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
+			
+			.add(ModItems.CAPLOCK_DERRINGER.get())
+			.add(ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get())
+			.add(ModItems.CAPLOCK_PISTOL.get())
+			.add(ModItems.CAPLOCK_PEPPERBOX_PISTOL.get())
+			.add(ModItems.CAPLOCK_ARQUEBUS.get())
+			.add(ModItems.CAPLOCK_CALIVER.get())
+			.add(ModItems.CAPLOCK_MUSKETOON.get())
+			.add(ModItems.CAPLOCK_MUSKET.get())
+			.add(ModItems.CAPLOCK_LONG_MUSKET.get())
+			.add(ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.CAPLOCK_BLUNDERBUSS.get())
+			.add(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
 			;
 		
 		tag(ModTags.Items.MATCHLOCK_FIREARM)
@@ -215,6 +228,42 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.FLINTLOCK_NOCK_GUN.get())
 			;
 			
+		tag(ModTags.Items.CAPLOCK_FIREARM)	
+			.add(ModItems.CAPLOCK_DERRINGER.get())
+			.add(ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get())
+			.add(ModItems.CAPLOCK_PISTOL.get())
+			.add(ModItems.CAPLOCK_PEPPERBOX_PISTOL.get())
+			.add(ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get())
+			.add(ModItems.CAPLOCK_ARQUEBUS.get())
+			.add(ModItems.CAPLOCK_CALIVER.get())
+			.add(ModItems.CAPLOCK_MUSKETOON.get())
+			.add(ModItems.CAPLOCK_MUSKET.get())
+			.add(ModItems.CAPLOCK_LONG_MUSKET.get())
+			.add(ModItems.CAPLOCK_BLUNDERBUSS.get())
+			.add(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
+			;
+	
+	tag(ModTags.Items.SMALL_CAPLOCK_FIREARM)	
+		.add(ModItems.CAPLOCK_DERRINGER.get())
+		.add(ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get())
+		.add(ModItems.CAPLOCK_PISTOL.get())
+		.add(ModItems.CAPLOCK_PEPPERBOX_PISTOL.get())
+		.add(ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get())
+		;
+	
+	tag(ModTags.Items.MEDIUM_CAPLOCK_FIREARM)
+		.add(ModItems.CAPLOCK_ARQUEBUS.get())
+		.add(ModItems.CAPLOCK_CALIVER.get())
+		.add(ModItems.CAPLOCK_MUSKETOON.get())
+		;
+	
+	tag(ModTags.Items.LARGE_CAPLOCK_FIREARM)
+		.add(ModItems.CAPLOCK_MUSKET.get())
+		.add(ModItems.CAPLOCK_LONG_MUSKET.get())
+		.add(ModItems.CAPLOCK_BLUNDERBUSS.get())
+		.add(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
+		;
+		
 		// Ammo
 		tag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)
 			.add(ModItems.SMALL_STONE_MUSKET_BALL.get());
@@ -270,6 +319,10 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.LARGE_LEAD_BIRDSHOT.get())
 			.add(ModItems.LARGE_IRON_BIRDSHOT.get());		
 		
+		tag(ModTags.Items.MEDIUM_METAL_CANNONBALL)
+			.add(ModItems.MEDIUM_IRON_CANNONBALL.get())
+			;	
+		
 		// Cartridge
 		tag(ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
 			.add(ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get())
@@ -318,6 +371,21 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			;
 		
 		tag(ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.add(ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			.add(ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			;
+		
+		tag(ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.add(ModItems.SMALL_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			.add(ModItems.SMALL_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.add(ModItems.MEDIUM_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			.add(ModItems.MEDIUM_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			;
+		
+		tag(ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
 			.add(ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
 			.add(ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
 			;
@@ -448,6 +516,9 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		tag(ModTags.Items.GOLD_GEAR_SET)
 			.add(ModItems.GOLD_GEAR_SET.get());
 		
+		tag(ModTags.Items.DIAMOND_GEAR_SET)
+			.add(ModItems.DIAMOND_GEAR_SET.get());
+		
 		tag(ModTags.Items.WOOD_TRIGGER_ASSEMBLY)
 			.add(ModItems.WOOD_TRIGGER_ASSEMBLY.get());
 	
@@ -456,6 +527,12 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		
 		tag(ModTags.Items.GOLD_TRIGGER_ASSEMBLY)
 			.add(ModItems.GOLD_TRIGGER_ASSEMBLY.get());
+		
+		tag(ModTags.Items.DIAMOND_TRIGGER_ASSEMBLY)
+			.add(ModItems.DIAMOND_TRIGGER_ASSEMBLY.get());
+		
+		tag(ModTags.Items.PERCUSSION_CAP_CONE)
+			.add(ModItems.PERCUSSION_CAP_CONE.get());
 		
 		tag(ModTags.Items.MATCH_CORD)
 			.add(ModItems.MATCH_CORD.get());
@@ -472,6 +549,18 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 
 		tag(ModTags.Items.NUGGETS_BRASS)
 			.add(ModItems.BRASS_NUGGET.get());
+		
+		tag(ModTags.Items.INGOTS_MERCURY)
+			.add(ModItems.MERCURY_INGOT.get());
+	
+		tag(ModTags.Items.NUGGETS_MERCURY)
+			.add(ModItems.MERCURY_NUGGET.get());
+		
+		tag(ModTags.Items.INGOTS_QUICKSILVER)
+			.add(ModItems.MERCURY_INGOT.get());
+	
+		tag(ModTags.Items.NUGGETS_QUICKSILVER)
+			.add(ModItems.MERCURY_NUGGET.get());
 		
 		tag(ModTags.Items.DUST_NITER)
 			.add(ModItems.NITER.get());

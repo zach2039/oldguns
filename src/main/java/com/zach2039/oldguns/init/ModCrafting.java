@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
 import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
 import com.zach2039.oldguns.world.item.crafting.recipe.GunsmithsBenchDualArmorDyeRecipe;
@@ -41,7 +42,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author zach2039
  */
 public class ModCrafting {
-		
+	
 	public static class Brewing {
 
 		public static void register() {
@@ -82,6 +83,8 @@ public class ModCrafting {
 		public static final RegistryObject<ShapedGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPED = RECIPE_SERIALIZERS.register("gunsmiths_bench_shaped", ShapedGunsmithsBenchRecipe.Serializer::new);
 		
 		public static final RegistryObject<GunsmithsBenchDualArmorDyeRecipe.Serializer> GUNSMITHS_BENCH_DUAL_ARMOR_DYE = RECIPE_SERIALIZERS.register("gunsmiths_bench_dual_armor_dye", GunsmithsBenchDualArmorDyeRecipe.Serializer::new);
+		
+		public static final RegistryObject<CauldronRecipe.Serializer> CAULDRON = RECIPE_SERIALIZERS.register("crafting_special_cauldron", CauldronRecipe.Serializer::new);
 		
 		/**
 		 * Registers the {@link DeferredRegister} instance with the mod event bus.

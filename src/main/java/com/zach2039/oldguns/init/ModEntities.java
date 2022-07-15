@@ -28,7 +28,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author zach2039
  */
 public class ModEntities {
-	private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, OldGuns.MODID);
+	private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
