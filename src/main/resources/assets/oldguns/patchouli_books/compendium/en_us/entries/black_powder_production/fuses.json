@@ -6,23 +6,20 @@
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.black_powder_production.fuse0"
+			"text": "oldguns.page.black_powder_production.fuses0"
 		},
 		{
 			"type": "spotlight",
-			"title": "oldguns:bark_strands",
 			"item": "oldguns:bark_strands",
-			"text": "oldguns.page.black_powder_production.fuse1"
+			"text": "oldguns.page.black_powder_production.fuses1"
 		},
 		{
 			"type": "oldguns:gunsmiths_bench",
-			"recipe": "oldguns:match_cord",
-			"item": "oldguns:match_cord"
+			"recipe": "oldguns:match_cord_from_bark_strands"
 		},
 		{
 			"type": "oldguns:gunsmiths_bench",
-			"recipe": "oldguns:fuse",
-			"item": "oldguns:fuse"
+			"recipe": "oldguns:fuse"
 		}
 	]
 }
