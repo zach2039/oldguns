@@ -357,7 +357,11 @@ public class OldGunsConfig {
 							"oldguns:flintlock_pepperbox_pistol",
 							"oldguns:flintlock_musketoon",
 							"oldguns:flintlock_nock_gun",
-							"oldguns:flintlock_blunderbuss_pistol"						
+							"oldguns:flintlock_blunderbuss_pistol",
+							"oldguns:caplock_duckfoot_derringer",
+							"oldguns:caplock_pepperbox_pistol",
+							"oldguns:caplock_musketoon",
+							"oldguns:caplock_blunderbuss_pistol"
 							}));
 			
 			builder.pop();
