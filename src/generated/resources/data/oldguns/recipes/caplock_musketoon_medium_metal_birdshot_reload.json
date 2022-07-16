@@ -9,10 +9,13 @@
       "tag": "oldguns:medium_metal_birdshot"
     },
     {
-      "tag": "oldguns:flintlock_suitable_powder"
+      "tag": "oldguns:caplock_suitable_powder"
     },
     {
-      "tag": "oldguns:flintlock_suitable_powder"
+      "tag": "oldguns:caplock_suitable_powder"
+    },
+    {
+      "tag": "oldguns:percussion_cap"
     }
   ],
   "result": {

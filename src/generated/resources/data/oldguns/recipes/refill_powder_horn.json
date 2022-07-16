@@ -1,0 +1,15 @@
+{
+  "type": "oldguns:powder_horn_refill_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:powder_horn"
+    },
+    {
+      "tag": "oldguns:any_gunpowder"
+    }
+  ],
+  "result": {
+    "item": "minecraft:air"
+  }
+}

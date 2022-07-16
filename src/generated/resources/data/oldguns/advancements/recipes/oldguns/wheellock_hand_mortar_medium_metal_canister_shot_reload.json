@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_firearm": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:wheellock_hand_mortar"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_powder": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:wheellock_suitable_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldguns:wheellock_hand_mortar_medium_metal_canister_shot_reload"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_firearm",
+      "has_powder",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:wheellock_hand_mortar_medium_metal_canister_shot_reload"
+    ]
+  }
+}

@@ -3,6 +3,7 @@ package com.zach2039.oldguns.data;
 import javax.annotation.Nullable;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
 
@@ -323,6 +324,10 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.MEDIUM_IRON_CANNONBALL.get())
 			;	
 		
+		tag(ModTags.Items.MEDIUM_METAL_CANISTER_SHOT)
+			.add(ModItems.MEDIUM_IRON_CANISTER_SHOT.get())
+			;	
+		
 		// Cartridge
 		tag(ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
 			.add(ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get())
@@ -390,11 +395,21 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.add(ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
 			;
 		
+		// Reloading
+		tag(ModTags.Items.PERCUSSION_CAP)
+			.add(ModItems.PERCUSSION_CAP.get());
+		
 		// Powder
 		tag(ModTags.Items.ANY_GUNPOWDER)
 			.add(Items.GUNPOWDER)
 			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get())
 			.add(ModItems.MEDIUM_GRADE_BLACK_POWDER.get());
+		
+		tag(ModTags.Items.ANY_GUNPOWDER_BLOCK)
+			.add(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get().asItem())
+			.add(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get().asItem())
+			.add(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get().asItem())
+			;
 		
 		tag(ModTags.Items.ANY_BLACK_POWDER)
 			.add(ModItems.HIGH_GRADE_BLACK_POWDER.get())

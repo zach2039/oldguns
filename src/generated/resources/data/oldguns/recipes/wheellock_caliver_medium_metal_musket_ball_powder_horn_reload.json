@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:firearm_muzzleloader_powder_horn_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:wheellock_caliver"
+    },
+    {
+      "tag": "oldguns:medium_metal_musket_ball"
+    },
+    {
+      "type": "oldguns:powder_horn",
+      "item": "oldguns:powder_horn",
+      "nbt": "{powder:{Count:2b,id:\"oldguns:medium_grade_black_powder\"}}"
+    }
+  ],
+  "result": {
+    "item": "oldguns:wheellock_caliver",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

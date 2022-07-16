@@ -1,0 +1,13 @@
+{
+  "type": "oldguns:gunsmiths_bench_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:low_grade_black_powder_block"
+    }
+  ],
+  "result": {
+    "count": 9,
+    "item": "minecraft:gunpowder"
+  }
+}

@@ -6,6 +6,7 @@ import java.util.function.Supplier;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
 
 import net.minecraft.core.Registry;
 import net.minecraft.world.Container;
@@ -24,6 +25,8 @@ public class ModRecipeTypes {
 	public static final TypeWithClass<GunsmithsBenchRecipe> DAMAGEABLE_TOOL_CRAFT = register("damagable_tool_craft", GunsmithsBenchRecipe.class);
 	
 	public static final TypeWithClass<CauldronRecipe> CAULDRON = register("cauldron", CauldronRecipe.class);
+	
+	public static final TypeWithClass<ShapelessVanillaMuzzleloaderPowderHornReloadRecipe> POWDER_HORN_RELOAD = register("powder_horn_reload", ShapelessVanillaMuzzleloaderPowderHornReloadRecipe.class);
 
 	private static boolean isInitialized;
 	

@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "type": "oldguns:any_design_notes",
+      "item": "oldguns:design_notes"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "item": "minecraft:paper"
+  }
+}

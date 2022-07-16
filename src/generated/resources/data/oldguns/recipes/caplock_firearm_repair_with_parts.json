@@ -1,0 +1,15 @@
+{
+  "type": "oldguns:gunsmiths_bench_firearm_repair_with_parts_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "tag": "oldguns:caplock_firearm"
+    },
+    {
+      "item": "oldguns:caplock_repair_parts"
+    }
+  ],
+  "result": {
+    "item": "minecraft:air"
+  }
+}

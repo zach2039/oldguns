@@ -1,5 +1,6 @@
 ### v1.19-3.5.1-32
 
+ - Update to forge 41.0.98
  - Add Caplock weapons
  - Add Mercury
  - Add Percussion Powder
@@ -9,6 +10,8 @@
  - Refactor cauldron interaction code to be more addition-friendly 
  - Change BulletProjectile to inherit from Projectile and not Arrow
  - Add JEI cauldron recipe support
+ - Add Powder Horn
+ - Add Design Notes scrapping recipe
 
 ### v1.19-3.5.0-31
 

@@ -6,7 +6,9 @@ import java.util.stream.Collectors;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 import com.zach2039.oldguns.world.item.crafting.ingredient.ConditionalIngredientSerializer;
+import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientAnyDesignNotes;
 import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientNever;
+import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientPowderHorn;
 import com.zach2039.oldguns.world.item.crafting.recipe.GunsmithsBenchDualArmorDyeRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairWithKitRecipe;
@@ -17,6 +19,7 @@ import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchRe
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMortarAndPestleRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaRefillPowderHornRecipe;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -58,6 +61,8 @@ public class ModCrafting {
 	public static class Ingredients {
 		public static final IIngredientSerializer<IngredientNever> NEVER = CraftingHelper.register(new ResourceLocation(OldGuns.MODID, "never"), new IngredientNever.Serializer());
 		public static final IIngredientSerializer<Ingredient> CONDITIONAL = CraftingHelper.register(new ResourceLocation(OldGuns.MODID, "conditional"), new ConditionalIngredientSerializer());
+		public static final IIngredientSerializer<IngredientPowderHorn> POWDER_HORN = CraftingHelper.register(new ResourceLocation(OldGuns.MODID, "powder_horn"), new IngredientPowderHorn.Serializer());
+		public static final IIngredientSerializer<IngredientAnyDesignNotes> ANY_DESIGN_NOTES = CraftingHelper.register(new ResourceLocation(OldGuns.MODID, "any_design_notes"), new IngredientAnyDesignNotes.Serializer());
 
 		public static void register() {}
 	}
@@ -82,6 +87,8 @@ public class ModCrafting {
 		public static final RegistryObject<ShapelessGunsmithsBenchFirearmRepairWithKitRecipe.Serializer> GUNSMITHS_BENCH_FIREARM_REPAIR_WITH_KIT_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_firearm_repair_with_kit_shapeless", ShapelessGunsmithsBenchFirearmRepairWithKitRecipe.Serializer::new);
 		
 		public static final RegistryObject<ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe.Serializer> GUNSMITHS_BENCH_FIREARM_REPAIR_WITH_PARTS_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_firearm_repair_with_parts_shapeless", ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe.Serializer::new);
+		
+		public static final RegistryObject<ShapelessVanillaRefillPowderHornRecipe.Serializer> POWDER_HORN_REFILL_SHAPELESS = RECIPE_SERIALIZERS.register("powder_horn_refill_shapeless", ShapelessVanillaRefillPowderHornRecipe.Serializer::new);
 		
 		public static final RegistryObject<ShapedGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPED = RECIPE_SERIALIZERS.register("gunsmiths_bench_shaped", ShapedGunsmithsBenchRecipe.Serializer::new);
 		

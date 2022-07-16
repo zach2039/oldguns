@@ -85,6 +85,10 @@ public class OldGunsLanguageProvider extends LanguageProvider {
 		
 		addBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Medium-grade Black Powder");
 		
+		addBlock(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK, "Block of Low-grade Black Powder");
+		
+		addBlock(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK, "Block of Wet Low-grade Black Powder");
+		
 		addBlock(ModBlocks.CONGREVE_ROCKET_STAND, "Congreve Rocket Stand");
 		
 		addBlock(ModBlocks.MEDIUM_NAVAL_CANNON, "Medium Naval Cannon");

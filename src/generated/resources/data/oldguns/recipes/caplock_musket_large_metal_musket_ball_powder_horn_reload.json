@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:firearm_muzzleloader_powder_horn_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:caplock_musket"
+    },
+    {
+      "tag": "oldguns:large_metal_musket_ball"
+    },
+    {
+      "type": "oldguns:powder_horn",
+      "item": "oldguns:powder_horn",
+      "nbt": "{powder:{Count:2b,id:\"oldguns:high_grade_black_powder\"}}"
+    },
+    {
+      "tag": "oldguns:percussion_cap"
+    }
+  ],
+  "result": {
+    "item": "oldguns:caplock_musket",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

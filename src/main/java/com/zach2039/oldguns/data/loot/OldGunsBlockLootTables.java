@@ -5,6 +5,7 @@ import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 
 import net.minecraft.data.loot.BlockLoot;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
@@ -22,15 +23,20 @@ public class OldGunsBlockLootTables extends BlockLoot {
 		dropSelf(ModBlocks.HIGH_GRADE_BLACK_POWDER_CAKE.get());
 		dropSelf(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_CAKE.get());
 		
-		add(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), (p_124235_) -> {
-	         return createSingleItemTableWithSilkTouch(p_124235_, ModItems.HIGH_GRADE_BLACK_POWDER.get(), ConstantValue.exactly(9.0F));
+		add(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), (block) -> {
+	         return createSingleItemTableWithSilkTouch(block, ModItems.HIGH_GRADE_BLACK_POWDER.get(), ConstantValue.exactly(9.0F));
 	      });
 		dropSelf(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get());
 		
-		add(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), (p_124235_) -> {
-	         return createSingleItemTableWithSilkTouch(p_124235_, ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), ConstantValue.exactly(9.0F));
+		add(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), (block) -> {
+	         return createSingleItemTableWithSilkTouch(block, ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), ConstantValue.exactly(9.0F));
 	      });
 		dropSelf(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get());
+		
+		add(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get(), (block) -> {
+	         return createSingleItemTableWithSilkTouch(block, Items.GUNPOWDER, ConstantValue.exactly(9.0F));
+	      });
+		dropSelf(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get());
 		
 		dropSelf(ModBlocks.MEDIUM_NAVAL_CANNON.get());
 		

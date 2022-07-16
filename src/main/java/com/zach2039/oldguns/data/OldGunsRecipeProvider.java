@@ -2,9 +2,13 @@ package com.zach2039.oldguns.data;
 
 import java.util.function.Consumer;
 
-import com.mojang.datafixers.types.templates.Tag;
+import org.jetbrains.annotations.NotNull;
+
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.api.firearm.FirearmTypes.MechanismType;
+import com.zach2039.oldguns.api.firearm.util.PowderHornNBTHelper;
 import com.zach2039.oldguns.data.crafting.recipe.ShapedGunsmithsBenchRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderPowderHornReloadRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessFirearmMuzzleloaderReloadRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairWithKitRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchFirearmRepairWithPartsRecipeBuilder;
@@ -12,22 +16,28 @@ import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchHacksawR
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchMortarAndPestleRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaMortarAndPestleRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaRefillPowderHornRecipeBuilder;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
 import com.zach2039.oldguns.util.ModRegistryUtil;
+import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientAnyDesignNotes;
+import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientPowderHorn;
+import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.Tags;
 
@@ -50,16 +60,16 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 
 		// Materials		
 		// Lead
-		nuggetsToIngotRecipe(recipeConsumer, ModItems.LEAD_NUGGET.get(), ModTags.Items.INGOTS_LEAD);
-		ingotToNuggetsRecipe(recipeConsumer, ModItems.LEAD_INGOT.get(), ModTags.Items.NUGGETS_LEAD);
+		nuggetsToIngot(recipeConsumer, ModItems.LEAD_NUGGET.get(), ModTags.Items.INGOTS_LEAD);
+		ingotToNuggets(recipeConsumer, ModItems.LEAD_INGOT.get(), ModTags.Items.NUGGETS_LEAD);
 		
 		// Brass
-		nuggetsToIngotRecipe(recipeConsumer, ModItems.BRASS_NUGGET.get(), ModTags.Items.INGOTS_BRASS);
-		ingotToNuggetsRecipe(recipeConsumer, ModItems.BRASS_INGOT.get(), ModTags.Items.NUGGETS_BRASS);
+		nuggetsToIngot(recipeConsumer, ModItems.BRASS_NUGGET.get(), ModTags.Items.INGOTS_BRASS);
+		ingotToNuggets(recipeConsumer, ModItems.BRASS_INGOT.get(), ModTags.Items.NUGGETS_BRASS);
 		
 		// Mercury
-		nuggetsToIngotRecipe(recipeConsumer, ModItems.MERCURY_NUGGET.get(), ModTags.Items.INGOTS_MERCURY);
-		ingotToNuggetsRecipe(recipeConsumer, ModItems.MERCURY_INGOT.get(), ModTags.Items.NUGGETS_MERCURY);
+		nuggetsToIngot(recipeConsumer, ModItems.MERCURY_NUGGET.get(), ModTags.Items.INGOTS_MERCURY);
+		ingotToNuggets(recipeConsumer, ModItems.MERCURY_INGOT.get(), ModTags.Items.NUGGETS_MERCURY);
 
 		// Nitre Bedding
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModBlocks.NITER_BEDDING.get(), 4)
@@ -256,6 +266,17 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_medium_grade_black_powder_cake", has(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_from_block"));
 		
+		// Gunpowder from block of low grade black powder
+		ShapelessRecipeBuilder.shapeless(Items.GUNPOWDER, 9)
+				.requires(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
+				.unlockedBy("has_low_grade_black_powder_block", has(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_from_block_vanilla"));
+
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(Items.GUNPOWDER, 9)
+				.requires(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
+				.unlockedBy("has_low_grade_black_powder_block", has(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_from_block"));
+		
 		// High grade black powder block from high grade black powder
 		ShapelessRecipeBuilder.shapeless(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
@@ -277,6 +298,17 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.requires(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_medium_grade_black_powder", has(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_block"));
+		
+		// Low grade black powder block from high grade black powder
+		ShapelessRecipeBuilder.shapeless(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
+				.requires(Items.GUNPOWDER, 9)
+				.unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_block_vanilla"));
+
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
+				.requires(Items.GUNPOWDER, 9)
+				.unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_block"));
 
 		// Waxed Paper
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.WAXED_PAPER.get(), 8)
@@ -300,24 +332,24 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "percussion_cap"));
 		
 		// Create matchlock repair parts
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_MATCHLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_MATCHLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_MATCHLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_MATCHLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_MATCHLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.MATCHLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_MATCHLOCK_FIREARM);
 		// Create wheellock repair parts
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_WHEELLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_WHEELLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_WHEELLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_WHEELLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_WHEELLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_WHEELLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_WHEELLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.WHEELLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_WHEELLOCK_FIREARM);
 		// Create flintlock repair parts
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_FLINTLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_FLINTLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_FLINTLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_FLINTLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_FLINTLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_FLINTLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_FLINTLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.FLINTLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_FLINTLOCK_FIREARM);
 		// Create caplock repair parts
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_CAPLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_CAPLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_CAPLOCK_FIREARM);
-		shapelessFirearmSalvageRecipe(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_CAPLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 2, ModTags.Items.SMALL_CAPLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 4, ModTags.Items.MEDIUM_CAPLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 6, ModTags.Items.LARGE_CAPLOCK_FIREARM);
+		firearmSalvage(recipeConsumer, ModItems.CAPLOCK_REPAIR_PARTS.get(), 8, ModTags.Items.HUGE_CAPLOCK_FIREARM);
 		
 		// Firearm Repair
 		// With repair kit		
@@ -350,6 +382,21 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_parts", has(ModItems.FLINTLOCK_REPAIR_PARTS.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "flintlock_firearm_repair_with_parts"));
 		
+		ShapelessGunsmithsBenchFirearmRepairWithPartsRecipeBuilder.shapeless()
+				.requires(ModTags.Items.CAPLOCK_FIREARM)
+				.requires(ModItems.CAPLOCK_REPAIR_PARTS.get())						
+				.unlockedBy("has_firearm", has(ModTags.Items.FIREARM))
+				.unlockedBy("has_parts", has(ModItems.CAPLOCK_REPAIR_PARTS.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "caplock_firearm_repair_with_parts"));
+		
+		// Refill Powder Horn
+		ShapelessVanillaRefillPowderHornRecipeBuilder.shapeless()
+				.requires(ModItems.POWDER_HORN.get())								
+				.requires(ModTags.Items.ANY_GUNPOWDER)
+				.unlockedBy("has_any_gunpowder", has(ModTags.Items.ANY_GUNPOWDER))
+				.unlockedBy("has_powder_horn", has(ModItems.POWDER_HORN.get()))
+				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "refill_powder_horn"));
+		
 		// Workshops 
 		// Create gunsmiths bench
 		ShapedRecipeBuilder.shaped(ModBlocks.GUNSMITHS_BENCH.get())
@@ -365,147 +412,147 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		// Firearm Reloading
 		// Matchlocks
 		// Reload matchlock derringer
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_DERRINGER.get(), ModTags.Items.SMALL_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_DERRINGER.get(), ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_DERRINGER.get(), ModTags.Items.SMALL_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_DERRINGER.get(), ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_PISTOL.get(), ModTags.Items.SMALL_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_PISTOL.get(), ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_PISTOL.get(), ModTags.Items.SMALL_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_PISTOL.get(), ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock arquebus
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock caliver
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_CALIVER.get(), ModTags.Items.MEDIUM_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_CALIVER.get(), ModTags.Items.MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_CALIVER.get(), ModTags.Items.MEDIUM_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_CALIVER.get(), ModTags.Items.MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock musketoon
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_ROCK_BIRDSHOT, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		reload(recipeConsumer, ModItems.MATCHLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_ROCK_BIRDSHOT, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_MUSKET.get(), ModTags.Items.LARGE_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_MUSKET.get(), ModTags.Items.LARGE_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_MUSKET.get(), ModTags.Items.LARGE_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_MUSKET.get(), ModTags.Items.LARGE_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock long musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.MATCHLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_ROCK_MUSKET_BALL, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.MATCHLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload matchlock blunderbuss pistol birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_ROCK_BIRDSHOT, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 1);
+		reload(recipeConsumer, ModItems.MATCHLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_ROCK_BIRDSHOT, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
 		// Reload matchlock blunderbuss pistol birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.MATCHLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_ROCK_BIRDSHOT, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.MATCHLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_ROCK_BIRDSHOT, ModTags.Items.MATCHLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 
 		// Wheellock
 		// Reload wheellock derringer
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_DERRINGER.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.WHEELLOCK_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_DERRINGER.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload wheellock pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_PISTOL.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.WHEELLOCK_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_PISTOL.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload wheellock doublebarrel pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_DOUBLEBARREL_PISTOL.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload wheellock arquebus
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
+		reload(recipeConsumer, ModItems.WHEELLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
 		// Reload wheellock caliver
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_CALIVER.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_CALIVER.get(), ModTags.Items.MEDIUM_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);				
+		reload(recipeConsumer, ModItems.WHEELLOCK_CALIVER.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_CALIVER.get(), ModTags.Items.MEDIUM_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);				
 		// Reload wheellock musketoon ball and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_BIRDSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.WHEELLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
+		reload(recipeConsumer, ModItems.WHEELLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_BIRDSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 		// Reload wheellock musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_MUSKET.get(), ModTags.Items.LARGE_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.WHEELLOCK_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_MUSKET.get(), ModTags.Items.LARGE_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload wheellock long musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.WHEELLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.WHEELLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload wheellock blunderbuss pistol buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BUCKSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BIRDSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 1);
+		reload(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BUCKSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		reload(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BIRDSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
 		// Reload wheellock blunderbuss buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		reload(recipeConsumer, ModItems.WHEELLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 		// Reload wheellock hand mortar
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.WHEELLOCK_HAND_MORTAR.get(),  ModTags.Items.MEDIUM_METAL_CANNONBALL, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.WHEELLOCK_HAND_MORTAR.get(),  ModTags.Items.MEDIUM_METAL_CANISTER_SHOT, ModTags.Items.WHEELLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 		
 		// Flintlocks
 		// Reload flintlock derringer
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DERRINGER.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_DERRINGER.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock duckfoot derringer
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_PISTOL.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_PISTOL.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock doublebarrel pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock arquebus
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
+		reload(recipeConsumer, ModItems.FLINTLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
 		// Reload flintlock caliver
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_CALIVER.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_CALIVER.get(), ModTags.Items.MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);				
+		reload(recipeConsumer, ModItems.FLINTLOCK_CALIVER.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_CALIVER.get(), ModTags.Items.MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);				
 		// Reload flintlock musketoon ball and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.FLINTLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
+		reload(recipeConsumer, ModItems.FLINTLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 		// Reload flintlock musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_MUSKET.get(), ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_MUSKET.get(), ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock nock gun
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_NOCK_GUN.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_NOCK_GUN.get(), ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_NOCK_GUN.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_NOCK_GUN.get(), ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock long musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.FLINTLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.FLINTLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload flintlock blunderbuss pistol buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BUCKSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 1);
+		reload(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BUCKSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		reload(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
 		// Reload flintlock blunderbuss buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);		
+		reload(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		reload(recipeConsumer, ModItems.FLINTLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);		
 		// Reload flintlock doublebarrel blunderbuss buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		reload(recipeConsumer, ModItems.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 
 		// Caplocks
 		// Reload caplock derringer
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DERRINGER.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.CAPLOCK_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_DERRINGER.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload caplock duckfoot derringer
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_DUCKFOOT_DERRINGER.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload caplock pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_PISTOL.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.CAPLOCK_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_PISTOL.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload caplock doublebarrel pistol
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.CAPLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_PEPPERBOX_PISTOL.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload caplock arquebus
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
+		reload(recipeConsumer, ModItems.CAPLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_ARQUEBUS.get(), ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
 		// Reload caplock caliver
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_CALIVER.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_CALIVER.get(), ModTags.Items.MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);				
+		reload(recipeConsumer, ModItems.CAPLOCK_CALIVER.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_CALIVER.get(), ModTags.Items.MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);				
 		// Reload caplock musketoon ball and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.CAPLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_BIRDSHOT, ModTags.Items.FLINTLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.CAPLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);		
+		reload(recipeConsumer, ModItems.CAPLOCK_MUSKETOON.get(), ModTags.Items.MEDIUM_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 		// Reload caplock musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_MUSKET.get(), ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.CAPLOCK_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_MUSKET.get(), ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload caplock long musket
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleCartridgeReloadRecipe(recipeConsumer, ModItems.FLINTLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
+		reload(recipeConsumer, ModItems.CAPLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_METAL_MUSKET_BALL, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		cartridgeReload(recipeConsumer, ModItems.CAPLOCK_LONG_MUSKET.get(), ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE);
 		// Reload caplock blunderbuss pistol buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BUCKSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 1);
+		reload(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BUCKSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
+		reload(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS_PISTOL.get(), ModTags.Items.SMALL_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 1);
 		// Reload caplock blunderbuss buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);		
+		reload(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		reload(recipeConsumer, ModItems.CAPLOCK_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 		// Reload caplock doublebarrel blunderbuss buckshot and birdshot
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
-		shapelessMuzzleloaderSingleReloadRecipe(recipeConsumer, ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, 2);
+		reload(recipeConsumer, ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BUCKSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
+		reload(recipeConsumer, ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get(), ModTags.Items.LARGE_METAL_BIRDSHOT, ModTags.Items.CAPLOCK_SUITABLE_POWDER, ModItems.POWDER_HORN.get(), 2);
 
 		
 		// Artillery
@@ -1783,34 +1830,34 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		
 		// Cartridges
 		// Create small stone musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_STONE_MUSKET_BALL.get(), ModTags.Items.LOW_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.SMALL_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_STONE_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.SMALL_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_STONE_MUSKET_BALL.get(), ModTags.Items.LOW_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.SMALL_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_STONE_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
 		// Create medium stone musket ball paper cartridge
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.MEDIUM_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_STONE_MUSKET_BALL.get(), ModTags.Items.LOW_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.MEDIUM_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_STONE_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.MEDIUM_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_STONE_MUSKET_BALL.get(), ModTags.Items.LOW_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.MEDIUM_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_STONE_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
 		// Create large stone musket ball paper cartridge
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.LARGE_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_STONE_MUSKET_BALL.get(), ModTags.Items.LOW_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.LARGE_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_STONE_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.LARGE_STONE_MUSKET_BALL_LOW_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_STONE_MUSKET_BALL.get(), ModTags.Items.LOW_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.LARGE_STONE_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_STONE_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_stone_firearm_ammo"));
 		
 		// Create small iron musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.SMALL_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_IRON_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.SMALL_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_IRON_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.SMALL_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_IRON_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.SMALL_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_IRON_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
 		// Create medium iron musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.MEDIUM_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_IRON_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.MEDIUM_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_IRON_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.MEDIUM_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_IRON_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.MEDIUM_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_IRON_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
 		// Create large iron musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.LARGE_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_IRON_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_IRON_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.LARGE_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_IRON_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_IRON_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_iron_firearm_ammo"));
 		
 		// Create small lead musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.SMALL_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_LEAD_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.SMALL_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_LEAD_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.SMALL_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_LEAD_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.SMALL_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.SMALL_LEAD_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 1, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
 		// Create medium lead musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.MEDIUM_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_LEAD_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.MEDIUM_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_LEAD_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.MEDIUM_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_LEAD_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.MEDIUM_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.MEDIUM_LEAD_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
 		// Create large lead musket ball paper cartridges
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.LARGE_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_LEAD_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
-		shapelessPaperCartridgeRecipe(recipeConsumer, ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_LEAD_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));		
+		paperCartridge(recipeConsumer, ModItems.LARGE_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_LEAD_MUSKET_BALL.get(), ModTags.Items.MEDIUM_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));
+		paperCartridge(recipeConsumer, ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get(), ModItems.LARGE_LEAD_MUSKET_BALL.get(), ModTags.Items.HIGH_GRADE_BLACK_POWDER, 2, new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo"));		
 		
 		// Parts
 		// Create tiny stone barrel
@@ -2260,6 +2307,21 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "diamond_trigger_assembly"));
 		}
 		
+		// Percussion Cap Cone
+		{
+			final var blazeRod = Tags.Items.RODS_BLAZE;
+			final var goldNugget = Tags.Items.NUGGETS_GOLD;
+			
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.PERCUSSION_CAP_CONE.get())
+					.pattern(" R ")
+					.pattern("nnn")
+					.define('R', blazeRod)
+					.define('n', goldNugget)
+					.unlockedBy("has_" + blazeRod.location().getPath(), has(blazeRod))
+					.unlockedBy("has_" + goldNugget.location().getPath(), has(goldNugget))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "percussion_cap_cone"));
+		}
+		
 		// Create match cord from bark strands
 		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.MATCH_CORD.get())
 				.requires(ModItems.BARK_STRANDS.get())
@@ -2375,7 +2437,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_polished_granite", has(Items.POLISHED_GRANITE))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "mortar_and_pestle"));
 		
-		// Create hacksaw
+		// Hacksaw
 		ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.HACKSAW.get())
 				.pattern("SS ")
 				.pattern("IIS")
@@ -2384,6 +2446,28 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_stick", has(Tags.Items.RODS_WOODEN))
 				.unlockedBy("has_iron_ingot", has(Tags.Items.INGOTS_IRON))				
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "hacksaw"));
+		
+		// Powder Horn
+		{
+			final var goatHorn = Items.GOAT_HORN;
+			final var leather = Tags.Items.LEATHER;
+			final var string = Tags.Items.STRING;
+			final var copperIngot = Tags.Items.INGOTS_COPPER;
+			
+			ShapedGunsmithsBenchRecipeBuilder.shaped(ModItems.POWDER_HORN.get())
+					.pattern(" S ")
+					.pattern("LHS")
+					.pattern(" C ")
+					.define('H', goatHorn)
+					.define('L', leather)
+					.define('S', string)
+					.define('C', copperIngot)
+					.unlockedBy("has_" + ModRegistryUtil.getKey(goatHorn).getPath(), has(goatHorn))
+					.unlockedBy("has_" + leather.location().getPath(), has(leather))
+					.unlockedBy("has_" + string.location().getPath(), has(string))
+					.unlockedBy("has_" + copperIngot.location().getPath(), has(copperIngot))
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "powder_horn"));
+		}
 		
 		// Equipment
 		// Create blasting powder stick
@@ -2398,7 +2482,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "blasting_powder_stick"));
 		
 		// Vanilla alternative recipes
-		// Create TNT from blasting powder
+		// TNT
 		ShapedGunsmithsBenchRecipeBuilder.shaped(Items.TNT)
 				.pattern(" F ")
 				.pattern("SSS")
@@ -2410,9 +2494,21 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_tnt_from_blasting_powder_sticks"))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "tnt_from_blasting_powder_sticks"));
 		
+		// Paper
+		{
+			final var designNotes = ModItems.DESIGN_NOTES.get();
+			final var tagCompound = new CompoundTag();
+			tagCompound.put("item", ItemStack.EMPTY.serializeNBT());
+			
+			ShapelessRecipeBuilder.shapeless(Items.PAPER, 3)
+					.requires(IngredientAnyDesignNotes.of(designNotes))					
+					.unlockedBy("has_" + ModRegistryUtil.getKey(designNotes).getPath(), has(designNotes))		
+					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "paper_from_design_notes"));
+		}
+		
 	}
 
-	private static void nuggetsToIngotRecipe(Consumer<FinishedRecipe> recipeConsumer, Item nuggetOut, TagKey<Item> ingotIn) {
+	private static void nuggetsToIngot(Consumer<FinishedRecipe> recipeConsumer, Item nuggetOut, TagKey<Item> ingotIn) {
 		ShapelessRecipeBuilder.shapeless(nuggetOut, 9)
 			.requires(ingotIn)
 			.unlockedBy("has_" + ingotIn.location().getPath(), has(ingotIn))
@@ -2424,7 +2520,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(nuggetOut).getPath()));
 	}
 	
-	private static void ingotToNuggetsRecipe(Consumer<FinishedRecipe> recipeConsumer, Item ingotOut, TagKey<Item> nuggetIn) {
+	private static void ingotToNuggets(Consumer<FinishedRecipe> recipeConsumer, Item ingotOut, TagKey<Item> nuggetIn) {
 		ShapelessRecipeBuilder.shapeless(ingotOut)
 			.requires(nuggetIn).requires(nuggetIn).requires(nuggetIn)
 			.requires(nuggetIn).requires(nuggetIn).requires(nuggetIn)
@@ -2440,18 +2536,59 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(ingotOut).getPath()));
 	}
 	
-	private static void shapelessMuzzleloaderSingleReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, TagKey<Item> inputAmmo, TagKey<Item> inputPowder, int powderAmount) {
-		ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm)
+	private static void reload(Consumer<FinishedRecipe> recipeConsumer, FirearmItem firearm, TagKey<Item> inputAmmo, TagKey<Item> inputPowder, @NotNull PowderHornItem powderHornItem, int powderAmount) {
+		{
+			final var reloadBuilder = ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm); 
+			reloadBuilder
+					.requires(firearm)
+					.requires(inputAmmo)
+					.requires(inputPowder, powderAmount)
+					.unlockedBy("has_firearm", has(firearm))
+					.unlockedBy("has_powder", has(inputPowder))
+					;
+					
+			if (firearm.getMechanismType() == MechanismType.CAPLOCK) {
+				final var percussionCap = ModTags.Items.PERCUSSION_CAP;
+				reloadBuilder
+					.requires(percussionCap)
+					.unlockedBy("has_" + percussionCap.location().getPath(), has(percussionCap))
+					;
+			}
+					
+			reloadBuilder.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+		}
+		
+		{
+			final var reloadBuilder = ShapelessFirearmMuzzleloaderPowderHornReloadRecipeBuilder.shapeless(firearm);
+		
+			ItemStack powderHornStack = new ItemStack(powderHornItem);
+			ItemStack defaultPowder = PowderHornItem.getDefaultPowderForTag(inputPowder);
+			defaultPowder.setCount(powderAmount);
+			PowderHornNBTHelper.setPowderStack(powderHornStack, defaultPowder);
+		
+		
+			reloadBuilder
 				.requires(firearm)
 				.requires(inputAmmo)
-				.requires(inputPowder, powderAmount)
+				.requires(IngredientPowderHorn.of(powderHornStack.getOrCreateTag(), powderHornItem))
 				.unlockedBy("has_firearm", has(firearm))
 				.unlockedBy("has_ammo", has(inputAmmo))
-				.unlockedBy("has_powder", has(inputPowder))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
+				.unlockedBy("has_powder_horn", has(powderHornItem))
+				;
+				
+			if (firearm.getMechanismType() == MechanismType.CAPLOCK) {
+				final var percussionCap = ModTags.Items.PERCUSSION_CAP;
+				reloadBuilder
+					.requires(percussionCap)
+					.unlockedBy("has_" + percussionCap.location().getPath(), has(percussionCap))
+					;
+			}	
+				
+			reloadBuilder.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_powder_horn_reload"));
+		}
 	}
-
-	private static void shapelessFirearmSalvageRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputPart, int partAmount, TagKey<Item> inputFirearm) {
+	
+	private static void firearmSalvage(Consumer<FinishedRecipe> recipeConsumer, Item outputPart, int partAmount, TagKey<Item> inputFirearm) {
 		ShapelessGunsmithsBenchHacksawRecipeBuilder.shapeless(outputPart, partAmount)
 				.requires(inputFirearm)
 				.requires(ModItems.HACKSAW.get())
@@ -2460,7 +2597,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, inputFirearm.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_salvage"));
 	}
 	
-	private static void shapelessMuzzleloaderSingleCartridgeReloadRecipe(Consumer<FinishedRecipe> recipeConsumer, Item firearm, TagKey<Item> inputCartridge) {
+	private static void cartridgeReload(Consumer<FinishedRecipe> recipeConsumer, Item firearm, TagKey<Item> inputCartridge) {
 		ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm)
 				.requires(firearm)
 				.requires(inputCartridge)
@@ -2469,7 +2606,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputCartridge.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 	}
 	
-	private static void shapelessPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, TagKey<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
+	private static void paperCartridge(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, TagKey<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
 		ShapelessGunsmithsBenchRecipeBuilder.shapeless(outputCartridge)
 				.requires(inputAmmo)		
 				.requires(Tags.Items.STRING)
@@ -2478,23 +2615,6 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.unlockedBy("has_ammo", has(inputAmmo))
 				.unlockedBy("has_string", has(Tags.Items.STRING))
 				.unlockedBy("has_waxed_paper", has(ModItems.WAXED_PAPER.get()))
-				.unlockedBy("has_black_powder", has(inputPowder))
-				.condition(ammoCraftCondition)
-				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))
-				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(outputCartridge).getPath()));
-	}
-	
-	private static void shapelessCaplockPaperCartridgeRecipe(Consumer<FinishedRecipe> recipeConsumer, Item outputCartridge, Item inputAmmo, TagKey<Item> inputPowder, int powderAmount, ResourceLocation ammoCraftCondition) {
-		ShapelessGunsmithsBenchRecipeBuilder.shapeless(outputCartridge)
-				.requires(inputAmmo)		
-				.requires(Tags.Items.STRING)
-				.requires(ModItems.WAXED_PAPER.get())
-				.requires(ModItems.PERCUSSION_CAP.get())
-				.requires(inputPowder, powderAmount)					
-				.unlockedBy("has_ammo", has(inputAmmo))
-				.unlockedBy("has_string", has(Tags.Items.STRING))
-				.unlockedBy("has_waxed_paper", has(ModItems.WAXED_PAPER.get()))
-				.unlockedBy("has_percussion_cap", has(ModItems.PERCUSSION_CAP.get()))
 				.unlockedBy("has_black_powder", has(inputPowder))
 				.condition(ammoCraftCondition)
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))

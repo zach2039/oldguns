@@ -3,6 +3,7 @@ package com.zach2039.oldguns.compat.jei;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
 
 import mezz.jei.api.recipe.RecipeType;
 import net.minecraft.world.item.crafting.Recipe;

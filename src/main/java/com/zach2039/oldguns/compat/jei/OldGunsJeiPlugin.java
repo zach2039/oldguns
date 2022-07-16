@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
+import com.zach2039.oldguns.api.firearm.util.PowderHornNBTHelper;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.category.CauldronInteractionRecipeCategory;
 import com.zach2039.oldguns.compat.jei.category.GunsmithsBenchRecipeCategory;
@@ -13,15 +14,16 @@ import com.zach2039.oldguns.init.ModCauldronInteractions;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModMenuTypes;
+import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
+import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientAnyDesignNotes;
 
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.helpers.IJeiHelpers;
-import mezz.jei.api.helpers.IStackHelper;
+import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
 import mezz.jei.api.registration.IAdvancedRegistration;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -59,6 +61,14 @@ public class OldGunsJeiPlugin implements IModPlugin {
 				(stack, ctx) -> {
 					return (IDesignNotes.getDesign(stack) != "") ? IDesignNotes.getDesign(stack) : IIngredientSubtypeInterpreter.NONE;
 					});
+		
+		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.POWDER_HORN.get(), 
+				(stack, ctx) -> ModRegistryUtil.getKey(Items.GUNPOWDER).getPath());
+		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.POWDER_HORN.get(), 
+				(stack, ctx) -> ModRegistryUtil.getKey(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()).getPath());
+		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.POWDER_HORN.get(), 
+				(stack, ctx) -> ModRegistryUtil.getKey(ModItems.HIGH_GRADE_BLACK_POWDER.get()).getPath());
+		
 	}
 
 	@Override
@@ -82,20 +92,12 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerVanillaCategoryExtensions(IVanillaCategoryExtensionRegistration registration) {
-		
-	}
-		
-	@SuppressWarnings("unchecked")
-	private <T extends Recipe<?>> List<T> getFiltered(RecipeManager recipeManager, Predicate<? super Recipe<?>> include) {		
-		return (List<T>) recipeManager.getRecipes().stream().filter(include).toList();
+
 	}
 	
 	@SuppressWarnings("resource")
 	@Override
-	public void registerRecipes(IRecipeRegistration registration) {
-		IJeiHelpers jeiHelpers = registration.getJeiHelpers();
-		IStackHelper stackHelper = jeiHelpers.getStackHelper();
-		
+	public void registerRecipes(IRecipeRegistration registration) {		
 		if (Minecraft.getInstance().level != null) {
 			RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
 			
@@ -124,7 +126,7 @@ public class OldGunsJeiPlugin implements IModPlugin {
 
 	@Override
 	public void registerAdvanced(IAdvancedRegistration registration) {
-		
+
 	}
 
 	@Override
@@ -137,19 +139,17 @@ public class OldGunsJeiPlugin implements IModPlugin {
 		return UID;
 	}
 	
+	@SuppressWarnings("unchecked")
+	private <T extends Recipe<?>> List<T> getFiltered(RecipeManager recipeManager, Predicate<? super Recipe<?>> include) {		
+		return (List<T>) recipeManager.getRecipes().stream().filter(include).toList();
+	}
+	
 	private static boolean isGunsmithsBenchRecipe(Recipe<?> recipe) {
 		RecipeSerializer<?> serializer = recipe.getSerializer();
 		return (
 				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_MORTAR_AND_PESTLE_SHAPELESS.get()) ||
 				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPED.get()) || 
 				(serializer == ModCrafting.Recipes.GUNSMITHS_BENCH_SHAPELESS.get())
-				);
-	}
-	
-	private static boolean isCauldronRecipe(Recipe<?> recipe) {
-		RecipeSerializer<?> serializer = recipe.getSerializer();
-		return (
-				(serializer == ModCrafting.Recipes.CAULDRON.get())
 				);
 	}
 }

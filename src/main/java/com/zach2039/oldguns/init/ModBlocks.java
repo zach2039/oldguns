@@ -8,12 +8,14 @@ import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.HighGradeBlackPowderCakeBlock;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
+import com.zach2039.oldguns.world.level.block.LowGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.MediumGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
 import com.zach2039.oldguns.world.level.block.WallBlastingPowderStickBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.WetHighGradeBlackPowderCakeBlock;
+import com.zach2039.oldguns.world.level.block.WetLowGradeBlackPowderBlock;
 import com.zach2039.oldguns.world.level.block.WetMediumGradeBlackPowderBlock;
 
 import net.minecraft.world.item.BlockItem;
@@ -70,6 +72,13 @@ public class ModBlocks {
 	);
 	public static final RegistryObject<MediumGradeBlackPowderBlock> MEDIUM_GRADE_BLACK_POWDER_BLOCK = registerBlock("medium_grade_black_powder_block",
 			() -> new MediumGradeBlackPowderBlock()
+	);
+	
+	public static final RegistryObject<WetLowGradeBlackPowderBlock> WET_LOW_GRADE_BLACK_POWDER_BLOCK = registerBlock("wet_low_grade_black_powder_block",
+			() -> new WetLowGradeBlackPowderBlock()
+	);
+	public static final RegistryObject<LowGradeBlackPowderBlock> LOW_GRADE_BLACK_POWDER_BLOCK = registerBlock("low_grade_black_powder_block",
+			() -> new LowGradeBlackPowderBlock()
 	);
 	
 	// Artillery

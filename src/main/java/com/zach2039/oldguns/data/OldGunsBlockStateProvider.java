@@ -198,6 +198,22 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 
 		//simpleBlockItem(ModBlocks.LIQUID_NITER_CAULDRON.get(), liquidNiterCauldronFull);
 		
+		final ModelFile highGradeBlackPowderBlock = models().cubeAll(
+				name(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()),
+				modLoc("block/high_grade_black_powder_dry")
+		);
+		
+		simpleBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), highGradeBlackPowderBlock);
+		simpleBlockItem(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), highGradeBlackPowderBlock);
+		
+		final ModelFile wetHighGradeBlackPowderBlock = models().cubeAll(
+				name(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get()),
+				modLoc("block/high_grade_black_powder_wet")
+		);
+		
+		simpleBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
+		simpleBlockItem(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
+		
 		final ModelFile mediumGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/medium_grade_black_powder_dry")
@@ -214,21 +230,21 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 		simpleBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), wetMediumGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), wetMediumGradeBlackPowderBlock);
 		
-		final ModelFile highGradeBlackPowderBlock = models().cubeAll(
-				name(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()),
-				modLoc("block/high_grade_black_powder_dry")
+		final ModelFile lowGradeBlackPowderBlock = models().cubeAll(
+				name(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get()),
+				modLoc("block/low_grade_black_powder_dry")
 		);
 		
-		simpleBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), highGradeBlackPowderBlock);
-		simpleBlockItem(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), highGradeBlackPowderBlock);
+		simpleBlock(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get(), lowGradeBlackPowderBlock);
+		simpleBlockItem(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get(), lowGradeBlackPowderBlock);
 		
-		final ModelFile wetHighGradeBlackPowderBlock = models().cubeAll(
-				name(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get()),
-				modLoc("block/high_grade_black_powder_wet")
+		final ModelFile wetLowGradeBlackPowderBlock = models().cubeAll(
+				name(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get()),
+				modLoc("block/low_grade_black_powder_wet")
 		);
 		
-		simpleBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
-		simpleBlockItem(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
+		simpleBlock(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get(), wetLowGradeBlackPowderBlock);
+		simpleBlockItem(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get(), wetLowGradeBlackPowderBlock);
 		
 		fluidBlock(ModFluids.LIQUID_NITER);
 	}

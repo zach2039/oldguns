@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:firearm_muzzleloader_powder_horn_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:caplock_blunderbuss"
+    },
+    {
+      "tag": "oldguns:large_metal_buckshot"
+    },
+    {
+      "type": "oldguns:powder_horn",
+      "item": "oldguns:powder_horn",
+      "nbt": "{powder:{Count:2b,id:\"oldguns:high_grade_black_powder\"}}"
+    },
+    {
+      "tag": "oldguns:percussion_cap"
+    }
+  ],
+  "result": {
+    "item": "oldguns:caplock_blunderbuss",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

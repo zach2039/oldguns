@@ -10,6 +10,7 @@ import com.google.common.base.Preconditions;
 import com.zach2039.oldguns.OldGuns;
 
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.alchemy.Potion;

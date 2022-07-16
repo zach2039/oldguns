@@ -1,0 +1,26 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "key": {
+    "C": {
+      "tag": "forge:ingots/copper"
+    },
+    "H": {
+      "item": "minecraft:goat_horn"
+    },
+    "L": {
+      "tag": "forge:leather"
+    },
+    "S": {
+      "tag": "forge:string"
+    }
+  },
+  "pattern": [
+    " S ",
+    "LHS",
+    " C "
+  ],
+  "result": {
+    "item": "oldguns:powder_horn"
+  }
+}

@@ -1,5 +1,7 @@
 package com.zach2039.oldguns.init;
 
+import java.util.List;
+
 import com.zach2039.oldguns.OldGuns;
 
 import net.minecraft.resources.ResourceLocation;
@@ -7,6 +9,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.versions.forge.ForgeVersion;
 
@@ -20,6 +23,7 @@ import net.minecraftforge.versions.forge.ForgeVersion;
  */
 public class ModTags {
 	public static class Blocks {
+		
 		private static TagKey<Block> tag(final String name) {
 			return BlockTags.create(new ResourceLocation(OldGuns.MODID, name));
 		}
@@ -103,6 +107,10 @@ public class ModTags {
 		public static final TagKey<Item> MEDIUM_METAL_CANNONBALL = tag("medium_metal_cannonball");
 		public static final TagKey<Item> LARGE_METAL_CANNONBALL = tag("large_metal_cannonball");
 		
+		public static final TagKey<Item> SMALL_METAL_CANISTER_SHOT = tag("small_metal_canister_shot");
+		public static final TagKey<Item> MEDIUM_METAL_CANISTER_SHOT = tag("medium_metal_canister_shot");
+		public static final TagKey<Item> LARGE_METAL_CANISTER_SHOT = tag("large_metal_canister_shot");
+		
 		// Cartridge
 		public static final TagKey<Item> SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_matchlock_suitable_metal_musket_ball_cartridge");
 		public static final TagKey<Item> MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_matchlock_suitable_metal_musket_ball_cartridge");
@@ -120,8 +128,12 @@ public class ModTags {
 		public static final TagKey<Item> MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_caplock_suitable_metal_musket_ball_cartridge");
 		public static final TagKey<Item> LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("large_caplock_suitable_metal_musket_ball_cartridge");
 		
+		// Reloading
+		public static final TagKey<Item> PERCUSSION_CAP = tag("percussion_cap");
+		
 		// Powder
 		public static final TagKey<Item> ANY_GUNPOWDER = tag("any_gunpowder");
+		public static final TagKey<Item> ANY_GUNPOWDER_BLOCK = tag("any_gunpowder_block");
 		public static final TagKey<Item> ANY_BLACK_POWDER = tag("any_black_powder");
 		public static final TagKey<Item> LOW_GRADE_BLACK_POWDER = tag("low_grade_black_powder");
 		public static final TagKey<Item> MEDIUM_GRADE_BLACK_POWDER = tag("medium_grade_black_powder");

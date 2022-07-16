@@ -1,0 +1,19 @@
+{
+  "type": "oldguns:gunsmiths_bench_shaped",
+  "conditions": [],
+  "key": {
+    "R": {
+      "tag": "forge:rods/blaze"
+    },
+    "n": {
+      "tag": "forge:nuggets/gold"
+    }
+  },
+  "pattern": [
+    " R ",
+    "nnn"
+  ],
+  "result": {
+    "item": "oldguns:percussion_cap_cone"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "type": "oldguns:firearm_muzzleloader_powder_horn_reload_shapeless",
+  "conditions": [],
+  "ingredients": [
+    {
+      "item": "oldguns:matchlock_arquebus"
+    },
+    {
+      "tag": "oldguns:small_rock_musket_ball"
+    },
+    {
+      "type": "oldguns:powder_horn",
+      "item": "oldguns:powder_horn",
+      "nbt": "{powder:{Count:1b,id:\"minecraft:gunpowder\"}}"
+    }
+  ],
+  "result": {
+    "item": "oldguns:matchlock_arquebus",
+    "nbt": {
+      "Damage": 0
+    }
+  }
+}

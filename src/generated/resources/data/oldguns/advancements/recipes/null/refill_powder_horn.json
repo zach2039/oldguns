@@ -1,0 +1,45 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_any_gunpowder": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:any_gunpowder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_powder_horn": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "oldguns:powder_horn"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "oldguns:refill_powder_horn"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_any_gunpowder",
+      "has_powder_horn",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "oldguns:refill_powder_horn"
+    ]
+  }
+}
