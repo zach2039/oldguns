@@ -1,5 +1,5 @@
 {
-  "type": "minecraft:crafting_shapeless",
+  "type": "oldguns:scrap_design_notes_shapeless",
   "ingredients": [
     {
       "type": "oldguns:any_design_notes",

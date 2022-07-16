@@ -17,6 +17,7 @@ import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchMortarAn
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessGunsmithsBenchRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaMortarAndPestleRecipeBuilder;
 import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaRefillPowderHornRecipeBuilder;
+import com.zach2039.oldguns.data.crafting.recipe.ShapelessVanillaScrapDesignNotesRecipeBuilder;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
@@ -2500,7 +2501,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			final var tagCompound = new CompoundTag();
 			tagCompound.put("item", ItemStack.EMPTY.serializeNBT());
 			
-			ShapelessRecipeBuilder.shapeless(Items.PAPER, 3)
+			ShapelessVanillaScrapDesignNotesRecipeBuilder.shapeless(Items.PAPER, 3)
 					.requires(IngredientAnyDesignNotes.of(designNotes))					
 					.unlockedBy("has_" + ModRegistryUtil.getKey(designNotes).getPath(), has(designNotes))		
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "paper_from_design_notes"));

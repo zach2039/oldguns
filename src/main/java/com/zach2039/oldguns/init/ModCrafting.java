@@ -20,6 +20,7 @@ import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMortarAnd
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderReloadRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaRefillPowderHornRecipe;
+import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaScrapDesignNotesRecipe;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -89,6 +90,8 @@ public class ModCrafting {
 		public static final RegistryObject<ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe.Serializer> GUNSMITHS_BENCH_FIREARM_REPAIR_WITH_PARTS_SHAPELESS = RECIPE_SERIALIZERS.register("gunsmiths_bench_firearm_repair_with_parts_shapeless", ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe.Serializer::new);
 		
 		public static final RegistryObject<ShapelessVanillaRefillPowderHornRecipe.Serializer> POWDER_HORN_REFILL_SHAPELESS = RECIPE_SERIALIZERS.register("powder_horn_refill_shapeless", ShapelessVanillaRefillPowderHornRecipe.Serializer::new);
+		
+		public static final RegistryObject<ShapelessVanillaScrapDesignNotesRecipe.Serializer> SCRAP_DESIGN_NOTES_SHAPELESS = RECIPE_SERIALIZERS.register("scrap_design_notes_shapeless", ShapelessVanillaScrapDesignNotesRecipe.Serializer::new);
 		
 		public static final RegistryObject<ShapedGunsmithsBenchRecipe.Serializer> GUNSMITHS_BENCH_SHAPED = RECIPE_SERIALIZERS.register("gunsmiths_bench_shaped", ShapedGunsmithsBenchRecipe.Serializer::new);
 		

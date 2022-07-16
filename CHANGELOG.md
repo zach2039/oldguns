@@ -1,4 +1,4 @@
-### v1.19-3.5.1-32
+### v1.19-3.6.0-32
 
  - Update to forge 41.0.98
  - Add Caplock weapons

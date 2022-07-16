@@ -29,7 +29,7 @@ import net.minecraft.world.level.Level;
 
 public class PowderHornItem extends Item {
 
-	public static final int MAX_CAPACITY = 128;
+	public static final int MAX_CAPACITY = 127;
 	
 	public PowderHornItem() {
 		super(new Properties()
