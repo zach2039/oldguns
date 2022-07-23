@@ -2,6 +2,7 @@
 
  - Fix powder horn reload recipe using incorrect serializer 
  - Fix design notes scrap recipe using incorrect serializer 
+ - Refactor and fix serializer for powder horn reload
 
 ### v1.19-3.6.0-32
 
