@@ -73,6 +73,6 @@ public class ShapelessVanillaScrapDesignNotesRecipe extends ShapelessRecipe {
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModCrafting.Recipes.POWDER_HORN_REFILL_SHAPELESS.get();
+		return ModCrafting.Recipes.SCRAP_DESIGN_NOTES_SHAPELESS.get();
 	}
 }
