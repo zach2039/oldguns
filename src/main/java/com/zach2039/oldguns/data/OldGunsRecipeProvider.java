@@ -2538,29 +2538,32 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 	}
 	
 	private static void reload(Consumer<FinishedRecipe> recipeConsumer, FirearmItem firearm, TagKey<Item> inputAmmo, TagKey<Item> inputPowder, @NotNull PowderHornItem powderHornItem, int powderAmount) {
+		final var percussionCap = ModTags.Items.PERCUSSION_CAP;
 		{
-			final var reloadBuilder = ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm); 
-			reloadBuilder
+			var reloadBuilder = ShapelessFirearmMuzzleloaderReloadRecipeBuilder.shapeless(firearm);
+			
+			reloadBuilder = reloadBuilder
 					.requires(firearm)
 					.requires(inputAmmo)
 					.requires(inputPowder, powderAmount)
+					;
+			
+			if (firearm.getMechanismType() == MechanismType.CAPLOCK)
+				reloadBuilder = reloadBuilder.requires(percussionCap);
+				
+			reloadBuilder = reloadBuilder
 					.unlockedBy("has_firearm", has(firearm))
 					.unlockedBy("has_powder", has(inputPowder))
 					;
 					
-			if (firearm.getMechanismType() == MechanismType.CAPLOCK) {
-				final var percussionCap = ModTags.Items.PERCUSSION_CAP;
-				reloadBuilder
-					.requires(percussionCap)
-					.unlockedBy("has_" + percussionCap.location().getPath(), has(percussionCap))
-					;
-			}
+			if (firearm.getMechanismType() == MechanismType.CAPLOCK)
+				reloadBuilder = reloadBuilder.unlockedBy("has_" + percussionCap.location().getPath(), has(percussionCap));
 					
 			reloadBuilder.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_reload"));
 		}
 		
 		{
-			final var reloadBuilder = ShapelessFirearmMuzzleloaderPowderHornReloadRecipeBuilder.shapeless(firearm);
+			var reloadBuilder = ShapelessFirearmMuzzleloaderPowderHornReloadRecipeBuilder.shapeless(firearm);
 		
 			ItemStack powderHornStack = new ItemStack(powderHornItem);
 			ItemStack defaultPowder = PowderHornItem.getDefaultPowderForTag(inputPowder);
@@ -2568,22 +2571,23 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			PowderHornNBTHelper.setPowderStack(powderHornStack, defaultPowder);
 		
 		
-			reloadBuilder
+			reloadBuilder = reloadBuilder
 				.requires(firearm)
 				.requires(inputAmmo)
 				.requires(IngredientPowderHorn.of(powderHornStack.getOrCreateTag(), powderHornItem))
+				;
+				
+			if (firearm.getMechanismType() == MechanismType.CAPLOCK)
+				reloadBuilder = reloadBuilder.requires(percussionCap);
+				
+			reloadBuilder = reloadBuilder
 				.unlockedBy("has_firearm", has(firearm))
 				.unlockedBy("has_ammo", has(inputAmmo))
 				.unlockedBy("has_powder_horn", has(powderHornItem))
 				;
-				
-			if (firearm.getMechanismType() == MechanismType.CAPLOCK) {
-				final var percussionCap = ModTags.Items.PERCUSSION_CAP;
-				reloadBuilder
-					.requires(percussionCap)
-					.unlockedBy("has_" + percussionCap.location().getPath(), has(percussionCap))
-					;
-			}	
+					
+			if (firearm.getMechanismType() == MechanismType.CAPLOCK)
+				reloadBuilder = reloadBuilder.unlockedBy("has_" + percussionCap.location().getPath(), has(percussionCap));
 				
 			reloadBuilder.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(firearm).getPath() + "_" + inputAmmo.location().toString().toLowerCase().replace("[", "").replace("]", "").replace("namedtag", "").replace(OldGuns.MODID + ":", "") + "_powder_horn_reload"));
 		}
