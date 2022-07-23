@@ -255,8 +255,8 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 			}
 
 			buffer.writeItem(recipe.getResultItem());
-			buffer.writeUtf(PowderHornItem.getPowderTag(((Firearm)recipe.getResultItem().getItem())).location().getPath());
-			buffer.writeInt(recipe.getPowderAmount());
+			//buffer.writeUtf(PowderHornItem.getPowderTag(((Firearm)recipe.getResultItem().getItem())).location().toString());
+			//buffer.writeInt(recipe.getPowderAmount());
 		}
 	}
 }

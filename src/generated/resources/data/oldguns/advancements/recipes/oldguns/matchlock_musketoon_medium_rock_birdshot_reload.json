@@ -1,6 +1,16 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
+    "has_ammo": {
+      "conditions": {
+        "items": [
+          {
+            "tag": "oldguns:medium_rock_birdshot"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
     "has_firearm": {
       "conditions": {
         "items": [
@@ -33,6 +43,7 @@
   "requirements": [
     [
       "has_firearm",
+      "has_ammo",
       "has_powder",
       "has_the_recipe"
     ]
