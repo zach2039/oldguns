@@ -217,7 +217,7 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 	
 	@Override
 	public RecipeSerializer<?> getSerializer() {
-		return ModCrafting.Recipes.FIREARM_MUZZLELOADER_RELOAD_SHAPELESS.get();
+		return ModCrafting.Recipes.FIREARM_MUZZLELOADER_POWDER_HORN_RELOAD_SHAPELESS.get();
 	}
 	
 	public static class Serializer implements RecipeSerializer<ShapelessVanillaMuzzleloaderPowderHornReloadRecipe> {

@@ -1,3 +1,7 @@
+### v1.19-3.6.1-33
+
+ - Fix powder horn reload recipe using incorrect serializer 
+
 ### v1.19-3.6.0-32
 
  - Update to forge 41.0.98
