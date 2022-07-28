@@ -1,9 +1,13 @@
 package com.zach2039.oldguns.world.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
+import com.zach2039.oldguns.init.ModEntities;
+import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity.ArtilleryProperties;
 import com.zach2039.oldguns.api.artillery.Artillery;
 
 import net.minecraft.core.BlockPos;
@@ -25,6 +29,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -47,8 +52,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 
 	private static final EntityDataAccessor<Integer> ARTILLERY_TYPE = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);
 	private static final EntityDataAccessor<Integer> FIRING_STATE = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);
-	private static final EntityDataAccessor<CompoundTag> AMMO_PROJECTILE_TAG = SynchedEntityData.<CompoundTag>defineId(MoveableArtillery.class, EntityDataSerializers.COMPOUND_TAG);
-	private static final EntityDataAccessor<CompoundTag> AMMO_CHARGE_TAG = SynchedEntityData.<CompoundTag>defineId(MoveableArtillery.class, EntityDataSerializers.COMPOUND_TAG);
+	private static final EntityDataAccessor<CompoundTag> DATA_TAG = SynchedEntityData.<CompoundTag>defineId(MoveableArtillery.class, EntityDataSerializers.COMPOUND_TAG);
 	private static final EntityDataAccessor<Integer> FIRING_COOLDOWN = SynchedEntityData.<Integer>defineId(MoveableArtillery.class, EntityDataSerializers.INT);
 
 	private float invFriction;
@@ -65,40 +69,19 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	private boolean inputDown;
 	private double lastYd;
 
-	protected ArtilleryType type = ArtilleryType.CANNON;
-
-
-	/**
-	 * Projectile speed of this artillery instance.
-	 */
-	protected float baseProjectileSpeed = 2.5f;
-
-	/**
-	 * Effective range of this artillery instance.
-	 */
-	protected float effectiveRangeModifier = 500f;
-
-	/**
-	 * Deviation modifier of this artillery instance.
-	 */
-	protected float baseDeviation = 1f;
-
-	/**
-	 * Damage modifier of this artillery instance.
-	 */
-	protected float damageModifier = 1f;
-
 	public Entity pullingEntity;
 	public boolean fellLastTick = false;
 
-	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, Level level) {
+	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, Level level, ArtilleryProperties builder) {
 		super(entity, level);
 		this.blocksBuilding = true;
-		this.setBoundingBox(new AABB(-2, -2, -2, 2, 2, 2));
+		this.artilleryType = builder.artilleryType;
+		this.ammoSlots = builder.ammoSlots;	
+		this.baseProjectileDeviation = builder.baseProjectileDeviation;
 	}
 
-	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, Level level, double x, double y, double z) {
-		this(entity, level);
+	public MoveableArtillery(EntityType<? extends MoveableArtillery> entity, Level level, double x, double y, double z, ArtilleryProperties builder) {
+		this(entity, level, builder);
 		this.setPos(x, y, z);
 		this.xo = x;
 		this.yo = y;
@@ -107,6 +90,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 
 	@Override
 	protected void defineSynchedData() {
+		
 		this.entityData.define(ARTILLERY_TYPE, Integer.valueOf(ArtilleryType.CANNON.ordinal()));
 
 		this.entityData.define(TIME_SINCE_HIT, Integer.valueOf(0));
@@ -118,8 +102,16 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 		this.entityData.define(FIRING_STATE, Integer.valueOf(AmmoFiringState.UNLOADED.ordinal()));
 		this.entityData.define(FIRING_COOLDOWN, Integer.valueOf(0));
 
-		this.entityData.define(AMMO_CHARGE_TAG, new CompoundTag());
-		this.entityData.define(AMMO_PROJECTILE_TAG, new CompoundTag());
+		this.entityData.define(DATA_TAG, new CompoundTag());
+	}
+
+	public static boolean canVehicleCollide(Entity entityA, Entity entityB) {
+		return (entityB.canBeCollidedWith() || entityB.isPushable()) && !entityA.isPassengerOfSameVehicle(entityB);
+	}
+	
+	@Override
+	public boolean canCollideWith(Entity pEntity) {
+		return canVehicleCollide(this, pEntity);
 	}
 
 	@Override
@@ -129,7 +121,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 
 	@Override
 	public boolean isPushable() {
-		return false;
+		return true;
 	}
 
 	private void spawnDrops() {
@@ -193,16 +185,31 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 		return this.getDirection().getClockWise();
 	}
 
+	@Override 
+	public boolean mayInteract(Level level, BlockPos blockPos) {
+		return true;
+	}
+	
+	@Override
+	public InteractionResult interactAt(Player player, Vec3 vec3, InteractionHand hand) {
+		return interact(player, hand);
+	}
+	
 	@Override
 	public InteractionResult interact(Player player, InteractionHand hand) {
+		InteractionResult ret = super.interact(player, hand);
+		if (ret.consumesAction()) return ret;
+		
 		if (player.isSecondaryUseActive()) {
-			return InteractionResult.PASS;
-		} else {
 			if (!this.level.isClientSide) {
 				return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
 			} else {
 				return InteractionResult.SUCCESS;
 			}
+		} else if (this.isVehicle()) {
+			return InteractionResult.PASS;
+		} else {
+			return processInteraction(level, blockPosition(), player, hand);
 		}
 	}
 
@@ -419,201 +426,222 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	public static MoveableArtillery create(Level level, double x, double y, double z, ArtilleryType typeIn) {
 		switch (typeIn) {
 		case BOMBARD:
-			//return new Bombard(level, x, y, z);
+			return new Bombard(ModEntities.BOMBARD.get(), level, x, y, z);
 		default:
 			return null;
 		}
 	}
 
-//	@Override
-//	public void initArtilleryConfiguration() {}
-//
-//	@Override
-//	public void setArtilleryType(ArtilleryType artilleryType) {
-//		this.entityData.set(ARTILLERY_TYPE, Integer.valueOf(artilleryType.ordinal()));
-//	}
-//
-//	@Override
-//	public ArtilleryType getArtilleryType() {
-//		return ArtilleryType.values()[this.entityData.get(ARTILLERY_TYPE)];
-//	}
-//
-//	@Override
-//	public void pushAmmoProjectile(ItemStack ammoStack) {
-//		CompoundTag tag = getLoadedAmmoProjectiles();
-//
-//		ArtilleryNBTHelper.pushNBTTagAmmo(tag, ammoStack);
-//	}
-//
-//	@Override
-//	public void pushAmmoCharge(ItemStack chargeStack) {
-//		CompoundTag tag = getLoadedAmmoCharges();
-//
-//		ArtilleryNBTHelper.pushNBTTagAmmo(tag, chargeStack);
-//	}
-//
-//	@Override
-//	public ItemStack popAmmoProjectile() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public ItemStack popAmmoCharge() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public ItemStack peekAmmoProjectile() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public ItemStack peekAmmoCharge() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	@Override
-//	public void setFiringState(AmmoFiringState firingState) {
-//		this.entityData.set(FIRING_STATE, Integer.valueOf(firingState.ordinal()));
-//	}
-//
-//	@Override
-//	public AmmoFiringState getFiringState() {
-//		return AmmoFiringState.values()[((Integer)this.entityData.get(FIRING_STATE)).intValue()];
-//	}
-//
-//	@Override
-//	public void setFiringCooldown(int cooldown) {
-//		this.entityData.set(FIRING_COOLDOWN, Integer.valueOf(cooldown));
-//	}
-//
-//	@Override
-//	public int getFiringCooldown() {
-//		return this.entityData.get(FIRING_COOLDOWN);
-//	}
-//
-//	@Override
-//	public void setLoadedAmmoProjectiles(CompoundTag tag) {
-//		this.entityData.set(AMMO_PROJECTILE_TAG, tag);
-//	}
-//
-//	@Override
-//	public CompoundTag getLoadedAmmoProjectiles() {
-//		return this.entityData.get(AMMO_PROJECTILE_TAG);
-//	}
-//
-//	@Override
-//	public void setLoadedAmmoCharges(CompoundTag tag) {
-//		this.entityData.set(AMMO_CHARGE_TAG, tag);
-//	}
-//
-//	@Override
-//	public CompoundTag getLoadedAmmoCharges() {
-//		return this.entityData.get(AMMO_CHARGE_TAG);
-//	}
-//
-//	@Override
-//	public void setBaseProjectileSpeed(double baseProjectileSpeed) {
-//		this.baseProjectileSpeed = (float)baseProjectileSpeed;
-//	}
-//
-//	@Override
-//	public float getBaseProjectileSpeed() {
-//		return this.baseProjectileSpeed;
-//	}
-//
-//	@Override
-//	public void setBaseProjectileDeviation(double baseDeviation) {
-//		this.baseDeviation = (float)baseDeviation;
-//	}
-//
-//	@Override
-//	public float getBaseProjectileDeviation() {
-//		return this.baseDeviation;
-//	}
-//
-//	@Override
-//	public void setDamageModifier(double damageModifier) {
-//		this.damageModifier = (float)damageModifier;
-//	}
-//
-//	@Override
-//	public float getProjectileDamageModifier() {
-//		return this.damageModifier;
-//	}
-//
-//	@Override
-//	public void setEffectiveRangeModifier(double effectiveRangeMOdifier) {
-//		this.effectiveRangeModifier = (float)effectiveRangeMOdifier;
-//	}
-//
-//	@Override
-//	public float getEffectiveRangeModifier() {
-//		return this.effectiveRangeModifier;
-//	}
-//
-//	@Override
-//	public float getShotHeight() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public float getMinShotPitch() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public float getMaxShotPitch() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public float getMinShotYaw() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public float getMaxShotYaw() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//
-//	@Override
-//	public void setBarrelPitch(float pitch) {
-//		// TODO Auto-generated method stub
-//
-//	}
-//
-//	@Override
-//	public float getShotPitch() {
-//		// TODO Auto-generated method stub
-//		return 10;
-//	}
-//
-//	@Override
-//	public void setBarrelYaw(float yaw) {
-//		// TODO Auto-generated method stub
-//
-//	}
-
 	@Override
-	public float getShotYaw() {
-		// TODO Auto-generated method stub
-		return 0;
+	public ArtilleryType getArtilleryType() {
+		return this.artilleryType;
 	}
 
 	@Override
-	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ) {
-		// TODO Auto-generated method stub
+	public void setFiringCooldown(int firingCooldown) {
+		this.firingCooldown = firingCooldown;
+	}
 
+	@Override
+	public int getFiringCooldown() {
+		return this.firingCooldown;
+	}
+
+	@Override
+	public void putAmmoProjectile(int slot, ItemStack stackIn) {
+		ammoProjectiles.add(slot, stackIn);
+	}
+	
+	@Override
+	public Ammo getAmmoProjectile(int slot) {
+		Ammo projectileItem = (Ammo) ammoProjectiles.get(slot).getItem();
+		
+		ammoProjectiles.remove(slot);
+		
+		return projectileItem;
+	}
+
+	@Override
+	public Ammo peekAmmoProjectile(int slot) {
+		if (ammoProjectiles.isEmpty())
+			return null;
+		
+		Ammo projectileItem = (Ammo) ammoProjectiles.get(slot).getItem();
+		
+		return projectileItem;
+	}
+
+	@Override
+	public int getAmmoSlots() {
+		return this.ammoSlots;
+	}
+
+	@Override
+	public float getBaseProjectileDeviation() {
+		return this.baseProjectileDeviation;
+	}
+
+	@Override
+	public float getShotHeight() {
+		return 0.5f;
+	}
+
+	@Override
+	public float getMinShotPitch() {
+		return -16f;
+	}
+
+	@Override
+	public float getMaxShotPitch() {
+		return 20f;
+	}
+
+	@Override
+	public float getMinShotYaw() {
+		float facingYaw = 0f; 
+		return facingYaw - 20f;
+	}
+
+	@Override
+	public float getMaxShotYaw() {
+		float facingYaw = 0f; 
+		return facingYaw + 20f;
+	}
+
+	@Override
+	public void setShotPitch(float shotPitch) {
+		this.shotPitch = shotPitch;
+	}
+
+	@Override
+	public float getShotPitch() {
+		return this.shotPitch;
+	}
+
+	@Override
+	public void setShotYaw(float shotYaw) {
+		this.shotYaw = shotYaw;
+	}
+
+	@Override
+	public float getShotYaw() {
+		return this.shotYaw;
+	}
+
+	@Override
+	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ) {}
+
+	/**
+	 * Current artillery direction
+	 */
+	protected Direction facing = Direction.NORTH;
+	
+	/**
+	 * Current yaw of this artillery for projectile launching
+	 */
+	protected float shotYaw = 0f;
+	
+	/**
+	 * Current pitch of this artillery for projectile launching
+	 */
+	protected float shotPitch = 0f;
+	
+	/**
+	 * Cooldown ticks before this artillery can fire again
+	 */
+	protected int firingCooldown = 0;
+	
+	/**
+	 * NBT that contains ammo and charge information
+	 */
+	protected List<ItemStack> ammoProjectiles = new ArrayList<ItemStack>();
+	
+	/**
+	 * Type of this artillery
+	 */
+	protected ArtilleryType artilleryType = ArtilleryType.NAVAL_CANNON;
+	
+	/**
+	 * Total ammo slots of this artillery
+	 */
+	protected int ammoSlots = 1;
+	
+	/**
+	 * Base projectile deviation of this artillery
+	 */
+	protected float baseProjectileDeviation = 3.0f;
+
+	public static class ArtilleryProperties {
+
+		/**
+		 * Type of this artillery
+		 */
+		ArtilleryType artilleryType = ArtilleryType.NAVAL_CANNON;
+		
+		/**
+		 * Total ammo slots of this artillery
+		 */
+		protected int ammoSlots = 1;
+		
+		/**
+		 * Total charges per ammo loaded of this artillery
+		 */
+		int maxChargePerAmmo = 1;
+		
+		/**
+		 * Base projectile speed of this artillery
+		 */
+		float baseProjectileSpeed = 1.5f;
+		
+		/**
+		 * Effective range modifier of this artillery
+		 */
+		float effectiveRangeModifier = 1f;
+		
+		/**
+		 * Base projectile deviation of this artillery
+		 */
+		float baseProjectileDeviation = 3.0f;
+		
+		/**
+		 * Projectile damage modifier of this artillery
+		 */
+		float projectileDamageModifier = 1f;
+
+		public ArtilleryProperties artilleryType(ArtilleryType artilleryType) {
+			this.artilleryType = artilleryType;
+			return this;
+		}
+
+		public ArtilleryProperties ammoSlots(int ammoSlots) {
+			this.ammoSlots = ammoSlots;
+			return this;
+		}
+		
+		public ArtilleryProperties maxChargePerAmmo(int maxChargePerAmmo) {
+			this.maxChargePerAmmo = maxChargePerAmmo;
+			return this;
+		}
+
+		public ArtilleryProperties baseProjectileSpeed(float baseProjectileSpeed) {
+			this.baseProjectileSpeed = baseProjectileSpeed;
+			return this;
+		}
+
+		public ArtilleryProperties effectiveRangeModifier(float effectiveRangeModifier) {
+			this.effectiveRangeModifier = effectiveRangeModifier;
+			return this;
+		}
+
+		public ArtilleryProperties baseProjectileDeviation(float baseProjectileDeviation) {
+			this.baseProjectileDeviation = baseProjectileDeviation;
+			return this;
+		}
+
+		public ArtilleryProperties projectileDamageModifier(float projectileDamageModifier) {
+			this.projectileDamageModifier = projectileDamageModifier;
+			return this;
+		}
 	}
 
 

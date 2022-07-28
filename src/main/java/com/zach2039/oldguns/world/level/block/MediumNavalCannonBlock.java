@@ -121,7 +121,7 @@ public class MediumNavalCannonBlock extends HorizontalDirectionalBlock implement
 			if (blockEnt instanceof MediumNavalCannonBlockEntity) {
 				MediumNavalCannonBlockEntity cannonEnt = (MediumNavalCannonBlockEntity) blockEnt;
 
-				cannonEnt.processInteraction(level, blockpos, state, player, hand);
+				cannonEnt.processInteraction(level, blockpos, player, hand);
 
 				if (!level.isClientSide) {
 					level.blockUpdated(blockpos, this);

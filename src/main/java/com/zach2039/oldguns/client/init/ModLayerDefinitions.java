@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.client.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.client.model.BombardModel;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
 import com.zach2039.oldguns.client.model.CongreveRocketStandModel;
 import com.zach2039.oldguns.client.model.NavalCannonModel;
@@ -27,6 +28,7 @@ public class ModLayerDefinitions {
 		// Entities
 		event.registerLayerDefinition(BulletProjectileModel.LAYER_LOCATION, BulletProjectileModel::createBodyLayer);
 		event.registerLayerDefinition(RocketProjectileModel.LAYER_LOCATION, RocketProjectileModel::createBodyLayer);
+		event.registerLayerDefinition(BombardModel.LAYER_LOCATION, BombardModel::createBodyLayer);
 		
 		// Tile Entities
 		event.registerLayerDefinition(NavalCannonModel.LAYER_LOCATION, NavalCannonModel::createBodyLayer);

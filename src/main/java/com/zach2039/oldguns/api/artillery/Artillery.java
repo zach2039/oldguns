@@ -18,7 +18,7 @@ public interface Artillery {
 	
 	ArtilleryFiringState determineOverallFiringState();
 
-	public InteractionResult processInteraction(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand);
+	public InteractionResult processInteraction(Level level, BlockPos blockpos, Player player, InteractionHand hand);
 	
 	void putAmmoProjectile(int slot, ItemStack stackIn);
 	

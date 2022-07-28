@@ -1630,9 +1630,11 @@ public class OldGunsConfig {
 	}
 	
 	public static class ArtillerySettings {
-		public final CannonArtilleryAttributes medium_naval_cannon;
-		public final RocketArtilleryAttributes congreve_rocket_stand;
 		public final ArtilleryAmmoSettings artilleryAmmoSettings;
+		public final CannonArtilleryAttributes medium_naval_cannon;
+		public final CannonArtilleryAttributes bombard;
+		public final RocketArtilleryAttributes congreve_rocket_stand;
+		
 		
 		ArtillerySettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -1645,7 +1647,17 @@ public class OldGunsConfig {
 			medium_naval_cannon = new CannonArtilleryAttributes(
 					builder,
 					"Attributes of Naval Cannons",
-					"naval_cannon",
+					"medium_naval_cannon",
+					1.5f,
+					0.8f,
+					1.7f,
+					0.8f
+					);
+			
+			bombard = new CannonArtilleryAttributes(
+					builder,
+					"Attributes of Bombards",
+					"bombard",
 					1.5f,
 					0.8f,
 					1.7f,

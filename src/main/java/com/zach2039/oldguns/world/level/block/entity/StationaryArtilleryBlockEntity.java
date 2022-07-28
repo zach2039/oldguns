@@ -82,7 +82,7 @@ public abstract class StationaryArtilleryBlockEntity extends BlockEntity impleme
         writeToTag(nbt);
     }
 	
-	public abstract InteractionResult processInteraction(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand);
+	public abstract InteractionResult processInteraction(Level level, BlockPos blockpos, Player player, InteractionHand hand);
 	
 	public static void tick(final Level level, final BlockPos blockpos, final BlockState state, final StationaryArtilleryBlockEntity blockEntity) {
 		if (!blockEntity.hasLevel())

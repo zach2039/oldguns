@@ -12,6 +12,7 @@ import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryRocketAmmoItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.FirearmAmmoItem;
 import com.zach2039.oldguns.world.item.ammo.firearm.FirearmPaperCartridgeItem;
+import com.zach2039.oldguns.world.item.artillery.BombardItem;
 import com.zach2039.oldguns.world.item.artillery.LargePowderCharge;
 import com.zach2039.oldguns.world.item.artillery.MediumPowderCharge;
 import com.zach2039.oldguns.world.item.artillery.SmallPowderCharge;
@@ -73,7 +74,8 @@ public class ModItems {
 	
 	// Artillery	
 	// Pieces
-
+	public static final RegistryObject<BombardItem> BOMBARD = ITEMS.register("bombard", () -> new BombardItem(ModItems.defaultItemProperties().stacksTo(1)));
+	
 	// Ammo
 	// Rockets
 	public static final RegistryObject<ArtilleryRocketAmmoItem> MEDIUM_IRON_EXPLOSIVE_ROCKET = ITEMS.register("medium_iron_explosive_rocket", () -> new ArtilleryRocketAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_EXPLOSIVE_ROCKET));

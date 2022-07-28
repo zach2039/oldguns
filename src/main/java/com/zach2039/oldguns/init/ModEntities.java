@@ -3,6 +3,7 @@ package com.zach2039.oldguns.init;
 import java.util.function.Supplier;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.entity.Bombard;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.entity.RocketProjectile;
 
@@ -47,6 +48,13 @@ public class ModEntities {
 			.setTrackingRange(500)
 			.clientTrackingRange(500)
 			.sized(0.1f, 0.1f)
+			);
+	
+	public static final RegistryObject<EntityType<Bombard>> BOMBARD = registerEntityType("bombard",
+			() -> EntityType.Builder.<Bombard>of((Bombard::new), MobCategory.MISC)
+			.clientTrackingRange(8)
+			.setUpdateInterval(3)
+			.sized(1.0f, 1.0f)
 			);
 
 	// Mobs

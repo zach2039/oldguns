@@ -125,7 +125,7 @@ public class CongreveRocketStandBlock extends HorizontalDirectionalBlock impleme
 			if (blockEnt instanceof CongreveRocketStandBlockEntity) {
 				CongreveRocketStandBlockEntity rocketStandEnt = (CongreveRocketStandBlockEntity) blockEnt;
 
-				rocketStandEnt.processInteraction(level, blockpos, state, player, hand);
+				rocketStandEnt.processInteraction(level, blockpos, player, hand);
 
 				if (!level.isClientSide) {
 					level.blockUpdated(blockpos, this);

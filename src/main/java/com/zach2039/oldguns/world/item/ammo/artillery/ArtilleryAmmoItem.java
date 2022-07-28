@@ -10,6 +10,7 @@ import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
+import com.zach2039.oldguns.world.entity.MoveableArtillery;
 import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity;
 
 import net.minecraft.util.Mth;
@@ -68,6 +69,39 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 					worldIn, shooter, 
 					x + barrelX, 
 					y + barrelY + stationaryArtilleryEntity.getShotHeight(),
+					z + barrelZ);
+			/*BulletProjectile entityBullet = new BulletProjectile(
+					worldIn, shooter);*/
+			entityBullet.setDamage(getProjectileDamage());
+			entityBullet.setProjectileSize(getProjectileSize());
+			entityBullet.setProjectileType(getAmmoType());
+			entityBullet.setBypassArmorPercentage(getProjectileArmorBypassPercentage());
+			entityBullet.setEffectStrength(getEffectPotency());
+			entityBullet.setEffectTicks(getEffectTicks());
+			projectileEntityList.add(entityBullet);
+		}
+		
+		return projectileEntityList;
+	}
+	
+	public List<BulletProjectile> createProjectiles(Level worldIn, double x, double y, double z, ArtilleryAmmo stack,
+			MoveableArtillery movableArtillery, LivingEntity shooter) {
+		// Create list to hold all projectile entities that this bullet makes when fired
+		List<BulletProjectile> projectileEntityList = new ArrayList<BulletProjectile>();
+		
+		float range = 1.5f;
+		
+		/* Get the position of the cannon's barrel using trig. */
+		float barrelX = -Mth.sin((float) (((movableArtillery.getShotYaw()) / 180F) * 3.141593F)) * Mth.cos((float) ((movableArtillery.getShotPitch() / 180F) * 3.141593F)) * range;
+		float barrelY = -Mth.sin((float) ((movableArtillery.getShotPitch() / 180F) * 3.141593F)) * range - 0.1F;
+		float barrelZ = Mth.cos((float) (((movableArtillery.getShotYaw()) / 180F) * 3.141593F)) * Mth.cos((float) ((movableArtillery.getShotPitch() / 180F) * 3.141593F)) * range;
+		
+		for (int i = 0; i < getProjectileCount(); i++) 
+		{
+			BulletProjectile entityBullet = new BulletProjectile(
+					worldIn, shooter, 
+					x + barrelX, 
+					y + barrelY + movableArtillery.getShotHeight(),
 					z + barrelZ);
 			/*BulletProjectile entityBullet = new BulletProjectile(
 					worldIn, shooter);*/

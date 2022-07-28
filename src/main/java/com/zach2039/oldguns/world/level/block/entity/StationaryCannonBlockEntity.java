@@ -86,7 +86,7 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 				.collect(Collectors.toList());
 	}
 	
-	private boolean processLoadedState(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
+	private boolean processLoadedState(Level level, BlockPos blockpos, Player player, InteractionHand hand) {
 		ItemStack handItem = player.getItemInHand(hand);
 		boolean wasFired = false;
 		
@@ -129,7 +129,7 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		            	
 		            	doFiringEffect(level, player, pX, pY, pZ);
 		            	
-		            	level.setBlock(blockpos, state.setValue(BlockStateProperties.LIT, true), 2);
+		            	level.setBlock(blockpos, this.getBlockState().setValue(BlockStateProperties.LIT, true), 2);
 					}
 
 					wasFired = true;			
@@ -141,7 +141,7 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		return wasFired;
 	}
 	
-	private boolean processUnloadedState(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
+	private boolean processUnloadedState(Level level, BlockPos blockpos, Player player, InteractionHand hand) {
 		ItemStack handItem = player.getItemInHand(hand);
 		
 		// Each slot must be loaded one at a time, if multiple
@@ -205,7 +205,8 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		return false;
 	}
 	
-	public InteractionResult processInteraction(Level level, BlockPos blockpos, BlockState state, Player player, InteractionHand hand) {
+	@Override
+	public InteractionResult processInteraction(Level level, BlockPos blockpos, Player player, InteractionHand hand) {
 		InteractionResult result = InteractionResult.PASS;
 		ItemStack handItem = player.getItemInHand(hand);
 		
@@ -222,11 +223,11 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 			
 			switch(determineOverallFiringState()) {
 				case LOADED:
-					if (processLoadedState(level, blockpos, state, player, hand)) {
+					if (processLoadedState(level, blockpos, player, hand)) {
 						break;
 					}
 				case UNLOADED:
-					processUnloadedState(level, blockpos, state, player, hand);
+					processUnloadedState(level, blockpos, player, hand);
 				default:
 					break;
 			}
