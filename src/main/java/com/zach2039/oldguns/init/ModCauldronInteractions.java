@@ -83,13 +83,13 @@ public class ModCauldronInteractions {
 					new ResourceLocation(OldGuns.MODID, "empty_niter_cauldron_to_niter_bottle"),
 					LIQUID_NITER,
 					ModFluids.LIQUID_NITER.getStill().get(),
-					new ItemStack(ModItems.LIQUID_NITER_BOTTLE.get())
+					ModItems.LIQUID_NITER_BOTTLE.get()
 					);
 			addCauldronBucketEmptyRecipe(
 					new ResourceLocation(OldGuns.MODID, "empty_niter_cauldron_to_niter_bucket"),
 					LIQUID_NITER,
 					ModFluids.LIQUID_NITER.getStill().get(),
-					new ItemStack(ModFluids.LIQUID_NITER.getBucket().get())
+					ModFluids.LIQUID_NITER.getBucket().get()
 					);
 			
 			// Wetting of Black Powder
@@ -195,30 +195,28 @@ public class ModCauldronInteractions {
 	        return addRecipe(new CauldronRecipe(id, new ItemStack(input), output, fluid));
 	    }
 		
-		public static boolean addCauldronBucketEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, ItemStack output)
+		public static boolean addCauldronBucketEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item output)
 	    {
 			var input = new ItemStack(Items.BUCKET);
 			
 			targetMap.put(input.getItem(), 
 					(state, level, blockpos, player, hand, stack) -> {
-		    			return fillBucket(state, level, blockpos, player, hand, input, output, (Predicate<BlockState>) (cauldronState) -> cauldronState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
+		    			return fillBucket(state, level, blockpos, player, hand, input, new ItemStack(output), (Predicate<BlockState>) (cauldronState) -> cauldronState.getValue(LayeredCauldronBlock.LEVEL) == 3, SoundEvents.BUCKET_FILL);
 		    		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, input, output, fluid));
+	        return addRecipe(new CauldronRecipe(id, input, new ItemStack(output), fluid));
 	    }
 		
-		public static boolean addCauldronBottleEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, ItemStack output)
+		public static boolean addCauldronBottleEmptyRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item output)
 	    {		
-			var input = new ItemStack(Items.GLASS_BOTTLE);
-			
-			targetMap.put(input.getItem(),
+			targetMap.put(Items.GLASS_BOTTLE,
 					(state, level, blockpos, player, hand, stack) -> {
-	        			return fillBottle(state, level, blockpos, player, hand, input, output, (Predicate<BlockState>) (cauldronState) -> cauldronState.getValue(LayeredCauldronBlock.LEVEL) > 0, SoundEvents.BOTTLE_FILL);
+						return fillBottle(state, level, blockpos, player, hand, stack, new ItemStack(output), (Predicate<BlockState>) (cauldronState) -> cauldronState.getValue(LayeredCauldronBlock.LEVEL) > 0, SoundEvents.BOTTLE_FILL);
 	        		}
 					);
 			
-	        return addRecipe(new CauldronRecipe(id, input, output, fluid));
+	        return addRecipe(new CauldronRecipe(id, new ItemStack(Items.GLASS_BOTTLE), new ItemStack(output), fluid));
 	    }
 		
 		public static boolean addCauldronConvertRecipe(ResourceLocation id, Map<Item, CauldronInteraction> targetMap, Fluid fluid, Item input, ItemStack output, int multiplier, boolean lowerFillLevel, Supplier<Boolean> allowed)
@@ -297,8 +295,20 @@ public class ModCauldronInteractions {
 	    }
 	    
 	    static InteractionResult emptyBottle(Level level, BlockPos blockpos, Player player, InteractionHand hand, ItemStack input, BlockState state, SoundEvent soundEvent) {
+	    	final var fillOptional = level.getBlockState(blockpos).getOptionalValue(LayeredCauldronBlock.LEVEL);
+	    	
+	    	if (fillOptional.isPresent()) {
+	    		if (fillOptional.get() == 3) {
+	    			// Dont overfill
+	    			return InteractionResult.PASS;
+	    		}
+	    	}
+				
 			if (!level.isClientSide) {
-				player.setItemInHand(hand, ItemUtils.createFilledResult(input, player, new ItemStack(Items.GLASS_BOTTLE)));
+				if (!player.isCreative()) {
+					player.getItemInHand(hand).shrink(1);
+					player.addItem(new ItemStack(Items.GLASS_BOTTLE));
+				}
 				player.awardStat(Stats.USE_CAULDRON);
 				player.awardStat(Stats.ITEM_USED.get(input.getItem()));
 				if (level.getBlockState(blockpos).getBlock() != state.getBlock()) {
@@ -350,7 +360,10 @@ public class ModCauldronInteractions {
 			} else {
 				if (!level.isClientSide) {
 					Item item = outputStack.getItem();
-					player.setItemInHand(hand, ItemUtils.createFilledResult(inputStack, player, outputStack));
+					if (!player.isCreative()) {
+						player.getItemInHand(hand).shrink(1);
+						player.addItem(outputStack);
+					}
 					player.awardStat(Stats.USE_CAULDRON);
 					player.awardStat(Stats.ITEM_USED.get(item));
 					LayeredCauldronBlock.lowerFillLevel(state, level, blockpos);

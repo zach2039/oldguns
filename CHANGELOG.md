@@ -1,3 +1,7 @@
+### v1.19-3.6.2-34
+
+ - Fix [#28](https://github.com/zach2039/oldguns/issues/28)
+
 ### v1.19-3.6.1-33
 
  - Fix powder horn reload recipe using incorrect serializer 
