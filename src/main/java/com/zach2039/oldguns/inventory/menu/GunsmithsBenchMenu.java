@@ -119,8 +119,8 @@ public class GunsmithsBenchMenu extends Container {
 	public ItemStack quickMoveStack(PlayerEntity player, int slotIdx) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.slots.get(slotIdx);
-		int playerTotalInvSize = player.inventory.getContainerSize();
-		int menuSize = player.inventoryMenu.getSize();
+		int playerTotalInvSize = player.inventory.items.size();
+		int totalInvSize = (getSize() + playerTotalInvSize);
 		if (slot != null && slot.hasItem()) {
 			ItemStack itemstack1 = slot.getItem();
 			itemstack = itemstack1.copy();
@@ -128,24 +128,24 @@ public class GunsmithsBenchMenu extends Container {
 				this.access.execute((p_39378_, p_39379_) -> {
 					itemstack1.getItem().onCraftedBy(itemstack1, p_39378_, player);
 				});
-				if (!this.moveItemStackTo(itemstack1, getSize(), playerTotalInvSize + menuSize, true)) {
+				if (!this.moveItemStackTo(itemstack1, getSize(), totalInvSize, true)) {
 					return ItemStack.EMPTY;
 				}
 
 				slot.onQuickCraft(itemstack1, itemstack);
-			} else if (slotIdx >= getSize() && slotIdx < (playerTotalInvSize + menuSize)) {
+			} else if (slotIdx >= getSize() && slotIdx < (totalInvSize)) {
 				if (!this.moveItemStackTo(itemstack1, getSize() - 1, getSize(), false)) {
 					if (!this.moveItemStackTo(itemstack1, 1, getSize(), false)) {
-						if (slotIdx < (playerTotalInvSize + menuSize - getSize())) {
-							if (!this.moveItemStackTo(itemstack1, (playerTotalInvSize + menuSize - getSize()), playerTotalInvSize + menuSize, false)) {
+						if (slotIdx < (totalInvSize - getSize())) {
+							if (!this.moveItemStackTo(itemstack1, (totalInvSize - getSize()), totalInvSize, false)) {
 								return ItemStack.EMPTY;
 							}
-						} else if (!this.moveItemStackTo(itemstack1, getSize(), (playerTotalInvSize + menuSize - getSize()), false)) {
+						} else if (!this.moveItemStackTo(itemstack1, getSize(), (totalInvSize - getSize()), false)) {
 							return ItemStack.EMPTY;
 						}
 					}
 				}
-			} else if (!this.moveItemStackTo(itemstack1, getSize(), playerTotalInvSize + menuSize, false)) {
+			} else if (!this.moveItemStackTo(itemstack1, getSize(), totalInvSize, false)) {
 				return ItemStack.EMPTY;
 			}
 
