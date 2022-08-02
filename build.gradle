@@ -13,8 +13,13 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		//classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+
+
+		if (System.getenv("CI") == "true") {
+			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		} else {
+			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		}	
     }
 }
 apply plugin: 'net.minecraftforge.gradle'

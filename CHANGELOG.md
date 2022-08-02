@@ -1,3 +1,113 @@
+### v1.16.5-3.0.7-35
+
+ - Fix [#30](https://github.com/zach2039/oldguns/issues/30)
+ - Fix [#31](https://github.com/zach2039/oldguns/issues/31)
+
+### v1.19-3.6.2-34
+
+ - Fix [#28](https://github.com/zach2039/oldguns/issues/28)
+
+### v1.19-3.6.1-33
+
+ - Fix powder horn reload recipe using incorrect serializer 
+ - Fix design notes scrap recipe using incorrect serializer 
+ - Refactor and fix serializer for powder horn reload
+
+### v1.19-3.6.0-32
+
+ - Update to forge 41.0.98
+ - Add Caplock weapons
+ - Add Mercury
+ - Add Percussion Powder
+ - Add Wheellock Hand Mortar reload recipe
+ - Update guidebook with fuse info
+ - Fix some texture color profile issues (don't use Kolourpaint ever again...)
+ - Refactor cauldron interaction code to be more addition-friendly 
+ - Change BulletProjectile to inherit from Projectile and not Arrow
+ - Add JEI cauldron recipe support
+ - Add Powder Horn
+ - Add Design Notes scrapping recipe
+
+### v1.19-3.5.0-31
+
+ - Update to forge 41.0.85 
+
+### v1.19-3.4.2-30
+
+ - Remove old entities and inject code into Skeleton to use firearms
+ - Increase stack size of niter bottle and allow interaction on copper blocks
+
+### v1.19-3.4.1-29
+
+ - Edit mixin info and fix issue with some JEI recipes
+
+### v1.19-3.4.0-28
+
+ - Port to 1.19
+ - Remove custom entity spawning for now
+ - Update JEI compat and mods.toml dependencies
+ - Migrate to 1.19 methods and fields
+ - Pull update from 1.18.2
+
+### v1.18.2-3.3.1-27
+
+ - Fix players and entities not taking damage from artillery
+
+### v1.18.2-3.3.0-26
+
+ - Fix players not taking damage from artillery
+ - Port to 1.18.2
+ - Update build and mixins
+ - Update forge to 1.18.2
+ - Fix invisible pixels on ram_rod.png and long_match.png
+ - Fix liquid niter fluid interaction with copper
+ - Remove swap files
+ - Add liquid niter fluid and more liquid niter cauldron interactions
+ - Add recipes for rockets, rocket stands, and explosive shells
+ - Make Patchouli mandatory dependency
+ - Update issue templates
+ - Merge branch '1.18.1' of github.com:zach2039/oldguns into 1.18.1
+ - Update issue templates
+ - Swap logo with one from Xiraxis9
+ - Adjust mod.toml credits to include contributors and artists
+ - Fix wrong mechanism used in wheellock blunderbuss pistol
+ - Allow rocket artillery stand to be rotated in any direction
+ - Add config option for cauldron heat sources
+ - Add rocket artillery (WIP)
+ - Add blasting powder, rocket powder, and mining charges
+
+#### v1.18.1-3.2.1-25
+
+- Fix #14: Mortar and Pestle consumed when crafting in vanilla crafting bench
+
+#### v1.18.1-3.2.0-24
+
+- Fix harquebusier skeleton spawning underground
+- Edit firearm skeleton goals
+- Add guidebook entries for artillery
+- Fix gunsmiths bench gui texture
+- Add guide book pages for paper cartridges
+- Add and edit horsemans pot helm texture
+- Add repair parts and firearm salvage
+- Add paper cartridges and refactor recipe generation
+- Fix lead ingot dupe recipe
+- Fix lead nuggets recipe and add Horseman's Pot Helm
+- Add debuff to accuracy while mounted
+- Fix attribute applying to projectiles from equipment
+- Add crafttweaker to build.gradle
+- Refactor tooltips and AI
+- Fix double death message for armor bypass damage
+- Fix author names
+- Refactor items
+- Add musketeer hat textures
+- Refactor ammo items for artillery ammo use in handheld weapons
+- Add Musketeer Hat and start Musketeer Skeleton entity
+- Add projectile armor bypass percentage and config options
+- Refactor damage sources
+- Replace naval cannon model with ship cannon model from xiraxis9
+- Change firearm effect to use campfire smoke
+- Refactor firearm registration and files
+
 #### v1.16.5-3.0.6-23
 
 - Fix [#13](https://github.com/zach2039/oldguns/issues/13) causing crash when shift-clicking gun in crafting table during reload
