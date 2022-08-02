@@ -75,13 +75,13 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		
 		// Lead nuggets from ingots
 		{
-			ShapelessRecipeBuilder.shapeless(ModItems.LEAD_INGOT.get(), 9)
+			ShapelessRecipeBuilder.shapeless(ModItems.LEAD_NUGGET.get(), 9)
 					.requires(ModTags.Items.INGOTS_LEAD)
 					.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
 					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "lead_nugget_vanilla"));
 			
-			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.LEAD_INGOT.get(), 9)
+			ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.LEAD_NUGGET.get(), 9)
 					.requires(ModTags.Items.INGOTS_LEAD)
 					.unlockedBy("has_crafting_table", has(Blocks.CRAFTING_TABLE))
 					.unlockedBy("has_lead_ingot", has(ModTags.Items.INGOTS_LEAD))
