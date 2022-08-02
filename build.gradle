@@ -13,15 +13,18 @@ buildscript {
     dependencies {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
-		//classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		//classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.spongepowered.mixin'
-//apply plugin: 'com.diffplug.eclipse.apt'
+
+if (System.getenv("CI") != "true") {
+	apply plugin: 'com.diffplug.eclipse.apt'
+}
 
 group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
@@ -111,13 +114,18 @@ repositories {
 	maven { // Patchouli
 		url 'https://maven.blamejared.com' 
 	}
+	maven {
+		url 'https://www.cursemaven.com'
+		content {
+			includeGroup "curse.maven"
+		}
+	}
 }
 
 // Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
 String buildVersionString() {
     String mod_output_version = "${mod_version}-${mod_buildnumber}"
-    boolean jenkins_build = System.getenv("add_git_rev") != null
-    if (jenkins_build) {
+	if (System.getenv("CI") == "true") {
         File changelog = new File("CHANGELOG.md")
         if (!changelog.exists()) {
             // Get the current minor/patch number and bump it
@@ -174,7 +182,7 @@ jar {
         attributes([
                 "Specification-Title"     : "oldgunsmod",
                 "Specification-Vendor"    : "zach2039",
-                "Specification-Version"   : "${mc_version}-${mod_version}", // We are version 1 of ourselves
+                "Specification-Version"   : "${mc_version}-${mod_version}",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : archiveVersion.get(),
                 "Implementation-Vendor"   : "zach2039",
@@ -192,7 +200,10 @@ mixin {
 
 eclipse {
     afterEvaluate {
-        //synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
-        synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
+		if (System.getenv("CI") == "true") {
+			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
+		} else {
+        		synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+		}
     }
 }
