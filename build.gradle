@@ -43,8 +43,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    mappings channel: 'official', version: '1.18.2'
-	//mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
+    //mappings channel: 'official', version: '1.18.2'
+	mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
     runs {
         client {
             workingDirectory project.file('run')
@@ -192,7 +192,7 @@ jar {
         attributes([
                 "Specification-Title"     : "oldgunsmod",
                 "Specification-Vendor"    : "zach2039",
-                "Specification-Version"   : "${mc_version}-${mod_version}", // We are version 1 of ourselves
+                "Specification-Version"   : "${mc_version}-${mod_version}",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : archiveVersion.get(),
                 "Implementation-Vendor"   : "zach2039",
@@ -213,7 +213,7 @@ eclipse {
 		if (System.getenv("CI") == "true") {
 			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
 		} else {
-        	synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
+        		synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
 		}
     }
 }

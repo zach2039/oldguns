@@ -45,7 +45,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ProjectileUtil;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
@@ -66,7 +68,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
 
-public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnData {
+public class BulletProjectile extends Projectile implements IEntityAdditionalSpawnData {
 
 	protected static final EntityDataAccessor<Float> PROJECTILE_SIZE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
 	protected static final EntityDataAccessor<BlockPos> START_POS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BLOCK_POS);
@@ -106,6 +108,8 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	protected final Set<MobEffectInstance> effects = Sets.newHashSet();
 	protected boolean fixedColor;
 	protected int totalInGroundTime;
+	protected boolean inGround;
+	protected int inGroundTime;
 
 	// Set true when projectile is used to simulate trajectories on the client
 	public boolean isSimulated = false;
@@ -139,16 +143,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 	}
 
 	@Override
-	public void setEffectsFromItem(final ItemStack stackIn) {
-		super.setEffectsFromItem(stackIn);
-	}
-
-	@Override
-	protected ItemStack getPickupItem() {
-		return new ItemStack(ModItems.SMALL_IRON_MUSKET_BALL.get());
-	}
-
-	@Override
 	public boolean canHitEntity(Entity ent) {
 		boolean canHit = false;
 		if (!ent.isSpectator() && ent.isAlive() && ent.isPickable()) {
@@ -161,11 +155,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 		
 		return canHit && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(ent.getId()));
-	}
-
-	@Override
-	protected boolean tryPickup(Player playerIn) {
-		return false;
 	}
 
 	@Override
@@ -186,7 +175,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			setOwner(shooter);
 	}
 
-	@Override
 	public boolean isCritArrow() {
 		byte b0 = this.entityData.get(CRITICAL);
 		return (b0 & 1) != 0;
@@ -231,12 +219,10 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		this.entityData.define(EFFECT_TICKS, 0);
 	}
 
-	@Override
 	public void setPierceLevel(byte p_36768_) {
 		this.entityData.set(PIERCE_LEVEL, p_36768_);
 	}
 
-	@Override
 	public void setCritArrow(boolean p_36763_) {
 		this.setFlag(1, p_36763_);
 	}
@@ -250,25 +236,12 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 	}
 
-	@Override
-	public boolean shotFromCrossbow() {
-		byte b0 = this.entityData.get(ID_FLAGS);
-		return (b0 & 4) != 0;
-	}
-
-	@Override
 	public byte getPierceLevel() {
 		return this.entityData.get(PIERCE_LEVEL);
 	}	
 
-	@Override
 	public int getColor() {
 		return this.entityData.get(ID_EFFECT_COLOR);
-	}
-
-	@Override
-	public void setShotFromCrossbow(boolean isShotFromCrossbow) {
-		this.setFlag(4, isShotFromCrossbow);
 	}
 
 	private void setFixedColor(int color) {
@@ -320,7 +293,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			compound.put("inBlockState", NbtUtils.writeBlockState(this.lastState));
 		}
 
-		compound.putByte("shake", (byte)this.shakeTime);
 		compound.putBoolean("inGround", this.inGround);
 		compound.putInt("totalInGroundTime", this.totalInGroundTime);
 		compound.putByte("pickup", (byte)this.pickup.ordinal());
@@ -329,12 +301,24 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		compound.putBoolean("crit", this.isCritArrow());
 		compound.putByte("PierceLevel", this.getPierceLevel());
 		compound.putString("SoundEvent", Registry.SOUND_EVENT.getKey(this.soundEvent).toString());
-		compound.putBoolean("ShotFromCrossbow", this.shotFromCrossbow());
 		compound.putFloat("projectileSize", getProjectileSize());
 		compound.putFloat("effectStrength", getEffectStrength());
 		compound.putInt("effectTicks", getEffectTicks());
 	}
 
+	public void addEffect(MobEffectInstance pEffect) {
+		this.effects.add(pEffect);
+		this.getEntityData().set(ID_EFFECT_COLOR, PotionUtils.getColor(PotionUtils.getAllEffects(this.potion, this.effects)));
+	}
+	
+	public void setKnockback(int knockbackStrength) {
+		this.knockback = knockbackStrength;
+	}
+	
+	protected SoundEvent getDefaultHitGroundSoundEvent() {
+		return ModSoundEvents.BULLET_HIT_BLOCK.get();
+	}
+	
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		if (compound.hasUUID("Owner")) {
@@ -364,7 +348,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 			this.lastState = NbtUtils.readBlockState(compound.getCompound("inBlockState"));
 		}
 
-		this.shakeTime = compound.getByte("shake") & 255;
 		this.inGround = compound.getBoolean("inGround");
 		this.totalInGroundTime = compound.getInt("totalInGroundTime");
 		if (compound.contains("damage", Tag.TAG_DOUBLE)) {
@@ -380,8 +363,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		if (compound.contains("SoundEvent", Tag.TAG_STRING)) {
 			this.soundEvent = Registry.SOUND_EVENT.getOptional(new ResourceLocation(compound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
 		}
-
-		setShotFromCrossbow(compound.getBoolean("ShotFromCrossbow"));
 
 		setProjectileSize(compound.getFloat("projectileSize"));
 
@@ -455,6 +436,21 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		return DamageType.FIREARM;
 	}
 
+	protected void doPostHurtEffects(LivingEntity pLiving) {
+		Entity entity = this.getEffectSource();
+
+		for(MobEffectInstance mobeffectinstance : this.potion.getEffects()) {
+			pLiving.addEffect(new MobEffectInstance(mobeffectinstance.getEffect(), Math.max(mobeffectinstance.getDuration() / 8, 1), mobeffectinstance.getAmplifier(), mobeffectinstance.isAmbient(), mobeffectinstance.isVisible()), entity);
+		}
+
+		if (!this.effects.isEmpty()) {
+			for(MobEffectInstance mobeffectinstance1 : this.effects) {
+				pLiving.addEffect(mobeffectinstance1, entity);
+			}
+		}
+
+	}
+	
 	@Override
 	protected void onHitEntity(EntityHitResult result) {
 		Entity entity = result.getEntity();
@@ -552,15 +548,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 					this.piercedAndKilledEntities.add(livingentity);
 				}
 
-				if (!this.level.isClientSide && entity1 instanceof ServerPlayer) {
-					//ServerPlayer serverplayer = (ServerPlayer)entity1;
-					if (this.piercedAndKilledEntities != null && this.shotFromCrossbow()) {
-						//CriteriaTriggers.KILLED_BY_CROSSBOW.trigger(serverplayer, this.piercedAndKilledEntities);
-					} else if (!entity.isAlive() && this.shotFromCrossbow()) {
-						//CriteriaTriggers.KILLED_BY_CROSSBOW.trigger(serverplayer, Arrays.asList(entity));
-					}
-				}
-
 				// Reset inv time to allow multiple pellets to damage entities
 				entity.invulnerableTime = 0;
 			}
@@ -650,10 +637,8 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 					this.playSound(SoundEvents.ANVIL_HIT, 0.7F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
 				}
 				this.inGround = true;
-				this.shakeTime = 7;
 				this.setCritArrow(false);
 				this.setPierceLevel((byte)0);
-				this.setShotFromCrossbow(false);
 				this.resetPiercedEntities();
 			}
 		} else {			
@@ -806,7 +791,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 	}
 
-	@Override
 	protected void tickDespawn() {
 		++this.life;
 		if (this.life >= 1200) {
@@ -814,7 +798,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 	}
 
-	@Override
 	public boolean isNoPhysics() {
 		if (!this.level.isClientSide) {
 			return this.noPhysics;
@@ -823,6 +806,15 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 		}
 	}
 
+	@Nullable
+	protected EntityHitResult findHitEntity(Vec3 pStartVec, Vec3 pEndVec) {
+		return ProjectileUtil.getEntityHitResult(this.level, this, pStartVec, pEndVec, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
+	}
+	
+	protected float getWaterInertia() {
+		return 0.6F;
+	}
+	
 	@Override
 	public void tick() {
 		if (!this.hasBeenShot) {
@@ -860,10 +852,6 @@ public class BulletProjectile extends Arrow implements IEntityAdditionalSpawnDat
 					}
 				}
 			}
-		}
-
-		if (this.shakeTime > 0) {
-			--this.shakeTime;
 		}
 
 		if (this.isInWaterOrRain() || blockstate.is(Blocks.POWDER_SNOW)) {	         
