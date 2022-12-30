@@ -1,6 +1,6 @@
 ### v1.18.2-3.3.2-36
 
- - Incorporate changes from #26
+ - Incorporate changes from [#26](https://github.com/zach2039/oldguns/issues/26) to fix compat with infernal expansion
 
 ### v1.18.2-3.3.1-27
 
