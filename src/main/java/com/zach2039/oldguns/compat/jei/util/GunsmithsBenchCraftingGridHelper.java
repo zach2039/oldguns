@@ -100,4 +100,36 @@ public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
 		return index;
 	}
 
+	@Override
+	public <T> List<IRecipeSlotBuilder> createAndSetInputs(IRecipeLayoutBuilder builder,
+			IIngredientType<T> ingredientType,
+			List<@org.jetbrains.annotations.Nullable List<@org.jetbrains.annotations.Nullable T>> inputs, int width,
+			int height) {
+		if (width <= 0 || height <= 0) {
+			builder.setShapeless();
+		}
+
+		List<IRecipeSlotBuilder> inputSlots = new ArrayList<>();
+		for (int y = 0; y < 3; ++y) {
+			for (int x = 0; x < 3; ++x) {
+				IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, x * 18 + 25, y * 18 + 4);
+				inputSlots.add(slot);
+			}
+		}
+
+		setInputs(inputSlots, ingredientType, inputs, width, height);
+		return inputSlots;
+	}
+
+	@Override
+	public <T> IRecipeSlotBuilder createAndSetOutputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType,
+			@org.jetbrains.annotations.Nullable List<@org.jetbrains.annotations.Nullable T> outputs) {
+
+		IRecipeSlotBuilder outputSlot = builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22);
+		if (outputs != null) {
+			outputSlot.addIngredients(ingredientType, outputs);
+		}
+		return outputSlot;
+	}
+
 }

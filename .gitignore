@@ -25,3 +25,5 @@ log
 
 # data gen
 src/generated/resources/\.cache/
+.apt_generated/
+.apt_generated_tests/
