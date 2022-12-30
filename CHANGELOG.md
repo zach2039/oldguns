@@ -1,3 +1,7 @@
+### v1.18.2-3.3.2-36
+
+ - Incorperate changes from #26
+
 ### v1.18.2-3.3.1-27
 
  - Fix players and entities not taking damage from artillery
