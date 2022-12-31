@@ -32,7 +32,7 @@ public class CongreveRocketStandBlockEntity extends StationaryRocketBlockEntity 
 	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ) {
 		
 		TargetPoint point = new PacketDistributor.TargetPoint(
-				posX, posY, posZ, 1600d, player.level.dimension());
+				posX, posY, posZ, 40D, player.level.dimension());
 		
 		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
 				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.ROCKET_LAUNCH, 

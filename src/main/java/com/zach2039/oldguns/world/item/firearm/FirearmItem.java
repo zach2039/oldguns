@@ -76,7 +76,7 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 public class FirearmItem extends BowItem implements Firearm {
 
 	public static final Predicate<ItemStack> BULLET_OR_CARTRIDGE_ONLY = (stack) -> {
-	      return stack.is(ModTags.Items.ANY_FIREARM_BULLET) || stack.is(ModTags.Items.ANY_FIREARM_CARTRIDGE);
+	      return stack.is(ModTags.Items.ANY_BULLET) || stack.is(ModTags.Items.ANY_FIREARM_CARTRIDGE);
 	   };
 	   
 	private final Enchantment [] VALID_ENCHANTMENTS = {
