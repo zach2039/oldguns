@@ -612,7 +612,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	public void doFiringEffect(Level worldIn, Entity shooter, ItemStack stackIn)
 	{
 		TargetPoint point = new PacketDistributor.TargetPoint(
-				shooter.xo, shooter.yo, shooter.zo, 1600d, shooter.level.dimension());
+				shooter.xo, shooter.yo, shooter.zo, 40D, shooter.level.dimension());
 		
 		
 		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
