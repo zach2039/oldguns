@@ -1,0 +1,19 @@
+{
+  "values": [
+    "#oldguns:small_rock_musket_ball",
+    "#oldguns:small_rock_birdshot",
+    "#oldguns:medium_rock_musket_ball",
+    "#oldguns:medium_rock_birdshot",
+    "#oldguns:large_rock_musket_ball",
+    "#oldguns:large_rock_birdshot",
+    "#oldguns:small_metal_musket_ball",
+    "#oldguns:small_metal_birdshot",
+    "#oldguns:small_metal_buckshot",
+    "#oldguns:medium_metal_musket_ball",
+    "#oldguns:medium_metal_birdshot",
+    "#oldguns:medium_metal_buckshot",
+    "#oldguns:large_metal_musket_ball",
+    "#oldguns:large_metal_birdshot",
+    "#oldguns:large_metal_buckshot"
+  ]
+}

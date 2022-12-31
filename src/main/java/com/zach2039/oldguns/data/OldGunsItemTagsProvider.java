@@ -268,6 +268,22 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		;
 		
 		// Ammo		
+		tag(ModTags.Items.MEDIUM_METAL_CANNONBALL)
+			.add(ModItems.MEDIUM_IRON_CANNONBALL.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_METAL_CANISTER_SHOT)
+			.add(ModItems.MEDIUM_IRON_CANISTER_SHOT.get())
+			;
+	
+		tag(ModTags.Items.MEDIUM_METAL_GRAPESHOT)
+			.add(ModItems.MEDIUM_IRON_GRAPESHOT.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_METAL_EXPLOSIVE_SHELL)
+			.add(ModItems.MEDIUM_IRON_EXPLOSIVE_SHELL.get())
+			;
+		
 		tag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)
 			.add(ModItems.SMALL_STONE_MUSKET_BALL.get())
 			;
@@ -409,18 +425,24 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 			.addTag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
 			.addTag(ModTags.Items.SMALL_METAL_BIRDSHOT)
 			.addTag(ModTags.Items.SMALL_METAL_BUCKSHOT)
-			.addTag(ModTags.Items.SMALL_METAL_CANNONBALL)
-			.addTag(ModTags.Items.SMALL_METAL_CANISTER_SHOT)
+			//.addTag(ModTags.Items.SMALL_METAL_CANNONBALL)
+			//.addTag(ModTags.Items.SMALL_METAL_CANISTER_SHOT)
+			//.addTag(ModTags.Items.SMALL_METAL_GRAPESHOT)
+			//.addTag(ModTags.Items.SMALL_METAL_EXPLOSIVE_SHELL)
 			.addTag(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
 			.addTag(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
 			.addTag(ModTags.Items.MEDIUM_METAL_BUCKSHOT)
 			.addTag(ModTags.Items.MEDIUM_METAL_CANNONBALL)
 			.addTag(ModTags.Items.MEDIUM_METAL_CANISTER_SHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_GRAPESHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_EXPLOSIVE_SHELL)
 			.addTag(ModTags.Items.LARGE_METAL_MUSKET_BALL)
 			.addTag(ModTags.Items.LARGE_METAL_BIRDSHOT)
 			.addTag(ModTags.Items.LARGE_METAL_BUCKSHOT)
-			.addTag(ModTags.Items.LARGE_METAL_CANNONBALL)
-			.addTag(ModTags.Items.LARGE_METAL_CANISTER_SHOT)
+			//.addTag(ModTags.Items.LARGE_METAL_CANNONBALL)
+			//.addTag(ModTags.Items.LARGE_METAL_CANISTER_SHOT)
+			//.addTag(ModTags.Items.LARGE_METAL_GRAPESHOT)
+			//.addTag(ModTags.Items.LARGE_METAL_EXPLOSIVE_SHELL)
 			;
 		
 		tag(ModTags.Items.ANY_FIREARM_BULLET)

@@ -1,0 +1,16 @@
+{
+  "values": [
+    "#oldguns:small_matchlock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:medium_matchlock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:large_matchlock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:small_wheellock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:medium_wheellock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:large_wheellock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:small_flintlock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:medium_flintlock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:large_flintlock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:small_caplock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:medium_caplock_suitable_metal_musket_ball_cartridge",
+    "#oldguns:large_caplock_suitable_metal_musket_ball_cartridge"
+  ]
+}

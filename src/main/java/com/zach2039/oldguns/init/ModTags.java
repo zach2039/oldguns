@@ -115,6 +115,14 @@ public class ModTags {
 		public static final TagKey<Item> MEDIUM_METAL_CANISTER_SHOT = tag("medium_metal_canister_shot");
 		public static final TagKey<Item> LARGE_METAL_CANISTER_SHOT = tag("large_metal_canister_shot");
 		
+		public static final TagKey<Item> SMALL_METAL_GRAPESHOT = tag("small_metal_grapeshot");
+		public static final TagKey<Item> MEDIUM_METAL_GRAPESHOT = tag("medium_metal_grapeshot");
+		public static final TagKey<Item> LARGE_METAL_GRAPESHOT = tag("large_metal_grapeshot");
+		
+		public static final TagKey<Item> SMALL_METAL_EXPLOSIVE_SHELL = tag("small_metal_explosive_shell");
+		public static final TagKey<Item> MEDIUM_METAL_EXPLOSIVE_SHELL = tag("medium_metal_explosive_shell");
+		public static final TagKey<Item> LARGE_METAL_EXPLOSIVE_SHELL = tag("large_metal_explosive_shell");
+		
 		// Cartridge
 		public static final TagKey<Item> SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_matchlock_suitable_metal_musket_ball_cartridge");
 		public static final TagKey<Item> MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("medium_matchlock_suitable_metal_musket_ball_cartridge");
