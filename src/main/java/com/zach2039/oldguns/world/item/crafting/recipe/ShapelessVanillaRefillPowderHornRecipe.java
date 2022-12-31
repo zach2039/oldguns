@@ -40,6 +40,18 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 	}
 
 	@Override
+	public ItemStack getResultItem() {
+		// Recipe is dynamic, so return empty itemstack
+		return ItemStack.EMPTY;
+	}
+	
+	@Override
+	public boolean isSpecial() {
+		// Recipe is dynamic, so return true
+		return true;
+	}
+	
+	@Override
 	public NonNullList<ItemStack> getRemainingItems(final CraftingContainer inv) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
 
