@@ -1,3 +1,7 @@
+### v1.19.2-3.7.1-39
+
+ - Apply fix for client crash to naval cannon entity as well
+
 ### v1.19.2-3.7.0-37
 
  - Update to mc 1.19.2, forge 43.1.52 
