@@ -10,6 +10,8 @@ import com.zach2039.oldguns.init.ModTags;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.tags.BlockTagsProvider;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraftforge.common.data.ExistingFileHelper;
 
@@ -265,9 +267,26 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		.add(ModItems.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS.get())
 		;
 		
-		// Ammo
+		// Ammo		
+		tag(ModTags.Items.MEDIUM_METAL_CANNONBALL)
+			.add(ModItems.MEDIUM_IRON_CANNONBALL.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_METAL_CANISTER_SHOT)
+			.add(ModItems.MEDIUM_IRON_CANISTER_SHOT.get())
+			;
+	
+		tag(ModTags.Items.MEDIUM_METAL_GRAPESHOT)
+			.add(ModItems.MEDIUM_IRON_GRAPESHOT.get())
+			;
+		
+		tag(ModTags.Items.MEDIUM_METAL_EXPLOSIVE_SHELL)
+			.add(ModItems.MEDIUM_IRON_EXPLOSIVE_SHELL.get())
+			;
+		
 		tag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)
-			.add(ModItems.SMALL_STONE_MUSKET_BALL.get());
+			.add(ModItems.SMALL_STONE_MUSKET_BALL.get())
+			;
 	
 		tag(ModTags.Items.MEDIUM_ROCK_MUSKET_BALL)
 			.add(ModItems.MEDIUM_STONE_MUSKET_BALL.get());
@@ -393,6 +412,70 @@ public class OldGunsItemTagsProvider extends ItemTagsProvider {
 		tag(ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
 			.add(ModItems.LARGE_IRON_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
 			.add(ModItems.LARGE_LEAD_MUSKET_BALL_HIGH_GRADE_PAPER_CARTRIDGE.get())
+			;
+		
+		// General ammunition
+		tag(ModTags.Items.ANY_BULLET)
+			.addTag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)
+			.addTag(ModTags.Items.SMALL_ROCK_BIRDSHOT)			
+			.addTag(ModTags.Items.MEDIUM_ROCK_MUSKET_BALL)
+			.addTag(ModTags.Items.MEDIUM_ROCK_BIRDSHOT)
+			.addTag(ModTags.Items.LARGE_ROCK_MUSKET_BALL)
+			.addTag(ModTags.Items.LARGE_ROCK_BIRDSHOT)
+			.addTag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+			.addTag(ModTags.Items.SMALL_METAL_BIRDSHOT)
+			.addTag(ModTags.Items.SMALL_METAL_BUCKSHOT)
+			//.addTag(ModTags.Items.SMALL_METAL_CANNONBALL)
+			//.addTag(ModTags.Items.SMALL_METAL_CANISTER_SHOT)
+			//.addTag(ModTags.Items.SMALL_METAL_GRAPESHOT)
+			//.addTag(ModTags.Items.SMALL_METAL_EXPLOSIVE_SHELL)
+			.addTag(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
+			.addTag(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_BUCKSHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_CANNONBALL)
+			.addTag(ModTags.Items.MEDIUM_METAL_CANISTER_SHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_GRAPESHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_EXPLOSIVE_SHELL)
+			.addTag(ModTags.Items.LARGE_METAL_MUSKET_BALL)
+			.addTag(ModTags.Items.LARGE_METAL_BIRDSHOT)
+			.addTag(ModTags.Items.LARGE_METAL_BUCKSHOT)
+			//.addTag(ModTags.Items.LARGE_METAL_CANNONBALL)
+			//.addTag(ModTags.Items.LARGE_METAL_CANISTER_SHOT)
+			//.addTag(ModTags.Items.LARGE_METAL_GRAPESHOT)
+			//.addTag(ModTags.Items.LARGE_METAL_EXPLOSIVE_SHELL)
+			;
+		
+		tag(ModTags.Items.ANY_FIREARM_BULLET)
+			.addTag(ModTags.Items.SMALL_ROCK_MUSKET_BALL)
+			.addTag(ModTags.Items.SMALL_ROCK_BIRDSHOT)			
+			.addTag(ModTags.Items.MEDIUM_ROCK_MUSKET_BALL)
+			.addTag(ModTags.Items.MEDIUM_ROCK_BIRDSHOT)
+			.addTag(ModTags.Items.LARGE_ROCK_MUSKET_BALL)
+			.addTag(ModTags.Items.LARGE_ROCK_BIRDSHOT)
+			.addTag(ModTags.Items.SMALL_METAL_MUSKET_BALL)
+			.addTag(ModTags.Items.SMALL_METAL_BIRDSHOT)
+			.addTag(ModTags.Items.SMALL_METAL_BUCKSHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_MUSKET_BALL)
+			.addTag(ModTags.Items.MEDIUM_METAL_BIRDSHOT)
+			.addTag(ModTags.Items.MEDIUM_METAL_BUCKSHOT)
+			.addTag(ModTags.Items.LARGE_METAL_MUSKET_BALL)
+			.addTag(ModTags.Items.LARGE_METAL_BIRDSHOT)
+			.addTag(ModTags.Items.LARGE_METAL_BUCKSHOT)
+			;
+		
+		tag(ModTags.Items.ANY_FIREARM_CARTRIDGE)
+			.addTag(ModTags.Items.SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.MEDIUM_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.LARGE_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.SMALL_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.MEDIUM_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.LARGE_WHEELLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.SMALL_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.MEDIUM_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.LARGE_FLINTLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE) 
+			.addTag(ModTags.Items.SMALL_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.MEDIUM_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
+			.addTag(ModTags.Items.LARGE_CAPLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE)
 			;
 		
 		// Reloading

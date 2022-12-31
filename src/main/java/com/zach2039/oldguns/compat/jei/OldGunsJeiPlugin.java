@@ -63,12 +63,13 @@ public class OldGunsJeiPlugin implements IModPlugin {
 					});
 		
 		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.POWDER_HORN.get(), 
-				(stack, ctx) -> ModRegistryUtil.getKey(Items.GUNPOWDER).getPath());
-		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.POWDER_HORN.get(), 
-				(stack, ctx) -> ModRegistryUtil.getKey(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()).getPath());
-		registration.registerSubtypeInterpreter(VanillaTypes.ITEM_STACK, ModItems.POWDER_HORN.get(), 
-				(stack, ctx) -> ModRegistryUtil.getKey(ModItems.HIGH_GRADE_BLACK_POWDER.get()).getPath());
-		
+				(stack, ctx) -> {
+					if (PowderHornNBTHelper.peekPowderStack(stack) != ItemStack.EMPTY) { 
+						return ModRegistryUtil.getKey(PowderHornNBTHelper.peekPowderStack(stack).getItem()).getPath();
+					} else {
+						return IIngredientSubtypeInterpreter.NONE;
+					}
+				});		
 	}
 
 	@Override

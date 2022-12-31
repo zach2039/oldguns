@@ -1,3 +1,8 @@
+### v1.19-3.6.3-38
+
+ - Port fix for [#29](https://github.com/zach2039/oldguns/issues/29)
+ - Port fix for [#35](https://github.com/zach2039/oldguns/issues/35)
+
 ### v1.19-3.6.2-34
 
  - Fix [#28](https://github.com/zach2039/oldguns/issues/28)

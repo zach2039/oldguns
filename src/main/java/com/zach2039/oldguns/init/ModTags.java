@@ -83,6 +83,10 @@ public class ModTags {
 		public static final TagKey<Item> HUGE_CAPLOCK_FIREARM = tag("huge_caplock_firearm");
 		
 		// Ammo
+		public static final TagKey<Item> ANY_BULLET = tag("any_bullet");
+		public static final TagKey<Item> ANY_FIREARM_BULLET = tag("any_firearm_bullet");
+		public static final TagKey<Item> ANY_FIREARM_CARTRIDGE = tag("any_firearm_cartridge");
+		
 		public static final TagKey<Item> SMALL_ROCK_MUSKET_BALL = tag("small_rock_musket_ball");
 		public static final TagKey<Item> MEDIUM_ROCK_MUSKET_BALL = tag("medium_rock_musket_ball");
 		public static final TagKey<Item> LARGE_ROCK_MUSKET_BALL = tag("large_rock_musket_ball");
@@ -110,6 +114,14 @@ public class ModTags {
 		public static final TagKey<Item> SMALL_METAL_CANISTER_SHOT = tag("small_metal_canister_shot");
 		public static final TagKey<Item> MEDIUM_METAL_CANISTER_SHOT = tag("medium_metal_canister_shot");
 		public static final TagKey<Item> LARGE_METAL_CANISTER_SHOT = tag("large_metal_canister_shot");
+		
+		public static final TagKey<Item> SMALL_METAL_GRAPESHOT = tag("small_metal_grapeshot");
+		public static final TagKey<Item> MEDIUM_METAL_GRAPESHOT = tag("medium_metal_grapeshot");
+		public static final TagKey<Item> LARGE_METAL_GRAPESHOT = tag("large_metal_grapeshot");
+		
+		public static final TagKey<Item> SMALL_METAL_EXPLOSIVE_SHELL = tag("small_metal_explosive_shell");
+		public static final TagKey<Item> MEDIUM_METAL_EXPLOSIVE_SHELL = tag("medium_metal_explosive_shell");
+		public static final TagKey<Item> LARGE_METAL_EXPLOSIVE_SHELL = tag("large_metal_explosive_shell");
 		
 		// Cartridge
 		public static final TagKey<Item> SMALL_MATCHLOCK_SUITABLE_METAL_MUSKET_BALL_CARTRIDGE = tag("small_matchlock_suitable_metal_musket_ball_cartridge");

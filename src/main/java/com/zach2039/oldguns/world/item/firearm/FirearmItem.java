@@ -32,6 +32,7 @@ import com.zach2039.oldguns.capability.firearmempty.FirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModAttributes;
+import com.zach2039.oldguns.init.ModTags;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
@@ -73,6 +74,10 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FirearmItem extends BowItem implements Firearm {
 
+	public static final Predicate<ItemStack> BULLET_OR_CARTRIDGE_ONLY = (stack) -> {
+	      return stack.is(ModTags.Items.ANY_BULLET) || stack.is(ModTags.Items.ANY_FIREARM_CARTRIDGE);
+	   };
+	   
 	private final Enchantment [] VALID_ENCHANTMENTS = {
 			Enchantments.PUNCH_ARROWS, Enchantments.PIERCING, 
 			Enchantments.UNBREAKING, Enchantments.MENDING
@@ -605,11 +610,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	@Override
 	public void doFiringEffect(Level worldIn, Entity shooter, ItemStack stackIn)
 	{
-		TargetPoint point = new PacketDistributor.TargetPoint(
-				shooter.xo, shooter.yo, shooter.zo, 1600d, shooter.level.dimension());
-		
-		
-		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
+		OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 				new FirearmEffectMessage((LivingEntity)shooter, getFirearmEffectForSize(), shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 						shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 				);
@@ -617,7 +618,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return null;
+		return BULLET_OR_CARTRIDGE_ONLY;
 	};
 	
 	@Override
@@ -733,10 +734,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			FirearmNBTHelper.emptyNBTTagAmmo(stackIn);
 			stackIn.setDamageValue(stackIn.getMaxDamage());
 
-			PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
-					shooter.xo, shooter.yo, shooter.zo, 100d, shooter.level.dimension());
-
-			OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
+			OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.BREAK, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 					);
@@ -746,10 +744,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			/* Misfire. */
 			failure = true;
 
-			PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
-					shooter.xo, shooter.yo, shooter.zo, 100d, shooter.level.dimension());
-
-			OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
+			OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 							shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 					);
@@ -778,10 +773,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			{
 				failure = true;
 
-				PacketDistributor.TargetPoint point = new PacketDistributor.TargetPoint(
-						shooter.xo, shooter.yo, shooter.zo, 100d, shooter.level.dimension());
-
-				OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
+				OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 						new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE_WET, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 								shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 						);

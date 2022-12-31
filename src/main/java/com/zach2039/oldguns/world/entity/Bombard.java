@@ -259,11 +259,7 @@ public class Bombard extends MoveableArtillery implements CannonArtillery {
 	@Override
 	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ)
 	{
-		TargetPoint point = new PacketDistributor.TargetPoint(
-				posX, posY, posZ, 1600d, level.dimension());
-		
-		
-		OldGuns.NETWORK.send(PacketDistributor.NEAR.with(() -> point), 
+		OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), 
 				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.CANNON_SHOT, posX, posY + getShotHeight(), posZ,
 						getShotPitch(), getShotYaw(), 0)
 				);
