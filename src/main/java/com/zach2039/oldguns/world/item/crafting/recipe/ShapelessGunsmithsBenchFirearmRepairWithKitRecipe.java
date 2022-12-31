@@ -89,11 +89,18 @@ public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends Shapeless
 	
 	private ItemStack damageItem(final ItemStack stack) {
 		final Player craftingPlayer = ForgeHooks.getCraftingPlayer();
-		
-		Level level = craftingPlayer.getCommandSenderWorld();
-		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
-			ForgeEventFactory.onPlayerDestroyItem(craftingPlayer, stack, null);
-			return ItemStack.EMPTY;
+
+		/*
+		 *  At certain times, craftingPlayer might be null, like during PrimalMagicks 
+		 *  generateItemAffinityValuesFromIngredients method call. Prevent bad here
+		 *  with a null check.
+		 */
+		if (craftingPlayer != null) {
+			Level level = craftingPlayer.getCommandSenderWorld();
+			if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
+				ForgeEventFactory.onPlayerDestroyItem(craftingPlayer, stack, null);
+				return ItemStack.EMPTY;
+			}
 		}
 		
 		return stack;
