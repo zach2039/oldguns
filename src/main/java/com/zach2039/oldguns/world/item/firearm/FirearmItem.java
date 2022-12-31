@@ -609,7 +609,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	@Override
 	public void doFiringEffect(Level worldIn, Entity shooter, ItemStack stackIn)
 	{
-		OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY.with(() -> shooter), 
+		OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 				new FirearmEffectMessage((LivingEntity)shooter, getFirearmEffectForSize(), shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 						shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 				);
@@ -733,7 +733,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			FirearmNBTHelper.emptyNBTTagAmmo(stackIn);
 			stackIn.setDamageValue(stackIn.getMaxDamage());
 
-			OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY.with(() -> shooter), 
+			OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.BREAK, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 							shooter.xRotO, shooter.yRotO, ((Player)shooter).getUsedItemHand().ordinal())
 					);
@@ -743,7 +743,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			/* Misfire. */
 			failure = true;
 
-			OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY.with(() -> shooter), 
+			OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 					new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 							shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 					);
@@ -772,7 +772,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			{
 				failure = true;
 
-				OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY.with(() -> shooter), 
+				OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> shooter), 
 						new FirearmEffectMessage((LivingEntity)shooter, FirearmEffect.MISFIRE_WET, shooter.xo, shooter.yo + shooter.getEyeHeight(), shooter.zo,
 								shooter.xRotO, shooter.yRotO, ((LivingEntity)shooter).getUsedItemHand().ordinal())
 						);
