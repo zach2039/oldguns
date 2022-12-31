@@ -34,7 +34,7 @@ public class MediumNavalCannonBlockEntity extends StationaryCannonBlockEntity {
 	@Override
 	public void doFiringEffect(Level level, Player player, double posX, double posY, double posZ) {
 		
-		OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY.with(() -> player), 
+		OldGuns.NETWORK.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), 
 				new ArtilleryEffectMessage((LivingEntity)player, ArtilleryEffect.CANNON_SHOT, 
 						posX, posY + getShotHeight(), posZ,
 						getShotPitch(), getShotYaw(), 0)
