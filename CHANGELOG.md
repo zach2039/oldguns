@@ -1,6 +1,8 @@
 ### v1.19.2-3.7.0-37
 
  - Update to mc 1.19.2, forge 43.1.52 
+ - Update patchouli dependency to 1.19.2-76
+ - Update jei dependency to 1.19.2-11.2.0.254 
  - Fix [#29](https://github.com/zach2039/oldguns/issues/29)
  - Fix [#35](https://github.com/zach2039/oldguns/issues/35)
 
