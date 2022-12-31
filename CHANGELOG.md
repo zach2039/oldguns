@@ -1,3 +1,7 @@
+### v1.18.2-3.3.3-40
+
+ - Fix and close [#32](https://github.com/zach2039/oldguns/issues/32) to fix compat with primal magick
+
 ### v1.18.2-3.3.2-36
 
  - Incorporate changes from [#26](https://github.com/zach2039/oldguns/issues/26) to fix compat with infernal expansion
