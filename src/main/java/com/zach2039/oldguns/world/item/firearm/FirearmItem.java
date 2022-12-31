@@ -32,6 +32,7 @@ import com.zach2039.oldguns.capability.firearmempty.FirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModAttributes;
+import com.zach2039.oldguns.init.ModTags;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.equipment.HorsemansPotHelmItem;
@@ -43,6 +44,7 @@ import net.minecraft.network.protocol.game.ClientboundSetEquipmentPacket;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -73,6 +75,10 @@ import net.minecraftforge.network.PacketDistributor.TargetPoint;
 
 public class FirearmItem extends BowItem implements Firearm {
 
+	public static final Predicate<ItemStack> BULLET_OR_CARTRIDGE_ONLY = (stack) -> {
+	      return stack.is(ModTags.Items.ANY_FIREARM_BULLET) || stack.is(ModTags.Items.ANY_FIREARM_CARTRIDGE);
+	   };
+	   
 	private final Enchantment [] VALID_ENCHANTMENTS = {
 			Enchantments.PUNCH_ARROWS, Enchantments.PIERCING, 
 			Enchantments.UNBREAKING, Enchantments.MENDING
@@ -617,7 +623,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	
 	@Override
 	public Predicate<ItemStack> getAllSupportedProjectiles() {
-		return null;
+		return BULLET_OR_CARTRIDGE_ONLY;
 	};
 	
 	@Override

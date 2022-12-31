@@ -83,6 +83,10 @@ public class ModTags {
 		public static final TagKey<Item> HUGE_CAPLOCK_FIREARM = tag("huge_caplock_firearm");
 		
 		// Ammo
+		public static final TagKey<Item> ANY_BULLET = tag("any_bullet");
+		public static final TagKey<Item> ANY_FIREARM_BULLET = tag("any_firearm_bullet");
+		public static final TagKey<Item> ANY_FIREARM_CARTRIDGE = tag("any_firearm_cartridge");
+		
 		public static final TagKey<Item> SMALL_ROCK_MUSKET_BALL = tag("small_rock_musket_ball");
 		public static final TagKey<Item> MEDIUM_ROCK_MUSKET_BALL = tag("medium_rock_musket_ball");
 		public static final TagKey<Item> LARGE_ROCK_MUSKET_BALL = tag("large_rock_musket_ball");
