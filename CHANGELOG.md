@@ -1,3 +1,9 @@
+### v1.19.2-3.7.0-36
+
+ - Update to mc 1.19.2, forge 43.1.52 
+ - Fix [#29](https://github.com/zach2039/oldguns/issues/29)
+ - Fix [#35](https://github.com/zach2039/oldguns/issues/35)
+
 ### v1.19-3.6.2-34
 
  - Fix [#28](https://github.com/zach2039/oldguns/issues/28)
