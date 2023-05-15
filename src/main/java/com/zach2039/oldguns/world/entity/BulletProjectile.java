@@ -11,7 +11,6 @@ import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.init.ModEntities;
-import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModSoundEvents;
 import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource;
 import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource.DamageType;
@@ -29,6 +28,7 @@ import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -47,7 +47,6 @@ import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.entity.projectile.AbstractArrow.Pickup;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ProjectileUtil;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
@@ -157,7 +156,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return NetworkHooks.getEntitySpawningPacket(this);
 	}
 
@@ -397,9 +396,6 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	/**
 	 * Returns true if projectile's current location is within the specified range.
-	 * @param x
-	 * @param y
-	 * @param z
 	 * @return
 	 */
 	protected boolean isInsideEffectiveRange()
