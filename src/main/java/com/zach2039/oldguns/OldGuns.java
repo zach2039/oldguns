@@ -89,17 +89,7 @@ public class OldGuns
 	public static void enqueue(final InterModEnqueueEvent event) {
 
 	}
-	
-	public static final CreativeModeTab CREATIVE_MODE_TAB = new CreativeModeTab(MODID)
-	{
-		@Override
-		@Nonnull
-		public ItemStack makeIcon()
-		{
-			return new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
-		}
-	};
-	
+
 	public static void printDebug(String message) {
 		if (OldGunsConfig.COMMON.printDebugMessages.get()) {
 			OldGuns.LOGGER.info(message);

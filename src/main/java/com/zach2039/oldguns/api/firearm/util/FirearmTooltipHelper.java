@@ -94,7 +94,7 @@ public class FirearmTooltipHelper {
 			List<ItemStack> loadedAmmo = FirearmNBTHelper.getNBTTagMagazineStack(firearmStack);
 			for (int i = 0; i < ammoCapacity; i++) {
 				Component loadedAmmoMsg = (i < loadedAmmo.size()) ? ((MutableComponent)loadedAmmo.get(i).getHoverName()).withStyle(ChatFormatting.DARK_GRAY) : Component.literal("");
-				tooltip.add(Component.literal("⁍ ").withStyle(ChatFormatting.GRAY)
+				tooltip.add(Component.literal("\u204D ").withStyle(ChatFormatting.GRAY)
 						.append(loadedAmmoMsg)
 						);
 			}

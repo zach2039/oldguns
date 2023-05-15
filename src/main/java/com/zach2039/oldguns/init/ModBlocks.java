@@ -27,6 +27,8 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Collection;
+
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
  * 
@@ -152,12 +154,12 @@ public class ModBlocks {
 	}
 
 	/**
-	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#CREATIVE_MODE_TAB}.
+	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link OldGuns#CREATIVE_MODE_TAB}.
 	 *
 	 * @return The item properties
 	 */
 	private static Item.Properties defaultItemProperties() {
-		return new Item.Properties().tab(OldGuns.CREATIVE_MODE_TAB);
+		return new Item.Properties();
 	}
 
 	/**
@@ -168,5 +170,9 @@ public class ModBlocks {
 	@FunctionalInterface
 	private interface IBlockItemFactory<BLOCK extends Block> {
 		Item create(BLOCK block);
+	}
+
+	static Collection<RegistryObject<Item>> orderedItems() {
+		return ITEMS.getEntries();
 	}
 }

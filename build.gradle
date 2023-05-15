@@ -16,11 +16,11 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
 
-		if (System.getenv("CI") == "true") {
+		//if (System.getenv("CI") == "true") {
 			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-		} else {
-			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		}	
+		//} else {
+		//	classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		//}	
 
 		classpath "org.parchmentmc:librarian:${librarian_version}"
     }
@@ -31,9 +31,9 @@ apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
-if (System.getenv("CI") != "true") {
-	apply plugin: 'com.diffplug.eclipse.apt'
-}
+//if (System.getenv("CI") != "true") {
+//	apply plugin: 'com.diffplug.eclipse.apt'
+//}
 
 group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
@@ -43,8 +43,8 @@ java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
 minecraft {
-    //mappings channel: 'official', version: '1.19'
-    mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
+    mappings channel: 'official', version: '1.19.4'
+    //mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
 
     runs {
         client {
@@ -176,13 +176,13 @@ dependencies {
 		
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
+    //compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
 	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
- 	runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
+ 	//runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
 	//runtimeOnly	fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 	//runtimeOnly	fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
 	//runtimeOnly	fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")

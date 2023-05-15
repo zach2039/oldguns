@@ -19,6 +19,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
+
+import java.util.Collection;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -77,5 +80,9 @@ public class ModFluids {
 	
 	private static StandardFluidGroup.Builder standardGroup(final String name) {
 		return new StandardFluidGroup.Builder(name, FLUID_TYPES, FLUIDS, BLOCKS, ITEMS);
+	}
+
+	static Collection<RegistryObject<Item>> orderedItems() {
+		return ITEMS.getEntries();
 	}
 }

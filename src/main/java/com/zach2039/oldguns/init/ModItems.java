@@ -1,5 +1,6 @@
 package com.zach2039.oldguns.init;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import com.zach2039.oldguns.OldGuns;
@@ -390,6 +391,10 @@ public class ModItems {
 	 * @return The item properties
 	 */
 	private static Properties defaultItemProperties() {
-		return new Properties().tab(OldGuns.CREATIVE_MODE_TAB);
+		return new Properties();
+	}
+
+	static Collection<RegistryObject<Item>> orderedItems() {
+		return ITEMS.getEntries();
 	}
 }

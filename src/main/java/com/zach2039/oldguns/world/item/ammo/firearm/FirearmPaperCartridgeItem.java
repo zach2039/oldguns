@@ -40,7 +40,7 @@ public class FirearmPaperCartridgeItem extends FirearmAmmoItem {
 		tooltip.add(Component.literal("Loaded with:").withStyle(ChatFormatting.GRAY));
 		
 		Component projectileMsg = Component.translatable("item.oldguns." + this.ammoEntry.name().toLowerCase()).withStyle(ChatFormatting.DARK_GRAY);
-		tooltip.add(Component.translatable("⁍ ").withStyle(ChatFormatting.GRAY).append(projectileMsg));
+		tooltip.add(Component.translatable("\u204D ").withStyle(ChatFormatting.GRAY).append(projectileMsg));
 		
 		Component powderMsg = Component.translatable("item.oldguns." + this.powderType.name().toLowerCase() + "_black_powder").withStyle(ChatFormatting.DARK_GRAY);
 		tooltip.add(Component.literal("☼ ").withStyle(ChatFormatting.GRAY).append(powderMsg));
