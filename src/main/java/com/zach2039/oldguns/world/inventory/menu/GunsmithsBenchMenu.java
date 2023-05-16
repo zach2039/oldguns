@@ -11,6 +11,7 @@ import com.zach2039.oldguns.world.inventory.OldGunsResultContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsResultSlot;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
 import net.minecraft.server.level.ServerPlayer;
@@ -74,7 +75,7 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 			if (optional.isPresent()) {
 				GunsmithsBenchRecipe craftingrecipe = optional.get();
 				if (containerResult.setRecipeUsed(level, serverplayer, craftingrecipe)) {
-					itemstack = craftingrecipe.assemble(containerCrafting);
+					itemstack = craftingrecipe.assemble(containerCrafting, RegistryAccess.EMPTY);
 				}
 			}
 

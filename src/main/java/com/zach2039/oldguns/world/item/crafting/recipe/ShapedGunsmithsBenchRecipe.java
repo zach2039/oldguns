@@ -25,6 +25,8 @@ import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.Registry;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -74,7 +76,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 
 	@Override
     @Nonnull
-    public ItemStack getResultItem()
+    public ItemStack getResultItem(RegistryAccess registryAccess)
 	{
 		ItemStack outputStack = this.result;
 		
@@ -133,7 +135,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 	}
 	
 	@Override
-	public ItemStack assemble(GunsmithsBenchCraftingContainer craftinv) {
+	public ItemStack assemble(final GunsmithsBenchCraftingContainer craftinv, RegistryAccess registryAccess) {
 		ItemStack resultStack = this.result.copy();
 		
 		if (requiresDesignNotes(resultStack.getItem())) {
@@ -304,7 +306,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 
 	public static Item itemFromJson(JsonObject p_151279_) {
 		String s = GsonHelper.getAsString(p_151279_, "item");
-		Item item = Registry.ITEM.getOptional(new ResourceLocation(s)).orElseThrow(() -> {
+		Item item = BuiltInRegistries.ITEM.getOptional(new ResourceLocation(s)).orElseThrow(() -> {
 			return new JsonSyntaxException("Unknown item '" + s + "'");
 		});
 		if (item == Items.AIR) {
@@ -359,7 +361,7 @@ public class ShapedGunsmithsBenchRecipe implements Recipe<GunsmithsBenchCrafting
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 

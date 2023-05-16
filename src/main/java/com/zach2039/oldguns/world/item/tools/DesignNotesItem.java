@@ -16,6 +16,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
 
 public class DesignNotesItem extends Item implements IDesignNotes {
 	
@@ -23,21 +24,16 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 		super(new Properties()
 				.stacksTo(1)
 				.rarity(Rarity.RARE)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}
-	
-	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-		if (this.allowedIn(tab)) {
 
-			ItemStack stackBase = new ItemStack(this);
-			OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
-				stackList.add(IDesignNotes.setDesignTagOnItem(stackBase, e));
-			});
-			
-		}
+	public void fillCreativeModeTab(final MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries) {
+		ItemStack stackBase = new ItemStack(this);
+		OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
+			entries.put(IDesignNotes.setDesignTagOnItem(stackBase, e), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		});
 	}
-	
+
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, level, tooltip, flagIn);

@@ -93,7 +93,7 @@ public class ShapelessGunsmithsBenchHacksawRecipe extends ShapelessGunsmithsBenc
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 	

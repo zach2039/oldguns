@@ -93,7 +93,7 @@ public class ShapelessGunsmithsBenchMortarAndPestleRecipe extends ShapelessGunsm
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 	

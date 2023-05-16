@@ -130,7 +130,7 @@ public class LiquidNiterCauldronBlock extends LayeredCauldronBlock {
 	public void entityInside(BlockState state, Level level, BlockPos blockpos, Entity entity) {
 		if (!level.isClientSide && this.isEntityInsideContent(state, blockpos, entity)) {
 			if (entity.isOnFire()) {
-				level.explode(null, blockpos.getX(), blockpos.getY() + 1, blockpos.getZ(), 3f, Explosion.BlockInteraction.BREAK);
+				level.explode(null, blockpos.getX(), blockpos.getY() + 1, blockpos.getZ(), 3f, Level.ExplosionInteraction.BLOCK);
 			} else {
 				if (entity instanceof LivingEntity) {
 					((LivingEntity)entity).addEffect(new MobEffectInstance(MobEffects.POISON, 900, 0));

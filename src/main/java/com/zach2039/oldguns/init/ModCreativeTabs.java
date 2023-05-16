@@ -2,11 +2,14 @@ package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
+import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
+import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -61,7 +64,17 @@ public class ModCreativeTabs {
         // Painful
         entries.forEach((itemStackTabVisibilityEntry) -> {
             if (itemStackTabVisibilityEntry.getKey().getItem() instanceof FirearmItem item) {
-                item.fillCreativeModeTab(itemStackTabVisibilityEntry);
+                item.fillCreativeModeTab((MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility>) itemStackTabVisibilityEntry);
+            }
+        });
+        entries.forEach((itemStackTabVisibilityEntry) -> {
+            if (itemStackTabVisibilityEntry.getKey().getItem() instanceof PowderHornItem item) {
+                item.fillCreativeModeTab((MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility>) itemStackTabVisibilityEntry);
+            }
+        });
+        entries.forEach((itemStackTabVisibilityEntry) -> {
+            if (itemStackTabVisibilityEntry.getKey().getItem() instanceof DesignNotesItem item) {
+                item.fillCreativeModeTab((MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility>) itemStackTabVisibilityEntry);
             }
         });
     }

@@ -14,6 +14,7 @@ import com.zach2039.oldguns.world.item.material.RepairPartItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -31,7 +32,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe extends Shapele
 	}
 
 	@Override
-	public ItemStack assemble(final GunsmithsBenchCraftingContainer inv) {
+	public ItemStack assemble(final GunsmithsBenchCraftingContainer inv, RegistryAccess registryAccess) {
 		ItemStack firearmStack = ItemStack.EMPTY;
 		List<ItemStack> repairPartStacks = new ArrayList<ItemStack>();
 		
@@ -135,7 +136,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithPartsRecipe extends Shapele
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 	

@@ -10,7 +10,7 @@ public class LargePowderCharge extends Item implements ArtilleryCharge {
 	public LargePowderCharge() {
 		super(new Properties()
 				.stacksTo(8)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}
 
 	@Override

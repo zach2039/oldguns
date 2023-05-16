@@ -9,16 +9,18 @@ import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModRecipeTypes {
-	public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(Registry.RECIPE_TYPE_REGISTRY, OldGuns.MODID);
+	public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, OldGuns.MODID);
 	
 	public static final TypeWithClass<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench", GunsmithsBenchRecipe.class);
 	

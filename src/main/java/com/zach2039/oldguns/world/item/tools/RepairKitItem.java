@@ -10,7 +10,6 @@ public class RepairKitItem extends Item {
 	public RepairKitItem() {
 		super(new Properties()
 				.defaultDurability(4)
-				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}
 	

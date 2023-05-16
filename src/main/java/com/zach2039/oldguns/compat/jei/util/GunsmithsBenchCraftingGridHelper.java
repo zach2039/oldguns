@@ -17,22 +17,22 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
  *
  */
 public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
-	@Override
-	public <T> void setInputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<List<T>> inputs, int width, int height) {
-		if (width <= 0 || height <= 0) {
-			builder.setShapeless();
-		}
-
-		List<IRecipeSlotBuilder> inputSlots = new ArrayList<>();
-		for (int y = 0; y < 3; ++y) {
-			for (int x = 0; x < 3; ++x) {
-				IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, x * 18 + 25, y * 18 + 4);
-				inputSlots.add(slot);
-			}
-		}
-
-		setInputs(inputSlots, ingredientType, inputs, width, height);
-	}
+//	@Override
+//	public <T> void setInputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<List<T>> inputs, int width, int height) {
+//		if (width <= 0 || height <= 0) {
+//			builder.setShapeless();
+//		}
+//
+//		List<IRecipeSlotBuilder> inputSlots = new ArrayList<>();
+//		for (int y = 0; y < 3; ++y) {
+//			for (int x = 0; x < 3; ++x) {
+//				IRecipeSlotBuilder slot = builder.addSlot(RecipeIngredientRole.INPUT, x * 18 + 25, y * 18 + 4);
+//				inputSlots.add(slot);
+//			}
+//		}
+//
+//		setInputs(inputSlots, ingredientType, inputs, width, height);
+//	}
 
 	@Override
 	public <T> void setInputs(List<IRecipeSlotBuilder> slotBuilders, IIngredientType<T> ingredientType, List<List<T>> inputs, int width, int height) {
@@ -54,13 +54,13 @@ public class GunsmithsBenchCraftingGridHelper implements ICraftingGridHelper {
 		}
 	}
 
-	@Override
-	public <T> void setOutputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<T> outputs) {
-		IRecipeSlotBuilder outputSlot = builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22);
-		if (outputs != null) {
-			outputSlot.addIngredients(ingredientType, outputs);
-		}
-	}
+//	@Override
+//	public <T> void setOutputs(IRecipeLayoutBuilder builder, IIngredientType<T> ingredientType, List<T> outputs) {
+//		IRecipeSlotBuilder outputSlot = builder.addSlot(RecipeIngredientRole.OUTPUT, 119, 22);
+//		if (outputs != null) {
+//			outputSlot.addIngredients(ingredientType, outputs);
+//		}
+//	}
 
 	private static int getShapelessSize(int total) {
 		if (total > 4) {

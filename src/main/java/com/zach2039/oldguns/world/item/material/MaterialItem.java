@@ -9,13 +9,13 @@ public class MaterialItem extends Item {
 	public MaterialItem(int maxStackSize) {
 		super(new Properties()
 				.stacksTo(maxStackSize)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}
 	
 	public MaterialItem() {
 		super(new Properties()
 				.stacksTo(64)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}
 
 }

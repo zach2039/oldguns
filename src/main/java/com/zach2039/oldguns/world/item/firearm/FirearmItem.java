@@ -724,7 +724,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			double expZ = shooter.zo + handZ;
 
 			/* Explode for real. */
-			worldIn.explode((Entity)null, expX, expY, expZ, strength, false, Explosion.BlockInteraction.NONE);			
+			worldIn.explode((Entity)null, expX, expY, expZ, strength, false, Level.ExplosionInteraction.NONE);
 
 			/* Empty firearm and set damage to max. */
 			FirearmNBTHelper.emptyNBTTagAmmo(stackIn);

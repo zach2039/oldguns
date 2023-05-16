@@ -39,7 +39,7 @@ public class BlastingPowderStickBlockEntity extends TimedExplosiveBlockEntity {
 		if (!level.isClientSide()) {
 			level.removeBlock(pos, false);
 			
-			Explosion exp = level.explode(null, posX, posY, posZ, 2.0F, Explosion.BlockInteraction.NONE);
+			Explosion exp = level.explode(null, posX, posY, posZ, 2.0F, Level.ExplosionInteraction.NONE);
 			
 			for (int x = -1; x < 2; x++) {
 				for (int y = -1; y < 2; y++) {

@@ -15,6 +15,7 @@ import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -32,15 +34,17 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 
 public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 
+	private final ItemStack result;
 	private final boolean isSimple;
 	
 	public ShapelessVanillaRefillPowderHornRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-		super(id, group, result, ingredients);
+		super(id, group, CraftingBookCategory.MISC, result, ingredients);
+		this.result = result;
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
 	}
 
 	@Override
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(RegistryAccess registryAccess) {
 		// Recipe is dynamic, so return empty itemstack
 		return ItemStack.EMPTY;
 	}
@@ -61,7 +65,7 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 	}
 	
 	@Override
-	public ItemStack assemble(final CraftingContainer inv) {
+	public ItemStack assemble(final CraftingContainer inv, RegistryAccess registryAccess) {
 		ItemStack powderHornStack = ItemStack.EMPTY;
 		List<ItemStack> powderStacks = new ArrayList<ItemStack>();
 		
@@ -181,7 +185,7 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 	

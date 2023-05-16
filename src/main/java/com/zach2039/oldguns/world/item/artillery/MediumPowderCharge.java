@@ -10,7 +10,7 @@ public class MediumPowderCharge extends Item implements ArtilleryCharge {
 	public MediumPowderCharge() {
 		super(new Properties()
 				.stacksTo(12)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}
 
 	@Override

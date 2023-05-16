@@ -4,7 +4,11 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
+import net.minecraft.world.flag.FeatureFlag;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.inventory.MenuType;
+import net.minecraftforge.common.extensions.IForgeMenuType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +28,7 @@ public class ModMenuTypes {
 	private static boolean isInitialized;
 
 	public static final RegistryObject<MenuType<GunsmithsBenchMenu>> GUNSMITHS_BENCH = MENU_TYPES.register("gunsmiths_bench",
-			() -> new MenuType<>(new GunsmithsBenchMenu.Factory())
+			() -> IForgeMenuType.create(new GunsmithsBenchMenu.Factory())
 	);
 
 	/**

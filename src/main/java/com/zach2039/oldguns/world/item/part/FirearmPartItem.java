@@ -15,7 +15,7 @@ public class FirearmPartItem extends Item {
 	public FirearmPartItem(FirearmPart part) {
 		this((FirearmPartProperties) new FirearmPartProperties()				
 				.partType(part)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}	
 	
 	public FirearmPart getPartType() {

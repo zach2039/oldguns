@@ -23,6 +23,7 @@ import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -33,6 +34,7 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -42,15 +44,17 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 
 public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends ShapelessRecipe
 {
+	private final ItemStack result;
 	private final boolean isSimple;
 	
-	public ShapelessVanillaMuzzleloaderPowderHornReloadRecipe(final ResourceLocation id, final String group, final ItemStack recipeOutput, final NonNullList<Ingredient> ingredients) {
-		super(id, group, recipeOutput, ingredients);
+	public ShapelessVanillaMuzzleloaderPowderHornReloadRecipe(final ResourceLocation id, final String group, final ItemStack result, final NonNullList<Ingredient> ingredients) {
+		super(id, group, CraftingBookCategory.MISC, result, ingredients);
+		this.result = result;
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple); 
 	}
 	
 	private int getPowderAmount() {
-		return (((Firearm)this.getResultItem().getItem()).getFirearmSize() != FirearmSize.SMALL) ? 2 : 1;
+		return (((Firearm)this.result.getItem()).getFirearmSize() != FirearmSize.SMALL) ? 2 : 1;
 	}
 		
 	@Override
@@ -92,7 +96,7 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 		            else inputs.add(itemstack);
 				} else if (itemstack.getItem() instanceof PowderHornItem) {		
 					int count = PowderHornNBTHelper.peekPowderCount(itemstack);
-					boolean hasTag = PowderHornNBTHelper.hasPowderOfTag(itemstack, PowderHornItem.getPowderTag((((Firearm)this.getResultItem().getItem()))));
+					boolean hasTag = PowderHornNBTHelper.hasPowderOfTag(itemstack, PowderHornItem.getPowderTag((((Firearm)this.result.getItem()))));
 					int powderAmount = this.getPowderAmount();
 					if (count >= powderAmount && hasTag) {
 						++i;
@@ -119,7 +123,7 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 	}
 	
 	@Override
-	public ItemStack assemble(final CraftingContainer inv)
+	public ItemStack assemble(final CraftingContainer inv, RegistryAccess registryAccess)
 	{
 		/* Required itemstacks for proper nbt results. */
 		ItemStack firearmStack = ItemStack.EMPTY;
@@ -185,9 +189,9 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 
 	@Override
 	@Nonnull
-	public ItemStack getResultItem()
+	public ItemStack getResultItem(RegistryAccess registryAccess)
 	{
-		ItemStack outputStack = super.getResultItem().copy();
+		ItemStack outputStack = result.copy();
 		
 		if (outputStack.getItem() instanceof FirearmItem) {
 			FirearmItem firearmItem = (FirearmItem)outputStack.getItem();
@@ -254,7 +258,7 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 			//buffer.writeUtf(PowderHornItem.getPowderTag(((Firearm)recipe.getResultItem().getItem())).location().toString());
 			//buffer.writeInt(recipe.getPowderAmount());
 		}

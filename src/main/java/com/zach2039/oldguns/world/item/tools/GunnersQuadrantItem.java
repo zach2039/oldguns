@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 public class GunnersQuadrantItem extends Item {
 	
 	public GunnersQuadrantItem() {
-		super(new Properties().stacksTo(1).tab(OldGuns.CREATIVE_MODE_TAB));
+		super(new Properties().stacksTo(1));
 	}
 }

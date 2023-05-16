@@ -9,6 +9,7 @@ import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecip
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -57,13 +58,13 @@ public class GunsmithsBenchRecipeProcessor implements IComponentProcessor {
 		}
 		if (key.equals("heading")) {
 			if (!hasCustomHeading) {
-				return IVariable.from(recipe.getResultItem().getHoverName());
+				return IVariable.from(recipe.getResultItem(RegistryAccess.EMPTY).getHoverName());
 			}
 			return null;
 		}
 		if (key.equals("heading2") && this.recipe2 != null) {
 			if (!hasCustomHeading) {
-				return IVariable.from(recipe2.getResultItem().getHoverName());
+				return IVariable.from(recipe2.getResultItem(RegistryAccess.EMPTY).getHoverName());
 			}
 			return null;
 		}
@@ -109,11 +110,11 @@ public class GunsmithsBenchRecipeProcessor implements IComponentProcessor {
 		}
 		if (key.equals("output")) {
 			//return IVariable.wrapList(Arrays.stream(List.of(recipe.getResultItem(), recipe2.getResultItem()).toArray()).map(IVariable::from).collect(Collectors.toList()));
-			return IVariable.from(recipe.getResultItem());
+			return IVariable.from(recipe.getResultItem(RegistryAccess.EMPTY));
 		}
 		if (key.equals("output2") && this.recipe2 != null) {
 			//return IVariable.wrapList(Arrays.stream(List.of(recipe.getResultItem(), recipe2.getResultItem()).toArray()).map(IVariable::from).collect(Collectors.toList()));
-			return IVariable.from(recipe2.getResultItem());
+			return IVariable.from(recipe2.getResultItem(RegistryAccess.EMPTY));
 		}
 		if (key.equals("shapeless")) {
 			return IVariable.wrap(shapeless);

@@ -20,6 +20,7 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
@@ -301,7 +302,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 
 			p_126230_.add("ingredients", jsonarray);
 			JsonObject jsonobject = new JsonObject();
-			jsonobject.addProperty("item", Registry.ITEM.getKey(this.result).toString());
+			jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result).toString());
 			if (this.count > 1) {
 				jsonobject.addProperty("count", this.count);
 			}

@@ -22,6 +22,7 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
@@ -215,7 +216,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 
 	public static class Vanilla extends EnhancedShapedRecipeBuilder<ShapedRecipe, Vanilla> {
 		private Vanilla(final ItemStack result) {
-			super(result, RecipeSerializer.SHAPED_RECIPE);
+			super(RecipeCategory.MISC, result, RecipeSerializer.SHAPED_RECIPE);
 		}
 
 		/**
@@ -291,7 +292,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 
 			p_126167_.add("key", jsonobject);
 			JsonObject jsonobject1 = new JsonObject();
-			jsonobject1.addProperty("item", Registry.ITEM.getKey(this.result).toString());
+			jsonobject1.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result).toString());
 			if (this.count > 1) {
 				jsonobject1.addProperty("count", this.count);
 			}

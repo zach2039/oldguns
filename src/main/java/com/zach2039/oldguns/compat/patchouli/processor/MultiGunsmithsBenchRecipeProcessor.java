@@ -11,6 +11,8 @@ import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapedGunsmithsBenchRecipe;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import vazkii.patchouli.api.IComponentProcessor;
@@ -82,13 +84,13 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 		}
 		if (key.equals("heading")) {
 			if (!hasCustomHeading) {
-				return IVariable.from(recipes.get(0).getResultItem().getHoverName());
+				return IVariable.from(recipes.get(0).getResultItem(null).getHoverName());
 			}
 			return null;
 		}
 		if (key.equals("heading2") && this.recipes2 != null) {
 			if (!hasCustomHeading) {
-				return IVariable.from(recipes2.get(0).getResultItem().getHoverName());
+				return IVariable.from(recipes2.get(0).getResultItem(RegistryAccess.EMPTY).getHoverName());
 			}
 			return null;
 		}
@@ -140,11 +142,11 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 		}
 		if (key.equals("output")) {
 			//return IVariable.wrapList(Arrays.stream(List.of(recipe.getResultItem(), recipe2.getResultItem()).toArray()).map(IVariable::from).collect(Collectors.toList()));
-			return IVariable.wrapList(recipes.stream().map(GunsmithsBenchRecipe::getResultItem).map(IVariable::from).collect(Collectors.toList()));
+			return IVariable.wrapList(recipes.stream().map((recipe) -> recipe.getResultItem(RegistryAccess.EMPTY)).map(IVariable::from).collect(Collectors.toList()));
 		}
 		if (key.equals("output2") && this.recipes2 != null) {
 			//return IVariable.wrapList(Arrays.stream(List.of(recipe.getResultItem(), recipe2.getResultItem()).toArray()).map(IVariable::from).collect(Collectors.toList()));
-			return IVariable.wrapList(recipes2.stream().map(GunsmithsBenchRecipe::getResultItem).map(IVariable::from).collect(Collectors.toList()));
+			return IVariable.wrapList(recipes2.stream().map((recipe2) -> recipe2.getResultItem(RegistryAccess.EMPTY)).map(IVariable::from).collect(Collectors.toList()));
 		}
 		if (key.equals("shapeless")) {
 			return IVariable.wrap(shapeless);

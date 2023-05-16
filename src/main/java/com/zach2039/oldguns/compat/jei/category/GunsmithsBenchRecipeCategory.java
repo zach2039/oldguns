@@ -30,6 +30,7 @@ import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 
@@ -48,8 +49,8 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 
 	@Override
 	public void setRecipe(IRecipeLayoutBuilder builder, GunsmithsBenchRecipe recipe, IFocusGroup focuses) {		
-		ItemStack designNotes = getNotesForRecipe(recipe.getResultItem());
-		ItemStack resultItem = recipe.getResultItem();
+		ItemStack designNotes = getNotesForRecipe(recipe.getResultItem(RegistryAccess.EMPTY));
+		ItemStack resultItem = recipe.getResultItem(RegistryAccess.EMPTY);
 		
 		List<List<ItemStack>> inputs = recipe.getIngredients().stream()
 				.map(ingredient -> List.of(ingredient.getItems()))
@@ -61,11 +62,11 @@ public class GunsmithsBenchRecipeCategory extends OldGunsRecipeCategory<Gunsmith
 		if (recipe instanceof ShapedGunsmithsBenchRecipe) {
 			int width = ((ShapedGunsmithsBenchRecipe)recipe).getWidth();
 			int height = ((ShapedGunsmithsBenchRecipe)recipe).getHeight();
-			craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
-			craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, inputs, width, height);
+			craftingGridHelper.createAndSetOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
+			craftingGridHelper.createAndSetInputs(builder, VanillaTypes.ITEM_STACK, inputs, width, height);
 		} else if (recipe instanceof ShapelessGunsmithsBenchRecipe) {
-			craftingGridHelper.setOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
-			craftingGridHelper.setInputs(builder, VanillaTypes.ITEM_STACK, inputs, 0, 0);
+			craftingGridHelper.createAndSetOutputs(builder, VanillaTypes.ITEM_STACK, List.of(resultItem));
+			craftingGridHelper.createAndSetInputs(builder, VanillaTypes.ITEM_STACK, inputs, 0, 0);
 			builder.setShapeless();
 		}
 	}

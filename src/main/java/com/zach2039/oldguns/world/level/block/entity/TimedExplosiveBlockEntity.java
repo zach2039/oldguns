@@ -46,7 +46,7 @@ public class TimedExplosiveBlockEntity extends BlockEntity {
 		double x = this.getBlockPos().getX();
 		double y = this.getBlockPos().getY();
 		double z = this.getBlockPos().getZ();
-		level.explode(null, x, y, z, 3.0F, Explosion.BlockInteraction.DESTROY);
+		level.explode(null, x, y, z, 3.0F, Level.ExplosionInteraction.BLOCK);
 		
 		setRemoved();
 	}

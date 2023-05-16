@@ -37,15 +37,15 @@ public class MusketeerHatItem extends ArmorItem {
 	private Multimap<Attribute, AttributeModifier> defaultModifiers;
 	
 	public MusketeerHatItem() {
-		super(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new Properties()
+		super(ArmorMaterials.LEATHER, Type.HELMET, new Properties()
 				.durability(128)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 		
 		initAttributes();
 	}
 	
 	private void initAttributes() {
-		UUID uuid = ARMOR_MODIFIER_UUID_PER_SLOT[slot.getIndex()];
+		UUID uuid = ARMOR_MODIFIER_UUID_PER_SLOT[this.type.getSlot().getIndex()];
 		Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
 		builder.put(Attributes.ARMOR, new AttributeModifier(uuid, "Armor modifier", (double)this.getDefense(), AttributeModifier.Operation.ADDITION));
 		builder.put(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(uuid, "Armor toughness", (double)this.getToughness(), AttributeModifier.Operation.ADDITION));
@@ -66,7 +66,7 @@ public class MusketeerHatItem extends ArmorItem {
 	
 	@Override
 	public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlot slot) {
-		return slot == this.slot ? this.defaultModifiers : super.getDefaultAttributeModifiers(slot);
+		return slot == this.type.getSlot() ? this.defaultModifiers : super.getDefaultAttributeModifiers(slot);
 	}
 	
 	@Override

@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
 import org.checkerframework.checker.nullness.qual.NonNull;
 
 import com.zach2039.oldguns.OldGuns;
@@ -34,7 +36,6 @@ public class PowderHornItem extends Item {
 	public PowderHornItem() {
 		super(new Properties()
 				.stacksTo(1)
-				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}
 	
@@ -141,15 +142,12 @@ public class PowderHornItem extends Item {
 
 		return stackIn;
 	}
-	
-	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-		if (this.allowedIn(tab)) {
-			ItemStack hornStack = new ItemStack(this);
-			initNBTTags(hornStack);
-			
-			stackList.add(hornStack);
-		}
+
+	public void fillCreativeModeTab(final MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries) {
+		ItemStack hornStack = new ItemStack(this);
+		initNBTTags(hornStack);
+
+		entries.put(hornStack, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 	}
 	
 	@Override

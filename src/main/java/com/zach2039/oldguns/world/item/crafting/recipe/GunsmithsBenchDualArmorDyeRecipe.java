@@ -9,6 +9,7 @@ import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.DyeItem;
@@ -59,7 +60,7 @@ public class GunsmithsBenchDualArmorDyeRecipe implements GunsmithsBenchRecipe {
 	}
 
 	@Override
-	public ItemStack assemble(GunsmithsBenchCraftingContainer container) {
+	public ItemStack assemble(final GunsmithsBenchCraftingContainer container, RegistryAccess registryAccess) {
 		List<DyeItem> dyeStacksA = Lists.newArrayList();
 		List<DyeItem> dyeStacksB = Lists.newArrayList();
 		ItemStack itemstack = ItemStack.EMPTY;
@@ -98,7 +99,7 @@ public class GunsmithsBenchDualArmorDyeRecipe implements GunsmithsBenchRecipe {
 	}
 
 	@Override
-	public ItemStack getResultItem() {
+	public ItemStack getResultItem(RegistryAccess registryAccess) {
 		return ItemStack.EMPTY;
 	}
 	

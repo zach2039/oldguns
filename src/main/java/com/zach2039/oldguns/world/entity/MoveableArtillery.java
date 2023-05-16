@@ -7,13 +7,13 @@ import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.init.ModEntities;
-import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity.ArtilleryProperties;
 import com.zach2039.oldguns.api.artillery.Artillery;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -23,13 +23,15 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
+import net.minecraft.world.damagesource.DamageType;
+import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -135,7 +137,8 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 		} else if (!this.level.isClientSide && !this.isRemoved()) {
 			// Reduce damage taken if source was not player
 			float dmgMod = 1.0f;
-			if (!(source.getEntity() instanceof Player) || source.isProjectile()) {                		
+			//if (!(source.getEntity() instanceof Player) || source..isProjectile()) {
+			if (!(source.getEntity() instanceof Player)) {
 				dmgMod = 0.1f;
 			}
 
@@ -164,7 +167,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	};
 
 	@Override
-	public void animateHurt() {
+	public void animateHurt(float delta) {
 		this.setHurtDir(-this.getHurtDir());
 		this.setHurtTime(10);
 		this.setDamage(this.getDamage() * 11.0F);
@@ -377,7 +380,8 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 			if (falling) {
 				if (this.fallDistance > 15.0F) {
 
-					this.causeFallDamage(this.fallDistance, 1.0F, DamageSource.FALL);
+					state.getBlock().fallOn(this.level, state, blockpos, this, this.fallDistance);
+					this.level.gameEvent(GameEvent.HIT_GROUND, blockpos, GameEvent.Context.of(this, this.getBlockStateOn()));
 					if (!this.level.isClientSide && !this.isRemoved()) {
 						this.kill();
 						if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
@@ -419,7 +423,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return new ClientboundAddEntityPacket(this);
 	}
 

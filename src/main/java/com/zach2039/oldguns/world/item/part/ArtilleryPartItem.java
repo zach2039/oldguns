@@ -15,7 +15,7 @@ public class ArtilleryPartItem extends Item {
 	public ArtilleryPartItem(ArtilleryPart part) {
 		this((ArtilleryPartProperties) new ArtilleryPartProperties()				
 				.partType(part)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				);
 	}
 	
 	public ArtilleryPart getPartType() {

@@ -10,7 +10,6 @@ public class MortarAndPestleItem extends Item {
 	public MortarAndPestleItem() {
 		super(new Properties()
 				.defaultDurability(512)
-				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}
 	

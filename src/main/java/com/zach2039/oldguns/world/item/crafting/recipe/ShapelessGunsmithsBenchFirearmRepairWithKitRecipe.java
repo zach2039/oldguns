@@ -11,6 +11,7 @@ import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.tools.RepairKitItem;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,7 +32,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends Shapeless
 	}
 
 	@Override
-	public ItemStack assemble(final GunsmithsBenchCraftingContainer inv) {
+	public ItemStack assemble(final GunsmithsBenchCraftingContainer inv, RegistryAccess registryAccess) {
 		ItemStack firearmStack = ItemStack.EMPTY;
 		ItemStack repairKitStack = ItemStack.EMPTY;
 		
@@ -135,7 +136,7 @@ public class ShapelessGunsmithsBenchFirearmRepairWithKitRecipe extends Shapeless
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 	

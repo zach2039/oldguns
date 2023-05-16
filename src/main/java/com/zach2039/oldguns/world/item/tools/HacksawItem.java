@@ -10,7 +10,6 @@ public class HacksawItem extends Item {
 	public HacksawItem() {
 		super(new Properties()
 				.defaultDurability(256)
-				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}
 	
