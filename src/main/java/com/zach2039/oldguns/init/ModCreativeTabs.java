@@ -1,6 +1,7 @@
 package com.zach2039.oldguns.init;
 
 import com.zach2039.oldguns.OldGuns;
+import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
@@ -47,5 +48,21 @@ public class ModCreativeTabs {
         items.stream()
                 .map(RegistryObject::get)
                 .forEach(output::accept);
+    }
+
+    @SubscribeEvent
+    public static void buildContents(final CreativeModeTabEvent.BuildContents event) {
+        if (event.getTab() != CREATIVE_MODE_TAB) {
+            return;
+        }
+
+        final var entries = event.getEntries();
+
+        // Painful
+        entries.forEach((itemStackTabVisibilityEntry) -> {
+            if (itemStackTabVisibilityEntry.getKey().getItem() instanceof FirearmItem item) {
+                item.fillCreativeModeTab(itemStackTabVisibilityEntry);
+            }
+        });
     }
 }

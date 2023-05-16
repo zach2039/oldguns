@@ -16,6 +16,7 @@ import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
 
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.DyeColor;
@@ -39,8 +40,8 @@ import net.minecraftforge.fluids.FluidType;
 public class OldGunsLanguageProvider extends LanguageProvider {
 	private final Map<EntityType<?>, String> ENTITY_TYPE_NAMES = new HashMap<>();
 
-	public OldGunsLanguageProvider(final DataGenerator gen) {
-		super(gen, OldGuns.MODID, "en_us");
+	public OldGunsLanguageProvider(final PackOutput output) {
+		super(output, OldGuns.MODID, "en_us");
 	}
 
 	@Override

@@ -22,6 +22,8 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
@@ -269,7 +271,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		compound.putBoolean("HasBeenShot", this.hasBeenShot);
 
 		if (this.potion != Potions.EMPTY) {
-			compound.putString("Potion", Registry.POTION.getKey(this.potion).toString());
+			compound.putString("Potion", BuiltInRegistries.POTION.getKey(this.potion).toString());
 		}
 
 		if (this.fixedColor) {
@@ -298,7 +300,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		compound.putFloat("bypassArmorPercentage", this.getBypassArmorPercentage());
 		compound.putBoolean("crit", this.isCritArrow());
 		compound.putByte("PierceLevel", this.getPierceLevel());
-		compound.putString("SoundEvent", Registry.SOUND_EVENT.getKey(this.soundEvent).toString());
+		compound.putString("SoundEvent", BuiltInRegistries.SOUND_EVENT.getKey(this.soundEvent).toString());
 		compound.putFloat("projectileSize", getProjectileSize());
 		compound.putFloat("effectStrength", getEffectStrength());
 		compound.putInt("effectTicks", getEffectTicks());
@@ -343,7 +345,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 		this.life = compound.getShort("life");
 		if (compound.contains("inBlockState", Tag.TAG_COMPOUND)) {
-			this.lastState = NbtUtils.readBlockState(compound.getCompound("inBlockState"));
+			this.lastState = NbtUtils.readBlockState(this.level.holderLookup(Registries.BLOCK), compound.getCompound("inBlockState"));
 		}
 
 		this.inGround = compound.getBoolean("inGround");
@@ -359,7 +361,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		this.setCritArrow(compound.getBoolean("crit"));
 		this.setPierceLevel(compound.getByte("PierceLevel"));
 		if (compound.contains("SoundEvent", Tag.TAG_STRING)) {
-			this.soundEvent = Registry.SOUND_EVENT.getOptional(new ResourceLocation(compound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
+			this.soundEvent = BuiltInRegistries.SOUND_EVENT.getOptional(new ResourceLocation(compound.getString("SoundEvent"))).orElse(this.getDefaultHitGroundSoundEvent());
 		}
 
 		setProjectileSize(compound.getFloat("projectileSize"));
@@ -514,7 +516,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			
 			// Reset hurt timer for some double damage type trickery
 			entity.invulnerableTime = 0;
-			entity.hurt(damagesource.bypassArmor(), (float)damageBypass);		
+			entity.hurt(damagesource.bypassArmor(), (float)damageBypass);
 			
 			if (entity instanceof LivingEntity) {
 				LivingEntity livingentity = (LivingEntity)entity;
@@ -678,7 +680,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			case CANISTER:
 				if (getEffectTicks() <= 0) {
 					if (getEffectStrength() > 0.0f && !level.isClientSide()) {
-						level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Explosion.BlockInteraction.NONE);
+						level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Level.ExplosionInteraction.NONE);
 						for (int i = 0; i < Math.round(getEffectStrength()) + 1; i++) {
 							// Do canister shot explosion after ticks required
 							
@@ -712,14 +714,14 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 				if (getEffectStrength() > 0.0f)
 				{
 					if (!level.isClientSide()) {
-						level.explode(this, entity.getX(), entity.getY(), entity.getZ(), getEffectStrength(), Explosion.BlockInteraction.DESTROY);
+						level.explode(this, entity.getX(), entity.getY(), entity.getZ(), getEffectStrength(), Level.ExplosionInteraction.BLOCK);
 					}
 					discard();
 				}
 				break;
 			case CANISTER:
 				if (getEffectStrength() > 0.0f && !level.isClientSide()) {
-					level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Explosion.BlockInteraction.NONE);
+					level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Level.ExplosionInteraction.NONE);
 					for (int i = 0; i < Math.round(getEffectStrength()) + 1; i++) {
 						// Do canister shot explosion after ticks required
 						
@@ -748,7 +750,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			case EXPLOSIVE_SHELL:
 				if (getEffectStrength() > 0.0f) {
 					if (!level.isClientSide()) {
-						level.explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Explosion.BlockInteraction.DESTROY);
+						level.explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Level.ExplosionInteraction.BLOCK);
 					}
 					discard();
 				}
@@ -1042,13 +1044,11 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 	
 	/**
 	 * Set the start location for this entity. Will be used to calculate damage falloff.
-	 * @param x
-	 * @param y
-	 * @param z
+	 * @param pos
 	 */
 	public void setLaunchLocation(Vec3 pos)
 	{
-		this.entityData.set(START_POS, new BlockPos(pos.x, pos.y, pos.z));
+		this.entityData.set(START_POS, new BlockPos((int) pos.x, (int) pos.y, (int) pos.z));
 	} 
 
 	/**
@@ -1059,7 +1059,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 	 */
 	public void setLaunchLocation(double x, double y, double z)
 	{
-		this.entityData.set(START_POS, new BlockPos(x, y, z));
+		this.entityData.set(START_POS, new BlockPos((int) x, (int) y, (int) z));
 	}
 
 	/**
@@ -1073,7 +1073,6 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	/**
 	 * Get the start location for this entity. Will be used to calculate damage falloff.
-	 * @param position
 	 */
 	public BlockPos getLaunchLocation()
 	{
@@ -1118,7 +1117,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	/**
 	 * Set the effect length of this projectile
-	 * @param effectStrength
+	 * @param effectTicks
 	 */
 	public void setEffectTicks(int effectTicks)
 	{
@@ -1127,7 +1126,6 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	/**
 	 * Get the effect lenght of this projectile
-	 * @param range
 	 */
 	public int getEffectTicks()
 	{
@@ -1136,7 +1134,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	/**
 	 * Set the size of this projectile.
-	 * @param range
+	 * @param size
 	 */
 	public void setProjectileSize(float size)
 	{
@@ -1145,7 +1143,6 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	/**
 	 * Get the shooting entity for this entity.
-	 * @param range
 	 */
 	public float getProjectileSize()
 	{

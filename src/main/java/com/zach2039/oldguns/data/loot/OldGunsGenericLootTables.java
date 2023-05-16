@@ -7,6 +7,7 @@ import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModLootTables;
 
+import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
@@ -20,7 +21,7 @@ import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
-public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLocation, LootTable.Builder>> {
+public class OldGunsGenericLootTables implements LootTableSubProvider {
 	
 	@SuppressWarnings("deprecation")
 	private Builder<?> createDesignNotesForItem(int weight, Item item) {
@@ -45,9 +46,9 @@ public class OldGunsGenericLootTables implements Consumer<BiConsumer<ResourceLoc
 				.apply(SetItemCountFunction.setCount(UniformGenerator.between(1, 1)))
 				.apply(SetItemDamageFunction.setDamage(UniformGenerator.between(0.15f, 0.70f)));
 	}
-	
+
 	@Override
-	public void accept(final BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
+	public void generate(final BiConsumer<ResourceLocation, LootTable.Builder> consumer) {
 		consumer.accept(
 				ModLootTables.LOOT_TABLE_MECHANISM,
 				LootTable.lootTable()

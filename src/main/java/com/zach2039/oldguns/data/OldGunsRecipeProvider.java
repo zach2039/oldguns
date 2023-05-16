@@ -2,6 +2,8 @@ package com.zach2039.oldguns.data;
 
 import java.util.function.Consumer;
 
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.*;
 import org.jetbrains.annotations.NotNull;
 
 import com.zach2039.oldguns.OldGuns;
@@ -28,10 +30,6 @@ import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 
 import net.minecraft.data.DataGenerator;
-import net.minecraft.data.recipes.FinishedRecipe;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.ShapedRecipeBuilder;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
@@ -52,12 +50,12 @@ import net.minecraftforge.common.Tags;
  */
 public class OldGunsRecipeProvider extends RecipeProvider {
 	
-	public OldGunsRecipeProvider(final DataGenerator dataGenerator) {
-		super(dataGenerator);
+	public OldGunsRecipeProvider(final PackOutput output) {
+		super(output);
 	}
 
 	@Override
-	protected void buildCraftingRecipes(final Consumer<FinishedRecipe> recipeConsumer) {
+	protected void buildRecipes(final Consumer<FinishedRecipe> recipeConsumer) {
 
 		// Materials		
 		// Lead
@@ -246,18 +244,18 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_cake"));
 		
 		// High grade black powder from block of high grade black powder
-		ShapelessRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
 				.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.unlockedBy("has_high_grade_black_powder_block", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_block_vanilla"));
 
-		ShapelessGunsmithsBenchRecipeBuilder.shapeless(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
+		ShapelessGunsmithsBenchRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
 				.requires(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.unlockedBy("has_high_grade_black_powder_block", has(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_from_block"));
 		
 		// Medium grade black powder from block of medium grade black powder
-		ShapelessRecipeBuilder.shapeless(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.requires(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
 				.unlockedBy("has_medium_grade_black_powder_cake", has(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_from_block_vanilla"));
@@ -268,7 +266,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_from_block"));
 		
 		// Gunpowder from block of low grade black powder
-		ShapelessRecipeBuilder.shapeless(Items.GUNPOWDER, 9)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.GUNPOWDER, 9)
 				.requires(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
 				.unlockedBy("has_low_grade_black_powder_block", has(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_from_block_vanilla"));
@@ -279,7 +277,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_from_block"));
 		
 		// High grade black powder block from high grade black powder
-		ShapelessRecipeBuilder.shapeless(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.HIGH_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_high_grade_black_powder", has(ModItems.HIGH_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_block_vanilla"));
@@ -290,7 +288,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "high_grade_black_powder_block"));
 		
 		// Medium grade black powder block from high grade black powder
-		ShapelessRecipeBuilder.shapeless(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(ModItems.MEDIUM_GRADE_BLACK_POWDER.get(), 9)
 				.unlockedBy("has_medium_grade_black_powder", has(ModItems.MEDIUM_GRADE_BLACK_POWDER.get()))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_block_vanilla"));
@@ -301,7 +299,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "medium_grade_black_powder_block"));
 		
 		// Low grade black powder block from high grade black powder
-		ShapelessRecipeBuilder.shapeless(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get())
 				.requires(Items.GUNPOWDER, 9)
 				.unlockedBy("has_gunpowder", has(Items.GUNPOWDER))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "low_grade_black_powder_block_vanilla"));
@@ -400,7 +398,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 		
 		// Workshops 
 		// Create gunsmiths bench
-		ShapedRecipeBuilder.shaped(ModBlocks.GUNSMITHS_BENCH.get())
+		ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.GUNSMITHS_BENCH.get())
 				.pattern("LLC")
 				.pattern("PGP")
 				.define('L', ItemTags.LOGS)
@@ -2501,7 +2499,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 			final var tagCompound = new CompoundTag();
 			tagCompound.put("item", ItemStack.EMPTY.serializeNBT());
 			
-			ShapelessVanillaScrapDesignNotesRecipeBuilder.shapeless(Items.PAPER, 3)
+			ShapelessVanillaScrapDesignNotesRecipeBuilder.shapeless(RecipeCategory.MISC, Items.PAPER, 3)
 					.requires(IngredientAnyDesignNotes.of(designNotes))					
 					.unlockedBy("has_" + ModRegistryUtil.getKey(designNotes).getPath(), has(designNotes))		
 					.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, "paper_from_design_notes"));
@@ -2510,7 +2508,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 	}
 
 	private static void nuggetsToIngot(Consumer<FinishedRecipe> recipeConsumer, Item nuggetOut, TagKey<Item> ingotIn) {
-		ShapelessRecipeBuilder.shapeless(nuggetOut, 9)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, nuggetOut, 9)
 			.requires(ingotIn)
 			.unlockedBy("has_" + ingotIn.location().getPath(), has(ingotIn))
 			.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(nuggetOut).getPath() + "_vanilla"));
@@ -2522,7 +2520,7 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 	}
 	
 	private static void ingotToNuggets(Consumer<FinishedRecipe> recipeConsumer, Item ingotOut, TagKey<Item> nuggetIn) {
-		ShapelessRecipeBuilder.shapeless(ingotOut)
+		ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ingotOut)
 			.requires(nuggetIn).requires(nuggetIn).requires(nuggetIn)
 			.requires(nuggetIn).requires(nuggetIn).requires(nuggetIn)
 			.requires(nuggetIn).requires(nuggetIn).requires(nuggetIn)
@@ -2631,10 +2629,5 @@ public class OldGunsRecipeProvider extends RecipeProvider {
 				.condition(ammoCraftCondition)
 				.condition(new ResourceLocation(OldGuns.MODID, "can_craft_paper_cartridges"))
 				.save(recipeConsumer, new ResourceLocation(OldGuns.MODID, ModRegistryUtil.getKey(outputCartridge).getPath()));
-	}
-	
-	@Override
-	public String getName() {
-		return "OldGunsRecipes";
 	}
 }

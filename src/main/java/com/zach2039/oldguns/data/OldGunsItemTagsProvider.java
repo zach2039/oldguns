@@ -1,19 +1,19 @@
 package com.zach2039.oldguns.data;
 
-import javax.annotation.Nullable;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModTags;
-
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
+import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
+
+import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -25,12 +25,17 @@ import net.minecraftforge.common.data.ExistingFileHelper;
  */
 public class OldGunsItemTagsProvider extends ItemTagsProvider {
 	
-	public OldGunsItemTagsProvider(final DataGenerator dataGenerator, final BlockTagsProvider blockTagProvider, @Nullable final ExistingFileHelper existingFileHelper) {
-		super(dataGenerator, blockTagProvider, OldGuns.MODID, existingFileHelper);
+	public OldGunsItemTagsProvider(
+			final PackOutput output,
+			final CompletableFuture<HolderLookup.Provider> lookupProvider,
+			final CompletableFuture<TagsProvider.TagLookup<Block>> blockTags,
+			@Nullable final ExistingFileHelper existingFileHelper
+	) {
+		super(output, lookupProvider, blockTags, OldGuns.MODID, existingFileHelper);
 	}
 
 	@Override
-	protected void addTags() {
+	protected void addTags(final HolderLookup.Provider provider) {
 		
 		// Artillery
 		// Pieces

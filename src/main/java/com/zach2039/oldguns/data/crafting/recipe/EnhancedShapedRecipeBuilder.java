@@ -23,16 +23,14 @@ import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
@@ -57,8 +55,8 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	protected String itemGroup;
 	protected final List<ResourceLocation> conditions;
 
-	protected EnhancedShapedRecipeBuilder(final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
-		super(result.getItem(), result.getCount());
+	protected EnhancedShapedRecipeBuilder(RecipeCategory recipeCategory, final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
+		super(recipeCategory, result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = serializer;
 		this.conditions = new ArrayList<ResourceLocation>();
@@ -162,7 +160,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	 * @param id The recipe ID
 	 */
 	protected void ensureValid(final ResourceLocation id) {
-		if (itemGroup == null && result.getItem().getItemCategory() == null) {
+		if (itemGroup == null) {
 			throw new IllegalStateException("Enhanced Shaped Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
 		}
 	}
@@ -201,8 +199,8 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 
 			String itemGroupName = itemGroup;
 			if (itemGroupName == null) {
-				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
-				itemGroupName = itemGroup.getRecipeFolderName();
+				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getC());
+				itemGroupName = itemGroup.getDisplayName().toString();
 			}
 
 			final ResourceLocation advancementID = new ResourceLocation(id.getNamespace(), "recipes/" + itemGroupName + "/" + id.getPath());

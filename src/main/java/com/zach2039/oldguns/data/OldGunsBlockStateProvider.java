@@ -1,13 +1,5 @@
 package com.zach2039.oldguns.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.zach2039.oldguns.OldGuns;
@@ -19,22 +11,21 @@ import com.zach2039.oldguns.util.EnumFaceRotation;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
-
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelBuilder;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.Lazy;
+
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -84,7 +75,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 
 							.transforms()
 
-							.transform(TransformType.FIRST_PERSON_RIGHT_HAND)
+							.transform(ItemDisplayContext.FIRST_PERSON_RIGHT_HAND)
 							.rotation(0, 135, 0)
 							.scale(0.40f)
 							.end()
@@ -109,8 +100,8 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 		return ImmutableMap.copyOf(map);
 	});
 
-	public OldGunsBlockStateProvider(final DataGenerator gen, final ExistingFileHelper exFileHelper) {
-		super(gen, OldGuns.MODID, exFileHelper);
+	public OldGunsBlockStateProvider(final PackOutput output, final ExistingFileHelper exFileHelper) {
+		super(output, OldGuns.MODID, exFileHelper);
 	}
 
 	@Override

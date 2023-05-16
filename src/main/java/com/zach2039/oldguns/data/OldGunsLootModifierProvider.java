@@ -1,27 +1,20 @@
 package com.zach2039.oldguns.data;
 
-import java.lang.reflect.Field;
-
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.init.ModLootModifierCodecs;
 import com.zach2039.oldguns.init.ModLootTables;
-import com.zach2039.oldguns.world.level.storage.loot.modifiers.DesignNotesFlintlockLootModifier;
-import com.zach2039.oldguns.world.level.storage.loot.modifiers.DesignNotesMatchlockLootModifier;
-import com.zach2039.oldguns.world.level.storage.loot.modifiers.DesignNotesMechanismLootModifier;
-import com.zach2039.oldguns.world.level.storage.loot.modifiers.DesignNotesWheellockLootModifier;
-import com.zach2039.oldguns.world.level.storage.loot.modifiers.MatchlockLootModifier;
-import com.zach2039.oldguns.world.level.storage.loot.modifiers.MechanismLootModifier;
+import com.zach2039.oldguns.world.level.storage.loot.modifiers.*;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnDesignNotesLootCondition;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnFirearmsLootCondition;
 import com.zach2039.oldguns.world.level.storage.loot.predicates.LootSpawnMechanismsLootCondition;
-
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraftforge.common.data.GlobalLootModifierProvider;
 import net.minecraftforge.common.loot.LootTableIdCondition;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
+
+import java.lang.reflect.Field;
 
 
 /**
@@ -34,9 +27,9 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  */
 public class OldGunsLootModifierProvider extends GlobalLootModifierProvider {
 	private static final Field TO_SERIALIZE = ObfuscationReflectionHelper.findField(GlobalLootModifierProvider.class, /* toSerialize */ "toSerialize");
-	
-	public OldGunsLootModifierProvider(final DataGenerator gen) {
-		super(gen, OldGuns.MODID);
+
+	public OldGunsLootModifierProvider(final PackOutput output) {
+		super(output, OldGuns.MODID);
 	}
 
 	@Override

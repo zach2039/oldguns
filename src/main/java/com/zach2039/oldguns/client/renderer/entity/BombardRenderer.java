@@ -1,31 +1,21 @@
 package com.zach2039.oldguns.client.renderer.entity;
 
-import javax.annotation.Nonnull;
-import javax.swing.Renderer;
-
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.BombardModel;
-import com.zach2039.oldguns.client.model.BulletProjectileModel;
-import com.zach2039.oldguns.client.model.CongreveRocketStandModel;
-import com.zach2039.oldguns.client.model.RocketProjectileModel;
 import com.zach2039.oldguns.world.entity.Bombard;
-import com.zach2039.oldguns.world.entity.BulletProjectile;
-import com.zach2039.oldguns.world.level.block.entity.CongreveRocketStandBlockEntity;
-
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
-import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
-import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+
+import javax.annotation.Nonnull;
 
 @OnlyIn(Dist.CLIENT)
 public class BombardRenderer extends EntityRenderer<Bombard> implements EntityRendererProvider<Bombard> {
@@ -46,7 +36,7 @@ public class BombardRenderer extends EntityRenderer<Bombard> implements EntityRe
 		
 		matrixStackIn.translate(0.0f, 0.5f, 0.0f);
 		model.setupAnim(entity, 0, 0, 0, 0, 0);
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-entity.getShotYaw()));
+		matrixStackIn.mulPose(Axis.YP.rotationDegrees(-entity.getShotYaw()));
 		
 		matrixStackIn.pushPose();
 		matrixStackIn.scale(1.5f, -1.5f, -1.5f);	

@@ -16,6 +16,7 @@ import com.zach2039.oldguns.data.loot.OldGunsBlockLootTables;
 import com.zach2039.oldguns.data.loot.OldGunsGenericLootTables;
 
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.storage.loot.BuiltInLootTables;
@@ -34,18 +35,15 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
  * @author zach2039
  */
 public class OldGunsLootTableProvider extends LootTableProvider {
-	private final List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> lootTableGenerators = ImmutableList.of(
-			Pair.of(OldGunsBlockLootTables::new, LootContextParamSets.BLOCK),
-			Pair.of(OldGunsGenericLootTables::new, LootContextParamSets.ALL_PARAMS)
-	);
-
-	public OldGunsLootTableProvider(final DataGenerator dataGeneratorIn) {
-		super(dataGeneratorIn);
+	private OldGunsLootTableProvider(final PackOutput output, final List<SubProviderEntry> subProviders) {
+		super(output, Set.of(), subProviders);
 	}
 
-	@Override
-	protected List<Pair<Supplier<Consumer<BiConsumer<ResourceLocation, LootTable.Builder>>>, LootContextParamSet>> getTables() {
-		return lootTableGenerators;
+	public static OldGunsLootTableProvider create(final PackOutput output) {
+		return new OldGunsLootTableProvider(output, ImmutableList.of(
+				new SubProviderEntry(OldGunsBlockLootTables::new, LootContextParamSets.BLOCK),
+				new SubProviderEntry(OldGunsGenericLootTables::new, LootContextParamSets.ALL_PARAMS)
+		));
 	}
 	
 	@Override
@@ -61,13 +59,5 @@ public class OldGunsLootTableProvider extends LootTableProvider {
 		}
 
 		map.forEach((id, lootTable) -> LootTables.validate(validationContext, id, lootTable));
-	}
-
-	/**
-	 * Gets a name for this provider, to use in logging.
-	 */
-	@Override
-	public String getName() {
-		return "OldGunsLootTables";
 	}
 }

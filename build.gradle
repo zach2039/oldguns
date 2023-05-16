@@ -177,6 +177,7 @@ dependencies {
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}:api")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
