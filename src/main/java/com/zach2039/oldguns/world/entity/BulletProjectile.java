@@ -1,24 +1,16 @@
 package com.zach2039.oldguns.world.entity;
 
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.init.ModEntities;
 import com.zach2039.oldguns.init.ModSoundEvents;
-import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource;
-import com.zach2039.oldguns.world.damagesource.OldGunsDamageSource.DamageType;
 import com.zach2039.oldguns.world.damagesource.OldGunsDamageSourceIndirectEntity;
-
+import com.zach2039.oldguns.world.damagesource.OldGunsDamageSources;
+import com.zach2039.oldguns.world.damagesource.OldGunsDamageTypes;
 import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Registry;
 import net.minecraft.core.Vec3i;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -35,11 +27,13 @@ import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.Mth;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
@@ -54,19 +48,19 @@ import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
-import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.entity.IEntityAdditionalSpawnData;
 import net.minecraftforge.network.NetworkHooks;
+
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 public class BulletProjectile extends Projectile implements IEntityAdditionalSpawnData {
 
@@ -147,7 +141,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		boolean canHit = false;
 		if (!ent.isSpectator() && ent.isAlive() && ent.isPickable()) {
 			Entity entity = this.getOwner();
-			if (this.getDamageType() == DamageType.ARTILLERY) {
+			if (this.getDamageType() == OldGunsDamageTypes.ARTILLERY) {
 				canHit = true;
 			} else {
 				canHit = entity == null || this.leftOwner || !entity.isPassengerOfSameVehicle(ent);
@@ -418,7 +412,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		return (distance < effectiveRange) ? true : false;
 	}
 
-	protected DamageType getDamageType() {
+	protected ResourceKey<DamageType> getDamageType() {
 		if (
 				this.getProjectileType() == ProjectileType.CANNONBALL ||
 				this.getProjectileType() == ProjectileType.CANISTER ||
@@ -427,10 +421,10 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 				this.getProjectileType() == ProjectileType.EXPLOSIVE_SHELL
 				) {
 
-			return DamageType.ARTILLERY;
+			return OldGunsDamageTypes.ARTILLERY;
 		}
 
-		return DamageType.FIREARM;
+		return OldGunsDamageTypes.FIREARM;
 	}
 
 	protected void doPostHurtEffects(LivingEntity pLiving) {
@@ -489,9 +483,9 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		Entity entity1 = this.getOwner();
 		OldGunsDamageSourceIndirectEntity damagesource;
 		if (entity1 == null) {
-			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, null, this.getBypassArmorPercentage());
+			damagesource = (OldGunsDamageSourceIndirectEntity) OldGunsDamageSources.projectile(this.getDamageType(), this, null, this.getBypassArmorPercentage());
 		} else {
-			damagesource = OldGunsDamageSource.projectile(this.getDamageType(), this, entity1, this.getBypassArmorPercentage());
+			damagesource = (OldGunsDamageSourceIndirectEntity) OldGunsDamageSources.projectile(this.getDamageType(), this, entity1, this.getBypassArmorPercentage());
 			
 			if (entity1 instanceof LivingEntity) {
 				((LivingEntity)entity1).setLastHurtMob(entity);
@@ -516,7 +510,8 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			
 			// Reset hurt timer for some double damage type trickery
 			entity.invulnerableTime = 0;
-			entity.hurt(damagesource.bypassArmor(), (float)damageBypass);
+			//entity.hurt(damagesource.bypassArmor(), (float)damageBypass);
+			entity.hurt(damagesource, (float)damageBypass);
 			
 			if (entity instanceof LivingEntity) {
 				LivingEntity livingentity = (LivingEntity)entity;
@@ -922,7 +917,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			this.setXRot((float)(Mth.atan2(d6, d4) * (double)(180F / (float)Math.PI)));
 			this.setXRot(lerpRotation(this.xRotO, this.getXRot()));
 			this.setYRot(lerpRotation(this.yRotO, this.getYRot()));
-			boolean noFriction = (this.isInsideEffectiveRange() && this.getDamageType() == DamageType.FIREARM && !this.isInWater());
+			boolean noFriction = (this.isInsideEffectiveRange() && this.getDamageType() == OldGunsDamageTypes.FIREARM && !this.isInWater());
 			float f = (noFriction) ? 1.0f : 0.98F;
 			//float f1 = 0.05F;
 			if (!this.isSimulated && this.isInWater()) {

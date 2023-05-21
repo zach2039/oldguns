@@ -46,10 +46,12 @@ RECIPE extends Recipe<?>,
 BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 > extends ShapedRecipeBuilder {
 	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapedRecipeBuilder.class, /* ensureValid */ "m_126143_", ResourceLocation.class);
+	private static final Field CATEGORY = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* category */ "f_243672_");
 	private static final Field ADVANCEMENT = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* advancement */ "f_126110_");
 	private static final Field GROUP = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* group */ "f_126111_");
 	private static final Field ROWS = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* rows */ "f_126108_");
 	private static final Field KEY = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* key */ "f_126109_");
+	private static final Field SHOW_NOTIFICATION = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* showNotification */ "f_271093_");
 
 	protected final ItemStack result;
 	protected final RecipeSerializer<? extends RECIPE> serializer;
@@ -192,22 +194,27 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 				group = "";
 			}
 
+			final var category = (RecipeCategory) CATEGORY.get(this);
+
 			@SuppressWarnings("unchecked")
 			final List<String> rows = (List<String>) ROWS.get(this);
 
 			@SuppressWarnings("unchecked")
-			final Map<Character, Ingredient> key = (Map<Character, Ingredient>) KEY.get(this);
+			final var key = (Map<Character, Ingredient>) KEY.get(this);
 
-			String itemGroupName = itemGroup;
-			if (itemGroupName == null) {
-				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getC());
-				itemGroupName = itemGroup.getDisplayName().toString();
-			}
+			final var showNotification = (boolean) SHOW_NOTIFICATION.get(this);
 
-			final ResourceLocation advancementID = new ResourceLocation(id.getNamespace(), "recipes/" + itemGroupName + "/" + id.getPath());
-
-			final ConditionedResult baseRecipe = new ConditionedResult(id, result.getItem(), result.getCount(), group, rows, key, advancementBuilder, advancementID, conditions);
-
+			final var baseRecipe = new Result(id,
+					result.getItem(),
+					result.getCount(),
+					group,
+					determineBookCategory(category),
+					rows,
+					key,
+					advancementBuilder,
+					id.withPrefix("recipes/" + category.getFolderName() + "/"),
+					showNotification
+			);
 			consumer.accept(new SimpleFinishedRecipe(baseRecipe, result, serializer));
 		} catch (final IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException("Failed to build Enhanced Shaped Recipe " + id, e);
