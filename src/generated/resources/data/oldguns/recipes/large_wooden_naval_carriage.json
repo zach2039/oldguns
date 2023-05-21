@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "L": {
       "tag": "minecraft:logs"
@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "oldguns:large_wooden_naval_carriage"
-  }
+  },
+  "show_notification": true
 }

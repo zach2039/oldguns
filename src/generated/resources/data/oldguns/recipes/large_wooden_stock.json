@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "L": {
       "tag": "minecraft:logs"
@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "oldguns:large_wooden_stock"
-  }
+  },
+  "show_notification": true
 }

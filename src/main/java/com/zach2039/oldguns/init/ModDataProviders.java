@@ -2,14 +2,7 @@ package com.zach2039.oldguns.init;
 
 import com.google.common.collect.Sets;
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.data.OldGunsBlockStateProvider;
-import com.zach2039.oldguns.data.OldGunsBlockTagsProvider;
-import com.zach2039.oldguns.data.OldGunsItemModelProvider;
-import com.zach2039.oldguns.data.OldGunsItemTagsProvider;
-import com.zach2039.oldguns.data.OldGunsLanguageProvider;
-import com.zach2039.oldguns.data.OldGunsLootModifierProvider;
-import com.zach2039.oldguns.data.OldGunsLootTableProvider;
-import com.zach2039.oldguns.data.OldGunsRecipeProvider;
+import com.zach2039.oldguns.data.*;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
@@ -19,6 +12,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.resources.RegistryDataLoader;
 import net.minecraft.resources.ResourceKey;
+import net.minecraftforge.common.data.DatapackBuiltinEntriesProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -47,24 +41,21 @@ public class ModDataProviders {
 		final var existingFileHelper = event.getExistingFileHelper();
 		final var lookupProvider = event.getLookupProvider().thenApply(ModDataProviders::createLookup);
 
-		if (event.includeClient()) {
-			dataGenerator.addProvider(true, new OldGunsLanguageProvider(output));
-			
-			final OldGunsItemModelProvider itemModelProvider = new OldGunsItemModelProvider(output, existingFileHelper);
-			dataGenerator.addProvider(true, itemModelProvider);
-			
-			dataGenerator.addProvider(true, new OldGunsBlockStateProvider(output, itemModelProvider.existingFileHelper));
-		}
+		dataGenerator.addProvider(event.includeClient(), new OldGunsLanguageProvider(output));
 
-		if (event.includeServer()) {
-			dataGenerator.addProvider(true, new OldGunsRecipeProvider(output));
-			dataGenerator.addProvider(true, OldGunsLootTableProvider.create(output));
-			dataGenerator.addProvider(true, new OldGunsLootModifierProvider(output));
-			
-			final OldGunsBlockTagsProvider blockTagsProvider = new OldGunsBlockTagsProvider(output, lookupProvider, existingFileHelper);
-			dataGenerator.addProvider(true, blockTagsProvider);
-			dataGenerator.addProvider(true, new OldGunsItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
-		}
+		final OldGunsItemModelProvider itemModelProvider = new OldGunsItemModelProvider(output, existingFileHelper);
+		dataGenerator.addProvider(event.includeClient(), itemModelProvider);
+
+		dataGenerator.addProvider(event.includeClient(), new OldGunsBlockStateProvider(output, itemModelProvider.existingFileHelper));
+
+		dataGenerator.addProvider(event.includeServer(), new OldGunsRecipeProvider(output));
+		dataGenerator.addProvider(event.includeServer(), OldGunsLootTableProvider.create(output));
+		dataGenerator.addProvider(event.includeServer(), new OldGunsLootModifierProvider(output));
+
+		final OldGunsBlockTagsProvider blockTagsProvider = new OldGunsBlockTagsProvider(output, lookupProvider, existingFileHelper);
+		dataGenerator.addProvider(event.includeServer(), blockTagsProvider);
+		dataGenerator.addProvider(event.includeServer(), new OldGunsItemTagsProvider(output, lookupProvider, blockTagsProvider.contentsGetter(), existingFileHelper));
+		dataGenerator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(output, lookupProvider, Set.of(OldGuns.MODID)));
 	}
 
 	private static HolderLookup.Provider createLookup(final HolderLookup.Provider vanillaLookupProvider) {
@@ -76,7 +67,8 @@ public class ModDataProviders {
 		//		.add(Registries.BIOME, ModBiomes::bootstrap)
 		//		.add(ForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap);
 
-		final var builder = new RegistrySetBuilder();
+		final var builder = new RegistrySetBuilder()
+				.add(Registries.DAMAGE_TYPE, OldGunsDamageTypesProvider::bootstrap);
 
 		@SuppressWarnings("UnstableApiUsage")
 		final var allKeys = DataPackRegistriesHooks.getDataPackRegistries()

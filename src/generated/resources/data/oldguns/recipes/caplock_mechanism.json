@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "C": {
       "tag": "oldguns:percussion_cap_cone"
@@ -25,5 +25,6 @@
   ],
   "result": {
     "item": "oldguns:caplock_mechanism"
-  }
+  },
+  "show_notification": true
 }

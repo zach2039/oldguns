@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "R": {
       "tag": "forge:rods/blaze"
@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "oldguns:percussion_cap_cone"
-  }
+  },
+  "show_notification": true
 }

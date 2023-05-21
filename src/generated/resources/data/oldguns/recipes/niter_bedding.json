@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "C": {
       "item": "minecraft:clay_ball"
@@ -20,5 +20,6 @@
   "result": {
     "count": 4,
     "item": "oldguns:niter_bedding"
-  }
+  },
+  "show_notification": true
 }

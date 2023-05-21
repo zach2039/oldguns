@@ -163,9 +163,9 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	 * @param id The recipe ID
 	 */
 	protected void ensureValid(final ResourceLocation id) {
-		if (itemGroup == null) {
-			throw new IllegalStateException("Enhanced Shaped Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
-		}
+		//if (itemGroup == null) {
+		//	throw new IllegalStateException("Enhanced Shaped Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
+		//}
 	}
 
 	/**

@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "B": {
       "tag": "forge:ingots/brass"
@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "oldguns:medium_brass_flared_barrel"
-  }
+  },
+  "show_notification": true
 }

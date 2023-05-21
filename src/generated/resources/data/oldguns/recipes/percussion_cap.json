@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "n": {
       "tag": "forge:nuggets/gold"
@@ -16,5 +16,6 @@
   "result": {
     "count": 2,
     "item": "oldguns:percussion_cap"
-  }
+  },
+  "show_notification": true
 }

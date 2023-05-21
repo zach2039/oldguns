@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "E": {
       "tag": "oldguns:iron_gear_set"
@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "oldguns:wheellock_mechanism"
-  }
+  },
+  "show_notification": true
 }

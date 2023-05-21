@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "b": {
       "tag": "forge:nuggets/brass"
@@ -12,5 +12,6 @@
   ],
   "result": {
     "item": "oldguns:tiny_brass_barrel"
-  }
+  },
+  "show_notification": true
 }

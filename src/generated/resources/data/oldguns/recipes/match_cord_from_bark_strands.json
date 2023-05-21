@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_match_cord_from_bark_strands"
-    }
-  ],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:bark_strands"

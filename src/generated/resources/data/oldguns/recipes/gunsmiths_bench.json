@@ -1,5 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
+  "category": "building",
   "key": {
     "C": {
       "tag": "forge:cobblestone"
@@ -20,5 +21,6 @@
   ],
   "result": {
     "item": "oldguns:gunsmiths_bench"
-  }
+  },
+  "show_notification": true
 }

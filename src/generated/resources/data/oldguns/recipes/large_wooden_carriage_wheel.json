@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "B": {
       "item": "minecraft:stone"
@@ -19,5 +19,6 @@
   ],
   "result": {
     "item": "oldguns:large_wooden_carriage_wheel"
-  }
+  },
+  "show_notification": true
 }

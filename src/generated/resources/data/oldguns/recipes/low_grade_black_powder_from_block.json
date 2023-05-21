@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:low_grade_black_powder_block"

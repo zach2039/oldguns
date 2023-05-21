@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "H": {
       "item": "minecraft:honeycomb"
@@ -17,5 +17,6 @@
   "result": {
     "count": 8,
     "item": "oldguns:waxed_paper"
-  }
+  },
+  "show_notification": true
 }

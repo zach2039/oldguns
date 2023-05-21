@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "S": {
       "tag": "minecraft:wooden_slabs"
@@ -16,5 +16,6 @@
   ],
   "result": {
     "item": "oldguns:small_wooden_carriage_wheel"
-  }
+  },
+  "show_notification": true
 }

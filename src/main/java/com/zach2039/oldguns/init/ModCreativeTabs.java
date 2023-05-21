@@ -62,20 +62,22 @@ public class ModCreativeTabs {
         final var entries = event.getEntries();
 
         // Painful
-        entries.forEach((itemStackTabVisibilityEntry) -> {
-            if (itemStackTabVisibilityEntry.getKey().getItem() instanceof FirearmItem item) {
-                item.fillCreativeModeTab((MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility>) itemStackTabVisibilityEntry);
-            }
-        });
-        entries.forEach((itemStackTabVisibilityEntry) -> {
-            if (itemStackTabVisibilityEntry.getKey().getItem() instanceof PowderHornItem item) {
-                item.fillCreativeModeTab((MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility>) itemStackTabVisibilityEntry);
-            }
-        });
-        entries.forEach((itemStackTabVisibilityEntry) -> {
-            if (itemStackTabVisibilityEntry.getKey().getItem() instanceof DesignNotesItem item) {
-                item.fillCreativeModeTab((MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility>) itemStackTabVisibilityEntry);
-            }
-        });
+        //for (java.util.Map.Entry<ItemStack, CreativeModeTab.TabVisibility> entry : entries) {
+        //    if (entry.getKey().getItem() instanceof FirearmItem item) {
+        //        item.fillCreativeModeTab(entries);
+        //   }
+        //}
+
+        //for (java.util.Map.Entry<ItemStack, CreativeModeTab.TabVisibility> entry : entries) {
+        //    if (entry.getKey().getItem() instanceof PowderHornItem item) {
+        //        item.fillCreativeModeTab(entries);
+        //    }
+        //}
+
+        //for (java.util.Map.Entry<ItemStack, CreativeModeTab.TabVisibility> entry : entries) {
+        //    if (entry.getKey().getItem() instanceof DesignNotesItem item) {
+        //        item.fillCreativeModeTab(entries);
+        //    }
+        //}
     }
 }

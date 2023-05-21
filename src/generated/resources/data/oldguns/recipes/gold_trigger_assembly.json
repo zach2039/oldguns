@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "E": {
       "tag": "oldguns:gold_gear_set"
@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "oldguns:gold_trigger_assembly"
-  }
+  },
+  "show_notification": true
 }

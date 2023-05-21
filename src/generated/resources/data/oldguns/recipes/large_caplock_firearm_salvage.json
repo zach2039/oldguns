@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_hacksaw_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "tag": "oldguns:large_caplock_firearm"

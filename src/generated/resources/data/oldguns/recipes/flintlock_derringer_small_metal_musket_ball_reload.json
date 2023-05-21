@@ -1,6 +1,6 @@
 {
   "type": "oldguns:firearm_muzzleloader_reload_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:flintlock_derringer"

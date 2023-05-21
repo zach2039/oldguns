@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_lead_firearm_ammo"
-    }
-  ],
+  "category": "misc",
   "key": {
     "L": {
       "tag": "forge:ingots/lead"
@@ -20,5 +16,6 @@
   "result": {
     "count": 2,
     "item": "oldguns:medium_lead_musket_ball"
-  }
+  },
+  "show_notification": true
 }

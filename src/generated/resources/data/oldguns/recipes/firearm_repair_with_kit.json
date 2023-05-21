@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_firearm_repair_with_kit_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "tag": "oldguns:firearm"

@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "G": {
       "item": "minecraft:polished_granite"
@@ -19,5 +19,6 @@
     "nbt": {
       "Damage": 0
     }
-  }
+  },
+  "show_notification": true
 }

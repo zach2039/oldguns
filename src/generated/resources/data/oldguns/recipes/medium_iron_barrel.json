@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "I": {
       "tag": "forge:ingots/iron"
@@ -15,5 +15,6 @@
   ],
   "result": {
     "item": "oldguns:medium_iron_barrel"
-  }
+  },
+  "show_notification": true
 }

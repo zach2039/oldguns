@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_firearm_repair_with_parts_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "tag": "oldguns:wheellock_firearm"

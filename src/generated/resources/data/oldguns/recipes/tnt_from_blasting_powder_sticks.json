@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_tnt_from_blasting_powder_sticks"
-    }
-  ],
+  "category": "misc",
   "key": {
     "F": {
       "item": "oldguns:fuse"
@@ -20,5 +16,6 @@
   ],
   "result": {
     "item": "minecraft:tnt"
-  }
+  },
+  "show_notification": true
 }

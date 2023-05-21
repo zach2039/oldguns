@@ -71,6 +71,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.MutableHashedLinkedMap;
 import net.minecraftforge.network.PacketDistributor;
+import org.spongepowered.asm.mixin.Mutable;
 
 public class FirearmItem extends BowItem implements Firearm {
 
@@ -645,7 +646,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	/**
 	 * Does NBT stuff for firearm conditions, and will cause certain things to happen based on said conditions.
 	 * @param worldIn
-	 * @param entityShooter
+	 * @param shooter
 	 * @param stackIn
 	 * @return 
 	 */

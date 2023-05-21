@@ -107,9 +107,12 @@ minecraft {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	maven { // JEI & Tinkers
-        name 'DVS1 Maven FS'
-        url 'https://dvs1.progwml6.com/files/maven'
+	//maven { // JEI & Tinkers
+    //    name 'DVS1 Maven FS'
+    //    url 'https://dvs1.progwml6.com/files/maven'
+    //}
+    maven { // Patchouli and JEI
+        url 'https://maven.blamejared.com'
     }
 	maven { 
 		url = "https://repo.spongepowered.org/repository/maven-public/" 
@@ -118,9 +121,6 @@ repositories {
         name = "ModMaven"
         url = "https://modmaven.k-4u.nl"
     }
-	maven { // Patchouli
-		url 'https://maven.blamejared.com' 
-	}
 	maven {
 		url 'https://www.cursemaven.com'
 		content {
@@ -173,29 +173,43 @@ String buildVersionString() {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-		
+
+    // JEI compile
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
 	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+    //compileOnly fg.deobf("curse.maven:jei-238222:4471300")
+
+    // Patchouli compile
     //compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
     compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.19.3-${patchouli_version}:api")
+
+    // Crafttweaker compile
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
+    // JEI runtime
 	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
 	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+    //runtimeOnly fg.deobf("curse.maven:jei-238222:4471300")
+
+    // Patchouli runtime
  	//runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
+
+    // Crafttweaker runtime
+    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
+    //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
+
+    // Architectury, Cloth, and REI runtime
 	//runtimeOnly	fg.deobf("dev.architectury:architectury-forge:${architectury_version}")
 	//runtimeOnly	fg.deobf("me.shedaniel.cloth:cloth-config-forge:${cloth_version}")
 	//runtimeOnly	fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:${rei_version}")
 	//runtimeOnly	fg.deobf("me.shedaniel:RoughlyEnoughItems-plugin-compatibilities-forge:${rei_compat_version}")
-    //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
-    //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
-	// Create to test structure interaction with block artillery and the like
+	// Create runtime
 	//runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
 	//runtimeOnly fg.deobf("curse.maven:flywheel-486392:3600401")
 
-	// GuardVillagers to test firearm use
+	// GuardVillagers runtime
 	//runtimeOnly fg.deobf("curse.maven:guard-villagers-360203:3970122")
 
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'

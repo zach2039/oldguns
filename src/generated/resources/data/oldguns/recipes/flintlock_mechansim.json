@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "E": {
       "tag": "oldguns:gold_gear_set"
@@ -25,5 +25,6 @@
   ],
   "result": {
     "item": "oldguns:flintlock_mechanism"
-  }
+  },
+  "show_notification": true
 }

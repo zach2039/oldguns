@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "D": {
       "tag": "forge:gems/diamond"
@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "oldguns:diamond_trigger_assembly"
-  }
+  },
+  "show_notification": true
 }

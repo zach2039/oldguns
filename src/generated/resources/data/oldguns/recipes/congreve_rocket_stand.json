@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_congreve_rocket_stand_artillery"
-    }
-  ],
+  "category": "misc",
   "key": {
     "P": {
       "tag": "minecraft:planks"
@@ -23,5 +19,6 @@
   ],
   "result": {
     "item": "oldguns:congreve_rocket_stand"
-  }
+  },
+  "show_notification": true
 }

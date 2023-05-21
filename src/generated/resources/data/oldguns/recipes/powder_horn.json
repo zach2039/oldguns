@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "C": {
       "tag": "forge:ingots/copper"
@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "oldguns:powder_horn"
-  }
+  },
+  "show_notification": true
 }
