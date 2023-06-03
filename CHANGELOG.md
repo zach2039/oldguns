@@ -1,3 +1,7 @@
+### v1.19.2-3.7.2-42
+
+ - Fix issue with oredict dusts tag typo
+
 ### v1.19.2-3.7.1-39
 
  - Apply fix for client crash to naval cannon entity as well

@@ -16,24 +16,24 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
 
-		if (System.getenv("CI") == "true") {
+		//if (System.getenv("CI") == "true") {
 			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-		} else {
-			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		}	
+		//} else {
+		//	classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+		//}	
 
 		classpath "org.parchmentmc:librarian:${librarian_version}"
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
+//apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
 
-if (System.getenv("CI") != "true") {
-	apply plugin: 'com.diffplug.eclipse.apt'
-}
+//if (System.getenv("CI") != "true") {
+//	apply plugin: 'com.diffplug.eclipse.apt'
+//}
 
 group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"

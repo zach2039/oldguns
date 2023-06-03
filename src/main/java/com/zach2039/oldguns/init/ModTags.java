@@ -211,10 +211,10 @@ public class ModTags {
 		public static final TagKey<Item> NUGGETS_MERCURY = forgeTag("nuggets/mercury");
 		public static final TagKey<Item> INGOTS_QUICKSILVER = forgeTag("ingots/quicksilver");
 		public static final TagKey<Item> NUGGETS_QUICKSILVER = forgeTag("nuggets/quicksilver");
-		public static final TagKey<Item> DUST_NITER = forgeTag("dust/niter");
-		public static final TagKey<Item> DUST_NITRE = forgeTag("dust/nitre");
-		public static final TagKey<Item> DUST_SALTPETER = forgeTag("dust/saltpeter");
-		public static final TagKey<Item> DUST_SULFUR = forgeTag("dust/sulfur");
+		public static final TagKey<Item> DUST_NITER = forgeTag("dusts/niter");
+		public static final TagKey<Item> DUST_NITRE = forgeTag("dusts/nitre");
+		public static final TagKey<Item> DUST_SALTPETER = forgeTag("dusts/saltpeter");
+		public static final TagKey<Item> DUST_SULFUR = forgeTag("dusts/sulfur");
 		
 		private static TagKey<Item> tag(final String name) {
 			return ItemTags.create(new ResourceLocation(OldGuns.MODID, name));
