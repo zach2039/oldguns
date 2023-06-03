@@ -3,13 +3,13 @@
   "conditions": [],
   "ingredients": [
     {
-      "tag": "forge:dust/saltpeter"
+      "tag": "forge:dusts/saltpeter"
     },
     {
-      "tag": "forge:dust/saltpeter"
+      "tag": "forge:dusts/saltpeter"
     },
     {
-      "tag": "forge:dust/sulfur"
+      "tag": "forge:dusts/sulfur"
     },
     {
       "item": "minecraft:charcoal"

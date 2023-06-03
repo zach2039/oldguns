@@ -13,21 +13,21 @@
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_dust/saltpeter": {
+    "has_dusts/saltpeter": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:dust/saltpeter"
+            "tag": "forge:dusts/saltpeter"
           }
         ]
       },
       "trigger": "minecraft:inventory_changed"
     },
-    "has_dust/sulfur": {
+    "has_dusts/sulfur": {
       "conditions": {
         "items": [
           {
-            "tag": "forge:dust/sulfur"
+            "tag": "forge:dusts/sulfur"
           }
         ]
       },
@@ -64,8 +64,8 @@
   },
   "requirements": [
     [
-      "has_dust/saltpeter",
-      "has_dust/sulfur",
+      "has_dusts/saltpeter",
+      "has_dusts/sulfur",
       "has_ingots/mercury",
       "has_charcoal",
       "has_oldguns:mortar_and_pestle",

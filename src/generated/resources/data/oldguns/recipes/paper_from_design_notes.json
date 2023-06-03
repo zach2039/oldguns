@@ -1,8 +1,8 @@
 {
-  "type": "oldguns:scrap_design_notes_shapeless",
+  "type": "minecraft:crafting_shapeless",
   "ingredients": [
     {
-      "type": "oldguns:any_design_notes",
+      "type": "oldguns:powder_horn",
       "item": "oldguns:design_notes"
     }
   ],
