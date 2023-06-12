@@ -1,3 +1,7 @@
+### v1.19.3-3.8.1-43
+
+ - Update to 1.19.3, forge 44.1.23 
+
 ### v1.19.2-3.7.2-42
 
  - Fix issue with oredict dusts tag typo
