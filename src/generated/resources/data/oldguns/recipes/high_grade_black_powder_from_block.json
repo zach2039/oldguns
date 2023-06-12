@@ -1,6 +1,6 @@
 {
-  "type": "oldguns:gunsmiths_bench_shapeless",
-  "conditions": [],
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:high_grade_black_powder_block"

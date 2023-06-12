@@ -18,12 +18,14 @@ import com.zach2039.oldguns.world.item.firearm.FirearmItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -32,38 +34,40 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 
 public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 {
+	private final ItemStack result;
 	private final boolean isSimple;
-	
-	public ShapelessVanillaMuzzleloaderReloadRecipe(final ResourceLocation id, final String group, final ItemStack recipeOutput, final NonNullList<Ingredient> ingredients) {
-		super(id, group, recipeOutput, ingredients);
+
+	public ShapelessVanillaMuzzleloaderReloadRecipe(final ResourceLocation id, final String group, final ItemStack result, final NonNullList<Ingredient> ingredients) {
+		super(id, group, CraftingBookCategory.MISC, result, ingredients);
+		this.result = result;
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
 	}
-	
+
 	@Override
-	public boolean matches(CraftingContainer p_44262_, Level p_44263_) {
+	public boolean matches(CraftingContainer craftingContainer, Level level) {
 		StackedContents stackedcontents = new StackedContents();
 		java.util.List<ItemStack> inputs = new java.util.ArrayList<>();
 		int i = 0;
 
-		for(int j = 0; j < p_44262_.getContainerSize(); ++j) {
-			ItemStack itemstack = p_44262_.getItem(j);
+		for(int j = 0; j < craftingContainer.getContainerSize(); ++j) {
+			ItemStack itemstack = craftingContainer.getItem(j);
 			// Check if items are valid, but check status of firearms as well, since we don't want to try and reload a broken firearm
 			if (!itemstack.isEmpty()) {
 				if (!(itemstack.getItem() instanceof Firearm)) {
 					++i;
-		            if (isSimple)
-		            stackedcontents.accountStack(itemstack, 1);
-		            else inputs.add(itemstack);
+					if (isSimple)
+						stackedcontents.accountStack(itemstack, 1);
+					else inputs.add(itemstack);
 				} else {
 					if (
-							FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN && 
-							FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) < ((Firearm)itemstack.getItem()).getAmmoCapacity()
-						)
+							FirearmNBTHelper.getNBTTagCondition(itemstack) != FirearmCondition.BROKEN &&
+									FirearmNBTHelper.peekNBTTagAmmoCount(itemstack) < ((Firearm)itemstack.getItem()).getAmmoCapacity()
+					)
 					{
 						++i;
-			            if (isSimple)
-			            stackedcontents.accountStack(itemstack, 1);
-			            else inputs.add(itemstack);
+						if (isSimple)
+							stackedcontents.accountStack(itemstack, 1);
+						else inputs.add(itemstack);
 					}
 				}
 			}
@@ -71,24 +75,24 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 
 		return i == this.getIngredients().size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.getIngredients()) != null);
 	}
-	
+
 	@Override
 	public ItemStack assemble(final CraftingContainer inv)
 	{
 		/* Required itemstacks for proper nbt results. */
 		ItemStack firearmStack = ItemStack.EMPTY;
 		ItemStack ammoStack = ItemStack.EMPTY;
-		
+
 		/* Find input firearm and copy to output. */
 		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
 			ItemStack stack = inv.getItem(i);
-			
+
 			/* If item is a firearm instance and can reload, set output stack and break. */
 			if (stack.getItem() instanceof Firearm)
 			{
 				Firearm firearmItem = (Firearm) stack.getItem();
-				
+
 				if (firearmItem.canReload(stack) && FirearmNBTHelper.getNBTTagCondition(stack) != FirearmCondition.BROKEN)
 				{
 					firearmStack = stack.copy();
@@ -96,12 +100,12 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 				}
 			}
 		}
-		
+
 		/* Find input ammo and copy to output. */
 		for (int i = 0; i < inv.getContainerSize(); i++)
 		{
 			ItemStack stack = inv.getItem(i);
-			
+
 			/* If item is a ammo instance, set input ammo stack and break. */
 			if (stack.getItem() instanceof FirearmAmmo)
 			{
@@ -109,17 +113,17 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 				break;
 			}
 		}
-		
+
 		/* Increase ammo count by one on stack, if all itemstacks were found. */
 		if (!firearmStack.isEmpty() && !ammoStack.isEmpty())
 		{
 			FirearmNBTHelper.pushNBTTagAmmo(firearmStack, ammoStack);
-			
+
 			FirearmEmptyCapability.updateFirearmEmpty(firearmStack);
-			
+
 			return firearmStack;
 		}
-		
+
 		return ItemStack.EMPTY;
 	}
 
@@ -127,39 +131,39 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 	@Nonnull
 	public ItemStack getResultItem()
 	{
-		ItemStack outputStack = super.getResultItem().copy();
-		
+		ItemStack outputStack = result.copy();
+
 		if (outputStack.getItem() instanceof FirearmItem) {
 			FirearmItem firearmItem = (FirearmItem)outputStack.getItem();
-			
+
 			List<ItemStack> dummyAmmoStackList = new ArrayList<ItemStack>();
-			
+
 			this.getIngredients().forEach((ing) -> {
 				if (ing.getItems()[0].getItem() instanceof Ammo) {
 					dummyAmmoStackList.add(ing.getItems()[0]);
 					return;
 				}
 			});
-			
+
 			if (dummyAmmoStackList.isEmpty()) {
 				dummyAmmoStackList.add(firearmItem.getDefaultProjectileForFirearm());
 			}
-	
+
 			FirearmNBTHelper.setNBTTagMagazineStack(outputStack, dummyAmmoStackList);
-	
+
 			((FirearmItem)outputStack.getItem()).initNBTTags(outputStack);
-	
+
 			FirearmEmptyCapability.updateFirearmEmpty(outputStack);
 		}
 
 		return outputStack;
 	}
-	
+
 	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return ModCrafting.Recipes.FIREARM_MUZZLELOADER_RELOAD_SHAPELESS.get();
 	}
-	
+
 	public static class Serializer implements RecipeSerializer<ShapelessVanillaMuzzleloaderReloadRecipe> {
 		@Override
 		public ShapelessVanillaMuzzleloaderReloadRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
@@ -194,8 +198,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
 }
-

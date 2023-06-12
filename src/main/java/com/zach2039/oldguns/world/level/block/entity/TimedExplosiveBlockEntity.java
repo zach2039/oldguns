@@ -20,7 +20,7 @@ public class TimedExplosiveBlockEntity extends BlockEntity {
 	protected LivingEntity placer;
 	protected boolean isLit = false;
 	protected int fuseTime;
-	
+
 	public TimedExplosiveBlockEntity(BlockEntityType<?> type, BlockPos blockpos, BlockState state) {
 		super(type, blockpos, state);
 	}
@@ -32,71 +32,71 @@ public class TimedExplosiveBlockEntity extends BlockEntity {
 	public boolean isLit() {
 		return this.isLit;
 	}
-	
+
 	public void lightFuse() {
 		Level level = this.getLevel();
-		
+
 		if (!level.isClientSide()) {
 			this.isLit = true;
 			this.fuseTime = 100 + level.random.nextInt(80);
 		}
 	}
-	
+
 	public void explode() {
 		double x = this.getBlockPos().getX();
 		double y = this.getBlockPos().getY();
 		double z = this.getBlockPos().getZ();
-		level.explode(null, x, y, z, 3.0F, Explosion.BlockInteraction.DESTROY);
-		
+		level.explode(null, x, y, z, 3.0F, Level.ExplosionInteraction.BLOCK);
+
 		setRemoved();
 	}
-	
+
 	public void tick() {
 		Level level = this.getLevel();
-		
+
 		if (!level.isClientSide()) {
 			if (this.isLit) {
 				this.fuseTime--;
-				
+
 				if (this.fuseTime <= 0) {
 					explode();
 				}
 			}
 		}
 	}
-	
+
 	@Override
-    public void load(CompoundTag nbt) {
-        if (nbt != null) {
-            super.load(nbt);
+	public void load(CompoundTag nbt) {
+		if (nbt != null) {
+			super.load(nbt);
 
-            fuseTime = nbt.getInt("fuseTime");
-            isLit = nbt.getBoolean("isLit");
-            if (placer != null) {
-            	placer = (LivingEntity) level.getEntity(nbt.getInt("placer"));
-            }
-        }
-    }
+			fuseTime = nbt.getInt("fuseTime");
+			isLit = nbt.getBoolean("isLit");
+			if (placer != null) {
+				placer = (LivingEntity) level.getEntity(nbt.getInt("placer"));
+			}
+		}
+	}
 
-    @Override
-    public void saveAdditional(CompoundTag nbt) {
-        super.saveAdditional(nbt);
+	@Override
+	public void saveAdditional(CompoundTag nbt) {
+		super.saveAdditional(nbt);
 
-        nbt.putInt("fuseTime", fuseTime);
-        nbt.putBoolean("isLit", isLit);
-        if (nbt.contains("placer")) {
-        	nbt.putInt("placer", placer.getId());
-        }
-    }
-    
-    @Nullable
-    @Override
-    public Packet<ClientGamePacketListener> getUpdatePacket() {
-        return ClientboundBlockEntityDataPacket.create(this);
-    }
+		nbt.putInt("fuseTime", fuseTime);
+		nbt.putBoolean("isLit", isLit);
+		if (nbt.contains("placer")) {
+			nbt.putInt("placer", placer.getId());
+		}
+	}
 
-    @Override
-    public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
-        this.load(pkt.getTag());
-    }
+	@Nullable
+	@Override
+	public Packet<ClientGamePacketListener> getUpdatePacket() {
+		return ClientboundBlockEntityDataPacket.create(this);
+	}
+
+	@Override
+	public void onDataPacket(Connection net, ClientboundBlockEntityDataPacket pkt) {
+		this.load(pkt.getTag());
+	}
 }

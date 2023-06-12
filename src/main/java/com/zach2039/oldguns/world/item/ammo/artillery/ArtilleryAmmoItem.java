@@ -45,8 +45,7 @@ public class ArtilleryAmmoItem extends Item implements Ammo, ArtilleryAmmo {
 				.projectileDeviationModifier(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileDeviationModifier)).floatValue())
 				.projectileArmorBypassPercentage(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileArmorBypassPercentage)).floatValue())
 				.ammoType(entry.getProjectileType())
-				.stacksTo((int) OldGunsConfig.getServer(entry.getAttributes().maxStackSize))				
-				.tab(OldGuns.CREATIVE_MODE_TAB)
+				.stacksTo((int) OldGunsConfig.getServer(entry.getAttributes().maxStackSize))
 				);
 	}
 	

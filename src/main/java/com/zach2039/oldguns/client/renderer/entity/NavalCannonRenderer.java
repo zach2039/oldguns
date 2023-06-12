@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
@@ -48,7 +48,7 @@ public class NavalCannonRenderer implements BlockEntityRenderer<MediumNavalCanno
 		
 		stackIn.translate(0.5f, 2.25f, 0.5f);
 		model.setupAnim(blockEntity, 0, 0, 0, 0, 0);
-		stackIn.mulPose(Vector3f.YP.rotationDegrees(-blockEntity.getYawFromFacing()));
+		stackIn.mulPose(Axis.YP.rotationDegrees(-blockEntity.getYawFromFacing()));
 		
 		stackIn.pushPose();
 		stackIn.scale(1.5f, -1.5f, -1.5f);	

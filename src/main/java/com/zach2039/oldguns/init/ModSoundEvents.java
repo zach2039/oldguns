@@ -11,7 +11,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
- * 
+ *
  * @author Choonster
  *
  * With additions by:
@@ -23,11 +23,11 @@ public class ModSoundEvents {
 	private static boolean isInitialized;
 
 	public static final RegistryObject<SoundEvent> BULLET_RICOCHET = registerSoundEvent("bullet.ricochet");
-	
+
 	public static final RegistryObject<SoundEvent> BULLET_HIT_BLOCK = registerSoundEvent("bullet.hit.block");
-	
+
 	public static final RegistryObject<SoundEvent> BULLET_HIT_MOB = registerSoundEvent("bullet.hit.mob");
-	
+
 	public static final RegistryObject<SoundEvent> BULLET_SHOOT= registerSoundEvent("bullet.shoot");
 
 	/**
@@ -56,6 +56,6 @@ public class ModSoundEvents {
 	 * @return A RegistryObject reference to the SoundEvent
 	 */
 	private static RegistryObject<SoundEvent> registerSoundEvent(final String soundName) {
-		return SOUND_EVENTS.register(soundName, () -> new SoundEvent(new ResourceLocation(OldGuns.MODID, soundName)));
+		return SOUND_EVENTS.register(soundName, () -> SoundEvent.createVariableRangeEvent(new ResourceLocation(OldGuns.MODID, soundName)));
 	}
 }

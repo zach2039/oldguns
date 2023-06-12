@@ -1,6 +1,6 @@
 {
   "type": "oldguns:firearm_muzzleloader_powder_horn_reload_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:wheellock_caliver"

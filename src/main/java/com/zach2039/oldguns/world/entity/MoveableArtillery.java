@@ -7,13 +7,13 @@ import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.init.ModEntities;
-import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity.ArtilleryProperties;
 import com.zach2039.oldguns.api.artillery.Artillery;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -29,7 +29,6 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.Level;
@@ -419,7 +418,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	}
 
 	@Override
-	public Packet<?> getAddEntityPacket() {
+	public Packet<ClientGamePacketListener> getAddEntityPacket() {
 		return new ClientboundAddEntityPacket(this);
 	}
 

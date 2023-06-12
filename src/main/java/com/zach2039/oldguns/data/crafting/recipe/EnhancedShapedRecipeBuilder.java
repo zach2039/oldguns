@@ -22,17 +22,16 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeSerializer;
-import net.minecraft.world.item.crafting.ShapedRecipe;
+import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
 
@@ -43,10 +42,11 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  * @author Choonster
  */
 public class EnhancedShapedRecipeBuilder<
-RECIPE extends Recipe<?>,
-BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
-> extends ShapedRecipeBuilder {
+		RECIPE extends Recipe<?>,
+		BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
+		> extends ShapedRecipeBuilder {
 	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapedRecipeBuilder.class, /* ensureValid */ "m_126143_", ResourceLocation.class);
+	private static final Field CATEGORY = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* category */ "f_243672_");
 	private static final Field ADVANCEMENT = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* advancement */ "f_126110_");
 	private static final Field GROUP = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* group */ "f_126111_");
 	private static final Field ROWS = ObfuscationReflectionHelper.findField(ShapedRecipeBuilder.class, /* rows */ "f_126108_");
@@ -57,8 +57,8 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	protected String itemGroup;
 	protected final List<ResourceLocation> conditions;
 
-	protected EnhancedShapedRecipeBuilder(final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
-		super(result.getItem(), result.getCount());
+	protected EnhancedShapedRecipeBuilder(RecipeCategory recipeCategory, final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
+		super(recipeCategory, result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = serializer;
 		this.conditions = new ArrayList<ResourceLocation>();
@@ -162,9 +162,9 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 	 * @param id The recipe ID
 	 */
 	protected void ensureValid(final ResourceLocation id) {
-		if (itemGroup == null && result.getItem().getItemCategory() == null) {
-			throw new IllegalStateException("Enhanced Shaped Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
-		}
+		//if (itemGroup == null) {
+		//	throw new IllegalStateException("Enhanced Shaped Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
+		//}
 	}
 
 	/**
@@ -193,22 +193,24 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 				group = "";
 			}
 
+			final var category = (RecipeCategory) CATEGORY.get(this);
+
 			@SuppressWarnings("unchecked")
 			final List<String> rows = (List<String>) ROWS.get(this);
 
 			@SuppressWarnings("unchecked")
-			final Map<Character, Ingredient> key = (Map<Character, Ingredient>) KEY.get(this);
+			final var key = (Map<Character, Ingredient>) KEY.get(this);
 
-			String itemGroupName = itemGroup;
-			if (itemGroupName == null) {
-				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
-				itemGroupName = itemGroup.getRecipeFolderName();
-			}
-
-			final ResourceLocation advancementID = new ResourceLocation(id.getNamespace(), "recipes/" + itemGroupName + "/" + id.getPath());
-
-			final ConditionedResult baseRecipe = new ConditionedResult(id, result.getItem(), result.getCount(), group, rows, key, advancementBuilder, advancementID, conditions);
-
+			final var baseRecipe = new Result(id,
+					result.getItem(),
+					result.getCount(),
+					group,
+					determineBookCategory(category),
+					rows,
+					key,
+					advancementBuilder,
+					id.withPrefix("recipes/" + category.getFolderName() + "/")
+			);
 			consumer.accept(new SimpleFinishedRecipe(baseRecipe, result, serializer));
 		} catch (final IllegalAccessException | InvocationTargetException e) {
 			throw new RuntimeException("Failed to build Enhanced Shaped Recipe " + id, e);
@@ -217,7 +219,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 
 	public static class Vanilla extends EnhancedShapedRecipeBuilder<ShapedRecipe, Vanilla> {
 		private Vanilla(final ItemStack result) {
-			super(result, RecipeSerializer.SHAPED_RECIPE);
+			super(RecipeCategory.MISC, result, RecipeSerializer.SHAPED_RECIPE);
 		}
 
 		/**
@@ -274,7 +276,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 			for(ResourceLocation l : this.conditions) {
 				JsonObject typeObj = new JsonObject();
 				typeObj.addProperty("type", l.toString());
-				condArray.add(typeObj); 
+				condArray.add(typeObj);
 			}
 
 			p_126167_.add("conditions", condArray);
@@ -293,7 +295,7 @@ BUILDER extends EnhancedShapedRecipeBuilder<RECIPE, BUILDER>
 
 			p_126167_.add("key", jsonobject);
 			JsonObject jsonobject1 = new JsonObject();
-			jsonobject1.addProperty("item", Registry.ITEM.getKey(this.result).toString());
+			jsonobject1.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result).toString());
 			if (this.count > 1) {
 				jsonobject1.addProperty("count", this.count);
 			}

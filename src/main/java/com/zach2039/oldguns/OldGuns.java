@@ -42,20 +42,20 @@ import net.minecraftforge.network.simple.SimpleChannel;
 @Mod(OldGuns.MODID)
 public class OldGuns
 {
-    public static Logger LOGGER = LogManager.getLogger(OldGuns.MODID);
-	
+	public static Logger LOGGER = LogManager.getLogger(OldGuns.MODID);
+
 	public static final String MODID = "oldguns";
 	public static final String NAME = "Old Guns Mod";
 
 	public static final SimpleChannel NETWORK = ModNetwork.getNetworkChannel();
 
-    public OldGuns() {
-    	OldGunsConfig.register(ModLoadingContext.get());
+	public OldGuns() {
+		OldGunsConfig.register(ModLoadingContext.get());
 
 		final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
 		FMLJavaModLoadingContext.get().getModEventBus().addListener(this::onCommonSetup);
-		
+
 		ModFluids.initialize(modEventBus);
 		ModBlocks.initialize(modEventBus);
 		ModItems.initialize(modEventBus);
@@ -69,10 +69,10 @@ public class OldGuns
 		ModSoundEvents.initialize(modEventBus);
 		ModBlockEntities.initialize(modEventBus);
 		ModLootConditionTypes.initialize(modEventBus);
-    }
+	}
 
 	private void onCommonSetup(final FMLCommonSetupEvent event) {
-    	LOGGER.warn("****************************************");
+		LOGGER.warn("****************************************");
 		LOGGER.warn("Random UUID: {}", UUID.randomUUID());
 		LOGGER.warn("****************************************");
 
@@ -89,17 +89,7 @@ public class OldGuns
 	public static void enqueue(final InterModEnqueueEvent event) {
 
 	}
-	
-	public static final CreativeModeTab CREATIVE_MODE_TAB = new CreativeModeTab(MODID)
-	{
-		@Override
-		@Nonnull
-		public ItemStack makeIcon()
-		{
-			return new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
-		}
-	};
-	
+
 	public static void printDebug(String message) {
 		if (OldGunsConfig.COMMON.printDebugMessages.get()) {
 			OldGuns.LOGGER.info(message);

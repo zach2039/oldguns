@@ -1,13 +1,5 @@
 package com.zach2039.oldguns.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.function.Supplier;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.zach2039.oldguns.OldGuns;
@@ -19,26 +11,25 @@ import com.zach2039.oldguns.util.EnumFaceRotation;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.level.block.LiquidNiterCauldronBlock;
 import com.zach2039.oldguns.world.level.block.NiterBeddingBlock;
-
-import net.minecraft.client.renderer.block.model.ItemTransforms.TransformType;
+import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.core.Direction;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.client.model.generators.BlockModelBuilder;
-import net.minecraftforge.client.model.generators.BlockStateProvider;
-import net.minecraftforge.client.model.generators.ConfiguredModel;
-import net.minecraftforge.client.model.generators.ModelBuilder;
-import net.minecraftforge.client.model.generators.ModelFile;
+import net.minecraftforge.client.model.generators.*;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.common.util.Lazy;
 
+import java.util.*;
+import java.util.function.Function;
+import java.util.function.Supplier;
+
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
- * 
+ *
  * @author Choonster
  *
  * With additions by:
@@ -84,7 +75,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 
 							.transforms()
 
-							.transform(TransformType.FIRST_PERSON_RIGHT_HAND)
+							.transform(ItemTransforms.TransformType.FIRST_PERSON_RIGHT_HAND)
 							.rotation(0, 135, 0)
 							.scale(0.40f)
 							.end()
@@ -109,8 +100,8 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 		return ImmutableMap.copyOf(map);
 	});
 
-	public OldGunsBlockStateProvider(final DataGenerator gen, final ExistingFileHelper exFileHelper) {
-		super(gen, OldGuns.MODID, exFileHelper);
+	public OldGunsBlockStateProvider(final PackOutput output, final ExistingFileHelper exFileHelper) {
+		super(output, OldGuns.MODID, exFileHelper);
 	}
 
 	@Override
@@ -120,23 +111,23 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 
 	@Override
 	protected void registerStatesAndModels() {
-		
+
 		final BlockModelBuilder niterBeddingEmpty = models()
 				.cubeAll(name(ModBlocks.NITER_BEDDING.get()) + "_empty", modLoc("block/niter_bedding_empty"));
-		
+
 		final BlockModelBuilder niterBeddingFull = models()
 				.cubeAll(name(ModBlocks.NITER_BEDDING.get()) + "_full", modLoc("block/niter_bedding_full"));
-		
+
 		getVariantBuilder(ModBlocks.NITER_BEDDING.get()).forAllStates(state -> {
 			if (state.getValue(NiterBeddingBlock.REFUSE_AMOUNT) != NiterBeddingBlock.MAX_REFUSE_AMOUNT) {
 				return ConfiguredModel.builder().modelFile(niterBeddingEmpty).build();
 			}
-			
+
 			return ConfiguredModel.builder().modelFile(niterBeddingFull).build();
 		});
 
 		simpleBlockItem(ModBlocks.NITER_BEDDING.get(), niterBeddingEmpty);
-		
+
 //		{
 //			  "parent": "minecraft:block/template_cauldron_level1",
 //			  "textures": {
@@ -148,7 +139,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 //			    "side": "minecraft:block/cauldron_side"
 //			  }
 //			}
-		
+
 		final ModelFile liquidNiterCauldron1 = models()
 				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_level1", mcLoc("template_cauldron_level1"))
 				.texture("content", modLoc("block/fluid_liquid_niter_still"))
@@ -157,7 +148,7 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.texture("top", mcLoc("block/cauldron_top"))
 				.texture("bottom", mcLoc("block/cauldron_bottom"))
 				.texture("side", mcLoc("block/cauldron_side"));
-		
+
 		final ModelFile liquidNiterCauldron2 = models()
 				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_level2", mcLoc("template_cauldron_level2"))
 				.texture("content", modLoc("block/fluid_liquid_niter_still"))
@@ -166,8 +157,8 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.texture("top", mcLoc("block/cauldron_top"))
 				.texture("bottom", mcLoc("block/cauldron_bottom"))
 				.texture("side", mcLoc("block/cauldron_side"));
-		
-		
+
+
 		final ModelFile liquidNiterCauldronFull = models()
 				.withExistingParent(name(ModBlocks.LIQUID_NITER_CAULDRON.get()) + "_full", mcLoc("template_cauldron_full"))
 				.texture("content", modLoc("block/fluid_liquid_niter_still"))
@@ -183,13 +174,13 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.modelForState()
 				.modelFile(liquidNiterCauldron1)
 				.addModel()
-				
+
 				.partialState()
 				.with(LiquidNiterCauldronBlock.LEVEL, 2)
 				.modelForState()
 				.modelFile(liquidNiterCauldron2)
 				.addModel()
-				
+
 				.partialState()
 				.with(LiquidNiterCauldronBlock.LEVEL, 3)
 				.modelForState()
@@ -197,55 +188,55 @@ public class OldGunsBlockStateProvider extends BlockStateProvider {
 				.addModel();
 
 		//simpleBlockItem(ModBlocks.LIQUID_NITER_CAULDRON.get(), liquidNiterCauldronFull);
-		
+
 		final ModelFile highGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/high_grade_black_powder_dry")
 		);
-		
+
 		simpleBlock(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), highGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.HIGH_GRADE_BLACK_POWDER_BLOCK.get(), highGradeBlackPowderBlock);
-		
+
 		final ModelFile wetHighGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/high_grade_black_powder_wet")
 		);
-		
+
 		simpleBlock(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.WET_HIGH_GRADE_BLACK_POWDER_BLOCK.get(), wetHighGradeBlackPowderBlock);
-		
+
 		final ModelFile mediumGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/medium_grade_black_powder_dry")
 		);
-		
+
 		simpleBlock(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), mediumGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), mediumGradeBlackPowderBlock);
-		
+
 		final ModelFile wetMediumGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/medium_grade_black_powder_wet")
 		);
-		
+
 		simpleBlock(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), wetMediumGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK.get(), wetMediumGradeBlackPowderBlock);
-		
+
 		final ModelFile lowGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/low_grade_black_powder_dry")
 		);
-		
+
 		simpleBlock(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get(), lowGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.LOW_GRADE_BLACK_POWDER_BLOCK.get(), lowGradeBlackPowderBlock);
-		
+
 		final ModelFile wetLowGradeBlackPowderBlock = models().cubeAll(
 				name(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get()),
 				modLoc("block/low_grade_black_powder_wet")
 		);
-		
+
 		simpleBlock(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get(), wetLowGradeBlackPowderBlock);
 		simpleBlockItem(ModBlocks.WET_LOW_GRADE_BLACK_POWDER_BLOCK.get(), wetLowGradeBlackPowderBlock);
-		
+
 		fluidBlock(ModFluids.LIQUID_NITER);
 	}
 

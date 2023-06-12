@@ -1,13 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_lead_firearm_ammo"
-    },
-    {
-      "type": "oldguns:can_craft_paper_cartridges"
-    }
-  ],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:medium_lead_musket_ball"

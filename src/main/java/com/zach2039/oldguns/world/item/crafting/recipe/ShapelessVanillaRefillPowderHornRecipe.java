@@ -15,6 +15,7 @@ import com.zach2039.oldguns.world.item.tools.PowderHornItem;
 
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -22,6 +23,7 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -32,10 +34,12 @@ import net.minecraftforge.common.crafting.CraftingHelper;
 
 public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 
+	private final ItemStack result;
 	private final boolean isSimple;
-	
+
 	public ShapelessVanillaRefillPowderHornRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-		super(id, group, result, ingredients);
+		super(id, group, CraftingBookCategory.MISC, result, ingredients);
+		this.result = result;
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
 	}
 
@@ -44,34 +48,34 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 		// Recipe is dynamic, so return empty itemstack
 		return ItemStack.EMPTY;
 	}
-	
+
 	@Override
 	public boolean isSpecial() {
 		// Recipe is dynamic, so return true
 		return true;
 	}
-	
+
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(final CraftingContainer inv) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
 
 		// Dont allow remaining items, since we want to refil the powder horn and not duplicate it
-		
+
 		return remainingItems;
 	}
-	
+
 	@Override
 	public ItemStack assemble(final CraftingContainer inv) {
 		ItemStack powderHornStack = ItemStack.EMPTY;
 		List<ItemStack> powderStacks = new ArrayList<ItemStack>();
-		
+
 		for (int i = 0; i < inv.getContainerSize(); i++) {
 			ItemStack stack = inv.getItem(i);
-			
-			if (stack.getItem() instanceof PowderHornItem) {				
+
+			if (stack.getItem() instanceof PowderHornItem) {
 				powderHornStack = stack.copy();
 			}
-			
+
 			if (stack.is(ModTags.Items.ANY_GUNPOWDER)) {
 				powderStacks.add(stack.copy());
 			}
@@ -81,15 +85,15 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 			ItemStack firstPowderStack = powderStacks.get(0);
 			int multiplier = 1;
 			int powderAmount = powderStacks.size() * multiplier;
-			
+
 			// Dont allow overfill
 			if (PowderHornNBTHelper.peekPowderCount(powderHornStack) + powderAmount > PowderHornItem.MAX_CAPACITY)
 				return ItemStack.EMPTY;
-			
+
 			// Dont allow powder mixing
 			if (!powderStacks.stream().allMatch(e -> firstPowderStack.getItem() == e.getItem()))
 				return ItemStack.EMPTY;
-				
+
 			// Dont allow overwriting stored powder
 			final ItemStack powderHornFinal = powderHornStack;
 			final ItemStack powderStackFinal = firstPowderStack.copy();
@@ -98,15 +102,15 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 				if (!powderStacks.stream().allMatch(e -> PowderHornNBTHelper.peekPowderStack(powderHornFinal).getItem() == powderStackFinal.getItem()))
 					return ItemStack.EMPTY;
 			}
-			
+
 			PowderHornNBTHelper.setPowderStack(powderHornFinal, powderStackFinal);
-			
+
 			return powderHornStack;
 		}
-		
+
 		return ItemStack.EMPTY;
 	}
-	
+
 	@Override
 	public boolean matches(CraftingContainer craftinv, Level level) {
 		StackedContents stackedcontents = new StackedContents();
@@ -143,9 +147,9 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 
 		return i == this.getIngredients().size() && (isSimple ? stackedcontents.canCraft(this, (IntList)null) : net.minecraftforge.common.util.RecipeMatcher.findMatches(inputs,  this.getIngredients()) != null);
 	}
-	
+
 	public static class Serializer implements RecipeSerializer<ShapelessVanillaRefillPowderHornRecipe> {
-		
+
 		@Override
 		public ShapelessVanillaRefillPowderHornRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");
@@ -153,7 +157,7 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 
 			ShapelessVanillaRefillPowderHornRecipe recipeFromJson = new ShapelessVanillaRefillPowderHornRecipe(recipeID, group, result, ingredients);
-			
+
 			return recipeFromJson;
 		}
 
@@ -181,10 +185,10 @@ public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
-	
+
 	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return ModCrafting.Recipes.POWDER_HORN_REFILL_SHAPELESS.get();

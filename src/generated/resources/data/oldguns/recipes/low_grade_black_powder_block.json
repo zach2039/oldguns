@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "item": "minecraft:gunpowder"

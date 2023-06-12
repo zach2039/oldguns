@@ -20,7 +20,9 @@ import net.minecraft.advancements.CriterionTriggerInstance;
 import net.minecraft.advancements.RequirementsStrategy;
 import net.minecraft.advancements.critereon.RecipeUnlockedTrigger;
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -42,10 +44,11 @@ import net.minecraftforge.fml.util.ObfuscationReflectionHelper;
  * @author Choonster
  */
 public class EnhancedShapelessRecipeBuilder<
-RECIPE extends Recipe<?>,
-BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
-> extends ShapelessRecipeBuilder {
+		RECIPE extends Recipe<?>,
+		BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
+		> extends ShapelessRecipeBuilder {
 	private static final Method ENSURE_VALID = ObfuscationReflectionHelper.findMethod(ShapelessRecipeBuilder.class, /* ensureValid */ "m_126207_", ResourceLocation.class);
+	private static final Field CATEGORY = ObfuscationReflectionHelper.findField(ShapelessRecipeBuilder.class, /* category */ "f_244182_");
 	private static final Field ADVANCEMENT = ObfuscationReflectionHelper.findField(ShapelessRecipeBuilder.class, /* advancement */ "f_126176_");
 	private static final Field GROUP = ObfuscationReflectionHelper.findField(ShapelessRecipeBuilder.class, /* group */ "f_126177_");
 	private static final Field INGREDIENTS = ObfuscationReflectionHelper.findField(ShapelessRecipeBuilder.class, /* ingredients */ "f_126175_");
@@ -57,7 +60,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 	protected final List<ResourceLocation> conditions;
 
 	protected EnhancedShapelessRecipeBuilder(final ItemStack result, final RecipeSerializer<? extends RECIPE> serializer) {
-		super(result.getItem(), result.getCount());
+		super(RecipeCategory.MISC, result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = serializer;
 		this.conditions = new ArrayList<ResourceLocation>();
@@ -65,7 +68,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 
 	@SuppressWarnings("unchecked")
 	public EnhancedShapelessRecipeBuilder(ItemStack result, Serializer serializer) {
-		super(result.getItem(), result.getCount());
+		super(RecipeCategory.MISC, result.getItem(), result.getCount());
 		this.result = result;
 		this.serializer = (RecipeSerializer<? extends RECIPE>) serializer;
 		this.conditions = new ArrayList<ResourceLocation>();
@@ -95,7 +98,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 	public BUILDER requires(final TagKey<Item> tagIn) {
 		return (BUILDER) super.requires(tagIn);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public BUILDER requires(final TagKey<Item> tagIn, final int quantity) {
 		return (BUILDER) super.requires(Ingredient.of(tagIn), quantity);
@@ -199,17 +202,11 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 				group = "";
 			}
 
+			final var category = (RecipeCategory) CATEGORY.get(this);
+
 			final List<Ingredient> ingredients = getIngredients();
 
-			String itemGroupName = itemGroup;
-			if (itemGroupName == null && !hasDummyOutput) {
-				final CreativeModeTab itemGroup = Preconditions.checkNotNull(result.getItem().getItemCategory());
-				itemGroupName = itemGroup.getRecipeFolderName();
-			}
-
-			final ResourceLocation advancementID = new ResourceLocation(id.getNamespace(), "recipes/" + itemGroupName + "/" + id.getPath());
-
-			final ConditionedResult baseRecipe = new ConditionedResult(id, result.getItem(), result.getCount(), group, ingredients, advancementBuilder, advancementID, conditions);
+			final var baseRecipe = new Result(id, result.getItem(), result.getCount(), group, determineBookCategory(category), ingredients, advancementBuilder, id.withPrefix("recipes/" + category.getFolderName() + "/"));
 
 			consumer.accept(new SimpleFinishedRecipe(baseRecipe, result, serializer));
 		} catch (final IllegalAccessException | InvocationTargetException e) {
@@ -227,9 +224,9 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 	}
 
 	protected void validate(final ResourceLocation id) {
-		if (itemGroup == null && result.getItem().getItemCategory() == null && !hasDummyOutput) {
-			throw new IllegalStateException("Enhanced Shapeless Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
-		}
+		//if (itemGroup == null && result.getItem().getItemCategory() == null && !hasDummyOutput) {
+		//	throw new IllegalStateException("Enhanced Shapeless Recipe " + id + " has result " + result + " with no item group - use EnhancedShapedRecipeBuilder.itemGroup to specify one");
+		//}
 	}
 
 	public static class Vanilla extends EnhancedShapelessRecipeBuilder<ShapelessRecipe, Vanilla> {
@@ -288,7 +285,7 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 			for(ResourceLocation l : this.conditions) {
 				JsonObject typeObj = new JsonObject();
 				typeObj.addProperty("type", l.toString());
-				condArray.add(typeObj); 
+				condArray.add(typeObj);
 			}
 
 			p_126230_.add("conditions", condArray);
@@ -297,11 +294,11 @@ BUILDER extends EnhancedShapelessRecipeBuilder<RECIPE, BUILDER>
 
 			for(Ingredient ingredient : this.ingredients) {
 				jsonarray.add(ingredient.toJson());
-			}	         
+			}
 
 			p_126230_.add("ingredients", jsonarray);
 			JsonObject jsonobject = new JsonObject();
-			jsonobject.addProperty("item", Registry.ITEM.getKey(this.result).toString());
+			jsonobject.addProperty("item", BuiltInRegistries.ITEM.getKey(this.result).toString());
 			if (this.count > 1) {
 				jsonobject.addProperty("count", this.count);
 			}

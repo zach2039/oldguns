@@ -69,6 +69,7 @@ import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
 import net.minecraftforge.network.PacketDistributor;
 
 public class FirearmItem extends BowItem implements Firearm {
@@ -117,7 +118,6 @@ public class FirearmItem extends BowItem implements Firearm {
 				.projectileSpeed(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileSpeed)).floatValue())
 				.defaultDurability((int) OldGunsConfig.getServer(entry.getAttributes().durability))
 				.setNoRepair()
-				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}
 
@@ -134,18 +134,14 @@ public class FirearmItem extends BowItem implements Firearm {
 		FirearmTooltipHelper.populateTooltipInfo(this, stackIn, tooltip);	
 	}
 
-	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-		if (this.allowedIn(tab)) {
-			ItemStack firearmStack = new ItemStack(this);
-			initNBTTags(firearmStack);
-			for (int i = 0; i < this.ammoCapacity; i++) {
-				FirearmNBTHelper.pushNBTTagAmmo(firearmStack, getDefaultProjectileForFirearm());
-			}
-			stackList.add(firearmStack);
+	public void fillCreativeModeTab(final MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries) {
+		ItemStack firearmStack = new ItemStack(this);
+		initNBTTags(firearmStack);
+		for (int i = 0; i < this.ammoCapacity; i++) {
+			FirearmNBTHelper.pushNBTTagAmmo(firearmStack, getDefaultProjectileForFirearm());
 		}
+		entries.put(firearmStack, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
 	}
-
 
 	@Override
 	public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
@@ -727,7 +723,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			double expZ = shooter.zo + handZ;
 
 			/* Explode for real. */
-			worldIn.explode((Entity)null, expX, expY, expZ, strength, false, Explosion.BlockInteraction.NONE);			
+			worldIn.explode((Entity)null, expX, expY, expZ, strength, false, Level.ExplosionInteraction.NONE);
 
 			/* Empty firearm and set damage to max. */
 			FirearmNBTHelper.emptyNBTTagAmmo(stackIn);

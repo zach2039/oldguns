@@ -1,6 +1,6 @@
 {
   "type": "oldguns:powder_horn_refill_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:powder_horn"

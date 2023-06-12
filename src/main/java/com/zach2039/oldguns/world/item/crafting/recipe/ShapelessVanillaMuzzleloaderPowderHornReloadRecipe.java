@@ -33,6 +33,7 @@ import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
@@ -44,8 +45,8 @@ public class ShapelessVanillaMuzzleloaderPowderHornReloadRecipe extends Shapeles
 {
 	private final boolean isSimple;
 	
-	public ShapelessVanillaMuzzleloaderPowderHornReloadRecipe(final ResourceLocation id, final String group, final ItemStack recipeOutput, final NonNullList<Ingredient> ingredients) {
-		super(id, group, recipeOutput, ingredients);
+	public ShapelessVanillaMuzzleloaderPowderHornReloadRecipe(final ResourceLocation id, final String group, final ItemStack result, final NonNullList<Ingredient> ingredients) {
+		super(id, group, CraftingBookCategory.MISC, result, ingredients);
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple); 
 	}
 	

@@ -1,5 +1,6 @@
 package com.zach2039.oldguns.init;
 
+import java.util.Collection;
 import java.util.Optional;
 
 import com.zach2039.oldguns.OldGuns;
@@ -61,7 +62,7 @@ import net.minecraftforge.registries.RegistryObject;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
- * 
+ *
  * @author Choonster
  *
  * With additions by:
@@ -69,13 +70,13 @@ import net.minecraftforge.registries.RegistryObject;
  */
 public class ModItems {
 	private static final DeferredRegister<net.minecraft.world.item.Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OldGuns.MODID);
-	
+
 	private static boolean isInitialized;
-	
-	// Artillery	
+
+	// Artillery
 	// Pieces
 	public static final RegistryObject<BombardItem> BOMBARD = ITEMS.register("bombard", () -> new BombardItem(ModItems.defaultItemProperties().stacksTo(1)));
-	
+
 	// Ammo
 	// Rockets
 	public static final RegistryObject<ArtilleryRocketAmmoItem> MEDIUM_IRON_EXPLOSIVE_ROCKET = ITEMS.register("medium_iron_explosive_rocket", () -> new ArtilleryRocketAmmoItem(AmmoTypes.ArtilleryAmmo.MEDIUM_IRON_EXPLOSIVE_ROCKET));
@@ -88,7 +89,7 @@ public class ModItems {
 	public static final RegistryObject<SmallPowderCharge> SMALL_POWDER_CHARGE = ITEMS.register("small_powder_charge", () -> new SmallPowderCharge());
 	public static final RegistryObject<MediumPowderCharge> MEDIUM_POWDER_CHARGE = ITEMS.register("medium_powder_charge", () -> new MediumPowderCharge());
 	public static final RegistryObject<LargePowderCharge> LARGE_POWDER_CHARGE = ITEMS.register("large_powder_charge", () -> new LargePowderCharge());
-	
+
 	// Parts
 	// Cannon Barrel
 	// Iron
@@ -106,7 +107,7 @@ public class ModItems {
 	public static final RegistryObject<ArtilleryPartItem> SMALL_WOODEN_CARRIAGE_WHEEL = ITEMS.register("small_wooden_carriage_wheel", () -> new ArtilleryPartItem(ArtilleryPart.SMALL_CARRIAGE_WHEEL));
 	public static final RegistryObject<ArtilleryPartItem> MEDIUM_WOODEN_CARRIAGE_WHEEL = ITEMS.register("medium_wooden_carriage_wheel", () -> new ArtilleryPartItem(ArtilleryPart.MEDIUM_CARRIAGE_WHEEL));
 	public static final RegistryObject<ArtilleryPartItem> LARGE_WOODEN_CARRIAGE_WHEEL = ITEMS.register("large_wooden_carriage_wheel", () -> new ArtilleryPartItem(ArtilleryPart.LARGE_CARRIAGE_WHEEL));
-	
+
 	// Firearms
 	// Matchlock
 	public static final RegistryObject<FirearmItem> MATCHLOCK_DERRINGER = ITEMS.register("matchlock_derringer", () -> new FirearmItem(FirearmTypes.Muzzleloaders.MATCHLOCK_DERRINGER));
@@ -118,7 +119,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmItem> MATCHLOCK_MUSKET = ITEMS.register("matchlock_musket", () -> new FirearmItem(FirearmTypes.Muzzleloaders.MATCHLOCK_MUSKET));
 	public static final RegistryObject<FirearmItem> MATCHLOCK_LONG_MUSKET = ITEMS.register("matchlock_long_musket", () -> new FirearmItem(FirearmTypes.Muzzleloaders.MATCHLOCK_LONG_MUSKET));
 	public static final RegistryObject<FirearmItem> MATCHLOCK_BLUNDERBUSS = ITEMS.register("matchlock_blunderbuss", () -> new FirearmItem(FirearmTypes.Muzzleloaders.MATCHLOCK_BLUNDERBUSS));
-	
+
 	// Wheelock
 	public static final RegistryObject<FirearmItem> WHEELLOCK_DERRINGER = ITEMS.register("wheellock_derringer", () -> new FirearmItem(FirearmTypes.Muzzleloaders.WHEELLOCK_DERRINGER));
 	public static final RegistryObject<FirearmItem> WHEELLOCK_PISTOL = ITEMS.register("wheellock_pistol", () -> new FirearmItem(FirearmTypes.Muzzleloaders.WHEELLOCK_PISTOL));
@@ -131,7 +132,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmItem> WHEELLOCK_BLUNDERBUSS_PISTOL = ITEMS.register("wheellock_blunderbuss_pistol", () -> new FirearmItem(FirearmTypes.Muzzleloaders.WHEELLOCK_BLUNDERBUSS_PISTOL));
 	public static final RegistryObject<FirearmItem> WHEELLOCK_BLUNDERBUSS = ITEMS.register("wheellock_blunderbuss", () -> new FirearmItem(FirearmTypes.Muzzleloaders.WHEELLOCK_BLUNDERBUSS));
 	public static final RegistryObject<FirearmItem> WHEELLOCK_HAND_MORTAR = ITEMS.register("wheellock_hand_mortar", () -> new FirearmItem(FirearmTypes.Muzzleloaders.WHEELLOCK_HAND_MORTAR));
-	
+
 	// Flintlock
 	public static final RegistryObject<FirearmItem> FLINTLOCK_DERRINGER = ITEMS.register("flintlock_derringer",	() -> new FirearmItem(FirearmTypes.Muzzleloaders.FLINTLOCK_DERRINGER));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_DUCKFOOT_DERRINGER = ITEMS.register("flintlock_duckfoot_derringer", () -> new FirearmItem(FirearmTypes.Muzzleloaders.FLINTLOCK_DUCKFOOT_DERRINGER));
@@ -146,7 +147,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmItem> FLINTLOCK_NOCK_GUN = ITEMS.register("flintlock_nock_gun", () -> new FirearmItem(FirearmTypes.Muzzleloaders.FLINTLOCK_NOCK_GUN));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_BLUNDERBUSS = ITEMS.register("flintlock_blunderbuss", () -> new FirearmItem(FirearmTypes.Muzzleloaders.FLINTLOCK_BLUNDERBUSS));
 	public static final RegistryObject<FirearmItem> FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS = ITEMS.register("flintlock_doublebarrel_blunderbuss", () -> new FirearmItem(FirearmTypes.Muzzleloaders.FLINTLOCK_DOUBLEBARREL_BLUNDERBUSS));
-	
+
 	// Caplock
 	public static final RegistryObject<FirearmItem> CAPLOCK_DERRINGER = ITEMS.register("caplock_derringer",	() -> new FirearmItem(FirearmTypes.Muzzleloaders.CAPLOCK_DERRINGER));
 	public static final RegistryObject<FirearmItem> CAPLOCK_DUCKFOOT_DERRINGER = ITEMS.register("caplock_duckfoot_derringer", () -> new FirearmItem(FirearmTypes.Muzzleloaders.CAPLOCK_DUCKFOOT_DERRINGER));
@@ -160,7 +161,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmItem> CAPLOCK_LONG_MUSKET = ITEMS.register("caplock_long_musket", () -> new FirearmItem(FirearmTypes.Muzzleloaders.CAPLOCK_LONG_MUSKET));
 	public static final RegistryObject<FirearmItem> CAPLOCK_BLUNDERBUSS = ITEMS.register("caplock_blunderbuss", () -> new FirearmItem(FirearmTypes.Muzzleloaders.CAPLOCK_BLUNDERBUSS));
 	public static final RegistryObject<FirearmItem> CAPLOCK_DOUBLEBARREL_BLUNDERBUSS = ITEMS.register("caplock_doublebarrel_blunderbuss", () -> new FirearmItem(FirearmTypes.Muzzleloaders.CAPLOCK_DOUBLEBARREL_BLUNDERBUSS));
-	
+
 	// Ammo
 	// Stone
 	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_MUSKET_BALL = ITEMS.register("small_stone_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_STONE_MUSKET_BALL));
@@ -175,7 +176,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmAmmoItem> SMALL_STONE_BIRDSHOT = ITEMS.register("small_stone_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_STONE_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_STONE_BIRDSHOT = ITEMS.register("medium_stone_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_STONE_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_STONE_BIRDSHOT = ITEMS.register("large_stone_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_STONE_BIRDSHOT));
-	
+
 	// Iron
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL = ITEMS.register("small_iron_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_IRON_MUSKET_BALL));
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_iron_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_IRON_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
@@ -192,7 +193,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmAmmoItem> SMALL_IRON_BIRDSHOT = ITEMS.register("small_iron_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_IRON_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_IRON_BIRDSHOT = ITEMS.register("medium_iron_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_IRON_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_IRON_BIRDSHOT = ITEMS.register("large_iron_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_IRON_BIRDSHOT));
-	
+
 	// Lead
 	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL = ITEMS.register("small_lead_musket_ball", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_MUSKET_BALL));
 	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_MUSKET_BALL_MEDIUM_GRADE_PAPER_CARTRIDGE = ITEMS.register("small_lead_musket_ball_medium_grade_paper_cartridge", () -> new FirearmPaperCartridgeItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_MUSKET_BALL, ProjectilePowderType.MEDIUM_GRADE));
@@ -209,7 +210,7 @@ public class ModItems {
 	public static final RegistryObject<FirearmAmmoItem> SMALL_LEAD_BIRDSHOT = ITEMS.register("small_lead_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.SMALL_LEAD_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> MEDIUM_LEAD_BIRDSHOT = ITEMS.register("medium_lead_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.MEDIUM_LEAD_BIRDSHOT));
 	public static final RegistryObject<FirearmAmmoItem> LARGE_LEAD_BIRDSHOT = ITEMS.register("large_lead_birdshot", () -> new FirearmAmmoItem(AmmoTypes.FirearmAmmo.LARGE_LEAD_BIRDSHOT));
-	
+
 	// Parts
 	// Mechanism
 	public static final RegistryObject<FirearmPartItem> MATCHLOCK_MECHANISM = ITEMS.register("matchlock_mechanism", () -> new FirearmPartItem(FirearmPart.MATCHLOCK_MECHANISM));
@@ -248,7 +249,7 @@ public class ModItems {
 	// Iron
 	public static final RegistryObject<FirearmPartItem> SMALL_IRON_FLARED_BARREL = ITEMS.register("small_iron_flared_barrel", () -> new FirearmPartItem(FirearmPart.SMALL_METAL_FLARED_BARREL));
 	public static final RegistryObject<FirearmPartItem> MEDIUM_IRON_FLARED_BARREL = ITEMS.register("medium_iron_flared_barrel", () -> new FirearmPartItem(FirearmPart.MEDIUM_METAL_FLARED_BARREL));
-	public static final RegistryObject<FirearmPartItem> LARGE_IRON_FLARED_BARREL = ITEMS.register("large_iron_flared_barrel", () -> new FirearmPartItem(FirearmPart.LARGE_METAL_FLARED_BARREL));	
+	public static final RegistryObject<FirearmPartItem> LARGE_IRON_FLARED_BARREL = ITEMS.register("large_iron_flared_barrel", () -> new FirearmPartItem(FirearmPart.LARGE_METAL_FLARED_BARREL));
 	public static final RegistryObject<FirearmPartItem> SMALL_BRASS_FLARED_BARREL = ITEMS.register("small_brass_flared_barrel", () -> new FirearmPartItem(FirearmPart.SMALL_METAL_FLARED_BARREL));
 	public static final RegistryObject<FirearmPartItem> MEDIUM_BRASS_FLARED_BARREL = ITEMS.register("medium_brass_flared_barrel", () -> new FirearmPartItem(FirearmPart.MEDIUM_METAL_FLARED_BARREL));
 	public static final RegistryObject<FirearmPartItem> LARGE_BRASS_FLARED_BARREL = ITEMS.register("large_brass_flared_barrel", () -> new FirearmPartItem(FirearmPart.LARGE_METAL_FLARED_BARREL));
@@ -264,31 +265,31 @@ public class ModItems {
 	public static final RegistryObject<FirearmPartItem> DIAMOND_TRIGGER_ASSEMBLY = ITEMS.register("diamond_trigger_assembly", () -> new FirearmPartItem(FirearmPart.DIAMOND_TRIGGER_ASSEMBLY));
 	// Percussion Cap Cone
 	public static final RegistryObject<FirearmPartItem> PERCUSSION_CAP_CONE = ITEMS.register("percussion_cap_cone", () -> new FirearmPartItem(FirearmPart.PERCUSSION_CAP_CONE));
-	
+
 	// Materials
 	// Iron
 	public static final RegistryObject<MaterialItem> IRON_BITS = ITEMS.register("iron_bits", () -> new MaterialItem());
-	
+
 	// Lead
 	public static final RegistryObject<MaterialItem> LEAD_INGOT = ITEMS.register("lead_ingot", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> LEAD_NUGGET = ITEMS.register("lead_nugget", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> LEAD_BITS = ITEMS.register("lead_bits", () -> new MaterialItem());
-	
+
 	// Brass
 	public static final RegistryObject<MaterialItem> BRASS_INGOT = ITEMS.register("brass_ingot", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> BRASS_NUGGET = ITEMS.register("brass_nugget", () -> new MaterialItem());
-	
+
 	// Mercury
 	public static final RegistryObject<MaterialItem> MERCURY_INGOT = ITEMS.register("mercury_ingot", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> MERCURY_NUGGET = ITEMS.register("mercury_nugget", () -> new MaterialItem());
-	
+
 	// Niter
-	public static final RegistryObject<MaterialItem> NITRATE_SOIL = ITEMS.register("nitrate_soil", () -> new MaterialItem());	
+	public static final RegistryObject<MaterialItem> NITRATE_SOIL = ITEMS.register("nitrate_soil", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> LIQUID_NITER_BOTTLE = ITEMS.register("liquid_niter_bottle", () -> new MaterialItem(16) {
 		/**
-	    * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
-	    * {@link #onItemUse}.
-	    */
+		 * Called to trigger the item's "innate" right click behavior. To handle when this item is used on a Block, see
+		 * {@link #onItemUseFirst(ItemStack, UseOnContext)}.
+		 */
 		@Override
 		public InteractionResult useOn(UseOnContext ctx) {
 			Level level = ctx.getLevel();
@@ -299,14 +300,14 @@ public class ModItems {
 			if (ctx.getClickedFace() != Direction.DOWN && blockstate.getBlock() instanceof WeatheringCopper) {
 				Optional<BlockState> optionalBlockState = ((WeatheringCopper)blockstate.getBlock()).getNext(blockstate);
 				if (optionalBlockState.isPresent()) {
-					
+
 					player.setItemInHand(ctx.getHand(), ItemUtils.createFilledResult(itemstack, player, new ItemStack(Items.GLASS_BOTTLE)));
 					player.awardStat(Stats.ITEM_USED.get(itemstack.getItem()));
-					
+
 					level.playSound((Player)null, blockpos, SoundEvents.BOTTLE_EMPTY, SoundSource.BLOCKS, 1.0F, 1.0F);
 					level.gameEvent((Entity)null, GameEvent.FLUID_PLACE, blockpos);
 					level.setBlockAndUpdate(blockpos, ((WeatheringCopper)blockstate.getBlock()).getNext(blockstate).get());
-					
+
 					//this.fizz(level, blockpos);
 					level.levelEvent(1501, blockpos, 0);
 					return InteractionResult.sidedSuccess(level.isClientSide);
@@ -316,55 +317,55 @@ public class ModItems {
 		}
 	});
 	public static final RegistryObject<MaterialItem> NITER = ITEMS.register("niter", () -> new MaterialItem());
-	
+
 	// Sulfur
 	public static final RegistryObject<MaterialItem> SULFUR = ITEMS.register("sulfur", () -> new MaterialItem());
-	
+
 	// Black Powder
 	public static final RegistryObject<MaterialItem> ROCKET_POWDER = ITEMS.register("rocket_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> BLASTING_POWDER = ITEMS.register("blasting_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> PERCUSSION_POWDER = ITEMS.register("percussion_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> MEDIUM_GRADE_BLACK_POWDER = ITEMS.register("medium_grade_black_powder", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> HIGH_GRADE_BLACK_POWDER = ITEMS.register("high_grade_black_powder", () -> new MaterialItem());
-	
+
 	// Fuses
 	public static final RegistryObject<MaterialItem> BARK_STRANDS = ITEMS.register("bark_strands", () -> new BurnableMaterialItem());
 	public static final RegistryObject<MaterialItem> MATCH_CORD = ITEMS.register("match_cord", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> FUSE = ITEMS.register("fuse", () -> new MaterialItem());
-	
+
 	// Ammo Crafting
 	public static final RegistryObject<MaterialItem> WAXED_PAPER = ITEMS.register("waxed_paper", () -> new MaterialItem());
 	public static final RegistryObject<MaterialItem> PERCUSSION_CAP = ITEMS.register("percussion_cap", () -> new MaterialItem(32));
-	
+
 	// Repair
 	public static final RegistryObject<RepairPartItem> MATCHLOCK_REPAIR_PARTS = ITEMS.register("matchlock_repair_parts", () -> new RepairPartItem());
 	public static final RegistryObject<RepairPartItem> WHEELLOCK_REPAIR_PARTS = ITEMS.register("wheellock_repair_parts", () -> new RepairPartItem());
 	public static final RegistryObject<RepairPartItem> FLINTLOCK_REPAIR_PARTS = ITEMS.register("flintlock_repair_parts", () -> new RepairPartItem());
 	public static final RegistryObject<RepairPartItem> CAPLOCK_REPAIR_PARTS = ITEMS.register("caplock_repair_parts", () -> new RepairPartItem());
-	
+
 	// Crafting Tools
 	public static final RegistryObject<RepairKitItem> REPAIR_KIT = ITEMS.register("repair_kit", () -> new RepairKitItem());
 	public static final RegistryObject<MortarAndPestleItem> MORTAR_AND_PESTLE = ITEMS.register("mortar_and_pestle", () -> new MortarAndPestleItem());
 	public static final RegistryObject<HacksawItem> HACKSAW = ITEMS.register("hacksaw", () -> new HacksawItem());
 	public static final RegistryObject<DesignNotesItem> DESIGN_NOTES = ITEMS.register("design_notes", () -> new DesignNotesItem());
-	
+
 	// Reloading
 	public static final RegistryObject<PowderHornItem> POWDER_HORN = ITEMS.register("powder_horn", () -> new PowderHornItem());
-	
+
 	// Artillery Tools
 	public static final RegistryObject<RamRodItem> RAM_ROD = ITEMS.register("ram_rod", () -> new RamRodItem());
 	public static final RegistryObject<LongMatchItem> LONG_MATCH = ITEMS.register("long_match", () -> new LongMatchItem());
 	public static final RegistryObject<GunnersQuadrantItem> GUNNERS_QUADRANT = ITEMS.register("gunners_quadrant", () -> new GunnersQuadrantItem());
-	
+
 	// Equipment
 	public static final RegistryObject<BlastingPowderStickBlockItem> BLASTING_POWDER_STICK = ITEMS.register("blasting_powder_stick", () -> new BlastingPowderStickBlockItem());
 	public static final RegistryObject<ArmorItem> MUSKETEER_HAT = ITEMS.register("musketeer_hat", () -> new MusketeerHatItem());
 	public static final RegistryObject<ArmorItem> HORSEMANS_POT_HELM = ITEMS.register("horsemans_pot_helm", () -> new HorsemansPotHelmItem());
-	
+
 	// Spawn Eggs
 	//public static final RegistryObject<ForgeSpawnEggItem> MUSKETEER_SKELETON_SPAWN_EGG = ITEMS.register("musketeer_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.MUSKETEER_SKELETON, 0x636566, 0, defaultItemProperties()));
 	//public static final RegistryObject<ForgeSpawnEggItem> HARQUEBUSIER_SKELETON_SPAWN_EGG = ITEMS.register("harquebusier_skeleton_spawn_egg", () -> new ForgeSpawnEggItem(ModEntities.HARQUEBUSIER_SKELETON, 0x282931, 0, defaultItemProperties()));
-	
+
 	/**
 	 * Registers the {@link DeferredRegister} instance with the mod event bus.
 	 * <p>
@@ -384,12 +385,16 @@ public class ModItems {
 	}
 
 	/**
-	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#CREATIVE_MODE_TAB}.
+	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link OldGuns}.
 	 *
 	 * @author choonster
 	 * @return The item properties
 	 */
 	private static Properties defaultItemProperties() {
-		return new Properties().tab(OldGuns.CREATIVE_MODE_TAB);
+		return new Properties();
+	}
+
+	static Collection<RegistryObject<Item>> orderedItems() {
+		return ITEMS.getEntries();
 	}
 }

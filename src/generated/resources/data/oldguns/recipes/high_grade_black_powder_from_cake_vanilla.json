@@ -1,6 +1,6 @@
 {
   "type": "oldguns:mortar_and_pestle_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:high_grade_black_powder_cake"

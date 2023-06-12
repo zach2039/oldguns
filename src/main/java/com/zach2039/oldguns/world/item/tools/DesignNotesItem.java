@@ -16,28 +16,24 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.MutableHashedLinkedMap;
 
 public class DesignNotesItem extends Item implements IDesignNotes {
-	
+
 	public DesignNotesItem() {
 		super(new Properties()
 				.stacksTo(1)
 				.rarity(Rarity.RARE)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+		);
 	}
-	
-	@Override
-	public void fillItemCategory(CreativeModeTab tab, NonNullList<ItemStack> stackList) {
-		if (this.allowedIn(tab)) {
 
-			ItemStack stackBase = new ItemStack(this);
-			OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
-				stackList.add(IDesignNotes.setDesignTagOnItem(stackBase, e));
-			});
-			
-		}
+	public void fillCreativeModeTab(final MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries) {
+		ItemStack stackBase = new ItemStack(this);
+		OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().forEach((e) -> {
+			entries.put(IDesignNotes.setDesignTagOnItem(stackBase, e), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+		});
 	}
-	
+
 	@Override
 	public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flagIn) {
 		super.appendHoverText(stack, level, tooltip, flagIn);
@@ -46,17 +42,17 @@ public class DesignNotesItem extends Item implements IDesignNotes {
 			tooltip.add(Component.translatable("item." + IDesignNotes.getDesign(stack).replace(':', '.')));
 		}
 	}
-	
+
 	@Override
-    public boolean hasCraftingRemainingItem(ItemStack stack) {
-        return true;
-        
-    }
-    
-    @Override
-    public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
-        final ItemStack copy = itemstack.copy();
-       
-        return copy;
-    }
+	public boolean hasCraftingRemainingItem(ItemStack stack) {
+		return true;
+
+	}
+
+	@Override
+	public ItemStack getCraftingRemainingItem(ItemStack itemstack) {
+		final ItemStack copy = itemstack.copy();
+
+		return copy;
+	}
 }

@@ -49,7 +49,6 @@ public class ArtilleryRocketAmmoItem extends Item implements Ammo, RocketArtille
 				.projectileArmorBypassPercentage(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileArmorBypassPercentage)).floatValue())
 				.ammoType(entry.getProjectileType())
 				.stacksTo((int) OldGunsConfig.getServer(entry.getAttributes().maxStackSize))
-				.tab(OldGuns.CREATIVE_MODE_TAB)
 				);
 	}
 	

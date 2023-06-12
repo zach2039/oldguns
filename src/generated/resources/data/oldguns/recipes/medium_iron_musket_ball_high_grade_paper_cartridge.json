@@ -1,13 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shapeless",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_iron_firearm_ammo"
-    },
-    {
-      "type": "oldguns:can_craft_paper_cartridges"
-    }
-  ],
+  "category": "misc",
   "ingredients": [
     {
       "item": "oldguns:medium_iron_musket_ball"

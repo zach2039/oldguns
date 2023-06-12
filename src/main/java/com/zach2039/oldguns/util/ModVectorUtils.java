@@ -1,14 +1,6 @@
 package com.zach2039.oldguns.util;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.util.EnumMap;
-import java.util.Map;
-
 import com.google.common.collect.ImmutableMap;
-import com.mojang.math.Quaternion;
-import com.mojang.math.Vector3f;
-
 import it.unimi.dsi.fastutil.objects.Object2DoubleMap;
 import it.unimi.dsi.fastutil.objects.Object2DoubleMaps;
 import it.unimi.dsi.fastutil.objects.Object2DoubleOpenHashMap;
@@ -18,6 +10,13 @@ import net.minecraft.core.Vec3i;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.EnumMap;
+import java.util.Map;
 
 /**
  * Utility methods for vectors and {@link AABB}s.
@@ -66,10 +65,10 @@ public class ModVectorUtils {
 	 * @param radians The angle in radians
 	 * @return The rotation quaternion
 	 */
-	public static Quaternion getRotationQuaternion(final Direction.Axis axis, final float radians) {
+	public static Quaternionf  getRotationQuaternion(final Direction.Axis axis, final float radians) {
 		final Vector3f axisDirectionVector = AXIS_DIRECTION_VECTORS.get(axis);
 
-		return new Quaternion(axisDirectionVector, radians, false);
+		return new Quaternionf(axisDirectionVector.x, axisDirectionVector.y, axisDirectionVector.z, radians);
 	}
 
 	/**
@@ -79,14 +78,14 @@ public class ModVectorUtils {
 	 * @param rotationQuaternion The rotation quaternion to apply
 	 * @return The rotated AABB
 	 */
-	public static AABB rotateAABB(final AABB axisAlignedBB, final Quaternion rotationQuaternion) {
+	public static AABB rotateAABB(final AABB axisAlignedBB, final Quaternionf rotationQuaternion) {
 		// Extract the minimum and maximum coordinates of the AABB into vectors
 		final Vector3f minCoords = new Vector3f((float) axisAlignedBB.minX, (float) axisAlignedBB.minY, (float) axisAlignedBB.minZ);
 		final Vector3f maxCoords = new Vector3f((float) axisAlignedBB.maxX, (float) axisAlignedBB.maxY, (float) axisAlignedBB.maxZ);
 
 		// Rotate the vectors in-place
-		minCoords.transform(rotationQuaternion);
-		maxCoords.transform(rotationQuaternion);
+		minCoords.rotate(rotationQuaternion);
+		maxCoords.rotate(rotationQuaternion);
 
 		// Return an AABB with the new coordinates
 		return new AABB(minCoords.x(), minCoords.y(), minCoords.z(), maxCoords.x(), maxCoords.y(), maxCoords.z());

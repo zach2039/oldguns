@@ -1,6 +1,6 @@
 {
   "type": "oldguns:mortar_and_pestle_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "tag": "forge:dusts/saltpeter"

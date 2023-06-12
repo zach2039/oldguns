@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_hacksaw_shapeless",
-  "conditions": [],
+  "category": "misc",
   "ingredients": [
     {
       "tag": "oldguns:medium_wheellock_firearm"

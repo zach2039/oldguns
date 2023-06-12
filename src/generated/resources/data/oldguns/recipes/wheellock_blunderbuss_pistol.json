@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_wheellock_weapons"
-    }
-  ],
+  "category": "misc",
   "key": {
     "B": {
       "tag": "oldguns:small_metal_flared_barrel"

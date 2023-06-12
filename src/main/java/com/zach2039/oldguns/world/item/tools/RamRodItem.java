@@ -7,6 +7,6 @@ import net.minecraft.world.item.Item;
 public class RamRodItem extends Item {
 	
 	public RamRodItem() {
-		super(new Properties().stacksTo(1).tab(OldGuns.CREATIVE_MODE_TAB));
+		super(new Properties().stacksTo(1));
 	}
 }

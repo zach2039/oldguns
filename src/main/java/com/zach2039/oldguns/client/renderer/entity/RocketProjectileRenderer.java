@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.RocketProjectileModel;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
@@ -35,9 +35,9 @@ public class RocketProjectileRenderer extends EntityRenderer<RocketProjectile> i
 	public void render(RocketProjectile entity, float entityYaw, float partialTicks, @Nonnull PoseStack stackIn, @Nonnull MultiBufferSource bufferIn, int packedLightIn) {
 		stackIn.pushPose();	
 		
-		stackIn.mulPose(Vector3f.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 40.0F));
-		stackIn.mulPose(Vector3f.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot()) + 90.0F));
-		stackIn.mulPose(Vector3f.XP.rotationDegrees(45.0F));	
+		stackIn.mulPose(Axis.YP.rotationDegrees(Mth.lerp(partialTicks, entity.yRotO, entity.getYRot()) - 40.0F));
+		stackIn.mulPose(Axis.ZP.rotationDegrees(Mth.lerp(partialTicks, entity.xRotO, entity.getXRot()) + 90.0F));
+		stackIn.mulPose(Axis.XP.rotationDegrees(45.0F));
 		
 		stackIn.pushPose();
 		stackIn.scale(1.5f, -1.5f, -1.5f);	

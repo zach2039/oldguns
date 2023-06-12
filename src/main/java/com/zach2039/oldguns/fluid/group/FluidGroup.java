@@ -202,8 +202,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 	public static Item.Properties defaultBucketProperties() {
 		return new Item.Properties()
 				.craftRemainder(Items.BUCKET)
-				.stacksTo(1)
-				.tab(CreativeModeTab.TAB_MISC);
+				.stacksTo(1);
 	}
 
 	@FunctionalInterface

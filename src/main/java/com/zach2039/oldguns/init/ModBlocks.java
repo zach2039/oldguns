@@ -27,9 +27,11 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
+import java.util.Collection;
+
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
- * 
+ *
  * @author Choonster
  *
  * With additions by:
@@ -44,51 +46,51 @@ public class ModBlocks {
 	public static final RegistryObject<GunsmithsBenchBlock> GUNSMITHS_BENCH = registerBlock("gunsmiths_bench",
 			() -> new GunsmithsBenchBlock()
 	);
-	
+
 	public static final RegistryObject<NiterBeddingBlock> NITER_BEDDING = registerBlock("niter_bedding",
 			() -> new NiterBeddingBlock()
 	);
-	
+
 	public static final RegistryObject<LiquidNiterCauldronBlock> LIQUID_NITER_CAULDRON = registerBlock("liquid_niter_cauldron",
 			() -> new LiquidNiterCauldronBlock()
 	);
-	
+
 	public static final RegistryObject<WetHighGradeBlackPowderCakeBlock> WET_HIGH_GRADE_BLACK_POWDER_CAKE = registerBlock("wet_high_grade_black_powder_cake",
 			() -> new WetHighGradeBlackPowderCakeBlock()
 	);
 	public static final RegistryObject<HighGradeBlackPowderCakeBlock> HIGH_GRADE_BLACK_POWDER_CAKE = registerBlock("high_grade_black_powder_cake",
 			() -> new HighGradeBlackPowderCakeBlock()
 	);
-	
+
 	public static final RegistryObject<WetHighGradeBlackPowderBlock> WET_HIGH_GRADE_BLACK_POWDER_BLOCK = registerBlock("wet_high_grade_black_powder_block",
 			() -> new WetHighGradeBlackPowderBlock()
 	);
 	public static final RegistryObject<HighGradeBlackPowderBlock> HIGH_GRADE_BLACK_POWDER_BLOCK = registerBlock("high_grade_black_powder_block",
 			() -> new HighGradeBlackPowderBlock()
 	);
-	
+
 	public static final RegistryObject<WetMediumGradeBlackPowderBlock> WET_MEDIUM_GRADE_BLACK_POWDER_BLOCK = registerBlock("wet_medium_grade_black_powder_block",
 			() -> new WetMediumGradeBlackPowderBlock()
 	);
 	public static final RegistryObject<MediumGradeBlackPowderBlock> MEDIUM_GRADE_BLACK_POWDER_BLOCK = registerBlock("medium_grade_black_powder_block",
 			() -> new MediumGradeBlackPowderBlock()
 	);
-	
+
 	public static final RegistryObject<WetLowGradeBlackPowderBlock> WET_LOW_GRADE_BLACK_POWDER_BLOCK = registerBlock("wet_low_grade_black_powder_block",
 			() -> new WetLowGradeBlackPowderBlock()
 	);
 	public static final RegistryObject<LowGradeBlackPowderBlock> LOW_GRADE_BLACK_POWDER_BLOCK = registerBlock("low_grade_black_powder_block",
 			() -> new LowGradeBlackPowderBlock()
 	);
-	
+
 	// Artillery
 	public static final RegistryObject<MediumNavalCannonBlock> MEDIUM_NAVAL_CANNON = registerBlock("medium_naval_cannon", () -> new MediumNavalCannonBlock());
 	public static final RegistryObject<CongreveRocketStandBlock> CONGREVE_ROCKET_STAND = registerBlock("congreve_rocket_stand", () -> new CongreveRocketStandBlock());
-	
+
 	// Equipment
 	public static final RegistryObject<BlastingPowderStickBlock> BLASTING_POWDER_STICK_BLOCK = registerItemlessBlock("blasting_powder_stick_block", () -> new BlastingPowderStickBlock());
 	public static final RegistryObject<WallBlastingPowderStickBlock> WALL_BLASTING_POWDER_STICK_BLOCK = registerItemlessBlock("wall_blasting_powder_stick_block", () -> new WallBlastingPowderStickBlock());
-	
+
 	/**
 	 * Registers the {@link DeferredRegister} instances with the mod event bus.
 	 * <p>
@@ -135,13 +137,12 @@ public class ModBlocks {
 
 		return block;
 	}
-	
+
 	/**
 	 * Registers a block without a blockItem.
 	 *
 	 * @param name         The registry name of the block
 	 * @param blockFactory The factory used to create the block
-	 * @param itemFactory  The factory used to create the block item
 	 * @param <BLOCK>      The block type
 	 * @return A RegistryObject reference to the block
 	 */
@@ -152,12 +153,12 @@ public class ModBlocks {
 	}
 
 	/**
-	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link TestMod3#CREATIVE_MODE_TAB}.
+	 * Gets an {@link Item.Properties} instance with the {@link CreativeModeTab} set to {@link OldGuns#CREATIVE_MODE_TAB}.
 	 *
 	 * @return The item properties
 	 */
 	private static Item.Properties defaultItemProperties() {
-		return new Item.Properties().tab(OldGuns.CREATIVE_MODE_TAB);
+		return new Item.Properties();
 	}
 
 	/**
@@ -168,5 +169,9 @@ public class ModBlocks {
 	@FunctionalInterface
 	private interface IBlockItemFactory<BLOCK extends Block> {
 		Item create(BLOCK block);
+	}
+
+	static Collection<RegistryObject<Item>> orderedItems() {
+		return ITEMS.getEntries();
 	}
 }

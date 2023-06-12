@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_iron_artillery_ammo"
-    }
-  ],
+  "category": "misc",
   "key": {
     "B": {
       "tag": "forge:storage_blocks/iron"

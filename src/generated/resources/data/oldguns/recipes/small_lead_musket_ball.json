@@ -1,10 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [
-    {
-      "type": "oldguns:can_craft_lead_firearm_ammo"
-    }
-  ],
+  "category": "misc",
   "key": {
     "l": {
       "tag": "forge:nuggets/lead"

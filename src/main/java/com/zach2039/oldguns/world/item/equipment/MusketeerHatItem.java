@@ -38,8 +38,7 @@ public class MusketeerHatItem extends ArmorItem {
 	
 	public MusketeerHatItem() {
 		super(ArmorMaterials.LEATHER, EquipmentSlot.HEAD, new Properties()
-				.durability(128)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.durability(128));
 		
 		initAttributes();
 	}

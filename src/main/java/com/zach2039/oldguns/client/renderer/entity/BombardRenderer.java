@@ -5,7 +5,8 @@ import javax.swing.Renderer;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mojang.math.Vector3f;
+import com.mojang.math.Axis;
+import org.joml.*;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.client.model.BombardModel;
 import com.zach2039.oldguns.client.model.BulletProjectileModel;
@@ -24,6 +25,7 @@ import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.EntityRendererProvider.Context;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -46,7 +48,7 @@ public class BombardRenderer extends EntityRenderer<Bombard> implements EntityRe
 		
 		matrixStackIn.translate(0.0f, 0.5f, 0.0f);
 		model.setupAnim(entity, 0, 0, 0, 0, 0);
-		matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(-entity.getShotYaw()));
+		matrixStackIn.mulPose(Axis.YP.rotationDegrees(-entity.getShotYaw()));
 		
 		matrixStackIn.pushPose();
 		matrixStackIn.scale(1.5f, -1.5f, -1.5f);	

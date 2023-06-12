@@ -5,20 +5,24 @@ import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 
 import net.minecraft.core.NonNullList;
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraftforge.common.crafting.CraftingHelper;
 
 public class ShapelessVanillaScrapDesignNotesRecipe extends ShapelessRecipe {
-	
+	private final ItemStack result;
+
 	public ShapelessVanillaScrapDesignNotesRecipe(ResourceLocation id, String group, ItemStack result, NonNullList<Ingredient> ingredients) {
-		super(id, group, result, ingredients);
+		super(id, group, CraftingBookCategory.MISC, result, ingredients);
+		this.result = result;
 	}
 
 	@Override
@@ -26,12 +30,12 @@ public class ShapelessVanillaScrapDesignNotesRecipe extends ShapelessRecipe {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
 
 		// Dont allow remaining items, since we want to refil the powder horn and not duplicate it
-		
+
 		return remainingItems;
 	}
-	
+
 	public static class Serializer implements RecipeSerializer<ShapelessVanillaScrapDesignNotesRecipe> {
-		
+
 		@Override
 		public ShapelessVanillaScrapDesignNotesRecipe fromJson(final ResourceLocation recipeID, final JsonObject json) {
 			final String group = GsonHelper.getAsString(json, "group", "");
@@ -39,7 +43,7 @@ public class ShapelessVanillaScrapDesignNotesRecipe extends ShapelessRecipe {
 			final ItemStack result = CraftingHelper.getItemStack(GsonHelper.getAsJsonObject(json, "result"), true);
 
 			ShapelessVanillaScrapDesignNotesRecipe recipeFromJson = new ShapelessVanillaScrapDesignNotesRecipe(recipeID, group, result, ingredients);
-			
+
 			return recipeFromJson;
 		}
 
@@ -67,10 +71,10 @@ public class ShapelessVanillaScrapDesignNotesRecipe extends ShapelessRecipe {
 				ingredient.toNetwork(buffer);
 			}
 
-			buffer.writeItem(recipe.getResultItem());
+			buffer.writeItem(recipe.result);
 		}
 	}
-	
+
 	@Override
 	public RecipeSerializer<?> getSerializer() {
 		return ModCrafting.Recipes.SCRAP_DESIGN_NOTES_SHAPELESS.get();

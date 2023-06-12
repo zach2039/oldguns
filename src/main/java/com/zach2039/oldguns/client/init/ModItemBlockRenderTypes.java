@@ -11,8 +11,11 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
+import java.lang.annotation.ElementType;
+
 @Mod.EventBusSubscriber(modid = OldGuns.MODID, value = Dist.CLIENT, bus = Bus.MOD)
 public class ModItemBlockRenderTypes {
+
 	@SubscribeEvent
 	public static void registerItemModelProperties(final FMLClientSetupEvent event) {
 		event.enqueueWork(() -> {

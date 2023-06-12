@@ -2,6 +2,7 @@ package com.zach2039.oldguns.world.item.crafting.cauldron;
 
 import javax.annotation.Nonnull;
 
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import org.jetbrains.annotations.NotNull;
 
 import com.google.gson.JsonObject;
@@ -25,7 +26,7 @@ public class CauldronRecipe extends CustomRecipe implements ICauldronRecipe {
 
     public CauldronRecipe(ResourceLocation id, @NotNull ItemStack input, ItemStack output, Fluid fluid)
     {
-    	super(id);
+    	super(id, CraftingBookCategory.MISC);
         this.input = input;
         this.output = output;
         this.fluid = fluid;

@@ -1,6 +1,6 @@
 {
   "type": "oldguns:gunsmiths_bench_shaped",
-  "conditions": [],
+  "category": "misc",
   "key": {
     "B": {
       "tag": "forge:ingots/brass"

@@ -38,8 +38,7 @@ public class HorsemansPotHelmItem extends ArmorItem {
 	
 	public HorsemansPotHelmItem() {
 		super(ArmorMaterials.IRON, EquipmentSlot.HEAD, new Properties()
-				.durability(275)
-				.tab(OldGuns.CREATIVE_MODE_TAB));
+				.durability(275));
 		
 		initAttributes();
 	}
