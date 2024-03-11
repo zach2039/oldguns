@@ -28,8 +28,6 @@ public class ShapelessVanillaScrapDesignNotesRecipe extends ShapelessRecipe {
 	@Override
 	public NonNullList<ItemStack> getRemainingItems(final CraftingContainer inv) {
 		final NonNullList<ItemStack> remainingItems = NonNullList.withSize(inv.getContainerSize(), ItemStack.EMPTY);
-
-		// Dont allow remaining items, since we want to refil the powder horn and not duplicate it
 		
 		return remainingItems;
 	}
