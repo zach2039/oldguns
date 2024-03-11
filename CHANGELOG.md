@@ -2,7 +2,7 @@
 
  - Fix and close [#58](https://github.com/zach2039/oldguns/issues/58)
 
-### v1.19.4-3.8.0-40
+### v1.19.4-3.8.0-41
 
  - Update to 1.19.4, forge 45.0.63 
 
