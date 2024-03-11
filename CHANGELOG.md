@@ -1,4 +1,5 @@
 ### v1.18.2-3.3.4-44
+
  - Fix and close [#58](https://github.com/zach2039/oldguns/issues/58)
 
 ### v1.18.2-3.3.3-40
