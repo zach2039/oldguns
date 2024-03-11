@@ -62,7 +62,7 @@ public class IngredientAnyDesignNotes extends AbstractIngredient {
 	@Override
 	public JsonElement toJson() {
 		JsonObject json = new JsonObject();
-        json.addProperty("type", CraftingHelper.getID(ModCrafting.Ingredients.POWDER_HORN).toString());
+
         if (items.size() == 1)
         {
             json.addProperty("item", ForgeRegistries.ITEMS.getKey(items.iterator().next()).toString());
