@@ -12,6 +12,7 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -47,8 +48,9 @@ public class ShapelessGunsmithsBenchHacksawRecipe extends ShapelessGunsmithsBenc
 	private ItemStack damageItem(final ItemStack stack) {
 		final Player craftingPlayer = ForgeHooks.getCraftingPlayer();
 
-		Level level = craftingPlayer.getCommandSenderWorld();
-		if (stack.hurt(1, level.random, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
+		Level level = (craftingPlayer != null) ? craftingPlayer.getCommandSenderWorld() : null;
+		RandomSource rand = (level != null) ? level.random : RandomSource.create();
+		if (stack.hurt(1, rand, craftingPlayer instanceof ServerPlayer ? (ServerPlayer) craftingPlayer : null)) {
 			ForgeEventFactory.onPlayerDestroyItem(craftingPlayer, stack, null);
 			return ItemStack.EMPTY;
 		}

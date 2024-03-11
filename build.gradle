@@ -191,10 +191,10 @@ dependencies {
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
 	// Create to test structure interaction with block artillery and the like
-	runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
-	runtimeOnly fg.deobf("curse.maven:flywheel-486392:3600401")
+	//runtimeOnly fg.deobf("curse.maven:create-328085:3600402")
+    runtimeOnly fg.deobf("curse.maven:create-328085:4835190")
 
-	// GuardVillagers to test firearm use
+    // GuardVillagers to test firearm use
 	runtimeOnly fg.deobf("curse.maven:guard-villagers-360203:3970122")
 
 	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
