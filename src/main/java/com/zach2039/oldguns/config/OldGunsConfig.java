@@ -337,7 +337,7 @@ public class OldGunsConfig {
 	}
 	
 	public static class DesignNotesSettings {
-		public final ConfigValue<List<String>> designNotesRequiredItems;
+		public final ConfigValue<List<? extends String>> designNotesRequiredItems;
 		
 		DesignNotesSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -345,7 +345,7 @@ public class OldGunsConfig {
 			designNotesRequiredItems = builder
 					.comment("A list of items that require design notes to be crafted in the gunsmith's bench")
 					.comment("Design Notes can be found in dungeon chests, villager chests, and mob loot")
-					.define("designNotesRequiredItems", Arrays.asList(new String[] {
+					.defineList("designNotesRequiredItems", Arrays.asList(
 							"oldguns:flintlock_mechanism",
 							"oldguns:caplock_mechanism",
 							"oldguns:matchlock_musketoon",
@@ -362,7 +362,7 @@ public class OldGunsConfig {
 							"oldguns:caplock_pepperbox_pistol",
 							"oldguns:caplock_musketoon",
 							"oldguns:caplock_blunderbuss_pistol"
-							}));
+							), s -> s instanceof String);
 			
 			builder.pop();
 		}
@@ -420,15 +420,15 @@ public class OldGunsConfig {
 		public final IntValue niterCrystallizationAmountMin;
 		public final IntValue niterCrystallizationAmountMax;
 		public final DoubleValue niterCrystallizationDifficulty;
-		public final ConfigValue<List<String>> niterCauldronValidHeatSources;
+		public final ConfigValue<List<? extends String>> niterCauldronValidHeatSources;
 		public final IntValue niterBeddingAnimalRadius;
 		public final IntValue niterBeddingHarvestAmount;
 		public final DoubleValue niterBeddingDripstoneGenerationDifficulty;
 		public final DoubleValue niterBeddingRefuseGenerationDifficulty;
 		public final DoubleValue lowRefuseAnimalGeneratedAmount;
 		public final DoubleValue highRefuseAnimalGeneratedAmount;
-		public final ConfigValue<List<String>> lowRefuseAnimals;
-		public final ConfigValue<List<String>> highRefuseAnimals;
+		public final ConfigValue<List<? extends String>> lowRefuseAnimals;
+		public final ConfigValue<List<? extends String>> highRefuseAnimals;
 		
 		NiterProductionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
@@ -448,7 +448,7 @@ public class OldGunsConfig {
 			
 			niterCauldronValidHeatSources = builder
 					.comment("A list of blocks that can be used as heat sources for niter crystallization")
-					.define("niterCauldronValidHeatSources", Arrays.asList(new String[] { "minecraft:fire", "minecraft:lava", "minecraft:campfire", "minecraft:soul_campfire" }));
+					.defineList("niterCauldronValidHeatSources", Arrays.asList("minecraft:fire", "minecraft:lava", "minecraft:campfire", "minecraft:soul_campfire"), s -> s instanceof String);
 			
 			niterBeddingDripstoneGenerationDifficulty = builder
 					.comment("How difficult it is for niter bedding to advance through its 10 refuse levels when under dripping water dripstone")
@@ -479,11 +479,11 @@ public class OldGunsConfig {
 			
 			lowRefuseAnimals = builder
 					.comment("A list of animal entities that will produce a modest amount of refuse for nitrated soil production")
-					.define("lowRefuseAnimals", Arrays.asList(new String[] { "entity.minecraft.chicken", "entity.minecraft.pig", "entity.minecraft.sheep", "entity.minecraft.llama" }));
+					.defineList("lowRefuseAnimals", Arrays.asList("entity.minecraft.chicken", "entity.minecraft.pig", "entity.minecraft.sheep", "entity.minecraft.llama"), s -> s instanceof String);
 			
 			highRefuseAnimals = builder
 					.comment("A list of animal entities that will produce a large amount of refuse for nitrated soil production")
-					.define("highRefuseAnimals", Arrays.asList(new String[] { "entity.minecraft.horse", "entity.minecraft.cow" }));
+					.defineList("highRefuseAnimals", Arrays.asList("entity.minecraft.horse", "entity.minecraft.cow"), s -> s instanceof String);
 			
 			builder.pop();
 		}
@@ -913,24 +913,24 @@ public class OldGunsConfig {
 	}
 
 	public static class MatchlockSettings {		
-		public final MuzzleloadingFirearmAttributes matchlock_derringer;
-		public final MuzzleloadingFirearmAttributes matchlock_pistol;
-		public final MuzzleloadingFirearmAttributes matchlock_arquebus;
+		public final FirearmAttributes matchlock_derringer;
+		public final FirearmAttributes matchlock_pistol;
+		public final FirearmAttributes matchlock_arquebus;
 		
-		public final MuzzleloadingFirearmAttributes matchlock_caliver;
-		public final MuzzleloadingFirearmAttributes matchlock_musketoon;
+		public final FirearmAttributes matchlock_caliver;
+		public final FirearmAttributes matchlock_musketoon;
 		
-		public final MuzzleloadingFirearmAttributes matchlock_musket;
-		public final MuzzleloadingFirearmAttributes matchlock_long_musket;	
+		public final FirearmAttributes matchlock_musket;
+		public final FirearmAttributes matchlock_long_musket;
 		
-		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss_pistol;
-		public final MuzzleloadingFirearmAttributes matchlock_blunderbuss;
+		public final FirearmAttributes matchlock_blunderbuss_pistol;
+		public final FirearmAttributes matchlock_blunderbuss;
 		
 		MatchlockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Matchlock
-			matchlock_derringer = new MuzzleloadingFirearmAttributes(
+			matchlock_derringer = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Derringers",
 					"matchlock_derringer",
@@ -938,10 +938,11 @@ public class OldGunsConfig {
 					3.0f,
 					0.5f,
 					5.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_pistol = new MuzzleloadingFirearmAttributes(
+			matchlock_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Pistols",
 					"matchlock_pistol",
@@ -949,10 +950,11 @@ public class OldGunsConfig {
 					3.25f,
 					1.0f,
 					2.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_arquebus = new MuzzleloadingFirearmAttributes(
+			matchlock_arquebus = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Arquebus",
 					"matchlock_arquebus",
@@ -960,10 +962,11 @@ public class OldGunsConfig {
 					3.5f,
 					1.2f,
 					2.6f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_caliver = new MuzzleloadingFirearmAttributes(
+			matchlock_caliver = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Calivers",
 					"matchlock_caliver",
@@ -971,10 +974,11 @@ public class OldGunsConfig {
 					3.75f,
 					1.2f,
 					2.4f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_musketoon = new MuzzleloadingFirearmAttributes(
+			matchlock_musketoon = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Musketoons",
 					"matchlock_musketoon",
@@ -982,10 +986,11 @@ public class OldGunsConfig {
 					3.75f,
 					0.8f,
 					2.2f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_musket = new MuzzleloadingFirearmAttributes(
+			matchlock_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Muskets",
 					"matchlock_musket",
@@ -993,10 +998,11 @@ public class OldGunsConfig {
 					4.0f,
 					1.0f,
 					2.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_long_musket = new MuzzleloadingFirearmAttributes(
+			matchlock_long_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Long Muskets",
 					"matchlock_long_musket",
@@ -1004,10 +1010,11 @@ public class OldGunsConfig {
 					4.25f,
 					1.2f,
 					1.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+			matchlock_blunderbuss_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Blunderbuss Pistols",
 					"matchlock_blunderbuss_pistol",
@@ -1015,10 +1022,11 @@ public class OldGunsConfig {
 					2.75f,
 					0.4f,
 					4.1f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			matchlock_blunderbuss = new MuzzleloadingFirearmAttributes(
+			matchlock_blunderbuss = new FirearmAttributes(
 					builder,
 					"Attributes of Matchlock Blunderbusses",
 					"matchlock_blunderbuss",
@@ -1026,7 +1034,8 @@ public class OldGunsConfig {
 					3.5f,
 					1.0f,
 					2.3f,
-					1.0f
+					1.0f,
+					80
 					);
 			
 			builder.pop();
@@ -1034,27 +1043,27 @@ public class OldGunsConfig {
 	}
 	
 	public static class WheellockSettings {		
-		public final MuzzleloadingFirearmAttributes wheellock_derringer;
-		public final MuzzleloadingFirearmAttributes wheellock_pistol;
-		public final MuzzleloadingFirearmAttributes wheellock_doublebarrel_pistol;
-		public final MuzzleloadingFirearmAttributes wheellock_arquebus;
+		public final FirearmAttributes wheellock_derringer;
+		public final FirearmAttributes wheellock_pistol;
+		public final FirearmAttributes wheellock_doublebarrel_pistol;
+		public final FirearmAttributes wheellock_arquebus;
 		
-		public final MuzzleloadingFirearmAttributes wheellock_caliver;
-		public final MuzzleloadingFirearmAttributes wheellock_musketoon;
+		public final FirearmAttributes wheellock_caliver;
+		public final FirearmAttributes wheellock_musketoon;
 		
-		public final MuzzleloadingFirearmAttributes wheellock_musket;
-		public final MuzzleloadingFirearmAttributes wheellock_long_musket;	
+		public final FirearmAttributes wheellock_musket;
+		public final FirearmAttributes wheellock_long_musket;
 		
-		public final MuzzleloadingFirearmAttributes wheellock_blunderbuss_pistol;
-		public final MuzzleloadingFirearmAttributes wheellock_blunderbuss;
+		public final FirearmAttributes wheellock_blunderbuss_pistol;
+		public final FirearmAttributes wheellock_blunderbuss;
 		
-		public final MuzzleloadingFirearmAttributes wheellock_hand_mortar;
+		public final FirearmAttributes wheellock_hand_mortar;
 		
 		WheellockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Wheellock
-			wheellock_derringer = new MuzzleloadingFirearmAttributes(
+			wheellock_derringer = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Derringers",
 					"wheellock_derringer",
@@ -1062,10 +1071,11 @@ public class OldGunsConfig {
 					3.125f,
 					0.5f,
 					5.5f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_pistol = new MuzzleloadingFirearmAttributes(
+			wheellock_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Pistols",
 					"wheellock_pistol",
@@ -1073,10 +1083,11 @@ public class OldGunsConfig {
 					3.375f,
 					1.0f,
 					2.7f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_doublebarrel_pistol = new MuzzleloadingFirearmAttributes(
+			wheellock_doublebarrel_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Double Barrel Pistols",
 					"wheellock_double_barrel_pistol",
@@ -1084,10 +1095,11 @@ public class OldGunsConfig {
 					3.275f,
 					0.8f,
 					3.7f,
-					0.8f
+					0.8f,
+					80
 					);
 			
-			wheellock_arquebus = new MuzzleloadingFirearmAttributes(
+			wheellock_arquebus = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Arquebus",
 					"wheellock_arquebus",
@@ -1095,10 +1107,11 @@ public class OldGunsConfig {
 					3.625f,
 					1.2f,
 					2.4f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_caliver = new MuzzleloadingFirearmAttributes(
+			wheellock_caliver = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Calivers",
 					"wheellock_caliver",
@@ -1106,10 +1119,11 @@ public class OldGunsConfig {
 					3.875f,
 					1.2f,
 					2.1f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_musketoon = new MuzzleloadingFirearmAttributes(
+			wheellock_musketoon = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Musketoons",
 					"wheellock_musketoon",
@@ -1117,10 +1131,11 @@ public class OldGunsConfig {
 					3.875f,
 					0.8f,
 					1.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_musket = new MuzzleloadingFirearmAttributes(
+			wheellock_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Muskets",
 					"wheellock_musket",
@@ -1128,10 +1143,11 @@ public class OldGunsConfig {
 					4.125f,
 					1.0f,
 					1.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_long_musket = new MuzzleloadingFirearmAttributes(
+			wheellock_long_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Long Muskets",
 					"wheellock_long_musket",
@@ -1139,10 +1155,11 @@ public class OldGunsConfig {
 					4.375f,
 					1.2f,
 					1.5f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+			wheellock_blunderbuss_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Blunderbuss Pistols",
 					"flintlock_blunderbuss_pistol",
@@ -1150,10 +1167,11 @@ public class OldGunsConfig {
 					3.875f,
 					0.4f,
 					4.2f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_blunderbuss = new MuzzleloadingFirearmAttributes(
+			wheellock_blunderbuss = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Blunderbusses",
 					"wheellock_blunderbuss",
@@ -1161,10 +1179,11 @@ public class OldGunsConfig {
 					3.625f,
 					1.0f,
 					2.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			wheellock_hand_mortar = new MuzzleloadingFirearmAttributes(
+			wheellock_hand_mortar = new FirearmAttributes(
 					builder,
 					"Attributes of Wheellock Hand Mortars",
 					"wheellock_hand_mortar",
@@ -1172,7 +1191,8 @@ public class OldGunsConfig {
 					1.5f,
 					1.0f,
 					7.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
 			builder.pop();
@@ -1180,28 +1200,28 @@ public class OldGunsConfig {
 	}
 	
 	public static class FlintlockSettings {		
-		public final MuzzleloadingFirearmAttributes flintlock_derringer;
-		public final MuzzleloadingFirearmAttributes flintlock_duckfoot_derringer;
-		public final MuzzleloadingFirearmAttributes flintlock_pistol;
-		public final MuzzleloadingFirearmAttributes flintlock_pepperbox_pistol;
-		public final MuzzleloadingFirearmAttributes flintlock_arquebus;
+		public final FirearmAttributes flintlock_derringer;
+		public final FirearmAttributes flintlock_duckfoot_derringer;
+		public final FirearmAttributes flintlock_pistol;
+		public final FirearmAttributes flintlock_pepperbox_pistol;
+		public final FirearmAttributes flintlock_arquebus;
 		
-		public final MuzzleloadingFirearmAttributes flintlock_caliver;
-		public final MuzzleloadingFirearmAttributes flintlock_musketoon;
+		public final FirearmAttributes flintlock_caliver;
+		public final FirearmAttributes flintlock_musketoon;
 		
-		public final MuzzleloadingFirearmAttributes flintlock_musket;
-		public final MuzzleloadingFirearmAttributes flintlock_nock_gun;
-		public final MuzzleloadingFirearmAttributes flintlock_long_musket;		
+		public final FirearmAttributes flintlock_musket;
+		public final FirearmAttributes flintlock_nock_gun;
+		public final FirearmAttributes flintlock_long_musket;
 		
-		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss_pistol;
-		public final MuzzleloadingFirearmAttributes flintlock_blunderbuss;
-		public final MuzzleloadingFirearmAttributes flintlock_doublebarrel_blunderbuss;	
+		public final FirearmAttributes flintlock_blunderbuss_pistol;
+		public final FirearmAttributes flintlock_blunderbuss;
+		public final FirearmAttributes flintlock_doublebarrel_blunderbuss;
 		
 		FlintlockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Flintlock
-			flintlock_derringer = new MuzzleloadingFirearmAttributes(
+			flintlock_derringer = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Derringers",
 					"flintlock_derringer",
@@ -1209,10 +1229,11 @@ public class OldGunsConfig {
 					3.25f,
 					0.5f,
 					5.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_duckfoot_derringer = new MuzzleloadingFirearmAttributes(
+			flintlock_duckfoot_derringer = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Duckfoot Derringers",
 					"flintlock_duckfoot_derringers",
@@ -1220,10 +1241,11 @@ public class OldGunsConfig {
 					3.0f,
 					0.3f,
 					10.0f,
-					0.8f
+					0.8f,
+					80
 					);
 			
-			flintlock_pistol = new MuzzleloadingFirearmAttributes(
+			flintlock_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Pistols",
 					"flintlock_pistol",
@@ -1231,10 +1253,11 @@ public class OldGunsConfig {
 					3.5f,
 					1.0f,
 					2.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_pepperbox_pistol = new MuzzleloadingFirearmAttributes(
+			flintlock_pepperbox_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Pepperbox Pistols",
 					"flintlock_pepperbox_pistol",
@@ -1242,10 +1265,11 @@ public class OldGunsConfig {
 					3.4f,
 					0.8f,
 					3.0f,
-					0.8f
+					0.8f,
+					80
 					);
 			
-			flintlock_arquebus = new MuzzleloadingFirearmAttributes(
+			flintlock_arquebus = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Arquebus",
 					"flintlock_arquebus",
@@ -1253,10 +1277,11 @@ public class OldGunsConfig {
 					3.75f,
 					1.2f,
 					1.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_caliver = new MuzzleloadingFirearmAttributes(
+			flintlock_caliver = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Calivers",
 					"flintlock_caliver",
@@ -1264,10 +1289,11 @@ public class OldGunsConfig {
 					4.0f,
 					1.2f,
 					1.6f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_musketoon = new MuzzleloadingFirearmAttributes(
+			flintlock_musketoon = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Musketoons",
 					"flintlock_musketoon",
@@ -1275,10 +1301,11 @@ public class OldGunsConfig {
 					4.0f,
 					0.8f,
 					1.5f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_musket = new MuzzleloadingFirearmAttributes(
+			flintlock_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Muskets",
 					"flintlock_musket",
@@ -1286,10 +1313,11 @@ public class OldGunsConfig {
 					4.25f,
 					1.0f,
 					1.4f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_nock_gun = new MuzzleloadingFirearmAttributes(
+			flintlock_nock_gun = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Nock Guns",
 					"flintlock_nock_gun",
@@ -1297,10 +1325,11 @@ public class OldGunsConfig {
 					4.0f,
 					0.8f,
 					1.8f,
-					0.8f
+					0.8f,
+					80
 					);
 			
-			flintlock_long_musket = new MuzzleloadingFirearmAttributes(
+			flintlock_long_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Long Muskets",
 					"flintlock_long_musket",
@@ -1308,10 +1337,11 @@ public class OldGunsConfig {
 					4.5f,
 					1.2f,
 					1.2f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+			flintlock_blunderbuss_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Blunderbuss Pistols",
 					"flintlock_blunderbuss_pistol",
@@ -1319,10 +1349,11 @@ public class OldGunsConfig {
 					3.0f,
 					0.4f,
 					3.5f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_blunderbuss = new MuzzleloadingFirearmAttributes(
+			flintlock_blunderbuss = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Blunderbusses",
 					"flintlock_blunderbuss",
@@ -1330,10 +1361,11 @@ public class OldGunsConfig {
 					3.5f,
 					1.0f,
 					1.7f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			flintlock_doublebarrel_blunderbuss = new MuzzleloadingFirearmAttributes(
+			flintlock_doublebarrel_blunderbuss = new FirearmAttributes(
 					builder,
 					"Attributes of Flintlock Doublebarrel Blunderbusses",
 					"flintlock_doublebarrel_blunderbuss",
@@ -1341,7 +1373,8 @@ public class OldGunsConfig {
 					3.5f,
 					0.8f,
 					1.7f,
-					0.8f
+					0.8f,
+					80
 					);
 			
 			builder.pop();
@@ -1349,27 +1382,27 @@ public class OldGunsConfig {
 	}
 	
 	public static class CaplockSettings {		
-		public final MuzzleloadingFirearmAttributes caplock_derringer;
-		public final MuzzleloadingFirearmAttributes caplock_duckfoot_derringer;
-		public final MuzzleloadingFirearmAttributes caplock_pistol;
-		public final MuzzleloadingFirearmAttributes caplock_pepperbox_pistol;
-		public final MuzzleloadingFirearmAttributes caplock_arquebus;
+		public final FirearmAttributes caplock_derringer;
+		public final FirearmAttributes caplock_duckfoot_derringer;
+		public final FirearmAttributes caplock_pistol;
+		public final FirearmAttributes caplock_pepperbox_pistol;
+		public final FirearmAttributes caplock_arquebus;
 		                                            
-		public final MuzzleloadingFirearmAttributes caplock_caliver;
-		public final MuzzleloadingFirearmAttributes caplock_musketoon;
+		public final FirearmAttributes caplock_caliver;
+		public final FirearmAttributes caplock_musketoon;
 		                                            
-		public final MuzzleloadingFirearmAttributes caplock_musket;
-		public final MuzzleloadingFirearmAttributes caplock_long_musket;		
+		public final FirearmAttributes caplock_musket;
+		public final FirearmAttributes caplock_long_musket;
 		                                            
-		public final MuzzleloadingFirearmAttributes caplock_blunderbuss_pistol;
-		public final MuzzleloadingFirearmAttributes caplock_blunderbuss;
-		public final MuzzleloadingFirearmAttributes caplock_doublebarrel_blunderbuss;	
+		public final FirearmAttributes caplock_blunderbuss_pistol;
+		public final FirearmAttributes caplock_blunderbuss;
+		public final FirearmAttributes caplock_doublebarrel_blunderbuss;
 		
 		CaplockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Caplock
-			caplock_derringer = new MuzzleloadingFirearmAttributes(
+			caplock_derringer = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Derringers",
 					"caplock_derringer",
@@ -1377,10 +1410,11 @@ public class OldGunsConfig {
 					3.375f,
 					0.6f,
 					5.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_duckfoot_derringer = new MuzzleloadingFirearmAttributes(
+			caplock_duckfoot_derringer = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Duckfoot Derringers",
 					"caplock_duckfoot_derringer",
@@ -1388,10 +1422,11 @@ public class OldGunsConfig {
 					3.125f,
 					0.4f,
 					10.0f,
-					0.8f
+					0.8f,
+					80
 					);
 			
-			caplock_pistol = new MuzzleloadingFirearmAttributes(
+			caplock_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Pistols",
 					"caplock_pistol",
@@ -1399,10 +1434,11 @@ public class OldGunsConfig {
 					3.625f,
 					1.1f,
 					2.0f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_pepperbox_pistol = new MuzzleloadingFirearmAttributes(
+			caplock_pepperbox_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Pepperbox Pistols",
 					"caplock_pepperbox_pistol",
@@ -1410,10 +1446,11 @@ public class OldGunsConfig {
 					3.525f,
 					0.9f,
 					3.0f,
-					0.8f
+					0.8f,
+					80
 					);
 			
-			caplock_arquebus = new MuzzleloadingFirearmAttributes(
+			caplock_arquebus = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Arquebus",
 					"caplock_arquebus",
@@ -1421,10 +1458,11 @@ public class OldGunsConfig {
 					3.875f,
 					1.3f,
 					1.8f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_caliver = new MuzzleloadingFirearmAttributes(
+			caplock_caliver = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Calivers",
 					"caplock_caliver",
@@ -1432,10 +1470,11 @@ public class OldGunsConfig {
 					4.125f,
 					1.3f,
 					1.6f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_musketoon = new MuzzleloadingFirearmAttributes(
+			caplock_musketoon = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Musketoons",
 					"caplock_musketoon",
@@ -1443,10 +1482,11 @@ public class OldGunsConfig {
 					4.125f,
 					0.9f,
 					1.5f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_musket = new MuzzleloadingFirearmAttributes(
+			caplock_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Muskets",
 					"caplock_musket",
@@ -1454,10 +1494,11 @@ public class OldGunsConfig {
 					4.375f,
 					1.1f,
 					1.4f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_long_musket = new MuzzleloadingFirearmAttributes(
+			caplock_long_musket = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Long Muskets",
 					"caplock_long_musket",
@@ -1465,10 +1506,11 @@ public class OldGunsConfig {
 					4.625f,
 					1.3f,
 					1.2f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_blunderbuss_pistol = new MuzzleloadingFirearmAttributes(
+			caplock_blunderbuss_pistol = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Blunderbuss Pistols",
 					"caplock_blunderbuss_pistol",
@@ -1476,10 +1518,11 @@ public class OldGunsConfig {
 					3.125f,
 					0.5f,
 					3.5f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_blunderbuss = new MuzzleloadingFirearmAttributes(
+			caplock_blunderbuss = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Blunderbusses",
 					"caplock_blunderbuss",
@@ -1487,10 +1530,11 @@ public class OldGunsConfig {
 					3.625f,
 					1.1f,
 					1.7f,
-					1.0f
+					1.0f,
+					80
 					);
 			
-			caplock_doublebarrel_blunderbuss = new MuzzleloadingFirearmAttributes(
+			caplock_doublebarrel_blunderbuss = new FirearmAttributes(
 					builder,
 					"Attributes of Caplock Doublebarrel Blunderbusses",
 					"caplock_doublebarrel_blunderbuss",
@@ -1498,50 +1542,16 @@ public class OldGunsConfig {
 					3.625f,
 					0.9f,
 					1.7f,
-					0.8f
+					0.8f,
+					80
 					);
 			
 			builder.pop();
 		}
 	}
-	
-	public static class MuzzleloadingFirearmAttributes {
-		public final IntValue durability;
-		public final DoubleValue effectiveRangeModifier;
-		public final DoubleValue shotDamageModifier;
-		public final DoubleValue shotDeviationModifier;
-		public final DoubleValue projectileSpeed;
-		
-		MuzzleloadingFirearmAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
-				final int defaultDurability, final float defaultProjectileSpeed, final float defaultEffectiveRangeModifier, 
-				final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
-			builder.comment(comment).push(path);
-			
-			durability = builder
-					.comment("How many uses before breaking")
-					.defineInRange("durability", defaultDurability, 1, Integer.MAX_VALUE);
-			
-			effectiveRangeModifier = builder
-					.comment("How the firearm modifies the base range of ammo shot")
-					.defineInRange("effectiveRangeModifier", defaultEffectiveRangeModifier, 0.001f, Float.MAX_VALUE);
-			
-			shotDamageModifier = builder
-					.comment("How the firearm modifies the base damage of ammo shot")
-					.defineInRange("shotDamageModifier", defaultShotDamageModifier, 0.001f, Float.MAX_VALUE);
-			
-			shotDeviationModifier = builder
-					.comment("How the firearm modifies the base deviation of ammo shot")
-					.defineInRange("shotDeviaitionModifier", defaultShotDeviaitionModifier, 0.001f, Float.MAX_VALUE);
-			
-			projectileSpeed = builder
-					.comment("How fast projectiles shot from the firearm are")
-					.defineInRange("projectileSpeed", defaultProjectileSpeed, 0.001f, Float.MAX_VALUE);			
-			
-			builder.pop();
-		}
-	}
-	
-	public static class BreechloadingFirearmAttributes {
+
+
+	public static class FirearmAttributes {
 		public final IntValue durability;
 		public final IntValue reloadTicks;
 		public final DoubleValue effectiveRangeModifier;
@@ -1549,9 +1559,10 @@ public class OldGunsConfig {
 		public final DoubleValue shotDeviationModifier;
 		public final DoubleValue projectileSpeed;
 		
-		BreechloadingFirearmAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
-				final int defaultDurability, final int defaultReloadTicks, final float defaultProjectileSpeed, 
-				final float defaultEffectiveRangeModifier, final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
+		FirearmAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+						  final int defaultDurability, final float defaultProjectileSpeed,
+						  final float defaultEffectiveRangeModifier, final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier,
+						  final int defaultReloadTicks) {
 			builder.comment(comment).push(path);
 			
 			durability = builder
@@ -1559,7 +1570,7 @@ public class OldGunsConfig {
 					.defineInRange("durability", defaultDurability, 1, Integer.MAX_VALUE);
 			
 			reloadTicks = builder
-					.comment("How long it takes to fully reload via breechloading in ticks")
+					.comment("How long it takes to fully reload via breechloading in ticks, if weapon is a breeachloader")
 					.defineInRange("reloadTicks", defaultReloadTicks, 1, Integer.MAX_VALUE);
 			
 			effectiveRangeModifier = builder

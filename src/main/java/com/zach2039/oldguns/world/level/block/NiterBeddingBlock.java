@@ -137,8 +137,8 @@ public class NiterBeddingBlock extends Block {
 		double lowRefuseAnimalAmountPer = NITER_PRODUCTION_SETTINGS.lowRefuseAnimalGeneratedAmount.get();
 		double highRefuseAnimalAmountPer = NITER_PRODUCTION_SETTINGS.highRefuseAnimalGeneratedAmount.get();
 		
-		List<String> lowRefuseAnimalEntityNames = NITER_PRODUCTION_SETTINGS.lowRefuseAnimals.get();
-		List<String> highRefuseAnimalEntityNames = NITER_PRODUCTION_SETTINGS.highRefuseAnimals.get();
+		List<? extends String> lowRefuseAnimalEntityNames = NITER_PRODUCTION_SETTINGS.lowRefuseAnimals.get();
+		List<? extends String> highRefuseAnimalEntityNames = NITER_PRODUCTION_SETTINGS.highRefuseAnimals.get();
 		
 		AABB niterBedNitrateRadius = new AABB(
 				pos.getX() - animalEffectRadius, pos.getY() + 1, pos.getZ() - animalEffectRadius, 

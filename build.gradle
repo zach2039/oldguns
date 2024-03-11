@@ -30,6 +30,12 @@ apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
+apply plugin: 'idea'
+idea {
+    module {
+        inheritOutputDirs = true
+    }
+}
 
 //if (System.getenv("CI") != "true") {
 //	apply plugin: 'com.diffplug.eclipse.apt'

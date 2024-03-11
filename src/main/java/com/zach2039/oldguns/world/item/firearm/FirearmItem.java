@@ -90,17 +90,14 @@ public class FirearmItem extends BowItem implements Firearm {
 	private FirearmItem(FirearmProperties builder) {
 		super((Properties) builder);
 		this.ammoCapacity = builder.ammoCapacity;
-		this.projectileSpeed = builder.projectileSpeed;
-		this.effectiveRangeModifier = builder.effectiveRangeModifier;
-		this.deviationModifier = builder.deviationModifier;
-		this.damageModifier = builder.damageModifier;
-		this.requiredReloadTicks = builder.requiredReloadTicks;
+
 		this.mechanismType = builder.mechanismType;
 		this.defaultProjectileType = builder.defaultProjectileType;
 		this.reloadType = builder.reloadType;
 		this.firearmSize = builder.firearmSize;
 		this.firearmWaterResiliency = builder.firearmWaterResiliency;
 		this.firesAllLoadedAmmoAtOnce = builder.firesAllLoadedAmmoAtOnce;
+		this.firearmAttributes = builder.firearmAttributes;
 		initAttributes();
 	}
 	
@@ -113,10 +110,8 @@ public class FirearmItem extends BowItem implements Firearm {
 				.firearmSize(entry.getFirearmSize())
 				.firearmWaterResiliency(entry.getFirearmWaterResiliency())
 				.reloadType(entry.getFirearmReloadType())
-				.effectiveRangeModifier(((Double) OldGunsConfig.getServer(entry.getAttributes().effectiveRangeModifier)).floatValue())
-				.damageModifier(((Double) OldGunsConfig.getServer(entry.getAttributes().shotDamageModifier)).floatValue())
-				.deviationModifier(((Double) OldGunsConfig.getServer(entry.getAttributes().shotDeviationModifier)).floatValue())
-				.projectileSpeed(((Double) OldGunsConfig.getServer(entry.getAttributes().projectileSpeed)).floatValue())
+
+				.firearmAttributes(entry.getAttributes())
 				.defaultDurability((int) OldGunsConfig.getServer(entry.getAttributes().durability))
 				.setNoRepair()
 				//.tab(OldGuns.CREATIVE_MODE_TAB)
@@ -139,7 +134,7 @@ public class FirearmItem extends BowItem implements Firearm {
 	public void fillCreativeModeTab(final MutableHashedLinkedMap<ItemStack, CreativeModeTab.TabVisibility> entries) {
 		ItemStack firearmStack = new ItemStack(this);
 		initNBTTags(firearmStack);
-		for (int i = 0; i < this.ammoCapacity; i++) {
+		for (int i = 0; i < this.getAmmoCapacity(); i++) {
 			FirearmNBTHelper.pushNBTTagAmmo(firearmStack, getDefaultProjectileForFirearm());
 		}
 		entries.put(firearmStack, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
@@ -240,6 +235,16 @@ public class FirearmItem extends BowItem implements Firearm {
 	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged)
 	{
 		return !oldStack.equals(newStack); //!ItemStack.areItemStacksEqual(oldStack, newStack);
+	}
+
+	@Override
+	public int getMaxDamage(ItemStack stack) {
+		return ((Integer) OldGunsConfig.getServer(this.firearmAttributes.durability)).intValue();
+	}
+
+	@Override
+	public boolean canBeDepleted() {
+		return ((Integer) OldGunsConfig.getServer(this.firearmAttributes.durability)).intValue() > 0;
 	}
 
 	@Override
@@ -841,39 +846,27 @@ public class FirearmItem extends BowItem implements Firearm {
 	public static class FirearmProperties extends Properties {
 
 		/**
+		 * Associated config attributes of this firearm item
+		 */
+		OldGunsConfig.FirearmAttributes firearmAttributes;
+
+		public FirearmProperties firearmAttributes(OldGunsConfig.FirearmAttributes firearmAttributes) {
+			this.firearmAttributes = firearmAttributes;
+			return this;
+		}
+
+		/**
 		 * Ammo capacity of this firearm item instance.
 		 */
 		int ammoCapacity = 1;
 
-		/**
-		 * Projectile speed of this firearm item instance.
-		 */
-		float projectileSpeed = 2.5f;
 
-		/**
-		 * Effective range of this firearm item instance.
-		 */
-		float effectiveRangeModifier = 10f;
 
-		/**
-		 * Deviation modifier of this firearm item instance.
-		 */
-		float deviationModifier = 1f;
-
-		/**
-		 * Damage modifier of this firearm item instance.
-		 */
-		float damageModifier = 1f;
-
-		/**
-		 * Required reload ticks of this firearm item instance.
-		 */
-		int requiredReloadTicks = 80;
 
 		/**
 		 * Whether the firearm fires all loaded ammo at once. Used for nockguns and duckfoot firearms.
 		 */
-		private boolean firesAllLoadedAmmoAtOnce = false;
+		boolean firesAllLoadedAmmoAtOnce = false;
 
 		/**
 		 * Mechanism type of firearm
@@ -905,30 +898,7 @@ public class FirearmItem extends BowItem implements Firearm {
 			return this;
 		}
 
-		public FirearmProperties projectileSpeed(float projectileSpeed) {
-			this.projectileSpeed = projectileSpeed;
-			return this;
-		}
 
-		public FirearmProperties effectiveRangeModifier(float effectiveRangeModifier) {
-			this.effectiveRangeModifier = effectiveRangeModifier;
-			return this;
-		}
-
-		public FirearmProperties deviationModifier(float deviationModifier) {
-			this.deviationModifier = deviationModifier;
-			return this;
-		}
-
-		public FirearmProperties damageModifier(float damageModifier) {
-			this.damageModifier = damageModifier;
-			return this;
-		}
-
-		public FirearmProperties requiredReloadTicks(int requiredReloadTicks) {
-			this.requiredReloadTicks = requiredReloadTicks;
-			return this;
-		}
 
 		public FirearmProperties firesAllLoadedAmmoAtOnce(boolean firesAllLoadedAmmoAtOnce) {
 			this.firesAllLoadedAmmoAtOnce = firesAllLoadedAmmoAtOnce;
@@ -969,27 +939,27 @@ public class FirearmItem extends BowItem implements Firearm {
 
 	@Override
 	public float getProjectileSpeed() {
-		return this.projectileSpeed;
+		return ((Double) OldGunsConfig.getServer(this.firearmAttributes.projectileSpeed)).floatValue();
 	}
 
 	@Override
 	public float getEffectiveRangeModifier() {
-		return this.effectiveRangeModifier;
+		return ((Double) OldGunsConfig.getServer(this.firearmAttributes.effectiveRangeModifier)).floatValue();
 	}
 
 	@Override
 	public float getFirearmDeviation() {
-		return this.deviationModifier;
+		return ((Double) OldGunsConfig.getServer(this.firearmAttributes.shotDeviationModifier)).floatValue();
 	}
 
 	@Override
 	public float getDamageModifier() {
-		return this.damageModifier;
+		return ((Double) OldGunsConfig.getServer(this.firearmAttributes.shotDamageModifier)).floatValue();
 	}
 
 	@Override
 	public int getRequiredReloadTicks() {
-		return this.requiredReloadTicks;
+		return ((Integer) OldGunsConfig.getServer(this.firearmAttributes.reloadTicks)).intValue();
 	}
 
 	@Override
@@ -1027,30 +997,13 @@ public class FirearmItem extends BowItem implements Firearm {
 	 */
 	int ammoCapacity = 1;
 
-	/**
-	 * Projectile speed of this firearm item instance.
-	 */
-	float projectileSpeed = 2.5f;
+
+
 
 	/**
-	 * Effective range of this firearm item instance.
+	 * Associated config attributes of this firearm item
 	 */
-	float effectiveRangeModifier = 10f;
-
-	/**
-	 * Deviation modifier of this firearm item instance.
-	 */
-	float deviationModifier = 1f;
-
-	/**
-	 * Damage modifier of this firearm item instance.
-	 */
-	float damageModifier = 1f;
-
-	/**
-	 * Required reload ticks of this firearm item instance.
-	 */
-	int requiredReloadTicks = 80;
+	OldGunsConfig.FirearmAttributes firearmAttributes;
 
 	/**
 	 * Whether the firearm fires all loaded ammo at once. Used for nockguns and duckfoot firearms.
