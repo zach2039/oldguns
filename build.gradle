@@ -19,7 +19,7 @@ buildscript {
 		if (System.getenv("CI") == "true") {
 			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
 		} else {
-			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
+			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
 		}	
 
 		classpath 'org.parchmentmc:librarian:1.+'

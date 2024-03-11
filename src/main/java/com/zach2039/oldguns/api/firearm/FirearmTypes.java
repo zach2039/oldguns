@@ -2,9 +2,8 @@ package com.zach2039.oldguns.api.firearm;
 
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import com.zach2039.oldguns.config.OldGunsConfig.BreechloadingFirearmAttributes;
 import com.zach2039.oldguns.config.OldGunsConfig.FirearmSettings;
-import com.zach2039.oldguns.config.OldGunsConfig.MuzzleloadingFirearmAttributes;
+import com.zach2039.oldguns.config.OldGunsConfig.FirearmAttributes;
 
 public class FirearmTypes {
 	
@@ -50,14 +49,14 @@ public class FirearmTypes {
 		;
 		
 		Muzzleloaders(int ammoCapacity, boolean firesAllAtOnce, MechanismType mechanismType, ProjectileType defaultProjectileType, FirearmSize firearmSize, 
-				FirearmWaterResiliency firearmWaterResiliency, MuzzleloadingFirearmAttributes muzzleloadingFirearmAttributes) {
+				FirearmWaterResiliency firearmWaterResiliency, FirearmAttributes firearmAttributes) {
 			this.ammoCapacity = ammoCapacity;
 			this.firesAllAtOnce = firesAllAtOnce;
 			this.mechanismType = mechanismType;
 			this.defaultProjectileType = defaultProjectileType;
 			this.firearmSize = firearmSize;
 			this.firearmWaterResiliency = firearmWaterResiliency;
-			this.muzzleloadingFirearmAttributes = muzzleloadingFirearmAttributes;
+			this.firearmAttributes = firearmAttributes;
 		}
 		
 		public int getAmmoCapacity() {
@@ -88,8 +87,8 @@ public class FirearmTypes {
 			return FirearmReloadType.MUZZLELOADER;
 		}
 
-		public MuzzleloadingFirearmAttributes getAttributes() {
-			return this.muzzleloadingFirearmAttributes;
+		public FirearmAttributes getAttributes() {
+			return this.firearmAttributes;
 		}
 		
 		int ammoCapacity;
@@ -104,7 +103,7 @@ public class FirearmTypes {
 		
 		FirearmWaterResiliency firearmWaterResiliency;
 		
-		MuzzleloadingFirearmAttributes muzzleloadingFirearmAttributes;
+		FirearmAttributes firearmAttributes;
 	}
 	
 	public enum Breechloaders {
@@ -112,14 +111,14 @@ public class FirearmTypes {
 		;
 		
 		Breechloaders(FirearmSize firearmSize, FirearmWaterResiliency firearmWaterResiliency, 
-				BreechloadingFirearmAttributes breechloadingFirearmAttributes) {
+				FirearmAttributes breechloadingFirearmAttributes) {
 			this.firearmSize = firearmSize;
 			this.firearmWaterResiliency = firearmWaterResiliency;
-			this.breechloadingFirearmAttributes = breechloadingFirearmAttributes;
+			this.firearmAttributes = firearmAttributes;
 		}
 		
-		public BreechloadingFirearmAttributes getAttributes() {
-			return this.breechloadingFirearmAttributes;
+		public FirearmAttributes getAttributes() {
+			return this.firearmAttributes;
 		}
 		
 		public FirearmSize getFirearmSize() {
@@ -138,7 +137,7 @@ public class FirearmTypes {
 		
 		FirearmWaterResiliency firearmWaterResiliency;
 		
-		BreechloadingFirearmAttributes breechloadingFirearmAttributes;
+		FirearmAttributes firearmAttributes;
 	}
 	
 	public enum MechanismType {

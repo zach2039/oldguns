@@ -1,3 +1,6 @@
+### v1.18.2-3.3.4-44
+ - Fix and close [#58](https://github.com/zach2039/oldguns/issues/58)
+
 ### v1.18.2-3.3.3-40
 
  - Fix and close [#32](https://github.com/zach2039/oldguns/issues/32) to fix compat with primal magick
