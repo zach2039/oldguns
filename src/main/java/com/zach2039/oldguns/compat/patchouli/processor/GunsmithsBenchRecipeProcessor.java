@@ -13,6 +13,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeManager;
+import net.minecraft.world.level.Level;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
@@ -28,7 +29,7 @@ public class GunsmithsBenchRecipeProcessor implements IComponentProcessor {
 	private boolean hasCustomHeading;
 
 	@Override
-	public void setup(IVariableProvider variables) {
+	public void setup(Level level, IVariableProvider variables) {
 		RecipeManager manager = Minecraft.getInstance().level.getRecipeManager();
 
 		if (variables.has("recipe")) {
@@ -52,7 +53,7 @@ public class GunsmithsBenchRecipeProcessor implements IComponentProcessor {
 	}
 
 	@Override
-	public IVariable process(String key) {
+	public IVariable process(Level level, String key) {
 		if (recipe == null) {
 			return null;
 		}

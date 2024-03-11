@@ -23,13 +23,13 @@ Antique weapons for that colonial feel.
     side="BOTH"
 [[dependencies.oldguns]]
     modId="patchouli"
-    mandatory=false
-    versionRange="[1.19-,)"
+    mandatory=true
+    versionRange="[1.19.4-,)"
     ordering="NONE"
     side="CLIENT"
 [[dependencies.oldguns]]
     modId="jei"
     mandatory=false
-    versionRange="[1.19-,)"
+    versionRange="[1.19.4-,)"
     ordering="NONE"
     side="CLIENT"

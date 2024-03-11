@@ -15,6 +15,7 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.Level;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariable;
 import vazkii.patchouli.api.IVariableProvider;
@@ -30,7 +31,7 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 	private boolean hasCustomHeading;
 
 	@Override
-	public void setup(IVariableProvider variables) {
+	public void setup(Level level, IVariableProvider variables) {
 
 		List<String> names = variables.get("recipes").asStream().map(IVariable::asString).collect(Collectors.toList());
 		this.recipes = new ArrayList<>();
@@ -78,7 +79,7 @@ public class MultiGunsmithsBenchRecipeProcessor implements IComponentProcessor {
 	}
 
 	@Override
-	public IVariable process(String key) {
+	public IVariable process(Level level, String key) {
 		if (recipes.isEmpty()) {
 			return null;
 		}
