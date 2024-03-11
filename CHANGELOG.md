@@ -1,3 +1,8 @@
+### v1.19.4-3.8.2-46
+
+- Fix [#48](https://github.com/zach2039/oldguns/issues/48)
+- Fix recipe error with design notes scrap to paper
+
 ### v1.19.4-3.8.1-45
 
  - Fix and close [#58](https://github.com/zach2039/oldguns/issues/58)
