@@ -1,3 +1,9 @@
+### v1.19.2-3.7.3-47
+
+ - Fix [#49](https://github.com/zach2039/oldguns/issues/49)
+ - Fix recipe error with design notes scrap to paper
+ - Update to Forge 43.3.8
+
 ### v1.19.2-3.7.2-42
 
  - Fix issue with oredict dusts tag typo
