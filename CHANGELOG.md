@@ -1,3 +1,7 @@
+### v1.19.4-3.8.3-48
+
+ - Fix [#49](https://github.com/zach2039/oldguns/issues/49)
+
 ### v1.19.4-3.8.2-46
 
 - Fix [#48](https://github.com/zach2039/oldguns/issues/48)
