@@ -1,3 +1,8 @@
+### v1.20.1-3.9.1-50
+
+ - Fix mods.toml versioning for Forge and dependencies
+ - Make Patchouli not mandatory so NeoForge can be used in CurseForge without issue 
+
 ### v1.20.1-3.9.0-49
 
  - Update to MC 1.20.1, Forge 47.2.20
