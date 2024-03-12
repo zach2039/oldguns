@@ -27,8 +27,7 @@ import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 
@@ -40,7 +39,12 @@ public class NiterBeddingBlock extends Block {
 	public static final Property<Integer> REFUSE_AMOUNT = IntegerProperty.create("refuse_amount", 0, MAX_REFUSE_AMOUNT);
 
 	public NiterBeddingBlock() {
-		super(Block.Properties.of(Material.DIRT, MaterialColor.DIRT).strength(0.5F).sound(SoundType.GRAVEL).randomTicks());
+		super(Block.Properties.of()
+				.mapColor(MapColor.DIRT)
+				.strength(0.5F)
+				.sound(SoundType.GRAVEL)
+				.randomTicks()
+		);
 		registerDefaultState(stateDefinition.any().setValue(REFUSE_AMOUNT, Integer.valueOf(0)));
 	}
 

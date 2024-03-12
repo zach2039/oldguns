@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:matchlock_caliver"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

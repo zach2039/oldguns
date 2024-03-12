@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:hacksaw"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

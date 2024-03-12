@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:wheellock_pistol_small_metal_musket_ball_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:lead_ingot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

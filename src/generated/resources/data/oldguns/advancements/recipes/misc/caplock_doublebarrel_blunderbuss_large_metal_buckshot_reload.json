@@ -63,5 +63,6 @@
     "recipes": [
       "oldguns:caplock_doublebarrel_blunderbuss_large_metal_buckshot_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

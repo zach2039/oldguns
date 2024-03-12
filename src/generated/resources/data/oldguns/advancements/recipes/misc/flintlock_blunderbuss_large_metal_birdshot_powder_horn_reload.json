@@ -54,5 +54,6 @@
     "recipes": [
       "oldguns:flintlock_blunderbuss_large_metal_birdshot_powder_horn_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

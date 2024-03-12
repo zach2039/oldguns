@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:percussion_cap_cone"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

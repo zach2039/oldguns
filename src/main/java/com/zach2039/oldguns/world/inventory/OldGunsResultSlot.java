@@ -9,6 +9,8 @@ import net.minecraft.world.inventory.RecipeHolder;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.Collections;
+
 public class OldGunsResultSlot extends Slot {
 	   private final GunsmithsBenchCraftingContainer craftSlots;
 	   private final Player player;
@@ -43,12 +45,13 @@ public class OldGunsResultSlot extends Slot {
 
 	   protected void checkTakeAchievements(ItemStack p_40185_) {
 	      if (this.removeCount > 0) {
-	         p_40185_.onCraftedBy(this.player.level, this.player, this.removeCount);
+	         p_40185_.onCraftedBy(this.player.level(), this.player, this.removeCount);
 	         net.minecraftforge.event.ForgeEventFactory.firePlayerCraftingEvent(this.player, p_40185_, this.craftSlots);
 	      }
 
 	      if (this.container instanceof RecipeHolder) {
-	         ((RecipeHolder)this.container).awardUsedRecipes(this.player);
+			  // FIXME : No idea what the list parameter does on this now
+	         ((RecipeHolder)this.container).awardUsedRecipes(this.player, Collections.emptyList());
 	      }
 
 	      this.removeCount = 0;
@@ -57,7 +60,7 @@ public class OldGunsResultSlot extends Slot {
 	   public void onTake(Player player, ItemStack p_150639_) {
 	      this.checkTakeAchievements(p_150639_);
 	      net.minecraftforge.common.ForgeHooks.setCraftingPlayer(player);
-	      NonNullList<ItemStack> nonnulllist = player.level.getRecipeManager().getRemainingItemsFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), this.craftSlots, player.level);
+	      NonNullList<ItemStack> nonnulllist = player.level().getRecipeManager().getRemainingItemsFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), this.craftSlots, player.level());
 	      net.minecraftforge.common.ForgeHooks.setCraftingPlayer(null);
 	      for(int i = 0; i < nonnulllist.size(); ++i) {
 	         ItemStack itemstack = this.craftSlots.getItem(i);
@@ -70,7 +73,7 @@ public class OldGunsResultSlot extends Slot {
 	         if (!itemstack1.isEmpty()) {
 	            if (itemstack.isEmpty()) {
 	               this.craftSlots.setItem(i, itemstack1);
-	            } else if (ItemStack.isSame(itemstack, itemstack1) && ItemStack.tagMatches(itemstack, itemstack1)) {
+	            } else if (ItemStack.isSameItemSameTags(itemstack, itemstack1)) {
 	               itemstack1.grow(itemstack.getCount());
 	               this.craftSlots.setItem(i, itemstack1);
 	            } else if (!this.player.getInventory().add(itemstack1)) {

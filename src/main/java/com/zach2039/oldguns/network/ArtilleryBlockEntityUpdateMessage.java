@@ -44,7 +44,7 @@ public class ArtilleryBlockEntityUpdateMessage {
                 if (ClientUtil.getClientPlayer() == null) return;
                 
                 /* Get world of client. */
-				Level world = Minecraft.getInstance().player.level;
+				Level world = Minecraft.getInstance().player.level();
 				
 				/* Only process effects if world isn't null. */
 				if (world != null) 

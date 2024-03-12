@@ -11,22 +11,21 @@ import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Material;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
- * A group consisting of a still and flowing fluid, a fluid block and a bucket item.
+ * A group consisting of a fluid type, a still and flowing fluid, a fluid block and a bucket item.
  * <p>
  * This class restricts the still and flowing fluids to subclasses of {@link FlowingFluid} and provides default
  * still, flowing, block and bucket factories.
  * <p>
- * The only required inputs are the {@link FluidAttributes} ({@link StandardFluidGroup.Builder#attributes(FluidAttributes.Builder)})
- * and the block's {@link Material} ({@link StandardFluidGroup.Builder#blockMaterial(Material)}).
+ * The only required input is the {@link FluidType} factory ({@link StandardFluidGroup.Builder#typeFactory(Supplier)})}).
  *
  * @author Choonster
  */
@@ -36,8 +35,6 @@ public class StandardFluidGroup extends FluidGroup<FluidType, FlowingFluid, Flow
 	}
 
 	public static class Builder extends FluidGroup.Builder<FluidType, FlowingFluid, FlowingFluid, LiquidBlock, Item> {
-		@Nullable
-		private Material blockMaterial;
 
 		public Builder(final String name, final DeferredRegister<FluidType> fluidTypes, final DeferredRegister<Fluid> fluids, final DeferredRegister<Block> blocks, final DeferredRegister<Item> items) {
 			super(name, fluidTypes, fluids, blocks, items);
@@ -45,18 +42,9 @@ public class StandardFluidGroup extends FluidGroup<FluidType, FlowingFluid, Flow
 			stillFactory = ForgeFlowingFluid.Source::new;
 			flowingFactory = ForgeFlowingFluid.Flowing::new;
 
-			blockFactory = fluid -> {
-				Preconditions.checkState(blockMaterial != null, "Block Material not provided");
-
-				return new LiquidBlock(fluid, FluidGroup.defaultBlockProperties(blockMaterial));
-			};
+			blockFactory = LiquidBlock::new;
 
 			bucketFactory = fluid -> new BucketItem(fluid, FluidGroup.defaultBucketProperties());
-		}
-
-		public Builder blockMaterial(final Material blockMaterial) {
-			this.blockMaterial = blockMaterial;
-			return this;
 		}
 
 		@Override
@@ -87,6 +75,11 @@ public class StandardFluidGroup extends FluidGroup<FluidType, FlowingFluid, Flow
 		@Override
 		public Builder propertiesCustomiser(final Consumer<ForgeFlowingFluid.Properties> propertiesCustomiser) {
 			return (Builder) super.propertiesCustomiser(propertiesCustomiser);
+		}
+
+		@Override
+		public Builder blockPropertiesCustomiser(final Consumer<BlockBehaviour.Properties> blockPropertiesCustomiser) {
+			return (Builder) super.blockPropertiesCustomiser(blockPropertiesCustomiser);
 		}
 
 		@Override

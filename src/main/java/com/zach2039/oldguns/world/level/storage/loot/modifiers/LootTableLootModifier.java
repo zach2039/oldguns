@@ -23,7 +23,20 @@ import net.minecraftforge.common.loot.LootModifier;
  *
  * @author Choonster
  */
-public abstract class LootTableLootModifier extends LootModifier {
+public class LootTableLootModifier extends LootModifier {
+
+	public static final Supplier<Codec<LootTableLootModifier>> CODEC = Suppliers.memoize(() ->
+			RecordCodecBuilder.create(inst ->
+					codecStart(inst)
+							.and(
+									ResourceLocation.CODEC
+											.fieldOf("loot_table")
+											.forGetter(m -> m.lootTableID)
+							)
+							.apply(inst, LootTableLootModifier::new)
+			)
+	);
+
 	protected final ResourceLocation lootTableID;
 	
 	public LootTableLootModifier(final LootItemCondition[] conditions, final ResourceLocation lootTableID) {
@@ -31,9 +44,10 @@ public abstract class LootTableLootModifier extends LootModifier {
 		this.lootTableID = lootTableID;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	protected @NotNull ObjectArrayList<ItemStack> doApply(final ObjectArrayList<ItemStack> generatedLoot, final LootContext context) {
-		final var lootTable = context.getLootTable(lootTableID);
+		final var lootTable = context.getResolver().getLootTable(lootTableID);
 
 		// Generate additional loot without applying loot modifiers, otherwise each modifier would run multiple times
 		// for the same loot generation.
@@ -43,6 +57,8 @@ public abstract class LootTableLootModifier extends LootModifier {
 	}
 
 	@Override
-	public abstract Codec<? extends IGlobalLootModifier> codec();
+	public Codec<? extends IGlobalLootModifier> codec() {
+		return CODEC.get();
+	};
 }
 

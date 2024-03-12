@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:wheellock_hand_mortar_medium_metal_canister_shot_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

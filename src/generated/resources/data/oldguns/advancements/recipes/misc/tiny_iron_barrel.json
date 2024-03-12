@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:tiny_iron_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

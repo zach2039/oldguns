@@ -1,11 +1,8 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.Random;
-
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -21,12 +18,20 @@ import net.minecraft.world.level.block.FallingBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
 
 public class LowGradeBlackPowderBlock extends FallingBlock {
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public LowGradeBlackPowderBlock() {
-		super(BlockBehaviour.Properties.of(ModMaterials.BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(
+				BlockBehaviour.Properties.of()
+						.mapColor(MapColor.COLOR_BLACK)
+						.ignitedByLava()
+						.strength(0.5F)
+						.sound(SoundType.SAND)
+						.randomTicks()
+		);
 		this.registerDefaultState(this.stateDefinition.any());
 	}
 	

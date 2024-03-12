@@ -54,5 +54,6 @@
     "recipes": [
       "oldguns:wheellock_doublebarrel_pistol_small_metal_musket_ball_powder_horn_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

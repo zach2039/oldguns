@@ -257,7 +257,7 @@ public class FirearmItem extends BowItem implements Firearm {
 				Player player = (Player) entityIn;
 				if (player.isCreative() || player.isPassenger())
 					return;
-				if (ItemStack.isSame(player.getMainHandItem(), stackIn) || ItemStack.isSame(player.getOffhandItem (), stackIn)) {
+				if (ItemStack.isSameItem(player.getMainHandItem(), stackIn) || ItemStack.isSameItem(player.getOffhandItem (), stackIn)) {
 					if (getFirearmSize() == FirearmSize.HUGE) {
 						addEffect(player, MobEffects.MOVEMENT_SLOWDOWN, 0);
 					}

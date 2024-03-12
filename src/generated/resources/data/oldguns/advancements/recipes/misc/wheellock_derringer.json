@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:wheellock_derringer"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

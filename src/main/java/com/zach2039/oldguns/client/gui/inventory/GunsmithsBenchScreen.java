@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
 
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
@@ -36,19 +37,19 @@ public class GunsmithsBenchScreen extends AbstractContainerScreen<GunsmithsBench
 		super.containerTick();
 	}
 
-	public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-		this.renderBackground(matrixStack);
-		super.render(matrixStack, mouseX, mouseY, partialTicks);
-		this.renderTooltip(matrixStack, mouseX, mouseY);
+	public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTicks) {
+		this.renderBackground(guiGraphics);
+		super.render(guiGraphics, mouseX, mouseY, partialTicks);
+		this.renderTooltip(guiGraphics, mouseX, mouseY);
 	}
 
-	protected void renderBg(PoseStack p_98474_, float p_98475_, int p_98476_, int p_98477_) {
+	protected void renderBg(GuiGraphics guiGraphics, float p_98475_, int p_98476_, int p_98477_) {
 		RenderSystem.setShader(GameRenderer::getPositionTexShader);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		RenderSystem.setShaderTexture(0, GUNSMITHS_BENCH_LOCATION);
 		int i = this.leftPos;
 		int j = (this.height - this.imageHeight) / 2;
-		this.blit(p_98474_, i, j, 0, 0, this.imageWidth, this.imageHeight);
+		guiGraphics.blit(GUNSMITHS_BENCH_LOCATION, i, j, 0, 0, this.imageWidth, this.imageHeight);
 	}
 
 	protected boolean isHovering(int p_98462_, int p_98463_, int p_98464_, int p_98465_, double p_98466_, double p_98467_) {

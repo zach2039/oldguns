@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:medium_wooden_carriage_wheel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

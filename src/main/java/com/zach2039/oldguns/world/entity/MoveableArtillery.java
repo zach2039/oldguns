@@ -134,7 +134,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 	public boolean hurt(DamageSource source, float amount) {
 		if (this.isInvulnerableTo(source)) {
 			return false;
-		} else if (!this.level.isClientSide && !this.isRemoved()) {
+		} else if (!this.level().isClientSide && !this.isRemoved()) {
 			// Reduce damage taken if source was not player
 			float dmgMod = 1.0f;
 			//if (!(source.getEntity() instanceof Player) || source..isProjectile()) {
@@ -149,7 +149,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 			this.gameEvent(GameEvent.ENTITY_DAMAGE, source.getEntity());
 			boolean flag = source.getEntity() instanceof Player && ((Player)source.getEntity()).getAbilities().instabuild;
 			if (flag || this.getDamage() > 40.0F) {
-				if (!flag && this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+				if (!flag && this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
 					this.spawnDrops();
 				}
 
@@ -204,7 +204,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 		if (ret.consumesAction()) return ret;
 		
 		if (player.isSecondaryUseActive()) {
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				return player.startRiding(this) ? InteractionResult.CONSUME : InteractionResult.PASS;
 			} else {
 				return InteractionResult.SUCCESS;
@@ -212,12 +212,13 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 		} else if (this.isVehicle()) {
 			return InteractionResult.PASS;
 		} else {
-			return processInteraction(level, blockPosition(), player, hand);
+			return processInteraction(level(), blockPosition(), player, hand);
 		}
 	}
 
 	@Override
-	public void positionRider(Entity entity) {
+	public void positionRider(Entity entity, Entity.MoveFunction moveFunction) {
+		// FIXME : Need to use moveFunction maybe
 		if (this.hasPassenger(entity)) {
 			float f = 0.0F;
 			float f1 = (float)((this.isRemoved() ? (double)0.01F : this.getPassengersRidingOffset()) + entity.getMyRidingOffset());
@@ -244,7 +245,6 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 				entity.setYBodyRot(((Animal)entity).yBodyRot + (float)j);
 				entity.setYHeadRot(entity.getYHeadRot() + (float)j);
 			}
-
 		}
 	}
 
@@ -286,7 +286,7 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 		}
 
 		this.checkInsideBlocks();
-		List<Entity> list = this.level.getEntities(this, this.getBoundingBox().inflate((double)0.2F, (double)-0.01F, (double)0.2F), EntitySelector.pushableBy(this));
+		List<Entity> list = this.level().getEntities(this, this.getBoundingBox().inflate((double)0.2F, (double)-0.01F, (double)0.2F), EntitySelector.pushableBy(this));
 		if (!list.isEmpty()) {
 			//boolean flag = !this.level.isClientSide && !(this.getControllingPassenger() instanceof Player);
 
@@ -339,9 +339,9 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 					for(int k2 = k; k2 < l; ++k2) {
 						if (j2 <= 0 || k2 != k && k2 != l - 1) {
 							blockpos$mutableblockpos.set(l1, k2, i2);
-							BlockState blockstate = this.level.getBlockState(blockpos$mutableblockpos);
-							if (!(blockstate.getBlock() instanceof WaterlilyBlock) && Shapes.joinIsNotEmpty(blockstate.getCollisionShape(this.level, blockpos$mutableblockpos).move((double)l1, (double)k2, (double)i2), voxelshape, BooleanOp.AND)) {
-								f += blockstate.getFriction(this.level, blockpos$mutableblockpos, this);
+							BlockState blockstate = this.level().getBlockState(blockpos$mutableblockpos);
+							if (!(blockstate.getBlock() instanceof WaterlilyBlock) && Shapes.joinIsNotEmpty(blockstate.getCollisionShape(this.level(), blockpos$mutableblockpos).move((double)l1, (double)k2, (double)i2), voxelshape, BooleanOp.AND)) {
+								f += blockstate.getFriction(this.level(), blockpos$mutableblockpos, this);
 								++k1;
 							}
 						}
@@ -380,18 +380,18 @@ public abstract class MoveableArtillery extends Entity implements Artillery {
 			if (falling) {
 				if (this.fallDistance > 15.0F) {
 
-					state.getBlock().fallOn(this.level, state, blockpos, this, this.fallDistance);
-					this.level.gameEvent(GameEvent.HIT_GROUND, blockpos, GameEvent.Context.of(this, this.getBlockStateOn()));
-					if (!this.level.isClientSide && !this.isRemoved()) {
+					state.getBlock().fallOn(this.level(), state, blockpos, this, this.fallDistance);
+					this.level().gameEvent(GameEvent.HIT_GROUND, blockpos, GameEvent.Context.of(this, this.getBlockStateOn()));
+					if (!this.level().isClientSide && !this.isRemoved()) {
 						this.kill();
-						if (this.level.getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
+						if (this.level().getGameRules().getBoolean(GameRules.RULE_DOENTITYDROPS)) {
 							this.spawnDrops();
 						}
 					}
 				}
 
 				this.resetFallDistance();
-			} else if (!this.level.getFluidState(this.blockPosition().below()).is(FluidTags.WATER) && par < 0.0D) {
+			} else if (!this.level().getFluidState(this.blockPosition().below()).is(FluidTags.WATER) && par < 0.0D) {
 				this.fallDistance = (float)((double)this.fallDistance - par);
 			}
 

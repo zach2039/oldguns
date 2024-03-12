@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:caplock_arquebus"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -37,7 +37,7 @@ public class FirearmEffectMessage {
 	}
 	
 	public static FirearmEffectMessage decode(final FriendlyByteBuf buf) {
-		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level.getEntity(buf.readInt());
+		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level().getEntity(buf.readInt());
 		int parameter = buf.readInt();
 		FirearmEffect effectType = FirearmEffect.values()[buf.readInt()];
 		double x = buf.readDouble();
@@ -66,7 +66,7 @@ public class FirearmEffectMessage {
                 if (ClientUtil.getClientPlayer() == null) return;
  
                 /* Get world of client. */
-    			Level world = ClientUtil.getClientPlayer().level;
+    			Level world = ClientUtil.getClientPlayer().level();
     			
     			/* Only process effects if world isn't null. */
     			if (world != null)

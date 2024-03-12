@@ -30,5 +30,6 @@
     "recipes": [
       "oldguns:paper_from_design_notes"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

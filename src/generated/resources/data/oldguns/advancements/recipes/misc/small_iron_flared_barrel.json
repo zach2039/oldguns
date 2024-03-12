@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:small_iron_flared_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

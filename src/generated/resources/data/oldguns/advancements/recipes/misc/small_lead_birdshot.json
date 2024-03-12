@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:small_lead_birdshot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

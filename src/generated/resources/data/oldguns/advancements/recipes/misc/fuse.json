@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:fuse"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

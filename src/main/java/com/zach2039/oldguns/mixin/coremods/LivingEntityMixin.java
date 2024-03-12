@@ -29,7 +29,7 @@ public class LivingEntityMixin {
 
 		if (((LivingEntity)(Object)this) instanceof Mob) {
 			Mob mob = (Mob) ((LivingEntity)(Object)this);
-			if (mob.level != null && !mob.level.isClientSide && OldGunsConfig.SERVER.mobSettings.resetMobShotTimerOnHit.get()) {
+			if (mob.level() != null && !mob.level().isClientSide && OldGunsConfig.SERVER.mobSettings.resetMobShotTimerOnHit.get()) {
 				mob.goalSelector.getAvailableGoals().stream()
 				.filter((goal) -> {return goal.getGoal() instanceof RangedFirearmAttackGoal;}).forEach((goal) -> {
 					((RangedFirearmAttackGoal<?>)goal.getGoal()).interruptFiring();

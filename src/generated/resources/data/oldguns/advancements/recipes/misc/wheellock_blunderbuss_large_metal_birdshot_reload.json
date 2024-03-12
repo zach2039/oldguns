@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:wheellock_blunderbuss_large_metal_birdshot_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

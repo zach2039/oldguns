@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:flintlock_blunderbuss_pistol_small_metal_buckshot_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:flintlock_derringer"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

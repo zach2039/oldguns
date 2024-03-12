@@ -23,7 +23,7 @@ public class TryAvoidWaterGoal extends Goal {
 		BlockPos blockpos = null;
 
 		for(BlockPos blockpos1 : BlockPos.betweenClosed(Mth.floor(this.mob.getX() - searchRadius), Mth.floor(this.mob.getY() - searchRadius), Mth.floor(this.mob.getZ() - searchRadius), Mth.floor(this.mob.getX() + searchRadius), Mth.floor(this.mob.getY() + searchRadius), Mth.floor(this.mob.getZ() + searchRadius))) {
-			if (this.mob.level.getFluidState(blockpos1).isEmpty()) {
+			if (this.mob.level().getFluidState(blockpos1).isEmpty()) {
 				blockpos = blockpos1;
 				break;
 			}

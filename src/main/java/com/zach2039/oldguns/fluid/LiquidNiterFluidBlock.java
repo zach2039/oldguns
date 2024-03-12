@@ -1,13 +1,11 @@
 package com.zach2039.oldguns.fluid;
 
 import java.util.Optional;
-import java.util.Random;
 
 import javax.annotation.Nonnull;
 
 import com.google.common.collect.ImmutableList;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
-import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -25,11 +23,16 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
+import net.minecraft.world.level.material.MapColor;
 
 public class LiquidNiterFluidBlock extends LiquidBlock {
 
 	public LiquidNiterFluidBlock(java.util.function.Supplier<? extends FlowingFluid> fluidSupplier) {
-		super(fluidSupplier, FluidGroup.defaultBlockProperties(ModMaterials.LIQUID_NITER));
+		super(fluidSupplier,
+				FluidGroup.defaultBlockProperties()
+						.mapColor(MapColor.COLOR_LIGHT_GRAY)
+						.ignitedByLava()
+		);
 	}
 
 	@Override

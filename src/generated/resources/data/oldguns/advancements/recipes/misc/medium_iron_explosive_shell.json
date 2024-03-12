@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:medium_iron_explosive_shell"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

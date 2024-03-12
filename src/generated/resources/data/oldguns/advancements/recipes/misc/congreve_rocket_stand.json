@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:congreve_rocket_stand"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

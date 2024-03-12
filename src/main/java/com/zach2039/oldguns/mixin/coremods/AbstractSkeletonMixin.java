@@ -30,7 +30,7 @@ public class AbstractSkeletonMixin {
 	@Inject(method = "aiStep", at = @At(value = "HEAD"))
 	private void aiStep(CallbackInfo ci) {
 		//OldGuns.LOGGER.debug("aiStep");
-		if (((AbstractSkeleton)(Object)this).level != null && !((AbstractSkeleton)(Object)this).level.isClientSide) {
+		if (((AbstractSkeleton)(Object)this).level() != null && !((AbstractSkeleton)(Object)this).level().isClientSide) {
 			ItemStack firearmStack = ((AbstractSkeleton)(Object)this).getItemInHand(ProjectileUtil.getWeaponHoldingHand(((AbstractSkeleton)(Object)this), item -> item instanceof FirearmItem));
 			
 			if (firearmStack.getItem() instanceof FirearmItem) {
@@ -65,14 +65,14 @@ public class AbstractSkeletonMixin {
 			}
 		};
 		
-		if (((AbstractSkeleton)(Object)this).level != null && !((AbstractSkeleton)(Object)this).level.isClientSide) {
+		if (((AbstractSkeleton)(Object)this).level() != null && !((AbstractSkeleton)(Object)this).level().isClientSide) {
 			ItemStack itemstack = ((AbstractSkeleton)(Object)this).getItemInHand(ProjectileUtil.getWeaponHoldingHand(((AbstractSkeleton)(Object)this), item -> item instanceof FirearmItem));
 			if ((itemstack.getItem() instanceof FirearmItem) && (itemstack.getMaxDamage() != itemstack.getDamageValue())) {
 				((AbstractSkeleton)(Object)this).goalSelector.removeGoal(((AbstractSkeletonAccess)((AbstractSkeleton)(Object)this)).getMeleeGoal());
 				((AbstractSkeleton)(Object)this).goalSelector.removeGoal(((AbstractSkeletonAccess)((AbstractSkeleton)(Object)this)).getBowGoal());
 				
 				int i = OldGunsConfig.SERVER.mobSettings.firearmMobShotTime.get();
-				if (((AbstractSkeleton)(Object)this).level.getDifficulty() != Difficulty.HARD) {
+				if (((AbstractSkeleton)(Object)this).level().getDifficulty() != Difficulty.HARD) {
 					i = OldGunsConfig.SERVER.mobSettings.firearmMobShotTimeHard.get();
 				}
 
@@ -85,8 +85,8 @@ public class AbstractSkeletonMixin {
 	
 	/**
 	 * Mixin to allow skeletons to shoot firearms.
-	 * @param target
-	 * @param power
+	 * @param pTarget
+	 * @param pDistanceFactor
 	 * @param ci
 	 */
 	@Inject(method = "performRangedAttack", at = @At(value = "HEAD"), cancellable = true)
@@ -97,12 +97,12 @@ public class AbstractSkeletonMixin {
 			FirearmItem firearmItem = (FirearmItem)firearmStack.getItem();
 			ItemStack ammoStack = ((AbstractSkeleton)(Object)this).getProjectile(((AbstractSkeleton)(Object)this).getItemInHand(ProjectileUtil.getWeaponHoldingHand(((AbstractSkeleton)(Object)this), item -> item instanceof FirearmItem)));
 
-			if (!((AbstractSkeleton)(Object)this).level.isClientSide()) {
-				boolean failure = firearmItem.checkConditionForEffect(((AbstractSkeleton)(Object)this).level, ((AbstractSkeleton)(Object)this), firearmStack);
+			if (!((AbstractSkeleton)(Object)this).level().isClientSide()) {
+				boolean failure = firearmItem.checkConditionForEffect(((AbstractSkeleton)(Object)this).level(), ((AbstractSkeleton)(Object)this), firearmStack);
 	
 				// If firearm broke or misfired, do nothing
 				if (!failure) {
-					firearmItem.fireProjectiles(((AbstractSkeleton)(Object)this).level, ((AbstractSkeleton)(Object)this), firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmMobBaseProjectileDeviation.get().floatValue());
+					firearmItem.fireProjectiles(((AbstractSkeleton)(Object)this).level(), ((AbstractSkeleton)(Object)this), firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmMobBaseProjectileDeviation.get().floatValue());
 					
 				}				
 			}
@@ -112,8 +112,7 @@ public class AbstractSkeletonMixin {
 	
 	/**
 	 * Mixin to allow skeletons to use firearms.
-	 * @param target
-	 * @param power
+	 * @param projectileWeapon
 	 * @param cir
 	 */
 	@Inject(method = "canFireProjectileWeapon", at = @At(value = "HEAD"), cancellable = true)

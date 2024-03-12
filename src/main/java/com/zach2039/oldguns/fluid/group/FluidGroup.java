@@ -8,13 +8,14 @@ import javax.annotation.Nullable;
 
 import com.google.common.base.Preconditions;
 
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.fluids.FluidType;
 import net.minecraftforge.fluids.ForgeFlowingFluid;
 import net.minecraftforge.registries.DeferredRegister;
@@ -95,16 +96,24 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 
 		@Nullable
 		private Supplier<TYPE> typeFactory;
+
 		@Nullable
 		protected IFluidFactory<STILL> stillFactory;
+
 		@Nullable
 		protected IFluidFactory<FLOWING> flowingFactory;
+
 		@Nullable
 		protected IBlockFactory<STILL, BLOCK> blockFactory;
+
 		@Nullable
 		protected IBucketFactory<STILL, BUCKET> bucketFactory;
+
 		@Nullable
 		protected Consumer<ForgeFlowingFluid.Properties> propertiesCustomiser;
+
+		@Nullable
+		protected Consumer<BlockBehaviour.Properties> blockPropertiesCustomiser;
 
 		@Nullable
 		protected ForgeFlowingFluid.Properties properties;
@@ -153,6 +162,12 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 			return this;
 		}
 
+		public Builder<TYPE, STILL, FLOWING, BLOCK, BUCKET> blockPropertiesCustomiser(final Consumer<BlockBehaviour.Properties> blockPropertiesCustomiser) {
+			Preconditions.checkNotNull(blockPropertiesCustomiser, "blockPropertiesCustomiser");
+			this.blockPropertiesCustomiser = blockPropertiesCustomiser;
+			return this;
+		}
+
 		public FluidGroup<TYPE, STILL, FLOWING, BLOCK, BUCKET> build() {
 			return buildImpl(FluidGroup::new);
 		}
@@ -169,7 +184,13 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 			final RegistryObject<STILL> still = fluids.register(name, () -> stillFactory.create(Objects.requireNonNull(properties)));
 			final RegistryObject<FLOWING> flowing = fluids.register("flowing_" + name, () -> flowingFactory.create(Objects.requireNonNull(properties)));
 
-			final RegistryObject<BLOCK> block = blocks.register(name, () -> blockFactory.create(still));
+			final var blockProperties = defaultBlockProperties();
+
+			if (blockPropertiesCustomiser != null) {
+				blockPropertiesCustomiser.accept(blockProperties);
+			}
+
+			final RegistryObject<BLOCK> block = blocks.register(name, () -> blockFactory.create(still, blockProperties));
 			final RegistryObject<BUCKET> bucket = items.register(name + "_bucket", () -> bucketFactory.create(still));
 
 			properties = new ForgeFlowingFluid.Properties(type, still, flowing)
@@ -192,18 +213,21 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 		}
 	}
 
-	public static Block.Properties defaultBlockProperties(final Material material) {
-		return Block.Properties.of(material)
+	public static Block.Properties defaultBlockProperties() {
+		return Block.Properties.of()
+				.replaceable()
 				.noCollission()
 				.strength(100)
-				.noLootTable();
+				.pushReaction(PushReaction.DESTROY)
+				.noLootTable()
+				.liquid()
+				.sound(SoundType.EMPTY);
 	}
 
 	public static Item.Properties defaultBucketProperties() {
 		return new Item.Properties()
 				.craftRemainder(Items.BUCKET)
-				.stacksTo(1)
-				;
+				.stacksTo(1);
 	}
 
 	@FunctionalInterface
@@ -213,7 +237,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 
 	@FunctionalInterface
 	public interface IBlockFactory<STILL extends Fluid, BLOCK extends Block> {
-		BLOCK create(Supplier<? extends STILL> fluid);
+		BLOCK create(Supplier<? extends STILL> fluid, BlockBehaviour.Properties properties);
 	}
 
 	@FunctionalInterface

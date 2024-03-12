@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:sulfur_from_quartz_vanilla"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

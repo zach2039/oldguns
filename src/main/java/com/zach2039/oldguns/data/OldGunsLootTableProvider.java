@@ -19,11 +19,7 @@ import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.level.storage.loot.BuiltInLootTables;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.LootTables;
-import net.minecraft.world.level.storage.loot.ValidationContext;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSet;
+import net.minecraft.world.level.storage.loot.*;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 
 /**
@@ -58,6 +54,10 @@ public class OldGunsLootTableProvider extends LootTableProvider {
 			validationContext.reportProblem("Missing mod loot table: " + id);
 		}
 
-		map.forEach((id, lootTable) -> LootTables.validate(validationContext, id, lootTable));
+		map.forEach((id, lootTable) -> lootTable.validate(
+				validationContext
+						.setParams(lootTable.getParamSet())
+						.enterElement("{" + id + "}", new LootDataId<>(LootDataType.TABLE, id))
+		));
 	}
 }

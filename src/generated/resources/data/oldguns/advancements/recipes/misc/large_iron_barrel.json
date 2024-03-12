@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:large_iron_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

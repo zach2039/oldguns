@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:medium_iron_grapeshot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

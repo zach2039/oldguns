@@ -181,5 +181,6 @@
       ],
       "rolls": 1.0
     }
-  ]
+  ],
+  "random_sequence": "oldguns:loot_table_matchlock_firearm"
 }

@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:refill_powder_horn"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

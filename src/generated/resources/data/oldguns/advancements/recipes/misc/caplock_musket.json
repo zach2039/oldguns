@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:caplock_musket"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

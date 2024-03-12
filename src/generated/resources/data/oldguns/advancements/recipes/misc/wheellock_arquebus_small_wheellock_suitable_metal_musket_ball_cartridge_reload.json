@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:wheellock_arquebus_small_wheellock_suitable_metal_musket_ball_cartridge_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

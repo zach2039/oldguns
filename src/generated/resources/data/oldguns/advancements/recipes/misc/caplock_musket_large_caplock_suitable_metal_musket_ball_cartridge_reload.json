@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:caplock_musket_large_caplock_suitable_metal_musket_ball_cartridge_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

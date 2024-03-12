@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:large_wooden_handle"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

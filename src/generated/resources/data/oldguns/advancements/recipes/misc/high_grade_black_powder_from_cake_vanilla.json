@@ -43,5 +43,6 @@
     "recipes": [
       "oldguns:high_grade_black_powder_from_cake_vanilla"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

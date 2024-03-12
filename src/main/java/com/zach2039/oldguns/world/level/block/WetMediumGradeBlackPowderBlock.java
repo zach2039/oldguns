@@ -1,11 +1,8 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.Random;
-
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -18,13 +15,22 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class WetMediumGradeBlackPowderBlock extends Block {
 
 	private static final CorningProcessSettings CORNING_PROCESS_SETTINGS = OldGunsConfig.SERVER.recipeSettings.blackPowderManufactureSettings.corningProcessSettings;
 	
 	public WetMediumGradeBlackPowderBlock() {
-		super(BlockBehaviour.Properties.of(ModMaterials.WET_BLACK_POWDER).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(
+				BlockBehaviour.Properties.of()
+						.mapColor(MapColor.COLOR_BLACK)
+						.pushReaction(PushReaction.DESTROY)
+						.strength(0.5F)
+						.sound(SoundType.SAND)
+						.randomTicks()
+		);
 		this.registerDefaultState(this.stateDefinition.any());
 	}
 	

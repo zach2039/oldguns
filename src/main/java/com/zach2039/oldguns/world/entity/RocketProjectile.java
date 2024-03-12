@@ -135,9 +135,9 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 		}
 
 		BlockPos blockpos = this.blockPosition();
-		BlockState blockstate = this.level.getBlockState(blockpos);
+		BlockState blockstate = this.level().getBlockState(blockpos);
 		if (!this.canCollideWithBlockState(blockstate) && !flag) {
-			VoxelShape voxelshape = blockstate.getCollisionShape(this.level, blockpos);
+			VoxelShape voxelshape = blockstate.getCollisionShape(this.level(), blockpos);
 			if (!voxelshape.isEmpty()) {
 				Vec3 vec31 = this.position();
 
@@ -169,7 +169,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 			this.inGroundTime = 0;
 			Vec3 vec32 = this.position();
 			Vec3 vec33 = vec32.add(vec3);
-			HitResult hitresult = this.level.clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+			HitResult hitresult = this.level().clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
 			if (hitresult.getType() != HitResult.Type.MISS) {
 				vec33 = hitresult.getLocation();
 			}
@@ -208,7 +208,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 			double d1 = vec3.z;
 			if (this.isCritArrow()) {
 				for(int i = 0; i < 4; ++i) {
-					this.level.addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
+					this.level().addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
 				}
 			}
 
@@ -229,7 +229,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 			float f = (noFriction) ? 1.15f : 0.98F;
 			if (!this.isSimulated && this.isInWater()) {
 				for(int j = 0; j < 4; ++j) {
-					this.level.addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
+					this.level().addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
 				}
 
 				f = this.getWaterInertia();
@@ -246,7 +246,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 			this.checkInsideBlocks();
 		}
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			if (this.inGround) {
 				if (this.inGroundTime % 5 == 0) {
 					this.makeParticle(1);
@@ -255,18 +255,18 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 				this.makeParticle(2);
 			}
 		} else if (this.inGround && this.inGroundTime != 0 && !this.effects.isEmpty() && this.inGroundTime >= 600) {
-			this.level.broadcastEntityEvent(this, (byte)0);
+			this.level().broadcastEntityEvent(this, (byte)0);
 			this.potion = Potions.EMPTY;
 			this.effects.clear();
 			this.entityData.set(ID_EFFECT_COLOR, -1);
 		}
 
 		if (this.life == 0 && !this.isSilent()) {
-			this.level.playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.AMBIENT, 4.0F, 0.2F);
+			this.level().playSound((Player)null, this.getX(), this.getY(), this.getZ(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundSource.AMBIENT, 4.0F, 0.2F);
 		}
 
-		if (this.level.isClientSide && this.life % 2 < 2) {
-			this.level.addParticle(ParticleTypes.CLOUD, this.getX(), this.getY() - 0.3D, this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
+		if (this.level().isClientSide && this.life % 2 < 2) {
+			this.level().addParticle(ParticleTypes.CLOUD, this.getX(), this.getY() - 0.3D, this.getZ(), this.random.nextGaussian() * 0.05D, -this.getDeltaMovement().y * 0.5D, this.random.nextGaussian() * 0.05D);
 		}
 		
 		doEffectOnTick();
@@ -278,7 +278,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 				double pX = this.getX() + ((this.random.nextDouble()/2f) - 0.25f);
 				double pY = this.getY() + ((this.random.nextDouble()/2f) - 0.25f);
 				double pZ = this.getZ() + ((this.random.nextDouble()/2f) - 0.25f);
-				this.level.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pX, pY, pZ, 0d, 0d, 0d);
+				this.level().addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, pX, pY, pZ, 0d, 0d, 0d);
 			}
 		}
 	}

@@ -54,5 +54,6 @@
     "recipes": [
       "oldguns:wheellock_blunderbuss_pistol_small_metal_birdshot_powder_horn_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

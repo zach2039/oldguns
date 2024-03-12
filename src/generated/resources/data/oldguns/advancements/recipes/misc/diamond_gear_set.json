@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:diamond_gear_set"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

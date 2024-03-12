@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:small_powder_charge"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

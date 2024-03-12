@@ -63,5 +63,6 @@
     "recipes": [
       "oldguns:caplock_musketoon_medium_metal_birdshot_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

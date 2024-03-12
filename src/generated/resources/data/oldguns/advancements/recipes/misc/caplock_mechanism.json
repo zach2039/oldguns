@@ -76,5 +76,6 @@
     "recipes": [
       "oldguns:caplock_mechanism"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

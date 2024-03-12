@@ -30,5 +30,6 @@
     "recipes": [
       "oldguns:niter_bedding"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

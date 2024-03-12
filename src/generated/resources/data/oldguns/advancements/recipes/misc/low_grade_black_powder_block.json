@@ -30,5 +30,6 @@
     "recipes": [
       "oldguns:low_grade_black_powder_block"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.common.SoundActions;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fluids.FluidType;
@@ -53,8 +54,8 @@ public class ModFluids {
 					))
 				.stillFactory(LiquidNiterFluid.Source::new)
 				.flowingFactory(LiquidNiterFluid.Flowing::new)
-				.blockFactory(LiquidNiterFluidBlock::new)
-				.blockMaterial(ModMaterials.LIQUID_NITER)
+				//.blockFactory(LiquidNiterFluidBlock::new)
+				.blockPropertiesCustomiser(properties -> properties.mapColor(MapColor.COLOR_LIGHT_BLUE).ignitedByLava())
 				.build();			
 			
 

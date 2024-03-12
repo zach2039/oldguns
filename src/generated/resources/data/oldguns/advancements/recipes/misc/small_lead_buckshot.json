@@ -43,5 +43,6 @@
     "recipes": [
       "oldguns:small_lead_buckshot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

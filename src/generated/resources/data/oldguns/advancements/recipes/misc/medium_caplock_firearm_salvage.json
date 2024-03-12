@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:medium_caplock_firearm_salvage"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:gunners_quadrant"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

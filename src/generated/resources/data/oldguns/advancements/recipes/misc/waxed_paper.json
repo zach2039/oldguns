@@ -43,5 +43,6 @@
     "recipes": [
       "oldguns:waxed_paper"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

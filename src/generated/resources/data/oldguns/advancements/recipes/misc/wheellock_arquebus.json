@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:wheellock_arquebus"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:medium_wooden_naval_carriage"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

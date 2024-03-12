@@ -43,5 +43,6 @@
     "recipes": [
       "oldguns:medium_iron_buckshot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

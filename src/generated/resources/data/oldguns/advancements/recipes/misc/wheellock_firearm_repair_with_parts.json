@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:wheellock_firearm_repair_with_parts"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

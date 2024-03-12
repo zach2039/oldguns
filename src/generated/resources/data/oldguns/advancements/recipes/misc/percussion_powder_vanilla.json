@@ -76,5 +76,6 @@
     "recipes": [
       "oldguns:percussion_powder_vanilla"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

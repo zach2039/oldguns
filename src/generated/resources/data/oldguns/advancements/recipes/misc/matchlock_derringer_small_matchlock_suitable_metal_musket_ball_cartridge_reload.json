@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:matchlock_derringer_small_matchlock_suitable_metal_musket_ball_cartridge_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

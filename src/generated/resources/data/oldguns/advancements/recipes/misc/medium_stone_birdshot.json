@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:medium_stone_birdshot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

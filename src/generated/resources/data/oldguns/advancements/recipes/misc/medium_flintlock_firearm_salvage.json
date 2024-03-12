@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:medium_flintlock_firearm_salvage"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

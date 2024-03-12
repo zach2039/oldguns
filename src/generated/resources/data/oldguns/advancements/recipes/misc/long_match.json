@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:long_match"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

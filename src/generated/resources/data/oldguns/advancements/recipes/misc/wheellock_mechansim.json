@@ -63,5 +63,6 @@
     "recipes": [
       "oldguns:wheellock_mechansim"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

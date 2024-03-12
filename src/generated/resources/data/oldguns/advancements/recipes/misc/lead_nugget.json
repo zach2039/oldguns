@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:lead_nugget"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

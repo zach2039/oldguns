@@ -54,5 +54,6 @@
     "recipes": [
       "oldguns:matchlock_pistol_small_rock_musket_ball_powder_horn_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

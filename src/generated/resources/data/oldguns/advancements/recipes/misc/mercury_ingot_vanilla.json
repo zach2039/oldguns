@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:mercury_ingot_vanilla"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

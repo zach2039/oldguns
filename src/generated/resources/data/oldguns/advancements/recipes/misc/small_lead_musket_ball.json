@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:small_lead_musket_ball"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

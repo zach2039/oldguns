@@ -63,5 +63,6 @@
     "recipes": [
       "oldguns:wood_trigger_assembly"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

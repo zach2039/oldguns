@@ -172,7 +172,7 @@ public class FirearmEffectHelper {
 		switch (effect)
 		{
 			case MISFIRE:
-				player.level.playLocalSound(posX, posY, posZ, SoundEvents.NOTE_BLOCK_HAT.get(), SoundSource.PLAYERS,
+				player.level().playLocalSound(posX, posY, posZ, SoundEvents.NOTE_BLOCK_HAT.get(), SoundSource.PLAYERS,
 						0.5f, 1.0f / (new Random().nextFloat() * 0.4F + 1.2F), true);
 				break;
 			case MISFIRE_WET:

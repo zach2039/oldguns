@@ -32,15 +32,15 @@ public class OldGunsDamageSources {
 	}
 	
 	public static DamageSource firearm(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
-		return new OldGunsDamageSourceIndirectEntity(typeHolder(projectile.level, OldGunsDamageTypes.FIREARM), projectile, shooter, percentBypassArmor);
+		return new OldGunsDamageSourceIndirectEntity(typeHolder(projectile.level(), OldGunsDamageTypes.FIREARM), projectile, shooter, percentBypassArmor);
 	}
 	
 	public static DamageSource artillery(BulletProjectile projectile, @Nullable Entity shooter, float percentBypassArmor) {
-		return new OldGunsDamageSourceIndirectEntity(typeHolder(projectile.level, OldGunsDamageTypes.ARTILLERY), projectile, shooter, percentBypassArmor);
+		return new OldGunsDamageSourceIndirectEntity(typeHolder(projectile.level(), OldGunsDamageTypes.ARTILLERY), projectile, shooter, percentBypassArmor);
 	}
 	
 	public static OldGunsDamageSourceIndirectEntity rocket(RocketProjectile projectile, @Nullable Entity shooter) {
-		return new OldGunsDamageSourceIndirectEntity(typeHolder(projectile.level, OldGunsDamageTypes.ARTILLERY), projectile, shooter, 0.0F);
+		return new OldGunsDamageSourceIndirectEntity(typeHolder(projectile.level(), OldGunsDamageTypes.ARTILLERY), projectile, shooter, 0.0F);
 	}
 
 	private static Holder<DamageType> typeHolder(Level level, ResourceKey<DamageType> typeKey)

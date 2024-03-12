@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:gold_gear_set"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

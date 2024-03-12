@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:brass_ingot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

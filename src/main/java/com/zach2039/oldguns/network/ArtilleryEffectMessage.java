@@ -37,7 +37,7 @@ public class ArtilleryEffectMessage {
 	}
 	
 	public static ArtilleryEffectMessage decode(final FriendlyByteBuf buf) {
-		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level.getEntity(buf.readInt());
+		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level().getEntity(buf.readInt());
 		int parameter = buf.readInt();
 		ArtilleryEffect effectType = ArtilleryEffect.values()[buf.readInt()];
 		double x = buf.readDouble();
@@ -66,7 +66,7 @@ public class ArtilleryEffectMessage {
                 if (ClientUtil.getClientPlayer() == null) return;
                 
                 /* Get world of client. */
-				Level world = Minecraft.getInstance().player.level;
+				Level world = Minecraft.getInstance().player.level();
 				
 				/* Only process effects if world isn't null. */
 				if (world != null) 

@@ -52,5 +52,6 @@
     "recipes": [
       "oldguns:large_iron_brass_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

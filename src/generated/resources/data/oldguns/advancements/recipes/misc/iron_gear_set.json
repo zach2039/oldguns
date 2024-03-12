@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:iron_gear_set"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

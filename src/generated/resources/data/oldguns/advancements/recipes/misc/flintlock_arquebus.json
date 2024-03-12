@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:flintlock_arquebus"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -25,25 +25,25 @@ public class ModNetwork {
 		channel.messageBuilder(FirearmEffectMessage.class, 1)
 				.decoder(FirearmEffectMessage::decode)
 				.encoder(FirearmEffectMessage::encode)
-				.consumer(FirearmEffectMessage::handle)
+				.consumerMainThread(FirearmEffectMessage::handle)
 				.add();
 		
 		channel.messageBuilder(ArtilleryEffectMessage.class, 2)
 				.decoder(ArtilleryEffectMessage::decode)
 				.encoder(ArtilleryEffectMessage::encode)
-				.consumer(ArtilleryEffectMessage::handle)
+				.consumerMainThread(ArtilleryEffectMessage::handle)
 				.add();
 		
 		channel.messageBuilder(UpdateMenuFirearmEmptyMessage.class, 3)
 				.decoder(UpdateMenuFirearmEmptyMessage::decode)
 				.encoder(UpdateMenuFirearmEmptyMessage::encode)
-				.consumer(UpdateMenuFirearmEmptyMessage::handle)
+				.consumerMainThread(UpdateMenuFirearmEmptyMessage::handle)
 				.add();
 		
 		channel.messageBuilder(ArtilleryBlockEntityUpdateMessage.class, 4)
 				.decoder(ArtilleryBlockEntityUpdateMessage::decode)
 				.encoder(ArtilleryBlockEntityUpdateMessage::encode)
-				.consumer(ArtilleryBlockEntityUpdateMessage::handle)
+				.consumerMainThread(ArtilleryBlockEntityUpdateMessage::handle)
 				.add();
 		
 		return channel;

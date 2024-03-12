@@ -41,7 +41,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -52,7 +52,10 @@ public class BlastingPowderStickBlock extends BaseEntityBlock implements EntityB
 	public static final BooleanProperty UNSTABLE = BlockStateProperties.UNSTABLE;
 
 	public BlastingPowderStickBlock() {
-		super(BlockBehaviour.Properties.of(Material.EXPLOSIVE)
+		super(BlockBehaviour.Properties.of()
+				.mapColor(MapColor.FIRE)
+				.ignitedByLava()
+				.noCollission()
 				.instabreak()
 				.sound(SoundType.GRASS));
 		this.registerDefaultState(this.defaultBlockState().setValue(UNSTABLE, Boolean.valueOf(false)));

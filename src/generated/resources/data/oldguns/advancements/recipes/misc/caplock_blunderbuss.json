@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:caplock_blunderbuss"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

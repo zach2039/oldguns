@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:medium_matchlock_firearm_salvage"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

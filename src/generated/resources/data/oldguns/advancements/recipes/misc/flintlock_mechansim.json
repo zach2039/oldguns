@@ -76,5 +76,6 @@
     "recipes": [
       "oldguns:flintlock_mechansim"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

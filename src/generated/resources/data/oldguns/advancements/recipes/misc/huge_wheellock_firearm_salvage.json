@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:huge_wheellock_firearm_salvage"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

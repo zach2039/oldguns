@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:matchlock_arquebus"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

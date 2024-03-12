@@ -54,5 +54,6 @@
     "recipes": [
       "oldguns:medium_iron_canister_shot"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

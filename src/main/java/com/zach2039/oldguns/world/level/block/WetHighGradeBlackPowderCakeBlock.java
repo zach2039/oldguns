@@ -1,11 +1,8 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.Random;
-
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.CorningProcessSettings;
 import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModMaterials;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,6 +19,8 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -32,7 +31,14 @@ public class WetHighGradeBlackPowderCakeBlock extends Block {
 	public static final BooleanProperty DRY = BooleanProperty.create("dry");
 	
 	public WetHighGradeBlackPowderCakeBlock() {
-		super(BlockBehaviour.Properties.of(ModMaterials.BLACK_POWDER_CAKE).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(
+				BlockBehaviour.Properties.of()
+						.mapColor(MapColor.COLOR_BLACK)
+						.pushReaction(PushReaction.DESTROY)
+						.strength(0.5F)
+						.sound(SoundType.SAND)
+						.randomTicks()
+		);
 		this.registerDefaultState(this.stateDefinition.any().setValue(DRY, Boolean.valueOf(false)));
 	}
 
@@ -67,7 +73,7 @@ public class WetHighGradeBlackPowderCakeBlock extends Block {
 	
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos p_51211_) {
-		return level.getBlockState(p_51211_.below()).getMaterial().isSolid();
+		return level.getBlockState(p_51211_.below()).isSolid();
 	}
 
 	@Override

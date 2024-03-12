@@ -97,7 +97,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 	public boolean hurt(DamageSource damagesource, float amount) {
 
 		// Make firearm skeletons reset shot time when hit
-		if (this.level != null && !this.level.isClientSide && OldGunsConfig.SERVER.mobSettings.resetMobShotTimerOnHit.get()) {
+		if (this.level() != null && !this.level().isClientSide && OldGunsConfig.SERVER.mobSettings.resetMobShotTimerOnHit.get()) {
 			this.firearmAttackGoal.interruptFiring();
 		}
 
@@ -106,7 +106,7 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 
 	@Override
 	public void aiStep() {
-		if (this.level != null && !this.level.isClientSide) {
+		if (this.level() != null && !this.level().isClientSide) {
 			ItemStack firearmStack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem));
 			if (firearmStack.getItem() instanceof FirearmItem) {
 				FirearmItem firearmItem = (FirearmItem)firearmStack.getItem();
@@ -140,13 +140,13 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 
 	@Override
 	public void reassessWeaponGoal() {		
-		if (this.level != null && !this.level.isClientSide) {
+		if (this.level() != null && !this.level().isClientSide) {
 			this.goalSelector.removeGoal(this.meleeAttackGoal);
 			this.goalSelector.removeGoal(this.firearmAttackGoal);
 			ItemStack itemstack = this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem));
 			if ((itemstack.getItem() instanceof FirearmItem) && (itemstack.getMaxDamage() != itemstack.getDamageValue())) {
 				int i = OldGunsConfig.SERVER.mobSettings.firearmMobShotTime.get();
-				if (this.level.getDifficulty() != Difficulty.HARD) {
+				if (this.level().getDifficulty() != Difficulty.HARD) {
 					i = OldGunsConfig.SERVER.mobSettings.firearmMobShotTimeHard.get();
 				}
 
@@ -165,15 +165,15 @@ public abstract class AbstractFirearmSkeleton extends AbstractSkeleton {
 		FirearmItem firearmItem = (FirearmItem)firearmStack.getItem();
 		ItemStack ammoStack = this.getProjectile(this.getItemInHand(ProjectileUtil.getWeaponHoldingHand(this, item -> item instanceof FirearmItem)));
 
-		if (!this.level.isClientSide()) {
-			boolean failure = firearmItem.checkConditionForEffect(this.level, this, firearmStack);
+		if (!this.level().isClientSide()) {
+			boolean failure = firearmItem.checkConditionForEffect(this.level(), this, firearmStack);
 
 			// If firearm broke or misfired, do nothing
 			if (failure) {
 				return;
 			}
 
-			firearmItem.fireProjectiles(this.level, this, firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmMobBaseProjectileDeviation.get().floatValue());
+			firearmItem.fireProjectiles(this.level(), this, firearmStack, ammoStack, OldGunsConfig.SERVER.mobSettings.firearmMobBaseProjectileDeviation.get().floatValue());
 		}
 	}
 

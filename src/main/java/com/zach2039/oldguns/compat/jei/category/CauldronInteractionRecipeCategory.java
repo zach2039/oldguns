@@ -26,19 +26,16 @@ import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
-import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
-import net.minecraft.client.gui.GuiComponent;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.fluids.FluidStack;
@@ -74,23 +71,23 @@ public class CauldronInteractionRecipeCategory implements IRecipeCategory<Cauldr
 		return icon;
 	}
 	
-	private void drawSlot(PoseStack transform, int x, int y, int w, int h, int dark, int main, int light)
+	private void drawSlot(GuiGraphics guiGraphics, int x, int y, int w, int h, int dark, int main, int light)
 	{
 		final int minX = x + 8 - w / 2;
 		final int minY = y + 8 - h / 2;
 		final int maxX = minX + w;
 		final int maxY = minY + h;
-		GuiComponent.fill(transform, minX, minY - 1, maxX, minY, dark);
-		GuiComponent.fill(transform, minX - 1, minY - 1, minX, maxY, dark);
-		GuiComponent.fill(transform, minX, minY, maxX, maxY, main);
-		GuiComponent.fill(transform, minX, maxY, maxX + 1, maxY + 1, light);
-		GuiComponent.fill(transform, maxX, minY, maxX + 1, maxY, light);
+
+		guiGraphics.fill(minX, minY - 1, maxX, minY, dark);
+		guiGraphics.fill(minX - 1, minY - 1, minX, maxY, dark);
+		guiGraphics.fill(minX, minY, maxX, maxY, main);
+		guiGraphics.fill(minX, maxY, maxX + 1, maxY + 1, light);
+		guiGraphics.fill(maxX, minY, maxX + 1, maxY, light);
 	}
 	
 	@Override
-	public void draw(CauldronRecipe recipe, IRecipeSlotsView recipeSlotsView, PoseStack transform, double mouseX, double mouseY)
-	{
-		drawSlot(transform, 31, 9, 16, 16, (0xff<<24)|0x373737, (0xff<<24)|0x8b8b8b, (0xff<<24)|0xffffff);
+	public void draw(CauldronRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+		drawSlot(guiGraphics, 31, 9, 16, 16, (0xff<<24)|0x373737, (0xff<<24)|0x8b8b8b, (0xff<<24)|0xffffff);
 	}
 	
 	@Override

@@ -24,6 +24,7 @@ import com.zach2039.oldguns.init.ModPotions;
 import com.zach2039.oldguns.init.ModRecipeTypes;
 import com.zach2039.oldguns.init.ModSoundEvents;
 import com.zach2039.oldguns.init.ModSpawnPlacements;
+import com.zach2039.oldguns.init.ModCreativeTabs;
 import com.zach2039.oldguns.init.ModCauldronInteractions.OldGunsCauldronInteraction;
 
 import net.minecraft.world.item.CreativeModeTab;
@@ -69,6 +70,7 @@ public class OldGuns
 		ModSoundEvents.initialize(modEventBus);
 		ModBlockEntities.initialize(modEventBus);
 		ModLootConditionTypes.initialize(modEventBus);
+		ModCreativeTabs.initialize(modEventBus);
     }
 
 	private void onCommonSetup(final FMLCommonSetupEvent event) {

@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:wheellock_long_musket"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

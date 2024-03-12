@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:sulfur_from_quartz"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

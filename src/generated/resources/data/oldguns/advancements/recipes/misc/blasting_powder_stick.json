@@ -56,5 +56,6 @@
     "recipes": [
       "oldguns:blasting_powder_stick"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

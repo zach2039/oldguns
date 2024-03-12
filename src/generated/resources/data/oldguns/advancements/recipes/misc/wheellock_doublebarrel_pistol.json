@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:wheellock_doublebarrel_pistol"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

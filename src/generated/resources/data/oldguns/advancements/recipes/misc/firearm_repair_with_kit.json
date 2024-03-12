@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:firearm_repair_with_kit"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

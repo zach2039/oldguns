@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:naval_cannon"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

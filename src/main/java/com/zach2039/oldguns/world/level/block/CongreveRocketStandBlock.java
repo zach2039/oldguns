@@ -29,7 +29,6 @@ import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.SoundType;
-import net.minecraft.world.level.block.SupportType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -38,8 +37,8 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -56,8 +55,10 @@ public class CongreveRocketStandBlock extends HorizontalDirectionalBlock impleme
 			);
 
 	public CongreveRocketStandBlock() {
-		super(Block.Properties
-				.of(Material.WOOD)
+		super(Block.Properties.of()
+				.mapColor(MapColor.WOOD)
+				.ignitedByLava()
+				.instrument(NoteBlockInstrument.BASS)
 				.sound(SoundType.WOOD)
 				.strength(3.0F)
 				.dynamicShape()

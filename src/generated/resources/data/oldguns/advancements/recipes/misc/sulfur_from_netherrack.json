@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:sulfur_from_netherrack"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

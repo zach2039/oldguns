@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:medium_iron_cannon_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

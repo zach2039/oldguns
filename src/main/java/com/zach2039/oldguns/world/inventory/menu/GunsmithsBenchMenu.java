@@ -101,7 +101,7 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	}
 	
 	public boolean recipeMatches(Recipe<? super GunsmithsBenchCraftingContainer> recipe) {
-		return recipe.matches(this.craftSlots, this.player.level);
+		return recipe.matches(this.craftSlots, this.player.level());
 	}
 
 	public void removed(Player player) {

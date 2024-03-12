@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:medium_iron_cannonball"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

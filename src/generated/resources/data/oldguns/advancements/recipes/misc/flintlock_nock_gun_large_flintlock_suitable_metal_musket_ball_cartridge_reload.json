@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:flintlock_nock_gun_large_flintlock_suitable_metal_musket_ball_cartridge_reload"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

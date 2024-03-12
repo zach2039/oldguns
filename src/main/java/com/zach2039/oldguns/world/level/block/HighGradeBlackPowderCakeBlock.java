@@ -1,7 +1,5 @@
 package com.zach2039.oldguns.world.level.block;
 
-import com.zach2039.oldguns.init.ModMaterials;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -12,6 +10,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -19,7 +19,15 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 public class HighGradeBlackPowderCakeBlock extends Block {
 	
 	public HighGradeBlackPowderCakeBlock() {
-		super(BlockBehaviour.Properties.of(ModMaterials.BLACK_POWDER_CAKE).strength(0.5F).sound(SoundType.SAND).randomTicks());
+		super(
+				BlockBehaviour.Properties.of()
+						.mapColor(MapColor.COLOR_BLACK)
+						.ignitedByLava()
+						.pushReaction(PushReaction.DESTROY)
+						.strength(0.5F)
+						.sound(SoundType.SAND)
+						.randomTicks()
+		);
 		this.registerDefaultState(this.stateDefinition.any());
 	}
 	
@@ -49,7 +57,7 @@ public class HighGradeBlackPowderCakeBlock extends Block {
 	
 	@Override
 	public boolean canSurvive(BlockState state, LevelReader level, BlockPos p_51211_) {
-		return level.getBlockState(p_51211_.below()).getMaterial().isSolid();
+		return level.getBlockState(p_51211_.below()).isSolid();
 	}
 
 	@Override

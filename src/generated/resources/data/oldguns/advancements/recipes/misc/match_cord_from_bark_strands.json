@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:match_cord_from_bark_strands"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

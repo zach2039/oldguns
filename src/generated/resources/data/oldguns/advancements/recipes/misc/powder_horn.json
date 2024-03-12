@@ -63,5 +63,6 @@
     "recipes": [
       "oldguns:powder_horn"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

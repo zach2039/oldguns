@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:matchlock_musket"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

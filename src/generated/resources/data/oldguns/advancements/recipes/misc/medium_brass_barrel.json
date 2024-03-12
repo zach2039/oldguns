@@ -39,5 +39,6 @@
     "recipes": [
       "oldguns:medium_brass_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

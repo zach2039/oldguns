@@ -28,5 +28,6 @@
     "recipes": [
       "oldguns:repair_kit"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

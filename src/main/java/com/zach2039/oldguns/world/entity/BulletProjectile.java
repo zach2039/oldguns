@@ -164,7 +164,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	@Override
 	public void readSpawnData(FriendlyByteBuf buf) {
-		final Entity shooter = level.getEntity(buf.readVarInt());
+		final Entity shooter = level().getEntity(buf.readVarInt());
 		if (shooter != null)
 			setOwner(shooter);
 	}
@@ -339,7 +339,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 		this.life = compound.getShort("life");
 		if (compound.contains("inBlockState", Tag.TAG_COMPOUND)) {
-			this.lastState = NbtUtils.readBlockState(this.level.holderLookup(Registries.BLOCK), compound.getCompound("inBlockState"));
+			this.lastState = NbtUtils.readBlockState(this.level().holderLookup(Registries.BLOCK), compound.getCompound("inBlockState"));
 		}
 
 		this.inGround = compound.getBoolean("inGround");
@@ -368,7 +368,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 	protected boolean checkLeftOwner() {
 		Entity entity = this.getOwner();
 		if (entity != null) {
-			for(Entity entity1 : this.level.getEntities(this, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), (ent) -> {
+			for(Entity entity1 : this.level().getEntities(this, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), (ent) -> {
 				return !ent.isSpectator() && ent.isPickable();
 			})) {
 				if (entity1.getRootVehicle() == entity.getRootVehicle()) {
@@ -381,7 +381,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 	}
 
 	protected boolean shouldFall() {
-		return this.inGround && this.level.noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
+		return this.inGround && this.level().noCollision((new AABB(this.position(), this.position())).inflate(0.06D));
 	}
 
 	protected void startFalling() {
@@ -515,7 +515,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			
 			if (entity instanceof LivingEntity) {
 				LivingEntity livingentity = (LivingEntity)entity;
-				if (!this.level.isClientSide && this.getPierceLevel() <= 0) {
+				if (!this.level().isClientSide && this.getPierceLevel() <= 0) {
 					//livingentity.setArrowCount(livingentity.getArrowCount() + 1);
 				}
 
@@ -526,7 +526,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 					}
 				}
 
-				if (!this.level.isClientSide && entity1 instanceof LivingEntity) {
+				if (!this.level().isClientSide && entity1 instanceof LivingEntity) {
 					EnchantmentHelper.doPostHurtEffects(livingentity, entity1);
 					EnchantmentHelper.doPostDamageEffects((LivingEntity)entity1, livingentity);
 				}
@@ -553,7 +553,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		} else {
 			entity.setRemainingFireTicks(k);
 			
-			if (!this.level.isClientSide) {
+			if (!this.level().isClientSide) {
 				this.discard();
 			}
 		}
@@ -596,8 +596,8 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	@Override
 	protected void onHitBlock(BlockHitResult result) {
-		this.lastState = this.level.getBlockState(result.getBlockPos());
-		BlockState blockstate = this.level.getBlockState(result.getBlockPos());
+		this.lastState = this.level().getBlockState(result.getBlockPos());
+		BlockState blockstate = this.level().getBlockState(result.getBlockPos());
 		Vec3i hitNormal = result.getDirection().getNormal();
 		boolean isShallowAngle = Mth.abs((float) this.getDeltaMovement().normalize().dot(new Vec3(hitNormal.getX(), hitNormal.getY(), hitNormal.getZ()).normalize())) < 0.4;
 		boolean ricochet = result.getDirection().getAxis().isVertical() && (isShallowAngle) && (this.getVelocityMagnitude() > 1f);
@@ -622,7 +622,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			}
 
 			if (canCollideWithBlockState(blockstate)) {
-				blockstate.onProjectileHit(this.level, blockstate, result, this);
+				blockstate.onProjectileHit(this.level(), blockstate, result, this);
 				if (!this.isInWater() && this.getVelocityMagnitude() > 1.0f) {
 					this.playSound(ModSoundEvents.BULLET_HIT_BLOCK.get(), 0.7F, 1.0F / (this.random.nextFloat() * 0.2F + 0.9F));
 				} else {
@@ -643,7 +643,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			if (!this.isSimulated) {
 				for(int i = 0; i < 3; ++i) {
 					BlockParticleOption blockPart = new BlockParticleOption(ParticleTypes.BLOCK, blockstate);
-					this.level.addParticle(blockPart, 
+					this.level().addParticle(blockPart,
 							this.xo - this.getDeltaMovement().x * 0.25D, this.yo - this.getDeltaMovement().y * 0.25, this.zo - this.getDeltaMovement().z * 0.25,
 							0, 0, 0);
 				}
@@ -674,12 +674,12 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		switch (getProjectileType()) {
 			case CANISTER:
 				if (getEffectTicks() <= 0) {
-					if (getEffectStrength() > 0.0f && !level.isClientSide()) {
-						level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Level.ExplosionInteraction.NONE);
+					if (getEffectStrength() > 0.0f && !level().isClientSide()) {
+						level().explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Level.ExplosionInteraction.NONE);
 						for (int i = 0; i < Math.round(getEffectStrength()) + 1; i++) {
 							// Do canister shot explosion after ticks required
 							
-							BulletProjectile entityBullet = new BulletProjectile(level, xo, yo, zo);
+							BulletProjectile entityBullet = new BulletProjectile(level(), xo, yo, zo);
 							entityBullet.setDamage(getDamage());
 							entityBullet.setProjectileSize(0.3f);
 							entityBullet.setProjectileType(ProjectileType.BUCKSHOT);
@@ -689,12 +689,12 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 									Mth.randomBetween(random, 0f, (this.inGround) ? 360f : 120f), Mth.randomBetween(random, 0f, 360f), 
 									0.0F, 3f, 5f);
 							
-							level.addFreshEntity(entityBullet);
+							level().addFreshEntity(entityBullet);
 						}
 					}
 					discard();
 				} else {
-					if (!level.isClientSide())
+					if (!level().isClientSide())
 						setEffectTicks(getEffectTicks() - 1);
 				}
 				break;
@@ -708,19 +708,19 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			case EXPLOSIVE_SHELL:
 				if (getEffectStrength() > 0.0f)
 				{
-					if (!level.isClientSide()) {
-						level.explode(this, entity.getX(), entity.getY(), entity.getZ(), getEffectStrength(), Level.ExplosionInteraction.BLOCK);
+					if (!level().isClientSide()) {
+						level().explode(this, entity.getX(), entity.getY(), entity.getZ(), getEffectStrength(), Level.ExplosionInteraction.BLOCK);
 					}
 					discard();
 				}
 				break;
 			case CANISTER:
-				if (getEffectStrength() > 0.0f && !level.isClientSide()) {
-					level.explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Level.ExplosionInteraction.NONE);
+				if (getEffectStrength() > 0.0f && !level().isClientSide()) {
+					level().explode(this, this.getX(), this.getY(), this.getZ(), getEffectStrength() / 4, Level.ExplosionInteraction.NONE);
 					for (int i = 0; i < Math.round(getEffectStrength()) + 1; i++) {
 						// Do canister shot explosion after ticks required
 						
-						BulletProjectile entityBullet = new BulletProjectile(level, xo, yo, zo);
+						BulletProjectile entityBullet = new BulletProjectile(level(), xo, yo, zo);
 						entityBullet.setDamage(getDamage());
 						entityBullet.setProjectileSize(0.3f);
 						entityBullet.setProjectileType(ProjectileType.BUCKSHOT);
@@ -730,7 +730,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 								Mth.randomBetween(random, 0f, 360f), Mth.randomBetween(random, 0f, 360f), 
 								0.0F, 3f, 5f);
 						
-						level.addFreshEntity(entityBullet);
+						level().addFreshEntity(entityBullet);
 					}
 				}
 				discard();
@@ -744,8 +744,8 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		switch (getProjectileType()) {
 			case EXPLOSIVE_SHELL:
 				if (getEffectStrength() > 0.0f) {
-					if (!level.isClientSide()) {
-						level.explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Level.ExplosionInteraction.BLOCK);
+					if (!level().isClientSide()) {
+						level().explode(this, blockpos.getX(), blockpos.getY(), blockpos.getZ(), getEffectStrength(), Level.ExplosionInteraction.BLOCK);
 					}
 					discard();
 				}
@@ -753,19 +753,19 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			case CANNONBALL:
 				/* Default behavior is solid projectile. */
 				if (getEffectStrength() > 0.0f) {
-					BlockState hitBlock = level.getBlockState(blockpos);
-					float hitBlockHardness = hitBlock.getDestroySpeed(level, blockpos);
+					BlockState hitBlock = level().getBlockState(blockpos);
+					float hitBlockHardness = hitBlock.getDestroySpeed(level(), blockpos);
 					
 					OldGuns.printDebug(this + " target hardness : " + hitBlockHardness);
 					OldGuns.printDebug(this + " effect before : " + getEffectStrength());
 					
 					if (hitBlockHardness < getEffectStrength() && 
-							hitBlock.canEntityDestroy(level, blockpos, getOwner()) &&
+							hitBlock.canEntityDestroy(level(), blockpos, getOwner()) &&
 							hitBlock.getBlock() != Blocks.BEDROCK
 							) {				
-						if (!level.isClientSide()) {
+						if (!level().isClientSide()) {
 							/* Punch through block if effectStrength of solid projectile is greater than block hardness, and keep going with reduced effectiveness. */
-							level.destroyBlock(blockpos, level.random.nextBoolean());
+							level().destroyBlock(blockpos, level().random.nextBoolean());
 						}
 						float effectModifier = (!this.isInWater()) ? 0.70f : 0.45f;
 						setEffectStrength(Math.max(0.1f, getEffectStrength() * effectModifier));
@@ -791,7 +791,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 	}
 
 	public boolean isNoPhysics() {
-		if (!this.level.isClientSide) {
+		if (!this.level().isClientSide) {
 			return this.noPhysics;
 		} else {
 			return (this.entityData.get(ID_FLAGS) & 2) != 0;
@@ -800,7 +800,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 
 	@Nullable
 	protected EntityHitResult findHitEntity(Vec3 pStartVec, Vec3 pEndVec) {
-		return ProjectileUtil.getEntityHitResult(this.level, this, pStartVec, pEndVec, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
+		return ProjectileUtil.getEntityHitResult(this.level(), this, pStartVec, pEndVec, this.getBoundingBox().expandTowards(this.getDeltaMovement()).inflate(1.0D), this::canHitEntity);
 	}
 	
 	protected float getWaterInertia() {
@@ -831,9 +831,9 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		}
 
 		BlockPos blockpos = this.blockPosition();
-		BlockState blockstate = this.level.getBlockState(blockpos);
+		BlockState blockstate = this.level().getBlockState(blockpos);
 		if (!this.canCollideWithBlockState(blockstate) && !flag) {
-			VoxelShape voxelshape = blockstate.getCollisionShape(this.level, blockpos);
+			VoxelShape voxelshape = blockstate.getCollisionShape(this.level(), blockpos);
 			if (!voxelshape.isEmpty()) {
 				Vec3 vec31 = this.position();
 
@@ -861,7 +861,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			this.inGroundTime = 0;
 			Vec3 vec32 = this.position();
 			Vec3 vec33 = vec32.add(vec3);
-			HitResult hitresult = this.level.clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
+			HitResult hitresult = this.level().clip(new ClipContext(vec32, vec33, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this));
 			if (hitresult.getType() != HitResult.Type.MISS) {
 				vec33 = hitresult.getLocation();
 			}
@@ -900,7 +900,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			double d1 = vec3.z;
 			if (this.isCritArrow()) {
 				for(int i = 0; i < 4; ++i) {
-					this.level.addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
+					this.level().addParticle(ParticleTypes.CRIT, this.getX() + d5 * (double)i / 4.0D, this.getY() + d6 * (double)i / 4.0D, this.getZ() + d1 * (double)i / 4.0D, -d5, -d6 + 0.2D, -d1);
 				}
 			}
 
@@ -923,7 +923,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			if (!this.isSimulated && this.isInWater()) {
 				for(int j = 0; j < 4; ++j) {
 					//float f2 = 0.25F;
-					this.level.addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
+					this.level().addParticle(ParticleTypes.BUBBLE, d7 - d5 * 0.25D, d2 - d6 * 0.25D, d3 - d1 * 0.25D, d5, d6, d1);
 				}
 
 				f = this.getWaterInertia();
@@ -940,7 +940,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			this.checkInsideBlocks();
 		}
 
-		if (this.level.isClientSide) {
+		if (this.level().isClientSide) {
 			if (this.inGround) {
 				if (this.inGroundTime % 5 == 0) {
 					this.makeParticle(1);
@@ -949,7 +949,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 				this.makeParticle(2);
 			}
 		} else if (this.inGround && this.inGroundTime != 0 && !this.effects.isEmpty() && this.inGroundTime >= 600) {
-			this.level.broadcastEntityEvent(this, (byte)0);
+			this.level().broadcastEntityEvent(this, (byte)0);
 			this.potion = Potions.EMPTY;
 			this.effects.clear();
 			this.entityData.set(ID_EFFECT_COLOR, -1);
@@ -960,9 +960,9 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		tickDespawn();
 
 		if (!this.isSimulated && this.totalInGroundTime >= 100 && ((this.life % (20 + this.random.nextInt(10) - 5)) == 0)) {
-			this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
+			this.level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
 		} else if (!this.isSimulated && this.totalInGroundTime == 0 && (this.life % 2) == 0) {
-			this.level.addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
+			this.level().addParticle(ParticleTypes.SMOKE, this.getX(), this.getY(), this.getZ(), 0d, 0d, 0d);
 		}
 	}
 
@@ -974,7 +974,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 			double d2 = (double)(i >> 0 & 255) / 255.0D;
 
 			for(int j = 0; j < particleCount; ++j) {
-				this.level.addParticle(ParticleTypes.ENTITY_EFFECT, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), d0, d1, d2);
+				this.level().addParticle(ParticleTypes.ENTITY_EFFECT, this.getRandomX(0.5D), this.getRandomY(), this.getRandomZ(0.5D), d0, d1, d2);
 			}	
 		}
 	}	

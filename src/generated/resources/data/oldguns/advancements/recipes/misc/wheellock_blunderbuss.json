@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:wheellock_blunderbuss"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

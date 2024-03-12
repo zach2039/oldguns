@@ -43,5 +43,6 @@
     "recipes": [
       "oldguns:medium_stone_flared_barrel"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

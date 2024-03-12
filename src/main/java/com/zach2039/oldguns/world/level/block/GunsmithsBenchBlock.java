@@ -23,8 +23,9 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.BlockHitResult;
 
 public class GunsmithsBenchBlock extends Block {
@@ -32,8 +33,10 @@ public class GunsmithsBenchBlock extends Block {
 	public static final Property<Direction> FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 	
 	public GunsmithsBenchBlock() {
-		super(Block.Properties
-				.of(Material.WOOD)
+		super(Block.Properties.of()
+				.mapColor(MapColor.WOOD)
+				.ignitedByLava()
+				.instrument(NoteBlockInstrument.BASS)
 				.sound(SoundType.WOOD)
 				.strength(3.0F)
 				.dynamicShape()

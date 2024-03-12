@@ -63,5 +63,6 @@
     "recipes": [
       "oldguns:matchlock_mechansim"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

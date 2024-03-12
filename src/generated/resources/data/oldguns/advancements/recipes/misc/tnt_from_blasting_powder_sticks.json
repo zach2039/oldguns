@@ -41,5 +41,6 @@
     "recipes": [
       "oldguns:tnt_from_blasting_powder_sticks"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

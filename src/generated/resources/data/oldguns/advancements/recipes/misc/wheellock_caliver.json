@@ -50,5 +50,6 @@
     "recipes": [
       "oldguns:wheellock_caliver"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }

@@ -249,7 +249,7 @@ public class Bombard extends MoveableArtillery implements CannonArtillery {
 		
 		if (!level.isClientSide()) {
 			OldGuns.NETWORK.send(
-	                PacketDistributor.TRACKING_CHUNK.with(() -> this.level.getChunkAt(this.blockPosition())),
+	                PacketDistributor.TRACKING_CHUNK.with(() -> this.level().getChunkAt(this.blockPosition())),
 	                new ArtilleryBlockEntityUpdateMessage(this.blockPosition(), this.serializeNBT()));
 		}
 		
