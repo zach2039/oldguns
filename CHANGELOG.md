@@ -1,3 +1,7 @@
+### v1.20.1-3.9.0-49
+
+ - Update to MC 1.20.1, Forge 47.2.20
+
 ### v1.19.4-3.8.3-48
 
  - Fix [#49](https://github.com/zach2039/oldguns/issues/49)
