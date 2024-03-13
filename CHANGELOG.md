@@ -1,3 +1,7 @@
+### v1.12.2-2.0.6-51
+
+ - Refactor for new mod versioning 
+
 #### v2.0.5
 
 - Fixed https://github.com/grilled-salmon/oldguns/issues/1
