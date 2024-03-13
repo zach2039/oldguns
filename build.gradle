@@ -16,23 +16,20 @@ buildscript {
         classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
 		classpath "com.diffplug.gradle:goomph:3.33.0"
 
-		if (System.getenv("CI") == "true") {
-			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-		} else {
-			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-		}	
+		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
 
 		classpath 'org.parchmentmc:librarian:1.+'
     }
 }
 apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 apply plugin: 'org.spongepowered.mixin'
-
-if (System.getenv("CI") != "true") {
-	apply plugin: 'com.diffplug.eclipse.apt'
+apply plugin: 'idea'
+idea {
+    module {
+        inheritOutputDirs = true
+    }
 }
 
 group = "com.zach2039.oldguns" 
@@ -206,14 +203,4 @@ jar.finalizedBy('reobfJar')
 
 mixin {
     add sourceSets.main, "oldguns.refmap.json"
-}
-
-eclipse {
-    afterEvaluate {
-		if (System.getenv("CI") == "true") {
-			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
-		} else {
-        		synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
-		}
-    }
 }
