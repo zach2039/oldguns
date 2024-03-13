@@ -8,7 +8,7 @@ public class ItemLongMatch extends Item
 	public ItemLongMatch()
 	{
 		setRegistryName(OldGuns.MODID, "long_match");
-		//setUnlocalizedName("long_match");
+		setTranslationKey("long_match");
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}

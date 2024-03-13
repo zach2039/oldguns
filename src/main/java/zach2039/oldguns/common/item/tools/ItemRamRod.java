@@ -8,7 +8,7 @@ public class ItemRamRod extends Item
 	public ItemRamRod()
 	{
 		setRegistryName(OldGuns.MODID, "ram_rod");
-		//setUnlocalizedName("ram_rod");
+		setTranslationKey("ram_rod");
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}

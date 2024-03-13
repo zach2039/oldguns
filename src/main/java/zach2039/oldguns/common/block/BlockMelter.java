@@ -33,7 +33,7 @@ public class BlockMelter extends BlockContainer
 	{
 		super(Material.ROCK);
 		setRegistryName(OldGuns.MODID, "melter");
-		//setUnlocalizedName("melter");
+		setTranslationKey("melter");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.STONE);	
 		this.isBurning = isBurning;

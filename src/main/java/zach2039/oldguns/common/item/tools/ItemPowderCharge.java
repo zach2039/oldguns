@@ -8,7 +8,7 @@ public class ItemPowderCharge extends Item
 	public ItemPowderCharge()
 	{
 		setRegistryName(OldGuns.MODID, "powder_charge");
-		//setUnlocalizedName("powder_charge");
+		setTranslationKey("powder_charge");
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}

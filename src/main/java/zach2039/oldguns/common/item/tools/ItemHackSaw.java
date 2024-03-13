@@ -8,7 +8,7 @@ public class ItemHackSaw extends Item
 	public ItemHackSaw()
 	{
 		setRegistryName(OldGuns.MODID, "hack_saw");
-		//setUnlocalizedName("hack_saw");
+		setTranslationKey("hack_saw");
 		setMaxStackSize(1);
 		setMaxDamage(16);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);

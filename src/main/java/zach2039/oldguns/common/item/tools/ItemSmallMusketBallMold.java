@@ -13,7 +13,7 @@ public class ItemSmallMusketBallMold extends Item
 	public ItemSmallMusketBallMold()
 	{
 		setRegistryName(OldGuns.MODID, "small_musket_ball_mold");
-		//setUnlocalizedName("small_musket_ball_mold");
+		setTranslationKey("small_musket_ball_mold");
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		

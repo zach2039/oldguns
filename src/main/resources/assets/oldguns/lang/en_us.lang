@@ -128,6 +128,10 @@ item.large_musket_ball_mold_tool.name=Large Musket Ball Mold Tool
 item.repair_kit.name=Firearm Repair Kit
 item.hack_saw.name=Hack Saw
 
+# Materials
+item.lead_bits.name=Lead Bits
+item.iron_bits.name=Iron Bits
+
 # Blocks
 tile.gunsmiths_bench.name=Gunsmith's Bench
 tile.melter.name=Melter

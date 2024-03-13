@@ -8,7 +8,7 @@ public abstract class ItemMaterial extends Item
 	public ItemMaterial(String name, int maxStackSize)
 	{
 		setRegistryName(OldGuns.MODID, name);
-		//setUnlocalizedName(name);
+		setTranslationKey(name);
 		setMaxStackSize(maxStackSize);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}

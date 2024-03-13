@@ -33,7 +33,7 @@ public class BlockGunsmithsBench extends Block
 	{
 		super(Material.WOOD);
 		setRegistryName(OldGuns.MODID, "gunsmiths_bench");
-		//setUnlocalizedName("gunsmiths_bench");
+		setTranslationKey("gunsmiths_bench");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.WOOD);	
 		setHardness(2.5F);
