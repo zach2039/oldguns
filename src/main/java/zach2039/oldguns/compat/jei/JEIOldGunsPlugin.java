@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei;
+package zach2039.oldguns.compat.jei;
 
 import java.util.List;
 
@@ -19,13 +19,13 @@ import zach2039.oldguns.common.inventory.ContainerGunsmithsBench;
 import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
 import zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe;
 import zach2039.oldguns.common.item.crafting.ShapelessGunsmithsBenchRecipe;
-import zach2039.oldguns.integration.jei.breechloading.BreechloadingRecipeCategory;
-import zach2039.oldguns.integration.jei.breechloading.BreechloadingRecipeChecker;
-import zach2039.oldguns.integration.jei.breechloading.BreechloadingRecipeWrapper;
-import zach2039.oldguns.integration.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
-import zach2039.oldguns.integration.jei.gunsmithsbench.GunsmithsBenchRecipeChecker;
-import zach2039.oldguns.integration.jei.gunsmithsbench.ShapedGunsmithsBenchRecipeWrapper;
-import zach2039.oldguns.integration.jei.gunsmithsbench.ShapelessGunsmithsBenchRecipeWrapper;
+import zach2039.oldguns.compat.jei.breechloading.BreechloadingRecipeCategory;
+import zach2039.oldguns.compat.jei.breechloading.BreechloadingRecipeChecker;
+import zach2039.oldguns.compat.jei.breechloading.BreechloadingRecipeWrapper;
+import zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeCategory;
+import zach2039.oldguns.compat.jei.gunsmithsbench.GunsmithsBenchRecipeChecker;
+import zach2039.oldguns.compat.jei.gunsmithsbench.ShapedGunsmithsBenchRecipeWrapper;
+import zach2039.oldguns.compat.jei.gunsmithsbench.ShapelessGunsmithsBenchRecipeWrapper;
 
 @JEIPlugin
 public class JEIOldGunsPlugin implements IModPlugin {

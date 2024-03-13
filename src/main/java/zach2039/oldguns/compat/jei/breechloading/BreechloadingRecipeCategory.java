@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei.breechloading;
+package zach2039.oldguns.compat.jei.breechloading;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModItems;
-import zach2039.oldguns.integration.jei.JEIOldGunsUUIDs;
+import zach2039.oldguns.compat.jei.JEIOldGunsUUIDs;
 
 public class BreechloadingRecipeCategory implements IRecipeCategory<IRecipeWrapper> {
 

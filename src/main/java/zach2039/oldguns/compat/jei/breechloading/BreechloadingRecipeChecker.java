@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei.breechloading;
+package zach2039.oldguns.compat.jei.breechloading;
 
 import java.util.ArrayList;
 import java.util.Arrays;

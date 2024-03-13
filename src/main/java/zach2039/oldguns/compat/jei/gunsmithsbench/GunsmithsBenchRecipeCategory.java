@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei.gunsmithsbench;
+package zach2039.oldguns.compat.jei.gunsmithsbench;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModBlocks;
-import zach2039.oldguns.integration.jei.JEIOldGunsUUIDs;
+import zach2039.oldguns.compat.jei.JEIOldGunsUUIDs;
 
 public class GunsmithsBenchRecipeCategory implements IRecipeCategory<IRecipeWrapper> {
 

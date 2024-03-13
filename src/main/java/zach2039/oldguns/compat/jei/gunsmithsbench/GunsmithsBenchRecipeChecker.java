@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei.gunsmithsbench;
+package zach2039.oldguns.compat.jei.gunsmithsbench;
 
 import java.util.ArrayList;
 import java.util.Arrays;

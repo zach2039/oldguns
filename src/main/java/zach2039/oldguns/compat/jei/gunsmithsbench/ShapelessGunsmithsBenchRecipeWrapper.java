@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei.breechloading;
+package zach2039.oldguns.compat.jei.gunsmithsbench;
 
 import java.util.List;
 
@@ -12,14 +12,14 @@ import mezz.jei.api.recipe.wrapper.ICraftingRecipeWrapper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
+import zach2039.oldguns.common.item.crafting.ShapelessGunsmithsBenchRecipe;
 
-public class BreechloadingRecipeWrapper implements ICraftingRecipeWrapper {
+public class ShapelessGunsmithsBenchRecipeWrapper implements ICraftingRecipeWrapper {
 	
 	private final IJeiHelpers jeiHelpers;
-	protected final BreechloadingReloadRecipe recipe;
+	protected final ShapelessGunsmithsBenchRecipe recipe;
 
-	public BreechloadingRecipeWrapper(IJeiHelpers jeiHelpers, BreechloadingReloadRecipe recipe) 
+	public ShapelessGunsmithsBenchRecipeWrapper(IJeiHelpers jeiHelpers, ShapelessGunsmithsBenchRecipe recipe) 
 	{
 		this.jeiHelpers = jeiHelpers;
 		this.recipe = recipe;

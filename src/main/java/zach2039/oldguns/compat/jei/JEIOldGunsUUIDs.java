@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei;
+package zach2039.oldguns.compat.jei;
 
 import zach2039.oldguns.common.OldGuns;
 

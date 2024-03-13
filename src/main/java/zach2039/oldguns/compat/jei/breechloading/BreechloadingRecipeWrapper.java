@@ -1,4 +1,4 @@
-package zach2039.oldguns.integration.jei.gunsmithsbench;
+package zach2039.oldguns.compat.jei.breechloading;
 
 import java.util.List;
 
@@ -8,31 +8,21 @@ import mezz.jei.api.IJeiHelpers;
 import mezz.jei.api.ingredients.IIngredients;
 import mezz.jei.api.ingredients.VanillaTypes;
 import mezz.jei.api.recipe.IStackHelper;
-import mezz.jei.api.recipe.wrapper.IShapedCraftingRecipeWrapper;
+import mezz.jei.api.recipe.wrapper.ICraftingRecipeWrapper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import zach2039.oldguns.common.OldGuns;
-import zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe;
+import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
 
-public class ShapedGunsmithsBenchRecipeWrapper implements IShapedCraftingRecipeWrapper {
-
-	private final IJeiHelpers jeiHelpers;
-	protected final ShapedGunsmithsBenchRecipe recipe;
+public class BreechloadingRecipeWrapper implements ICraftingRecipeWrapper {
 	
-	public ShapedGunsmithsBenchRecipeWrapper(IJeiHelpers jeiHelpers, ShapedGunsmithsBenchRecipe recipe) 
+	private final IJeiHelpers jeiHelpers;
+	protected final BreechloadingReloadRecipe recipe;
+
+	public BreechloadingRecipeWrapper(IJeiHelpers jeiHelpers, BreechloadingReloadRecipe recipe) 
 	{
 		this.jeiHelpers = jeiHelpers;
 		this.recipe = recipe;
-	}
-
-	@Override
-	public int getWidth() {
-		return recipe.getRecipeWidth();
-	}
-
-	@Override
-	public int getHeight() {
-		return recipe.getRecipeHeight();
 	}
 
 	@Override
