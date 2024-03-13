@@ -763,7 +763,7 @@ public class ModConfigs {
             // strip off "item." or "tile." and "instrument." to get the raw item name without domain and item base names
         	String itemName = stackIn.getItem().getRegistryName().toString().replaceFirst(OldGuns.MODID + ":", "");
             boolean enableState = !ConfigCategoryRecipes.recipeToggles.containsKey(itemName) || (ConfigCategoryRecipes.recipeToggles.get(itemName) && !itemName.contains(":"));
-            OldGuns.logger.debug(String.format("Recipe Enabled? %s %s", itemName, enableState));
+            //OldGuns.logger.debug(String.format("Recipe Enabled? %s %s", itemName, enableState));
             return enableState;
         }
 	}
