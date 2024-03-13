@@ -3,7 +3,7 @@
 pipeline {
     agent any
     tools {
-        jdk "openjdk-1.8"
+        jdk "jdk-8"
     }
     stages {
         stage('Clean') {
