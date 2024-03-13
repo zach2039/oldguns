@@ -1,18 +1,84 @@
 buildscript {
     repositories {
-        jcenter()
-        maven { url = "http://files.minecraftforge.net/maven" }
+        mavenCentral()
+        maven { url = "https://maven.minecraftforge.net/" }
     }
+
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:2.3-SNAPSHOT'
+        classpath group: "net.minecraftforge.gradle", name: "ForgeGradle", version: "5.1.+"
     }
 }
-apply plugin: 'net.minecraftforge.gradle.forge'
-apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'net.minecraftforge.gradle'
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(8)
+compileJava {
+    sourceCompatibility = "8"
+    targetCompatibility = "8"
+}
 
 version = buildVersionString()
 group = "zach2039.oldguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "oldguns"
+archivesBaseName = "${name}"
+
+repositories {
+    maven {
+        url = "https://maven.minecraftforge.net/"
+    }
+
+    maven {
+        // location of the maven that hosts JEI files
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven { // Patchouli and JEI
+        url 'https://maven.blamejared.com'
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:1.12.2-14.23.5.2860"
+
+    // Crafttweaker stuff
+    //compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"
+
+    compileOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
+
+    // at runtime, use the full JEI jar
+    runtimeOnly fg.deobf("mezz.jei:jei_${mc_version}:${jei_version}")
+}
+
+minecraft {
+    mappings channel: 'stable', version: '39-1.12'
+
+    runs {
+        "client" {
+            workingDirectory file("./run")
+            mods { "${project.name}" { source sourceSets.main } }
+        }
+
+        "server" {
+            workingDirectory file("./run/server")
+            mods { "${project.name}" { source sourceSets.main } }
+        }
+    }
+}
+
+def version_replaces = [
+        'version'      : project.version,
+        'mc_version'   : mc_version,
+        'mod_version'  : mod_version,
+        'forge_version': forge_version,
+        'jei_version'  : jei_version
+]
+
+processResources {
+    inputs.properties(version_replaces)
+
+    filesMatching("mcmod.info") {
+        expand version_replaces
+    }
+}
 
 // Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
 String buildVersionString() {
@@ -55,65 +121,6 @@ String buildVersionString() {
     return "${mc_version}-${mod_output_version}"
 }
 
-
-sourceCompatibility = targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-compileJava {
-    sourceCompatibility = targetCompatibility = '1.8'
-}
-
-minecraft {
-    version = "1.12.2-14.23.5.2847"
-    runDir = "run"
-    mappings = "stable_39"
-	replace '${version}', project.version
-	useDepAts = true
-}
-
-repositories {
-	maven {
-		// location of the maven that hosts JEI files
-		name = "Progwml6 maven"
-		url = "https://dvs1.progwml6.com/files/maven/"
-	}
-    //maven { // Patchouli and JEI
-    //    url 'https://maven.blamejared.com'
-    //}
-    maven {
-		// CraftTweaker (MineTweaker3)
-        name 'jared maven'
-        url "http://maven.blamejared.com/"
-    }
-}
-
-dependencies {
-	// Crafttweaker stuff
-	compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"
-	deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
-
-	// at runtime, use the full JEI jar
-	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
-}
-
-processResources {
-	/* Ensure tasks redone with version change. */
-	inputs.property "version", project.version
-    inputs.property "mcversion", project.minecraft.version
-
-    /* Replace stuff in mcmod.info, nothing else. */
-    from(sourceSets.main.resources.srcDirs)
-    {
-        include 'mcmod.info'
-                
-        // replace version and mcversion
-        expand 'version':project.version, 'mcversion':project.minecraft.version
-    }
-        
-    /* Copy everything else except the mcmod.info. */
-    from(sourceSets.main.resources.srcDirs)
-    {
-        exclude 'mcmod.info'
-    }
-	
-	// Move access transformers to META-INF
-	rename '(.+_at.cfg)', 'META-INF/$1'
-}
+//When Forge 1.12 loads mods from a directory that's been put on the classpath, it expects to find resources in the same directory.
+//Default Gradle behavior puts resources in ./build/resources/main instead of ./build/classes/main/java. Let's change that.
+sourceSets.all { it.output.resourcesDir = it.output.classesDirs.getFiles().iterator().next() }

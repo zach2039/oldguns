@@ -19,7 +19,7 @@ public abstract class ItemArtillery extends Item
 	public ItemArtillery(String name, ArtilleryType artilleryType)
 	{
 		setRegistryName(OldGuns.MODID, name);
-		setUnlocalizedName(name);
+		//setUnlocalizedName(name);
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setArtilleryType(artilleryType);

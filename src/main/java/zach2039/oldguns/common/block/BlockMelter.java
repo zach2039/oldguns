@@ -33,7 +33,7 @@ public class BlockMelter extends BlockContainer
 	{
 		super(Material.ROCK);
 		setRegistryName(OldGuns.MODID, "melter");
-		setUnlocalizedName("melter");
+		//setUnlocalizedName("melter");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.STONE);	
 		this.isBurning = isBurning;
@@ -65,7 +65,7 @@ public class BlockMelter extends BlockContainer
 	@Override
 	public IBlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 	
 	@Override

@@ -704,7 +704,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		OldGuns.logger.debug(String.format("CLIENT:"));
         		OldGuns.logger.debug(String.format("   firingState         : %s", firingState));
         		OldGuns.logger.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
-        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
+        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getItem().getRegistryName()));
         		
         	}
         	else
@@ -712,7 +712,7 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         		OldGuns.logger.debug(String.format("SERVER:"));
         		OldGuns.logger.debug(String.format("   firingState         : %s", firingState));
         		OldGuns.logger.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
-        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getUnlocalizedName()));
+        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getItem().getRegistryName()));
         	}
         	
         	switch(firingState)

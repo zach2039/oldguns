@@ -38,7 +38,7 @@ public class BlockStationaryCannon extends BlockContainer {
 	public BlockStationaryCannon() {
 		super(Material.IRON);
 		setRegistryName(OldGuns.MODID, "stationary_cannon");
-		setUnlocalizedName("stationary_cannon");
+		//setUnlocalizedName("stationary_cannon");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.METAL);
 		setHardness(2.0F);
@@ -140,7 +140,7 @@ public class BlockStationaryCannon extends BlockContainer {
 	
 	@SideOnly(Side.CLIENT)
 	@Override
-	public BlockRenderLayer getBlockLayer()
+	public BlockRenderLayer getRenderLayer()
 	{
 		return BlockRenderLayer.SOLID;
 	}

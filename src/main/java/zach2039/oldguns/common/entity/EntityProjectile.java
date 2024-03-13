@@ -710,7 +710,7 @@ public class EntityProjectile extends EntityArrow
 	            
 	            if (this.canCollideWithBlockState(iblockstate))
 	            {
-	                this.inTile.onEntityCollidedWithBlock(this.world, blockpos, iblockstate, this);
+	                this.inTile.onEntityCollision(this.world, blockpos, iblockstate, this);
 	                
 	                for (int i = 0; i < 3; i++)
 	                {

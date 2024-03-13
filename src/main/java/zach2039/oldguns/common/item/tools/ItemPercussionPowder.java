@@ -8,7 +8,7 @@ public class ItemPercussionPowder extends Item
 	public ItemPercussionPowder()
 	{
 		setRegistryName(OldGuns.MODID, "percussion_powder");
-		setUnlocalizedName("percussion_powder");
+		//setUnlocalizedName("percussion_powder");
 		setMaxStackSize(64);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}

@@ -33,7 +33,7 @@ public class BlockGunsmithsBench extends Block
 	{
 		super(Material.WOOD);
 		setRegistryName(OldGuns.MODID, "gunsmiths_bench");
-		setUnlocalizedName("gunsmiths_bench");
+		//setUnlocalizedName("gunsmiths_bench");
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		setSoundType(SoundType.WOOD);	
 		setHardness(2.5F);
@@ -60,7 +60,7 @@ public class BlockGunsmithsBench extends Block
 	@Override
 	public IBlockState getStateFromMeta(final int meta)
 	{
-		return this.getDefaultState().withProperty(FACING, EnumFacing.getHorizontal(meta));
+		return this.getDefaultState().withProperty(FACING, EnumFacing.byHorizontalIndex(meta));
 	}
 	
 	@Override
@@ -131,7 +131,7 @@ public class BlockGunsmithsBench extends Block
 		@Override
 		public ITextComponent getDisplayName()
 		{
-			return new TextComponentTranslation(ModBlocks.GUNSMITHS_BENCH.getUnlocalizedName() + ".name", new Object[0]);
+			return new TextComponentTranslation(ModBlocks.GUNSMITHS_BENCH.getRegistryName() + ".name", new Object[0]);
 		}
 
 		@Override

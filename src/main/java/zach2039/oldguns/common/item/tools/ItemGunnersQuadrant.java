@@ -8,7 +8,7 @@ public class ItemGunnersQuadrant extends Item
 	public ItemGunnersQuadrant()
 	{
 		setRegistryName(OldGuns.MODID, "gunners_quadrant");
-		setUnlocalizedName("gunners_quadrant");
+		//setUnlocalizedName("gunners_quadrant");
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 	}

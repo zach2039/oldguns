@@ -13,7 +13,7 @@ public class ItemMediumMusketBallMoldTool extends Item
 	public ItemMediumMusketBallMoldTool()
 	{
 		setRegistryName(OldGuns.MODID, "medium_musket_ball_mold_tool");
-		setUnlocalizedName("medium_musket_ball_mold_tool");
+		//setUnlocalizedName("medium_musket_ball_mold_tool");
 		setMaxStackSize(1);
 		setCreativeTab(OldGuns.OLDGUNS_CREATIVE_TAB);
 		

@@ -14,7 +14,7 @@ public class GuiAimingBar extends GuiIngame {
 
 	public void renderAimingBar(ScaledResolution scaledRes, int x, float multiplier)
     {
-        this.mc.mcProfiler.startSection("aimBar");
+        this.mc.profiler.startSection("aimBar");
         this.mc.getTextureManager().bindTexture(Gui.ICONS);
         float f = multiplier;
         int i = 182;
@@ -29,6 +29,6 @@ public class GuiAimingBar extends GuiIngame {
         	this.drawTexturedModalRect(x - 64, k, 0, 69, -j, 5);
         }
 
-        this.mc.mcProfiler.endSection();
+        this.mc.profiler.endSection();
     }
 }
