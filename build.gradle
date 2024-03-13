@@ -64,8 +64,8 @@ compileJava {
 minecraft {
     version = "1.12.2-14.23.5.2847"
     runDir = "run"
-    mappings = "snapshot_20171003"
-	replace '@VERSION@', project.version
+    mappings = "stable_39"
+	replace '${version}', project.version
 	useDepAts = true
 }
 
@@ -75,12 +75,10 @@ repositories {
 		name = "Progwml6 maven"
 		url = "https://dvs1.progwml6.com/files/maven/"
 	}
-	maven {
-		// location of a maven mirror for JEI files, as a fallback
-		name = "ModMaven"
-		url = "https://modmaven.k-4u.nl"
-	}
-    maven { 
+    //maven { // Patchouli and JEI
+    //    url 'https://maven.blamejared.com'
+    //}
+    maven {
 		// CraftTweaker (MineTweaker3)
         name 'jared maven'
         url "http://maven.blamejared.com/"
@@ -89,10 +87,9 @@ repositories {
 
 dependencies {
 	// Crafttweaker stuff
-	compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"	
-	
-	// compile against the JEI API but do not include it at runtime
-	deobfProvided "mezz.jei:jei_${mc_version}:${jei_version}:api"
+	compileOnly "CraftTweaker2:CraftTweaker2-MC1120-Main:1.12-4.1.8.468"
+	deobfCompile "mezz.jei:jei_${mc_version}:${jei_version}:api"
+
 	// at runtime, use the full JEI jar
 	runtime "mezz.jei:jei_${mc_version}:${jei_version}"
 }
