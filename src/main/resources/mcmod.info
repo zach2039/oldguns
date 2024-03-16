@@ -1,5 +1,4 @@
-[
-{
+[{
   "modid": "oldguns",
   "name": "Old Guns Mod",
   "description": "Old guns and artillery for that colonial feel.",
@@ -11,6 +10,6 @@
   "credits": "https://www.zach2039.com/mods/oldguns/update.json",
   "logoFile": "oldguns.png",
   "screenshots": [],
-  "dependencies": []
-}
-]
+  "useDependencyInformation": true,
+  "dependencies": ["forge", "patchouli", "jei"]
+}]

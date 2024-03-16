@@ -69,7 +69,7 @@ public class MessageSyncTileEntityCannonRotation implements IMessage {
 							}
 							else
 							{
-								OldGuns.logger.error("Tile entity rotation sync packet tried to sync a tile entity that does not implement IArtillery");
+								OldGuns.LOGGER.error("Tile entity rotation sync packet tried to sync a tile entity that does not implement IArtillery");
 							}
 						}
 					}

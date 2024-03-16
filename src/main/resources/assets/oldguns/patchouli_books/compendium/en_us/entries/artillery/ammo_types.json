@@ -1,36 +1,24 @@
 {
-	"name": "oldguns.entry.artillery.ammo_types",
+	"name": "Ammo Types",
 	"category": "oldguns:artillery",
 	"icon": "oldguns:medium_iron_cannonball",
 	"sortnum": 4,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.artillery.ammo_types0"
+			"text": "Artillery can be loaded with varying types of ammo, providing different projectile effects.$(br)$(br)Some types available are listed in the following pages."
 		},
 		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"recipes": [
-				"oldguns:medium_iron_cannonball"
-			],
-			"heading": "oldguns.lang.artillery.cannonball",
-			"text": "oldguns.page.artillery.ammo_types1"
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:medium_iron_cannonball",
+			"heading": "Cannonball",
+			"text": "Cannonballs are the most simple of projectiles. It breaks blocks on impact and does major damage to any mobs hit."
 		},
 		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"recipes": [
-				"oldguns:medium_iron_grapeshot"
-			],
-			"heading": "oldguns.lang.artillery.grapeshot",
-			"text": "oldguns.page.artillery.ammo_types2"
-		},
-		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"recipes": [
-				"oldguns:medium_iron_canister_shot"
-			],
-			"heading": "oldguns.lang.artillery.canister_shot",
-			"text": "oldguns.page.artillery.ammo_types3"
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:medium_iron_he_shell",
+			"heading": "High-explosive shell",
+			"text": "High-explosive shells are a less piercing, more explosive version of a normal cannonball."
 		}
 	]
 }

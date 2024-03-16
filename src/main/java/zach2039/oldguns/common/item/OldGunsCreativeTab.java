@@ -58,7 +58,7 @@ public class OldGunsCreativeTab extends CreativeTabs {
 			String displayName2 = o2.getDisplayName();
 
 			int result = displayName1.compareToIgnoreCase(displayName2);
-			OldGuns.logger.debug("sorter: \"%s\" \"%s\" - %d", displayName1, displayName2, result);
+			OldGuns.LOGGER.debug("sorter: \"%s\" \"%s\" - %d", displayName1, displayName2, result);
 			return result;
 		}
 	}

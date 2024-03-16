@@ -24,7 +24,7 @@ public class GuiAimingBar extends GuiIngame {
 
         if (j > 0)
         {
-        	OldGuns.logger.info("j : " + j);
+        	OldGuns.LOGGER.info("j : " + j);
         	this.drawTexturedModalRect(x + 64, k, 0, 69, j, 5);
         	this.drawTexturedModalRect(x - 64, k, 0, 69, -j, 5);
         }

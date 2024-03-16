@@ -87,15 +87,15 @@ public class MessageSyncTileEntityCannonState implements IMessage {
 								artp.setPowderCharge(message.powderCharge);
 								art.setLoadedProjectile(message.loadedProjectile);
 								art.setFiringCooldown(message.firingCooldown);
-								OldGuns.logger.debug("Packet has been received on " + ctx.side);
-								OldGuns.logger.debug("    artilleryType : " + message.type);
-								OldGuns.logger.debug("      firingState : " + message.firingState);
-								OldGuns.logger.debug("     powderCharge : " + message.powderCharge);
-								OldGuns.logger.debug(" loadedProjectile : " + message.loadedProjectile);
+								OldGuns.LOGGER.debug("Packet has been received on " + ctx.side);
+								OldGuns.LOGGER.debug("    artilleryType : " + message.type);
+								OldGuns.LOGGER.debug("      firingState : " + message.firingState);
+								OldGuns.LOGGER.debug("     powderCharge : " + message.powderCharge);
+								OldGuns.LOGGER.debug(" loadedProjectile : " + message.loadedProjectile);
 							}
 							else
 							{
-								OldGuns.logger.error("Tile entity rotation sync packet tried to sync a tile entity that does not implement IArtillery and IArtilleryPowderable");
+								OldGuns.LOGGER.error("Tile entity rotation sync packet tried to sync a tile entity that does not implement IArtillery and IArtilleryPowderable");
 							}
 						}
 					}

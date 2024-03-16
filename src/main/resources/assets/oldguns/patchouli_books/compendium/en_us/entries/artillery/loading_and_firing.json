@@ -1,12 +1,12 @@
 {
-	"name": "oldguns.entry.artillery.loading_and_firing",
+	"name": "Loading and Firing",
 	"category": "oldguns:artillery",
 	"icon": "oldguns:ram_rod",
 	"sortnum": 3,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.artillery.loading_and_firing0"
+			"text": "To load a conventional artillery piece, like a cannon:$(br)$(br)1) Right-click with a Powder Charge.$(br)$(br)2) Right-click with a Ram Rod.$(br)$(br)3) Right-click with a projectile, like a cannonball.$(br)$(br)4) Right-click with a Long Match to fire.$(br)$(br)"
 		}
 	]
 }

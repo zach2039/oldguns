@@ -1,0 +1,47 @@
+{
+	"name": "Matchlock Firearms",
+	"category": "oldguns:firearms",
+	"icon": "oldguns:matchlock_pistol",
+	"sortnum": 2,
+	"pages": [
+		{
+			"type": "text",
+			"text": "Matchlock firearms are on the lowest rung of the available firearm arsenal, but are cheap to make and use!"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_derringer",
+			"text": "A very tiny weapon; questionable lethality."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_pistol"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_arquebus"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_caliver"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_long_musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_musketoon",
+			"text": "A versatile weapon that can fire bird-shot or musket ball."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:matchlock_blunderbuss",
+			"text": "Close-range problem solver! Can fire bird-shot or buck-shot."
+		}
+	]
+}

@@ -701,18 +701,18 @@ public abstract class EntityArtillery extends Entity implements IArtillery, IArt
         	/* Debug client/server rotation differences. */
         	if (this.world.isRemote)
         	{
-        		OldGuns.logger.debug(String.format("CLIENT:"));
-        		OldGuns.logger.debug(String.format("   firingState         : %s", firingState));
-        		OldGuns.logger.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
-        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getItem().getRegistryName()));
+        		OldGuns.LOGGER.debug(String.format("CLIENT:"));
+        		OldGuns.LOGGER.debug(String.format("   firingState         : %s", firingState));
+        		OldGuns.LOGGER.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
+        		OldGuns.LOGGER.debug(String.format("   currentProjectile   : %s", currentProjectile.getItem().getRegistryName()));
         		
         	}
         	else
         	{
-        		OldGuns.logger.debug(String.format("SERVER:"));
-        		OldGuns.logger.debug(String.format("   firingState         : %s", firingState));
-        		OldGuns.logger.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
-        		OldGuns.logger.debug(String.format("   currentProjectile   : %s", currentProjectile.getItem().getRegistryName()));
+        		OldGuns.LOGGER.debug(String.format("SERVER:"));
+        		OldGuns.LOGGER.debug(String.format("   firingState         : %s", firingState));
+        		OldGuns.LOGGER.debug(String.format("   currentPowderCharge : %d", currentPowderCharge));
+        		OldGuns.LOGGER.debug(String.format("   currentProjectile   : %s", currentProjectile.getItem().getRegistryName()));
         	}
         	
         	switch(firingState)

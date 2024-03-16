@@ -1,12 +1,12 @@
 {
-	"name": "oldguns.entry.basics.gunsmiths_bench",
+	"name": "Gunsmith's Bench",
 	"category": "oldguns:basics",
 	"icon": "oldguns:gunsmiths_bench",
 	"sortnum": 1,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.basics.gunsmiths_bench0"
+			"text": "To create firearms, tools, and some materials, a Gunsmith's Bench must be used."
 		},
 		{
 			"type": "spotlight",

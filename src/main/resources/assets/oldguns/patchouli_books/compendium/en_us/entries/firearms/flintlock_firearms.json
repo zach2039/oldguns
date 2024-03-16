@@ -1,0 +1,77 @@
+{
+	"name": "Flintlock Firearms",
+	"category": "oldguns:firearms",
+	"icon": "oldguns:flintlock_pistol",
+	"sortnum": 3,
+	"pages": [
+		{
+			"type": "text",
+			"text": "Flintlock firearms are mid-tier weapons, with some resistance to water and decent damage."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_derringer",
+			"text": "A very tiny weapon; questionable lethality."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_pistol"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_arquebus"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_caliver"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_long_musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_musketoon",
+			"text": "A versatile weapon that can fire bird-shot or musket ball."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_blunderbuss",
+			"text": "Close-range problem solver! Can fire bird-shot or buck-shot."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_breechloading_pistol",
+			"text": "A breech-loading variant of the flintlock pistol.",
+			"heading": "Breech-loading Pistol"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_breechloading_arquebus",
+			"text": "A breech-loading variant of the flintlock arquebus.",
+			"heading": "Breech-loading Arquebus"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_breechloading_caliver",
+			"text": "A breech-loading variant of the flintlock caliver.",
+			"heading": "Breech-loading Caliver"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_breechloading_musket",
+			"text": "A breech-loading variant of the flintlock musket.",
+			"heading": "Breech-loading Musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:flintlock_breechloading_long_musket",
+			"text": "A breech-loading variant of the flintlock long musket.",
+			"heading": "Breech-loading L. Musket"
+		}
+	]
+}

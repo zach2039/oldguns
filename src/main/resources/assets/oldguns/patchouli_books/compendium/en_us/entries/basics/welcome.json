@@ -1,5 +1,5 @@
 {
-	"name": "oldguns.entry.basics.welcome",
+	"name": "Old Guns",
 	"category": "oldguns:basics",
 	"icon": "oldguns:matchlock_mechanism",
 	"priority": true,
@@ -7,11 +7,11 @@
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.basics.welcome0"
+			"text": "Old Guns adds a collection of mid-15th century to early 19th century black powder arms and materials. This compendium should assist any up-and-coming gunsmith or gunner with these arms and materials, and the processes to manufacture said items."
 		},
 		{
 			"type": "text",
-			"text": "oldguns.page.basics.welcome1"
+			"text": "Contained within this book are guides to various concepts of Old Guns, like firearms, reloading, ammo manufacturing, artillery, and other miscellaneous details; these guides are organized by category, so be sure to check the index for a fast reference to any topic."
 		}
 	]
 }

@@ -11,11 +11,15 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.item.crafting.BreechloadingReloadRecipe;
+import zach2039.oldguns.common.item.crafting.ShapedGunsmithsBenchRecipe;
+import zach2039.oldguns.common.item.crafting.base.GunsmithsBenchRecipe;
 
 @EventBusSubscriber(modid = OldGuns.MODID)
 public class ModRecipes
 {
 	public final static List<BreechloadingReloadRecipe> breechloaderReloadRecipes = new ArrayList<BreechloadingReloadRecipe>();
+
+	public final static List<GunsmithsBenchRecipe> gunsmithsBenchRecipes = new ArrayList<GunsmithsBenchRecipe>();
 	
 	public static void registerOreDictEntries()
 	{	
@@ -72,12 +76,16 @@ public class ModRecipes
 	public static void onRecipesUpdatedEvent(RegistryEvent.Register<IRecipe> event) {
         /* Cache recipes that we need to reference during runtime, so that we don't slow things down. */
 		event.getRegistry().forEach((recipe) -> {
-			if (recipe instanceof BreechloadingReloadRecipe)
+			if (recipe instanceof BreechloadingReloadRecipe) {
 				ModRecipes.breechloaderReloadRecipes.add((BreechloadingReloadRecipe) recipe);
+				OldGuns.LOGGER.debug("Recipe cached : " + recipe.getRegistryName());
+			}
 		});
-		
-		ModRecipes.breechloaderReloadRecipes.forEach((recipe) -> {
-			OldGuns.logger.info("Recipe cached : " + recipe.getRegistryName());
+
+		event.getRegistry().forEach((recipe) -> {
+			if (recipe instanceof GunsmithsBenchRecipe)
+				ModRecipes.gunsmithsBenchRecipes.add((GunsmithsBenchRecipe) recipe);
+				OldGuns.LOGGER.debug("Recipe cached : " + recipe.getRegistryName());
 		});
     }
 }

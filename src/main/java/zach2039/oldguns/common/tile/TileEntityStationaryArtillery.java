@@ -276,8 +276,8 @@ public abstract class TileEntityStationaryArtillery extends TileEntity implement
 		float trueYawMin = mod * facingYaw + trueMinBarrelYaw;
 		float trueYawMax = mod * facingYaw + trueMaxBarrelYaw;
 
-		OldGuns.logger.debug("minBarrelYaw: " + getMinBarrelYaw() + ", maxBarrelYaw: " + getMaxBarrelYaw());
-		OldGuns.logger.debug("facing: " + facing + ", " + "yaw: " + clampedYaw + ", " + "yawMin: " + trueYawMin + ", yawMax: " + trueYawMax);
+		OldGuns.LOGGER.debug("minBarrelYaw: " + getMinBarrelYaw() + ", maxBarrelYaw: " + getMaxBarrelYaw());
+		OldGuns.LOGGER.debug("facing: " + facing + ", " + "yaw: " + clampedYaw + ", " + "yawMin: " + trueYawMin + ", yawMax: " + trueYawMax);
 		
 		this.barrelYaw = MathHelper.clamp(clampedYaw, trueYawMin, trueYawMax);
 	}

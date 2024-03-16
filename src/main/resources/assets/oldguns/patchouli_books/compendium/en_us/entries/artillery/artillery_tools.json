@@ -1,37 +1,33 @@
 {
-	"name": "oldguns.entry.artillery.artillery_tools",
+	"name": "Artillery Tools",
 	"category": "oldguns:artillery",
 	"icon": "oldguns:gunners_quadrant",
 	"sortnum": 2,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.artillery.artillery_tools0"
+			"text": "Operating artillery requires various tools to prep ammo and charges during loading."
 		},
 		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"recipes": [
-				"oldguns:small_powder_charge",
-				"oldguns:medium_powder_charge",
-				"oldguns:large_powder_charge"
-			],
-			"heading": "oldguns.lang.artillery.powder_charge",
-			"text": "oldguns.page.artillery.artillery_tools1"
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:powder_charge",
+			"heading": "Powder Charge",
+			"text": "The Powder Charge contains propellant used to launch any loaded ammunition.$(br)$(br)Using less or more charges will decrease or increase the launch velocity of projectiles, respectively."
 		},
 		{
 			"type": "oldguns:gunsmiths_bench",
 			"recipe": "oldguns:ram_rod",
-			"text": "oldguns.page.artillery.artillery_tools2"
+			"text": "The Ram Rod is used to push charges or ammunition down the barrel of an artillery piece after it has been placed inside."
 		},
 		{
 			"type": "oldguns:gunsmiths_bench",
 			"recipe": "oldguns:long_match",
-			"text": "oldguns.page.artillery.artillery_tools3"
+			"text": "The Long Match is used to fire an artillery piece after both the charge and ammunition has been loaded and the projectile rammed down."
 		},
 		{
 			"type": "oldguns:gunsmiths_bench",
 			"recipe": "oldguns:gunners_quadrant",
-			"text": "oldguns.page.artillery.artillery_tools4"
+			"text": "The Gunner's Quadrant can be used via crouching near the artillery piece to change the pitch and azimuth of the shot."
 		}
 	]
 }

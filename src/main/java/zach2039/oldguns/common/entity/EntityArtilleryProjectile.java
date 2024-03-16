@@ -107,22 +107,22 @@ public class EntityArtilleryProjectile extends EntityProjectile
 					{
 						IBlockState hitBlock = this.world.getBlockState(blockPos);
 						float hitBlockHardness = hitBlock.getBlockHardness(this.world, blockPos);
-						if (!this.world.isRemote) OldGuns.logger.debug("target hardness : " + hitBlockHardness);
-						if (!this.world.isRemote) OldGuns.logger.debug("effect before : " + getEffectStrength());
+						if (!this.world.isRemote) OldGuns.LOGGER.debug("target hardness : " + hitBlockHardness);
+						if (!this.world.isRemote) OldGuns.LOGGER.debug("effect before : " + getEffectStrength());
 						if (hitBlockHardness < getEffectStrength())
 						{							
 							/* Punch through block if effectStrength of solid projectile is greater than block hardness, and keep going with reduced effectiveness. */
 							this.world.destroyBlock(blockPos, this.rand.nextBoolean());
 							float effectModifier = (!this.isInWater()) ? 0.70f : 0.45f;
 							setEffectStrength(Math.max(0.1f, getEffectStrength() * effectModifier));
-							if (!this.world.isRemote) OldGuns.logger.debug("broke : " + hitBlock.toString());
+							if (!this.world.isRemote) OldGuns.LOGGER.debug("broke : " + hitBlock.toString());
 						}
 						else
 						{
 							setEffectStrength(0.0f);
-							if (!this.world.isRemote) OldGuns.logger.debug("stopped by, inWater : " + hitBlock.toString() + ", " + this.isInWater());
+							if (!this.world.isRemote) OldGuns.LOGGER.debug("stopped by, inWater : " + hitBlock.toString() + ", " + this.isInWater());
 						}
-						if (!this.world.isRemote) OldGuns.logger.debug("effect after : " + getEffectStrength());
+						if (!this.world.isRemote) OldGuns.LOGGER.debug("effect after : " + getEffectStrength());
 					}
 					//this.setDead();
 					break;

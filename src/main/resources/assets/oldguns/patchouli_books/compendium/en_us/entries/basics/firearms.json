@@ -1,12 +1,12 @@
 {
-	"name": "oldguns.entry.basics.firearms",
+	"name": "Firearms",
 	"category": "oldguns:basics",
 	"icon": "oldguns:matchlock_derringer",
 	"sortnum": 4,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.basics.firearms0"
+			"text": "Firearms are ranged, black powder weapons that have high damage and long reload time.$(br)$(br)Various types of firearm mechanisms exist: Matchlock, Wheellock, Flintlock, Caplock; these types have increasing damage and reliability, as well as variants that alter shot spread, ammo capacity, and other attributes."
 		},
 		{
 			"type": "spotlight",

@@ -1,16 +1,16 @@
 {
-	"name": "oldguns.entry.basics.artillery",
+	"name": "Artillery",
 	"category": "oldguns:basics",
-	"icon": "oldguns:medium_naval_cannon",
+	"icon": "oldguns:stationary_cannon",
 	"sortnum": 5,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.basics.artillery0"
+			"text": "Artillery includes various gun and missile emplacements that are used to lay siege to fortifications or deal massive damage to groups of mobs or players.$(br)$(br)While more suited to medium to large-scale engagements, artillery pieces can still find use as home defense for the more adventurous artilleryman."
 		},
 		{
 			"type": "spotlight",
-			"item": "oldguns:medium_naval_cannon"
+			"item": "oldguns:stationary_cannon"
 		}
 	]
 }

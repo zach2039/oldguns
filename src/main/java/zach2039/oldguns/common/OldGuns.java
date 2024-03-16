@@ -28,7 +28,7 @@ import zach2039.oldguns.util.IProxy;
 		name = OldGuns.MODNAME,
 		version = OldGuns.MODVERSION,
 		acceptedMinecraftVersions = "[1.12.2]",
-		dependencies = "required-after:forge@[14.23.5.2847,);"
+		dependencies = "required-after:forge@[14.23.5.2859,);required:patchouli@[10-23.6,);optional:jei@[10-23.6,);"
 	)
 public class OldGuns
 {
@@ -36,7 +36,7 @@ public class OldGuns
     public static final String MODNAME = "Old Guns";
     public static final String MODVERSION = "@VERSION@";
     
-    public static Logger logger;
+    public static Logger LOGGER;
     
     @SidedProxy(clientSide = "zach2039.oldguns.client.proxy.ClientProxy", serverSide = "zach2039.oldguns.server.proxy.ServerProxy")
 	public static IProxy proxy;
@@ -51,9 +51,9 @@ public class OldGuns
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
-        logger = event.getModLog();
+        LOGGER = event.getModLog();
         
-        logger.info("preInit()");
+        LOGGER.info("preInit()");
         
         /* PreInit sounds. */
         ModSoundEvents.RegistrationHandler.initializeSoundEvents();
@@ -68,7 +68,7 @@ public class OldGuns
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-    	logger.info("init()");
+    	LOGGER.info("init()");
         
     	/* Sync configuration settings. */
     	ConfigManager.sync(OldGuns.MODID, Type.INSTANCE);
@@ -92,7 +92,7 @@ public class OldGuns
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        logger.info("postInit()");
+        LOGGER.info("postInit()");
         
         /* Call sided proxy. */
         proxy.postInit();

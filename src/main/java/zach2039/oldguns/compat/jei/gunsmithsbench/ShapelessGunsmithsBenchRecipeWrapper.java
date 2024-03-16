@@ -36,7 +36,7 @@ public class ShapelessGunsmithsBenchRecipeWrapper implements ICraftingRecipeWrap
 			ingredients.setInputLists(VanillaTypes.ITEM, inputLists);
 			ingredients.setOutput(VanillaTypes.ITEM, recipeOutput);
 		} catch (RuntimeException e) {
-			OldGuns.logger.catching(e);
+			OldGuns.LOGGER.catching(e);
 		}
 	}
 

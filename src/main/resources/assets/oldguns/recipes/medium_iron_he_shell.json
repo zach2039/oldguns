@@ -11,13 +11,12 @@
 			"ore": "ingotIron"
 		},
 		"b": {
-			"type": "forge:ore_dict",
-			"ore": "blockIron"
+			"item": "minecraft:tnt"
 		}
 	},
 	"result":
 	{
-		"item": "oldguns:medium_iron_cannonball",
+		"item": "oldguns:medium_iron_he_shell",
 		"count": 1
 	}
 }

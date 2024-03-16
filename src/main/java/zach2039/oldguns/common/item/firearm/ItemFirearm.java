@@ -168,8 +168,8 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 			
 			if (entLiving.getActiveItemStack() == stack && isLoading)
 			{
-				OldGuns.logger.debug("hasAmmoLoaded : " + hasAmmoLoaded);
-				OldGuns.logger.debug("isLoading : " + isLoading);
+				OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
+				OldGuns.LOGGER.debug("isLoading : " + isLoading);
 				float progress = FirearmStackHelper.getReloadProgress(entLiving, getRequiredReloadTicks());
 				
 				if (progress > 0.09f && progress < 0.11f)
@@ -297,12 +297,12 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
     		//boolean canAim = (hasAmmoLoaded && readyToFire && notBroken && !holdingLargeFirearmOffhand);
     		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && readyToFire && notBroken && !holdingLargeFirearmOffhand);
             
-    		OldGuns.logger.debug("readyToFire : " + readyToFire);
-    		OldGuns.logger.debug("hasAmmoLoaded : " + hasAmmoLoaded);
-    		OldGuns.logger.debug("notBroken : " + notBroken);
-    		OldGuns.logger.debug("canReload : " + canReload);
-    		OldGuns.logger.debug("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
-    		OldGuns.logger.debug("isReloadableBreechloader : " + isReloadableBreechloader);
+    		OldGuns.LOGGER.debug("readyToFire : " + readyToFire);
+    		OldGuns.LOGGER.debug("hasAmmoLoaded : " + hasAmmoLoaded);
+    		OldGuns.LOGGER.debug("notBroken : " + notBroken);
+    		OldGuns.LOGGER.debug("canReload : " + canReload);
+    		OldGuns.LOGGER.debug("holdingLargeFirearmOffhand : " + holdingLargeFirearmOffhand);
+    		OldGuns.LOGGER.debug("isReloadableBreechloader : " + isReloadableBreechloader);
     		
             if (isReloadableBreechloader && canReload)
             {
@@ -372,14 +372,14 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
                     
                     if (ModConfigs.ConfigCategoryFirearms.printFirearmDebugMessages)
                     {
-	                    OldGuns.logger.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
-	                    OldGuns.logger.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
-	                    OldGuns.logger.info("FinalEffectiveRange : " + finalEffectiveRange);
+	                    OldGuns.LOGGER.info("AmmoEffectiveRange  : " + itemFirearmAmmo.getProjectileEffectiveRange());
+	                    OldGuns.LOGGER.info("FirearmEffectiveMod : " + getEffectiveRangeModifier());
+	                    OldGuns.LOGGER.info("FinalEffectiveRange : " + finalEffectiveRange);
 	                    
-	                    OldGuns.logger.info("FirearmDeviation   : " + getFirearmDeviation());
-	                    OldGuns.logger.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
-	                    OldGuns.logger.info("AimingDeviationMod : " + snapshotDevMulti);
-	                    OldGuns.logger.info("FinalDeviation     : " + finalDeviation);
+	                    OldGuns.LOGGER.info("FirearmDeviation   : " + getFirearmDeviation());
+	                    OldGuns.LOGGER.info("AmmoDeviationMod   : " + itemFirearmAmmo.getProjectileDeviationModifier());
+	                    OldGuns.LOGGER.info("AimingDeviationMod : " + snapshotDevMulti);
+	                    OldGuns.LOGGER.info("FinalDeviation     : " + finalDeviation);
                     }
                     
                     entityProjectiles.forEach((t) ->
@@ -522,10 +522,10 @@ public abstract class ItemFirearm extends ItemBow implements IFirearm
 		boolean canReload = (!hasAmmoLoaded && canReloadBreechloader && !holdingLoadedFirearmOffhand && readyToFire && notBroken && !holdingLargeFirearmOffhand);
 		
 		if (!worldIn.isRemote) {
-			OldGuns.logger.debug("itemstack                : " + itemstack);
-			OldGuns.logger.debug("isReloadableBreechloader : " + isReloadableBreechloader);
-			OldGuns.logger.debug("canAim                   : " + canAim);
-			OldGuns.logger.debug("canReload                : " + canReload);
+			OldGuns.LOGGER.debug("itemstack                : " + itemstack);
+			OldGuns.LOGGER.debug("isReloadableBreechloader : " + isReloadableBreechloader);
+			OldGuns.LOGGER.debug("canAim                   : " + canAim);
+			OldGuns.LOGGER.debug("canReload                : " + canReload);
 		}
 		
 		ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(itemstack, worldIn, playerIn, handIn, canAim);

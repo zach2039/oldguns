@@ -41,8 +41,8 @@ public class JEIOldGunsPlugin implements IModPlugin {
 		List<IRecipe> gunsmithBenchRecipes = GunsmithsBenchRecipeChecker.getValidRecipes(jeiHelpers);
 		List<IRecipe> breechloadingRecipes = BreechloadingRecipeChecker.getValidRecipes(jeiHelpers);
 		
-		OldGuns.logger.info("numvalid gunsmithBenchRecipes : " + gunsmithBenchRecipes.size());
-		OldGuns.logger.info("numvalid breechloadingRecipes : " + breechloadingRecipes.size());
+		OldGuns.LOGGER.info("numvalid gunsmithBenchRecipes : " + gunsmithBenchRecipes.size());
+		OldGuns.LOGGER.info("numvalid breechloadingRecipes : " + breechloadingRecipes.size());
 
 		registry.addRecipes(gunsmithBenchRecipes, JEIOldGunsUUIDs.GUNSMITHS_BENCH);
 		registry.addRecipes(breechloadingRecipes, JEIOldGunsUUIDs.BREECHLOADING);

@@ -1,6 +1,6 @@
 {
-	"name": "oldguns.category.artillery",
-	"description": "oldguns.description.artillery",
-	"icon": "oldguns:medium_naval_cannon",
+	"name": "Artillery",
+	"description": "Details on siege weapons that launch destructive projectiles.",
+	"icon": "oldguns:stationary_cannon",
 	"sortnum": 2
 }

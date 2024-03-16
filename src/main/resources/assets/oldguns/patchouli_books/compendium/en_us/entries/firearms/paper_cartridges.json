@@ -1,49 +1,41 @@
 {
-	"name": "oldguns.entry.firearms.paper_cartridges",
+	"name": "Paper Cartridges",
 	"category": "oldguns:firearms",
-	"icon": "oldguns:small_stone_musket_ball_low_grade_paper_cartridge",
-	"sortnum": 2,
+	"icon": "oldguns:medium_iron_musket_ball_paper_cartridge",
+	"sortnum": 5,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.firearms.paper_cartridges0"
+			"text": "Paper Cartridges are prepared shot and powder enclosed within a paper casing. Using paper cartridges allows more efficient ammo storage and faster reloading of certain muzzle-loaders."
 		},
 		{
 			"type": "oldguns:gunsmiths_bench",
-			"recipe": "oldguns:waxed_paper"
+			"recipe": "oldguns:small_iron_musket_ball_paper_cartridge",
+			"recipe2": "oldguns:small_iron_birdshot_paper_cartridge",
+			"heading": "Paper Cartridges"
 		},
 		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"recipes": [
-				"oldguns:small_stone_musket_ball_low_grade_paper_cartridge",
-				"oldguns:small_stone_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:medium_stone_musket_ball_low_grade_paper_cartridge",
-				"oldguns:medium_stone_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:large_stone_musket_ball_low_grade_paper_cartridge",
-				"oldguns:large_stone_musket_ball_medium_grade_paper_cartridge"
-			],
-			"heading": "oldguns.lang.firearms.stone_paper_cartridge",
-			"recipes2": [
-				"oldguns:small_iron_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:small_iron_musket_ball_high_grade_paper_cartridge",
-				"oldguns:medium_iron_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:medium_iron_musket_ball_high_grade_paper_cartridge",
-				"oldguns:large_iron_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:large_iron_musket_ball_high_grade_paper_cartridge"
-			],
-			"heading2": "oldguns.lang.firearms.iron_paper_cartridge"
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:small_iron_buckshot_paper_cartridge",
+			"recipe2": "oldguns:medium_iron_musket_ball_paper_cartridge",
+			"heading": ""
 		},
 		{
-			"type": "oldguns:multi_gunsmiths_bench",
-			"recipes": [
-				"oldguns:small_lead_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:small_lead_musket_ball_high_grade_paper_cartridge",
-				"oldguns:medium_lead_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:medium_lead_musket_ball_high_grade_paper_cartridge",
-				"oldguns:large_lead_musket_ball_medium_grade_paper_cartridge",
-				"oldguns:large_lead_musket_ball_high_grade_paper_cartridge"
-			],
-			"heading": "oldguns.lang.firearms.lead_paper_cartridge"
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:medium_iron_birdshot_paper_cartridge",
+			"recipe2": "oldguns:medium_iron_buckshot_paper_cartridge",
+			"heading": ""
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:large_iron_musket_ball_paper_cartridge",
+			"recipe2": "oldguns:large_iron_birdshot_paper_cartridge",
+			"heading": ""
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:large_iron_buckshot_paper_cartridge",
+			"heading": ""
 		}
 	]
 }

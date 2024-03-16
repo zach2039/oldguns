@@ -1,24 +1,12 @@
 {
-	"name": "oldguns.entry.firearms.general",
+	"name": "General Information",
 	"category": "oldguns:firearms",
-	"icon": "oldguns:flintlock_pistol",
+	"icon": "oldguns:matchlock_mechanism",
 	"sortnum": 1,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.firearms.general0"
-		},
-		{
-			"type": "text",
-			"text": "oldguns.page.firearms.general1"
-		},
-		{
-			"type": "text",
-			"text": "oldguns.page.firearms.general2"
-		},
-		{
-			"type": "text",
-			"text": "oldguns.page.firearms.general3"
+			"text": "While most firearms are reloaded in the user's inventory, modifications can be applied to allow breech-loading, which allows reloading by holding down right-click; release right-click once the reload animation completes."
 		}
 	]
 }

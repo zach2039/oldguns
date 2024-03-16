@@ -1,6 +1,6 @@
 {
-	"name": "oldguns.category.basics",
-	"description": "oldguns.description.basics",
+	"name": "The Basics",
+	"description": "A general overview of mechanics of Old Guns. For more details on contained topics, refer to their respective sections.",
 	"icon": "oldguns:gunsmiths_bench",
 	"sortnum": 0
 }

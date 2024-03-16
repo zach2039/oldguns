@@ -150,7 +150,7 @@ public class ModelRegistrationHandler
 	
 	private static void registerModel(Item item, int meta)
 	{
-		OldGuns.logger.debug("Registering model for item " + item + " with metadata value of " + meta + ".");
+		OldGuns.LOGGER.debug("Registering model for item " + item + " with metadata value of " + meta + ".");
 		ModelLoader.setCustomModelResourceLocation(item, meta, 
 				new ModelResourceLocation(item.getRegistryName(), "inventory"));
 	}

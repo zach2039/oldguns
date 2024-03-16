@@ -244,7 +244,7 @@ public class TileEntityMelter extends TileEntityLockable implements ITickable, I
 	{
 		if (castStack.attemptDamageItem(1, this.world.rand, null))
 		{
-			OldGuns.logger.debug("Consume cast item.", castStack);
+			OldGuns.LOGGER.debug("Consume cast item.", castStack);
 			castStack.shrink(1);
 		}
 	}
@@ -270,10 +270,10 @@ public class TileEntityMelter extends TileEntityLockable implements ITickable, I
             	currentResultStack.grow(resultFromInputStack.getCount());
             }
 
-            OldGuns.logger.info("inputStack.amt " + inputStack.getCount());
-            OldGuns.logger.info("castStack.amt " + castStack.getCount());
-            OldGuns.logger.info("currentResultStack.amt " + currentResultStack.getCount());
-            OldGuns.logger.info("resultFromInputStack.amt " + resultFromInputStack.getCount());
+            OldGuns.LOGGER.info("inputStack.amt " + inputStack.getCount());
+            OldGuns.LOGGER.info("castStack.amt " + castStack.getCount());
+            OldGuns.LOGGER.info("currentResultStack.amt " + currentResultStack.getCount());
+            OldGuns.LOGGER.info("resultFromInputStack.amt " + resultFromInputStack.getCount());
             
             // Shrink input stack on completion of melt.
             inputStack.shrink(1);

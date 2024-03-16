@@ -6,10 +6,8 @@ import java.util.Map.Entry;
 import com.google.common.collect.Maps;
 
 import net.minecraft.block.Block;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import zach2039.oldguns.common.OldGuns;
 import zach2039.oldguns.common.init.ModConfigs.ConfigCategoryRecipes;
 import zach2039.oldguns.common.init.ModItems;
@@ -76,7 +74,7 @@ public class MelterRecipes
 		
         if (getMeltingResult(input, cast) != ItemStack.EMPTY) 
         {
-        	OldGuns.logger.debug("Ignored melting recipe with conflicting input: {} = {}", input, stack);
+        	OldGuns.LOGGER.debug("Ignored melting recipe with conflicting input: {} = {}", input, stack);
         	return; 
         }
         // Create cast to output map, and populate.

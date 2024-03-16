@@ -1,12 +1,12 @@
 {
-	"name": "oldguns.entry.artillery.general",
+	"name": "General Information",
 	"category": "oldguns:artillery",
-	"icon": "oldguns:medium_naval_cannon",
+	"icon": "oldguns:stationary_cannon",
 	"sortnum": 1,
 	"pages": [
 		{
 			"type": "text",
-			"text": "oldguns.page.artillery.general0"
+			"text": "Artillery pieces, whether they be cannons, field guns, rockets, or other types, are used to do strong damage to structures and mobs.$(br)$(br)Artillery is normally expensive to create and load when compared to firearms, but provide more utility in terms of projectile, like Canister Shot, Grapeshot, and other types."
 		}
 	]
 }

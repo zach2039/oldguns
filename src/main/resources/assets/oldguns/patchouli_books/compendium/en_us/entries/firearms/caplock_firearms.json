@@ -1,0 +1,47 @@
+{
+	"name": "Caplock Firearms",
+	"category": "oldguns:firearms",
+	"icon": "oldguns:caplock_pistol",
+	"sortnum": 4,
+	"pages": [
+		{
+			"type": "text",
+			"text": "Caplock firearms are more advanced, more expensive, and more water-resistant. That is the power of percussion caps!"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_derringer",
+			"text": "A very tiny weapon; questionable lethality."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_pistol"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_arquebus"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_caliver"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_long_musket"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_musketoon",
+			"text": "A versatile weapon that can fire bird-shot or musket ball."
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:caplock_blunderbuss",
+			"text": "Close-range problem solver! Can fire bird-shot or buck-shot."
+		}
+	]
+}
