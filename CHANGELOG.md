@@ -1,6 +1,10 @@
 ### v1.12.2-2.0.6-51
 
- - Refactor for new mod versioning 
+ - Refactor mod versioning and jar name 
+ - Move to ForgeGradle 5
+ - Backport Patchouli guide book
+ - Add some recipes to guide book
+ - Add Patchouli as mandatory dependency
 
 #### v2.0.5
 
