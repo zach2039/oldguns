@@ -1,3 +1,5 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
 buildscript {
     repositories {
         mavenCentral()
@@ -134,6 +136,17 @@ processResources {
         expand version_replaces
     }
 }
+
+task updateVersion(type:Copy){
+    from('src')
+            {
+                exclude 'mcmod.info'
+            }
+    into 'build/sources/java'
+    filter(ReplaceTokens, tokens: [VERSION: project.version])
+}
+
+compileJava.dependsOn updateVersion
 
 // Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
 String buildVersionString() {

@@ -7,9 +7,8 @@
   "url": "https://www.curseforge.com/minecraft/mc-mods/old-guns-mod",
   "updateUrl": "https://www.zach2039.com/mods/oldguns/update.json",
   "authorList": ["Zach2039"],
-  "credits": "https://www.zach2039.com/mods/oldguns/update.json",
+  "credits": "Contributors, artists, and those who helped test!",
   "logoFile": "oldguns.png",
   "screenshots": [],
-  "useDependencyInformation": true,
   "dependencies": ["forge", "patchouli", "jei"]
 }]

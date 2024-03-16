@@ -28,7 +28,7 @@ import zach2039.oldguns.util.IProxy;
 		name = OldGuns.MODNAME,
 		version = OldGuns.MODVERSION,
 		acceptedMinecraftVersions = "[1.12.2]",
-		dependencies = "required-after:forge@[14.23.5.2859,);required:patchouli@[10-23.6,);optional:jei@[10-23.6,);"
+		dependencies = "required-after:forge@[14.23.5.-,);required:patchouli@[1.0-21.-,);"
 	)
 public class OldGuns
 {
