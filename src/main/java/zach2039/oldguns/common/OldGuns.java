@@ -26,15 +26,13 @@ import zach2039.oldguns.util.IProxy;
 @Mod(
 		modid = OldGuns.MODID,
 		name = OldGuns.MODNAME,
-		version = OldGuns.MODVERSION,
-		acceptedMinecraftVersions = "[1.12.2]",
-		dependencies = "required-after:forge@[14.23.5.-,);required:patchouli@[1.0-21.-,);"
+		dependencies = "required-after:forge@[14.23.5,);required:patchouli@[1.0-21,);",
+		useMetadata = true
 	)
 public class OldGuns
 {
     public static final String MODID = "oldguns";
     public static final String MODNAME = "Old Guns";
-    public static final String MODVERSION = "@VERSION@";
     
     public static Logger LOGGER;
     
