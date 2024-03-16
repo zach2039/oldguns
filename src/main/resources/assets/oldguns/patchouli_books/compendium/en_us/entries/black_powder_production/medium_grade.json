@@ -1,0 +1,18 @@
+{
+	"name": "oldguns.entry.black_powder_production.medium_grade",
+	"category": "oldguns:black_powder_production",
+	"icon": "oldguns:medium_grade_black_powder",
+	"sortnum": 2,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.medium_grade0"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:medium_grade_black_powder",
+			"heading": "oldguns.entry.black_powder_production.medium_grade",
+			"text": "oldguns.page.black_powder_production.medium_grade1"
+		}
+	]
+}

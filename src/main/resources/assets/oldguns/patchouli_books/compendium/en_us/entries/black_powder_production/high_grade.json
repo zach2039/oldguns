@@ -1,0 +1,50 @@
+{
+	"name": "oldguns.entry.black_powder_production.high_grade",
+	"category": "oldguns:black_powder_production",
+	"icon": "oldguns:high_grade_black_powder",
+	"sortnum": 3,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.high_grade0"
+		},
+		{
+			"type": "image",
+			"images": [
+				"oldguns:textures/gui/entries/high_grade_black_powder_cakes_drying.png"
+			],
+			"border": true,
+			"text": "oldguns.page.black_powder_production.high_grade1"
+		},
+		{
+			"type": "multiblock",
+			"multiblock": {
+				"pattern": [
+					[ " P " ],
+					[ " 0 " ],
+					[ "_O_" ]
+				],
+				"mapping": {
+					"P": "minecraft:piston[facing=down]",
+					"0": "oldguns:wet_medium_grade_black_powder_block",
+					"O": "minecraft:obsidian"
+				},
+				"symmetrical": true
+			},
+			"name": "oldguns.lang.black_powder_production.pressing",
+			"enable_visualize": false
+		},
+		{
+			"type": "spotlight",
+			"title": "oldguns.lang.black_powder_production.high_grade_cake",
+			"item": "oldguns:wet_high_grade_black_powder_cake",
+			"text": "oldguns.page.black_powder_production.high_grade3"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:high_grade_black_powder_from_cake",
+			"heading": "oldguns.entry.black_powder_production.high_grade",
+			"text": "oldguns.page.black_powder_production.high_grade4"
+		}
+	]
+}

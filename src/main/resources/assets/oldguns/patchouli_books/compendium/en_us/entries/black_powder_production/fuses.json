@@ -1,0 +1,25 @@
+{
+	"name": "oldguns.entry.black_powder_production.fuses",
+	"category": "oldguns:black_powder_production",
+	"icon": "oldguns:fuse",
+	"sortnum": 6,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.fuses0"
+		},
+		{
+			"type": "spotlight",
+			"item": "oldguns:bark_strands",
+			"text": "oldguns.page.black_powder_production.fuses1"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:match_cord_from_bark_strands"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:fuse"
+		}
+	]
+}

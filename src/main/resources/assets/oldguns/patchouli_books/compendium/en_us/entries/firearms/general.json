@@ -1,0 +1,24 @@
+{
+	"name": "oldguns.entry.firearms.general",
+	"category": "oldguns:firearms",
+	"icon": "oldguns:flintlock_pistol",
+	"sortnum": 1,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.firearms.general0"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.firearms.general1"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.firearms.general2"
+		},
+		{
+			"type": "text",
+			"text": "oldguns.page.firearms.general3"
+		}
+	]
+}

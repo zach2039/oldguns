@@ -1,0 +1,21 @@
+{
+	"name": "oldguns.entry.black_powder_production.sulfur",
+	"category": "oldguns:black_powder_production",
+	"icon": "oldguns:sulfur",
+	"sortnum": 5,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.sulfur0"
+		},
+		{
+			"type": "text",
+			"type": "oldguns:multi_gunsmiths_bench",
+			"recipes": [
+				"oldguns:sulfur_from_netherrack",
+				"oldguns:sulfur_from_quartz"
+			],
+			"text": "oldguns.page.black_powder_production.sulfur1"
+		}
+	]
+}

@@ -1,0 +1,17 @@
+{
+	"name": "oldguns.entry.black_powder_production.low_grade",
+	"category": "oldguns:black_powder_production",
+	"icon": "minecraft:gunpowder",
+	"sortnum": 1,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.low_grade0"
+		},
+		{
+			"type": "entity",
+			"entity": "minecraft:creeper",
+			"text": "oldguns.page.black_powder_production.low_grade1"
+		}
+	]
+}

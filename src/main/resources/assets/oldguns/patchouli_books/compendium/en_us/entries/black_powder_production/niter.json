@@ -1,0 +1,44 @@
+{
+	"name": "oldguns.entry.black_powder_production.niter",
+	"category": "oldguns:black_powder_production",
+	"icon": "oldguns:niter",
+	"sortnum": 4,
+	"pages": [
+		{
+			"type": "text",
+			"text": "oldguns.page.black_powder_production.niter0"
+		},
+		{
+			"type": "multiblock",
+			"multiblock": {
+				"pattern": [
+					[ " C " ],
+					[ "_0_" ]
+				],
+				"mapping": {
+					"C": "oldguns:liquid_niter_cauldron[level=3]",
+					"0": "minecraft:fire"
+				},
+				"symmetrical": true
+			},
+			"name": "oldguns.lang.black_powder_production.crystalization",
+			"enable_visualize": false
+		},
+		{
+			"type": "spotlight",
+			"item": "oldguns:liquid_niter_bottle",
+			"text": "oldguns.page.black_powder_production.niter2"
+		},
+		{
+			"type": "spotlight",
+			"item": "oldguns:nitrate_soil",
+			"text": "oldguns.page.black_powder_production.niter3"
+		},
+		{
+			"type": "oldguns:gunsmiths_bench",
+			"recipe": "oldguns:niter_bedding",
+			"item": "oldguns:niter_bedding",
+			"text": "oldguns.page.black_powder_production.niter4"
+		}
+	]
+}
