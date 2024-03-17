@@ -1,22 +1,21 @@
 package com.zach2039.oldguns.config;
 
-import java.util.Arrays;
-import java.util.List;
-
+import net.neoforged.fml.ModLoadingContext;
+import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.common.ModConfigSpec;
+import net.neoforged.neoforge.common.ModConfigSpec.BooleanValue;
+import net.neoforged.neoforge.common.ModConfigSpec.ConfigValue;
+import net.neoforged.neoforge.common.ModConfigSpec.DoubleValue;
+import net.neoforged.neoforge.common.ModConfigSpec.IntValue;
 import org.apache.commons.lang3.tuple.Pair;
 
-import net.minecraftforge.common.ForgeConfigSpec;
-import net.minecraftforge.common.ForgeConfigSpec.BooleanValue;
-import net.minecraftforge.common.ForgeConfigSpec.ConfigValue;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
-import net.minecraftforge.common.ForgeConfigSpec.IntValue;
-import net.minecraftforge.fml.ModLoadingContext;
-import net.minecraftforge.fml.config.ModConfig;
+import java.util.Arrays;
+import java.util.List;
 
 public class OldGunsConfig {
 	
 	public static class Client {
-		Client(final ForgeConfigSpec.Builder builder) {
+		Client(final ModConfigSpec.Builder builder) {
 			builder.comment("Client-only settings")
 					.push("client");
 
@@ -28,7 +27,7 @@ public class OldGunsConfig {
 		public final BooleanValue printDebugMessages;
 		public final BooleanValue patchRecipeBook;
 		
-		Common(final ForgeConfigSpec.Builder builder) {
+		Common(final ModConfigSpec.Builder builder) {
 			builder.comment("Common config settings")
 					.push("common");
 			
@@ -61,7 +60,7 @@ public class OldGunsConfig {
 		public final MobSettings mobSettings;
 		public final EquipmentSettings equipmentSettings;
 		
-		Server(final ForgeConfigSpec.Builder builder) {
+		Server(final ModConfigSpec.Builder builder) {
 			builder.comment("Server config settings")
 					.push("server");			
 
@@ -106,7 +105,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowMechanismsInLoot;
 		public final BooleanValue allowFirearmsInLoot;
 		
-		LootSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		LootSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowDesignNotesInLoot = builder
@@ -135,7 +134,7 @@ public class OldGunsConfig {
 		public final VanillaAlternativeRecipeSettings vanillaAlternativeRecipeSettings;
 		public final MiscRecipeSettings miscRecipeSettings;
 		
-		RecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		RecipeSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			worldInteractionSettings = new WorldInteractionSettings(
@@ -186,7 +185,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowMatchCordFromBarkStrandsCrafting;
 		public final BooleanValue allowMatchCordFromStringAtNiterCauldronCrafting;
 		
-		MiscRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		MiscRecipeSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowMatchCordFromBarkStrandsCrafting = builder
@@ -204,7 +203,7 @@ public class OldGunsConfig {
 	public static class VanillaAlternativeRecipeSettings {
 		public final BooleanValue allowTntFromBlastingPowderSticksCrafting;
 		
-		VanillaAlternativeRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		VanillaAlternativeRecipeSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowTntFromBlastingPowderSticksCrafting = builder
@@ -218,7 +217,7 @@ public class OldGunsConfig {
 	public static class EquipmentRecipeSettings {
 		public final BooleanValue allowBlastingPowderStickCrafting;
 		
-		EquipmentRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		EquipmentRecipeSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowBlastingPowderStickCrafting = builder
@@ -233,7 +232,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowShearsToStripBark;
 		public final IntValue barkStrandHarvestAmount;
 		
-		WorldInteractionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		WorldInteractionSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowShearsToStripBark = builder
@@ -258,7 +257,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowIronFirearmAmmoCrafting;
 		public final BooleanValue allowLeadFirearmAmmoCrafting;
 		
-		FirearmRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		FirearmRecipeSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowMatchlockWeaponsCrafting = builder
@@ -305,7 +304,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowIronArtilleryAmmoCrafting;
 		public final BooleanValue allowLeadArtilleryAmmoCrafting;
 		
-		ArtilleryRecipeSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		ArtilleryRecipeSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowCongreveRocketStandArtilleryCrafting = builder
@@ -339,7 +338,7 @@ public class OldGunsConfig {
 	public static class DesignNotesSettings {
 		public final ConfigValue<List<? extends String>> designNotesRequiredItems;
 		
-		DesignNotesSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		DesignNotesSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			designNotesRequiredItems = builder
@@ -373,7 +372,7 @@ public class OldGunsConfig {
 		public final CorningProcessSettings corningProcessSettings;
 		public final MercuryProductionSettings mercuryProductionSettings;
 		
-		BlackPowderManufactureSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		BlackPowderManufactureSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			niterProductionSettings = new NiterProductionSettings(
@@ -399,7 +398,7 @@ public class OldGunsConfig {
 		public final DoubleValue wetBlackPowderSunDryingDifficulty;
 		public final DoubleValue blackPowderRainWettingDifficulty;
 		
-		CorningProcessSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		CorningProcessSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			wetBlackPowderSunDryingDifficulty = builder
@@ -430,7 +429,7 @@ public class OldGunsConfig {
 		public final ConfigValue<List<? extends String>> lowRefuseAnimals;
 		public final ConfigValue<List<? extends String>> highRefuseAnimals;
 		
-		NiterProductionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		NiterProductionSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			niterCrystallizationAmountMin = builder
@@ -493,7 +492,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowMercuryFromGoldAtNiterCauldronCrafting;
 		public final BooleanValue allowMercuryFromRedstoneAtNiterCauldronCrafting;
 		
-		MercuryProductionSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		MercuryProductionSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowMercuryFromGoldAtNiterCauldronCrafting = builder
@@ -516,7 +515,7 @@ public class OldGunsConfig {
 		public final FlintlockSettings flintlockSettings;
 		public final CaplockSettings caplockSettings;
 		
-		FirearmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		FirearmSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			hugeFirearmDebuffs = builder
@@ -587,7 +586,7 @@ public class OldGunsConfig {
 		public final FirearmAmmoAttributes medium_lead_birdshot;
 		public final FirearmAmmoAttributes large_lead_birdshot;
 		
-		FirearmAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		FirearmAmmoSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowArmorBypass = builder
@@ -926,7 +925,7 @@ public class OldGunsConfig {
 		public final FirearmAttributes matchlock_blunderbuss_pistol;
 		public final FirearmAttributes matchlock_blunderbuss;
 		
-		MatchlockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		MatchlockSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Matchlock
@@ -1059,7 +1058,7 @@ public class OldGunsConfig {
 		
 		public final FirearmAttributes wheellock_hand_mortar;
 		
-		WheellockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		WheellockSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Wheellock
@@ -1217,7 +1216,7 @@ public class OldGunsConfig {
 		public final FirearmAttributes flintlock_blunderbuss;
 		public final FirearmAttributes flintlock_doublebarrel_blunderbuss;
 		
-		FlintlockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		FlintlockSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Flintlock
@@ -1398,7 +1397,7 @@ public class OldGunsConfig {
 		public final FirearmAttributes caplock_blunderbuss;
 		public final FirearmAttributes caplock_doublebarrel_blunderbuss;
 		
-		CaplockSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		CaplockSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			// Caplock
@@ -1559,7 +1558,7 @@ public class OldGunsConfig {
 		public final DoubleValue shotDeviationModifier;
 		public final DoubleValue projectileSpeed;
 		
-		FirearmAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+		FirearmAttributes(final ModConfigSpec.Builder builder, final String comment, final String path,
 						  final int defaultDurability, final float defaultProjectileSpeed,
 						  final float defaultEffectiveRangeModifier, final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier,
 						  final int defaultReloadTicks) {
@@ -1602,7 +1601,7 @@ public class OldGunsConfig {
 		public final DoubleValue projectileDeviationModifier;
 		public final DoubleValue projectileArmorBypassPercentage;
 		
-		FirearmAmmoAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+		FirearmAmmoAttributes(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final int defaultMaxStackSize, final int defaultProjectileCount, final float defaultProjectileDamage,
 				final float defaultProjectileSize, final float defaultProjectileEffectiveRange,
 				final float defaultProjectileDeviationModifier, final float deafultProjectileArmorBypassPercentage) {
@@ -1647,7 +1646,7 @@ public class OldGunsConfig {
 		public final RocketArtilleryAttributes congreve_rocket_stand;
 		
 		
-		ArtillerySettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		ArtillerySettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			artilleryAmmoSettings = new ArtilleryAmmoSettings(
@@ -1689,7 +1688,7 @@ public class OldGunsConfig {
 	public static class RocketArtilleryAttributes {
 		public final DoubleValue rocketDeviation;
 		
-		RocketArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+		RocketArtilleryAttributes(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final float defaultRocketDeviation) {
 			builder.comment(comment).push(path);
 			
@@ -1707,7 +1706,7 @@ public class OldGunsConfig {
 		public final DoubleValue projectileDeviation;
 		public final DoubleValue projectileSpeed;
 		
-		CannonArtilleryAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+		CannonArtilleryAttributes(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final float defaultProjectileSpeed, final float defaultEffectiveRangeModifier, 
 				final float defaultShotDeviaitionModifier, final float defaultShotDamageModifier) {
 			builder.comment(comment).push(path);
@@ -1748,7 +1747,7 @@ public class OldGunsConfig {
 		public final ArtilleryAmmoAttributes medium_iron_canister_shot;
 		public final ArtilleryAmmoAttributes large_iron_canister_shot;
 		
-		ArtilleryAmmoSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		ArtilleryAmmoSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowArmorBypass = builder
@@ -1966,7 +1965,7 @@ public class OldGunsConfig {
 		public final IntValue effectTicks;
 		public final DoubleValue effectPotency;
 		
-		ArtilleryAmmoAttributes(final ForgeConfigSpec.Builder builder, final String comment, final String path, 
+		ArtilleryAmmoAttributes(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final int defaultMaxStackSize, final int defaultProjectileCount, final float defaultProjectileDamage,
 				final float defaultProjectileSize, final float defaultProjectileEffectiveRange, 
 				final float defaultProjectileDeviationModifier, final float defaultProjectileArmorBypassPercentage, 
@@ -2021,7 +2020,7 @@ public class OldGunsConfig {
 		public final IntValue firearmMobShotTimeHard;
 		public final DoubleValue firearmMobBaseProjectileDeviation;
 		
-		MobSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		MobSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			mobFirearmEquipChance = builder
@@ -2060,7 +2059,7 @@ public class OldGunsConfig {
 		public final ConfigValue<List<String>> validBiomeCategories;
 		public final ConfigValue<List<String>> validBiomes;
 		
-		GenericMobSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+		GenericMobSettings(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final boolean defaultCanSpawn, final int defaultSpawnWeight, final int defaultMinCount, final int defaultMaxCount,
 				final List<String> defaultValidBiomeCategories, final List<String> defaultValidBiomes) {
 			builder.comment(comment).push(path);
@@ -2098,7 +2097,7 @@ public class OldGunsConfig {
 		public final MusketeerHatSettings musketeerHatSettings;
 		public final HorsemansPotHelmSettings horsemansPotHelmSettings;
 		
-		EquipmentSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path) {
+		EquipmentSettings(final ModConfigSpec.Builder builder, final String comment, final String path) {
 			builder.comment(comment).push(path);
 			
 			allowEquipmentEffects = builder
@@ -2123,7 +2122,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowEffects;
 		public final DoubleValue percentArmorBypassIncrease;
 		
-		MusketeerHatSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+		MusketeerHatSettings(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final boolean defaultAllowEffects, final double defaultPercentArmorBypassIncrease) {
 			builder.comment(comment).push(path);
 			
@@ -2143,7 +2142,7 @@ public class OldGunsConfig {
 		public final BooleanValue allowEffects;
 		public final DoubleValue percentMountedFirearmAccuracyIncrease;
 		
-		HorsemansPotHelmSettings(final ForgeConfigSpec.Builder builder, final String comment, final String path,
+		HorsemansPotHelmSettings(final ModConfigSpec.Builder builder, final String comment, final String path,
 				final boolean defaultAllowEffects, final double defaultPercentMountedFirearmAccuracyIncrease) {
 			builder.comment(comment).push(path);
 			
@@ -2159,30 +2158,30 @@ public class OldGunsConfig {
 		}
 	}
 	
-	private static final ForgeConfigSpec serverSpec;
+	private static final ModConfigSpec serverSpec;
 	public static final Server SERVER;
 
 	static {
-		final Pair<Server, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Server::new);
+		final Pair<Server, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Server::new);
 		serverSpec = specPair.getRight();
 		SERVER = specPair.getLeft();
 	}
 	
-	private static final ForgeConfigSpec commonSpec;
+	private static final ModConfigSpec commonSpec;
 	public static final Common COMMON;
 
 	static {
-		final Pair<Common, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Common::new);
+		final Pair<Common, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Common::new);
 		commonSpec = specPair.getRight();
 		COMMON = specPair.getLeft();
 	}
 
 
-	private static final ForgeConfigSpec clientSpec;
+	private static final ModConfigSpec clientSpec;
 	public static final Client CLIENT;
 
 	static {
-		final Pair<Client, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(Client::new);
+		final Pair<Client, ModConfigSpec> specPair = new ModConfigSpec.Builder().configure(Client::new);
 		clientSpec = specPair.getRight();
 		CLIENT = specPair.getLeft();
 	}

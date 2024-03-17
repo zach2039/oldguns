@@ -2,7 +2,6 @@ package com.zach2039.oldguns.data.crafting.recipe;
 
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessGunsmithsBenchHacksawRecipe;
-
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.ItemLike;
 

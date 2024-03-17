@@ -6,12 +6,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.Collection;
 import java.util.function.Supplier;
@@ -28,7 +28,7 @@ public class ModCreativeTabs {
 
     private static boolean isInitialized = false;
 
-    public static final RegistryObject<CreativeModeTab>  OLD_GUNS_CREATIVE_MODE_TAB = CREATIVE_MODE_TABS.register("tab", () -> {
+    public static final DeferredHolder<CreativeModeTab, ? extends CreativeModeTab> OLD_GUNS_CREATIVE_MODE_TAB = CREATIVE_MODE_TABS.register("tab", () -> {
         final Supplier<ItemStack> firearm = () -> new ItemStack(ModItems.FLINTLOCK_PISTOL.get());
 
         return CreativeModeTab.builder()
@@ -60,9 +60,9 @@ public class ModCreativeTabs {
         isInitialized = true;
     }
 
-    private static void add(final CreativeModeTab.Output output, final Collection<RegistryObject<Item>> items) {
+    private static void add(final CreativeModeTab.Output output, final Collection<DeferredHolder<Item, ? extends Item>> items) {
         items.stream()
-                .map(RegistryObject::get)
+                .map(DeferredHolder::get)
                 .forEach(output::accept);
     }
 

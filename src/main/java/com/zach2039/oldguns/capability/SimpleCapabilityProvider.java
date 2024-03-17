@@ -1,13 +1,12 @@
 package com.zach2039.oldguns.capability;
 
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
-
 import net.minecraft.core.Direction;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
+import net.neoforged.neoforge.common.capabilities.Capability;
+import net.neoforged.neoforge.common.capabilities.ICapabilityProvider;
+import net.neoforged.neoforge.common.util.LazyOptional;
+
+import javax.annotation.Nullable;
 
 /**
  * A simple implementation of {@link ICapabilityProvider} that supports a single {@link Capability} handler instance.

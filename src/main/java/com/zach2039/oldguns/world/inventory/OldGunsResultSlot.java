@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.world.inventory;
 
 import com.zach2039.oldguns.init.ModRecipeTypes;
-
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;

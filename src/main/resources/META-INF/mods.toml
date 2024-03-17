@@ -16,9 +16,9 @@ description='''
 Antique weapons for that colonial feel.
 '''
 [[dependencies.oldguns]]
-    modId="forge" #mandatory
+    modId="neoforge" #mandatory
     mandatory=true #mandatory
-    versionRange="[47,)" #mandatory
+    versionRange="[20,)" #mandatory
     ordering="NONE"
     side="BOTH"
 [[dependencies.oldguns]]

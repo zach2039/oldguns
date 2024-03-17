@@ -1,10 +1,8 @@
 package com.zach2039.oldguns.client.gui.inventory;
 
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
-
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;

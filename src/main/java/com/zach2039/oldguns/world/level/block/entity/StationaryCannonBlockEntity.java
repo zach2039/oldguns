@@ -1,25 +1,18 @@
 package com.zach2039.oldguns.world.level.block.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
-import com.zach2039.oldguns.api.artillery.AmmoFiringState;
-import com.zach2039.oldguns.api.artillery.Artillery;
-import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
-import com.zach2039.oldguns.api.artillery.CannonArtillery;
+import com.zach2039.oldguns.api.artillery.*;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
+import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -37,7 +30,12 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.network.PacketDistributor;
+import net.neoforged.neoforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlockEntity implements Artillery, CannonArtillery {
 
@@ -58,6 +56,7 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		
 		ListTag ammoChargesList = new ListTag();
 		this.ammoCharges.forEach((i) -> {
+			INBTSerializable<ItemStack>
 			ammoChargesList.add(i.serializeNBT());
 		});
 		tag.put("ammoCharges", ammoChargesList);
@@ -234,9 +233,9 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		}
 		
 		if (!level.isClientSide()) {
-			OldGuns.NETWORK.send(
-	                PacketDistributor.TRACKING_CHUNK.with(() -> this.level.getChunkAt(this.worldPosition)),
-	                new ArtilleryBlockEntityUpdateMessage(this.worldPosition, this.writeToTag(new CompoundTag())));
+			PacketDistributor.TRACKING_CHUNK.with(this.level.getChunkAt(this.worldPosition)).send(
+					new ArtilleryBlockEntityUpdateMessage.Data(this.worldPosition, this.writeToTag(new CompoundTag()))
+			);
 		}
 		
 		return result;

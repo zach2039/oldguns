@@ -3,10 +3,9 @@ package com.zach2039.oldguns.init;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.fluid.BasicFluidType;
 import com.zach2039.oldguns.fluid.LiquidNiterFluid;
-import com.zach2039.oldguns.fluid.LiquidNiterFluidBlock;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
 import com.zach2039.oldguns.fluid.group.StandardFluidGroup;
-
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Item;
@@ -15,12 +14,12 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraftforge.common.SoundActions;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.SoundActions;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.Collection;
 
@@ -33,10 +32,10 @@ import java.util.Collection;
  * @author zach2039
  */
 public class ModFluids {
-	private static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(ForgeRegistries.Keys.FLUID_TYPES, OldGuns.MODID);
-	private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(ForgeRegistries.FLUIDS, OldGuns.MODID);
-	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, OldGuns.MODID);
-	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, OldGuns.MODID);
+	private static final DeferredRegister<FluidType> FLUID_TYPES = DeferredRegister.create(NeoForgeRegistries.FLUID_TYPES, OldGuns.MODID);
+	private static final DeferredRegister<Fluid> FLUIDS = DeferredRegister.create(Registries.FLUID, OldGuns.MODID);
+	private static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, OldGuns.MODID);
+	private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(Registries.ITEM, OldGuns.MODID);
 
 	private static boolean isInitialized = false;
 
@@ -83,7 +82,7 @@ public class ModFluids {
 		return new StandardFluidGroup.Builder(name, FLUID_TYPES, FLUIDS, BLOCKS, ITEMS);
 	}
 
-	static Collection<RegistryObject<Item>> orderedItems() {
+	static Collection<DeferredHolder<Item, ? extends Item>> orderedItems() {
 		return ITEMS.getEntries();
 	}
 }

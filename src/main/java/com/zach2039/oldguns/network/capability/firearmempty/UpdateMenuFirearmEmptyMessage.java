@@ -1,16 +1,14 @@
 package com.zach2039.oldguns.network.capability.firearmempty;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.network.capability.UpdateMenuCapabilityMessage;
-
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.network.NetworkEvent;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

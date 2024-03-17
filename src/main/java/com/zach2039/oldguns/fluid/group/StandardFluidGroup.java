@@ -1,12 +1,5 @@
 package com.zach2039.oldguns.fluid.group;
 
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
-import com.google.common.base.Preconditions;
-
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -14,10 +7,13 @@ import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * A group consisting of a fluid type, a still and flowing fluid, a fluid block and a bucket item.
@@ -30,7 +26,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Choonster
  */
 public class StandardFluidGroup extends FluidGroup<FluidType, FlowingFluid, FlowingFluid, LiquidBlock, Item> {
-	private StandardFluidGroup(final RegistryObject<FluidType> type, final RegistryObject<FlowingFluid> still, final RegistryObject<FlowingFluid> flowing, final RegistryObject<LiquidBlock> block, final RegistryObject<Item> bucket) {
+	private StandardFluidGroup(final DeferredHolder<FluidType, ? extends FluidType> type, final DeferredHolder<Fluid, ? extends FlowingFluid> still, final DeferredHolder<Fluid, ? extends FlowingFluid> flowing, final DeferredHolder<LiquidBlock, ? extends LiquidBlock> block, final DeferredHolder<Item, ? extends Item> bucket) {
 		super(type, still, flowing, block, bucket);
 	}
 
@@ -39,8 +35,8 @@ public class StandardFluidGroup extends FluidGroup<FluidType, FlowingFluid, Flow
 		public Builder(final String name, final DeferredRegister<FluidType> fluidTypes, final DeferredRegister<Fluid> fluids, final DeferredRegister<Block> blocks, final DeferredRegister<Item> items) {
 			super(name, fluidTypes, fluids, blocks, items);
 
-			stillFactory = ForgeFlowingFluid.Source::new;
-			flowingFactory = ForgeFlowingFluid.Flowing::new;
+			stillFactory = BaseFlowingFluid.Source::new;
+			flowingFactory = BaseFlowingFluid.Flowing::new;
 
 			blockFactory = LiquidBlock::new;
 
@@ -73,7 +69,7 @@ public class StandardFluidGroup extends FluidGroup<FluidType, FlowingFluid, Flow
 		}
 
 		@Override
-		public Builder propertiesCustomiser(final Consumer<ForgeFlowingFluid.Properties> propertiesCustomiser) {
+		public Builder propertiesCustomiser(final Consumer<BaseFlowingFluid.Properties> propertiesCustomiser) {
 			return (Builder) super.propertiesCustomiser(propertiesCustomiser);
 		}
 

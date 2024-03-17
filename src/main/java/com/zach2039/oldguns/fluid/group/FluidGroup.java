@@ -1,13 +1,6 @@
 package com.zach2039.oldguns.fluid.group;
 
-import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
-
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
@@ -16,10 +9,15 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraftforge.fluids.FluidType;
-import net.minecraftforge.fluids.ForgeFlowingFluid;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.fluids.BaseFlowingFluid;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import javax.annotation.Nullable;
+import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 /**
  * A group consisting of a fluid type, a still and flowing fluid, a fluid block and a bucket item.
@@ -27,13 +25,15 @@ import net.minecraftforge.registries.RegistryObject;
  * @author Choonster
  */
 public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING extends Fluid, BLOCK extends LiquidBlock, BUCKET extends Item> {
-	private final RegistryObject<TYPE> type;
-	private final RegistryObject<STILL> still;
-	private final RegistryObject<FLOWING> flowing;
-	private final RegistryObject<BLOCK> block;
-	private final RegistryObject<BUCKET> bucket;
+	private final DeferredHolder<FluidType, ? extends TYPE> type;
+	private final DeferredHolder<Fluid, ? extends STILL> still;
+	private final DeferredHolder<Fluid, ? extends FLOWING> flowing;
+	private final DeferredHolder<LiquidBlock, ? extends BLOCK> block;
+	private final DeferredHolder<Item, ? extends BUCKET> bucket;
 
-	protected FluidGroup(final RegistryObject<TYPE> type, final RegistryObject<STILL> still, final RegistryObject<FLOWING> flowing, final RegistryObject<BLOCK> block, final RegistryObject<BUCKET> bucket) {
+	protected FluidGroup(final DeferredHolder<FluidType, ? extends TYPE> type, final DeferredHolder<Fluid, ? extends STILL> still,
+						 final DeferredHolder<Fluid, ? extends FLOWING> flowing, final DeferredHolder<LiquidBlock, ? extends BLOCK> block,
+						 final DeferredHolder<Item, ? extends BUCKET> bucket) {
 		this.type = type;
 		this.still = still;
 		this.flowing = flowing;
@@ -46,7 +46,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 	 *
 	 * @return THe fluid type.
 	 */
-	public RegistryObject<TYPE> getType() {
+	public DeferredHolder<FluidType, ? extends TYPE> getType() {
 		return type;
 	}
 
@@ -55,7 +55,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 	 *
 	 * @return The still fluid.
 	 */
-	public RegistryObject<STILL> getStill() {
+	public DeferredHolder<Fluid, ? extends STILL> getStill() {
 		return still;
 	}
 
@@ -64,7 +64,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 	 *
 	 * @return The flowing fluid.
 	 */
-	public RegistryObject<FLOWING> getFlowing() {
+	public DeferredHolder<Fluid, ? extends FLOWING> getFlowing() {
 		return flowing;
 	}
 
@@ -73,7 +73,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 	 *
 	 * @return The fluid block.
 	 */
-	public RegistryObject<BLOCK> getBlock() {
+	public DeferredHolder<LiquidBlock, ? extends BLOCK> getBlock() {
 		return block;
 	}
 
@@ -82,14 +82,14 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 	 *
 	 * @return The bucket item.
 	 */
-	public RegistryObject<BUCKET> getBucket() {
+	public DeferredHolder<Item, ? extends BUCKET> getBucket() {
 		return bucket;
 	}
 
 	public static class Builder<TYPE extends FluidType, STILL extends Fluid, FLOWING extends Fluid, BLOCK extends LiquidBlock, BUCKET extends Item> {
 		protected final DeferredRegister<FluidType> fluidTypes;
 		protected final DeferredRegister<Fluid> fluids;
-		protected final DeferredRegister<Block> blocks;
+		protected final DeferredRegister<LiquidBlock> blocks;
 		protected final DeferredRegister<Item> items;
 
 		protected final String name;
@@ -110,15 +110,15 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 		protected IBucketFactory<STILL, BUCKET> bucketFactory;
 
 		@Nullable
-		protected Consumer<ForgeFlowingFluid.Properties> propertiesCustomiser;
+		protected Consumer<BaseFlowingFluid.Properties> propertiesCustomiser;
 
 		@Nullable
 		protected Consumer<BlockBehaviour.Properties> blockPropertiesCustomiser;
 
 		@Nullable
-		protected ForgeFlowingFluid.Properties properties;
+		protected BaseFlowingFluid.Properties properties;
 
-		public Builder(final String name, final DeferredRegister<FluidType> fluidTypes, final DeferredRegister<Fluid> fluids, final DeferredRegister<Block> blocks, final DeferredRegister<Item> items) {
+		public Builder(final String name, final DeferredRegister<FluidType> fluidTypes, final DeferredRegister<Fluid> fluids, final DeferredRegister<LiquidBlock> blocks, final DeferredRegister<Item> items) {
 			this.name = name;
 			this.fluidTypes = fluidTypes;
 			this.fluids = fluids;
@@ -156,7 +156,7 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 			return this;
 		}
 
-		public Builder<TYPE, STILL, FLOWING, BLOCK, BUCKET> propertiesCustomiser(final Consumer<ForgeFlowingFluid.Properties> propertiesCustomiser) {
+		public Builder<TYPE, STILL, FLOWING, BLOCK, BUCKET> propertiesCustomiser(final Consumer<BaseFlowingFluid.Properties> propertiesCustomiser) {
 			Preconditions.checkNotNull(propertiesCustomiser, "propertiesCustomiser");
 			this.propertiesCustomiser = propertiesCustomiser;
 			return this;
@@ -179,10 +179,10 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 			Preconditions.checkState(blockFactory != null, "Block Factory not provided");
 			Preconditions.checkState(bucketFactory != null, "Bucket Factory not provided");
 
-			final RegistryObject<TYPE> type = fluidTypes.register(name, typeFactory);
+			final DeferredHolder<FluidType, ? extends TYPE> type = fluidTypes.register(name, typeFactory);
 
-			final RegistryObject<STILL> still = fluids.register(name, () -> stillFactory.create(Objects.requireNonNull(properties)));
-			final RegistryObject<FLOWING> flowing = fluids.register("flowing_" + name, () -> flowingFactory.create(Objects.requireNonNull(properties)));
+			final DeferredHolder<Fluid, ? extends STILL> still = fluids.register(name, () -> stillFactory.create(Objects.requireNonNull(properties)));
+			final DeferredHolder<Fluid, ? extends FLOWING> flowing = fluids.register("flowing_" + name, () -> flowingFactory.create(Objects.requireNonNull(properties)));
 
 			final var blockProperties = defaultBlockProperties();
 
@@ -190,10 +190,10 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 				blockPropertiesCustomiser.accept(blockProperties);
 			}
 
-			final RegistryObject<BLOCK> block = blocks.register(name, () -> blockFactory.create(still, blockProperties));
-			final RegistryObject<BUCKET> bucket = items.register(name + "_bucket", () -> bucketFactory.create(still));
+			final DeferredHolder<LiquidBlock, ? extends BLOCK> block = blocks.register(name, () -> blockFactory.create(still, blockProperties));
+			final DeferredHolder<Item, ? extends BUCKET> bucket = items.register(name + "_bucket", () -> bucketFactory.create(still));
 
-			properties = new ForgeFlowingFluid.Properties(type, still, flowing)
+			properties = new BaseFlowingFluid.Properties(type, still, flowing)
 					.block(block)
 					.bucket(bucket);
 
@@ -209,7 +209,9 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 				GROUP extends FluidGroup<TYPE, STILL, FLOWING, BLOCK, BUCKET>,
 				TYPE extends FluidType, STILL extends Fluid, FLOWING extends Fluid, BLOCK extends LiquidBlock, BUCKET extends Item
 				> {
-			GROUP create(RegistryObject<TYPE> type, RegistryObject<STILL> still, RegistryObject<FLOWING> flowing, RegistryObject<BLOCK> block, RegistryObject<BUCKET> bucket);
+			GROUP create(DeferredHolder<FluidType, ? extends TYPE> type, DeferredHolder<Fluid, ? extends STILL> still,
+						 DeferredHolder<Fluid, ? extends FLOWING> flowing, DeferredHolder<LiquidBlock, ? extends BLOCK> block,
+						 DeferredHolder<Item, ? extends BUCKET> bucket);
 		}
 	}
 
@@ -232,11 +234,11 @@ public class FluidGroup<TYPE extends FluidType, STILL extends Fluid, FLOWING ext
 
 	@FunctionalInterface
 	public interface IFluidFactory<FLUID extends Fluid> {
-		FLUID create(ForgeFlowingFluid.Properties properties);
+		FLUID create(BaseFlowingFluid.Properties properties);
 	}
 
 	@FunctionalInterface
-	public interface IBlockFactory<STILL extends Fluid, BLOCK extends Block> {
+	public interface IBlockFactory<STILL extends Fluid, BLOCK extends LiquidBlock> {
 		BLOCK create(Supplier<? extends STILL> fluid, BlockBehaviour.Properties properties);
 	}
 

@@ -1,12 +1,7 @@
 package com.zach2039.oldguns.fluid;
 
-import java.util.Optional;
-
-import javax.annotation.Nonnull;
-
 import com.google.common.collect.ImmutableList;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -24,6 +19,9 @@ import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.MapColor;
+
+import javax.annotation.Nonnull;
+import java.util.Optional;
 
 public class LiquidNiterFluidBlock extends LiquidBlock {
 

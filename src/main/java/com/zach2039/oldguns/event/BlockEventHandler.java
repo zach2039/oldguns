@@ -2,7 +2,6 @@ package com.zach2039.oldguns.event;
 
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModBlocks;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -18,7 +17,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.level.PistonEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = OldGuns.MODID)
 public class BlockEventHandler {

@@ -1,19 +1,14 @@
 package com.zach2039.oldguns.data;
 
-import javax.annotation.Nullable;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModTags;
-
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.BlockTagsProvider;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
+import javax.annotation.Nullable;
 import java.util.concurrent.CompletableFuture;
 
 /**

@@ -1,26 +1,23 @@
 package com.zach2039.oldguns.init;
 
-import java.util.Optional;
-import java.util.function.Supplier;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
 import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
 import com.zach2039.oldguns.world.item.crafting.recipe.ShapelessVanillaMuzzleloaderPowderHornReloadRecipe;
-
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.Container;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.Optional;
+import java.util.function.Supplier;
 
 public class ModRecipeTypes {
-	public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, OldGuns.MODID);
+	public static final DeferredRegister<RecipeType<?>> RECIPES = DeferredRegister.create(Registries.RECIPE_TYPE, OldGuns.MODID);
 	
 	public static final TypeWithClass<GunsmithsBenchRecipe> GUNSMITHS_BENCH = register("gunsmiths_bench", GunsmithsBenchRecipe.class);
 	
@@ -50,7 +47,7 @@ public class ModRecipeTypes {
 	}
 	
 	static <T extends Recipe<?>> TypeWithClass<T> register(String name, Class<T> type) {
-		RegistryObject<RecipeType<T>> regObj = RECIPES.register(name, () -> new RecipeType<T>() {});
+		DeferredHolder<RecipeType<?>, ? extends RecipeType<T>> regObj = RECIPES.register(name, () -> new RecipeType<T>() {});
 		return new TypeWithClass<>(regObj, type);
 	}
 
@@ -58,7 +55,7 @@ public class ModRecipeTypes {
 		return recipe.matches(c, level) ? Optional.of((T)recipe) : Optional.empty();
 	}
 	
-	public record TypeWithClass<T extends Recipe<?>>(RegistryObject<RecipeType<T>> type, Class<T> recipeClass) implements Supplier<RecipeType<T>> {
+	public record TypeWithClass<T extends Recipe<?>>(DeferredHolder<RecipeType<?>, ? extends RecipeType<T>> type, Class<T> recipeClass) implements Supplier<RecipeType<T>> {
 		public RecipeType<T> get() {
 			return type.get();
 		}

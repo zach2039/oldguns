@@ -5,10 +5,10 @@
 	"refmap": "oldguns.refmap.json",
 	"minVersion": "0.8",
 	"mixins": [
-		"accessors.AbstractSkeletonAccess",
-		"accessors.RangedBowAttackGoalAccess",
-		"coremods.AbstractSkeletonMixin",
-		"coremods.MonsterMixin",
-		"coremods.LivingEntityMixin"
-	]
+      "accessors.AbstractSkeletonAccess",
+      "accessors.RangedBowAttackGoalAccess",
+      "coremods.AbstractSkeletonMixin",
+      "coremods.LivingEntityMixin",
+      "coremods.MonsterMixin"
+    ]
 }

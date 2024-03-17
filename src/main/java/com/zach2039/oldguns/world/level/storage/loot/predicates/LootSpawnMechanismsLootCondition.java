@@ -1,19 +1,17 @@
 package com.zach2039.oldguns.world.level.storage.loot.predicates;
 
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonSerializationContext;
+import com.mojang.serialization.Codec;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModLootConditionTypes;
-
 import net.minecraft.world.level.storage.loot.LootContext;
-import net.minecraft.world.level.storage.loot.Serializer;
 import net.minecraft.world.level.storage.loot.predicates.LootItemCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemConditionType;
 
 public class LootSpawnMechanismsLootCondition implements LootItemCondition {
 	private static final LootSpawnMechanismsLootCondition INSTANCE = new LootSpawnMechanismsLootCondition();
-	
+
+	public static final Codec<LootSpawnMechanismsLootCondition> CODEC = Codec.unit(INSTANCE);
+
 	@Override
 	public LootItemConditionType getType() {
 		return ModLootConditionTypes.ALLOW_MECHANISMS_LOOT.get();
@@ -26,15 +24,5 @@ public class LootSpawnMechanismsLootCondition implements LootItemCondition {
 
 	public static LootItemCondition.Builder builder() {
 		return () -> INSTANCE;
-	}
-
-	public static class ConditionSerializer implements Serializer<LootSpawnMechanismsLootCondition> {
-		@Override
-		public void serialize(final JsonObject object, final LootSpawnMechanismsLootCondition instance, final JsonSerializationContext context) {}
-
-		@Override	
-		public LootSpawnMechanismsLootCondition deserialize(final JsonObject object, final JsonDeserializationContext context) {
-			return LootSpawnMechanismsLootCondition.INSTANCE;
-		}
 	}
 }

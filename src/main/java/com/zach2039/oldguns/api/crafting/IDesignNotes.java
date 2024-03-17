@@ -2,11 +2,10 @@ package com.zach2039.oldguns.api.crafting;
 
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModItems;
-
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 
 public interface IDesignNotes {
 	static String getDesign(ItemStack stack) {
@@ -17,12 +16,12 @@ public interface IDesignNotes {
 	}
 	
 	static ItemStack setDesignTagOnItem(ItemStack notes, Item item) {
-		notes.getOrCreateTag().putString("item", ForgeRegistries.ITEMS.getKey(item).toString());
+		notes.getOrCreateTag().putString("item", BuiltInRegistries.ITEM.getKey(item).toString());
 		return notes.copy();
 	}
 	
 	static CompoundTag setDesignOnTag(CompoundTag tag, Item item) {
-		tag.putString("item", ForgeRegistries.ITEMS.getKey(item).toString());
+		tag.putString("item", BuiltInRegistries.ITEM.getKey(item).toString());
 		return tag;
 	}
 	
@@ -32,7 +31,7 @@ public interface IDesignNotes {
 	}	
 	
 	static boolean hasDesignNotes(Item item) {
-		return OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(ForgeRegistries.ITEMS.getKey(item.asItem()).toString());
+		return OldGunsConfig.SERVER.recipeSettings.designNotesSettings.designNotesRequiredItems.get().contains(BuiltInRegistries.ITEM.getKey(item.asItem()).toString());
 	}
 	
 	static ItemStack getDesignNotesForItem(Item item) {

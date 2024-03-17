@@ -1,14 +1,10 @@
 package com.zach2039.oldguns.world.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.artillery.AmmoFiringState;
+import com.zach2039.oldguns.api.artillery.Artillery;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.init.ModEntities;
-import com.zach2039.oldguns.api.artillery.Artillery;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -23,9 +19,6 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.damagesource.DamageSources;
-import net.minecraft.world.damagesource.DamageType;
-import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.EntityType;
@@ -43,6 +36,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class MoveableArtillery extends Entity implements Artillery {
 

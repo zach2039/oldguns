@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.world.inventory;
 
 import com.zach2039.oldguns.world.item.tools.DesignNotesItem;
-
 import net.minecraft.world.Container;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;

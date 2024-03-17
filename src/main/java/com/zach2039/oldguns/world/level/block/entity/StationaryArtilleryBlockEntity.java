@@ -1,13 +1,9 @@
 package com.zach2039.oldguns.world.level.block.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.artillery.Artillery;
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.world.level.block.MediumNavalCannonBlock;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
@@ -22,6 +18,9 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class StationaryArtilleryBlockEntity extends BlockEntity implements Artillery {
 

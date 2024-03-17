@@ -1,23 +1,20 @@
 package com.zach2039.oldguns.world.item.crafting.cauldron;
 
-import javax.annotation.Nonnull;
-
-import net.minecraft.core.RegistryAccess;
-import net.minecraft.world.item.crafting.CraftingBookCategory;
-import org.jetbrains.annotations.NotNull;
-
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.init.ModCrafting;
-
+import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.CustomRecipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidStack;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
 
 public class CauldronRecipe extends CustomRecipe implements ICauldronRecipe {
 	

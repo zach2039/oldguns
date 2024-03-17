@@ -2,7 +2,6 @@ package com.zach2039.oldguns.world.item.artillery;
 
 import com.zach2039.oldguns.api.artillery.ArtilleryType;
 import com.zach2039.oldguns.world.entity.MoveableArtillery;
-
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;

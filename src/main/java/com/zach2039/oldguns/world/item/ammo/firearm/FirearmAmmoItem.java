@@ -1,8 +1,5 @@
 package com.zach2039.oldguns.world.item.ammo.firearm;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.AmmoTypes;
@@ -12,12 +9,14 @@ import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.init.ModAttributes;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.equipment.MusketeerHatItem;
-
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirearmAmmoItem extends Item implements Ammo, FirearmAmmo {
 	

@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.client.event;
 
 import com.zach2039.oldguns.init.ModFluids;
-
 import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;
@@ -10,7 +9,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.neoforged.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Some taken from <a href="https://github.com/Creators-of-Create/Create">Create</a> on Github

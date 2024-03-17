@@ -4,48 +4,31 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
 import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 import com.zach2039.oldguns.network.FirearmEffectMessage;
-import com.zach2039.oldguns.network.capability.firearmempty.UpdateMenuFirearmEmptyMessage;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
+import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 
-import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.network.NetworkRegistry;
-import net.minecraftforge.network.simple.SimpleChannel;
-
+@Mod.EventBusSubscriber(modid = OldGuns.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModNetwork {
-	public static final ResourceLocation CHANNEL_NAME = new ResourceLocation(OldGuns.MODID, "network");
-	
-	public static final String NETWORK_VERSION = new ResourceLocation(OldGuns.MODID, "2").toString();
-	
-	public static SimpleChannel getNetworkChannel() {
-		final SimpleChannel channel = NetworkRegistry.ChannelBuilder.named(CHANNEL_NAME)
-				.clientAcceptedVersions(version -> true)
-				.serverAcceptedVersions(version -> true)
-				.networkProtocolVersion(() -> NETWORK_VERSION)
-				.simpleChannel();
-		
-		channel.messageBuilder(FirearmEffectMessage.class, 1)
-				.decoder(FirearmEffectMessage::decode)
-				.encoder(FirearmEffectMessage::encode)
-				.consumerMainThread(FirearmEffectMessage::handle)
-				.add();
-		
-		channel.messageBuilder(ArtilleryEffectMessage.class, 2)
-				.decoder(ArtilleryEffectMessage::decode)
-				.encoder(ArtilleryEffectMessage::encode)
-				.consumerMainThread(ArtilleryEffectMessage::handle)
-				.add();
-		
-		channel.messageBuilder(UpdateMenuFirearmEmptyMessage.class, 3)
-				.decoder(UpdateMenuFirearmEmptyMessage::decode)
-				.encoder(UpdateMenuFirearmEmptyMessage::encode)
-				.consumerMainThread(UpdateMenuFirearmEmptyMessage::handle)
-				.add();
-		
-		channel.messageBuilder(ArtilleryBlockEntityUpdateMessage.class, 4)
-				.decoder(ArtilleryBlockEntityUpdateMessage::decode)
-				.encoder(ArtilleryBlockEntityUpdateMessage::encode)
-				.consumerMainThread(ArtilleryBlockEntityUpdateMessage::handle)
-				.add();
-		
-		return channel;
+
+	@SubscribeEvent
+	public static void register(final RegisterPayloadHandlerEvent event) {
+		final IPayloadRegistrar registrar = event.registrar(OldGuns.MODID);
+
+		registrar.play(ArtilleryEffectMessage.Data.ID, ArtilleryEffectMessage.Data::new, handler -> handler
+				.client(ArtilleryEffectMessage.getInstance()::handle)
+				.server(ArtilleryEffectMessage.getInstance()::handle)
+		);
+
+		registrar.play(ArtilleryBlockEntityUpdateMessage.Data.ID, ArtilleryBlockEntityUpdateMessage.Data::new, handler -> handler
+				.client(ArtilleryBlockEntityUpdateMessage.getInstance()::handle)
+				.server(ArtilleryBlockEntityUpdateMessage.getInstance()::handle)
+		);
+
+		registrar.play(FirearmEffectMessage.Data.ID, FirearmEffectMessage.Data::new, handler -> handler
+				.client(FirearmEffectMessage.getInstance()::handle)
+				.server(FirearmEffectMessage.getInstance()::handle)
+		);
 	}
 }

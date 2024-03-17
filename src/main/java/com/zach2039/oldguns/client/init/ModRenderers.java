@@ -1,19 +1,14 @@
 package com.zach2039.oldguns.client.init;
 
 import com.zach2039.oldguns.OldGuns;
-import com.zach2039.oldguns.client.renderer.entity.BombardRenderer;
-import com.zach2039.oldguns.client.renderer.entity.BulletProjectileRenderer;
-import com.zach2039.oldguns.client.renderer.entity.CongreveRocketStandRenderer;
-import com.zach2039.oldguns.client.renderer.entity.NavalCannonRenderer;
-import com.zach2039.oldguns.client.renderer.entity.RocketProjectileRenderer;
+import com.zach2039.oldguns.client.renderer.entity.*;
 import com.zach2039.oldguns.init.ModBlockEntities;
 import com.zach2039.oldguns.init.ModEntities;
-
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
 
 @Mod.EventBusSubscriber(modid = OldGuns.MODID, value = Dist.CLIENT, bus = Bus.MOD)
 public class ModRenderers {

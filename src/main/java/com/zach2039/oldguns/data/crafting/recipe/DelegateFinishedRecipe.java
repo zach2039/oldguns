@@ -1,12 +1,11 @@
 package com.zach2039.oldguns.data.crafting.recipe;
 
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonObject;
-
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+
+import javax.annotation.Nullable;
 
 /**
  * A {@link FinishedRecipe} that delegates to another {@link FinishedRecipe} instance.

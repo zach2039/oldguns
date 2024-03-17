@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.api.firearm.util;
 
 import com.zach2039.oldguns.world.item.tools.PowderHornItem;
-
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;

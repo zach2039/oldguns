@@ -13,33 +13,30 @@ buildscript {
 		mavenLocal()
     }
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-		classpath "com.diffplug.gradle:goomph:3.33.0"
-
-		//if (System.getenv("CI") == "true") {
-			classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-		//} else {
-		//	classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT-temp'
-		//}	
-
-		classpath "org.parchmentmc:librarian:${librarian_version}"
+        //classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+		//classpath "com.diffplug.gradle:goomph:3.33.0"
+        //classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
+		//classpath "org.parchmentmc:librarian:${librarian_version}"
     }
 }
-apply plugin: 'net.minecraftforge.gradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'idea'
+
+plugins {
+    //id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'net.neoforged.gradle.userdev' version "$neogradle_version"
+}
+
+//apply plugin: 'net.minecraftforge.gradle'
+//apply plugin: 'eclipse'
+//apply plugin: 'maven-publish'
+//apply plugin: 'org.parchmentmc.librarian.forgegradle'
+//apply plugin: 'org.spongepowered.mixin'
+//apply plugin: 'idea'
+
 idea {
     module {
         inheritOutputDirs = true
     }
 }
-
-//if (System.getenv("CI") != "true") {
-//	apply plugin: 'com.diffplug.eclipse.apt'
-//}
 
 group = "com.zach2039.oldguns" 
 archivesBaseName = "oldguns"
@@ -48,86 +45,80 @@ version = buildVersionString()
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-minecraft {
-    //mappings channel: 'parchment', version: "${parchment_version}-${mc_version}"
-    //mappings channel: 'official', version: '1.19.4'
-    mappings channel: 'official', version: '1.20.1'
 
-    runs {
-        client {
-            workingDirectory project.file('run')
-            property 'forge.logging.markers', 'REGISTRIES'
-			property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            property 'forge.logging.console.level', 'debug'
-			arg "-mixin.config=oldguns.mixins.json"
-            mods {
-                oldguns {
-                    source sourceSets.main
-                }
-            }
-        }
+runs {
+    client {
+        workingDirectory project.file('run')
 
-        server {
-            workingDirectory project.file('run')
+        //property 'neoforge.logging.markers', 'REGISTRIES'
+        //property 'neoforge.logging.console.level', 'debug'
 
-            property 'forge.logging.markers', 'REGISTRIES'
+        //property 'mixin.env.remapRefMap', 'true'
+        //property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
 
-            property 'forge.logging.console.level', 'debug'
-         	property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
-            
-            arg '-nogui'
-            arg "-mixin.config=oldguns.mixins.json"
-            mods {
-                oldguns {
-                    source sourceSets.main
-                }
-            }
-        }
+        //arg "-mixin.config=oldguns.mixins.json"
+        modSource sourceSets.main
 
-        data {
-            workingDirectory project.file('run')
-			
-			// Must use this if doing data-gen on CI or using gradle, or else
-			// run will grenade
-			forceExit false
+//        mods {
+//            oldguns {
+//                source sourceSets.main
+//            }
+//        }
+    }
 
-            property 'forge.logging.markers', 'REGISTRIES'
+    server {
+        workingDirectory project.file('run')
 
-            property 'forge.logging.console.level', 'debug'
-     		property 'mixin.env.remapRefMap', 'true'
-            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+        //property 'neoforge.logging.markers', 'REGISTRIES'
+        //property 'neoforge.logging.console.level', 'debug'
 
-            args '--mod', 'oldguns', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-			arg "-mixin.config=oldguns.mixins.json"
-			
-            mods {
-                oldguns {
-                    source sourceSets.main
-                }
-            }
-        }
+        //property 'mixin.env.remapRefMap', 'true'
+        //property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+        programArguments.add '-nogui'
+        //arg "-mixin.config=oldguns.mixins.json"
+
+        modSource sourceSets.main
+
+//        mods {
+//            oldguns {
+//                source sourceSets.main
+//            }
+//        }
+    }
+
+    data {
+        workingDirectory project.file('run')
+
+        //property 'neoforge.logging.markers', 'REGISTRIES'
+        //property 'neoforge.logging.console.level', 'debug'
+
+        // property 'mixin.env.remapRefMap', 'true'
+        //property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+        programArguments.addAll '--mod', 'oldguns', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        //arg "-mixin.config=oldguns.mixins.json"
+
+        modSource sourceSets.main
+
+//        mods {
+//            oldguns {
+//                source sourceSets.main
+//            }
+//        }
     }
 }
+
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 repositories {
-	//maven { // JEI & Tinkers
-    //    name 'DVS1 Maven FS'
-    //    url 'https://dvs1.progwml6.com/files/maven'
-    //}
     maven { // Patchouli and JEI
         url 'https://maven.blamejared.com'
     }
 	maven { 
 		url = "https://repo.spongepowered.org/repository/maven-public/" 
 	}
-    maven { // Mirror for JEI
-        name = "ModMaven"
-        url = "https://modmaven.k-4u.nl"
-    }
 	maven {
 		url 'https://www.cursemaven.com'
 		content {
@@ -135,6 +126,7 @@ repositories {
 		}
 	}
 	maven { url "https://maven.shedaniel.me" }
+    mavenLocal()
 }
 
 // Taken and modified from https://github.com/BluSunrize/ImmersiveEngineering/
@@ -179,27 +171,29 @@ String buildVersionString() {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    //minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
+    //minecraft "net.neoforged:neoforge:${neoforge_version}"
+    implementation "net.neoforged:neoforge:${neoforge_version}"
 
     // JEI compile
-	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-	compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
+	compileOnly "mezz.jei:jei-${mc_version}-neoforge-api:${jei_version}"
+	compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
     //compileOnly fg.deobf("curse.maven:jei-238222:4471300")
 
     // Patchouli impl
-    compileOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api")
+    compileOnly "vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}:api"
 
     // Crafttweaker compile
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
     //compileOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-1.18.2:${crafttweaker_version}")
 
     // JEI runtime
-	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-	runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-common:${jei_version}")
+	//runtimeOnly "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
+	//runtimeOnly "mezz.jei:jei-${mc_version}-common:${jei_version}"
     //runtimeOnly fg.deobf("curse.maven:jei-238222:4471300")
 
     // Patchouli runtime
-    runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}")
+    runtimeOnly "vazkii.patchouli:Patchouli:${mc_version}-${patchouli_version}"
 
     // Crafttweaker runtime
     //runtimeOnly fg.deobf("com.blamejared.crafttweaker:CraftTweaker-forge-${mc_version}:${crafttweaker_version}")
@@ -218,7 +212,7 @@ dependencies {
 	// GuardVillagers runtime
 	//runtimeOnly fg.deobf("curse.maven:guard-villagers-360203:3970122")
 
-	annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+	//annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
 jar {
@@ -236,23 +230,14 @@ jar {
     }
 }
 
-jar.finalizedBy('reobfJar')
+//jar.finalizedBy('reobfJar')
 
-mixin {
-    add sourceSets.main, "oldguns.refmap.json"
-	//config "oldguns.mixins.json"
-
-	//debug.verbose = true
-	//debug.export = true
-	//dumpTargetOnFailure = true
-}
-
-//eclipse {
-//    afterEvaluate {
-//		if (System.getenv("CI") == "true") {
-//			synchronizationTasks createSrgToMcp, createMcpToSrg, eclipseJdt 
-//		} else {
-//        	synchronizationTasks createSrgToMcp, createMcpToSrg, mixinEclipseJdtApt, eclipseJdt, eclipseFactorypath
-//		}
-//    }
+//mixin {
+//    add sourceSets.main, "oldguns.refmap.json"
+//	//config "oldguns.mixins.json"
+//
+//	//debug.verbose = true
+//	//debug.export = true
+//	//dumpTargetOnFailure = true
 //}
+

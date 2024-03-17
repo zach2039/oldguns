@@ -1,14 +1,7 @@
 package com.zach2039.oldguns.compat.patchouli;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModCrafting;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.Container;
@@ -16,8 +9,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 import vazkii.patchouli.api.IVariable;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class PatchouliUtils {
 	private static boolean crafttweakerInfoNote = false;

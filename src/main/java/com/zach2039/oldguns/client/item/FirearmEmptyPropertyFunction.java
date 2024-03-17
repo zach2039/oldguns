@@ -3,7 +3,6 @@ package com.zach2039.oldguns.client.item;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.util.FirearmNBTHelper;
 import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
-
 import net.minecraft.client.renderer.item.ClampedItemPropertyFunction;
 import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.resources.ResourceLocation;

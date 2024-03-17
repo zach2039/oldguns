@@ -4,7 +4,6 @@ import com.google.gson.JsonObject;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.tools.MortarAndPestleItem;
-
 import net.minecraft.core.NonNullList;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -19,9 +18,9 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.event.ForgeEventFactory;
+import net.neoforged.neoforge.common.ForgeHooks;
+import net.neoforged.neoforge.common.crafting.CraftingHelper;
 
 public class ShapelessVanillaMortarAndPestleRecipe extends ShapelessRecipe {
 

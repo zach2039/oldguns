@@ -2,7 +2,6 @@ package com.zach2039.oldguns.data.crafting.recipe;
 
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.util.ModJsonUtil;
-
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;

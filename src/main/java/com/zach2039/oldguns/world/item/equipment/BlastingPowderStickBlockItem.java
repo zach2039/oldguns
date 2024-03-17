@@ -1,8 +1,6 @@
 package com.zach2039.oldguns.world.item.equipment;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModBlocks;
-
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.StandingAndWallBlockItem;

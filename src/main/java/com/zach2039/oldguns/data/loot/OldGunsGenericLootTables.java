@@ -1,12 +1,8 @@
 package com.zach2039.oldguns.data.loot;
 
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.init.ModLootTables;
-
 import net.minecraft.data.loot.LootTableSubProvider;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +16,8 @@ import net.minecraft.world.level.storage.loot.functions.SetItemDamageFunction;
 import net.minecraft.world.level.storage.loot.functions.SetNbtFunction;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+
+import java.util.function.BiConsumer;
 
 public class OldGunsGenericLootTables implements LootTableSubProvider {
 	

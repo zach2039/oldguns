@@ -1,9 +1,5 @@
 package com.zach2039.oldguns.world.item.equipment;
 
-import java.util.UUID;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.ImmutableMultimap.Builder;
 import com.google.common.collect.Multimap;
@@ -13,7 +9,6 @@ import com.zach2039.oldguns.client.model.armor.MusketeerHatModel;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.EquipmentSettings;
 import com.zach2039.oldguns.init.ModAttributes;
-
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -27,6 +22,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
+
+import javax.annotation.Nullable;
+import java.util.UUID;
 
 public class MusketeerHatItem extends ArmorItem {
 	

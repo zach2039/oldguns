@@ -1,14 +1,13 @@
 package com.zach2039.oldguns.api.firearm.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.zach2039.oldguns.api.firearm.FirearmCondition;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FirearmNBTHelper {
 	

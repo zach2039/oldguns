@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.client.gui;
 
 import com.zach2039.oldguns.OldGuns;
-
 import net.minecraft.resources.ResourceLocation;
 
 public class ModGuiIDs {

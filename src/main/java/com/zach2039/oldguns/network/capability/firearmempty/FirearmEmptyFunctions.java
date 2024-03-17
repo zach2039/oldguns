@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.network.capability.firearmempty;
 
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
-
 import net.minecraft.network.FriendlyByteBuf;
 
 /**

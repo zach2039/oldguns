@@ -2,8 +2,8 @@ package com.zach2039.oldguns.api.firearm;
 
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import com.zach2039.oldguns.config.OldGunsConfig.FirearmSettings;
 import com.zach2039.oldguns.config.OldGunsConfig.FirearmAttributes;
+import com.zach2039.oldguns.config.OldGunsConfig.FirearmSettings;
 
 public class FirearmTypes {
 	

@@ -1,39 +1,21 @@
 package com.zach2039.oldguns.compat.jei;
 
-import java.util.List;
-import java.util.function.Predicate;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.crafting.IDesignNotes;
 import com.zach2039.oldguns.api.firearm.util.PowderHornNBTHelper;
 import com.zach2039.oldguns.client.gui.inventory.GunsmithsBenchScreen;
 import com.zach2039.oldguns.compat.jei.category.CauldronInteractionRecipeCategory;
 import com.zach2039.oldguns.compat.jei.category.GunsmithsBenchRecipeCategory;
-import com.zach2039.oldguns.init.ModBlocks;
-import com.zach2039.oldguns.init.ModCauldronInteractions;
-import com.zach2039.oldguns.init.ModCrafting;
-import com.zach2039.oldguns.init.ModItems;
-import com.zach2039.oldguns.init.ModMenuTypes;
+import com.zach2039.oldguns.init.*;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.inventory.menu.GunsmithsBenchMenu;
-import com.zach2039.oldguns.world.item.crafting.ingredient.IngredientAnyDesignNotes;
-
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.drawable.IDrawableStatic;
 import mezz.jei.api.helpers.IGuiHelper;
-import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.ingredients.subtypes.IIngredientSubtypeInterpreter;
-import mezz.jei.api.registration.IAdvancedRegistration;
-import mezz.jei.api.registration.IGuiHandlerRegistration;
-import mezz.jei.api.registration.IModIngredientRegistration;
-import mezz.jei.api.registration.IRecipeCatalystRegistration;
-import mezz.jei.api.registration.IRecipeCategoryRegistration;
-import mezz.jei.api.registration.IRecipeRegistration;
-import mezz.jei.api.registration.IRecipeTransferRegistration;
-import mezz.jei.api.registration.ISubtypeRegistration;
-import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
+import mezz.jei.api.registration.*;
 import mezz.jei.api.runtime.IJeiRuntime;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
@@ -43,6 +25,9 @@ import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeManager;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.block.Blocks;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 @JeiPlugin
 public class OldGunsJeiPlugin implements IModPlugin {

@@ -3,11 +3,10 @@ package com.zach2039.oldguns.world.item.crafting.conditions;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.config.OldGunsConfig;
-
 import net.minecraft.resources.ResourceLocation;
-import net.minecraftforge.common.crafting.conditions.ICondition;
-import net.minecraftforge.common.crafting.conditions.IConditionSerializer;
-import net.minecraftforge.common.crafting.conditions.ICondition.IContext;
+import net.neoforged.neoforge.common.crafting.conditions.ICondition;
+import net.neoforged.neoforge.common.crafting.conditions.ICondition.IContext;
+import net.neoforged.neoforge.common.crafting.conditions.IConditionSerializer;
 
 public class CanCraftMatchlockWeaponsCondition implements ICondition
 {

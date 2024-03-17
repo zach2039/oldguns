@@ -1,24 +1,23 @@
 package com.zach2039.oldguns.init;
 
-import java.util.function.Supplier;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.entity.Bombard;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.entity.RocketProjectile;
-
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
-import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.Mod.EventBusSubscriber.Bus;
+import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.function.Supplier;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -29,12 +28,12 @@ import net.minecraftforge.registries.RegistryObject;
  * @author zach2039
  */
 public class ModEntities {
-	private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, OldGuns.MODID);
+	private static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(Registries.ENTITY_TYPE, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
 	// Artillery
-	public static final RegistryObject<EntityType<BulletProjectile>> BULLET_PROJECTILE = registerEntityType("bullet_projectile",
+	public static final DeferredHolder<EntityType<?>, ? extends EntityType<BulletProjectile>> BULLET_PROJECTILE = registerEntityType("bullet_projectile",
 			() -> EntityType.Builder.<BulletProjectile>of((BulletProjectile::new), MobCategory.MISC)
 			.setUpdateInterval(1)
 			.setTrackingRange(500)
@@ -42,7 +41,7 @@ public class ModEntities {
 			.sized(0.1f, 0.1f)
 			);
 	
-	public static final RegistryObject<EntityType<RocketProjectile>> ROCKET_PROJECTILE = registerEntityType("rocket_projectile",
+	public static final DeferredHolder<EntityType<?>, ? extends EntityType<RocketProjectile>> ROCKET_PROJECTILE = registerEntityType("rocket_projectile",
 			() -> EntityType.Builder.<RocketProjectile>of((RocketProjectile::new), MobCategory.MISC)
 			.setUpdateInterval(1)
 			.setTrackingRange(500)
@@ -50,7 +49,7 @@ public class ModEntities {
 			.sized(0.1f, 0.1f)
 			);
 	
-	public static final RegistryObject<EntityType<Bombard>> BOMBARD = registerEntityType("bombard",
+	public static final DeferredHolder<EntityType<?>, ? extends EntityType<Bombard>> BOMBARD = registerEntityType("bombard",
 			() -> EntityType.Builder.<Bombard>of((Bombard::new), MobCategory.MISC)
 			.clientTrackingRange(8)
 			.setUpdateInterval(3)
@@ -94,7 +93,7 @@ public class ModEntities {
 	 * @param factory The factory used to create the entity type builder
 	 * @return A RegistryObject reference to the entity type
 	 */
-	private static <T extends Entity> RegistryObject<EntityType<T>> registerEntityType(final String name, final Supplier<EntityType.Builder<T>> factory) {
+	private static <T extends Entity> DeferredHolder<EntityType<?>, ? extends EntityType<T>> registerEntityType(final String name, final Supplier<EntityType.Builder<T>> factory) {
 		return ENTITIES.register(name,
 				() -> factory.get().build(new ResourceLocation(OldGuns.MODID, name).toString())
 				);

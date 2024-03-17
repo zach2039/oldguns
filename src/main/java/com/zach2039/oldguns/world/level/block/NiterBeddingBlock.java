@@ -1,12 +1,8 @@
 package com.zach2039.oldguns.world.level.block;
 
-import java.util.List;
-import java.util.Random;
-
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.NiterProductionSettings;
 import com.zach2039.oldguns.init.ModItems;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
@@ -30,6 +26,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
+
+import java.util.List;
 
 public class NiterBeddingBlock extends Block {
 

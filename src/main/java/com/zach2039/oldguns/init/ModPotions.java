@@ -1,18 +1,16 @@
 package com.zach2039.oldguns.init;
 
-import java.util.function.Supplier;
-
-import javax.annotation.Nullable;
-
 import com.zach2039.oldguns.OldGuns;
-
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.item.alchemy.Potion;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
+
+import javax.annotation.Nullable;
+import java.util.function.Supplier;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github
@@ -23,7 +21,7 @@ import net.minecraftforge.registries.RegistryObject;
  * @author zach2039
  */
 public class ModPotions {
-	private static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(ForgeRegistries.POTIONS, OldGuns.MODID);
+	private static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
@@ -53,7 +51,7 @@ public class ModPotions {
 	 * @param effectInstanceFactory The factory used to create the potion's effect instance
 	 * @return A RegistryObject reference to the potion
 	 */
-	private static RegistryObject<Potion> registerPotion(final String name, final Supplier<MobEffectInstance> effectInstanceFactory) {
+	private static DeferredHolder<Potion, ? extends Potion> registerPotion(final String name, final Supplier<MobEffectInstance> effectInstanceFactory) {
 		return registerPotion(name, effectInstanceFactory, null);
 	}
 
@@ -67,7 +65,7 @@ public class ModPotions {
 	 * @param namePrefix            The name prefix, if any
 	 * @return The PotionType
 	 */
-	private static RegistryObject<Potion> registerPotion(final String name, final Supplier<MobEffectInstance> effectInstanceFactory, @Nullable final String namePrefix) {
+	private static DeferredHolder<Potion, ? extends Potion> registerPotion(final String name, final Supplier<MobEffectInstance> effectInstanceFactory, @Nullable final String namePrefix) {
 		final String fullName = namePrefix != null ? namePrefix + name : name;
 
 		return POTIONS.register(fullName, () -> {

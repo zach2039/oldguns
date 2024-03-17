@@ -1,16 +1,14 @@
 package com.zach2039.oldguns.world.item.crafting.ingredient;
 
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.init.ModCrafting;
-
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraftforge.common.crafting.IIngredientSerializer;
+import net.neoforged.neoforge.common.crafting.IIngredientSerializer;
+
+import javax.annotation.Nullable;
+import java.util.stream.Stream;
 
 /**
  * An {@link Ingredient} that never matches any {@link ItemStack}.

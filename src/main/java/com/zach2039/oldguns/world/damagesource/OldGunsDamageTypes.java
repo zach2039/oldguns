@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.world.damagesource;
 
 import com.zach2039.oldguns.OldGuns;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

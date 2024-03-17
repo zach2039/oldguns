@@ -4,14 +4,13 @@ import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.world.level.block.entity.BlastingPowderStickBlockEntity;
 import com.zach2039.oldguns.world.level.block.entity.CongreveRocketStandBlockEntity;
 import com.zach2039.oldguns.world.level.block.entity.MediumNavalCannonBlockEntity;
-
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredHolder;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ModBlockEntities {
 	
@@ -19,23 +18,23 @@ public class ModBlockEntities {
 		return new Block[] { ModBlocks.BLASTING_POWDER_STICK_BLOCK.get(), ModBlocks.WALL_BLASTING_POWDER_STICK_BLOCK.get() };
 	}
 	
-	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, OldGuns.MODID);
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, OldGuns.MODID);
 
 	private static boolean isInitialized;
 
 	// Artillery
-	public static final RegistryObject<BlockEntityType<MediumNavalCannonBlockEntity>> MEDIUM_NAVAL_CANNON = registerBlockEntityType("medium_naval_cannon",
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MediumNavalCannonBlockEntity>> MEDIUM_NAVAL_CANNON = registerBlockEntityType("medium_naval_cannon",
 			MediumNavalCannonBlockEntity::new,
 			ModBlocks.MEDIUM_NAVAL_CANNON
 	);
 	
-	public static final RegistryObject<BlockEntityType<CongreveRocketStandBlockEntity>> CONGREVE_ROCKET_STAND = registerBlockEntityType("congreve_rocket_stand",
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CongreveRocketStandBlockEntity>> CONGREVE_ROCKET_STAND = registerBlockEntityType("congreve_rocket_stand",
 			CongreveRocketStandBlockEntity::new,
 			ModBlocks.CONGREVE_ROCKET_STAND
 	);
 	
 	// Equipment
-	public static final RegistryObject<BlockEntityType<BlastingPowderStickBlockEntity>> BLASTING_POWDER_STICK = BLOCK_ENTITY_TYPES.register("blasting_powder_stick", () -> BlockEntityType.Builder.of(BlastingPowderStickBlockEntity::new, getBlastingPowderStickBlockEntityValidBlocks()).build(null));
+	public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlastingPowderStickBlockEntity>> BLASTING_POWDER_STICK = BLOCK_ENTITY_TYPES.register("blasting_powder_stick", () -> BlockEntityType.Builder.of(BlastingPowderStickBlockEntity::new, getBlastingPowderStickBlockEntityValidBlocks()).build(null));
 
 
 	/**
@@ -64,7 +63,7 @@ public class ModBlockEntities {
 	 * @param <T>                 The block entity class
 	 * @return A RegistryObject reference to the block entity type
 	 */
-	private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> registerBlockEntityType(final String name, final BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier, final RegistryObject<? extends Block> validBlock) {
+	private static <T extends BlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> registerBlockEntityType(final String name, final BlockEntityType.BlockEntitySupplier<T> blockEntitySupplier, final DeferredHolder<?, ? extends Block> validBlock) {
 		return BLOCK_ENTITY_TYPES.register(name, () -> {
 			@SuppressWarnings("ConstantConditions")
 			// dataFixerType will always be null until mod data fixers are implemented

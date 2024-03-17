@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.api.artillery;
 
 import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
-
 import net.minecraft.world.item.ItemStack;
 
 public interface CannonArtillery {

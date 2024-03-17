@@ -4,7 +4,6 @@ import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.api.firearm.FirearmSize;
 import com.zach2039.oldguns.api.firearm.FirearmTypes.MechanismType;
 import com.zach2039.oldguns.init.ModItems;
-
 import net.minecraft.world.item.Item;
 
 public class FirearmItemHelper {

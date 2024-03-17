@@ -1,11 +1,10 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
 import com.zach2039.oldguns.init.ModItems;
-
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.item.alchemy.Potions;
-import net.minecraftforge.common.brewing.IBrewingRecipe;
+import net.neoforged.neoforge.common.brewing.IBrewingRecipe;
 
 public class LiquidNiterRecipe implements IBrewingRecipe {
 

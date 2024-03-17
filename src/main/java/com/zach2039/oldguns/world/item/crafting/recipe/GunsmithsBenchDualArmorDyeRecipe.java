@@ -1,14 +1,11 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
-import java.util.List;
-
 import com.google.common.collect.Lists;
 import com.google.gson.JsonObject;
 import com.zach2039.oldguns.api.equipment.DualColorDyeableItem;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
@@ -18,6 +15,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.level.Level;
+
+import java.util.List;
 
 public class GunsmithsBenchDualArmorDyeRecipe implements GunsmithsBenchRecipe {
 

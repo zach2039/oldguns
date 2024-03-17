@@ -1,15 +1,13 @@
 package com.zach2039.oldguns.compat.jei.util;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.builder.IRecipeSlotBuilder;
 import mezz.jei.api.gui.ingredient.ICraftingGridHelper;
 import mezz.jei.api.ingredients.IIngredientType;
 import mezz.jei.api.recipe.RecipeIngredientRole;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copy of JEIs CraftingGridHelper with edits

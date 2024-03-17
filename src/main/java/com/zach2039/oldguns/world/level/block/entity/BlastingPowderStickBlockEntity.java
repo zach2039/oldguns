@@ -1,7 +1,6 @@
 package com.zach2039.oldguns.world.level.block.entity;
 
 import com.zach2039.oldguns.init.ModBlockEntities;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;

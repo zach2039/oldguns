@@ -1,87 +1,54 @@
 package com.zach2039.oldguns.network;
 
-import java.util.function.Supplier;
-
+import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
 import com.zach2039.oldguns.api.firearm.util.FirearmEffectHelper;
 import com.zach2039.oldguns.client.util.ClientUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
-import net.minecraftforge.network.NetworkEvent;
+import net.neoforged.fml.loading.FMLEnvironment;
+import net.neoforged.neoforge.network.handling.PlayPayloadContext;
 
 /**
  * Sent to the server by {@link FirearmItem} to display firing effects.
  */
 public class ArtilleryEffectMessage {
-	int shootingEntityId, parameter;
-	ArtilleryEffect effectType;
-	double posX, posY, posZ;
-	float rotationPitch, rotationYaw;
 
-	public ArtilleryEffectMessage(LivingEntity shooter, ArtilleryEffect effect, double x, double y, double z, float pitch, float yaw, int parameter) {
-		this.shootingEntityId = shooter.getId();
-		this.parameter = parameter;
-		this.effectType = effect;
-		this.posX = x;
-		this.posY = y;
-		this.posZ = z;
-		this.rotationPitch = pitch;
-		this.rotationYaw = yaw;
-	}
-	
-	public static ArtilleryEffectMessage decode(final FriendlyByteBuf buf) {
-		LivingEntity shooter = (LivingEntity) ClientUtil.getClientPlayer().level().getEntity(buf.readInt());
-		int parameter = buf.readInt();
-		ArtilleryEffect effectType = ArtilleryEffect.values()[buf.readInt()];
-		double x = buf.readDouble();
-		double y = buf.readDouble();
-		double z = buf.readDouble();
-		float pitch = buf.readFloat();
-		float yaw = buf.readFloat();
-		
-		return new ArtilleryEffectMessage(shooter, effectType, x, y, z, pitch, yaw, parameter);
+	private static final ArtilleryEffectMessage INSTANCE = new ArtilleryEffectMessage();
+
+	public static ArtilleryEffectMessage getInstance() {
+		return INSTANCE;
 	}
 
-	public static void encode(final ArtilleryEffectMessage message, final FriendlyByteBuf buf) {
-		buf.writeInt(message.shootingEntityId);
-		buf.writeInt(message.parameter);
-		buf.writeInt(message.effectType.ordinal());
-		buf.writeDouble(message.posX);
-		buf.writeDouble(message.posY);
-		buf.writeDouble(message.posZ);
-		buf.writeFloat(message.rotationPitch);
-		buf.writeFloat(message.rotationYaw);
-	}
+	public void handle(final ArtilleryEffectMessage.Data data, final PlayPayloadContext ctx) {
+		ctx.workHandler().submitAsync(() -> {
+			if (FMLEnvironment.dist.isClient())
+			{
+				if (ClientUtil.getClientPlayer() == null) return;
 
-	public static void handle(final ArtilleryEffectMessage message, final Supplier<NetworkEvent.Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> {
-                if (ClientUtil.getClientPlayer() == null) return;
-                
-                /* Get world of client. */
+				/* Get world of client. */
 				Level world = Minecraft.getInstance().player.level();
-				
+
 				/* Only process effects if world isn't null. */
-				if (world != null) 
+				if (world != null)
 				{
-					/* Get information from message. */
-					Entity entity = world.getEntity(message.shootingEntityId);
-					ArtilleryEffect effect = message.effectType;
-					double x = message.posX;
-					double y = message.posY;
-					double z = message.posZ;
-					double pitch = message.rotationPitch;
-					double yaw = message.rotationYaw;
-					int parameter = message.parameter;
-					
-					/* Pick particle effect from message. */
+					/* Get information from data. */
+					Entity entity = data.shooter;
+					ArtilleryEffect effect = data.effect;
+					double x = data.x;
+					double y = data.y;
+					double z = data.z;
+					double pitch = data.pitch;
+					double yaw = data.yaw;
+					int parameter = data.parameter;
+
+					/* Pick particle effect from data. */
 					switch (effect)
 					{
 						case CANNON_SHOT:
@@ -92,9 +59,41 @@ public class ArtilleryEffectMessage {
 							break;
 					}
 				}
-			});
+			}
 		});
+	}
 
-		ctx.get().setPacketHandled(true);
+	public record Data(LivingEntity shooter, ArtilleryEffect effect, double x, double y, double z, float pitch, float yaw, int parameter) implements CustomPacketPayload {
+		public static final ResourceLocation ID = new ResourceLocation(OldGuns.MODID, "artillery_effect_data");
+
+		public Data(final FriendlyByteBuf buf) {
+			this(
+					(LivingEntity) ClientUtil.getClientPlayer().level().getEntity(buf.readInt()),
+					ArtilleryEffect.values()[buf.readInt()],
+					buf.readDouble(),
+					buf.readDouble(),
+					buf.readDouble(),
+					buf.readFloat(),
+					buf.readFloat(),
+					buf.readInt()
+			);
+		}
+
+		@Override
+		public void write(final FriendlyByteBuf buf) {
+			buf.writeInt(shooter.getId());
+			buf.writeInt(effect.ordinal());
+			buf.writeDouble(x);
+			buf.writeDouble(y);
+			buf.writeDouble(z);
+			buf.writeFloat(pitch);
+			buf.writeFloat(yaw);
+			buf.writeInt(parameter);
+		}
+
+		@Override
+		public ResourceLocation id() {
+			return ID;
+		}
 	}
 }

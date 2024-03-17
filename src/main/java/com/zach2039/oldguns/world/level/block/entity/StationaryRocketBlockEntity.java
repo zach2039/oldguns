@@ -1,8 +1,5 @@
 package com.zach2039.oldguns.world.level.block.entity;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.RocketArtilleryAmmo;
 import com.zach2039.oldguns.api.artillery.Artillery;
@@ -16,7 +13,6 @@ import com.zach2039.oldguns.world.entity.RocketProjectile;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryRocketAmmoItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.level.block.CongreveRocketStandBlock;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -35,7 +31,10 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraftforge.network.PacketDistributor;
+import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public abstract class StationaryRocketBlockEntity extends StationaryArtilleryBlockEntity implements Artillery, RocketArtillery {
 
@@ -188,9 +187,9 @@ public abstract class StationaryRocketBlockEntity extends StationaryArtilleryBlo
 		}
 		
 		if (!level.isClientSide()) {
-			OldGuns.NETWORK.send(
-	                PacketDistributor.TRACKING_CHUNK.with(() -> this.level.getChunkAt(this.worldPosition)),
-	                new ArtilleryBlockEntityUpdateMessage(this.worldPosition, this.writeToTag(new CompoundTag())));
+			PacketDistributor.TRACKING_CHUNK.with(this.level.getChunkAt(this.worldPosition)).send(
+					new ArtilleryBlockEntityUpdateMessage.Data(this.worldPosition, this.writeToTag(new CompoundTag()))
+			);
 		}
 		
 		return result;

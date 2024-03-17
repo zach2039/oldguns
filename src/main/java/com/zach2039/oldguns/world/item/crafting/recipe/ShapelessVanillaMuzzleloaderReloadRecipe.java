@@ -1,11 +1,7 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
 import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.FirearmAmmo;
 import com.zach2039.oldguns.api.firearm.Firearm;
@@ -15,7 +11,6 @@ import com.zach2039.oldguns.capability.firearmempty.FirearmEmptyCapability;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
-
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -30,7 +25,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.crafting.CraftingHelper;
+import net.neoforged.neoforge.common.crafting.CraftingHelper;
+
+import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 {
@@ -38,7 +37,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 	private final boolean isSimple;
 	
 	public ShapelessVanillaMuzzleloaderReloadRecipe(final ResourceLocation id, final String group, final ItemStack result, final NonNullList<Ingredient> ingredients) {
-		super(id, group, CraftingBookCategory.MISC, result, ingredients);
+		super(group, CraftingBookCategory.MISC, result, ingredients);
 		this.result = result;
 		this.isSimple = ingredients.stream().allMatch(Ingredient::isSimple);
 	}
@@ -175,7 +174,7 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 		}
 
 		@Override
-		public ShapelessVanillaMuzzleloaderReloadRecipe fromNetwork(final ResourceLocation recipeID, final FriendlyByteBuf buffer) {
+		public ShapelessVanillaMuzzleloaderReloadRecipe fromNetwork(final FriendlyByteBuf buffer) {
 			final String group = buffer.readUtf(Short.MAX_VALUE);
 			final int numIngredients = buffer.readVarInt();
 			final NonNullList<Ingredient> ingredients = NonNullList.withSize(numIngredients, Ingredient.EMPTY);
@@ -187,6 +186,11 @@ public class ShapelessVanillaMuzzleloaderReloadRecipe extends ShapelessRecipe
 			final ItemStack result = buffer.readItem();
 
 			return new ShapelessVanillaMuzzleloaderReloadRecipe(recipeID, group, result, ingredients);
+		}
+
+		@Override
+		public Codec<ShapelessVanillaMuzzleloaderReloadRecipe> codec() {
+			return null;
 		}
 
 		@Override

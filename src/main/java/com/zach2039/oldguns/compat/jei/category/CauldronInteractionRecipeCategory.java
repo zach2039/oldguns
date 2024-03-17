@@ -10,18 +10,9 @@
  */
 package com.zach2039.oldguns.compat.jei.category;
 
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Nonnull;
-
-import com.mojang.blaze3d.systems.RenderSystem;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.compat.jei.JEIRecipeTypes;
 import com.zach2039.oldguns.world.item.crafting.cauldron.CauldronRecipe;
-
-import mezz.jei.api.constants.ModIds;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.forge.ForgeTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;

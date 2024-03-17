@@ -1,18 +1,11 @@
 package com.zach2039.oldguns.world.item.crafting.recipe;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.gson.JsonObject;
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.firearm.util.PowderHornNBTHelper;
 import com.zach2039.oldguns.init.ModCrafting;
 import com.zach2039.oldguns.init.ModTags;
-import com.zach2039.oldguns.world.inventory.GunsmithsBenchCraftingContainer;
 import com.zach2039.oldguns.world.item.crafting.util.ModRecipeUtil;
-import com.zach2039.oldguns.world.item.tools.HacksawItem;
 import com.zach2039.oldguns.world.item.tools.PowderHornItem;
-
 import it.unimi.dsi.fastutil.ints.IntList;
 import net.minecraft.core.NonNullList;
 import net.minecraft.core.RegistryAccess;
@@ -21,16 +14,16 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.CraftingContainer;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.CraftingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.ShapelessRecipe;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.crafting.CraftingHelper;
+import net.neoforged.neoforge.common.crafting.CraftingHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ShapelessVanillaRefillPowderHornRecipe extends ShapelessRecipe {
 

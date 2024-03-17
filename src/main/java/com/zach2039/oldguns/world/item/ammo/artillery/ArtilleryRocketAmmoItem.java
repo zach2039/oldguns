@@ -1,26 +1,20 @@
 package com.zach2039.oldguns.world.item.ammo.artillery;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.AmmoTypes;
-import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectileType;
 import com.zach2039.oldguns.api.ammo.RocketArtilleryAmmo;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.entity.RocketProjectile;
-import com.zach2039.oldguns.world.level.block.entity.StationaryArtilleryBlockEntity;
 import com.zach2039.oldguns.world.level.block.entity.StationaryRocketBlockEntity;
-
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.ForgeConfigSpec.DoubleValue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ArtilleryRocketAmmoItem extends Item implements Ammo, RocketArtilleryAmmo {
 	

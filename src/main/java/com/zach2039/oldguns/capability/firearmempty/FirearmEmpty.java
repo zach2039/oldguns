@@ -1,9 +1,8 @@
 package com.zach2039.oldguns.capability.firearmempty;
 
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
-
 import net.minecraft.nbt.ByteTag;
-import net.minecraftforge.common.util.INBTSerializable;
+import net.neoforged.neoforge.common.util.INBTSerializable;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

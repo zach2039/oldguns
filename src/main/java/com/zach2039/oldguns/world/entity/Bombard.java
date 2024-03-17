@@ -1,18 +1,10 @@
 package com.zach2039.oldguns.world.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
-import com.zach2039.oldguns.api.artillery.AmmoFiringState;
-import com.zach2039.oldguns.api.artillery.ArtilleryEffect;
-import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
-import com.zach2039.oldguns.api.artillery.ArtilleryType;
-import com.zach2039.oldguns.api.artillery.CannonArtillery;
+import com.zach2039.oldguns.api.artillery.*;
 import com.zach2039.oldguns.config.OldGunsConfig;
 import com.zach2039.oldguns.config.OldGunsConfig.CannonArtilleryAttributes;
 import com.zach2039.oldguns.init.ModItems;
@@ -22,7 +14,6 @@ import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
 import com.zach2039.oldguns.world.item.tools.LongMatchItem;
 import com.zach2039.oldguns.world.item.tools.RamRodItem;
-
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
@@ -38,10 +29,12 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraftforge.network.PacketDistributor;
-import net.minecraftforge.network.PacketDistributor.TargetPoint;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Bombard extends MoveableArtillery implements CannonArtillery {
 	private static final CannonArtilleryAttributes artilleryAttributes = OldGunsConfig.SERVER.artillerySettings.bombard;

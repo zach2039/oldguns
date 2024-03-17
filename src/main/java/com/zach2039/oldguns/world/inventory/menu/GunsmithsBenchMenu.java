@@ -1,7 +1,5 @@
 package com.zach2039.oldguns.world.inventory.menu;
 
-import java.util.Optional;
-
 import com.zach2039.oldguns.init.ModBlocks;
 import com.zach2039.oldguns.init.ModMenuTypes;
 import com.zach2039.oldguns.init.ModRecipeTypes;
@@ -10,7 +8,6 @@ import com.zach2039.oldguns.world.inventory.OldGunsDesignNotesSlot;
 import com.zach2039.oldguns.world.inventory.OldGunsResultContainer;
 import com.zach2039.oldguns.world.inventory.OldGunsResultSlot;
 import com.zach2039.oldguns.world.item.crafting.GunsmithsBenchRecipe;
-
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.game.ClientboundContainerSetSlotPacket;
@@ -24,8 +21,11 @@ import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.network.IContainerFactory;
+import net.neoforged.neoforge.network.IContainerFactory;
+
+import java.util.Optional;
 
 public class GunsmithsBenchMenu extends AbstractContainerMenu {
 	public static final int RESULT_SLOT = 0;
@@ -71,10 +71,10 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 		if (!level.isClientSide) {
 			ServerPlayer serverplayer = (ServerPlayer)player;
 			ItemStack itemstack = ItemStack.EMPTY;
-			Optional<GunsmithsBenchRecipe> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), containerCrafting, level);
+			Optional<RecipeHolder<GunsmithsBenchRecipe>> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), containerCrafting, level);
 			if (optional.isPresent()) {
-				GunsmithsBenchRecipe craftingrecipe = optional.get();
-				if (containerResult.setRecipeUsed(level, serverplayer, craftingrecipe)) {
+				GunsmithsBenchRecipe craftingrecipe = optional.get().value();
+				if (containerResult.setRecipeUsed(craftingrecipe)) {
 					itemstack = craftingrecipe.assemble(containerCrafting, RegistryAccess.EMPTY);
 				}
 			}

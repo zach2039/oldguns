@@ -1,12 +1,12 @@
 package com.zach2039.oldguns.network.capability;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.core.Direction;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.common.capabilities.Capability;
+import net.neoforged.neoforge.common.capabilities.Capability;
+
+import javax.annotation.Nullable;
 
 /**
  * Utility methods and common interfaces for {@link UpdateMenuCapabilityMessage} .

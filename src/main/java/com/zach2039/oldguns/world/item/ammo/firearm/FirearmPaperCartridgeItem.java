@@ -1,17 +1,15 @@
 package com.zach2039.oldguns.world.item.ammo.firearm;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.zach2039.oldguns.api.ammo.AmmoTypes.FirearmAmmo;
 import com.zach2039.oldguns.api.ammo.ProjectilePowderType;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class FirearmPaperCartridgeItem extends FirearmAmmoItem {
 

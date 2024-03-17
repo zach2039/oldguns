@@ -1,11 +1,11 @@
 package com.zach2039.oldguns.world.damagesource;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.core.Holder;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.entity.Entity;
+
+import javax.annotation.Nullable;
 
 public class OldGunsDamageSourceIndirectEntity extends DamageSource {
 	private float percentBypassArmor = 0.0f;

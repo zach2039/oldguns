@@ -1,16 +1,13 @@
 package com.zach2039.oldguns.api.firearm.util;
 
-import java.util.List;
-
-import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.world.item.firearm.FirearmItem;
-
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public class FirearmTooltipHelper {
 	public static void populateTooltipInfo(FirearmItem firearmItem, ItemStack firearmStack, List<Component> tooltip)

@@ -3,7 +3,6 @@ package com.zach2039.oldguns.capability.firearmempty;
 import com.zach2039.oldguns.api.capability.firearmempty.IFirearmEmpty;
 import com.zach2039.oldguns.capability.CapabilityContainerListener;
 import com.zach2039.oldguns.network.capability.firearmempty.UpdateMenuFirearmEmptyMessage;
-
 import net.minecraft.server.level.ServerPlayer;
 
 /**

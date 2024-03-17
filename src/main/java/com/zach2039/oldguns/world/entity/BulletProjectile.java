@@ -21,8 +21,6 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtUtils;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundGameEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -54,15 +52,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.phys.*;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
-import net.minecraftforge.network.NetworkHooks;
+import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
 
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
-public class BulletProjectile extends Projectile implements IEntityAdditionalSpawnData {
+public class BulletProjectile extends Projectile implements IEntityWithComplexSpawn {
 
 	protected static final EntityDataAccessor<Float> PROJECTILE_SIZE = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.FLOAT);
 	protected static final EntityDataAccessor<BlockPos> START_POS = SynchedEntityData.defineId(BulletProjectile.class, EntityDataSerializers.BLOCK_POS);
@@ -151,10 +148,10 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 		return canHit && (this.piercingIgnoreEntityIds == null || !this.piercingIgnoreEntityIds.contains(ent.getId()));
 	}
 
-	@Override
-	public Packet<ClientGamePacketListener> getAddEntityPacket() {
-		return NetworkHooks.getEntitySpawningPacket(this);
-	}
+	//@Override
+	//public Packet<ClientGamePacketListener> getAddEntityPacket() {
+	//	return NetworkHooks.getEntitySpawningPacket(this);
+	//}
 
 	@Override
 	public void writeSpawnData(FriendlyByteBuf buf) {
@@ -881,7 +878,7 @@ public class BulletProjectile extends Projectile implements IEntityAdditionalSpa
 					}
 				}
 
-				if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+				if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag && !net.neoforged.neoforge.event.EventHooks.onProjectileImpact(this, hitresult)) {
 					this.onHit(hitresult);
 					this.hasImpulse = true;
 				}

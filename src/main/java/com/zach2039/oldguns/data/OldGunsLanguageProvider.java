@@ -1,9 +1,5 @@
 package com.zach2039.oldguns.data;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Supplier;
-
 import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.data.lang.OldGunsCompendiumLang;
 import com.zach2039.oldguns.fluid.group.FluidGroup;
@@ -13,9 +9,7 @@ import com.zach2039.oldguns.init.ModFluids;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.text.OldGunsLang;
 import com.zach2039.oldguns.world.level.block.GunsmithsBenchBlock;
-
 import net.minecraft.client.resources.language.I18n;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
@@ -26,8 +20,12 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.fluids.FluidType;
+import net.neoforged.neoforge.common.data.LanguageProvider;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Supplier;
 
 /**
  * Taken from <a href="https://github.com/Choonster-Minecraft-Mods/TestMod3">TestMod3</a> on Github

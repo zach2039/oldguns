@@ -1,12 +1,12 @@
 package com.zach2039.oldguns.api.equipment;
 
-import java.util.List;
-
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.DyeItem;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+
+import java.util.List;
 
 public interface DualColorDyeableItem {
 	String TAG_COLOR_A = "colorA";

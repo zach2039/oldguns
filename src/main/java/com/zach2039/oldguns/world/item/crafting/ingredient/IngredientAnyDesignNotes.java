@@ -1,35 +1,29 @@
 package com.zach2039.oldguns.world.item.crafting.ingredient;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableSet;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.init.ModCrafting;
-
-import net.minecraft.nbt.CompoundTag;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.util.GsonHelper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.common.crafting.AbstractIngredient;
-import net.minecraftforge.common.crafting.CraftingHelper;
-import net.minecraftforge.common.crafting.IIngredientSerializer;
-import net.minecraftforge.registries.ForgeRegistries;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
+import net.neoforged.neoforge.common.crafting.CraftingHelper;
 
-public class IngredientAnyDesignNotes extends AbstractIngredient {
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+public class IngredientAnyDesignNotes extends Ingredient {
 
 	private final Set<Item> items;
 
@@ -127,9 +121,10 @@ public class IngredientAnyDesignNotes extends AbstractIngredient {
 		}
 
 		@Override
-		public IngredientAnyDesignNotes parse(FriendlyByteBuf buffer)
+		public IngredientAnyDesignNotes parse(final FriendlyByteBuf buf)
 		{
-			Set<Item> items = Stream.generate(() -> buffer.readRegistryIdUnsafe(ForgeRegistries.ITEMS)).limit(buffer.readVarInt()).collect(Collectors.toSet());
+			buf.readRegistryKey()
+			Set<Item> items = Stream.generate(() -> buf.readRegistryIdUnsafe(BuiltInRegistries.ITEM)).limit(buffer.readVarInt()).collect(Collectors.toSet());
 			return new IngredientAnyDesignNotes(items);
 		}
 
@@ -138,7 +133,7 @@ public class IngredientAnyDesignNotes extends AbstractIngredient {
 		{
 			buffer.writeVarInt(ingredient.items.size());
 			for (Item item : ingredient.items)
-				buffer.writeRegistryIdUnsafe(ForgeRegistries.ITEMS, item);
+				buffer.writeRegistryIdUnsafe(BuiltInRegistries.ITEM, item);
 		}
 	}
 }

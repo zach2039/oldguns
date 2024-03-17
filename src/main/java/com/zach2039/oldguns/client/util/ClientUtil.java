@@ -1,10 +1,10 @@
 package com.zach2039.oldguns.client.util;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.world.entity.player.Player;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.fml.DistExecutor;
+import net.neoforged.fml.DistExecutor;
+
+import javax.annotation.Nullable;
 
 /**
  * Client-specific utility methods designed to be called from common code.

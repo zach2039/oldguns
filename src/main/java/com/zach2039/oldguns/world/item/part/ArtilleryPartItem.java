@@ -1,8 +1,6 @@
 package com.zach2039.oldguns.world.item.part;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.artillery.ArtilleryPart;
-
 import net.minecraft.world.item.Item;
 
 public class ArtilleryPartItem extends Item {
