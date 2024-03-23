@@ -6,11 +6,10 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Recipe;
-import net.minecraft.world.item.crafting.RecipeHolder;
 
 import javax.annotation.Nullable;
 
-public class OldGunsResultContainer implements Container, RecipeHolder {
+public class OldGunsResultContainer implements Container {
 	private final NonNullList<ItemStack> itemStacks = NonNullList.withSize(1, ItemStack.EMPTY);
 	@Nullable
 	private Recipe<?> recipeUsed;

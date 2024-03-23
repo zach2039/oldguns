@@ -1,14 +1,14 @@
 package com.zach2039.oldguns.world.inventory;
 
-import com.zach2039.oldguns.init.ModRecipeTypes;
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.Container;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.RecipeHolder;
+import net.minecraft.world.inventory.RecipeCraftingHolder;
 import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.Collections;
+import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.event.EventHooks;
 
 public class OldGunsResultSlot extends Slot {
 	   private final GunsmithsBenchCraftingContainer craftSlots;
@@ -21,65 +21,71 @@ public class OldGunsResultSlot extends Slot {
 	      this.craftSlots = craftinv;
 	   }
 
-	   public boolean mayPlace(ItemStack p_40178_) {
+	   @Override
+	   public boolean mayPlace(ItemStack stackIn) {
 	      return false;
 	   }
 
-	   public ItemStack remove(int p_40173_) {
+	   @Override
+	   public ItemStack remove(int amount) {
 	      if (this.hasItem()) {
-	         this.removeCount += Math.min(p_40173_, this.getItem().getCount());
+	         this.removeCount += Math.min(amount, this.getItem().getCount());
 	      }
 
-	      return super.remove(p_40173_);
+	      return super.remove(amount);
 	   }
 
-	   protected void onQuickCraft(ItemStack p_40180_, int p_40181_) {
-	      this.removeCount += p_40181_;
-	      this.checkTakeAchievements(p_40180_);
+	   @Override
+	   protected void onQuickCraft(ItemStack itemStack, int numCrafted) {
+	      this.removeCount += numCrafted;
+	      this.checkTakeAchievements(itemStack);
 	   }
 
-	   protected void onSwapCraft(int p_40183_) {
-	      this.removeCount += p_40183_;
+	   @Override
+	   protected void onSwapCraft(int numCrafted) {
+	      this.removeCount += numCrafted;
 	   }
 
-	   protected void checkTakeAchievements(ItemStack p_40185_) {
-	      if (this.removeCount > 0) {
-	         p_40185_.onCraftedBy(this.player.level(), this.player, this.removeCount);
-	         net.minecraftforge.event.ForgeEventFactory.firePlayerCraftingEvent(this.player, p_40185_, this.craftSlots);
-	      }
+	   @Override
+	   protected void checkTakeAchievements(ItemStack stackIn) {
+		   if (this.removeCount > 0) {
+			   stackIn.onCraftedBy(this.player.level(), this.player, this.removeCount);
+			   EventHooks.firePlayerCraftingEvent(this.player, stackIn, this.craftSlots);
+		   }
 
-	      if (this.container instanceof RecipeHolder) {
-			  // FIXME : No idea what the list parameter does on this now
-	         ((RecipeHolder)this.container).awardUsedRecipes(this.player, Collections.emptyList());
-	      }
+		   Container container = this.container;
+		   if (container instanceof RecipeCraftingHolder recipecraftingholder) {
+			   recipecraftingholder.awardUsedRecipes(this.player, this.craftSlots.getItems());
+		   }
 
-	      this.removeCount = 0;
+		   this.removeCount = 0;
 	   }
 
-	   public void onTake(Player player, ItemStack p_150639_) {
-	      this.checkTakeAchievements(p_150639_);
-	      net.minecraftforge.common.ForgeHooks.setCraftingPlayer(player);
-	      NonNullList<ItemStack> nonnulllist = player.level().getRecipeManager().getRemainingItemsFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), this.craftSlots, player.level());
-	      net.minecraftforge.common.ForgeHooks.setCraftingPlayer(null);
-	      for(int i = 0; i < nonnulllist.size(); ++i) {
-	         ItemStack itemstack = this.craftSlots.getItem(i);
-	         ItemStack itemstack1 = nonnulllist.get(i);
-	         if (!itemstack.isEmpty()) {
-	            this.craftSlots.removeItem(i, 1);
-	            itemstack = this.craftSlots.getItem(i);
-	         }
+	   @Override
+	   public void onTake(Player player, ItemStack stackIn) {
+		   this.checkTakeAchievements(stackIn);
+		   CommonHooks.setCraftingPlayer(player);
+		   NonNullList<ItemStack> nonnulllist = player.level().getRecipeManager().getRemainingItemsFor(RecipeType.CRAFTING, this.craftSlots, player.level());
+		   CommonHooks.setCraftingPlayer((Player)null);
 
-	         if (!itemstack1.isEmpty()) {
-	            if (itemstack.isEmpty()) {
-	               this.craftSlots.setItem(i, itemstack1);
-	            } else if (ItemStack.isSameItemSameTags(itemstack, itemstack1)) {
-	               itemstack1.grow(itemstack.getCount());
-	               this.craftSlots.setItem(i, itemstack1);
-	            } else if (!this.player.getInventory().add(itemstack1)) {
-	               this.player.drop(itemstack1, false);
-	            }
-	         }
-	      }
+		   for(int i = 0; i < nonnulllist.size(); ++i) {
+			   ItemStack itemstack = this.craftSlots.getItem(i);
+			   ItemStack itemstack1 = (ItemStack)nonnulllist.get(i);
+			   if (!itemstack.isEmpty()) {
+				   this.craftSlots.removeItem(i, 1);
+				   itemstack = this.craftSlots.getItem(i);
+			   }
 
+			   if (!itemstack1.isEmpty()) {
+				   if (itemstack.isEmpty()) {
+					   this.craftSlots.setItem(i, itemstack1);
+				   } else if (ItemStack.isSameItemSameTags(itemstack, itemstack1)) {
+					   itemstack1.grow(itemstack.getCount());
+					   this.craftSlots.setItem(i, itemstack1);
+				   } else if (!this.player.getInventory().add(itemstack1)) {
+					   this.player.drop(itemstack1, false);
+				   }
+			   }
+		   }
 	   }
 	}

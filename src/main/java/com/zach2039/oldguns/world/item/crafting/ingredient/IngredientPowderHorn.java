@@ -13,10 +13,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.neoforged.neoforge.common.crafting.AbstractIngredient;
+import net.neoforged.neoforge.common.crafting.ChildBasedIngredient;
+import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import net.neoforged.neoforge.common.crafting.CraftingHelper;
-import net.neoforged.neoforge.common.crafting.IIngredientSerializer;
 
 import javax.annotation.Nullable;
 import java.util.Arrays;
@@ -26,7 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class IngredientPowderHorn extends AbstractIngredient {
+public class IngredientPowderHorn extends Ingredient {
 
 	private final Set<Item> items;
 	private final CompoundTag nbt;
@@ -74,9 +73,14 @@ public class IngredientPowderHorn extends AbstractIngredient {
         json.addProperty("nbt", nbt.toString());
         return json;
 	}
-	
+
 	@Override
-	public boolean test(@Nullable ItemStack input)
+	protected Stream<ItemStack> generateMatchingStacks() {
+		return null;
+	}
+
+	@Override
+	public boolean testComplex(@Nullable ItemStack input)
 	{
 		if (input == null)
 			return false;

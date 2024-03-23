@@ -1,25 +1,16 @@
 package com.zach2039.oldguns.world.item.crafting.conditions;
 
-import com.google.gson.JsonObject;
-import com.zach2039.oldguns.OldGuns;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.crafting.conditions.ICondition;
-import net.neoforged.neoforge.common.crafting.conditions.ICondition.IContext;
-import net.neoforged.neoforge.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 public class CanCraftTntFromBlastingPowderSticksCondition implements ICondition
 {
 	public static final CanCraftTntFromBlastingPowderSticksCondition INSTANCE = new CanCraftTntFromBlastingPowderSticksCondition();
-    private static final ResourceLocation NAME = new ResourceLocation(OldGuns.MODID, "can_craft_tnt_from_blasting_powder_sticks");
+    public static Codec<CanCraftTntFromBlastingPowderSticksCondition> CODEC = MapCodec.unit(INSTANCE).stable().codec();
 
     public CanCraftTntFromBlastingPowderSticksCondition() {}
-
-    @Override
-    public ResourceLocation getID()
-    {
-        return NAME;
-    }
 
     @Override
     public boolean test(IContext context)
@@ -33,24 +24,9 @@ public class CanCraftTntFromBlastingPowderSticksCondition implements ICondition
         return "can_craft_tnt_from_blasting_powder_sticks";
     }
 
-    public static class Serializer implements IConditionSerializer<CanCraftTntFromBlastingPowderSticksCondition>
-    {
-        public static final Serializer INSTANCE = new Serializer();
-
-        @Override
-        public void write(JsonObject json, CanCraftTntFromBlastingPowderSticksCondition value) { }
-
-        @Override
-        public CanCraftTntFromBlastingPowderSticksCondition read(JsonObject json)
-        {
-            return CanCraftTntFromBlastingPowderSticksCondition.INSTANCE;
-        }
-
-        @Override
-        public ResourceLocation getID()
-        {
-            return CanCraftTntFromBlastingPowderSticksCondition.NAME;
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
     }
 }
 

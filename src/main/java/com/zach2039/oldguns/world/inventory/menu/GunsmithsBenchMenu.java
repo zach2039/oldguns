@@ -74,9 +74,9 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 			Optional<RecipeHolder<GunsmithsBenchRecipe>> optional = level.getServer().getRecipeManager().getRecipeFor(ModRecipeTypes.GUNSMITHS_BENCH.get(), containerCrafting, level);
 			if (optional.isPresent()) {
 				GunsmithsBenchRecipe craftingrecipe = optional.get().value();
-				if (containerResult.setRecipeUsed(craftingrecipe)) {
+				//if (containerResult.setRecipeUsed(craftingrecipe)) {
 					itemstack = craftingrecipe.assemble(containerCrafting, RegistryAccess.EMPTY);
-				}
+				//}
 			}
 
 			containerResult.setItem(0, itemstack);
@@ -85,7 +85,8 @@ public class GunsmithsBenchMenu extends AbstractContainerMenu {
 		}
 	}
 
-	public void slotsChanged(Container p_39366_) {
+	@Override
+	public void slotsChanged(Container container) {
 		this.access.execute((level, player) -> {
 			slotChangedCraftingGrid(this, level, this.player, this.craftSlots, this.resultSlots);
 		});

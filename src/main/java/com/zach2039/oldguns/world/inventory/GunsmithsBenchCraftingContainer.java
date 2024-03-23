@@ -6,10 +6,13 @@ import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.inventory.CraftingContainer;
 import net.minecraft.world.inventory.StackedContentsCompatible;
 import net.minecraft.world.item.ItemStack;
 
-public class GunsmithsBenchCraftingContainer implements Container, StackedContentsCompatible {
+import java.util.List;
+
+public class GunsmithsBenchCraftingContainer implements Container, StackedContentsCompatible, CraftingContainer {
 	
 	private final NonNullList<ItemStack> items;
 	private final int width;
@@ -23,10 +26,12 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 		this.height = height;
 	}
 
+	@Override
 	public int getContainerSize() {
 		return this.items.size();
 	}
 
+	@Override
 	public boolean isEmpty() {
 		for(ItemStack itemstack : this.items) {
 			if (!itemstack.isEmpty()) {
@@ -37,14 +42,17 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 		return true;
 	}
 
+	@Override
 	public ItemStack getItem(int slot) {
 		return slot >= this.getContainerSize() ? ItemStack.EMPTY : this.items.get(slot);
 	}
 
+	@Override
 	public ItemStack removeItemNoUpdate(int slot) {
 		return ContainerHelper.takeItem(this.items, slot);
 	}
 
+	@Override
 	public ItemStack removeItem(int slot, int amount) {
 		ItemStack itemstack = ContainerHelper.removeItem(this.items, slot, amount);
 		if (!itemstack.isEmpty()) {
@@ -54,18 +62,22 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 		return itemstack;
 	}
 
+	@Override
 	public void setItem(int slot, ItemStack itemstack) {
 		this.items.set(slot, itemstack);
 		this.menu.slotsChanged(this);
 	}
 
+	@Override
 	public void setChanged() {
 	}
 
+	@Override
 	public boolean stillValid(Player player) {
 		return true;
 	}
 
+	@Override
 	public void clearContent() {
 		this.items.clear();
 	}
@@ -74,13 +86,19 @@ public class GunsmithsBenchCraftingContainer implements Container, StackedConten
 		return this.height;
 	}
 
+	@Override
+	public List<ItemStack> getItems() {
+		return this.items;
+	}
+
 	public int getWidth() {
 		return this.width;
 	}
 
-	public void fillStackedContents(StackedContents p_39342_) {
+	@Override
+	public void fillStackedContents(StackedContents stackedContents) {
 		for(ItemStack itemstack : this.items) {
-			p_39342_.accountSimpleStack(itemstack);
+			stackedContents.accountSimpleStack(itemstack);
 		}
 	}
 }

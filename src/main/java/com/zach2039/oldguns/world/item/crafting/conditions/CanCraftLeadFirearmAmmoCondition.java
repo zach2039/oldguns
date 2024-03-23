@@ -1,25 +1,16 @@
 package com.zach2039.oldguns.world.item.crafting.conditions;
 
-import com.google.gson.JsonObject;
-import com.zach2039.oldguns.OldGuns;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.crafting.conditions.ICondition;
-import net.neoforged.neoforge.common.crafting.conditions.ICondition.IContext;
-import net.neoforged.neoforge.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 public class CanCraftLeadFirearmAmmoCondition implements ICondition
 {
 	public static final CanCraftLeadFirearmAmmoCondition INSTANCE = new CanCraftLeadFirearmAmmoCondition();
-    private static final ResourceLocation NAME = new ResourceLocation(OldGuns.MODID, "can_craft_lead_firearm_ammo");
+    public static Codec<CanCraftLeadFirearmAmmoCondition> CODEC = MapCodec.unit(INSTANCE).stable().codec();
 
     public CanCraftLeadFirearmAmmoCondition() {}
-
-    @Override
-    public ResourceLocation getID()
-    {
-        return NAME;
-    }
 
     @Override
     public boolean test(IContext context)
@@ -33,24 +24,9 @@ public class CanCraftLeadFirearmAmmoCondition implements ICondition
         return "can_craft_lead_firearm_ammo";
     }
 
-    public static class Serializer implements IConditionSerializer<CanCraftLeadFirearmAmmoCondition>
-    {
-        public static final Serializer INSTANCE = new Serializer();
-
-        @Override
-        public void write(JsonObject json, CanCraftLeadFirearmAmmoCondition value) { }
-
-        @Override
-        public CanCraftLeadFirearmAmmoCondition read(JsonObject json)
-        {
-            return CanCraftLeadFirearmAmmoCondition.INSTANCE;
-        }
-
-        @Override
-        public ResourceLocation getID()
-        {
-            return CanCraftLeadFirearmAmmoCondition.NAME;
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
     }
 }
 

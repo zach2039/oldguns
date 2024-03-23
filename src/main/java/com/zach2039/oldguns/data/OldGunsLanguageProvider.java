@@ -20,8 +20,8 @@ import net.minecraft.world.item.alchemy.Potion;
 import net.minecraft.world.item.alchemy.PotionUtils;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraftforge.fluids.FluidType;
 import net.neoforged.neoforge.common.data.LanguageProvider;
+import net.neoforged.neoforge.fluids.FluidType;
 
 import java.util.HashMap;
 import java.util.Map;

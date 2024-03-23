@@ -1,11 +1,9 @@
 package com.zach2039.oldguns.world.item.crafting.ingredient;
 
-import com.google.gson.JsonObject;
-import com.zach2039.oldguns.init.ModCrafting;
-import net.minecraft.network.FriendlyByteBuf;
+import com.mojang.serialization.Codec;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.neoforged.neoforge.common.crafting.IIngredientSerializer;
+import net.neoforged.neoforge.common.crafting.IngredientType;
 
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
@@ -22,35 +20,16 @@ import java.util.stream.Stream;
 public class IngredientNever extends Ingredient {
 	public static final IngredientNever INSTANCE = new IngredientNever();
 
+	public static final Codec<IngredientNever> CODEC = Codec.unit(INSTANCE);
+
+	public static final IngredientType<IngredientNever> TYPE = new IngredientType<>(CODEC);
+
 	private IngredientNever() {
 		super(Stream.empty());
 	}
 
 	@Override
-	public boolean test(@Nullable final ItemStack p_test_1_) {
+	public boolean test(@Nullable ItemStack itemStack) {
 		return false;
-	}
-
-	@Override
-	public IIngredientSerializer<? extends Ingredient> getSerializer() {
-		return ModCrafting.Ingredients.NEVER;
-	}
-
-	public static class Serializer implements IIngredientSerializer<IngredientNever> {
-
-		@Override
-		public IngredientNever parse(final JsonObject json) {
-			return IngredientNever.INSTANCE;
-		}
-
-		@Override
-		public IngredientNever parse(final FriendlyByteBuf buffer) {
-			return IngredientNever.INSTANCE;
-		}
-
-		@Override
-		public void write(final FriendlyByteBuf buffer, final IngredientNever ingredient) {
-			// No-op
-		}
 	}
 }

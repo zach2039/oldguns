@@ -1,13 +1,14 @@
 package com.zach2039.oldguns.world.level.block.entity;
 
-import com.zach2039.oldguns.OldGuns;
 import com.zach2039.oldguns.api.ammo.Ammo;
 import com.zach2039.oldguns.api.ammo.ArtilleryAmmo;
 import com.zach2039.oldguns.api.ammo.ArtilleryCharge;
-import com.zach2039.oldguns.api.artillery.*;
+import com.zach2039.oldguns.api.artillery.AmmoFiringState;
+import com.zach2039.oldguns.api.artillery.Artillery;
+import com.zach2039.oldguns.api.artillery.ArtilleryFiringState;
+import com.zach2039.oldguns.api.artillery.CannonArtillery;
 import com.zach2039.oldguns.init.ModItems;
 import com.zach2039.oldguns.network.ArtilleryBlockEntityUpdateMessage;
-import com.zach2039.oldguns.network.ArtilleryEffectMessage;
 import com.zach2039.oldguns.util.ModRegistryUtil;
 import com.zach2039.oldguns.world.entity.BulletProjectile;
 import com.zach2039.oldguns.world.item.ammo.artillery.ArtilleryAmmoItem;
@@ -30,7 +31,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.neoforged.neoforge.common.util.INBTSerializable;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 import java.util.ArrayList;
@@ -47,7 +47,8 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		this.effectiveRangeModifier = builder.effectiveRangeModifier;
 		this.projectileDamageModifier = builder.projectileDamageModifier;
 	}
-	
+
+	@Override
 	public CompoundTag writeToTag(CompoundTag tag) {
 		super.writeToTag(tag);
 		
@@ -56,20 +57,20 @@ public abstract class StationaryCannonBlockEntity extends StationaryArtilleryBlo
 		
 		ListTag ammoChargesList = new ListTag();
 		this.ammoCharges.forEach((i) -> {
-			INBTSerializable<ItemStack>
-			ammoChargesList.add(i.serializeNBT());
+			ammoChargesList.add(i.getTag());
 		});
 		tag.put("ammoCharges", ammoChargesList);
 		
 		ListTag ammoProjectileList = new ListTag();
 		this.ammoProjectiles.forEach((i) -> {
-			ammoProjectileList.add(i.serializeNBT());
+			ammoProjectileList.add(i.getTag());
 		});
 		tag.put("ammoProjectiles", ammoProjectileList);
 		
 		return tag;
 	}
-	
+
+	@Override
 	public void readFromTag(CompoundTag tag) {
 		super.readFromTag(tag);
 		

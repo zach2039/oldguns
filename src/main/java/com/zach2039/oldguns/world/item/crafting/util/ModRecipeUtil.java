@@ -1,9 +1,7 @@
 package com.zach2039.oldguns.world.item.crafting.util;
 
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import net.minecraft.core.NonNullList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
@@ -11,7 +9,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.neoforged.fml.util.ObfuscationReflectionHelper;
-import net.neoforged.neoforge.common.crafting.CraftingHelper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -55,22 +52,22 @@ public class ModRecipeUtil {
 		}
 	}
 
-	/**
-	 * Parse the input of a shapeless recipe.
-	 *
-	 * @param json The recipe's JSON object
-	 * @return A NonNullList containing the ingredients specified in the JSON object
-	 */
-	public static NonNullList<Ingredient> parseShapeless(final JsonObject json) {
-		final NonNullList<Ingredient> ingredients = NonNullList.create();
-		for (final JsonElement element : GsonHelper.getAsJsonArray(json, "ingredients"))
-			ingredients.add(CraftingHelper.getIngredient(element, false));
-
-		if (ingredients.isEmpty())
-			throw new JsonParseException("No ingredients for shapeless recipe");
-
-		return ingredients;
-	}
+//	/**
+//	 * Parse the input of a shapeless recipe.
+//	 *
+//	 * @param json The recipe's JSON object
+//	 * @return A NonNullList containing the ingredients specified in the JSON object
+//	 */
+//	public static NonNullList<Ingredient> parseShapeless(final JsonObject json) {
+//		final NonNullList<Ingredient> ingredients = NonNullList.create();
+//		for (final JsonElement element : GsonHelper.getAsJsonArray(json, "ingredients"))
+//			ingredients.add(CraftingHelper.getIngredient(element, false));
+//
+//		if (ingredients.isEmpty())
+//			throw new JsonParseException("No ingredients for shapeless recipe");
+//
+//		return ingredients;
+//	}
 
 	public record ShapedPrimer(NonNullList<Ingredient> ingredients,	int recipeWidth, int recipeHeight) {}
 }

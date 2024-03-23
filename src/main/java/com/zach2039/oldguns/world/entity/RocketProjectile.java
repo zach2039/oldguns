@@ -29,9 +29,10 @@ import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.entity.IEntityAdditionalSpawnData;
+import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
+import net.neoforged.neoforge.event.EventHooks;
 
-public class RocketProjectile extends BulletProjectile implements IEntityAdditionalSpawnData {
+public class RocketProjectile extends BulletProjectile implements IEntityWithComplexSpawn {
 
 	protected static final EntityDataAccessor<Byte> TRAJECTORY_BIAS_X = SynchedEntityData.defineId(RocketProjectile.class, EntityDataSerializers.BYTE);
 	protected static final EntityDataAccessor<Byte> TRAJECTORY_BIAS_Y = SynchedEntityData.defineId(RocketProjectile.class, EntityDataSerializers.BYTE);
@@ -189,7 +190,7 @@ public class RocketProjectile extends BulletProjectile implements IEntityAdditio
 					}
 				}
 
-				if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, hitresult)) {
+				if (hitresult != null && hitresult.getType() != HitResult.Type.MISS && !flag && !EventHooks.onProjectileImpact(this, hitresult)) {
 					this.onHit(hitresult);
 					this.hasImpulse = true;
 				}				

@@ -41,6 +41,7 @@ public class OldGuns
 		ModEntities.initialize(modEventBus);
 		ModLootModifierCodecs.initialize(modEventBus);
 		ModPotions.initialize(modEventBus);
+		ModConditions.initialize(modEventBus);
 		ModCrafting.Recipes.initialize(modEventBus);
 		ModSoundEvents.initialize(modEventBus);
 		ModBlockEntities.initialize(modEventBus);

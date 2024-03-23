@@ -1,25 +1,16 @@
 package com.zach2039.oldguns.world.item.crafting.conditions;
 
-import com.google.gson.JsonObject;
-import com.zach2039.oldguns.OldGuns;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.MapCodec;
 import com.zach2039.oldguns.config.OldGunsConfig;
-import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.common.crafting.conditions.ICondition;
-import net.neoforged.neoforge.common.crafting.conditions.ICondition.IContext;
-import net.neoforged.neoforge.common.crafting.conditions.IConditionSerializer;
+import net.neoforged.neoforge.common.conditions.ICondition;
 
 public class CanCraftFlintlockWeaponsCondition implements ICondition
 {
 	public static final CanCraftFlintlockWeaponsCondition INSTANCE = new CanCraftFlintlockWeaponsCondition();
-    private static final ResourceLocation NAME = new ResourceLocation(OldGuns.MODID, "can_craft_flintlock_weapons");
+    public static Codec<CanCraftFlintlockWeaponsCondition> CODEC = MapCodec.unit(INSTANCE).stable().codec();
 
     public CanCraftFlintlockWeaponsCondition() {}
-
-    @Override
-    public ResourceLocation getID()
-    {
-        return NAME;
-    }
 
     @Override
     public boolean test(IContext context)
@@ -33,24 +24,9 @@ public class CanCraftFlintlockWeaponsCondition implements ICondition
         return "can_craft_flintlock_weapons";
     }
 
-    public static class Serializer implements IConditionSerializer<CanCraftFlintlockWeaponsCondition>
-    {
-        public static final Serializer INSTANCE = new Serializer();
-
-        @Override
-        public void write(JsonObject json, CanCraftFlintlockWeaponsCondition value) { }
-
-        @Override
-        public CanCraftFlintlockWeaponsCondition read(JsonObject json)
-        {
-            return CanCraftFlintlockWeaponsCondition.INSTANCE;
-        }
-
-        @Override
-        public ResourceLocation getID()
-        {
-            return CanCraftFlintlockWeaponsCondition.NAME;
-        }
+    @Override
+    public Codec<? extends ICondition> codec() {
+        return CODEC;
     }
 }
 
